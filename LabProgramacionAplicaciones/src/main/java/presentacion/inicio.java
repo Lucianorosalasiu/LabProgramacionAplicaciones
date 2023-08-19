@@ -29,13 +29,20 @@ public class inicio extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jMenuAcciones = new javax.swing.JMenu();
+        jMenuUsuario = new javax.swing.JMenu();
+        jMenuUsuarioAlta = new javax.swing.JMenuItem();
+        jMenuUsuarioConsulta = new javax.swing.JMenuItem();
+        jMenuUsuarioModificar = new javax.swing.JMenuItem();
+        jMenuActividad = new javax.swing.JMenu();
+        jMenuActividadAlta = new javax.swing.JMenuItem();
+        jMenuActividadConsulta = new javax.swing.JMenuItem();
+        jMenuDepartamentoAlta = new javax.swing.JMenuItem();
+        jMenuSalida = new javax.swing.JMenu();
+        jMenuSalidaAlta = new javax.swing.JMenuItem();
+        jMenuSalidaConsulta = new javax.swing.JMenuItem();
+        jMenuSalidaInscripcion = new javax.swing.JMenuItem();
+        jMenuPaquete = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         jMenu7.setText("jMenu7");
@@ -49,38 +56,61 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Acciones");
+        jMenuAcciones.setText("Acciones");
 
-        jMenu3.setText("Usuarios");
+        jMenuUsuario.setText("Usuarios");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuUsuarioAlta.setText("Alta de Usuario");
+        jMenuUsuarioAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuUsuarioAltaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenuUsuario.add(jMenuUsuarioAlta);
 
-        jMenu1.add(jMenu3);
+        jMenuUsuarioConsulta.setText("Consulta de Usuario");
+        jMenuUsuario.add(jMenuUsuarioConsulta);
 
-        jMenu4.setText("Actividad Turistica");
+        jMenuUsuarioModificar.setText("Modificar Datos de Usuario");
+        jMenuUsuario.add(jMenuUsuarioModificar);
 
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAcciones.add(jMenuUsuario);
+
+        jMenuActividad.setText("Actividad Turistica");
+
+        jMenuActividadAlta.setText("Alta de Actividad");
+        jMenuActividad.add(jMenuActividadAlta);
+
+        jMenuActividadConsulta.setText("Consulta de Actividad");
+        jMenuActividad.add(jMenuActividadConsulta);
+
+        jMenuDepartamentoAlta.setText("Alta de Departamento");
+        jMenuActividad.add(jMenuDepartamentoAlta);
+
+        jMenuAcciones.add(jMenuActividad);
+
+        jMenuSalida.setText("Salida Turistica");
+
+        jMenuSalidaAlta.setText("Alta de Salida");
+        jMenuSalidaAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuSalidaAltaActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem3);
+        jMenuSalida.add(jMenuSalidaAlta);
 
-        jMenu1.add(jMenu4);
+        jMenuSalidaConsulta.setText("Consulta de Salida");
+        jMenuSalida.add(jMenuSalidaConsulta);
 
-        jMenu5.setText("Salida Turistica");
-        jMenu1.add(jMenu5);
+        jMenuSalidaInscripcion.setText("Inscripción a Salida");
+        jMenuSalida.add(jMenuSalidaInscripcion);
 
-        jMenu6.setText("Paquetes");
-        jMenu1.add(jMenu6);
+        jMenuAcciones.add(jMenuSalida);
 
-        jMenuBar1.add(jMenu1);
+        jMenuPaquete.setText("Paquetes");
+        jMenuAcciones.add(jMenuPaquete);
+
+        jMenuBar1.add(jMenuAcciones);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -111,13 +141,13 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuUsuarioAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioAltaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuUsuarioAltaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuSalidaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaAltaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuSalidaAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,15 +186,22 @@ public class inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenuAcciones;
+    private javax.swing.JMenu jMenuActividad;
+    private javax.swing.JMenuItem jMenuActividadAlta;
+    private javax.swing.JMenuItem jMenuActividadConsulta;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuDepartamentoAlta;
+    private javax.swing.JMenu jMenuPaquete;
+    private javax.swing.JMenu jMenuSalida;
+    private javax.swing.JMenuItem jMenuSalidaAlta;
+    private javax.swing.JMenuItem jMenuSalidaConsulta;
+    private javax.swing.JMenuItem jMenuSalidaInscripcion;
+    private javax.swing.JMenu jMenuUsuario;
+    private javax.swing.JMenuItem jMenuUsuarioAlta;
+    private javax.swing.JMenuItem jMenuUsuarioConsulta;
+    private javax.swing.JMenuItem jMenuUsuarioModificar;
     // End of variables declaration//GEN-END:variables
 }
