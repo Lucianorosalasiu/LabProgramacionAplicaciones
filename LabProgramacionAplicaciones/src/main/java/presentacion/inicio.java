@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import java.time.Clock;
+
 /**
  *
  * @author lucho
@@ -27,7 +29,13 @@ public class inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu7 = new javax.swing.JMenu();
-        jButton1 = new javax.swing.JButton();
+        jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
+        jInternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
+        jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
+        jInternalFrameModificarUsuario = new javax.swing.JInternalFrame();
+        jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
+        jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
+        jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAcciones = new javax.swing.JMenu();
         jMenuUsuario = new javax.swing.JMenu();
@@ -43,18 +51,106 @@ public class inicio extends javax.swing.JFrame {
         jMenuSalidaConsulta = new javax.swing.JMenuItem();
         jMenuSalidaInscripcion = new javax.swing.JMenuItem();
         jMenuPaquete = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenu7.setText("jMenu7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(600, 800));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jTabbedPaneCasosDeUso.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPaneCasosDeUso.setToolTipText("");
+
+        jInternalFrameAgregarUsuario.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAgregarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameAgregarUsuario.getContentPane());
+        jInternalFrameAgregarUsuario.getContentPane().setLayout(jInternalFrameAgregarUsuarioLayout);
+        jInternalFrameAgregarUsuarioLayout.setHorizontalGroup(
+            jInternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAgregarUsuarioLayout.setVerticalGroup(
+            jInternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Agregar Usuario", jInternalFrameAgregarUsuario);
+
+        jInternalFrameConsultarUsuario.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameConsultarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameConsultarUsuario.getContentPane());
+        jInternalFrameConsultarUsuario.getContentPane().setLayout(jInternalFrameConsultarUsuarioLayout);
+        jInternalFrameConsultarUsuarioLayout.setHorizontalGroup(
+            jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameConsultarUsuarioLayout.setVerticalGroup(
+            jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Consultar Usuario", jInternalFrameConsultarUsuario);
+
+        jInternalFrameModificarUsuario.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameModificarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameModificarUsuario.getContentPane());
+        jInternalFrameModificarUsuario.getContentPane().setLayout(jInternalFrameModificarUsuarioLayout);
+        jInternalFrameModificarUsuarioLayout.setHorizontalGroup(
+            jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameModificarUsuarioLayout.setVerticalGroup(
+            jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Modificar Usuario", jInternalFrameModificarUsuario);
+
+        jInternalFrameAltaActividadTuristica.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAltaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameAltaActividadTuristica.getContentPane());
+        jInternalFrameAltaActividadTuristica.getContentPane().setLayout(jInternalFrameAltaActividadTuristicaLayout);
+        jInternalFrameAltaActividadTuristicaLayout.setHorizontalGroup(
+            jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAltaActividadTuristicaLayout.setVerticalGroup(
+            jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Alta Actividad Turistica", jInternalFrameAltaActividadTuristica);
+
+        jInternalFrameConsultaActividadTuristica.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameConsultaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameConsultaActividadTuristica.getContentPane());
+        jInternalFrameConsultaActividadTuristica.getContentPane().setLayout(jInternalFrameConsultaActividadTuristicaLayout);
+        jInternalFrameConsultaActividadTuristicaLayout.setHorizontalGroup(
+            jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameConsultaActividadTuristicaLayout.setVerticalGroup(
+            jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Consulta Actividad Turistica", jInternalFrameConsultaActividadTuristica);
+
+        jInternalFrameAltaDepartamento.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAltaDepartamentoLayout = new javax.swing.GroupLayout(jInternalFrameAltaDepartamento.getContentPane());
+        jInternalFrameAltaDepartamento.getContentPane().setLayout(jInternalFrameAltaDepartamentoLayout);
+        jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
+            jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
+            jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Alta Departamento", jInternalFrameAltaDepartamento);
 
         jMenuAcciones.setText("Acciones");
 
@@ -69,9 +165,19 @@ public class inicio extends javax.swing.JFrame {
         jMenuUsuario.add(jMenuUsuarioAlta);
 
         jMenuUsuarioConsulta.setText("Consulta de Usuario");
+        jMenuUsuarioConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUsuarioConsultaActionPerformed(evt);
+            }
+        });
         jMenuUsuario.add(jMenuUsuarioConsulta);
 
         jMenuUsuarioModificar.setText("Modificar Datos de Usuario");
+        jMenuUsuarioModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUsuarioModificarActionPerformed(evt);
+            }
+        });
         jMenuUsuario.add(jMenuUsuarioModificar);
 
         jMenuAcciones.add(jMenuUsuario);
@@ -79,12 +185,27 @@ public class inicio extends javax.swing.JFrame {
         jMenuActividad.setText("Actividad Turistica");
 
         jMenuActividadAlta.setText("Alta de Actividad");
+        jMenuActividadAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActividadAltaActionPerformed(evt);
+            }
+        });
         jMenuActividad.add(jMenuActividadAlta);
 
         jMenuActividadConsulta.setText("Consulta de Actividad");
+        jMenuActividadConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActividadConsultaActionPerformed(evt);
+            }
+        });
         jMenuActividad.add(jMenuActividadConsulta);
 
         jMenuDepartamentoAlta.setText("Alta de Departamento");
+        jMenuDepartamentoAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDepartamentoAltaActionPerformed(evt);
+            }
+        });
         jMenuActividad.add(jMenuDepartamentoAlta);
 
         jMenuAcciones.add(jMenuActividad);
@@ -112,42 +233,63 @@ public class inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAcciones);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(176, 176, 176))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jButton1)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jMenuUsuarioAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioAltaActionPerformed
         // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(0);
+        
     }//GEN-LAST:event_jMenuUsuarioAltaActionPerformed
 
     private void jMenuSalidaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaAltaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSalidaAltaActionPerformed
+
+    private void jMenuDepartamentoAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDepartamentoAltaActionPerformed
+        jTabbedPaneCasosDeUso.setSelectedIndex(5);
+        /*Implementacion por consola del CU 12 Alta departamento*/
+        System.out.println("| Ingresando un nuevo departamento |");
+    }//GEN-LAST:event_jMenuDepartamentoAltaActionPerformed
+
+    private void jMenuUsuarioConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioConsultaActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(1);
+    }//GEN-LAST:event_jMenuUsuarioConsultaActionPerformed
+
+    private void jMenuUsuarioModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioModificarActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(2);
+    }//GEN-LAST:event_jMenuUsuarioModificarActionPerformed
+
+    private void jMenuActividadAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActividadAltaActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(3);
+    }//GEN-LAST:event_jMenuActividadAltaActionPerformed
+
+    private void jMenuActividadConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActividadConsultaActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(4);
+    }//GEN-LAST:event_jMenuActividadConsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,8 +327,12 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
+    private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
+    private javax.swing.JInternalFrame jInternalFrameAltaDepartamento;
+    private javax.swing.JInternalFrame jInternalFrameConsultaActividadTuristica;
+    private javax.swing.JInternalFrame jInternalFrameConsultarUsuario;
+    private javax.swing.JInternalFrame jInternalFrameModificarUsuario;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuActividad;
@@ -203,5 +349,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarioAlta;
     private javax.swing.JMenuItem jMenuUsuarioConsulta;
     private javax.swing.JMenuItem jMenuUsuarioModificar;
+    private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
     // End of variables declaration//GEN-END:variables
 }
