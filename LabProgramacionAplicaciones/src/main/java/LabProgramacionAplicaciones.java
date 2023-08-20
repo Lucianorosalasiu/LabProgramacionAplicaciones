@@ -1,6 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
+import clases.Departamento;
 import interfaces.IControlador;
 import fabrica.Fabrica;
 /**
