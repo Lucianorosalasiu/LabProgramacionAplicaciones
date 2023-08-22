@@ -589,9 +589,7 @@ public class inicio extends javax.swing.JFrame {
         String url = jTextFieldURLDepartamento.getText();
         
         if(IControlador.existeDepartamento(nombre)){
-            System.out.println("ERROR");
             jDialogDepartamentoDuplicado.setVisible(true);
-        //dialogo
         }else{
             IControlador.altaDepartamento(nombre,descripcion,url);
             jTextFieldNombreDepartamento.setText("");

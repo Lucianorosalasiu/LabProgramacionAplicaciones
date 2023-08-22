@@ -32,8 +32,13 @@ public class Controlador implements IControlador{
     
     @Override
     public boolean existeDepartamento(String nombre){
-        for(int i = 0; i < departamentos.size();i++){
+        /*for(int i = 0; i < departamentos.size();i++){
             if(nombre.equals(departamentos.get(i).getNombre())){
+                return true;
+            }
+        }*/
+        for(Departamento elemento: departamentos){
+            if(nombre.equals(elemento.getNombre())){
                 return true;
             }
         }
