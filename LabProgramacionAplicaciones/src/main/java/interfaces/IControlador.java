@@ -10,6 +10,7 @@ package interfaces;
  */
 public interface  IControlador {
     
-    void test(); 
+    void test();
+    boolean existeDepartamento(String nombre);
     void altaDepartamento(String nombre, String descripcion, String url);
 }

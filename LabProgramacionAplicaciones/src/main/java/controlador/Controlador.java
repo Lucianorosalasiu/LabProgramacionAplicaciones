@@ -4,9 +4,10 @@
  */
 package controlador;
 import interfaces.IControlador;
-import java.util.Map;
 import clases.Departamento;
-import java.util.HashMap;
+import clases.MyException;
+import java.util.ArrayList;
+import java.util.EmptyStackException;
 /**
  *
  * @author lucho
@@ -14,11 +15,12 @@ import java.util.HashMap;
 public class Controlador implements IControlador{
     private Controlador(){}
     private static Controlador instance = null;
-    private Map<String,Departamento> departamentos = new HashMap<>();
+    private static ArrayList<Departamento> departamentos;
     
     public static Controlador getInstance(){
         if(instance == null){
             instance = new Controlador();
+            departamentos = new ArrayList<Departamento>();
         }
         return instance;
     }
@@ -29,18 +31,18 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void altaDepartamento(String nombre, String descripcion, String url){
-
-        if(departamentos.containsKey(nombre)){
-            System.out.println("repetido");
-        }else{
-            System.out.println("no repetido");
-            Departamento nuevoDepartamento = new Departamento(nombre,descripcion,url);
-            departamentos.put(nombre, nuevoDepartamento);
+    public boolean existeDepartamento(String nombre){
+        for(int i = 0; i < departamentos.size();i++){
+            if(nombre.equals(departamentos.get(i).getNombre())){
+                return true;
+            }
         }
-        /*Si se repite nombre
-        devolver excepcion
-        si no
-        crear departamento y guardarlo en una arraylist en el controlador*/
+        return false;
+    }
+    
+    @Override
+    public void altaDepartamento(String nombre, String descripcion, String url){
+        Departamento nuevoDepartamento = new Departamento(nombre, descripcion, url);
+        departamentos.add(nuevoDepartamento);
     }
 }

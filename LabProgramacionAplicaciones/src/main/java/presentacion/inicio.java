@@ -31,6 +31,11 @@ public class inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogDepartamentoDuplicado = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButtonDepartamentoDuplicadoCancelar = new javax.swing.JButton();
+        jButtonDepartamentoDuplicadoReingresar = new javax.swing.JButton();
         jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
         jInternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
@@ -71,6 +76,60 @@ public class inicio extends javax.swing.JFrame {
         jMenuAltaPaquete = new javax.swing.JMenuItem();
         jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
+
+        jDialogDepartamentoDuplicado.setTitle("ERROR");
+        jDialogDepartamentoDuplicado.setLocationByPlatform(true);
+        jDialogDepartamentoDuplicado.setMinimumSize(new java.awt.Dimension(400, 250));
+        jDialogDepartamentoDuplicado.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
+        jDialogDepartamentoDuplicado.setPreferredSize(new java.awt.Dimension(400, 250));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Ya existe un departamento ingresado en el sistema con ese nombre!.\nSeleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButtonDepartamentoDuplicadoCancelar.setText("Cancelar");
+        jButtonDepartamentoDuplicadoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDepartamentoDuplicadoCancelarActionPerformed(evt);
+            }
+        });
+
+        jButtonDepartamentoDuplicadoReingresar.setText("Reingresar");
+        jButtonDepartamentoDuplicadoReingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDepartamentoDuplicadoReingresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogDepartamentoDuplicadoLayout = new javax.swing.GroupLayout(jDialogDepartamentoDuplicado.getContentPane());
+        jDialogDepartamentoDuplicado.getContentPane().setLayout(jDialogDepartamentoDuplicadoLayout);
+        jDialogDepartamentoDuplicadoLayout.setHorizontalGroup(
+            jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+                        .addComponent(jButtonDepartamentoDuplicadoCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonDepartamentoDuplicadoReingresar)))
+                .addContainerGap())
+        );
+        jDialogDepartamentoDuplicadoLayout.setVerticalGroup(
+            jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDepartamentoDuplicadoCancelar)
+                    .addComponent(jButtonDepartamentoDuplicadoReingresar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("G1 - Programación de Aplicaciones");
@@ -529,8 +588,16 @@ public class inicio extends javax.swing.JFrame {
         String descripcion = jTextFieldDescripcionDepartamento.getText();
         String url = jTextFieldURLDepartamento.getText();
         
-        System.out.println(nombre + descripcion + url);
-        IControlador.altaDepartamento(nombre,descripcion,url);
+        if(IControlador.existeDepartamento(nombre)){
+            System.out.println("ERROR");
+            jDialogDepartamentoDuplicado.setVisible(true);
+        //dialogo
+        }else{
+            IControlador.altaDepartamento(nombre,descripcion,url);
+            jTextFieldNombreDepartamento.setText("");
+            jTextFieldDescripcionDepartamento.setText("");
+            jTextFieldURLDepartamento.setText("");
+        }   
     }//GEN-LAST:event_jButtonAltaDepartamentoEnviarActionPerformed
 
     private void jButtonAltaDepartamentoVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
@@ -539,6 +606,19 @@ public class inicio extends javax.swing.JFrame {
         jTextFieldDescripcionDepartamento.setText("");
         jTextFieldURLDepartamento.setText("");
     }//GEN-LAST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
+
+    private void jButtonDepartamentoDuplicadoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNombreDepartamento.setText("");
+        jTextFieldDescripcionDepartamento.setText("");
+        jTextFieldURLDepartamento.setText("");
+        jDialogDepartamentoDuplicado.setVisible(false);
+    }//GEN-LAST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
+
+    private void jButtonDepartamentoDuplicadoReingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
+        // TODO add your handling code here:
+        jDialogDepartamentoDuplicado.setVisible(false);
+    }//GEN-LAST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -578,6 +658,9 @@ public class inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAltaDepartamentoEnviar;
     private javax.swing.JButton jButtonAltaDepartamentoVaciarCampos;
+    private javax.swing.JButton jButtonDepartamentoDuplicadoCancelar;
+    private javax.swing.JButton jButtonDepartamentoDuplicadoReingresar;
+    private javax.swing.JDialog jDialogDepartamentoDuplicado;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
     private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
@@ -611,8 +694,10 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarioAlta;
     private javax.swing.JMenuItem jMenuUsuarioConsulta;
     private javax.swing.JMenuItem jMenuUsuarioModificar;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparatorAltaDepartamento;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldDescripcionDepartamento;
     private javax.swing.JTextField jTextFieldNombreDepartamento;
     private javax.swing.JTextField jTextFieldURLDepartamento;
