@@ -11,4 +11,5 @@ package interfaces;
 public interface  IControlador {
     
     void test(); 
+    void altaDepartamento(String nombre, String descripcion, String url);
 }

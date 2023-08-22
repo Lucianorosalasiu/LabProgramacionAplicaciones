@@ -68,9 +68,9 @@ public class inicio extends javax.swing.JFrame {
         jMenuSalidaConsulta = new javax.swing.JMenuItem();
         jMenuSalidaInscripcion = new javax.swing.JMenuItem();
         jMenuPaquete = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuAltaPaquete = new javax.swing.JMenuItem();
+        jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
+        jMenuConsultaPaquete = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("G1 - Programación de Aplicaciones");
@@ -409,29 +409,29 @@ public class inicio extends javax.swing.JFrame {
 
         jMenuPaquete.setText("Paquetes");
 
-        jMenuItem1.setText("Alta Paquete de Actividades Turísticas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAltaPaquete.setText("Alta Paquete de Actividades Turísticas");
+        jMenuAltaPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuAltaPaqueteActionPerformed(evt);
             }
         });
-        jMenuPaquete.add(jMenuItem1);
+        jMenuPaquete.add(jMenuAltaPaquete);
 
-        jMenuItem2.setText("Agregar Actividad Turística a Paquete");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAgregarActividadPaquete.setText("Agregar Actividad Turística a Paquete");
+        jMenuAgregarActividadPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuAgregarActividadPaqueteActionPerformed(evt);
             }
         });
-        jMenuPaquete.add(jMenuItem2);
+        jMenuPaquete.add(jMenuAgregarActividadPaquete);
 
-        jMenuItem3.setText("Consulta de Paquetes");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultaPaquete.setText("Consulta de Paquetes");
+        jMenuConsultaPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuConsultaPaqueteActionPerformed(evt);
             }
         });
-        jMenuPaquete.add(jMenuItem3);
+        jMenuPaquete.add(jMenuConsultaPaquete);
 
         jMenuAcciones.add(jMenuPaquete);
 
@@ -504,20 +504,20 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.setSelectedIndex(8);
     }//GEN-LAST:event_jMenuSalidaInscripcionActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuConsultaPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultaPaqueteActionPerformed
         // TODO add your handling code here:
         jTabbedPaneCasosDeUso.setSelectedIndex(11);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuConsultaPaqueteActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuAltaPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaPaqueteActionPerformed
         // TODO add your handling code here:
         jTabbedPaneCasosDeUso.setSelectedIndex(9);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuAltaPaqueteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuAgregarActividadPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAgregarActividadPaqueteActionPerformed
         // TODO add your handling code here:
         jTabbedPaneCasosDeUso.setSelectedIndex(10);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuAgregarActividadPaqueteActionPerformed
 
     private void jTextFieldURLDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldURLDepartamentoActionPerformed
         // TODO add your handling code here:
@@ -530,7 +530,7 @@ public class inicio extends javax.swing.JFrame {
         String url = jTextFieldURLDepartamento.getText();
         
         System.out.println(nombre + descripcion + url);
-        IControlador.test();
+        IControlador.altaDepartamento(nombre,descripcion,url);
     }//GEN-LAST:event_jButtonAltaDepartamentoEnviarActionPerformed
 
     private void jButtonAltaDepartamentoVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
@@ -597,11 +597,11 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
     private javax.swing.JMenuItem jMenuActividadConsulta;
+    private javax.swing.JMenuItem jMenuAgregarActividadPaquete;
+    private javax.swing.JMenuItem jMenuAltaPaquete;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuConsultaPaquete;
     private javax.swing.JMenuItem jMenuDepartamentoAlta;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jMenuPaquete;
     private javax.swing.JMenu jMenuSalida;
     private javax.swing.JMenuItem jMenuSalidaAlta;
