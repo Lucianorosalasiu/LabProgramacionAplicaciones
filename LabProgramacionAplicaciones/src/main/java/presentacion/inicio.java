@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import fabrica.Fabrica;
+import interfaces.IControlador;
 import java.time.Clock;
 
 /**
@@ -11,7 +13,8 @@ import java.time.Clock;
  * @author lucho
  */
 public class inicio extends javax.swing.JFrame {
-
+    Fabrica fabrica = new Fabrica();
+    IControlador IControlador = fabrica.getInterface();
     /**
      * Creates new form inicio
      */
@@ -35,6 +38,15 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
+        jTextFieldNombreDepartamento = new javax.swing.JTextField();
+        jLabelNombreDepartamento = new javax.swing.JLabel();
+        jLabelDescripcionDepartamento = new javax.swing.JLabel();
+        jTextFieldDescripcionDepartamento = new javax.swing.JTextField();
+        jTextFieldURLDepartamento = new javax.swing.JTextField();
+        jLabelURLDepartamento = new javax.swing.JLabel();
+        jButtonAltaDepartamentoVaciarCampos = new javax.swing.JButton();
+        jButtonAltaDepartamentoEnviar = new javax.swing.JButton();
+        jSeparatorAltaDepartamento = new javax.swing.JSeparator();
         jInternalFrameAltaSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameConsultaSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameInscripcionSalidaTuristica = new javax.swing.JInternalFrame();
@@ -61,9 +73,9 @@ public class inicio extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("G1 - Programación de Aplicaciones");
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(600, 800));
 
         jTabbedPaneCasosDeUso.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPaneCasosDeUso.setToolTipText("");
@@ -145,15 +157,76 @@ public class inicio extends javax.swing.JFrame {
 
         jInternalFrameAltaDepartamento.setVisible(true);
 
+        jTextFieldNombreDepartamento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jLabelNombreDepartamento.setText("Nombre departamento");
+
+        jLabelDescripcionDepartamento.setText("Descripción departamento");
+
+        jTextFieldURLDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldURLDepartamentoActionPerformed(evt);
+            }
+        });
+
+        jLabelURLDepartamento.setText("URL");
+
+        jButtonAltaDepartamentoVaciarCampos.setText("vaciar campos");
+        jButtonAltaDepartamentoVaciarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAltaDepartamentoVaciarCamposActionPerformed(evt);
+            }
+        });
+
+        jButtonAltaDepartamentoEnviar.setText("enviar");
+        jButtonAltaDepartamentoEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAltaDepartamentoEnviarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrameAltaDepartamentoLayout = new javax.swing.GroupLayout(jInternalFrameAltaDepartamento.getContentPane());
         jInternalFrameAltaDepartamento.getContentPane().setLayout(jInternalFrameAltaDepartamentoLayout);
         jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
+                .addContainerGap(253, Short.MAX_VALUE)
+                .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelNombreDepartamento)
+                    .addComponent(jTextFieldNombreDepartamento)
+                    .addComponent(jTextFieldDescripcionDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(jLabelDescripcionDepartamento)
+                    .addComponent(jLabelURLDepartamento)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
+                        .addComponent(jButtonAltaDepartamentoVaciarCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAltaDepartamentoEnviar))
+                    .addComponent(jTextFieldURLDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                    .addComponent(jSeparatorAltaDepartamento))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabelNombreDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldNombreDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabelDescripcionDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldDescripcionDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jLabelURLDepartamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldURLDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jSeparatorAltaDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAltaDepartamentoVaciarCampos)
+                    .addComponent(jButtonAltaDepartamentoEnviar))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Alta Departamento", jInternalFrameAltaDepartamento);
@@ -216,7 +289,7 @@ public class inicio extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTabbedPaneCasosDeUso.addTab("Crear Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
+        jTabbedPaneCasosDeUso.addTab("Alta Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
 
         jInternalFrameAgregarActividadPaquete.setVisible(true);
 
@@ -372,14 +445,14 @@ public class inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addComponent(jTabbedPaneCasosDeUso)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                .addComponent(jTabbedPaneCasosDeUso)
                 .addContainerGap())
         );
 
@@ -446,6 +519,27 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.setSelectedIndex(10);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jTextFieldURLDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldURLDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldURLDepartamentoActionPerformed
+
+    private void jButtonAltaDepartamentoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoEnviarActionPerformed
+        // TODO add your handling code here:
+        String nombre = jTextFieldNombreDepartamento.getText();
+        String descripcion = jTextFieldDescripcionDepartamento.getText();
+        String url = jTextFieldURLDepartamento.getText();
+        
+        System.out.println(nombre + descripcion + url);
+        IControlador.test();
+    }//GEN-LAST:event_jButtonAltaDepartamentoEnviarActionPerformed
+
+    private void jButtonAltaDepartamentoVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
+        // TODO add your handling code here:
+        jTextFieldNombreDepartamento.setText("");
+        jTextFieldDescripcionDepartamento.setText("");
+        jTextFieldURLDepartamento.setText("");
+    }//GEN-LAST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -482,6 +576,8 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAltaDepartamentoEnviar;
+    private javax.swing.JButton jButtonAltaDepartamentoVaciarCampos;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
     private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
@@ -494,6 +590,9 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrameConsultarUsuario;
     private javax.swing.JInternalFrame jInternalFrameInscripcionSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameModificarUsuario;
+    private javax.swing.JLabel jLabelDescripcionDepartamento;
+    private javax.swing.JLabel jLabelNombreDepartamento;
+    private javax.swing.JLabel jLabelURLDepartamento;
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
@@ -512,6 +611,10 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarioAlta;
     private javax.swing.JMenuItem jMenuUsuarioConsulta;
     private javax.swing.JMenuItem jMenuUsuarioModificar;
+    private javax.swing.JSeparator jSeparatorAltaDepartamento;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
+    private javax.swing.JTextField jTextFieldDescripcionDepartamento;
+    private javax.swing.JTextField jTextFieldNombreDepartamento;
+    private javax.swing.JTextField jTextFieldURLDepartamento;
     // End of variables declaration//GEN-END:variables
 }
