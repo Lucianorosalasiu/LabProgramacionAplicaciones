@@ -28,7 +28,6 @@ public class inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu7 = new javax.swing.JMenu();
         jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
         jInternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
@@ -36,6 +35,12 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
+        jInternalFrameAltaSalidaTuristica = new javax.swing.JInternalFrame();
+        jInternalFrameConsultaSalidaTuristica = new javax.swing.JInternalFrame();
+        jInternalFrameInscripcionSalidaTuristica = new javax.swing.JInternalFrame();
+        jInternalFrameAltaPaqueteActividades = new javax.swing.JInternalFrame();
+        jInternalFrameAgregarActividadPaquete = new javax.swing.JInternalFrame();
+        jInternalFrameConsultaPaquetes = new javax.swing.JInternalFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAcciones = new javax.swing.JMenu();
         jMenuUsuario = new javax.swing.JMenu();
@@ -51,8 +56,9 @@ public class inicio extends javax.swing.JFrame {
         jMenuSalidaConsulta = new javax.swing.JMenuItem();
         jMenuSalidaInscripcion = new javax.swing.JMenuItem();
         jMenuPaquete = new javax.swing.JMenu();
-
-        jMenu7.setText("jMenu7");
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
@@ -120,7 +126,7 @@ public class inicio extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTabbedPaneCasosDeUso.addTab("Alta Actividad Turistica", jInternalFrameAltaActividadTuristica);
+        jTabbedPaneCasosDeUso.addTab("Alta Actividad Turística", jInternalFrameAltaActividadTuristica);
 
         jInternalFrameConsultaActividadTuristica.setVisible(true);
 
@@ -135,7 +141,7 @@ public class inicio extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jTabbedPaneCasosDeUso.addTab("Consulta Actividad Turistica", jInternalFrameConsultaActividadTuristica);
+        jTabbedPaneCasosDeUso.addTab("Consulta Actividad Turística", jInternalFrameConsultaActividadTuristica);
 
         jInternalFrameAltaDepartamento.setVisible(true);
 
@@ -151,6 +157,96 @@ public class inicio extends javax.swing.JFrame {
         );
 
         jTabbedPaneCasosDeUso.addTab("Alta Departamento", jInternalFrameAltaDepartamento);
+
+        jInternalFrameAltaSalidaTuristica.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAltaSalidaTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameAltaSalidaTuristica.getContentPane());
+        jInternalFrameAltaSalidaTuristica.getContentPane().setLayout(jInternalFrameAltaSalidaTuristicaLayout);
+        jInternalFrameAltaSalidaTuristicaLayout.setHorizontalGroup(
+            jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAltaSalidaTuristicaLayout.setVerticalGroup(
+            jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Alta Salida Turística", jInternalFrameAltaSalidaTuristica);
+
+        jInternalFrameConsultaSalidaTuristica.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameConsultaSalidaTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameConsultaSalidaTuristica.getContentPane());
+        jInternalFrameConsultaSalidaTuristica.getContentPane().setLayout(jInternalFrameConsultaSalidaTuristicaLayout);
+        jInternalFrameConsultaSalidaTuristicaLayout.setHorizontalGroup(
+            jInternalFrameConsultaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameConsultaSalidaTuristicaLayout.setVerticalGroup(
+            jInternalFrameConsultaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Consulta Salida Turística", jInternalFrameConsultaSalidaTuristica);
+
+        jInternalFrameInscripcionSalidaTuristica.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameInscripcionSalidaTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameInscripcionSalidaTuristica.getContentPane());
+        jInternalFrameInscripcionSalidaTuristica.getContentPane().setLayout(jInternalFrameInscripcionSalidaTuristicaLayout);
+        jInternalFrameInscripcionSalidaTuristicaLayout.setHorizontalGroup(
+            jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameInscripcionSalidaTuristicaLayout.setVerticalGroup(
+            jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Inscripcion a Salida Turística", jInternalFrameInscripcionSalidaTuristica);
+
+        jInternalFrameAltaPaqueteActividades.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAltaPaqueteActividadesLayout = new javax.swing.GroupLayout(jInternalFrameAltaPaqueteActividades.getContentPane());
+        jInternalFrameAltaPaqueteActividades.getContentPane().setLayout(jInternalFrameAltaPaqueteActividadesLayout);
+        jInternalFrameAltaPaqueteActividadesLayout.setHorizontalGroup(
+            jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
+            jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Crear Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
+
+        jInternalFrameAgregarActividadPaquete.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameAgregarActividadPaqueteLayout = new javax.swing.GroupLayout(jInternalFrameAgregarActividadPaquete.getContentPane());
+        jInternalFrameAgregarActividadPaquete.getContentPane().setLayout(jInternalFrameAgregarActividadPaqueteLayout);
+        jInternalFrameAgregarActividadPaqueteLayout.setHorizontalGroup(
+            jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameAgregarActividadPaqueteLayout.setVerticalGroup(
+            jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Agregar Actividad Turística a Paquete", jInternalFrameAgregarActividadPaquete);
+
+        jInternalFrameConsultaPaquetes.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrameConsultaPaquetesLayout = new javax.swing.GroupLayout(jInternalFrameConsultaPaquetes.getContentPane());
+        jInternalFrameConsultaPaquetes.getContentPane().setLayout(jInternalFrameConsultaPaquetesLayout);
+        jInternalFrameConsultaPaquetesLayout.setHorizontalGroup(
+            jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrameConsultaPaquetesLayout.setVerticalGroup(
+            jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Consulta de Paquetes", jInternalFrameConsultaPaquetes);
 
         jMenuAcciones.setText("Acciones");
 
@@ -221,14 +317,49 @@ public class inicio extends javax.swing.JFrame {
         jMenuSalida.add(jMenuSalidaAlta);
 
         jMenuSalidaConsulta.setText("Consulta de Salida");
+        jMenuSalidaConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalidaConsultaActionPerformed(evt);
+            }
+        });
         jMenuSalida.add(jMenuSalidaConsulta);
 
         jMenuSalidaInscripcion.setText("Inscripción a Salida");
+        jMenuSalidaInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSalidaInscripcionActionPerformed(evt);
+            }
+        });
         jMenuSalida.add(jMenuSalidaInscripcion);
 
         jMenuAcciones.add(jMenuSalida);
 
         jMenuPaquete.setText("Paquetes");
+
+        jMenuItem1.setText("Alta Paquete de Actividades Turísticas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuPaquete.add(jMenuItem1);
+
+        jMenuItem2.setText("Agregar Actividad Turística a Paquete");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuPaquete.add(jMenuItem2);
+
+        jMenuItem3.setText("Consulta de Paquetes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuPaquete.add(jMenuItem3);
+
         jMenuAcciones.add(jMenuPaquete);
 
         jMenuBar1.add(jMenuAcciones);
@@ -263,12 +394,11 @@ public class inicio extends javax.swing.JFrame {
 
     private void jMenuSalidaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaAltaActionPerformed
         // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(6);
     }//GEN-LAST:event_jMenuSalidaAltaActionPerformed
 
     private void jMenuDepartamentoAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDepartamentoAltaActionPerformed
         jTabbedPaneCasosDeUso.setSelectedIndex(5);
-        /*Implementacion por consola del CU 12 Alta departamento*/
-        System.out.println("| Ingresando un nuevo departamento |");
     }//GEN-LAST:event_jMenuDepartamentoAltaActionPerformed
 
     private void jMenuUsuarioConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioConsultaActionPerformed
@@ -290,6 +420,31 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTabbedPaneCasosDeUso.setSelectedIndex(4);
     }//GEN-LAST:event_jMenuActividadConsultaActionPerformed
+
+    private void jMenuSalidaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaConsultaActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(7);
+    }//GEN-LAST:event_jMenuSalidaConsultaActionPerformed
+
+    private void jMenuSalidaInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaInscripcionActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(8);
+    }//GEN-LAST:event_jMenuSalidaInscripcionActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(11);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(9);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(10);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,19 +482,27 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
     private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
     private javax.swing.JInternalFrame jInternalFrameAltaDepartamento;
+    private javax.swing.JInternalFrame jInternalFrameAltaPaqueteActividades;
+    private javax.swing.JInternalFrame jInternalFrameAltaSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameConsultaActividadTuristica;
+    private javax.swing.JInternalFrame jInternalFrameConsultaPaquetes;
+    private javax.swing.JInternalFrame jInternalFrameConsultaSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameConsultarUsuario;
+    private javax.swing.JInternalFrame jInternalFrameInscripcionSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameModificarUsuario;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
     private javax.swing.JMenuItem jMenuActividadConsulta;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuDepartamentoAlta;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jMenuPaquete;
     private javax.swing.JMenu jMenuSalida;
     private javax.swing.JMenuItem jMenuSalidaAlta;
