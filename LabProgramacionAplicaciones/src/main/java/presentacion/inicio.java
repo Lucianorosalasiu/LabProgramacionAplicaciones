@@ -4,8 +4,8 @@
  */
 package presentacion;
 
-import fabrica.Fabrica;
-import interfaces.IControlador;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 import java.time.Clock;
 
 /**
@@ -81,7 +81,6 @@ public class inicio extends javax.swing.JFrame {
         jDialogDepartamentoDuplicado.setLocationByPlatform(true);
         jDialogDepartamentoDuplicado.setMinimumSize(new java.awt.Dimension(400, 250));
         jDialogDepartamentoDuplicado.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
-        jDialogDepartamentoDuplicado.setPreferredSize(new java.awt.Dimension(400, 250));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -133,7 +132,6 @@ public class inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("G1 - Programación de Aplicaciones");
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
 
         jTabbedPaneCasosDeUso.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
