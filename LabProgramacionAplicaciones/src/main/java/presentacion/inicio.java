@@ -4,8 +4,8 @@
  */
 package presentacion;
 
-import fabrica.Fabrica;
-import interfaces.IControlador;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 import java.time.Clock;
 import java.util.Date;
 
