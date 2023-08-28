@@ -61,6 +61,27 @@ public class inicio extends javax.swing.JFrame {
         jCU4TableDepartamentos = new javax.swing.JTable();
         jCU4ButtonEnviar = new javax.swing.JButton();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jCU4LabelNombre1 = new javax.swing.JLabel();
+        jCU4TextFieldNombre1 = new javax.swing.JTextField();
+        jCU4LabelDescripcion1 = new javax.swing.JLabel();
+        jCU4TextAreaDescripcion1 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jCU4LabelDuracion1 = new javax.swing.JLabel();
+        jCU4TextFieldDuracion1 = new javax.swing.JTextField();
+        jCU4LabelCosto1 = new javax.swing.JLabel();
+        jCU4TextFieldCosto1 = new javax.swing.JTextField();
+        jCU4LabelCiudad1 = new javax.swing.JLabel();
+        jCU4TextFieldCiudad1 = new javax.swing.JTextField();
+        jCU4LabelCiudad2 = new javax.swing.JLabel();
+        jCU4TextFieldCiudad2 = new javax.swing.JTextField();
         jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
         jCU12TextFieldNombre = new javax.swing.JTextField();
         jCU12LabelNombre = new javax.swing.JLabel();
@@ -347,7 +368,7 @@ public class inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelProveedores)
@@ -355,7 +376,7 @@ public class inicio extends javax.swing.JFrame {
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelDepartamentos)
-                                .addGap(0, 142, Short.MAX_VALUE))
+                                .addGap(0, 143, Short.MAX_VALUE))
                             .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -401,15 +422,159 @@ public class inicio extends javax.swing.JFrame {
 
         jInternalFrameConsultaActividadTuristica.setVisible(true);
 
+        jLabel8.setText("Departamento");
+
+        jLabel9.setText("Actividad");
+
+        jLabel10.setText("Salida");
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton1.setText("Consultar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jCU4LabelNombre1.setText("Nombre");
+
+        jCU4TextFieldNombre1.setEditable(false);
+        jCU4TextFieldNombre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4TextFieldNombre1ActionPerformed(evt);
+            }
+        });
+
+        jCU4LabelDescripcion1.setText("Descripción");
+
+        jTextArea3.setEditable(false);
+        jTextArea3.setColumns(20);
+        jTextArea3.setLineWrap(true);
+        jTextArea3.setRows(5);
+        jCU4TextAreaDescripcion1.setViewportView(jTextArea3);
+
+        jCU4LabelDuracion1.setText("Duración");
+
+        jCU4TextFieldDuracion1.setEditable(false);
+        jCU4TextFieldDuracion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4TextFieldDuracion1ActionPerformed(evt);
+            }
+        });
+
+        jCU4LabelCosto1.setText("Costo");
+
+        jCU4TextFieldCosto1.setEditable(false);
+        jCU4TextFieldCosto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4TextFieldCosto1ActionPerformed(evt);
+            }
+        });
+
+        jCU4LabelCiudad1.setText("Ciudad");
+
+        jCU4TextFieldCiudad1.setEditable(false);
+        jCU4TextFieldCiudad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4TextFieldCiudad1ActionPerformed(evt);
+            }
+        });
+
+        jCU4LabelCiudad2.setText("Fecha alta");
+
+        jCU4TextFieldCiudad2.setEditable(false);
+        jCU4TextFieldCiudad2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4TextFieldCiudad2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrameConsultaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameConsultaActividadTuristica.getContentPane());
         jInternalFrameConsultaActividadTuristica.getContentPane().setLayout(jInternalFrameConsultaActividadTuristicaLayout);
         jInternalFrameConsultaActividadTuristicaLayout.setHorizontalGroup(
             jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8)
+                        .addComponent(jButton1)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jCU4TextAreaDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jCU4TextFieldCiudad1)
+                        .addComponent(jCU4TextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCU4LabelDescripcion1)
+                    .addComponent(jCU4LabelCiudad1)
+                    .addComponent(jCU4LabelNombre1)
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU4TextFieldDuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU4LabelDuracion1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU4LabelCosto1)
+                            .addComponent(jCU4TextFieldCosto1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCU4TextFieldCiudad2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCU4LabelCiudad2))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jInternalFrameConsultaActividadTuristicaLayout.setVerticalGroup(
             jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jCU4LabelNombre1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU4TextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jCU4LabelDescripcion1)
+                        .addGap(4, 4, 4)
+                        .addComponent(jCU4TextAreaDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCU4LabelDuracion1)
+                            .addComponent(jCU4LabelCosto1))
+                        .addGap(4, 4, 4)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCU4TextFieldDuracion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU4TextFieldCosto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jCU4LabelCiudad1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU4TextFieldCiudad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jCU4LabelCiudad2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU4TextFieldCiudad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE))
+                    .addComponent(jSeparator1)
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jTabbedPaneCasosDeUso.addTab("Consulta Actividad Turística", jInternalFrameConsultaActividadTuristica);
@@ -449,7 +614,7 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCU12LabelNombre)
                     .addComponent(jCU12TextFieldNombre)
@@ -462,7 +627,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jCU12ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCU12TextFieldURL)
                     .addComponent(jCU12Separator))
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,7 +822,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addComponent(jSpinnerCantMaxTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButtonAltaSalidaEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jInternalFrameAltaSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -981,6 +1146,30 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU4TextFieldCiudadActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCU4TextFieldNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldNombre1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU4TextFieldNombre1ActionPerformed
+
+    private void jCU4TextFieldDuracion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldDuracion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU4TextFieldDuracion1ActionPerformed
+
+    private void jCU4TextFieldCosto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldCosto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU4TextFieldCosto1ActionPerformed
+
+    private void jCU4TextFieldCiudad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldCiudad1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU4TextFieldCiudad1ActionPerformed
+
+    private void jCU4TextFieldCiudad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldCiudad2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU4TextFieldCiudad2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1017,6 +1206,7 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAltaSalidaEnviar;
     private javax.swing.JButton jButtonAltaSalidaVaciarCampos;
     private javax.swing.JButton jButtonDepartamentoDuplicadoCancelar;
@@ -1032,21 +1222,36 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU12TextFieldURL;
     private javax.swing.JButton jCU4ButtonEnviar;
     private javax.swing.JLabel jCU4LabelCiudad;
+    private javax.swing.JLabel jCU4LabelCiudad1;
+    private javax.swing.JLabel jCU4LabelCiudad2;
     private javax.swing.JLabel jCU4LabelCosto;
+    private javax.swing.JLabel jCU4LabelCosto1;
     private javax.swing.JLabel jCU4LabelDepartamentos;
     private javax.swing.JLabel jCU4LabelDescripcion;
+    private javax.swing.JLabel jCU4LabelDescripcion1;
     private javax.swing.JLabel jCU4LabelDuracion;
+    private javax.swing.JLabel jCU4LabelDuracion1;
     private javax.swing.JLabel jCU4LabelNombre;
+    private javax.swing.JLabel jCU4LabelNombre1;
     private javax.swing.JLabel jCU4LabelProveedores;
     private javax.swing.JScrollPane jCU4ScrollPanelDepartamentos;
     private javax.swing.JScrollPane jCU4ScrollPanelProveedores;
     private javax.swing.JTable jCU4TableDepartamentos;
     private javax.swing.JTable jCU4TableProveedores;
     private javax.swing.JScrollPane jCU4TextAreaDescripcion;
+    private javax.swing.JScrollPane jCU4TextAreaDescripcion1;
     private javax.swing.JTextField jCU4TextFieldCiudad;
+    private javax.swing.JTextField jCU4TextFieldCiudad1;
+    private javax.swing.JTextField jCU4TextFieldCiudad2;
     private javax.swing.JTextField jCU4TextFieldCosto;
+    private javax.swing.JTextField jCU4TextFieldCosto1;
     private javax.swing.JTextField jCU4TextFieldDuracion;
+    private javax.swing.JTextField jCU4TextFieldDuracion1;
     private javax.swing.JTextField jCU4TextFieldNombre;
+    private javax.swing.JTextField jCU4TextFieldNombre1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBoxActividad;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JDialog jDialogDepartamentoDuplicado;
@@ -1063,12 +1268,15 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrameInscripcionSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameModificarUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
@@ -1088,12 +1296,14 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarioConsulta;
     private javax.swing.JMenuItem jMenuUsuarioModificar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinnerCantMaxTuristas;
     private javax.swing.JSpinner jSpinnerFechaAlta;
     private javax.swing.JSpinner jSpinnerFechaSalida;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextFieldLugarSalida;
     private javax.swing.JTextField jTextFieldNombreSalida;
     // End of variables declaration//GEN-END:variables
