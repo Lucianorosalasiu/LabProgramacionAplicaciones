@@ -247,7 +247,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTabbedPaneCasosDeUso" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -256,7 +256,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPaneCasosDeUso" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPaneCasosDeUso" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -275,8 +279,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Agregar Usuario">
-                <Property name="tabTitle" type="java.lang.String" value="Agregar Usuario"/>
+              <JTabbedPaneConstraints tabName="Alta Usuario">
+                <Property name="tabTitle" type="java.lang.String" value="Alta Usuario"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -300,8 +304,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consultar Usuario">
-                <Property name="tabTitle" type="java.lang.String" value="Consultar Usuario"/>
+              <JTabbedPaneConstraints tabName="Consulta de Usuario">
+                <Property name="tabTitle" type="java.lang.String" value="Consulta de Usuario"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -366,7 +370,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jCU4TextFieldNombre" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCU4TextAreaDescripcion" alignment="0" pref="270" max="32767" attributes="0"/>
+                                      <Component id="jCU4ScrollPaneDescripcion" alignment="0" pref="270" max="32767" attributes="0"/>
                                       <Component id="jCU4TextFieldDuracion" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCU4TextFieldCosto" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jCU4TextFieldCiudad" alignment="0" max="32767" attributes="0"/>
@@ -418,19 +422,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jCU4TextFieldNombre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="26" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" pref="23" max="32767" attributes="0"/>
                               <Component id="jCU4LabelDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU4TextAreaDescripcion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="26" max="32767" attributes="0"/>
+                              <Component id="jCU4ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" pref="23" max="32767" attributes="0"/>
                               <Component id="jCU4LabelDuracion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jCU4TextFieldDuracion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="26" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" pref="23" max="32767" attributes="0"/>
                               <Component id="jCU4LabelCosto" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jCU4TextFieldCosto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="29" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" pref="26" max="32767" attributes="0"/>
                               <Component id="jCU4LabelCiudad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jCU4TextFieldCiudad" min="-2" max="-2" attributes="0"/>
@@ -451,14 +455,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldNombreActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jCU4TextAreaDescripcion">
+            <Container class="javax.swing.JScrollPane" name="jCU4ScrollPaneDescripcion">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea2">
+                <Component class="javax.swing.JTextArea" name="jCU4TextAreaDescripcion">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>
@@ -623,40 +627,40 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox3" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox2" alignment="1" min="-2" pref="344" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ButtonConsultar" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ComboBoxSalida" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelSalida" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ComboBoxActividad" alignment="1" min="-2" pref="344" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelActividad" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5ComboBoxDepartamento" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace pref="69" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jCU4TextAreaDescripcion1" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jCU4TextFieldCiudad1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jCU4TextFieldNombre1" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                              <Component id="jCU5ScrollPaneDescripcion" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jCU5TextFieldCiudad" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jCU5TextFieldNombre" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jCU4LabelDescripcion1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCU4LabelCiudad1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCU4LabelNombre1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelCiudad" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCU4TextFieldDuracion1" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelDuracion1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldDuracion" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCU4LabelCosto1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4TextFieldCosto1" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelCosto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldCosto" min="-2" pref="130" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jCU4TextFieldCiudad2" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                          <Component id="jCU4LabelCiudad2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5TextFieldFecha" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="71" max="32767" attributes="0"/>
                   </Group>
@@ -668,48 +672,48 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jCU4LabelNombre1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelNombre" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldNombre1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5TextFieldNombre" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelDescripcion1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU4TextAreaDescripcion1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCU4LabelDuracion1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelCosto1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelCosto" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCU4TextFieldDuracion1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4TextFieldCosto1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldCosto" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelCiudad1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelCiudad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldCiudad1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5TextFieldCiudad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelCiudad2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelFecha" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldCiudad2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="99" max="32767" attributes="0"/>
+                              <Component id="jCU5TextFieldFecha" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="87" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ComboBoxDepartamento" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelActividad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ComboBoxActividad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelSalida" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ComboBoxSalida" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5ButtonConsultar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -719,12 +723,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel8">
+            <Component class="javax.swing.JLabel" name="jCU5LabelDepartamento">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Departamento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="jCU5ComboBoxDepartamento">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -734,12 +738,12 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel9">
+            <Component class="javax.swing.JLabel" name="jCU5LabelActividad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Actividad"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="jCU5ComboBoxActividad">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -749,12 +753,12 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
+            <Component class="javax.swing.JLabel" name="jCU5LabelSalida">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salida"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox3">
+            <Component class="javax.swing.JComboBox" name="jCU5ComboBoxSalida">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -769,40 +773,40 @@
                 <Property name="orientation" type="int" value="1"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jCU5ButtonConsultar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consultar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5ButtonConsultarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jCU4LabelNombre1">
+            <Component class="javax.swing.JLabel" name="jCU5LabelNombre">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jCU4TextFieldNombre1">
+            <Component class="javax.swing.JTextField" name="jCU5TextFieldNombre">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldNombre1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldNombreActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jCU4LabelDescripcion1">
+            <Component class="javax.swing.JLabel" name="jCU5LabelDescripcion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jCU4TextAreaDescripcion1">
+            <Container class="javax.swing.JScrollPane" name="jCU5ScrollPaneDescripcion">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea3">
+                <Component class="javax.swing.JTextArea" name="jCU5TextAreaDescripcion">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
@@ -812,62 +816,63 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jCU4LabelDuracion1">
+            <Component class="javax.swing.JLabel" name="jCU5LabelDuracion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Duraci&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jCU4TextFieldDuracion1">
+            <Component class="javax.swing.JTextField" name="jCU5TextFieldDuracion">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldDuracion1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldDuracionActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jCU4LabelCosto1">
+            <Component class="javax.swing.JLabel" name="jCU5LabelCosto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Costo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jCU4TextFieldCosto1">
+            <Component class="javax.swing.JTextField" name="jCU5TextFieldCosto">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldCosto1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldCostoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jCU4LabelCiudad1">
+            <Component class="javax.swing.JLabel" name="jCU5LabelCiudad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ciudad"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jCU4TextFieldCiudad1">
+            <Component class="javax.swing.JTextField" name="jCU5TextFieldCiudad">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldCiudad1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldCiudadActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jCU4LabelCiudad2">
+            <Component class="javax.swing.JLabel" name="jCU5LabelFecha">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha alta"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jCU4TextFieldCiudad2">
+            <Component class="javax.swing.JTextField" name="jCU5TextFieldFecha">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4TextFieldCiudad2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldFechaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaDepartamento">
           <Properties>
+            <Property name="opaque" type="boolean" value="true"/>
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -908,22 +913,22 @@
                       <Component id="jCU12LabelNombre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU12TextFieldNombre" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Component id="jCU12LabelDescripcion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU12TextFieldDescripcion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Component id="jCU12LabelURL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU12TextFieldURL" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Component id="jCU12Separator" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jCU12ButtonVaciar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCU12ButtonEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -975,131 +980,6 @@
             <Component class="javax.swing.JSeparator" name="jCU12Separator">
             </Component>
           </SubComponents>
-        </Container>
-        <Container class="javax.swing.JInternalFrame" name="jInternalFrameConsultaSalidaTuristica">
-          <Properties>
-            <Property name="visible" type="boolean" value="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consulta Salida Tur&#xed;stica">
-                <Property name="tabTitle" type="java.lang.String" value="Consulta Salida Tur&#xed;stica"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JInternalFrame" name="jInternalFrameInscripcionSalidaTuristica">
-          <Properties>
-            <Property name="visible" type="boolean" value="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Inscripcion a Salida Tur&#xed;stica">
-                <Property name="tabTitle" type="java.lang.String" value="Inscripcion a Salida Tur&#xed;stica"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaPaqueteActividades">
-          <Properties>
-            <Property name="visible" type="boolean" value="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Alta Paquete de Actividades Tur&#xed;sticas">
-                <Property name="tabTitle" type="java.lang.String" value="Alta Paquete de Actividades Tur&#xed;sticas"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JInternalFrame" name="jInternalFrameAgregarActividadPaquete">
-          <Properties>
-            <Property name="visible" type="boolean" value="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Agregar Actividad Tur&#xed;stica a Paquete">
-                <Property name="tabTitle" type="java.lang.String" value="Agregar Actividad Tur&#xed;stica a Paquete"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-        <Container class="javax.swing.JInternalFrame" name="jInternalFrameConsultaPaquetes">
-          <Properties>
-            <Property name="visible" type="boolean" value="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consulta de Paquetes">
-                <Property name="tabTitle" type="java.lang.String" value="Consulta de Paquetes"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaSalidaTuristica">
           <Properties>
@@ -1206,7 +1086,7 @@
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSpinnerFechaAlta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <EmptySpace pref="163" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonAltaSalidaVaciarCampos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonAltaSalidaEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1324,6 +1204,131 @@
               </Events>
             </Component>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JInternalFrame" name="jInternalFrameConsultaSalidaTuristica">
+          <Properties>
+            <Property name="visible" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Consulta Salida Tur&#xed;stica">
+                <Property name="tabTitle" type="java.lang.String" value="Consulta Salida Tur&#xed;stica"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JInternalFrame" name="jInternalFrameInscripcionSalidaTuristica">
+          <Properties>
+            <Property name="visible" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Inscripcion a Salida Tur&#xed;stica">
+                <Property name="tabTitle" type="java.lang.String" value="Inscripcion a Salida Tur&#xed;stica"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaPaqueteActividades">
+          <Properties>
+            <Property name="visible" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Crear Paquete de Actividades Tur&#xed;sticas">
+                <Property name="tabTitle" type="java.lang.String" value="Crear Paquete de Actividades Tur&#xed;sticas"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JInternalFrame" name="jInternalFrameAgregarActividadPaquete">
+          <Properties>
+            <Property name="visible" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Agregar Actividad Tur&#xed;stica a Paquete">
+                <Property name="tabTitle" type="java.lang.String" value="Agregar Actividad Tur&#xed;stica a Paquete"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JInternalFrame" name="jInternalFrameConsultaPaquetes">
+          <Properties>
+            <Property name="visible" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Consulta de Paquete de Actividades Tur&#xed;sticas">
+                <Property name="tabTitle" type="java.lang.String" value="Consulta de Paquete de Actividades Tur&#xed;sticas"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
       </SubComponents>
     </Container>
