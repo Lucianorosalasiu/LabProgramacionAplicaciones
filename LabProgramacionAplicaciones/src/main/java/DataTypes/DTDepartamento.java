@@ -2,10 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.clases;
+package DataTypes;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -14,18 +12,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Entity
-public class Departamento{
-    @Id
+public class DTDepartamento {
     private String nombre;
     private String descripcion;
-    private String url;
+    private String URL;
     
-    public Departamento(){}
-    
-    public Departamento(String nombre, String descripcion, String url){
+    public DTDepartamento(){}
+    public DTDepartamento(String nombre, String descripcion, String URL){
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.url = url;
+        this.URL = URL;
     }
 }

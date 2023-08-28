@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import DataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
@@ -953,7 +954,7 @@ public class inicio extends javax.swing.JFrame {
 
         jMenuPaquete.setText("Paquetes");
 
-        jMenuAltaPaquete.setText("Alta Paquete de Actividades Turísticas");
+        jMenuAltaPaquete.setText("Crear Paquete de Actividades Turísticas");
         jMenuAltaPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuAltaPaqueteActionPerformed(evt);
@@ -1076,25 +1077,20 @@ public class inicio extends javax.swing.JFrame {
         if(IControlador.existeDepartamento(nombre)){
             jDialogDepartamentoDuplicado.setVisible(true);
         }else{
-            IControlador.altaDepartamento(nombre,descripcion,url);
-            jCU12TextFieldNombre.setText("");
-            jCU12TextFieldDescripcion.setText("");
-            jCU12TextFieldURL.setText("");
+            DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
+            IControlador.altaDepartamento(departamento);
+            jCU12vaciarCampos();
         }   
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
 
     private void jCU12ButtonVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12ButtonVaciarActionPerformed
         // TODO add your handling code here:
-        jCU12TextFieldNombre.setText("");
-        jCU12TextFieldDescripcion.setText("");
-        jCU12TextFieldURL.setText("");
+        jCU12vaciarCampos();
     }//GEN-LAST:event_jCU12ButtonVaciarActionPerformed
 
     private void jButtonDepartamentoDuplicadoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
         // TODO add your handling code here:
-        jCU12TextFieldNombre.setText("");
-        jCU12TextFieldDescripcion.setText("");
-        jCU12TextFieldURL.setText("");
+        jCU12vaciarCampos();
         jDialogDepartamentoDuplicado.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
 
@@ -1174,6 +1170,12 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU5TextFieldFechaActionPerformed
 
+    public void jCU12vaciarCampos(){
+        jCU12TextFieldNombre.setText("");
+        jCU12TextFieldDescripcion.setText("");
+        jCU12TextFieldURL.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
