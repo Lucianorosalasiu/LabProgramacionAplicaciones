@@ -379,17 +379,21 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jCU4LabelProveedores" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
-                                      <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jCU4ScrollPanelProveedores" pref="0" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jCU4LabelProveedores" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="142" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -641,22 +645,22 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                      <EmptySpace pref="255" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelNombreDepartamento" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldNombreDepartamento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldDescripcionDepartamento" alignment="0" pref="271" max="32767" attributes="0"/>
-                          <Component id="jLabelDescripcionDepartamento" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelURLDepartamento" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButtonAltaDepartamentoVaciarCampos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButtonAltaDepartamentoEnviar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU12LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU12TextFieldNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jCU12TextFieldDescripcion" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jCU12LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU12LabelURL" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jCU12ButtonVaciar" min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jCU12ButtonEnviar" min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jTextFieldURLDepartamento" alignment="0" pref="271" max="32767" attributes="0"/>
-                          <Component id="jSeparatorAltaDepartamento" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jCU12TextFieldURL" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jCU12Separator" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="252" max="32767" attributes="0"/>
+                      <EmptySpace pref="254" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -664,23 +668,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Component id="jLabelNombreDepartamento" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU12LabelNombre" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldNombreDepartamento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Component id="jLabelDescripcionDepartamento" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU12TextFieldNombre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <Component id="jCU12LabelDescripcion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldDescripcionDepartamento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Component id="jLabelURLDepartamento" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU12TextFieldDescripcion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <Component id="jCU12LabelURL" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldURLDepartamento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jSeparatorAltaDepartamento" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jCU12TextFieldURL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <Component id="jCU12Separator" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonAltaDepartamentoVaciarCampos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonAltaDepartamentoEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU12ButtonVaciar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU12ButtonEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="57" max="32767" attributes="0"/>
                   </Group>
@@ -688,50 +692,50 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextFieldNombreDepartamento">
+            <Component class="javax.swing.JTextField" name="jCU12TextFieldNombre">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelNombreDepartamento">
+            <Component class="javax.swing.JLabel" name="jCU12LabelNombre">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre departamento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelDescripcionDepartamento">
+            <Component class="javax.swing.JLabel" name="jCU12LabelDescripcion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descripci&#xf3;n departamento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldDescripcionDepartamento">
+            <Component class="javax.swing.JTextField" name="jCU12TextFieldDescripcion">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldURLDepartamento">
+            <Component class="javax.swing.JTextField" name="jCU12TextFieldURL">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldURLDepartamentoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU12TextFieldURLActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelURLDepartamento">
+            <Component class="javax.swing.JLabel" name="jCU12LabelURL">
               <Properties>
                 <Property name="text" type="java.lang.String" value="URL"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonAltaDepartamentoVaciarCampos">
+            <Component class="javax.swing.JButton" name="jCU12ButtonVaciar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="vaciar campos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaDepartamentoVaciarCamposActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU12ButtonVaciarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonAltaDepartamentoEnviar">
+            <Component class="javax.swing.JButton" name="jCU12ButtonEnviar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="enviar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAltaDepartamentoEnviarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU12ButtonEnviarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparatorAltaDepartamento">
+            <Component class="javax.swing.JSeparator" name="jCU12Separator">
             </Component>
           </SubComponents>
         </Container>

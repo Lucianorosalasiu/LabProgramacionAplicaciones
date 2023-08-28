@@ -62,15 +62,15 @@ public class inicio extends javax.swing.JFrame {
         jCU4ButtonEnviar = new javax.swing.JButton();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
-        jTextFieldNombreDepartamento = new javax.swing.JTextField();
-        jLabelNombreDepartamento = new javax.swing.JLabel();
-        jLabelDescripcionDepartamento = new javax.swing.JLabel();
-        jTextFieldDescripcionDepartamento = new javax.swing.JTextField();
-        jTextFieldURLDepartamento = new javax.swing.JTextField();
-        jLabelURLDepartamento = new javax.swing.JLabel();
-        jButtonAltaDepartamentoVaciarCampos = new javax.swing.JButton();
-        jButtonAltaDepartamentoEnviar = new javax.swing.JButton();
-        jSeparatorAltaDepartamento = new javax.swing.JSeparator();
+        jCU12TextFieldNombre = new javax.swing.JTextField();
+        jCU12LabelNombre = new javax.swing.JLabel();
+        jCU12LabelDescripcion = new javax.swing.JLabel();
+        jCU12TextFieldDescripcion = new javax.swing.JTextField();
+        jCU12TextFieldURL = new javax.swing.JTextField();
+        jCU12LabelURL = new javax.swing.JLabel();
+        jCU12ButtonVaciar = new javax.swing.JButton();
+        jCU12ButtonEnviar = new javax.swing.JButton();
+        jCU12Separator = new javax.swing.JSeparator();
         jInternalFrameConsultaSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameInscripcionSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameAltaPaqueteActividades = new javax.swing.JInternalFrame();
@@ -347,14 +347,16 @@ public class inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU4LabelProveedores)
-                                .addGap(220, 220, 220)
-                                .addComponent(jCU4LabelDepartamentos)
-                                .addGap(0, 88, Short.MAX_VALUE))
-                            .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU4LabelProveedores)
+                                .addGap(166, 166, 166)))
+                        .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU4LabelDepartamentos)
+                                .addGap(0, 142, Short.MAX_VALUE))
+                            .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jCU4ButtonEnviar)))
@@ -414,31 +416,31 @@ public class inicio extends javax.swing.JFrame {
 
         jInternalFrameAltaDepartamento.setVisible(true);
 
-        jTextFieldNombreDepartamento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jCU12TextFieldNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        jLabelNombreDepartamento.setText("Nombre departamento");
+        jCU12LabelNombre.setText("Nombre departamento");
 
-        jLabelDescripcionDepartamento.setText("Descripción departamento");
+        jCU12LabelDescripcion.setText("Descripción departamento");
 
-        jTextFieldURLDepartamento.addActionListener(new java.awt.event.ActionListener() {
+        jCU12TextFieldURL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldURLDepartamentoActionPerformed(evt);
+                jCU12TextFieldURLActionPerformed(evt);
             }
         });
 
-        jLabelURLDepartamento.setText("URL");
+        jCU12LabelURL.setText("URL");
 
-        jButtonAltaDepartamentoVaciarCampos.setText("vaciar campos");
-        jButtonAltaDepartamentoVaciarCampos.addActionListener(new java.awt.event.ActionListener() {
+        jCU12ButtonVaciar.setText("vaciar campos");
+        jCU12ButtonVaciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAltaDepartamentoVaciarCamposActionPerformed(evt);
+                jCU12ButtonVaciarActionPerformed(evt);
             }
         });
 
-        jButtonAltaDepartamentoEnviar.setText("enviar");
-        jButtonAltaDepartamentoEnviar.addActionListener(new java.awt.event.ActionListener() {
+        jCU12ButtonEnviar.setText("enviar");
+        jCU12ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAltaDepartamentoEnviarActionPerformed(evt);
+                jCU12ButtonEnviarActionPerformed(evt);
             }
         });
 
@@ -447,42 +449,42 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addContainerGap(255, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelNombreDepartamento)
-                    .addComponent(jTextFieldNombreDepartamento)
-                    .addComponent(jTextFieldDescripcionDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                    .addComponent(jLabelDescripcionDepartamento)
-                    .addComponent(jLabelURLDepartamento)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
-                        .addComponent(jButtonAltaDepartamentoVaciarCampos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAltaDepartamentoEnviar))
-                    .addComponent(jTextFieldURLDepartamento, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                    .addComponent(jSeparatorAltaDepartamento))
-                .addContainerGap(252, Short.MAX_VALUE))
+                    .addComponent(jCU12LabelNombre)
+                    .addComponent(jCU12TextFieldNombre)
+                    .addComponent(jCU12TextFieldDescripcion)
+                    .addComponent(jCU12LabelDescripcion)
+                    .addComponent(jCU12LabelURL)
+                    .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
+                        .addComponent(jCU12ButtonVaciar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCU12ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCU12TextFieldURL)
+                    .addComponent(jCU12Separator))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addComponent(jLabelNombreDepartamento)
+                .addComponent(jCU12LabelNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNombreDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jLabelDescripcionDepartamento)
+                .addComponent(jCU12TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jCU12LabelDescripcion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldDescripcionDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jLabelURLDepartamento)
+                .addComponent(jCU12TextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jCU12LabelURL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldURLDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jSeparatorAltaDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jCU12TextFieldURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jCU12Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAltaDepartamentoVaciarCampos)
-                    .addComponent(jButtonAltaDepartamentoEnviar))
+                    .addComponent(jCU12ButtonVaciar)
+                    .addComponent(jCU12ButtonEnviar))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -892,38 +894,38 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.setSelectedIndex(10);
     }//GEN-LAST:event_jMenuAgregarActividadPaqueteActionPerformed
 
-    private void jTextFieldURLDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldURLDepartamentoActionPerformed
+    private void jCU12TextFieldURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12TextFieldURLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldURLDepartamentoActionPerformed
+    }//GEN-LAST:event_jCU12TextFieldURLActionPerformed
 
-    private void jButtonAltaDepartamentoEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoEnviarActionPerformed
+    private void jCU12ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12ButtonEnviarActionPerformed
         // TODO add your handling code here:
-        String nombre = jTextFieldNombreDepartamento.getText();
-        String descripcion = jTextFieldDescripcionDepartamento.getText();
-        String url = jTextFieldURLDepartamento.getText();
+        String nombre = jCU12TextFieldNombre.getText();
+        String descripcion = jCU12TextFieldDescripcion.getText();
+        String url = jCU12TextFieldURL.getText();
         
         if(IControlador.existeDepartamento(nombre)){
             jDialogDepartamentoDuplicado.setVisible(true);
         }else{
             IControlador.altaDepartamento(nombre,descripcion,url);
-            jTextFieldNombreDepartamento.setText("");
-            jTextFieldDescripcionDepartamento.setText("");
-            jTextFieldURLDepartamento.setText("");
+            jCU12TextFieldNombre.setText("");
+            jCU12TextFieldDescripcion.setText("");
+            jCU12TextFieldURL.setText("");
         }   
-    }//GEN-LAST:event_jButtonAltaDepartamentoEnviarActionPerformed
+    }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
 
-    private void jButtonAltaDepartamentoVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
+    private void jCU12ButtonVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12ButtonVaciarActionPerformed
         // TODO add your handling code here:
-        jTextFieldNombreDepartamento.setText("");
-        jTextFieldDescripcionDepartamento.setText("");
-        jTextFieldURLDepartamento.setText("");
-    }//GEN-LAST:event_jButtonAltaDepartamentoVaciarCamposActionPerformed
+        jCU12TextFieldNombre.setText("");
+        jCU12TextFieldDescripcion.setText("");
+        jCU12TextFieldURL.setText("");
+    }//GEN-LAST:event_jCU12ButtonVaciarActionPerformed
 
     private void jButtonDepartamentoDuplicadoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
         // TODO add your handling code here:
-        jTextFieldNombreDepartamento.setText("");
-        jTextFieldDescripcionDepartamento.setText("");
-        jTextFieldURLDepartamento.setText("");
+        jCU12TextFieldNombre.setText("");
+        jCU12TextFieldDescripcion.setText("");
+        jCU12TextFieldURL.setText("");
         jDialogDepartamentoDuplicado.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
 
@@ -1015,12 +1017,19 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAltaDepartamentoEnviar;
-    private javax.swing.JButton jButtonAltaDepartamentoVaciarCampos;
     private javax.swing.JButton jButtonAltaSalidaEnviar;
     private javax.swing.JButton jButtonAltaSalidaVaciarCampos;
     private javax.swing.JButton jButtonDepartamentoDuplicadoCancelar;
     private javax.swing.JButton jButtonDepartamentoDuplicadoReingresar;
+    private javax.swing.JButton jCU12ButtonEnviar;
+    private javax.swing.JButton jCU12ButtonVaciar;
+    private javax.swing.JLabel jCU12LabelDescripcion;
+    private javax.swing.JLabel jCU12LabelNombre;
+    private javax.swing.JLabel jCU12LabelURL;
+    private javax.swing.JSeparator jCU12Separator;
+    private javax.swing.JTextField jCU12TextFieldDescripcion;
+    private javax.swing.JTextField jCU12TextFieldNombre;
+    private javax.swing.JTextField jCU12TextFieldURL;
     private javax.swing.JButton jCU4ButtonEnviar;
     private javax.swing.JLabel jCU4LabelCiudad;
     private javax.swing.JLabel jCU4LabelCosto;
@@ -1060,9 +1069,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelDescripcionDepartamento;
-    private javax.swing.JLabel jLabelNombreDepartamento;
-    private javax.swing.JLabel jLabelURLDepartamento;
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
@@ -1082,17 +1088,13 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarioConsulta;
     private javax.swing.JMenuItem jMenuUsuarioModificar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparatorAltaDepartamento;
     private javax.swing.JSpinner jSpinnerCantMaxTuristas;
     private javax.swing.JSpinner jSpinnerFechaAlta;
     private javax.swing.JSpinner jSpinnerFechaSalida;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextFieldDescripcionDepartamento;
     private javax.swing.JTextField jTextFieldLugarSalida;
-    private javax.swing.JTextField jTextFieldNombreDepartamento;
     private javax.swing.JTextField jTextFieldNombreSalida;
-    private javax.swing.JTextField jTextFieldURLDepartamento;
     // End of variables declaration//GEN-END:variables
 }
