@@ -191,7 +191,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuAltaPaquete">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Alta Paquete de Actividades Tur&#xed;sticas"/>
+                    <Property name="text" type="java.lang.String" value="Crear Paquete de Actividades Tur&#xed;sticas"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAltaPaqueteActionPerformed"/>
