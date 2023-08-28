@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import DataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
@@ -1076,7 +1077,8 @@ public class inicio extends javax.swing.JFrame {
         if(IControlador.existeDepartamento(nombre)){
             jDialogDepartamentoDuplicado.setVisible(true);
         }else{
-            IControlador.altaDepartamento(nombre,descripcion,url);
+            DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
+            IControlador.altaDepartamento(departamento);
             jCU12vaciarCampos();
         }   
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed

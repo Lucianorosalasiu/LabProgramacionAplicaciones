@@ -3,11 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica.controlador;
+import DataTypes.DTDepartamento;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import logica.clases.MyException;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 /**
  *
  * @author lucho
@@ -46,8 +50,18 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void altaDepartamento(String nombre, String descripcion, String url){
-        Departamento nuevoDepartamento = new Departamento(nombre, descripcion, url);
-        departamentos.add(nuevoDepartamento);
+    public void altaDepartamento(DTDepartamento departamento){
+        Departamento nuevoDepartamento = new Departamento(departamento.getNombre(),
+                departamento.getDescripcion(),departamento.getURL());
+        
+        departamentos.add(nuevoDepartamento); //se guarda en local
+        //aca va la persistencia
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("puConexionBD");
+
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(nuevoDepartamento);
+        em.getTransaction().commit();
+        
     }
 }

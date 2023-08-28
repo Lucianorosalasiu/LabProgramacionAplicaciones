@@ -4,6 +4,8 @@
  */
 package logica.interfaces;
 
+import DataTypes.DTDepartamento;
+
 /**
  *
  * @author lucho
@@ -12,5 +14,5 @@ public interface  IControlador {
     
     void test();
     boolean existeDepartamento(String nombre);
-    void altaDepartamento(String nombre, String descripcion, String url);
+    void altaDepartamento(DTDepartamento departamento);
 }
