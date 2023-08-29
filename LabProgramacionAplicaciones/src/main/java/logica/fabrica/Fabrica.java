@@ -9,8 +9,9 @@ import logica.controlador.Controlador;
  *
  * @author lucho
  */
+
 public class Fabrica {
-    public Fabrica(){};
+    public Fabrica(){}
     public IControlador getInterface(){
         return Controlador.getInstance();
     }

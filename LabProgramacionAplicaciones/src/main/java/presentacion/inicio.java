@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import DataTypes.DTDepartamento;
+import dataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class inicio extends javax.swing.JFrame {
     Fabrica fabrica = new Fabrica();
-    IControlador IControlador = fabrica.getInterface();
+    IControlador controlador = fabrica.getInterface();
     /**
      * Creates new form inicio
      */
@@ -1074,11 +1074,11 @@ public class inicio extends javax.swing.JFrame {
         String descripcion = jCU12TextFieldDescripcion.getText();
         String url = jCU12TextFieldURL.getText();
         
-        if(IControlador.existeDepartamento(nombre)){
+        if(controlador.existeDepartamento(nombre)){
             jDialogDepartamentoDuplicado.setVisible(true);
         }else{
             DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
-            IControlador.altaDepartamento(departamento);
+            controlador.altaDepartamento(departamento);
             jCU12vaciarCampos();
         }   
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed

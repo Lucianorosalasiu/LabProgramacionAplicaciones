@@ -384,7 +384,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jCU4ScrollPanelProveedores" pref="244" max="32767" attributes="0"/>
+                                      <Component id="jCU4ScrollPanelProveedores" pref="0" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -872,7 +872,6 @@
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaDepartamento">
           <Properties>
-            <Property name="opaque" type="boolean" value="true"/>
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
           <Constraints>

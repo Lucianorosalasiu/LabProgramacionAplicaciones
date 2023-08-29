@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package logica.interfaces;
+package persistencia;
 
 import dataTypes.DTDepartamento;
 
 /**
  *
- * @author lucho
+ * @author all
  */
-public interface  IControlador {
-    
-    void test();
-    boolean existeDepartamento(String nombre);
-    void altaDepartamento(DTDepartamento departamento);
+public interface IDataPersistencia {
+    void persistirDepartamento(DTDepartamento departamento);
 }
