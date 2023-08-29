@@ -50,6 +50,15 @@ public class DataPersistencia implements IDataPersistencia {
     public boolean existeDepartamento(String nombreDepartamento){
         EntityManager em = emf.createEntityManager();
         try{
+            /**
+            @queryName tiene que hacer referencia a una query que ya hayamos creado, en este caso
+            * la implementacion se encuentra en EDepartamento
+            * 
+            * @resultado se iguala el resultado de la consulta a una lista para saber si hubo coincidencias
+            * 
+            * @setParameter se le indica el nombre del atributo a reemplazar y el valor que va a llevar ese atributo 
+            * una vez se haga la consulta
+            */
             String queryName = "EDepartamento.existeNombreDepartamento";
             em.getTransaction().begin();
             List<EDepartamento> resultado = em.createNamedQuery(queryName,EDepartamento.class)
@@ -63,7 +72,11 @@ public class DataPersistencia implements IDataPersistencia {
                 return false;
             }
         }catch(Exception e){
+            /**
+             * comento la opcion para printear la traza del error ya que puede contener informacion sensible que no
+             * queremos que se vea en produccion, en caso de querer debugear se descomenta nuevamente.
             e.printStackTrace();
+            */
             em.getTransaction().rollback();
             /*si bien se dio un error y no sabemos si realmente existe una coincidencia, devolvemos true
             por seguridad ya que tiene que haber un return en este bloque obligadamente*/

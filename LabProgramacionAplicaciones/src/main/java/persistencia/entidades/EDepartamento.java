@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-
+@Table(name = "departamento")
 /**
  * se define una query personalizada que se puede reutilizar, en este caso esta es llamada desde DataPersistencia.existeDepartamento
  * 
@@ -25,9 +25,12 @@ import javax.persistence.*;
  * el nombre del parametro a remplazar
  * 
  * la reutilizacion de 'd' es una convencion en JPQL
+ * 
+ * notar como la seleccion se hace de 'EDepartamento' que es el nombre de la entidad y no de 'departamento' que es el nombre de la tabla
+ * 
+ * notar que se utiliza 'd.nombre' para acceder al atributo en vez de 'd.NOMBRE' el cual es el campo de la tabla
  */
 @NamedQuery(name = "EDepartamento.existeNombreDepartamento", query = "select d from EDepartamento d where d.nombre = :nombreDepartamento")
-@Table(name = "departamento")
 public class EDepartamento extends EBase {
     @Column(unique = true)
     private String nombre;
