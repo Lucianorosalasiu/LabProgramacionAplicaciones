@@ -37,37 +37,21 @@ public class Controlador implements IControlador{
         System.out.println("Hola estoy fabricando!");
     }
     
+    /**
+     * 
+     * @param nombre nombre del departamento a verificar su unicidad
+     * @throws MyException en caso de encontrar un departamento con ese nombre en el sistema
+     */
     @Override
-    public boolean existeDepartamento(String nombre){
-        /*for(int i = 0; i < departamentos.size();i++){
-            if(nombre.equals(departamentos.get(i).getNombre())){
-                return true;
-            }
-        }*/
-        for(Departamento elemento: departamentos){
-            if(nombre.equals(elemento.getNombre())){
-                return true;
-            }
+    public void existeDepartamento(String nombre)throws MyException{
+        if(dataPersistencia.existeDepartamento(nombre)){
+            throw new MyException("ERROR! Nombre del departamento ya existente en el sistema. ");
         }
-        return false;
     }
     
     @Override
-    public void altaDepartamento(DTDepartamento departamento){
-        /* Departamento nuevoDepartamento = new Departamento(departamento.getNombre(),
-                departamento.getDescripcion(),departamento.getURL());
-        */
-        
-        //departamentos.add(nuevoDepartamento); //se guarda en local
-        //aca va la persistencia
-        
+    public void altaDepartamento(DTDepartamento departamento){  
         dataPersistencia.persistirDepartamento(departamento);
     }
-    
-//    public void changeFavoritos(Socio user) throws UsuarioNoExisteException {
-//        if (favoritos.contains(user)) 
-//            favoritos.remove(user);
-//        else 
-//            favoritos.add(user); 
-//	}
+
 }

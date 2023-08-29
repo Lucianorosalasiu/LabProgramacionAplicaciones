@@ -5,6 +5,7 @@
 package logica.interfaces;
 
 import dataTypes.DTDepartamento;
+import logica.clases.MyException;
 
 /**
  *
@@ -13,6 +14,6 @@ import dataTypes.DTDepartamento;
 public interface  IControlador {
     
     void test();
-    boolean existeDepartamento(String nombre);
+    void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
 }

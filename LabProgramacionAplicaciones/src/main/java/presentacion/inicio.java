@@ -9,6 +9,7 @@ import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
 import java.util.Date;
+import logica.clases.MyException;
 
 /**
  *
@@ -33,9 +34,9 @@ public class inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialogDepartamentoDuplicado = new javax.swing.JDialog();
+        jCU12Dialog = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jCU12DialogTextArea = new javax.swing.JTextArea();
         jButtonDepartamentoDuplicadoCancelar = new javax.swing.JButton();
         jButtonDepartamentoDuplicadoReingresar = new javax.swing.JButton();
         jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
@@ -168,18 +169,17 @@ public class inicio extends javax.swing.JFrame {
         jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
 
-        jDialogDepartamentoDuplicado.setTitle("ERROR");
-        jDialogDepartamentoDuplicado.setLocationByPlatform(true);
-        jDialogDepartamentoDuplicado.setMinimumSize(new java.awt.Dimension(400, 250));
-        jDialogDepartamentoDuplicado.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
+        jCU12Dialog.setTitle("ERROR");
+        jCU12Dialog.setLocationByPlatform(true);
+        jCU12Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
+        jCU12Dialog.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Ya existe un departamento ingresado en el sistema con ese nombre!.\nSeleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
+        jCU12DialogTextArea.setEditable(false);
+        jCU12DialogTextArea.setColumns(20);
+        jCU12DialogTextArea.setLineWrap(true);
+        jCU12DialogTextArea.setRows(5);
+        jCU12DialogTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jCU12DialogTextArea);
 
         jButtonDepartamentoDuplicadoCancelar.setText("Cancelar");
         jButtonDepartamentoDuplicadoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -195,27 +195,27 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jDialogDepartamentoDuplicadoLayout = new javax.swing.GroupLayout(jDialogDepartamentoDuplicado.getContentPane());
-        jDialogDepartamentoDuplicado.getContentPane().setLayout(jDialogDepartamentoDuplicadoLayout);
-        jDialogDepartamentoDuplicadoLayout.setHorizontalGroup(
-            jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+        javax.swing.GroupLayout jCU12DialogLayout = new javax.swing.GroupLayout(jCU12Dialog.getContentPane());
+        jCU12Dialog.getContentPane().setLayout(jCU12DialogLayout);
+        jCU12DialogLayout.setHorizontalGroup(
+            jCU12DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU12DialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jCU12DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                    .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+                    .addGroup(jCU12DialogLayout.createSequentialGroup()
                         .addComponent(jButtonDepartamentoDuplicadoCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDepartamentoDuplicadoReingresar)))
                 .addContainerGap())
         );
-        jDialogDepartamentoDuplicadoLayout.setVerticalGroup(
-            jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogDepartamentoDuplicadoLayout.createSequentialGroup()
+        jCU12DialogLayout.setVerticalGroup(
+            jCU12DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU12DialogLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jDialogDepartamentoDuplicadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jCU12DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDepartamentoDuplicadoCancelar)
                     .addComponent(jButtonDepartamentoDuplicadoReingresar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1393,13 +1393,15 @@ public class inicio extends javax.swing.JFrame {
         String descripcion = jCU12TextFieldDescripcion.getText();
         String url = jCU12TextFieldURL.getText();
         
-        if(controlador.existeDepartamento(nombre)){
-            jDialogDepartamentoDuplicado.setVisible(true);
-        }else{
+        try{
+            controlador.existeDepartamento(nombre);
             DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
             controlador.altaDepartamento(departamento);
             jCU12vaciarCampos();
-        }   
+        }catch(MyException e){
+            jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+            jCU12Dialog.setVisible(true);
+        }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
 
     private void jCU12ButtonVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12ButtonVaciarActionPerformed
@@ -1410,12 +1412,12 @@ public class inicio extends javax.swing.JFrame {
     private void jButtonDepartamentoDuplicadoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
         // TODO add your handling code here:
         jCU12vaciarCampos();
-        jDialogDepartamentoDuplicado.setVisible(false);
+        jCU12Dialog.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoCancelarActionPerformed
 
     private void jButtonDepartamentoDuplicadoReingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
         // TODO add your handling code here:
-        jDialogDepartamentoDuplicado.setVisible(false);
+        jCU12Dialog.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
 
     private void jTextFieldNombreSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreSalidaActionPerformed
@@ -1560,6 +1562,8 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDepartamentoDuplicadoReingresar;
     private javax.swing.JButton jCU12ButtonEnviar;
     private javax.swing.JButton jCU12ButtonVaciar;
+    private javax.swing.JDialog jCU12Dialog;
+    private javax.swing.JTextArea jCU12DialogTextArea;
     private javax.swing.JLabel jCU12LabelDescripcion;
     private javax.swing.JLabel jCU12LabelNombre;
     private javax.swing.JLabel jCU12LabelURL;
@@ -1607,7 +1611,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU5TextFieldNombre;
     private javax.swing.JComboBox<String> jComboBoxActividad;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
-    private javax.swing.JDialog jDialogDepartamentoDuplicado;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
     private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
@@ -1670,7 +1673,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldLugarSalida;
     private javax.swing.JTextField jTextFieldNombreSalida;
     // End of variables declaration//GEN-END:variables

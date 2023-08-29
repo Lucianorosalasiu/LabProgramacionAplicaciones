@@ -16,6 +16,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+
+/**
+ * se define una query personalizada que se puede reutilizar, en este caso esta es llamada desde DataPersistencia.existeDepartamento
+ * 
+ * :atributo significa que ese atributo va a ser remplazado por un parametro posteriormente cuando se llame a la consulta
+ * en este caso cuando llamo a esta consulta utilizo .setParameter("nombreDepartamento", nombre) siendo nombre el parametro y la cadena de texto
+ * el nombre del parametro a remplazar
+ * 
+ * la reutilizacion de 'd' es una convencion en JPQL
+ */
+@NamedQuery(name = "EDepartamento.existeNombreDepartamento", query = "select d from EDepartamento d where d.nombre = :nombreDepartamento")
 @Table(name = "departamento")
 public class EDepartamento extends EBase {
     @Column(unique = true)

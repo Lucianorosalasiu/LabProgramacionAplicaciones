@@ -12,4 +12,5 @@ import dataTypes.DTDepartamento;
  */
 public interface IDataPersistencia {
     void persistirDepartamento(DTDepartamento departamento);
+    boolean existeDepartamento(String nombre);
 }

@@ -1,9 +1,11 @@
 package persistencia;
 
 import dataTypes.DTDepartamento;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import logica.clases.Departamento;
 import persistencia.entidades.EDepartamento;
 
 /*
@@ -45,18 +47,29 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
 
-    /*
-    ActividadesDeportivas ap = new ActividadesDeportivas();
-    ap.setNombre(act.getNombre());
-    ap.setDescripcion(act.getDescripcion());
-    ap.setDuracion(act.getDuracionMinutos());
-    ap.setCosto(act.getCosto());
-    ap.setFechaAlta(act.getFechaRegistro().toCalendar());
-    ap.setInstitucion(ins.getNombre());
-    ap.setEstado(act.getEstado().name());
-    ap.setProfesor(act.getCreador().getNickname());
-    em.getTransaction().begin();
-    em.persist(ap);
-    em.getTransaction().commit();
-    */
+    public boolean existeDepartamento(String nombreDepartamento){
+        EntityManager em = emf.createEntityManager();
+        try{
+            String queryName = "EDepartamento.existeNombreDepartamento";
+            em.getTransaction().begin();
+            List<EDepartamento> resultado = em.createNamedQuery(queryName,EDepartamento.class)
+                    .setParameter("nombreDepartamento",nombreDepartamento)
+                    .getResultList();
+            em.getTransaction().commit();
+            
+            if(!resultado.isEmpty()){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            /*si bien se dio un error y no sabemos si realmente existe una coincidencia, devolvemos true
+            por seguridad ya que tiene que haber un return en este bloque obligadamente*/
+            return true;
+        }finally{
+            em.close();
+        }
+    }
 }

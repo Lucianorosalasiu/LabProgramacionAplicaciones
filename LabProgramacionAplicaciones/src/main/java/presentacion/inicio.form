@@ -2,7 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JDialog" name="jDialogDepartamentoDuplicado">
+    <Container class="javax.swing.JDialog" name="jCU12Dialog">
       <Properties>
         <Property name="title" type="java.lang.String" value="ERROR"/>
         <Property name="locationByPlatform" type="boolean" value="true"/>
@@ -54,13 +54,12 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="jCU12DialogTextArea">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="Ya existe un departamento ingresado en el sistema con ese nombre!.&#xa;Seleccione &apos;Cancelar&apos; para volver atras y descartar los datos ingresados o &quot;Reingresar&quot; para volver atras y modificar los datos"/>
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
