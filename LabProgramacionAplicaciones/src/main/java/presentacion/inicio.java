@@ -71,6 +71,7 @@ public class inicio extends javax.swing.JFrame {
         jCU4ButtonEnviar = new javax.swing.JButton();
         jCU4LabelFecha = new javax.swing.JLabel();
         jCU4DateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jButton6 = new javax.swing.JButton();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jCU5LabelDepartamento = new javax.swing.JLabel();
         jCU5ComboBoxDepartamento = new javax.swing.JComboBox<>();
@@ -234,7 +235,6 @@ public class inicio extends javax.swing.JFrame {
         JDialogCamposVacios.setLocationByPlatform(true);
         JDialogCamposVacios.setMinimumSize(new java.awt.Dimension(400, 250));
         JDialogCamposVacios.setModal(true);
-        JDialogCamposVacios.setPreferredSize(new java.awt.Dimension(400, 250));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -377,10 +377,7 @@ public class inicio extends javax.swing.JFrame {
 
         jCU4TableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Descripción", "Sitio web"
@@ -418,6 +415,7 @@ public class inicio extends javax.swing.JFrame {
 
         jCU4LabelDepartamentos.setText("Departamentos");
 
+        jCU4TableDepartamentos.setAutoCreateRowSorter(true);
         jCU4TableDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -441,7 +439,8 @@ public class inicio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jCU4TableDepartamentos.setColumnSelectionAllowed(true);
+        jCU4TableDepartamentos.setCellSelectionEnabled(false);
+        jCU4TableDepartamentos.setRowSelectionAllowed(true);
         jCU4TableDepartamentos.getTableHeader().setReorderingAllowed(false);
         jCU4ScrollPanelDepartamentos.setViewportView(jCU4TableDepartamentos);
 
@@ -455,6 +454,13 @@ public class inicio extends javax.swing.JFrame {
         jCU4LabelFecha.setText("Fecha alta");
 
         jCU4DateChooserFecha.setDateFormatString("d,M,yyyy");
+
+        jButton6.setText("Vaciar campos");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrameAltaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameAltaActividadTuristica.getContentPane());
         jInternalFrameAltaActividadTuristica.getContentPane().setLayout(jInternalFrameAltaActividadTuristicaLayout);
@@ -501,7 +507,10 @@ public class inicio extends javax.swing.JFrame {
                                 .addComponent(jCU4LabelDepartamentos)
                                 .addGap(0, 151, Short.MAX_VALUE))
                             .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addComponent(jCU4ButtonEnviar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU4ButtonEnviar)))
                 .addContainerGap())
         );
         jInternalFrameAltaActividadTuristicaLayout.setVerticalGroup(
@@ -541,7 +550,9 @@ public class inicio extends javax.swing.JFrame {
                     .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                     .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCU4ButtonEnviar)
+                .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU4ButtonEnviar)
+                    .addComponent(jButton6))
                 .addGap(34, 34, 34))
         );
 
@@ -722,14 +733,14 @@ public class inicio extends javax.swing.JFrame {
 
         jCU12LabelURL.setText("URL");
 
-        jCU12ButtonVaciar.setText("vaciar campos");
+        jCU12ButtonVaciar.setText("Vaciar campos");
         jCU12ButtonVaciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU12ButtonVaciarActionPerformed(evt);
             }
         });
 
-        jCU12ButtonEnviar.setText("enviar");
+        jCU12ButtonEnviar.setText("Enviar");
         jCU12ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU12ButtonEnviarActionPerformed(evt);
@@ -1597,14 +1608,27 @@ public class inicio extends javax.swing.JFrame {
 
     private void jCU4ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonEnviarActionPerformed
         // TODO add your handling code here:
-        String nombre = jCU4TextFieldNombre.getText();
-        String descripcion = jCU4TextAreaDescripcion.getText();
-        String duracion = jCU4TextFieldDuracion.getText();
-        Float costo = Float.parseFloat(jCU4TextFieldCosto.getText());
-        String ciudad = jCU4TextFieldCiudad.getText();
-        Date fechaAlta = jCU4DateChooserFecha.getDate();
-        //String nombre departamento
-        //String nombre proveedor
+        if(jCU4verificarVacios()){
+            return;
+        }else{
+            String nombre = jCU4TextFieldNombre.getText();
+            String descripcion = jCU4TextAreaDescripcion.getText();
+            String duracion = jCU4TextFieldDuracion.getText();
+            Float costo = Float.parseFloat(jCU4TextFieldCosto.getText());
+            String ciudad = jCU4TextFieldCiudad.getText();
+            Date fechaAlta = jCU4DateChooserFecha.getDate();
+
+            /*conseguir departamento seleccionado de la tabla*/
+            int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
+            if(indexRowDepartamento != -1){
+                String nombreDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString();
+                String descripcionDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,1).toString();
+                String urlDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,2).toString();
+                DTDepartamento dtDepartamento = new DTDepartamento(nombreDTDepartamento,descripcionDTDepartamento,urlDTDepartamento);
+            }
+            
+            /*conseguir proveedor seleccionado de la tabla*/
+        }
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1621,22 +1645,63 @@ public class inicio extends javax.swing.JFrame {
         //cargar lista proveedores
         
         /**
-         * consigo el modelo de la tabla
+         * consigo el modelo de la tabla departamento
          * recorro la lista cargando sus valores en un objeto rowData de 3 campos (nombre,descripcion,url)
          * agrego la rowdata al modelo
          */
-        DefaultTableModel model = (DefaultTableModel) jCU4TableDepartamentos.getModel();
+        DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         
         for(DTDepartamento d: DTDepartamentos){
             Object rowData[] = new Object[3];
             rowData[0] = d.getNombre();
             rowData[1] = d.getDescripcion();
             rowData[2] = d.getURL();
-            model.addRow(rowData);
+            modelDepartamento.addRow(rowData);
         }
+       
+        /*temporalmente se crea un registro de proveedor para poder seguir
+        avanzando en el desarrollo, eventualmente cuando se implementen los proveedores
+        el funcionamiento sera similar al bloque de arriba*/
+        DefaultTableModel modelProveedor = (DefaultTableModel) jCU4TableProveedores.getModel();
+        
+        Object rowData[] = new Object[2];
+        rowData[0] = "nombreProveedor-hardcodeado";
+        rowData[1] = "descripcionProveedor-hardcodeado";
+        modelProveedor.addRow(rowData);
         
     }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        jCU4vaciarCampos();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    public void jCU4vaciarCampos(){
+        jCU4TextFieldNombre.setText("");
+        jCU4TextAreaDescripcion.setText("");
+        jCU4TextFieldCiudad.setText("");
+        jCU4TextFieldCosto.setText("");
+        jCU4TextFieldDuracion.setText("");
+        jCU4DateChooserFecha.setDate(null);
+    }
+    
+    public boolean jCU4verificarVacios(){
+        int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
+        int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
+        
+        if(jCU4TextFieldNombre.getText().isEmpty() ||
+           jCU4TextAreaDescripcion.getText().isEmpty() ||
+           jCU4TextFieldCiudad.getText().isEmpty() ||
+           jCU4TextFieldCosto.getText().isEmpty() ||
+           jCU4TextFieldDuracion.getText().isEmpty() ||
+           jCU4DateChooserFecha.getDate() == null || indexRowDepartamento == -1 ||
+           indexRowProveedor == -1){
+            JDialogCamposVacios.setVisible(true);
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     public void jCU12vaciarCampos(){
         jCU12TextFieldNombre.setText("");
@@ -1645,9 +1710,9 @@ public class inicio extends javax.swing.JFrame {
     }
     
     public boolean jCU12verificarVacios(){
-        if(jCU12TextFieldNombre.getText().equals("") ||
-        jCU12TextFieldDescripcion.getText().equals("") ||
-        jCU12TextFieldURL.getText().equals("")){
+        if(jCU12TextFieldNombre.getText().isEmpty() ||
+        jCU12TextFieldDescripcion.getText().isEmpty() ||
+        jCU12TextFieldURL.getText().isEmpty()){
             JDialogCamposVacios.setVisible(true);
             return true;
         }else{
@@ -1708,6 +1773,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonAltaSalidaEnviar;
     private javax.swing.JButton jButtonAltaSalidaVaciarCampos;
     private javax.swing.JButton jButtonDepartamentoDuplicadoCancelar;
