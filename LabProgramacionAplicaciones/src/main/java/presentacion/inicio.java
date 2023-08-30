@@ -10,6 +10,7 @@ import logica.interfaces.IControlador;
 import java.time.Clock;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import logica.clases.Departamento;
 import logica.clases.MyException;
 
@@ -419,10 +420,7 @@ public class inicio extends javax.swing.JFrame {
 
         jCU4TableDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre", "Descripción", "URL"
@@ -432,7 +430,7 @@ public class inicio extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1618,9 +1616,20 @@ public class inicio extends javax.swing.JFrame {
     private void jInternalFrameAltaActividadTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
         // TODO add your handling code here:
         System.out.println("esquizofrenia 2 el regreso");
-        //cargar lista departamentos
-        List<DTDepartamento> dTDepartamentos = controlador.obtenerDepartamentos();
+        List<DTDepartamento> DTDepartamentos = controlador.obtenerDepartamentos();
         //cargar lista proveedores
+        
+        /*cargar la tabla de departamentos*/
+        DefaultTableModel model = (DefaultTableModel) jCU4TableDepartamentos.getModel();
+        
+        for(DTDepartamento d: DTDepartamentos){
+            Object rowData[] = new Object[3];
+            rowData[0] = d.getNombre();
+            rowData[1] = d.getDescripcion();
+            rowData[2] = d.getURL();
+            model.addRow(rowData);
+        }
+        
     }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
 
     

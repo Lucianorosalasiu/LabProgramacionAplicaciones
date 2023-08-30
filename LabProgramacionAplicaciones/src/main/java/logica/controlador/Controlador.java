@@ -65,9 +65,7 @@ public class Controlador implements IControlador{
         for(EDepartamento d: EDepartamentos){
             DTDepartamento dtDepartamento = new DTDepartamento(d.getNombre(),d.getDescripcion(),d.getUrl());
             DTDepartamentos.add(dtDepartamento);
-            System.out.println(d.getNombre());
         }
-        
         
         return DTDepartamentos;       
     }
