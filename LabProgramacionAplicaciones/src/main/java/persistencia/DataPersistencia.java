@@ -1,6 +1,7 @@
 package persistencia;
 
 import dataTypes.DTDepartamento;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -59,9 +60,9 @@ public class DataPersistencia implements IDataPersistencia {
             * @setParameter se le indica el nombre del atributo a reemplazar y el valor que va a llevar ese atributo 
             * una vez se haga la consulta
             */
-            String queryName = "EDepartamento.existeNombreDepartamento";
+            //String queryName = "EDepartamento.existeNombreDepartamento";
             em.getTransaction().begin();
-            List<EDepartamento> resultado = em.createNamedQuery(queryName,EDepartamento.class)
+            List<EDepartamento> resultado = em.createNamedQuery("EDepartamento.existeNombreDepartamento",EDepartamento.class)
                     .setParameter("nombreDepartamento",nombreDepartamento)
                     .getResultList();
             em.getTransaction().commit();
@@ -81,6 +82,24 @@ public class DataPersistencia implements IDataPersistencia {
             /*si bien se dio un error y no sabemos si realmente existe una coincidencia, devolvemos true
             por seguridad ya que tiene que haber un return en este bloque obligadamente*/
             return true;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<EDepartamento> obtenerDepartamentos(){
+        EntityManager em = emf.createEntityManager();
+        List<EDepartamento> departamentos = new LinkedList<>();
+        
+        try{
+            em.getTransaction().begin();
+            departamentos = em.createNamedQuery("EDepartamento.obtenerDepartamentos",EDepartamento.class).getResultList();
+            em.getTransaction().commit();
+            return departamentos;
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            return departamentos;
         }finally{
             em.close();
         }

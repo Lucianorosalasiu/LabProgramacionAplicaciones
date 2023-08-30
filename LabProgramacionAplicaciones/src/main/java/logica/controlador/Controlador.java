@@ -8,9 +8,12 @@ import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import logica.clases.MyException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import persistencia.DataPersistencia;
 import persistencia.FDataPersistencia;
 import persistencia.IDataPersistencia;
+import persistencia.entidades.EDepartamento;
 /**
  *
  * @author lucho
@@ -52,6 +55,21 @@ public class Controlador implements IControlador{
     @Override
     public void altaDepartamento(DTDepartamento departamento){  
         dataPersistencia.persistirDepartamento(departamento);
+    }
+    
+    @Override
+    public List<DTDepartamento> obtenerDepartamentos(){
+        List<EDepartamento> EDepartamentos = dataPersistencia.obtenerDepartamentos();
+        List<DTDepartamento> DTDepartamentos = new LinkedList<>();        
+        
+        for(EDepartamento d: EDepartamentos){
+            DTDepartamento dtDepartamento = new DTDepartamento(d.getNombre(),d.getDescripcion(),d.getUrl());
+            DTDepartamentos.add(dtDepartamento);
+            System.out.println(d.getNombre());
+        }
+        
+        
+        return DTDepartamentos;       
     }
 
 }

@@ -422,6 +422,9 @@
           <Properties>
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jInternalFrameAltaActividadTuristicaInternalFrameActivated"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Alta Actividad Tur&#xed;stica">

@@ -9,6 +9,8 @@ import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
 import java.util.Date;
+import java.util.List;
+import logica.clases.Departamento;
 import logica.clases.MyException;
 
 /**
@@ -324,6 +326,23 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Modificar Usuario", jInternalFrameModificarUsuario);
 
         jInternalFrameAltaActividadTuristica.setVisible(true);
+        jInternalFrameAltaActividadTuristica.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                jInternalFrameAltaActividadTuristicaInternalFrameActivated(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jCU4TextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1466,19 +1485,20 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jCU12verificarVacios()){
             return;
-        }
-        String nombre = jCU12TextFieldNombre.getText();
-        String descripcion = jCU12TextFieldDescripcion.getText();
-        String url = jCU12TextFieldURL.getText();
-        
-        try{
-            controlador.existeDepartamento(nombre);
-            DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
-            controlador.altaDepartamento(departamento);
-            jCU12vaciarCampos();
-        }catch(MyException e){
-            jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
-            jCU12Dialog.setVisible(true);
+        }else{
+            String nombre = jCU12TextFieldNombre.getText();
+            String descripcion = jCU12TextFieldDescripcion.getText();
+            String url = jCU12TextFieldURL.getText();
+
+            try{
+                controlador.existeDepartamento(nombre);
+                DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
+                controlador.altaDepartamento(departamento);
+                jCU12vaciarCampos();
+            }catch(MyException e){
+                jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+                jCU12Dialog.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
 
@@ -1585,7 +1605,8 @@ public class inicio extends javax.swing.JFrame {
         Float costo = Float.parseFloat(jCU4TextFieldCosto.getText());
         String ciudad = jCU4TextFieldCiudad.getText();
         Date fechaAlta = jCU4DateChooserFecha.getDate();
-        
+        //String nombre departamento
+        //String nombre proveedor
         System.out.println(fechaAlta);
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
 
@@ -1593,6 +1614,14 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         JDialogCamposVacios.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jInternalFrameAltaActividadTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
+        // TODO add your handling code here:
+        System.out.println("esquizofrenia 2 el regreso");
+        //cargar lista departamentos
+        List<DTDepartamento> dTDepartamentos = controlador.obtenerDepartamentos();
+        //cargar lista proveedores
+    }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
 
     
     public void jCU12vaciarCampos(){

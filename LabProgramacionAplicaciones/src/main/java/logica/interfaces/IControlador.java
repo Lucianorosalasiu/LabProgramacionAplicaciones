@@ -5,6 +5,7 @@
 package logica.interfaces;
 
 import dataTypes.DTDepartamento;
+import java.util.List;
 import logica.clases.MyException;
 
 /**
@@ -16,4 +17,5 @@ public interface  IControlador {
     void test();
     void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
+    List<DTDepartamento> obtenerDepartamentos();
 }

@@ -5,6 +5,8 @@
 package persistencia;
 
 import dataTypes.DTDepartamento;
+import java.util.List;
+import persistencia.entidades.EDepartamento;
 
 /**
  *
@@ -13,4 +15,5 @@ import dataTypes.DTDepartamento;
 public interface IDataPersistencia {
     void persistirDepartamento(DTDepartamento departamento);
     boolean existeDepartamento(String nombre);
+    List<EDepartamento> obtenerDepartamentos();
 }
