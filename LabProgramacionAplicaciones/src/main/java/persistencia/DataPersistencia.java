@@ -1,5 +1,6 @@
 package persistencia;
 
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
+import logica.clases.MyException;
+import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 
 /*
@@ -29,23 +32,6 @@ public class DataPersistencia implements IDataPersistencia {
         if (instancia == null)
             instancia = new DataPersistencia();
         return instancia;
-    }
-
-    public void persistirDepartamento(DTDepartamento dtDepto) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
-            dtDepto.getDescripcion(),dtDepto.getURL());
-
-            em.getTransaction().begin();
-            em.persist(nuevoDepartamento);
-            em.getTransaction().commit(); 
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
     }
 
     public boolean existeDepartamento(String nombreDepartamento){
@@ -87,6 +73,23 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     
+    public void altaDepartamento(DTDepartamento dtDepto) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
+            dtDepto.getDescripcion(),dtDepto.getURL());
+
+            em.getTransaction().begin();
+            em.persist(nuevoDepartamento);
+            em.getTransaction().commit(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public List<DTDepartamento> obtenerDepartamentos(){
         EntityManager em = emf.createEntityManager();
@@ -103,7 +106,7 @@ public class DataPersistencia implements IDataPersistencia {
              * para respetar la arquitectura de capas y no pasar objetos
              */
             for(EDepartamento ed: EDepartamentos){
-                DTDepartamento DTDepartamento = new DTDepartamento(ed.getNombre(),ed.getDescripcion(),ed.getUrl());
+                DTDepartamento DTDepartamento = new DTDepartamento(ed.getId(),ed.getNombre(),ed.getDescripcion(),ed.getUrl());
                 DTDepartamentos.add(DTDepartamento);
             }
             
@@ -111,6 +114,44 @@ public class DataPersistencia implements IDataPersistencia {
         }catch(Exception e){
             em.getTransaction().rollback();
             return DTDepartamentos;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        EntityManager em = emf.createEntityManager();    
+        String consultaSQL = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
+            
+        List<EActividadTuristica> resultado = em.createQuery(consultaSQL,EActividadTuristica.class)
+                .setParameter("nombreActividad",nombre)
+                .getResultList();
+            
+        em.close();
+        
+        if(!resultado.isEmpty()){   
+            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
+        }
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+        EntityManager em = emf.createEntityManager();   
+        
+        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
+        
+        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
+        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
+                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
+                dtActividadTuristica.getFechaAlta(),eDepartamento);
+        
+        try{
+            em.getTransaction().begin();
+            em.persist(nuevaActividad);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
         }finally{
             em.close();
         }
