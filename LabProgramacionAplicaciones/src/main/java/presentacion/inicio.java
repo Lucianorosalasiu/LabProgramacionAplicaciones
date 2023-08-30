@@ -47,6 +47,11 @@ public class inicio extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton5 = new javax.swing.JButton();
+        jCU4Dialog = new javax.swing.JDialog();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jCU4DialogTextArea = new javax.swing.JTextArea();
+        jCU4ButtonReingresar = new javax.swing.JButton();
+        jCU4ButtonCancelar = new javax.swing.JButton();
         jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
         jInternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
@@ -272,6 +277,58 @@ public class inicio extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jCU4Dialog.setTitle("ERROR");
+        jCU4Dialog.setLocationByPlatform(true);
+        jCU4Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
+        jCU4Dialog.setPreferredSize(new java.awt.Dimension(400, 250));
+
+        jCU4DialogTextArea.setEditable(false);
+        jCU4DialogTextArea.setColumns(20);
+        jCU4DialogTextArea.setLineWrap(true);
+        jCU4DialogTextArea.setRows(5);
+        jCU4DialogTextArea.setWrapStyleWord(true);
+        jScrollPane7.setViewportView(jCU4DialogTextArea);
+
+        jCU4ButtonReingresar.setText("Reingresar");
+        jCU4ButtonReingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4ButtonReingresarActionPerformed(evt);
+            }
+        });
+
+        jCU4ButtonCancelar.setText("Cancelar");
+        jCU4ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4ButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jCU4DialogLayout = new javax.swing.GroupLayout(jCU4Dialog.getContentPane());
+        jCU4Dialog.getContentPane().setLayout(jCU4DialogLayout);
+        jCU4DialogLayout.setHorizontalGroup(
+            jCU4DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU4DialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jCU4DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCU4DialogLayout.createSequentialGroup()
+                        .addComponent(jCU4ButtonCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU4ButtonReingresar)))
+                .addContainerGap())
+        );
+        jCU4DialogLayout.setVerticalGroup(
+            jCU4DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU4DialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jCU4DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU4ButtonReingresar)
+                    .addComponent(jCU4ButtonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1634,8 +1691,8 @@ public class inicio extends javax.swing.JFrame {
                 controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento);
                 jCU4vaciarCampos();
             }catch(MyException e){
-                jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
-                jCU12Dialog.setVisible(true);
+                jCU4Dialog.setVisible(true);
+                jCU4DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
             }
         }
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
@@ -1685,6 +1742,17 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         jCU4vaciarCampos();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jCU4ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        jCU4vaciarCampos();
+        jCU4Dialog.setVisible(false);
+    }//GEN-LAST:event_jCU4ButtonCancelarActionPerformed
+
+    private void jCU4ButtonReingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonReingresarActionPerformed
+        // TODO add your handling code here:
+        jCU4Dialog.setVisible(false);
+    }//GEN-LAST:event_jCU4ButtonReingresarActionPerformed
 
     public void jCU4vaciarCampos(){
         jCU4TextFieldNombre.setText("");
@@ -1799,8 +1867,12 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU12TextFieldDescripcion;
     private javax.swing.JTextField jCU12TextFieldNombre;
     private javax.swing.JTextField jCU12TextFieldURL;
+    private javax.swing.JButton jCU4ButtonCancelar;
     private javax.swing.JButton jCU4ButtonEnviar;
+    private javax.swing.JButton jCU4ButtonReingresar;
     private com.toedter.calendar.JDateChooser jCU4DateChooserFecha;
+    private javax.swing.JDialog jCU4Dialog;
+    private javax.swing.JTextArea jCU4DialogTextArea;
     private javax.swing.JLabel jCU4LabelCiudad;
     private javax.swing.JLabel jCU4LabelCosto;
     private javax.swing.JLabel jCU4LabelDepartamentos;
@@ -1895,6 +1967,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinnerCantMaxTuristas;
     private javax.swing.JSpinner jSpinnerFechaAlta;
