@@ -34,23 +34,6 @@ public class DataPersistencia implements IDataPersistencia {
         return instancia;
     }
 
-    public void altaDepartamento(DTDepartamento dtDepto) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
-            dtDepto.getDescripcion(),dtDepto.getURL());
-
-            em.getTransaction().begin();
-            em.persist(nuevoDepartamento);
-            em.getTransaction().commit(); 
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
-
     public boolean existeDepartamento(String nombreDepartamento){
         EntityManager em = emf.createEntityManager();
         try{
@@ -90,6 +73,23 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     
+    public void altaDepartamento(DTDepartamento dtDepto) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
+            dtDepto.getDescripcion(),dtDepto.getURL());
+
+            em.getTransaction().begin();
+            em.persist(nuevoDepartamento);
+            em.getTransaction().commit(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public List<DTDepartamento> obtenerDepartamentos(){
         EntityManager em = emf.createEntityManager();
@@ -106,7 +106,7 @@ public class DataPersistencia implements IDataPersistencia {
              * para respetar la arquitectura de capas y no pasar objetos
              */
             for(EDepartamento ed: EDepartamentos){
-                DTDepartamento DTDepartamento = new DTDepartamento(ed.getNombre(),ed.getDescripcion(),ed.getUrl());
+                DTDepartamento DTDepartamento = new DTDepartamento(ed.getId(),ed.getNombre(),ed.getDescripcion(),ed.getUrl());
                 DTDepartamentos.add(DTDepartamento);
             }
             

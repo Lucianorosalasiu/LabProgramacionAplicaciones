@@ -375,6 +375,7 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
+        jCU4TableProveedores.setAutoCreateRowSorter(true);
         jCU4TableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -421,14 +422,14 @@ public class inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Descripción", "URL"
+                "Id", "Nombre", "Descripción", "URL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -439,8 +440,6 @@ public class inicio extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jCU4TableDepartamentos.setCellSelectionEnabled(false);
-        jCU4TableDepartamentos.setRowSelectionAllowed(true);
         jCU4TableDepartamentos.getTableHeader().setReorderingAllowed(false);
         jCU4ScrollPanelDepartamentos.setViewportView(jCU4TableDepartamentos);
 
@@ -1665,10 +1664,11 @@ public class inicio extends javax.swing.JFrame {
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         
         for(DTDepartamento d: DTDepartamentos){
-            Object rowData[] = new Object[3];
-            rowData[0] = d.getNombre();
-            rowData[1] = d.getDescripcion();
-            rowData[2] = d.getURL();
+            Object rowData[] = new Object[4];
+            rowData[0] = d.getId();
+            rowData[1] = d.getNombre();
+            rowData[2] = d.getDescripcion();
+            rowData[3] = d.getURL();
             modelDepartamento.addRow(rowData);
         }
        
