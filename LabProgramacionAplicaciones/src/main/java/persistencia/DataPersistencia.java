@@ -136,18 +136,15 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, DTDepartamento dtDepartamento){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
         EntityManager em = emf.createEntityManager();   
         
-//        EDepartamento eDepartamento = new EDepartamento(dtDepartamento.getNombre(),dtDepartamento.getDescripcion(),
-//        dtDepartamento.getURL());
-        //Long pk = 151L;
-        EDepartamento encontrar = em.find(EDepartamento.class,151L);
+        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
         
         EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),encontrar);
+                dtActividadTuristica.getFechaAlta(),eDepartamento);
         
         try{
             em.getTransaction().begin();

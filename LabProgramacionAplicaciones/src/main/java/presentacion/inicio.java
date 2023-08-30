@@ -1617,13 +1617,10 @@ public class inicio extends javax.swing.JFrame {
             String ciudad = jCU4TextFieldCiudad.getText();
             Date fechaAlta = jCU4DateChooserFecha.getDate();
 
-            /*conseguir departamento seleccionado de la tabla*/
+            /*conseguir la id del departamento seleccionado de la tabla*/
             int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
                 
-            String nombreDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString();
-            String descripcionDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,1).toString();
-            String urlDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,2).toString();
-            DTDepartamento dtDepartamento = new DTDepartamento(nombreDTDepartamento,descripcionDTDepartamento,urlDTDepartamento);
+            Long idDepartamento = Long.parseLong(jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString());
             
             /*conseguir proveedor seleccionado de la tabla*/
             
@@ -1634,7 +1631,7 @@ public class inicio extends javax.swing.JFrame {
                 /*construir el dt actividad turistica*/
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre,descripcion,
                 duracion,costo,ciudad,fechaAlta);
-                controlador.altaActividadTuristica(dtActividadTuristica, dtDepartamento);
+                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento);
                 jCU4vaciarCampos();
             }catch(MyException e){
                 jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");

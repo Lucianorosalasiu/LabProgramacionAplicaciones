@@ -21,5 +21,5 @@ public interface  IControlador {
     List<DTDepartamento> obtenerDepartamentos();
     
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, DTDepartamento dtDepartamento);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento);
 }

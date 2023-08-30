@@ -21,6 +21,6 @@ public interface IDataPersistencia {
     List<DTDepartamento> obtenerDepartamentos();
     
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, DTDepartamento dTDepartamento);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento);
     
 }
