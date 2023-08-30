@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica.controlador;
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
@@ -48,13 +49,13 @@ public class Controlador implements IControlador{
     @Override
     public void existeDepartamento(String nombre)throws MyException{
         if(dataPersistencia.existeDepartamento(nombre)){
-            throw new MyException("ERROR! Nombre del departamento ya existente en el sistema. ");
+            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema. ");
         }
     }
     
     @Override
     public void altaDepartamento(DTDepartamento departamento){  
-        dataPersistencia.persistirDepartamento(departamento);
+        dataPersistencia.altaDepartamento(departamento);
     }
     
     /**
@@ -65,6 +66,16 @@ public class Controlador implements IControlador{
     public List<DTDepartamento> obtenerDepartamentos(){
         List<DTDepartamento> DTDepartamentos = dataPersistencia.obtenerDepartamentos();        
         return DTDepartamentos;       
+    }
+    
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        dataPersistencia.existeActividadTuristica(nombre);
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, DTDepartamento dTDepartamento){
+        dataPersistencia.altaActividadTuristica(dtActividadTuristica, dTDepartamento);
     }
 
 }

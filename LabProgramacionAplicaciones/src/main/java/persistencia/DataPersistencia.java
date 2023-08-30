@@ -1,5 +1,6 @@
 package persistencia;
 
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
+import logica.clases.MyException;
+import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 
 /*
@@ -31,7 +34,7 @@ public class DataPersistencia implements IDataPersistencia {
         return instancia;
     }
 
-    public void persistirDepartamento(DTDepartamento dtDepto) {
+    public void altaDepartamento(DTDepartamento dtDepto) {
         EntityManager em = emf.createEntityManager();
         try {
             EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
@@ -111,6 +114,47 @@ public class DataPersistencia implements IDataPersistencia {
         }catch(Exception e){
             em.getTransaction().rollback();
             return DTDepartamentos;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        EntityManager em = emf.createEntityManager();    
+        String consultaSQL = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
+            
+        List<EActividadTuristica> resultado = em.createQuery(consultaSQL,EActividadTuristica.class)
+                .setParameter("nombreActividad",nombre)
+                .getResultList();
+            
+        em.close();
+        
+        if(!resultado.isEmpty()){   
+            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
+        }
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, DTDepartamento dtDepartamento){
+        EntityManager em = emf.createEntityManager();   
+        
+//        EDepartamento eDepartamento = new EDepartamento(dtDepartamento.getNombre(),dtDepartamento.getDescripcion(),
+//        dtDepartamento.getURL());
+        //Long pk = 151L;
+        EDepartamento encontrar = em.find(EDepartamento.class,151L);
+        
+        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
+        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
+                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
+                dtActividadTuristica.getFechaAlta(),encontrar);
+        
+        try{
+            em.getTransaction().begin();
+            em.persist(nuevaActividad);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
         }finally{
             em.close();
         }

@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -362,7 +363,6 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
-        jCU4TextFieldCosto.setText("0.00");
         jCU4TextFieldCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU4TextFieldCostoActionPerformed(evt);
@@ -1620,14 +1620,27 @@ public class inicio extends javax.swing.JFrame {
 
             /*conseguir departamento seleccionado de la tabla*/
             int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
-            if(indexRowDepartamento != -1){
-                String nombreDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString();
-                String descripcionDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,1).toString();
-                String urlDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,2).toString();
-                DTDepartamento dtDepartamento = new DTDepartamento(nombreDTDepartamento,descripcionDTDepartamento,urlDTDepartamento);
-            }
+                
+            String nombreDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString();
+            String descripcionDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,1).toString();
+            String urlDTDepartamento = jCU4TableDepartamentos.getValueAt(indexRowDepartamento,2).toString();
+            DTDepartamento dtDepartamento = new DTDepartamento(nombreDTDepartamento,descripcionDTDepartamento,urlDTDepartamento);
             
             /*conseguir proveedor seleccionado de la tabla*/
+            
+            
+            
+            try{
+                controlador.existeActividadTuristica(nombre);
+                /*construir el dt actividad turistica*/
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre,descripcion,
+                duracion,costo,ciudad,fechaAlta);
+                controlador.altaActividadTuristica(dtActividadTuristica, dtDepartamento);
+                jCU4vaciarCampos();
+            }catch(MyException e){
+                jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+                jCU12Dialog.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
 
