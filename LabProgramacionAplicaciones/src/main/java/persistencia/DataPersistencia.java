@@ -88,18 +88,29 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public List<EDepartamento> obtenerDepartamentos(){
+    public List<DTDepartamento> obtenerDepartamentos(){
         EntityManager em = emf.createEntityManager();
-        List<EDepartamento> departamentos = new LinkedList<>();
+        List<EDepartamento> EDepartamentos = new LinkedList<>();
+        List<DTDepartamento> DTDepartamentos = new LinkedList<>();  
         
         try{
             em.getTransaction().begin();
-            departamentos = em.createNamedQuery("EDepartamento.obtenerDepartamentos",EDepartamento.class).getResultList();
+            EDepartamentos = em.createNamedQuery("EDepartamento.obtenerDepartamentos",EDepartamento.class).getResultList();
             em.getTransaction().commit();
-            return departamentos;
+            
+            /**
+             * una vez obtenida la lista de EDepartamentos los parseo a DTDepartamentos
+             * para respetar la arquitectura de capas y no pasar objetos
+             */
+            for(EDepartamento ed: EDepartamentos){
+                DTDepartamento DTDepartamento = new DTDepartamento(ed.getNombre(),ed.getDescripcion(),ed.getUrl());
+                DTDepartamentos.add(DTDepartamento);
+            }
+            
+            return DTDepartamentos;
         }catch(Exception e){
             em.getTransaction().rollback();
-            return departamentos;
+            return DTDepartamentos;
         }finally{
             em.close();
         }

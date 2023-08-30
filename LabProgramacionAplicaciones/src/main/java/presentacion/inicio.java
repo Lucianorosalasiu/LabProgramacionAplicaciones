@@ -1605,7 +1605,6 @@ public class inicio extends javax.swing.JFrame {
         Date fechaAlta = jCU4DateChooserFecha.getDate();
         //String nombre departamento
         //String nombre proveedor
-        System.out.println(fechaAlta);
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1615,11 +1614,17 @@ public class inicio extends javax.swing.JFrame {
 
     private void jInternalFrameAltaActividadTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
         // TODO add your handling code here:
-        System.out.println("esquizofrenia 2 el regreso");
+        /**
+         * devuelve una lista con los DTDepartamentos cargados en el sistema
+         */
         List<DTDepartamento> DTDepartamentos = controlador.obtenerDepartamentos();
         //cargar lista proveedores
         
-        /*cargar la tabla de departamentos*/
+        /**
+         * consigo el modelo de la tabla
+         * recorro la lista cargando sus valores en un objeto rowData de 3 campos (nombre,descripcion,url)
+         * agrego la rowdata al modelo
+         */
         DefaultTableModel model = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         
         for(DTDepartamento d: DTDepartamentos){

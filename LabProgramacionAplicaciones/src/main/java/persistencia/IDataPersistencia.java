@@ -15,5 +15,5 @@ import persistencia.entidades.EDepartamento;
 public interface IDataPersistencia {
     void persistirDepartamento(DTDepartamento departamento);
     boolean existeDepartamento(String nombre);
-    List<EDepartamento> obtenerDepartamentos();
+    List<DTDepartamento> obtenerDepartamentos();
 }

@@ -57,16 +57,13 @@ public class Controlador implements IControlador{
         dataPersistencia.persistirDepartamento(departamento);
     }
     
+    /**
+     * @DTDepartamentos una linked list que se carga en persistencia con DTDepartamentos parseados desde un EDepartamento
+     * puede deolver la lista vacia en caso de que no se haya encontrado nada en persistencia
+     */
     @Override
     public List<DTDepartamento> obtenerDepartamentos(){
-        List<EDepartamento> EDepartamentos = dataPersistencia.obtenerDepartamentos();
-        List<DTDepartamento> DTDepartamentos = new LinkedList<>();        
-        
-        for(EDepartamento d: EDepartamentos){
-            DTDepartamento dtDepartamento = new DTDepartamento(d.getNombre(),d.getDescripcion(),d.getUrl());
-            DTDepartamentos.add(dtDepartamento);
-        }
-        
+        List<DTDepartamento> DTDepartamentos = dataPersistencia.obtenerDepartamentos();        
         return DTDepartamentos;       
     }
 
