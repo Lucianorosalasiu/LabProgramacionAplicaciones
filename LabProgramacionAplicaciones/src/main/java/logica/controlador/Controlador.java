@@ -5,6 +5,7 @@
 package logica.controlador;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import logica.clases.MyException;
@@ -77,5 +78,8 @@ public class Controlador implements IControlador{
     public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
         dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento);
     }
-
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+        dataPersistencia.altaPaqueteActividadTuristica(dtPaquete);
+    }
 }

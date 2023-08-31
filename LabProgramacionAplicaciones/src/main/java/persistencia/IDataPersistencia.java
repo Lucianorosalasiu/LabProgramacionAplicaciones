@@ -6,6 +6,7 @@ package persistencia;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
 import java.util.List;
 import logica.clases.MyException;
 import persistencia.entidades.EDepartamento;
@@ -22,5 +23,5 @@ public interface IDataPersistencia {
     
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento);
-    
+    void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
 }

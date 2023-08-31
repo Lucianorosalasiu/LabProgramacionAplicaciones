@@ -6,6 +6,7 @@ package presentacion;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.time.Clock;
@@ -130,17 +131,17 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameConsultaSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameInscripcionSalidaTuristica = new javax.swing.JInternalFrame();
         jInternalFrameAltaPaqueteActividades = new javax.swing.JInternalFrame();
-        TextFieldNombrePaquete = new javax.swing.JTextField();
-        TextFieldDescPaquete = new javax.swing.JTextField();
+        jCU9TextFieldNombrePaquete = new javax.swing.JTextField();
+        jCU9TextFieldDescPaquete = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        SpinnerValidezPaquete = new javax.swing.JSpinner();
-        SpinnerDescuentoPaquete = new javax.swing.JSpinner();
-        SpinnerFechaAltaPaquete = new javax.swing.JSpinner();
+        jCU9SpinnerValidezPaquete = new javax.swing.JSpinner();
+        jCU9SpinnerDescuentoPaquete = new javax.swing.JSpinner();
+        jCU9DateChooserFecha = new com.toedter.calendar.JDateChooser();
         jInternalFrameAgregarActividadPaquete = new javax.swing.JInternalFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -283,7 +284,6 @@ public class inicio extends javax.swing.JFrame {
         jCU4Dialog.setTitle("ERROR");
         jCU4Dialog.setLocationByPlatform(true);
         jCU4Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
-        jCU4Dialog.setPreferredSize(new java.awt.Dimension(400, 250));
 
         jCU4DialogTextArea.setEditable(false);
         jCU4DialogTextArea.setColumns(20);
@@ -1026,12 +1026,17 @@ public class inicio extends javax.swing.JFrame {
         jLabel12.setText("Fecha de alta:");
 
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        SpinnerValidezPaquete.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jCU9SpinnerValidezPaquete.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        SpinnerDescuentoPaquete.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jCU9SpinnerDescuentoPaquete.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        SpinnerFechaAltaPaquete.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
+        jCU9DateChooserFecha.setDateFormatString("d,M,yyyy");
 
         javax.swing.GroupLayout jInternalFrameAltaPaqueteActividadesLayout = new javax.swing.GroupLayout(jInternalFrameAltaPaqueteActividades.getContentPane());
         jInternalFrameAltaPaqueteActividades.getContentPane().setLayout(jInternalFrameAltaPaqueteActividadesLayout);
@@ -1040,30 +1045,30 @@ public class inicio extends javax.swing.JFrame {
             .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                 .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                        .addGap(312, 312, 312)
-                        .addComponent(jLabel9))
-                    .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(jLabel8))
-                    .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                         .addGap(305, 305, 305)
                         .addComponent(jLabel12))
                     .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                         .addGap(282, 282, 282)
                         .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SpinnerFechaAltaPaquete)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SpinnerDescuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jCU9SpinnerDescuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SpinnerValidezPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TextFieldDescPaquete)
-                            .addComponent(TextFieldNombrePaquete)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(338, Short.MAX_VALUE))
+                                .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCU9TextFieldDescPaquete)
+                            .addComponent(jCU9TextFieldNombrePaquete)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(jLabel9))
+                    .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
+                        .addGap(335, 335, 335)
+                        .addComponent(jLabel8)))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
         jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1071,24 +1076,24 @@ public class inicio extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextFieldNombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCU9TextFieldNombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextFieldDescPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCU9TextFieldDescPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(SpinnerValidezPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(SpinnerDescuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCU9SpinnerDescuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SpinnerFechaAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(38, 38, 38))
         );
@@ -1754,6 +1759,46 @@ public class inicio extends javax.swing.JFrame {
         jCU4Dialog.setVisible(false);
     }//GEN-LAST:event_jCU4ButtonReingresarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jCU9verificarVacios()){
+            return;
+        }else{
+            /*tomo los datos y contruyo el datatype*/
+            String nombre = jCU9TextFieldNombrePaquete.getText();
+            String desc = jCU9TextFieldDescPaquete.getText();
+            Date fechaAlta = jCU9DateChooserFecha.getDate();
+            int validez = (Integer) jCU9SpinnerValidezPaquete.getValue();
+            int descuento = (Integer) jCU9SpinnerDescuentoPaquete.getValue();
+            DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(nombre,desc,validez,descuento,fechaAlta);
+            controlador.altaPaqueteActividadTuristica(paquete);
+            jCU9vaciarCampos();
+            return;
+            /**/
+        }
+
+
+        // TODO add your handling code here:
+         
+        
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public boolean jCU9verificarVacios(){
+        if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
+            jCU9TextFieldDescPaquete.getText().isEmpty() ||
+            jCU9DateChooserFecha.getDate() == null){
+            JDialogCamposVacios.setVisible(true);
+            return true;
+        }else{
+            return false;
+            }
+        }
+    public void jCU9vaciarCampos(){
+        jCU9TextFieldNombrePaquete.setText("");
+        jCU9TextFieldDescPaquete.setText("");
+        jCU9DateChooserFecha.setDate(null);
+        jCU9SpinnerDescuentoPaquete.setValue(0);
+        jCU9SpinnerValidezPaquete.setValue(0);
+    }
     public void jCU4vaciarCampos(){
         jCU4TextFieldNombre.setText("");
         jCU4TextAreaDescripcion.setText("");
@@ -1836,15 +1881,10 @@ public class inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxDepartamentoPaquete;
     private javax.swing.JDialog JDialogCamposVacios;
-    private javax.swing.JSpinner SpinnerDescuentoPaquete;
     private javax.swing.JSpinner SpinnerDescuentoPaquete1;
-    private javax.swing.JSpinner SpinnerFechaAltaPaquete;
     private javax.swing.JSpinner SpinnerFechaAltaPaquete1;
-    private javax.swing.JSpinner SpinnerValidezPaquete;
     private javax.swing.JSpinner SpinnerValidezPaquete1;
-    private javax.swing.JTextField TextFieldDescPaquete;
     private javax.swing.JTextField TextFieldDescPaquete1;
-    private javax.swing.JTextField TextFieldNombrePaquete;
     private javax.swing.JTextField TextFieldNombrePaquete1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1911,6 +1951,11 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU5TextFieldDuracion;
     private javax.swing.JTextField jCU5TextFieldFecha;
     private javax.swing.JTextField jCU5TextFieldNombre;
+    private com.toedter.calendar.JDateChooser jCU9DateChooserFecha;
+    private javax.swing.JSpinner jCU9SpinnerDescuentoPaquete;
+    private javax.swing.JSpinner jCU9SpinnerValidezPaquete;
+    private javax.swing.JTextField jCU9TextFieldDescPaquete;
+    private javax.swing.JTextField jCU9TextFieldNombrePaquete;
     private javax.swing.JComboBox<String> jComboBoxActividad;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;

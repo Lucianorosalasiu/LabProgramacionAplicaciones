@@ -5,7 +5,6 @@
     <Container class="javax.swing.JDialog" name="jCU12Dialog">
       <Properties>
         <Property name="title" type="java.lang.String" value="ERROR"/>
-        <Property name="locationByPlatform" type="boolean" value="true"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 250]"/>
         </Property>
@@ -86,7 +85,6 @@
     <Container class="javax.swing.JDialog" name="JDialogCamposVacios">
       <Properties>
         <Property name="title" type="java.lang.String" value="Campos vacios"/>
-        <Property name="locationByPlatform" type="boolean" value="true"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 250]"/>
         </Property>
@@ -154,11 +152,7 @@
     <Container class="javax.swing.JDialog" name="jCU4Dialog">
       <Properties>
         <Property name="title" type="java.lang.String" value="ERROR"/>
-        <Property name="locationByPlatform" type="boolean" value="true"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[400, 250]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 250]"/>
         </Property>
       </Properties>
@@ -1474,16 +1468,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="328" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -1491,24 +1477,32 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="SpinnerFechaAltaPaquete" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="SpinnerDescuentoPaquete" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCU9SpinnerDescuentoPaquete" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="SpinnerValidezPaquete" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCU9SpinnerValidezPaquete" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="TextFieldDescPaquete" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="TextFieldNombrePaquete" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU9TextFieldDescPaquete" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU9TextFieldNombrePaquete" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jButton1" max="32767" attributes="0"/>
+                                  <Component id="jCU9DateChooserFecha" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="338" max="32767" attributes="0"/>
+                      <EmptySpace pref="342" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1518,26 +1512,26 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TextFieldNombrePaquete" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU9TextFieldNombrePaquete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TextFieldDescPaquete" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="jCU9TextFieldDescPaquete" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SpinnerValidezPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU9SpinnerValidezPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SpinnerDescuentoPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU9SpinnerDescuentoPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="SpinnerFechaAltaPaquete" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCU9DateChooserFecha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
@@ -1545,9 +1539,9 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="TextFieldNombrePaquete">
+            <Component class="javax.swing.JTextField" name="jCU9TextFieldNombrePaquete">
             </Component>
-            <Component class="javax.swing.JTextField" name="TextFieldDescPaquete">
+            <Component class="javax.swing.JTextField" name="jCU9TextFieldDescPaquete">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -1578,26 +1572,27 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerValidezPaquete">
+            <Component class="javax.swing.JSpinner" name="jCU9SpinnerValidezPaquete">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerDescuentoPaquete">
+            <Component class="javax.swing.JSpinner" name="jCU9SpinnerDescuentoPaquete">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerFechaAltaPaquete">
+            <Component class="com.toedter.calendar.JDateChooser" name="jCU9DateChooserFecha">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="now" stepSize="11" type="date"/>
-                </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="d,M,yyyy"/>
               </Properties>
             </Component>
           </SubComponents>

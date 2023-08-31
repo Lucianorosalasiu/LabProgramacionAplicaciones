@@ -5,6 +5,7 @@
     <class>persistencia.entidades.EBase</class>
     <class>persistencia.entidades.EDepartamento</class>
     <class>persistencia.entidades.EActividadTuristica</class>
+    <class>persistencia.entidades.EPaqueteActividadTuristica</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/turismouy?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="tecnologo"/>

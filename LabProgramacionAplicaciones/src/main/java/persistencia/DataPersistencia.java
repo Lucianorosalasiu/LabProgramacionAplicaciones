@@ -2,6 +2,7 @@ package persistencia;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import logica.clases.Departamento;
 import logica.clases.MyException;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
+import persistencia.entidades.EPaqueteActividadTuristica;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -155,5 +157,20 @@ public class DataPersistencia implements IDataPersistencia {
         }finally{
             em.close();
         }
+    }
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+         EntityManager em = emf.createEntityManager();
+         
+         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta());
+         try{
+             em.getTransaction().begin();
+             em.persist(nuevoPaquete);
+             em.getTransaction().commit();
+         }catch(Exception e){
+             em.getTransaction().rollback();
+         }finally{
+            em.close();
+         }
     }
 }
