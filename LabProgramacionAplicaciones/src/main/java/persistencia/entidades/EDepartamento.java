@@ -31,7 +31,7 @@ import javax.persistence.*;
  * notar que se utiliza 'd.nombre' para acceder al atributo en vez de 'd.NOMBRE' el cual es el campo de la tabla
  */
 @NamedQuery(name = "EDepartamento.obtenerDepartamentos", query = "select d from EDepartamento d")
-@NamedQuery(name = "EDepartamento.existeNombreDepartamento", query = "select d from EDepartamento d where d.nombre = :nombreDepartamento")
+//@NamedQuery(name = "EDepartamento.existeNombreDepartamento", query = "select d from EDepartamento d where d.nombre = :nombreDepartamento")
 public class EDepartamento extends EBase {
     @Column(unique = true)
     private String nombre;

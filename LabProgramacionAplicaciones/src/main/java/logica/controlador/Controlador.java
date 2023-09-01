@@ -49,9 +49,7 @@ public class Controlador implements IControlador{
      */
     @Override
     public void existeDepartamento(String nombre)throws MyException{
-        if(dataPersistencia.existeDepartamento(nombre)){
-            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema. ");
-        }
+        dataPersistencia.existeDepartamento(nombre);
     }
     
     @Override

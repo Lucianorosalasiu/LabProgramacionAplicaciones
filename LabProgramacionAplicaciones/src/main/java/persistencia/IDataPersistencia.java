@@ -17,11 +17,14 @@ import persistencia.entidades.EDepartamento;
  */
 public interface IDataPersistencia {
     
-    boolean existeDepartamento(String nombre);
+    /*CU4*/
+    void existeActividadTuristica(String nombre)throws MyException;
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento);
+    
+    /*CU12*/
+    void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
     List<DTDepartamento> obtenerDepartamentos();
     
-    void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento);
     void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
 }
