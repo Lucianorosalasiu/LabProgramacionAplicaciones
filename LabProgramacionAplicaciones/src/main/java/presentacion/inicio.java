@@ -79,6 +79,7 @@ public class inicio extends javax.swing.JFrame {
         jCU4LabelFecha = new javax.swing.JLabel();
         jCU4DateChooserFecha = new com.toedter.calendar.JDateChooser();
         jButton6 = new javax.swing.JButton();
+        jCU4ButtonActualizarTablas = new javax.swing.JButton();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jCU5LabelDepartamento = new javax.swing.JLabel();
         jCU5ComboBoxDepartamento = new javax.swing.JComboBox<>();
@@ -187,7 +188,6 @@ public class inicio extends javax.swing.JFrame {
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
 
         jCU12Dialog.setTitle("ERROR");
-        jCU12Dialog.setLocationByPlatform(true);
         jCU12Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
         jCU12Dialog.setModalityType(java.awt.Dialog.ModalityType.DOCUMENT_MODAL);
 
@@ -239,7 +239,6 @@ public class inicio extends javax.swing.JFrame {
         );
 
         JDialogCamposVacios.setTitle("Campos vacios");
-        JDialogCamposVacios.setLocationByPlatform(true);
         JDialogCamposVacios.setMinimumSize(new java.awt.Dimension(400, 250));
         JDialogCamposVacios.setModal(true);
 
@@ -282,7 +281,6 @@ public class inicio extends javax.swing.JFrame {
         );
 
         jCU4Dialog.setTitle("ERROR");
-        jCU4Dialog.setLocationByPlatform(true);
         jCU4Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
 
         jCU4DialogTextArea.setEditable(false);
@@ -518,6 +516,13 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
+        jCU4ButtonActualizarTablas.setText("Actualizar tablas");
+        jCU4ButtonActualizarTablas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU4ButtonActualizarTablasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrameAltaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameAltaActividadTuristica.getContentPane());
         jInternalFrameAltaActividadTuristica.getContentPane().setLayout(jInternalFrameAltaActividadTuristicaLayout);
         jInternalFrameAltaActividadTuristicaLayout.setHorizontalGroup(
@@ -553,7 +558,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelProveedores)
@@ -561,11 +566,13 @@ public class inicio extends javax.swing.JFrame {
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelDepartamentos)
-                                .addGap(0, 151, Short.MAX_VALUE))
+                                .addGap(0, 153, Short.MAX_VALUE))
                             .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU4ButtonActualizarTablas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU4ButtonEnviar)))
                 .addContainerGap())
         );
@@ -608,7 +615,8 @@ public class inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU4ButtonEnviar)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jCU4ButtonActualizarTablas))
                 .addGap(34, 34, 34))
         );
 
@@ -1708,39 +1716,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jInternalFrameAltaActividadTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
-        // TODO add your handling code here:
-        /**
-         * devuelve una lista con los DTDepartamentos cargados en el sistema
-         */
-        List<DTDepartamento> DTDepartamentos = controlador.obtenerDepartamentos();
-        //cargar lista proveedores
-        
-        /**
-         * consigo el modelo de la tabla departamento
-         * recorro la lista cargando sus valores en un objeto rowData de 3 campos (nombre,descripcion,url)
-         * agrego la rowdata al modelo
-         */
-        DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
-        
-        for(DTDepartamento d: DTDepartamentos){
-            Object rowData[] = new Object[4];
-            rowData[0] = d.getId();
-            rowData[1] = d.getNombre();
-            rowData[2] = d.getDescripcion();
-            rowData[3] = d.getURL();
-            modelDepartamento.addRow(rowData);
-        }
-       
-        /*temporalmente se crea un registro de proveedor para poder seguir
-        avanzando en el desarrollo, eventualmente cuando se implementen los proveedores
-        el funcionamiento sera similar al bloque de arriba*/
-        DefaultTableModel modelProveedor = (DefaultTableModel) jCU4TableProveedores.getModel();
-        
-        Object rowData[] = new Object[2];
-        rowData[0] = "nombreProveedor-hardcodeado";
-        rowData[1] = "descripcionProveedor-hardcodeado";
-        modelProveedor.addRow(rowData);
-        
+        jCU4actualizarTablas();
     }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaInternalFrameActivated
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1782,6 +1758,11 @@ public class inicio extends javax.swing.JFrame {
         
     
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCU4ButtonActualizarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonActualizarTablasActionPerformed
+        // TODO add your handling code here:
+        jCU4actualizarTablas();
+    }//GEN-LAST:event_jCU4ButtonActualizarTablasActionPerformed
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
             jCU9TextFieldDescPaquete.getText().isEmpty() ||
@@ -1824,6 +1805,49 @@ public class inicio extends javax.swing.JFrame {
         }else{
             return false;
         }
+    }
+    
+    /**
+     * @dtDepartamentos lista de dtDepartamentos que se van a convertir en registros
+     * la logica es la siguiente:
+     * 1.consigo los registros a poner
+     * 2.consigo el modelo de la tabla
+     * 3.borro los registros ya existentes en caso de que existan asi no tengo registros duplicados
+     * @fireTableDataChanged 4.actualizo la tabla para que sepa que le borre los registros
+     * 5.cargo los nuevos registros actualizados
+     * 
+     * TODO falta agregar la misma logica para la parte de proveedores cuando esten
+     */
+    public void jCU4actualizarTablas(){
+        // TODO add your handling code here:
+
+        List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
+        DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
+        
+        while(modelDepartamento.getRowCount() > 0){
+            System.out.println(modelDepartamento.getRowCount() + "|");
+            modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
+        }
+        
+        modelDepartamento.fireTableDataChanged();
+        
+        for(DTDepartamento d: dtDepartamentos){
+            Object rowData[] = new Object[4];
+            rowData[0] = d.getId();
+            rowData[1] = d.getNombre();
+            rowData[2] = d.getDescripcion();
+            rowData[3] = d.getURL();
+            modelDepartamento.addRow(rowData);
+        }
+        /*temporalmente se crea un registro de proveedor para poder seguir
+        avanzando en el desarrollo, eventualmente cuando se implementen los proveedores
+        el funcionamiento sera similar al bloque de arriba*/
+        DefaultTableModel modelProveedor = (DefaultTableModel) jCU4TableProveedores.getModel();
+        
+        Object rowData[] = new Object[2];
+        rowData[0] = "nombreProveedor-hardcodeado";
+        rowData[1] = "descripcionProveedor-hardcodeado";
+        modelProveedor.addRow(rowData);
     }
     
     public void jCU12vaciarCampos(){
@@ -1907,6 +1931,7 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU12TextFieldDescripcion;
     private javax.swing.JTextField jCU12TextFieldNombre;
     private javax.swing.JTextField jCU12TextFieldURL;
+    private javax.swing.JButton jCU4ButtonActualizarTablas;
     private javax.swing.JButton jCU4ButtonCancelar;
     private javax.swing.JButton jCU4ButtonEnviar;
     private javax.swing.JButton jCU4ButtonReingresar;

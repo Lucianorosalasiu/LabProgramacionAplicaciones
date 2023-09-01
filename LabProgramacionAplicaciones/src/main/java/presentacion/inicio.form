@@ -548,7 +548,7 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jCU4ScrollPanelProveedores" pref="246" max="32767" attributes="0"/>
+                                      <Component id="jCU4ScrollPanelProveedores" pref="248" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -559,7 +559,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="151" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -567,6 +567,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jCU4ButtonActualizarTablas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU4ButtonEnviar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -620,6 +622,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jCU4ButtonEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU4ButtonActualizarTablas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
@@ -803,6 +806,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jCU4ButtonActualizarTablas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Actualizar tablas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonActualizarTablasActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
