@@ -36,6 +36,65 @@ public class DataPersistencia implements IDataPersistencia {
         return instancia;
     }
 
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        EntityManager em = emf.createEntityManager();    
+        String consulta = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
+        List<EActividadTuristica> resultado = new LinkedList<>();
+        
+        try{
+        resultado = em.createQuery(consulta,EActividadTuristica.class)
+                .setParameter("nombreActividad",nombre)
+                .getResultList();
+        }catch(Exception e){
+            throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+        }finally{
+            em.close();
+        }   
+        
+        if(!resultado.isEmpty()){   
+            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
+        }
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+        EntityManager em = emf.createEntityManager();   
+        
+        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
+        
+        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
+        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
+                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
+                dtActividadTuristica.getFechaAlta(),eDepartamento);
+        
+        try{
+            em.getTransaction().begin();
+            em.persist(nuevaActividad);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+         EntityManager em = emf.createEntityManager();
+         
+         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta());
+         try{
+             em.getTransaction().begin();
+             em.persist(nuevoPaquete);
+             em.getTransaction().commit();
+         }catch(Exception e){
+             em.getTransaction().rollback();
+         }finally{
+            em.close();
+         }
+    }
+    
     public void existeDepartamento(String nombreDepartamento)throws MyException{
         EntityManager em = emf.createEntityManager();
         String consulta = "select d from EDepartamento d where d.nombre = :nombreDepartamento";
@@ -97,58 +156,5 @@ public class DataPersistencia implements IDataPersistencia {
         }finally{
             em.close();
         }
-    }
-    
-    @Override
-    public void existeActividadTuristica(String nombre)throws MyException{
-        EntityManager em = emf.createEntityManager();    
-        String consulta = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
-            
-        List<EActividadTuristica> resultado = em.createQuery(consulta,EActividadTuristica.class)
-                .setParameter("nombreActividad",nombre)
-                .getResultList();
-            
-        em.close();
-        
-        if(!resultado.isEmpty()){   
-            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
-        }
-    }
-    
-    @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
-        EntityManager em = emf.createEntityManager();   
-        
-        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
-        
-        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
-        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
-                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),eDepartamento);
-        
-        try{
-            em.getTransaction().begin();
-            em.persist(nuevaActividad);
-            em.getTransaction().commit();
-        }catch(Exception e){
-            em.getTransaction().rollback();
-        }finally{
-            em.close();
-        }
-    }
-    @Override
-    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
-         EntityManager em = emf.createEntityManager();
-         
-         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta());
-         try{
-             em.getTransaction().begin();
-             em.persist(nuevoPaquete);
-             em.getTransaction().commit();
-         }catch(Exception e){
-             em.getTransaction().rollback();
-         }finally{
-            em.close();
-         }
     }
 }

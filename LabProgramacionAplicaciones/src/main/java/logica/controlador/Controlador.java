@@ -42,6 +42,21 @@ public class Controlador implements IControlador{
         System.out.println("Hola estoy fabricando!");
     }
     
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        dataPersistencia.existeActividadTuristica(nombre);
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento);
+    }
+   
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+        dataPersistencia.altaPaqueteActividadTuristica(dtPaquete);
+    }
+    
     /**
      * 
      * @param nombre nombre del departamento a verificar su unicidad
@@ -65,19 +80,5 @@ public class Controlador implements IControlador{
     public List<DTDepartamento> obtenerDepartamentos(){
         List<DTDepartamento> DTDepartamentos = dataPersistencia.obtenerDepartamentos();        
         return DTDepartamentos;       
-    }
-    
-    @Override
-    public void existeActividadTuristica(String nombre)throws MyException{
-        dataPersistencia.existeActividadTuristica(nombre);
-    }
-    
-    @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
-        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento);
-    }
-    @Override
-    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
-        dataPersistencia.altaPaqueteActividadTuristica(dtPaquete);
     }
 }
