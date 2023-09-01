@@ -17,7 +17,6 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "departamento")
-//@NamedQuery(name = "EDepartamento.obtenerDepartamentos", query = "select d from EDepartamento d")
 public class EDepartamento extends EBase {
     @Column(unique = true)
     private String nombre;

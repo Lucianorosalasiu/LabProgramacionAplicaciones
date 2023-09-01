@@ -39,15 +39,20 @@ public class DataPersistencia implements IDataPersistencia {
     public void existeDepartamento(String nombreDepartamento)throws MyException{
         EntityManager em = emf.createEntityManager();
         String consulta = "select d from EDepartamento d where d.nombre = :nombreDepartamento";
+        List<EDepartamento> resultado = new LinkedList<>();
         
-        List<EDepartamento> resultado = em.createQuery(consulta,EDepartamento.class)
-                .setParameter("nombreDepartamento",nombreDepartamento).getResultList();
-
-        em.close();
+        try{
+            resultado = em.createQuery(consulta,EDepartamento.class)
+                    .setParameter("nombreDepartamento",nombreDepartamento).getResultList();
+        }catch(Exception e){
+                throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+        }finally{
+            em.close();
+        }
         
         if(!resultado.isEmpty()){
             throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema. ");
-        }   
+        }
     }
     
     public void altaDepartamento(DTDepartamento dtDepto) {
