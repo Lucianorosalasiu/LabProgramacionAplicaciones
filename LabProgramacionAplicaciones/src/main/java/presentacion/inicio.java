@@ -633,9 +633,6 @@ public class inicio extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jCU5ComboBoxDepartamentoFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jCU5ComboBoxDepartamentoFocusLost(evt);
-            }
         });
         jCU5ComboBoxDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -644,6 +641,12 @@ public class inicio extends javax.swing.JFrame {
         });
 
         jCU5LabelActividad.setText("Actividad");
+
+        jCU5ComboBoxActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5ComboBoxActividadActionPerformed(evt);
+            }
+        });
 
         jCU5LabelSalida.setText("Salida");
 
@@ -1840,10 +1843,21 @@ public class inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCU5ComboBoxDepartamentoActionPerformed
 
-    private void jCU5ComboBoxDepartamentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCU5ComboBoxDepartamentoFocusLost
+    private void jCU5ComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxActividadActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jCU5ComboBoxDepartamentoFocusLost
+        if(jCU5ComboBoxActividad.getSelectedItem() != null){
+            String nombreActividad = jCU5ComboBoxActividad.getSelectedItem().toString();
+            DTActividadTuristica dtActividadTuristica = controlador.obtenerActividadTuristica(nombreActividad);
+            
+            jCU5TextFieldNombre.setText(dtActividadTuristica.getNombre());
+            jCU5TextFieldCiudad.setText(dtActividadTuristica.getCiudad());
+            jCU5TextAreaDescripcion.setText(dtActividadTuristica.getDescripcion());
+            jCU5TextFieldDuracion.setText(dtActividadTuristica.getDuracion());
+            jCU5TextFieldCosto.setText(dtActividadTuristica.getCostoToString());
+            jCU5TextFieldFecha.setText(dtActividadTuristica.getFechaAlta().toString());
+            
+        }
+    }//GEN-LAST:event_jCU5ComboBoxActividadActionPerformed
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
             jCU9TextFieldDescPaquete.getText().isEmpty() ||

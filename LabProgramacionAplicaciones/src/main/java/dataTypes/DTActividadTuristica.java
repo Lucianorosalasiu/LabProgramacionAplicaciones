@@ -16,6 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DTActividadTuristica {
+    private Long id;
     private String nombre;
     private String descripcion;
     private String duracion;
@@ -23,6 +24,8 @@ public class DTActividadTuristica {
     private String ciudad;
     private Date fechaAlta;
     private Departamento departamento;
+    
+    public DTActividadTuristica(){}
     
     public DTActividadTuristica(String nombre, String descripcion, String duracion,
             float costo, String ciudad, Date fechaAlta, Departamento departamento){
@@ -46,7 +49,23 @@ public class DTActividadTuristica {
         this.fechaAlta = fechaAlta;
     }
     
+    public DTActividadTuristica(Long id, String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+    }
+    
     public DTActividadTuristica(String nombre){
         this.nombre = nombre;
+    }
+    
+    public String getCostoToString(){
+        Float costoString = this.costo;
+        return costoString.toString();
     }
 }

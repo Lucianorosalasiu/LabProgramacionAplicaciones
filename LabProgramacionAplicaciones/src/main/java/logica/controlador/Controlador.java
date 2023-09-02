@@ -57,6 +57,7 @@ public class Controlador implements IControlador{
         Long idDepartamento = 0L;
         
         List<DTDepartamento> departamentos = dataPersistencia.obtenerDepartamentos();
+        
         for(DTDepartamento de : departamentos){
             if(de.getNombre().equals(nombreDepartamento)){
                 idDepartamento = de.getId();
@@ -64,6 +65,19 @@ public class Controlador implements IControlador{
         }
         
         return dataPersistencia.obtenerActividadesTuristicas(idDepartamento);
+    }
+    
+    @Override
+    public DTActividadTuristica obtenerActividadTuristica(String nombreActividad){
+        Long idActividad = 0L;
+        List <DTActividadTuristica> dtActividadesTuristicas = dataPersistencia.obtenerActividadesTuristicas();
+        
+        for(DTActividadTuristica a : dtActividadesTuristicas){
+            if(a.getNombre().equals(nombreActividad)){
+                idActividad = a.getId();
+            }
+        }
+        return dataPersistencia.obtenerActividadTuristica(idActividad);
     }
    
     @Override

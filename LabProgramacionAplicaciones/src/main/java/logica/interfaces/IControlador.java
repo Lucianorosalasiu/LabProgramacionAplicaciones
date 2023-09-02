@@ -24,6 +24,7 @@ public interface  IControlador {
     
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
+    DTActividadTuristica obtenerActividadTuristica(String nombreActividad);
     
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
