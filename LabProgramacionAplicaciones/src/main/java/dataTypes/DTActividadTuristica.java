@@ -45,4 +45,8 @@ public class DTActividadTuristica {
         this.ciudad = ciudad;
         this.fechaAlta = fechaAlta;
     }
+    
+    public DTActividadTuristica(String nombre){
+        this.nombre = nombre;
+    }
 }

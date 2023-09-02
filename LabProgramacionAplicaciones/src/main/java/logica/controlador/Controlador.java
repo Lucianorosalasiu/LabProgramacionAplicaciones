@@ -51,6 +51,20 @@ public class Controlador implements IControlador{
     public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
         dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento);
     }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento){
+        Long idDepartamento = 0L;
+        
+        List<DTDepartamento> departamentos = dataPersistencia.obtenerDepartamentos();
+        for(DTDepartamento de : departamentos){
+            if(de.getNombre().equals(nombreDepartamento)){
+                idDepartamento = de.getId();
+            }
+        }
+        
+        return dataPersistencia.obtenerActividadesTuristicas(idDepartamento);
+    }
    
     @Override
     public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){

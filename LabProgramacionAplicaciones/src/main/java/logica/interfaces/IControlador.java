@@ -22,6 +22,9 @@ public interface  IControlador {
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento);
     
+    /*CU5*/
+    List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
+    
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
