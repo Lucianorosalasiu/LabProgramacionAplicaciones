@@ -1,12 +1,18 @@
 package persistencia;
 
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
+import logica.clases.MyException;
+import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
+import persistencia.entidades.EPaqueteActividadTuristica;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -30,7 +36,85 @@ public class DataPersistencia implements IDataPersistencia {
         return instancia;
     }
 
-    public void persistirDepartamento(DTDepartamento dtDepto) {
+    @Override
+    public void existeActividadTuristica(String nombre)throws MyException{
+        EntityManager em = emf.createEntityManager();    
+        String consulta = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
+        List<EActividadTuristica> resultado = new LinkedList<>();
+        
+        try{
+        resultado = em.createQuery(consulta,EActividadTuristica.class)
+                .setParameter("nombreActividad",nombre)
+                .getResultList();
+        }catch(Exception e){
+            throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+        }finally{
+            em.close();
+        }   
+        
+        if(!resultado.isEmpty()){   
+            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
+        }
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+        EntityManager em = emf.createEntityManager();   
+        
+        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
+        
+        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
+        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
+                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
+                dtActividadTuristica.getFechaAlta(),eDepartamento);
+        
+        try{
+            em.getTransaction().begin();
+            em.persist(nuevaActividad);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+         EntityManager em = emf.createEntityManager();
+         
+         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta());
+         try{
+             em.getTransaction().begin();
+             em.persist(nuevoPaquete);
+             em.getTransaction().commit();
+         }catch(Exception e){
+             em.getTransaction().rollback();
+         }finally{
+            em.close();
+         }
+    }
+    
+    public void existeDepartamento(String nombreDepartamento)throws MyException{
+        EntityManager em = emf.createEntityManager();
+        String consulta = "select d from EDepartamento d where d.nombre = :nombreDepartamento";
+        List<EDepartamento> resultado = new LinkedList<>();
+        
+        try{
+            resultado = em.createQuery(consulta,EDepartamento.class)
+                    .setParameter("nombreDepartamento",nombreDepartamento).getResultList();
+        }catch(Exception e){
+                throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+        }finally{
+            em.close();
+        }
+        
+        if(!resultado.isEmpty()){
+            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema. ");
+        }
+    }
+    
+    public void altaDepartamento(DTDepartamento dtDepto) {
         EntityManager em = emf.createEntityManager();
         try {
             EDepartamento nuevoDepartamento = new EDepartamento(dtDepto.getNombre(),
@@ -46,41 +130,29 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-
-    public boolean existeDepartamento(String nombreDepartamento){
+    
+    @Override
+    public List<DTDepartamento> obtenerDepartamentos(){
         EntityManager em = emf.createEntityManager();
+        String consulta = "select d from EDepartamento d";
+        List<DTDepartamento> dtDepartamentos = new LinkedList<>();  
+        
         try{
+            List<EDepartamento> resultado = em.createQuery(consulta,EDepartamento.class).getResultList();
             /**
-            @queryName tiene que hacer referencia a una query que ya hayamos creado, en este caso
-            * la implementacion se encuentra en EDepartamento
-            * 
-            * @resultado se iguala el resultado de la consulta a una lista para saber si hubo coincidencias
-            * 
-            * @setParameter se le indica el nombre del atributo a reemplazar y el valor que va a llevar ese atributo 
-            * una vez se haga la consulta
-            */
-            String queryName = "EDepartamento.existeNombreDepartamento";
-            em.getTransaction().begin();
-            List<EDepartamento> resultado = em.createNamedQuery(queryName,EDepartamento.class)
-                    .setParameter("nombreDepartamento",nombreDepartamento)
-                    .getResultList();
-            em.getTransaction().commit();
-            
-            if(!resultado.isEmpty()){
-                return true;
-            }else{
-                return false;
+             * una vez obtenida la lista de EDepartamentos los parseo a DTDepartamentos
+             * para respetar la arquitectura de capas y no pasar objetos
+             */
+            for(EDepartamento ed: resultado){
+                DTDepartamento dtDepartamento = new DTDepartamento(ed.getId(),ed.getNombre(),
+                        ed.getDescripcion(),ed.getUrl());
+                
+                dtDepartamentos.add(dtDepartamento);
             }
+            
+            return dtDepartamentos;
         }catch(Exception e){
-            /**
-             * comento la opcion para printear la traza del error ya que puede contener informacion sensible que no
-             * queremos que se vea en produccion, en caso de querer debugear se descomenta nuevamente.
-            e.printStackTrace();
-            */
-            em.getTransaction().rollback();
-            /*si bien se dio un error y no sabemos si realmente existe una coincidencia, devolvemos true
-            por seguridad ya que tiene que haber un return en este bloque obligadamente*/
-            return true;
+            return dtDepartamentos;
         }finally{
             em.close();
         }

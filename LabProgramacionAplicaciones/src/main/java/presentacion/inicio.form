@@ -5,7 +5,6 @@
     <Container class="javax.swing.JDialog" name="jCU12Dialog">
       <Properties>
         <Property name="title" type="java.lang.String" value="ERROR"/>
-        <Property name="locationByPlatform" type="boolean" value="true"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 250]"/>
         </Property>
@@ -79,6 +78,150 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDepartamentoDuplicadoReingresarActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="JDialogCamposVacios">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="Campos vacios"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 250]"/>
+        </Property>
+        <Property name="modal" type="boolean" value="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane4" alignment="0" pref="388" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jTextArea1">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="Se detectaron campos o parametros vacios, vuelva y complete la informacion antes de continuar."/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Aceptar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="jCU4Dialog">
+      <Properties>
+        <Property name="title" type="java.lang.String" value="ERROR"/>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 250]"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane7" alignment="0" pref="388" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jCU4ButtonCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jCU4ButtonReingresar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jCU4ButtonReingresar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU4ButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jCU4DialogTextArea">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jCU4ButtonReingresar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reingresar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonReingresarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jCU4ButtonCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonCancelarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -347,6 +490,9 @@
           <Properties>
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jInternalFrameAltaActividadTuristicaInternalFrameActivated"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Alta Actividad Tur&#xed;stica">
@@ -363,23 +509,42 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jCU4TextFieldNombre" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCU4ScrollPaneDescripcion" alignment="0" pref="270" max="32767" attributes="0"/>
-                                      <Component id="jCU4TextFieldDuracion" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCU4TextFieldCosto" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCU4TextFieldCiudad" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU4LabelCosto" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU4TextFieldCosto" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCU4LabelCiudad" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCU4TextFieldCiudad" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <Component id="jCU4LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelCosto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelCiudad" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU4LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU4LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU4LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU4LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jCU4TextFieldDuracion" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jCU4ScrollPaneDescripcion" alignment="0" pref="264" max="32767" attributes="0"/>
+                                              <Component id="jCU4TextFieldNombre" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCU4LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU4DateChooserFecha" alignment="0" min="-2" pref="264" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jCU4ScrollPanelProveedores" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jCU4ScrollPanelProveedores" pref="248" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -390,13 +555,16 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="143" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jCU4ButtonActualizarTablas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU4ButtonEnviar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -413,32 +581,45 @@
                           <Component id="jCU4LabelProveedores" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCU4LabelDepartamentos" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jCU4TextFieldNombre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="28" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Component id="jCU4LabelDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jCU4ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="28" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelDuracion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldDuracion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="28" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelCosto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldCosto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" pref="31" max="32767" attributes="0"/>
-                              <Component id="jCU4LabelCiudad" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU4TextFieldCiudad" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU4LabelDuracion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="jCU4TextFieldDuracion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                                      <Component id="jCU4LabelCosto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="jCU4TextFieldCosto" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU4LabelCiudad" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU4TextFieldCiudad" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <Component id="jCU4LabelFecha" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCU4DateChooserFecha" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jCU4ScrollPanelProveedores" pref="0" max="32767" attributes="0"/>
+                          <Component id="jCU4ScrollPanelProveedores" pref="387" max="32767" attributes="0"/>
                           <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCU4ButtonEnviar" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU4ButtonEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU4ButtonActualizarTablas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -490,8 +671,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jCU4TableProveedores">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="4">
+                      <Table columnCount="2" rowCount="0">
                         <Column editable="false" title="Descripci&#xf3;n" type="java.lang.String"/>
                         <Column editable="false" title="Sitio web" type="java.lang.String"/>
                       </Table>
@@ -510,7 +692,6 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
-                    <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
@@ -562,11 +743,13 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jCU4TableDepartamentos">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="4">
+                      <Table columnCount="4" rowCount="0">
+                        <Column editable="false" title="Id" type="java.lang.Long"/>
                         <Column editable="false" title="Nombre" type="java.lang.String"/>
-                        <Column editable="true" title="Descripci&#xf3;n" type="java.lang.String"/>
-                        <Column editable="true" title="URL" type="java.lang.String"/>
+                        <Column editable="false" title="Descripci&#xf3;n" type="java.lang.String"/>
+                        <Column editable="false" title="URL" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -588,7 +771,6 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
-                    <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
@@ -600,6 +782,35 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Enviar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonEnviarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU4LabelFecha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha alta"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jCU4DateChooserFecha">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="d,M,yyyy"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vaciar campos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jCU4ButtonActualizarTablas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Actualizar tablas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonActualizarTablasActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -957,7 +1168,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jCU12ButtonVaciar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="vaciar campos"/>
+                <Property name="text" type="java.lang.String" value="Vaciar campos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU12ButtonVaciarActionPerformed"/>
@@ -965,7 +1176,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jCU12ButtonEnviar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="enviar"/>
+                <Property name="text" type="java.lang.String" value="Enviar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU12ButtonEnviarActionPerformed"/>
@@ -1690,16 +1901,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="328" max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -1707,24 +1910,32 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="SpinnerFechaAltaPaquete" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="SpinnerDescuentoPaquete" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCU9SpinnerDescuentoPaquete" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="SpinnerValidezPaquete" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCU9SpinnerValidezPaquete" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="TextFieldDescPaquete" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="TextFieldNombrePaquete" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU9TextFieldDescPaquete" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU9TextFieldNombrePaquete" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jButton1" max="32767" attributes="0"/>
+                                  <Component id="jCU9DateChooserFecha" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="338" max="32767" attributes="0"/>
+                      <EmptySpace pref="342" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1734,26 +1945,26 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TextFieldNombrePaquete" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCU9TextFieldNombrePaquete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TextFieldDescPaquete" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="jCU9TextFieldDescPaquete" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SpinnerValidezPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU9SpinnerValidezPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SpinnerDescuentoPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU9SpinnerDescuentoPaquete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="SpinnerFechaAltaPaquete" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCU9DateChooserFecha" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
@@ -1761,9 +1972,9 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="TextFieldNombrePaquete">
+            <Component class="javax.swing.JTextField" name="jCU9TextFieldNombrePaquete">
             </Component>
-            <Component class="javax.swing.JTextField" name="TextFieldDescPaquete">
+            <Component class="javax.swing.JTextField" name="jCU9TextFieldDescPaquete">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -1794,26 +2005,27 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerValidezPaquete">
+            <Component class="javax.swing.JSpinner" name="jCU9SpinnerValidezPaquete">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerDescuentoPaquete">
+            <Component class="javax.swing.JSpinner" name="jCU9SpinnerDescuentoPaquete">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="SpinnerFechaAltaPaquete">
+            <Component class="com.toedter.calendar.JDateChooser" name="jCU9DateChooserFecha">
               <Properties>
-                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="now" stepSize="11" type="date"/>
-                </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="d,M,yyyy"/>
               </Properties>
             </Component>
           </SubComponents>

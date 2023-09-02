@@ -5,43 +5,42 @@
 package persistencia.entidades;
 
 import java.util.Date;
+import java.util.LinkedList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import logica.clases.Departamento;
+import logica.clases.ActividadTuristica;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * @author ignfer
+ * @author lucho
  */
 @Getter
 @Setter
-@Table(name = "actividadTuristica")
 @Entity
-public class EActividadTuristica extends EBase {
+@Table(name = "paquetes")
+public class EPaqueteActividadTuristica extends EBase{
     @Column(unique = true)
     private String nombre;
     private String descripcion;
-    private String duracion;
-    private float costo;
-    private String ciudad;
+    private int validez;
+    private float descuento;
     private Date fechaAlta;
-    @ManyToOne
-    private EDepartamento eDepartamento;
+   // @OneToMany
+   // private LinkedList<ActividadTuristica> actividades;
+
+    public EPaqueteActividadTuristica() {
+    }
     
-    private EActividadTuristica(){}
-    
-    public EActividadTuristica(String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento){
+    public EPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta){
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.duracion = duracion;
-        this.costo = costo;
-        this.ciudad = ciudad;
+        this.validez = validez;
+        this.descuento = descuento;
         this.fechaAlta = fechaAlta;
-        this.eDepartamento = eDepartamento;
+  //      actividades = new LinkedList<>();
     }
 }
