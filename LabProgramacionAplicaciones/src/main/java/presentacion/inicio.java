@@ -2253,7 +2253,7 @@ public class inicio extends javax.swing.JFrame {
     private void jCU6TableDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU6TableDepartamentosMouseClicked
         int selectedRow = jCU6TableDepartamentos.getSelectedRow();
         if (selectedRow != -1) {
-            updateActividadesInTable(jCU6TableActividades, (Long) jCU6TableDepartamentos.getValueAt(selectedRow, 0));
+            updateActividadesInTable(jCU6TableActividades, (String) jCU6TableDepartamentos.getValueAt(selectedRow, 1));
         }
     }//GEN-LAST:event_jCU6TableDepartamentosMouseClicked
 
@@ -2293,12 +2293,9 @@ public class inicio extends javax.swing.JFrame {
        
     }
     
-    private void updateActividadesInTable(JTable jTable, Long id) {
-        // TODO actualizar cuando este la op obtenerActividades, se usa filtrado por depto?
-        List<DTActividadTuristica> dtActividades = new ArrayList();
-        dtActividades.add(new DTActividadTuristica("Prueba1", "test", "1hs", 500, "", null));;
-        dtActividades.add(new DTActividadTuristica("Prueba2", "test2", "2hs", 800, "", null));;
-        
+    private void updateActividadesInTable(JTable jTable, String nombreDepartamento) {
+        List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesTuristicas(nombreDepartamento);
+
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
         
