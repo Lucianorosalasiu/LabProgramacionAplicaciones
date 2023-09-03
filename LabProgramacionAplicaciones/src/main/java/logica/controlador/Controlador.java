@@ -6,6 +6,7 @@ package logica.controlador;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import logica.clases.MyException;
@@ -102,11 +103,17 @@ public class Controlador implements IControlador{
     
     /**
      * @DTDepartamentos una linked list que se carga en persistencia con DTDepartamentos parseados desde un EDepartamento
-     * puede deolver la lista vacia en caso de que no se haya encontrado nada en persistencia
+     * puede devolver la lista vacia en caso de que no se haya encontrado nada en persistencia
      */
     @Override
     public List<DTDepartamento> obtenerDepartamentos(){
         List<DTDepartamento> DTDepartamentos = dataPersistencia.obtenerDepartamentos();        
         return DTDepartamentos;       
+    }
+    
+    @Override
+    public void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException {
+        dataPersistencia.existeSalidaTuristica(dtSalidaTuristica.getNombre());
+        dataPersistencia.altaSalidaTuristica(dtSalidaTuristica, nombreActividad);
     }
 }

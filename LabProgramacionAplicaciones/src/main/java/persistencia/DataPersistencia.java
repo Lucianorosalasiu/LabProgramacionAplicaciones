@@ -3,6 +3,7 @@ package persistencia;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import logica.clases.MyException;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EPaqueteActividadTuristica;
+import persistencia.entidades.ESalidaTuristica;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -222,6 +224,58 @@ public class DataPersistencia implements IDataPersistencia {
             return dtDepartamentos;
         }catch(Exception e){
             return dtDepartamentos;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void existeSalidaTuristica(String nombre) throws MyException {
+        EntityManager em = emf.createEntityManager();    
+        String consulta = "SELECT s from ESalidaTuristica s where s.nombre = :nombreSalida";
+        List<ESalidaTuristica> resultado = new LinkedList<>();
+        
+        try{
+            resultado = em.createQuery(consulta, ESalidaTuristica.class)
+                    .setParameter("nombreSalida", nombre)
+                    .getResultList();
+        }catch(Exception e){
+            throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+        }finally{
+            em.close();
+        }   
+        
+        if(!resultado.isEmpty()){   
+            throw new MyException("ERROR! Ya existe una salida turistica con el nombre ingresado. ");
+        }
+    }
+    
+    @Override
+    public void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException {
+        EntityManager em = emf.createEntityManager();   
+        
+        try{
+            em.getTransaction().begin();
+            
+            String query = "SELECT a FROM EActividadTuristica a WHERE a.nombre = :nombreActividad";
+            EActividadTuristica eActividadTuristica = em.createQuery(query, EActividadTuristica.class)
+                                    .setParameter("nombreActividad", nombreActividad)
+                                    .getSingleResult();
+
+            ESalidaTuristica nuevaSalida = new ESalidaTuristica(
+                    dtSalidaTuristica.getNombre(),
+                    dtSalidaTuristica.getCantidadMaxTuristas(),
+                    dtSalidaTuristica.getFechaSalida(),
+                    dtSalidaTuristica.getLugar(),
+                    dtSalidaTuristica.getFechaAlta(),
+                    eActividadTuristica
+            );
+
+            em.persist(nuevaSalida);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            throw new MyException("ERROR! Algo salio durante el alta de la salida turistica. ");
         }finally{
             em.close();
         }

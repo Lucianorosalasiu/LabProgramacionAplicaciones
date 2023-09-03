@@ -7,6 +7,7 @@ package logica.interfaces;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import java.util.List;
 import logica.clases.MyException;
 
@@ -25,6 +26,9 @@ public interface  IControlador {
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
     DTActividadTuristica obtenerActividadTuristica(String nombreActividad);
+
+    /*CU6*/
+    void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException;
     
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
