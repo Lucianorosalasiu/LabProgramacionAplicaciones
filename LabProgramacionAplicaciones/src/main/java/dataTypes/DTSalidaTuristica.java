@@ -32,4 +32,6 @@ public class DTSalidaTuristica {
         this.lugar = lugar;
         this.fechaAlta = fechaAlta;
     }
+    
+    public DTSalidaTuristica(){};
 }

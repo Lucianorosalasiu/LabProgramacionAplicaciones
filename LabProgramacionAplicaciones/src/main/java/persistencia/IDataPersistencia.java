@@ -32,6 +32,10 @@ public interface IDataPersistencia {
     void existeSalidaTuristica(String nombre) throws MyException;
     void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException;
     
+    /*CU7*/
+    List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad);
+    DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida);
+    
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);

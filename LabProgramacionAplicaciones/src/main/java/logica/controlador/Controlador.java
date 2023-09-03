@@ -116,4 +116,14 @@ public class Controlador implements IControlador{
         dataPersistencia.existeSalidaTuristica(dtSalidaTuristica.getNombre());
         dataPersistencia.altaSalidaTuristica(dtSalidaTuristica, nombreActividad);
     }
+    
+    @Override
+    public List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
+        return dataPersistencia.obtenerSalidasTuristicas(nombreActividad);
+    }
+    
+    @Override
+    public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida) {
+        return dataPersistencia.obtenerSalidaTuristica(nombreSalida);
+    }
 }

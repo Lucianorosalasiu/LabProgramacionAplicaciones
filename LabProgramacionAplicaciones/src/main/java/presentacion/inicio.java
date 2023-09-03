@@ -1006,7 +1006,6 @@ public class inicio extends javax.swing.JFrame {
         jCU6SpinnerFechaAlta.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
 
         jCU6ButtonCampos.setText("Vaciar campos");
-        jCU6ButtonCampos.setActionCommand("Vaciar campos");
         jCU6ButtonCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU6ButtonCamposActionPerformed(evt);
@@ -1014,7 +1013,6 @@ public class inicio extends javax.swing.JFrame {
         });
 
         jCU6ButtonEnviar.setText("Enviar");
-        jCU6ButtonEnviar.setActionCommand("Enviar");
         jCU6ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU6ButtonEnviarActionPerformed(evt);
@@ -1054,14 +1052,14 @@ public class inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Descripción", "URL"
+                "Nombre", "Descripción", "URL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1079,9 +1077,6 @@ public class inicio extends javax.swing.JFrame {
             }
         });
         jCU4ScrollPanelDepartamentos2.setViewportView(jCU6TableDepartamentos);
-        if (jCU6TableDepartamentos.getColumnModel().getColumnCount() > 0) {
-            jCU6TableDepartamentos.getColumnModel().getColumn(0).setMaxWidth(40);
-        }
 
         jCU6ButtonActualizarTablas.setText("Actualizar tablas");
         jCU6ButtonActualizarTablas.addActionListener(new java.awt.event.ActionListener() {
@@ -1128,7 +1123,8 @@ public class inicio extends javax.swing.JFrame {
                                     .addComponent(jCU6SpinnerCantMaxTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel6)
-                    .addComponent(jCU6SpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCU6SpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jInternalFrameAltaSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1174,18 +1170,38 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Alta Salida Turística", jInternalFrameAltaSalidaTuristica);
 
         jInternalFrameConsultaSalidaTuristica.setVisible(true);
+        jInternalFrameConsultaSalidaTuristica.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jInternalFrameConsultaSalidaTuristicaComponentShown(evt);
+            }
+        });
 
         jLabel19.setText("Departamento:");
 
         jCU7ComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Departamento" }));
+        jCU7ComboBoxDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU7ComboBoxDepartamentoActionPerformed(evt);
+            }
+        });
 
         jLabel20.setText("Actividad:");
 
         jCU7ComboBoxActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Actividad" }));
+        jCU7ComboBoxActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU7ComboBoxActividadActionPerformed(evt);
+            }
+        });
 
         jLabel21.setText("Salida:");
 
         jCU7ComboBoxSalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Salida" }));
+        jCU7ComboBoxSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU7ComboBoxSalidaActionPerformed(evt);
+            }
+        });
 
         jCU7TableConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2253,7 +2269,7 @@ public class inicio extends javax.swing.JFrame {
     private void jCU6TableDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU6TableDepartamentosMouseClicked
         int selectedRow = jCU6TableDepartamentos.getSelectedRow();
         if (selectedRow != -1) {
-            updateActividadesInTable(jCU6TableActividades, (String) jCU6TableDepartamentos.getValueAt(selectedRow, 1));
+            updateActividadesInTable(jCU6TableActividades, (String) jCU6TableDepartamentos.getValueAt(selectedRow, 0));
         }
     }//GEN-LAST:event_jCU6TableDepartamentosMouseClicked
 
@@ -2262,6 +2278,44 @@ public class inicio extends javax.swing.JFrame {
         DefaultTableModel modelTableActividades = (DefaultTableModel) jCU6TableActividades.getModel();
         modelTableActividades.setRowCount(0);
     }//GEN-LAST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
+
+    private void jCU7ComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU7ComboBoxActividadActionPerformed
+        if (jCU7ComboBoxActividad.getSelectedItem() != null) {
+            updateSalidasInComboBox(jCU7ComboBoxSalida, jCU7ComboBoxActividad.getSelectedItem().toString());
+        }
+    }//GEN-LAST:event_jCU7ComboBoxActividadActionPerformed
+
+    private void jInternalFrameConsultaSalidaTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameConsultaSalidaTuristicaComponentShown
+        updateDepartmentosInComboBox(jCU7ComboBoxDepartamento);
+    }//GEN-LAST:event_jInternalFrameConsultaSalidaTuristicaComponentShown
+
+    private void jCU7ComboBoxDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU7ComboBoxDepartamentoActionPerformed
+        if (jCU7ComboBoxDepartamento.getSelectedItem() != null) {
+            updateActividadesInComboBox(jCU7ComboBoxActividad, jCU7ComboBoxDepartamento.getSelectedItem().toString());
+        }
+    }//GEN-LAST:event_jCU7ComboBoxDepartamentoActionPerformed
+
+    private void jCU7ComboBoxSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU7ComboBoxSalidaActionPerformed
+        if (jCU7ComboBoxSalida.getSelectedItem() != null && jCU7ComboBoxSalida.getSelectedIndex() != 0) {
+            DTSalidaTuristica dtSalidaTuristica = controlador.obtenerSalidaTuristica(
+                    jCU7ComboBoxSalida.getSelectedItem().toString()
+            );
+            
+            DefaultTableModel modelConsulta = (DefaultTableModel) jCU7TableConsulta.getModel();
+            
+            modelConsulta.setRowCount(0);
+            
+            modelConsulta.addRow(
+                    new Object[] {
+                        dtSalidaTuristica.getNombre(),
+                        dtSalidaTuristica.getCantidadMaxTuristas(),
+                        dtSalidaTuristica.getFechaSalida(),
+                        dtSalidaTuristica.getLugar(),
+                        dtSalidaTuristica.getFechaAlta()
+                    }
+            );
+        } 
+    }//GEN-LAST:event_jCU7ComboBoxSalidaActionPerformed
     
     private void updateDepartmentosInComboBox(JComboBox jComboBox) {
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
@@ -2286,7 +2340,7 @@ public class inicio extends javax.swing.JFrame {
         for (DTDepartamento dtDepartamento : dtDepartamentos){
             modelTable.addRow(
                     new Object[]{
-                        dtDepartamento.getId(), dtDepartamento.getNombre(), dtDepartamento.getDescripcion(), dtDepartamento.getURL()
+                        dtDepartamento.getNombre(), dtDepartamento.getDescripcion(), dtDepartamento.getURL()
                     }
             );
         }
@@ -2308,6 +2362,34 @@ public class inicio extends javax.swing.JFrame {
         }
     }
 
+    private void updateActividadesInComboBox(JComboBox jComboBox, String nombreDepartamento) {
+        List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesTuristicas(nombreDepartamento);
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTActividadTuristica dtActividad : dtActividades){
+            jComboBox.addItem(dtActividad.getNombre());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }
+        
+    private void updateSalidasInComboBox(JComboBox jComboBox, String nombreActividad) {
+        List<DTSalidaTuristica> dtSalidas = controlador.obtenerSalidasTuristicas(nombreActividad);
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTSalidaTuristica dtSalida : dtSalidas){
+            jComboBox.addItem(dtSalida.getNombre());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }
+   
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
             jCU9TextFieldDescPaquete.getText().isEmpty() ||

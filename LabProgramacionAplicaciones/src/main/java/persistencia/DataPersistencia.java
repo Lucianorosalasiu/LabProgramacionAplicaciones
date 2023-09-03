@@ -280,4 +280,58 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    @Override
+    public List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
+        EntityManager em = emf.createEntityManager();
+        List<ESalidaTuristica> resultados;
+        List <DTSalidaTuristica> dtActividadesTuristicas = new LinkedList<>();
+        
+        try{
+            String query = "select s from ESalidaTuristica s where s.eActividadTuristica.nombre = :nombreActividad";
+            resultados = em.createQuery(query, ESalidaTuristica.class)
+                            .setParameter("nombreActividad", nombreActividad)
+                            .getResultList();
+            
+            for(ESalidaTuristica s : resultados){
+                dtActividadesTuristicas.add(    
+                        new DTSalidaTuristica(
+                            s.getNombre(),
+                            s.getCantidadMaxTuristas(),
+                            s.getFechaSalida(),
+                            s.getLugar(),
+                            s.getFechaAlta()
+                        )
+                );
+            }
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida){
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            String query = "select s from ESalidaTuristica s where s.nombre = :nombreSalida";
+            ESalidaTuristica eSalidaTuristica = em.createQuery(query, ESalidaTuristica.class)
+                            .setParameter("nombreSalida", nombreSalida)
+                            .getSingleResult();
+            
+            return new DTSalidaTuristica(
+                            eSalidaTuristica.getNombre(),
+                            eSalidaTuristica.getCantidadMaxTuristas(),
+                            eSalidaTuristica.getFechaSalida(),
+                            eSalidaTuristica.getLugar(),
+                            eSalidaTuristica.getFechaAlta()
+                        );
+        }catch(Exception e){
+            return new DTSalidaTuristica();
+        }finally{
+            em.close();
+        }
+    }
 }
