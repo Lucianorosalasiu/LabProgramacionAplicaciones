@@ -80,6 +80,75 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento){
+        EntityManager em = emf.createEntityManager();
+        List<EActividadTuristica> resultados = new LinkedList<>();
+        List <DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+        
+        try{
+            String consulta = "select a from EActividadTuristica a where a.eDepartamento.id = :idDepartamento";
+            resultados = em.createQuery(consulta,EActividadTuristica.class)
+                    .setParameter("idDepartamento",idDepartamento).getResultList();
+            
+            for(EActividadTuristica a : resultados){
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getNombre(),a.getDescripcion(),
+                a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+                
+                dtActividadesTuristicas.add(dtActividadTuristica);
+            }
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicas(){
+        EntityManager em = emf.createEntityManager();
+        List<EActividadTuristica> resultados = new LinkedList<>();
+        List <DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+        
+        try{
+            String consulta = "select a from EActividadTuristica a ";
+            resultados = em.createQuery(consulta,EActividadTuristica.class).getResultList();
+            
+            for(EActividadTuristica a : resultados){
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getId(),a.getNombre(),a.getDescripcion(),
+                a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+                
+                dtActividadesTuristicas.add(dtActividadTuristica);
+            }
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public DTActividadTuristica obtenerActividadTuristica(Long idActividad){
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, idActividad);
+            
+            DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
+                    eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
+                    eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta());
+
+            return dtActividadTuristica;
+        }catch(Exception e){
+            DTActividadTuristica dtActividadTuristica = new DTActividadTuristica();
+            return dtActividadTuristica;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
     public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
          EntityManager em = emf.createEntityManager();
          

@@ -559,7 +559,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="154" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -836,43 +836,82 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCU5ButtonConsultar" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCU5ComboBoxSalida" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
-                              <Component id="jCU5LabelSalida" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCU5ComboBoxActividad" alignment="1" min="-2" pref="344" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jCU5LabelActividad" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCU5ComboBoxDepartamento" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace pref="69" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jCU5ScrollPaneDescripcion" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jCU5TextFieldCiudad" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jCU5TextFieldNombre" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jCU5LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCU5LabelCiudad" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCU5LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCU5TextFieldDuracion" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                  <Component id="jCU5LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldNombre" min="-2" pref="177" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCU5LabelCiudad" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldCiudad" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCU5LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldDuracion" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jCU5LabelCosto" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU5TextFieldCosto" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5TextFieldCosto" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="jCU5TextFieldFecha" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                          <Component id="jCU5LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU5LabelSalida" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU5ComboBoxSalida" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU5LabelSalida1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU5ComboBoxPaquete" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jCU5LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCU5TextFieldFecha" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCU5ComboBoxDepartamento" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jCU5LabelActividad" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCU5ComboBoxActividad" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jCU5ScrollPaneDescripcion" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="71" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCU5LabelActividad1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU5LabelActividad2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="351" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -882,49 +921,73 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jCU5LabelNombre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU5TextFieldNombre" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelActividad1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                              <Component id="jCU5LabelActividad2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jSeparator1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5ComboBoxDepartamento" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5LabelActividad" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5ComboBoxActividad" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5LabelNombre" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5TextFieldNombre" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5LabelCiudad" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5TextFieldCiudad" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU5LabelDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="jCU5ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCU5LabelDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU5LabelCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5LabelDuracion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="jCU5TextFieldDuracion" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jCU5LabelCosto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                      <Component id="jCU5TextFieldCosto" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCU5TextFieldDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCU5TextFieldCosto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU5LabelCiudad" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU5TextFieldCiudad" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Component id="jCU5LabelFecha" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU5TextFieldFecha" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="87" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jCU5LabelDepartamento" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU5ComboBoxDepartamento" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU5LabelActividad" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU5ComboBoxActividad" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU5LabelSalida" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCU5ComboBoxSalida" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="jCU5ButtonConsultar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jCU5LabelSalida" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5ComboBoxSalida" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jCU5LabelSalida1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCU5ComboBoxPaquete" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -944,6 +1007,10 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jCU5ComboBoxDepartamentoFocusGained"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5ComboBoxDepartamentoActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -959,6 +1026,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5ComboBoxActividadActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -982,14 +1052,6 @@
               <Properties>
                 <Property name="orientation" type="int" value="1"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jCU5ButtonConsultar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consultar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5ButtonConsultarActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jCU5LabelNombre">
               <Properties>
@@ -1078,6 +1140,31 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU5TextFieldFechaActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JLabel" name="jCU5LabelSalida1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Paquete"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCU5ComboBoxPaquete">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU5LabelActividad1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Informaci&#xf3;n Salida"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU5LabelActividad2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Informaci&#xf3;n Paquete"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameAltaDepartamento">
@@ -1111,7 +1198,7 @@
                           <Component id="jCU12TextFieldURL" alignment="0" max="32767" attributes="0"/>
                           <Component id="jCU12Separator" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="255" max="32767" attributes="0"/>
+                      <EmptySpace pref="260" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1254,7 +1341,7 @@
                           </Group>
                           <Component id="jSpinnerFechaAlta" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace pref="57" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1513,7 +1600,7 @@
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <EmptySpace pref="343" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1634,14 +1721,14 @@
                           <Component id="jButton3" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="260" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="269" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="195" max="-2" attributes="0"/>
-                          <EmptySpace pref="577" max="32767" attributes="0"/>
+                          <EmptySpace pref="586" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1776,7 +1863,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="244" max="32767" attributes="0"/>
+                      <EmptySpace pref="249" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -1821,7 +1908,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="195" max="-2" attributes="0"/>
-                          <EmptySpace pref="567" max="32767" attributes="0"/>
+                          <EmptySpace pref="576" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
