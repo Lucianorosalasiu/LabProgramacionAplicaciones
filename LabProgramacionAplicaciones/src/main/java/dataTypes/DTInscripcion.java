@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package logica.clases;
+package dataTypes;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -16,11 +16,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Inscripcion {
-       //Turista turista;
-       SalidaTuristica salidaTuristica;
+public class DTInscripcion {
+       //DTTurista turista;
+       DTSalidaTuristica salidaTuristica;
        Date fecha;
        int cantidadTuristas;
        float costoTotal;
-
+       
+    public DTInscripcion(){}
+    
+    public DTInscripcion(Date fecha, int cantidadTuristas) {
+        this.fecha = fecha;
+        this.cantidadTuristas = cantidadTuristas;
+    }
 }

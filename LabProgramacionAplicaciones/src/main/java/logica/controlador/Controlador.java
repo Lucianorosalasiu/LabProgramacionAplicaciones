@@ -5,6 +5,7 @@
 package logica.controlador;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import logica.interfaces.IControlador;
@@ -125,5 +126,10 @@ public class Controlador implements IControlador{
     @Override
     public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida) {
         return dataPersistencia.obtenerSalidaTuristica(nombreSalida);
+    }
+    
+    @Override
+    public void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nicknameTurista) throws MyException {
+        
     }
 }

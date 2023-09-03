@@ -6,6 +6,7 @@ package presentacion;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import exceptions.EmptyFieldsException;
@@ -157,7 +158,6 @@ public class inicio extends javax.swing.JFrame {
         jCU8ComboBoxActividad = new javax.swing.JComboBox<>();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jCU8ComboBoxSalida = new javax.swing.JComboBox<>();
         jScrollPane7 = new javax.swing.JScrollPane();
         jCU8TableSalidas = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
@@ -169,6 +169,7 @@ public class inicio extends javax.swing.JFrame {
         jCU8SpinnerCantTuristas = new javax.swing.JSpinner();
         jCU8ButtonCampos = new javax.swing.JButton();
         jCU8ButtonEnviar = new javax.swing.JButton();
+        jCU8ButtonActualizarTablas = new javax.swing.JButton();
         jInternalFrameAltaPaqueteActividades = new javax.swing.JInternalFrame();
         jCU9TextFieldNombrePaquete = new javax.swing.JTextField();
         jCU9TextFieldDescPaquete = new javax.swing.JTextField();
@@ -1268,29 +1269,42 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Consulta Salida Turística", jInternalFrameConsultaSalidaTuristica);
 
         jInternalFrameInscripcionSalidaTuristica.setVisible(true);
+        jInternalFrameInscripcionSalidaTuristica.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jInternalFrameInscripcionSalidaTuristicaComponentShown(evt);
+            }
+        });
 
         jLabel22.setText("Departamento:");
 
         jCU8ComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Departamento" }));
+        jCU8ComboBoxDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU8ComboBoxDepartamentoActionPerformed(evt);
+            }
+        });
 
         jCU8ComboBoxActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Actividad" }));
+        jCU8ComboBoxActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU8ComboBoxActividadActionPerformed(evt);
+            }
+        });
 
         jLabel23.setText("Actividad:");
 
-        jLabel24.setText("Salida:");
-
-        jCU8ComboBoxSalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Salida" }));
+        jLabel24.setText("Salidas");
 
         jCU8TableSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Fecha de Salida", "Lugar de Salida"
+                "Nombre", "Cant. Max. Turistas", "Fecha de Salida", "Lugar de Salida"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1306,7 +1320,7 @@ public class inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Fecha de Salida", "Lugar de Salida"
+                "Nickname", "Email", "Nacionalidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1327,71 +1341,97 @@ public class inicio extends javax.swing.JFrame {
 
         jCU8SpinnerCantTuristas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jCU8ButtonCampos.setText("vaciar campos");
+        jCU8ButtonCampos.setText("Vaciar campos");
         jCU8ButtonCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU8ButtonCamposActionPerformed(evt);
             }
         });
 
-        jCU8ButtonEnviar.setText("enviar");
+        jCU8ButtonEnviar.setText("Enviar");
+        jCU8ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU8ButtonEnviarActionPerformed(evt);
+            }
+        });
+
+        jCU8ButtonActualizarTablas.setText("Actualizar tablas");
+        jCU8ButtonActualizarTablas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU8ButtonActualizarTablasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrameInscripcionSalidaTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameInscripcionSalidaTuristica.getContentPane());
         jInternalFrameInscripcionSalidaTuristica.getContentPane().setLayout(jInternalFrameInscripcionSalidaTuristicaLayout);
         jInternalFrameInscripcionSalidaTuristicaLayout.setHorizontalGroup(
             jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel26))
-                        .addGap(18, 18, 18)
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCU8SpinnerFechaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCU8ButtonCampos)
-                        .addGap(66, 66, 66)
-                        .addComponent(jCU8ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62))))
-            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel24)
+                .addGap(202, 202, 202))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                                    .addComponent(jLabel23)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jCU8ComboBoxActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel24)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jCU8ComboBoxSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                                .addComponent(jLabel22)
+                                .addGap(47, 47, 47)
+                                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel27)
+                                    .addComponent(jLabel26))
                                 .addGap(18, 18, 18)
-                                .addComponent(jCU8ComboBoxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCU8SpinnerFechaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jCU8ButtonActualizarTablas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(jCU8ButtonCampos)
+                                .addGap(32, 32, 32)
+                                .addComponent(jCU8ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabel25)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                                        .addComponent(jLabel23)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCU8ComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                                        .addComponent(jLabel22)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCU8ComboBoxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                                .addGap(137, 137, 137)
+                                .addComponent(jLabel25)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16))
         );
         jInternalFrameInscripcionSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCU8ComboBoxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCU8ComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel25))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27)
@@ -1403,25 +1443,13 @@ public class inicio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCU8ButtonCampos)
-                            .addComponent(jCU8ButtonEnviar))
+                            .addComponent(jCU8ButtonEnviar)
+                            .addComponent(jCU8ButtonActualizarTablas))
                         .addGap(35, 35, 35))
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCU8ComboBoxDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCU8ComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCU8ComboBoxSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(11, Short.MAX_VALUE))))
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
 
         jTabbedPaneCasosDeUso.addTab("Inscripcion a Salida Turística", jInternalFrameInscripcionSalidaTuristica);
@@ -1998,7 +2026,7 @@ public class inicio extends javax.swing.JFrame {
         jCU12Dialog.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
 
-    private void jCU6VaciarCampos(){
+    private void CU6VaciarCampos(){
         // Se limpian los campos del panel "Alta de Salida Turistica"
         updateDepartmentosInTable(jCU6TableDepartamentos);
         
@@ -2018,7 +2046,7 @@ public class inicio extends javax.swing.JFrame {
         jCU6SpinnerCantMaxTuristas.setValue(0);
     }
             
-    private boolean jCU6EmptyFields(){
+    private boolean CU6EmptyFields(){
         if (jCU6TableDepartamentos.getSelectedRowCount() != 1 || jCU6TableActividades.getSelectedRowCount() != 1 ||
                 jCU6TextFieldNombreSalida.getText().isEmpty() || jCU6TextFieldLugarSalida.getText().isEmpty() ||
                 (int) jCU6SpinnerCantMaxTuristas.getValue() == 0) {
@@ -2202,23 +2230,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU5ComboBoxActividadActionPerformed
 
     private void jCU8ButtonCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU8ButtonCamposActionPerformed
-        // Se limpian los campos del panel "Inscripcion a Salida Turistica"
-        updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
-        
-        // Guardamos el valor por defecto para limpiar el combobox
-        String defaultValue = jCU8ComboBoxActividad.getItemAt(0);
-        jCU8ComboBoxActividad.removeAllItems();
-        jCU8ComboBoxActividad.addItem(defaultValue);
-        
-        DefaultTableModel modelSalidas = (DefaultTableModel) jCU8TableSalidas.getModel();
-        modelSalidas.setRowCount(0);
-        
-        DefaultTableModel modelTuristas = (DefaultTableModel) jCU8TableTuristas.getModel();
-        modelTuristas.setRowCount(0);
-                
-        jCU8SpinnerFechaInscripcion.setValue(new Date());
-        jCU8SpinnerCantTuristas.setValue(0);
-        
+        CU8VaciarCampos();
     }//GEN-LAST:event_jCU8ButtonCamposActionPerformed
 
     private void jCU6ButtonActualizarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU6ButtonActualizarTablasActionPerformed
@@ -2230,7 +2242,7 @@ public class inicio extends javax.swing.JFrame {
     private void jCU6ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU6ButtonEnviarActionPerformed
         try {
             // Se validan campos vacios, caso que haya lanzamos una excepcion.
-            if (jCU6EmptyFields()){
+            if (CU6EmptyFields()){
                 throw new EmptyFieldsException("");
             }
             
@@ -2253,7 +2265,7 @@ public class inicio extends javax.swing.JFrame {
              
             JOptionPane.showMessageDialog(this, "Salida turistica dada de alta!", "EXITO", JOptionPane.INFORMATION_MESSAGE);
             
-            jCU6VaciarCampos();
+            CU6VaciarCampos();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos!", "ALERTA", JOptionPane.WARNING_MESSAGE);
         } catch (MyException ex) {
@@ -2263,7 +2275,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU6ButtonEnviarActionPerformed
 
     private void jCU6ButtonCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU6ButtonCamposActionPerformed
-        jCU6VaciarCampos();
+        CU6VaciarCampos();
     }//GEN-LAST:event_jCU6ButtonCamposActionPerformed
 
     private void jCU6TableDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU6TableDepartamentosMouseClicked
@@ -2316,6 +2328,61 @@ public class inicio extends javax.swing.JFrame {
             );
         } 
     }//GEN-LAST:event_jCU7ComboBoxSalidaActionPerformed
+
+    private void jInternalFrameInscripcionSalidaTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
+        updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
+        updateTuristasInTable(jCU8TableTuristas);
+    }//GEN-LAST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
+
+    private void jCU8ComboBoxDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU8ComboBoxDepartamentoActionPerformed
+        if (jCU8ComboBoxDepartamento.getSelectedItem() != null) {
+            updateActividadesInComboBox(jCU8ComboBoxActividad, jCU8ComboBoxDepartamento.getSelectedItem().toString());
+        } else {
+            DefaultTableModel modelSalidas = (DefaultTableModel) jCU8TableSalidas.getModel();
+            modelSalidas.setRowCount(0);
+        }
+    }//GEN-LAST:event_jCU8ComboBoxDepartamentoActionPerformed
+
+    private void jCU8ComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU8ComboBoxActividadActionPerformed
+        if (jCU8ComboBoxActividad.getSelectedItem() != null && jCU8ComboBoxActividad.getSelectedIndex() != 0) {
+            updateSalidasInTable(jCU8TableSalidas, jCU8ComboBoxActividad.getSelectedItem().toString());
+        } else {
+            DefaultTableModel modelSalidas = (DefaultTableModel) jCU8TableSalidas.getModel();
+            modelSalidas.setRowCount(0);
+        }
+    }//GEN-LAST:event_jCU8ComboBoxActividadActionPerformed
+
+    private void jCU8ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU8ButtonEnviarActionPerformed
+        try {
+            if (CU8EmptyFields()) {
+                throw new EmptyFieldsException("");
+            }
+            
+            String nombreSalida = (String) jCU8TableSalidas.getValueAt(jCU8TableSalidas.getSelectedRow(), 0);
+            String nicknameTurista = (String) jCU8TableTuristas.getValueAt(jCU8TableTuristas.getSelectedRow(), 0);
+            int cantTuristas = (int) jCU8SpinnerCantTuristas.getValue();
+            Date fechaInscripcion = (Date) jCU8SpinnerFechaInscripcion.getValue();
+            
+            DTInscripcion dtInscripcion = new DTInscripcion(fechaInscripcion, cantTuristas);
+            
+            controlador.altaInscripcion(dtInscripcion, nombreSalida, nicknameTurista);
+            
+            JOptionPane.showMessageDialog(this, "Inscripcion dada de alta!", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+            
+            CU8VaciarCampos();
+        } catch (EmptyFieldsException ex) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos!", "ALERTA", JOptionPane.WARNING_MESSAGE);
+        } catch (MyException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jCU8ButtonEnviarActionPerformed
+
+    private void jCU8ButtonActualizarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU8ButtonActualizarTablasActionPerformed
+        updateTuristasInTable(jCU8TableTuristas);
+        if (jCU8ComboBoxActividad.getSelectedItem() != null && jCU8ComboBoxActividad.getSelectedIndex() != 0) {
+            updateSalidasInTable(jCU8TableSalidas, jCU8ComboBoxActividad.getSelectedItem().toString());
+        }
+    }//GEN-LAST:event_jCU8ButtonActualizarTablasActionPerformed
     
     private void updateDepartmentosInComboBox(JComboBox jComboBox) {
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
@@ -2390,6 +2457,76 @@ public class inicio extends javax.swing.JFrame {
         jComboBox.setSelectedIndex(0);
     }
    
+    private void updateSalidasInTable(JTable jTable, String nombreActividad) {
+        List<DTSalidaTuristica> dtSalidas = controlador.obtenerSalidasTuristicas(nombreActividad);
+        
+        DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
+        modelTable.setRowCount(0);
+        
+        for (DTSalidaTuristica dtSalida : dtSalidas){
+            modelTable.addRow(
+                    new Object[] {
+                        dtSalida.getNombre(),
+                        dtSalida.getCantidadMaxTuristas(),
+                        dtSalida.getFechaSalida(),
+                        dtSalida.getLugar()
+                    }
+            );
+        }
+    }
+      
+    private void updateTuristasInTable(JTable jTable) {
+        // TODO actualizar funcion cuando este disponible consultar turistas.
+        //List<DTTuristas> dtTuristas = ;
+         
+        DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
+        modelTable.setRowCount(0);
+        
+        modelTable.addRow(
+                new Object[] {
+                    "Diego512",
+                    "diego@mail.com",
+                    "Uruguay"
+                }
+        );
+        
+        modelTable.addRow(
+                new Object[] {
+                    "Matias152",
+                    "matias@mail.com",
+                    "Brasil"
+                }
+        );
+    }
+    
+    private boolean CU8EmptyFields(){
+        if ((jCU8ComboBoxDepartamento.getSelectedItem() == null || jCU8ComboBoxDepartamento.getSelectedIndex() == 0) ||
+            (jCU8ComboBoxActividad.getSelectedItem() == null || jCU8ComboBoxActividad.getSelectedIndex() == 0) ||
+            jCU8TableSalidas.getSelectedRowCount() != 1 || jCU8TableTuristas.getSelectedRowCount() != 1 ||
+            (int) jCU8SpinnerCantTuristas.getValue() == 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    private void CU8VaciarCampos(){
+        // Se limpian los campos del panel "Inscripcion a Salida Turistica"
+        updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
+        
+        // Guardamos el valor por defecto para limpiar el combobox
+        String defaultValue = jCU8ComboBoxActividad.getItemAt(0);
+        jCU8ComboBoxActividad.removeAllItems();
+        jCU8ComboBoxActividad.addItem(defaultValue);
+        
+        DefaultTableModel modelSalidas = (DefaultTableModel) jCU8TableSalidas.getModel();
+        modelSalidas.setRowCount(0);
+        
+        updateTuristasInTable(jCU8TableTuristas);
+                
+        jCU8SpinnerFechaInscripcion.setValue(new Date());
+        jCU8SpinnerCantTuristas.setValue(0);
+    }
+    
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
             jCU9TextFieldDescPaquete.getText().isEmpty() ||
@@ -2622,11 +2759,11 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCU7ComboBoxDepartamento;
     private javax.swing.JComboBox<String> jCU7ComboBoxSalida;
     private javax.swing.JTable jCU7TableConsulta;
+    private javax.swing.JButton jCU8ButtonActualizarTablas;
     private javax.swing.JButton jCU8ButtonCampos;
     private javax.swing.JButton jCU8ButtonEnviar;
     private javax.swing.JComboBox<String> jCU8ComboBoxActividad;
     private javax.swing.JComboBox<String> jCU8ComboBoxDepartamento;
-    private javax.swing.JComboBox<String> jCU8ComboBoxSalida;
     private javax.swing.JSpinner jCU8SpinnerCantTuristas;
     private javax.swing.JSpinner jCU8SpinnerFechaInscripcion;
     private javax.swing.JTable jCU8TableSalidas;

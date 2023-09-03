@@ -5,6 +5,7 @@
 package logica.clases;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +16,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class SalidaTuristica {
     private String nombre;
     private int cantidadMaxTuristas;
     private Date fechaSalida;
     private String lugar;
     private Date fechaAlta;
-    
-    
 }

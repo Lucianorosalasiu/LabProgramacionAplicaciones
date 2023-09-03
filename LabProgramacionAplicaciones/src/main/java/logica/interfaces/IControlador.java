@@ -8,6 +8,7 @@ import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTInscripcion;
 import java.util.List;
 import logica.clases.MyException;
 
@@ -33,6 +34,9 @@ public interface  IControlador {
     /*CU7*/
     List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad);
     DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida);
+    
+    /*CU8*/
+    void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nicknameTurista) throws MyException;
     
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
