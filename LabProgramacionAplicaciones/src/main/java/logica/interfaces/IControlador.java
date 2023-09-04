@@ -10,16 +10,13 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTInscripcion;
 import java.util.List;
-import logica.clases.MyException;
+import exceptions.MyException;
 
 /**
  *
  * @author lucho
  */
 public interface  IControlador {
-    
-    void test();
-    
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento);

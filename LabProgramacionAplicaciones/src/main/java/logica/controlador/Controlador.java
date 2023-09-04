@@ -10,7 +10,7 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
-import logica.clases.MyException;
+import exceptions.MyException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,12 +38,7 @@ public class Controlador implements IControlador{
         }
         return instance;
     }
-    
-    @Override
-    public void test(){
-        System.out.println("Hola estoy fabricando!");
-    }
-    
+       
     @Override
     public void existeActividadTuristica(String nombre)throws MyException{
         dataPersistencia.existeActividadTuristica(nombre);
