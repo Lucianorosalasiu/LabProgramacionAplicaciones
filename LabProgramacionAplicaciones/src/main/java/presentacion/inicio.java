@@ -1618,7 +1618,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addComponent(jLabel25)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(16, 16, 16))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jInternalFrameInscripcionSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1657,7 +1657,7 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
 
         jTabbedPaneCasosDeUso.addTab("Inscripcion a Salida Turística", jInternalFrameInscripcionSalidaTuristica);
@@ -2718,7 +2718,7 @@ public class inicio extends javax.swing.JFrame {
                         description,
                         websiteURL
                     );
-                    // controlador.altaProveedor();
+                    // controlador.altaProveedor(nuevoProveedor);
                     break;
                     
                 case "Turista":
@@ -2731,7 +2731,8 @@ public class inicio extends javax.swing.JFrame {
                         birthDate,
                         nacionality
                     );
-                    // controlador.altaTurista();
+
+                    // controlador.altaTurista(nuevoTurista);
                     break;
             }
 
@@ -2861,7 +2862,7 @@ public class inicio extends javax.swing.JFrame {
         this.jCU8ButtonEnviar = jCU8ButtonEnviar;
         this.jCU8ComboBoxActividad = jCU8ComboBoxActividad;
         this.jCU8ComboBoxDepartamento = jCU8ComboBoxDepartamento;
-        this.jCU8ComboBoxSalida = jCU8ComboBoxSalida;
+        //this.jCU8ComboBoxSalida = jCU8ComboBoxSalida;
         this.jCU8SpinnerCantTuristas = jCU8SpinnerCantTuristas;
         this.jCU8SpinnerFechaInscripcion = jCU8SpinnerFechaInscripcion;
         this.jCU8TableSalidas = jCU8TableSalidas;

@@ -14,7 +14,5 @@ public class LabProgramacionAplicaciones {
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-        
-        controlador.test();
     }
 }
