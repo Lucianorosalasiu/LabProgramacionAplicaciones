@@ -181,7 +181,7 @@ public class DataPersistencia implements IDataPersistencia {
         }
         
         if(!resultado.isEmpty()){
-            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema. Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema.");
         }
     }
     

@@ -2330,10 +2330,9 @@ public class inicio extends javax.swing.JFrame {
                 DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
                 controlador.altaDepartamento(departamento);
                 jCU12vaciarCampos();
+                 JOptionPane.showMessageDialog(this,"Departamento dado de alta!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){
-                JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
-                //jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
-                //jCU12Dialog.setVisible(true);
+                JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR",JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
@@ -2455,9 +2454,9 @@ public class inicio extends javax.swing.JFrame {
                 duracion,costo,ciudad,fechaAlta);
                 controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento);
                 jCU4vaciarCampos();
+                JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){
-                jCU4Dialog.setVisible(true);
-                jCU4DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+                JOptionPane.showMessageDialog(this, e.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
@@ -3339,7 +3338,7 @@ public class inicio extends javax.swing.JFrame {
            jCU4TextFieldDuracion.getText().isEmpty() ||
            jCU4DateChooserFecha.getDate() == null || indexRowDepartamento == -1 ||
            indexRowProveedor == -1){
-            JDialogCamposVacios.setVisible(true);
+            JOptionPane.showMessageDialog(this,"Se detectaron campos o parametros vacios, vuelva y complete la informacion antes de continuar.","ALERTA",JOptionPane.WARNING_MESSAGE);
             return true;
         }else{
             return false;
