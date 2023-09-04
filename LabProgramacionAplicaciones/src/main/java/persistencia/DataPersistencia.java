@@ -49,13 +49,13 @@ public class DataPersistencia implements IDataPersistencia {
                 .setParameter("nombreActividad",nombre)
                 .getResultList();
         }catch(Exception e){
-            throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+            throw new MyException("Algo salio mal consultando la base de datos. ");
         }finally{
             em.close();
         }   
         
         if(!resultado.isEmpty()){   
-            throw new MyException("ERROR! Ya existe una actividad turistica con ese nombre. ");
+            throw new MyException("Ya existe una actividad turistica con ese nombre. ");
         }
     }
     
@@ -175,13 +175,13 @@ public class DataPersistencia implements IDataPersistencia {
             resultado = em.createQuery(consulta,EDepartamento.class)
                     .setParameter("nombreDepartamento",nombreDepartamento).getResultList();
         }catch(Exception e){
-                throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+                throw new MyException("Algo salio mal consultando la base de datos. ");
         }finally{
             em.close();
         }
         
         if(!resultado.isEmpty()){
-            throw new MyException("ERROR! Ya existe un departamento con ese nombre en el sistema.");
+            throw new MyException("Ya existe un departamento con ese nombre en el sistema.");
         }
     }
     
@@ -240,13 +240,13 @@ public class DataPersistencia implements IDataPersistencia {
                     .setParameter("nombreSalida", nombre)
                     .getResultList();
         }catch(Exception e){
-            throw new MyException("ERROR! Algo salio mal consultando la base de datos. ");
+            throw new MyException("Algo salio mal consultando la base de datos. ");
         }finally{
             em.close();
         }   
         
         if(!resultado.isEmpty()){   
-            throw new MyException("ERROR! Ya existe una salida turistica con el nombre ingresado. ");
+            throw new MyException("Ya existe una salida turistica con el nombre ingresado. ");
         }
     }
     

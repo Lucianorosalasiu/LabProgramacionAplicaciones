@@ -2332,7 +2332,7 @@ public class inicio extends javax.swing.JFrame {
                 jCU12vaciarCampos();
                  JOptionPane.showMessageDialog(this,"Departamento dado de alta!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){
-                JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,e.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
