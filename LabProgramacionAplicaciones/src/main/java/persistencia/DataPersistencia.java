@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
-import logica.clases.MyException;
+import exceptions.MyException;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EPaqueteActividadTuristica;

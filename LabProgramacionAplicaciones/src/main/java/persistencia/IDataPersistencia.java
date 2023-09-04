@@ -9,7 +9,7 @@ import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import java.util.List;
-import logica.clases.MyException;
+import exceptions.MyException;
 import persistencia.entidades.EDepartamento;
 
 /**

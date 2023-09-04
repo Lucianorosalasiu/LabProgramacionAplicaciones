@@ -4,27 +4,41 @@
  */
 package presentacion;
 
+import com.toedter.calendar.JDateChooser;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTurista;
 import exceptions.EmptyFieldsException;
+import java.awt.HeadlessException;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
-import java.time.Clock;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import logica.clases.Departamento;
-import logica.clases.MyException;
+import exceptions.MyException;
 
 /**
  *
- * @author lucho
+ * @author all
  */
 public class inicio extends javax.swing.JFrame {
     Fabrica fabrica = new Fabrica();
@@ -61,7 +75,28 @@ public class inicio extends javax.swing.JFrame {
         jCU4ButtonCancelar = new javax.swing.JButton();
         jDialog1 = new javax.swing.JDialog();
         jTabbedPaneCasosDeUso = new javax.swing.JTabbedPane();
-        jInternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
+        jCU1InternalFrameAgregarUsuario = new javax.swing.JInternalFrame();
+        jCU1LabelUserType = new javax.swing.JLabel();
+        JCU1ComboBoxUserType = new javax.swing.JComboBox<>();
+        JCU1NickNameTextField = new javax.swing.JTextField();
+        JCU1NacionalityTextField = new javax.swing.JTextField();
+        JCU1WebsiteTextField = new javax.swing.JTextField();
+        jCU1LabelNickName = new javax.swing.JLabel();
+        jCU1LabelName = new javax.swing.JLabel();
+        jCU1LabelLastName = new javax.swing.JLabel();
+        jCU1LabelEmail = new javax.swing.JLabel();
+        jCU1LabelBirthDate = new javax.swing.JLabel();
+        JCU1NameTextField = new javax.swing.JTextField();
+        JCU1LastNameTextField = new javax.swing.JTextField();
+        JCU1EmailTextField = new javax.swing.JTextField();
+        jCU1LabelDescription = new javax.swing.JLabel();
+        jCU1LabelWebsite = new javax.swing.JLabel();
+        jCU1LabelNacionality = new javax.swing.JLabel();
+        jCU1ScrollPane11Description = new javax.swing.JScrollPane();
+        jCU1TextAreaDescription = new javax.swing.JTextArea();
+        JCU1DateChooserBirthDate = new com.toedter.calendar.JDateChooser();
+        JCU1ButtonClearFields = new javax.swing.JButton();
+        JCU1ButtonSendData = new javax.swing.JButton();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameModificarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
@@ -388,20 +423,193 @@ public class inicio extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPaneCasosDeUso.setToolTipText("");
 
-        jInternalFrameAgregarUsuario.setVisible(true);
+        jCU1InternalFrameAgregarUsuario.setVisible(true);
 
-        javax.swing.GroupLayout jInternalFrameAgregarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameAgregarUsuario.getContentPane());
-        jInternalFrameAgregarUsuario.getContentPane().setLayout(jInternalFrameAgregarUsuarioLayout);
-        jInternalFrameAgregarUsuarioLayout.setHorizontalGroup(
-            jInternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jCU1LabelUserType.setText("Tipo de usuario a agregar");
+
+        JCU1ComboBoxUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar tipo", "Proveedor/a", "Turista" }));
+        JCU1ComboBoxUserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1ComboBoxUserTypeActionPerformed(evt);
+            }
+        });
+
+        JCU1NickNameTextField.setVisible(false);
+        JCU1NickNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1NickNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        JCU1NacionalityTextField.setVisible(false);
+
+        JCU1WebsiteTextField.setVisible(false);
+        JCU1WebsiteTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1WebsiteTextFieldActionPerformed(evt);
+            }
+        });
+
+        jCU1LabelNickName.setText("Nombre de Usuario");
+        jCU1LabelNickName.setVisible(false);
+
+        jCU1LabelName.setText("Nombre");
+        jCU1LabelName.setVisible(false);
+
+        jCU1LabelLastName.setText("Apellido");
+        jCU1LabelLastName.setVisible(false);
+
+        jCU1LabelEmail.setText("Correo electrónico");
+        jCU1LabelEmail.setVisible(false);
+
+        jCU1LabelBirthDate.setText("Fecha de Nacimiento");
+        jCU1LabelBirthDate.setVisible(false);
+
+        JCU1NameTextField.setVisible(false);
+        JCU1NameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1NameTextFieldActionPerformed(evt);
+            }
+        });
+
+        JCU1LastNameTextField.setVisible(false);
+        JCU1LastNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1LastNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        JCU1EmailTextField.setVisible(false);
+        JCU1EmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1EmailTextFieldActionPerformed(evt);
+            }
+        });
+
+        jCU1LabelDescription.setText("Descripción");
+        jCU1LabelDescription.setVisible(false);
+
+        jCU1LabelWebsite.setText("URL Sitio Web");
+        jCU1LabelWebsite.setVisible(false);
+
+        jCU1LabelNacionality.setText("Nacionalidad");
+        jCU1LabelNacionality.setVisible(false);
+
+        jCU1ScrollPane11Description.setVisible(false);
+
+        jCU1TextAreaDescription.setColumns(20);
+        jCU1TextAreaDescription.setRows(5);
+        jCU1ScrollPane11Description.setViewportView(jCU1TextAreaDescription);
+        jCU1ScrollPane11Description.setVisible(false);
+
+        JCU1DateChooserBirthDate.setDateFormatString("d,M,yyyy");
+        JCU1DateChooserBirthDate.setMaxSelectableDate(new java.util.Date(1672541999000L));
+        JCU1DateChooserBirthDate.setMinSelectableDate(new java.util.Date(-2208971597000L));
+        JCU1DateChooserBirthDate.setVisible(false);
+
+        JCU1ButtonClearFields.setText("Vaciar campos");
+        JCU1ButtonClearFields.setEnabled(false);
+        JCU1ButtonClearFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1ButtonClearFieldsActionPerformed(evt);
+            }
+        });
+
+        JCU1ButtonSendData.setText("Enviar");
+        JCU1ButtonSendData.setEnabled(false);
+        JCU1ButtonSendData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCU1ButtonSendDataActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jCU1InternalFrameAgregarUsuarioLayout = new javax.swing.GroupLayout(jCU1InternalFrameAgregarUsuario.getContentPane());
+        jCU1InternalFrameAgregarUsuario.getContentPane().setLayout(jCU1InternalFrameAgregarUsuarioLayout);
+        jCU1InternalFrameAgregarUsuarioLayout.setHorizontalGroup(
+            jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addComponent(JCU1ButtonClearFields)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JCU1ButtonSendData))
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU1LabelBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCU1DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCU1NacionalityTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU1LabelNacionality, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCU1LabelWebsite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JCU1WebsiteTextField)
+                    .addComponent(jCU1LabelUserType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JCU1ComboBoxUserType, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCU1LabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCU1ScrollPane11Description)
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCU1LabelLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCU1NickNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(JCU1LastNameTextField)
+                            .addComponent(jCU1LabelNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JCU1EmailTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCU1NameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU1LabelName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU1LabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(162, 162, 162))
         );
-        jInternalFrameAgregarUsuarioLayout.setVerticalGroup(
-            jInternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jCU1InternalFrameAgregarUsuarioLayout.setVerticalGroup(
+            jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jCU1LabelUserType)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JCU1ComboBoxUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU1LabelNickName)
+                    .addComponent(jCU1LabelName))
+                .addGap(5, 5, 5)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCU1NickNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCU1NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU1LabelLastName)
+                    .addComponent(jCU1LabelEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCU1LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCU1EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU1LabelNacionality)
+                    .addComponent(jCU1LabelBirthDate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JCU1NacionalityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCU1DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jCU1LabelDescription)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCU1ScrollPane11Description, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jCU1LabelWebsite)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JCU1WebsiteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCU1ButtonClearFields)
+                    .addComponent(JCU1ButtonSendData))
+                .addGap(72, 72, 72))
         );
 
-        jTabbedPaneCasosDeUso.addTab("Alta Usuario", jInternalFrameAgregarUsuario);
+        jTabbedPaneCasosDeUso.addTab("Alta Usuario", jCU1InternalFrameAgregarUsuario);
 
         jInternalFrameConsultarUsuario.setVisible(true);
 
@@ -612,7 +820,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelProveedores)
@@ -620,7 +828,7 @@ public class inicio extends javax.swing.JFrame {
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelDepartamentos)
-                                .addGap(0, 154, Short.MAX_VALUE))
+                                .addGap(0, 199, Short.MAX_VALUE))
                             .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jButton6)
@@ -664,7 +872,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jCU4LabelFecha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU4DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                     .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -884,7 +1092,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addComponent(jCU5LabelSalida1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCU5ComboBoxPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 67, Short.MAX_VALUE)))
+                        .addGap(0, 88, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -925,7 +1133,7 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
-                .addContainerGap(256, Short.MAX_VALUE)
+                .addContainerGap(311, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCU12LabelNombre)
                     .addComponent(jCU12TextFieldNombre)
@@ -938,7 +1146,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jCU12ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCU12TextFieldURL)
                     .addComponent(jCU12Separator))
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
         jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -947,21 +1155,21 @@ public class inicio extends javax.swing.JFrame {
                 .addComponent(jCU12LabelNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jCU12LabelDescripcion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jCU12LabelURL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jCU12Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU12ButtonVaciar)
                     .addComponent(jCU12ButtonEnviar))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Alta Departamento", jInternalFrameAltaDepartamento);
@@ -1006,7 +1214,6 @@ public class inicio extends javax.swing.JFrame {
         jCU6SpinnerFechaAlta.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
 
         jCU6ButtonCampos.setText("Vaciar campos");
-        jCU6ButtonCampos.setActionCommand("Vaciar campos");
         jCU6ButtonCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU6ButtonCamposActionPerformed(evt);
@@ -1014,7 +1221,6 @@ public class inicio extends javax.swing.JFrame {
         });
 
         jCU6ButtonEnviar.setText("Enviar");
-        jCU6ButtonEnviar.setActionCommand("Enviar");
         jCU6ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCU6ButtonEnviarActionPerformed(evt);
@@ -1128,7 +1334,8 @@ public class inicio extends javax.swing.JFrame {
                                     .addComponent(jCU6SpinnerCantMaxTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel6)
-                    .addComponent(jCU6SpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jCU6SpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jInternalFrameAltaSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1141,7 +1348,7 @@ public class inicio extends javax.swing.JFrame {
                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCU4ScrollPanelDepartamentos2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -1225,7 +1432,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jLabel21)
                         .addGap(18, 18, 18)
                         .addComponent(jCU7ComboBoxSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(jInternalFrameConsultaSalidaTuristicaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4)
@@ -1365,7 +1572,7 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(jLabel25)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -1405,7 +1612,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(11, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPaneCasosDeUso.addTab("Inscripcion a Salida Turística", jInternalFrameInscripcionSalidaTuristica);
@@ -1465,7 +1672,7 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
                         .addGap(335, 335, 335)
                         .addComponent(jLabel8)))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(465, Short.MAX_VALUE))
         );
         jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1490,7 +1697,7 @@ public class inicio extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(38, 38, 38))
         );
@@ -1570,17 +1777,17 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createSequentialGroup()
                     .addGap(10, 10, 10)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(586, Short.MAX_VALUE)))
+                    .addContainerGap(691, Short.MAX_VALUE)))
         );
         jInternalFrameAgregarActividadPaqueteLayout.setVerticalGroup(
             jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
             .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1592,7 +1799,7 @@ public class inicio extends javax.swing.JFrame {
             .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -1667,7 +1874,7 @@ public class inicio extends javax.swing.JFrame {
         jInternalFrameConsultaPaquetesLayout.setHorizontalGroup(
             jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addContainerGap(331, Short.MAX_VALUE)
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
@@ -1702,14 +1909,14 @@ public class inicio extends javax.swing.JFrame {
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                     .addGap(20, 20, 20)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(576, Short.MAX_VALUE)))
+                    .addContainerGap(681, Short.MAX_VALUE)))
         );
         jInternalFrameConsultaPaquetesLayout.setVerticalGroup(
             jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
-                        .addContainerGap(26, Short.MAX_VALUE)
+                        .addContainerGap(20, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1740,7 +1947,7 @@ public class inicio extends javax.swing.JFrame {
             .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -1868,14 +2075,11 @@ public class inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPaneCasosDeUso)
-                .addContainerGap())
+            .addComponent(jTabbedPaneCasosDeUso)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+            .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -2262,6 +2466,365 @@ public class inicio extends javax.swing.JFrame {
         DefaultTableModel modelTableActividades = (DefaultTableModel) jCU6TableActividades.getModel();
         modelTableActividades.setRowCount(0);
     }//GEN-LAST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
+
+    private void JCU1EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1EmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCU1EmailTextFieldActionPerformed
+
+    private void JCU1LastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1LastNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCU1LastNameTextFieldActionPerformed
+
+    private void JCU1NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCU1NameTextFieldActionPerformed
+
+    private void JCU1WebsiteTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1WebsiteTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCU1WebsiteTextFieldActionPerformed
+
+    private void JCU1NickNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1NickNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCU1NickNameTextFieldActionPerformed
+
+    private void JCU1ComboBoxUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ComboBoxUserTypeActionPerformed
+        String selectedItem = JCU1ComboBoxUserType.getSelectedItem().toString();
+        switch (selectedItem) {
+            case "Proveedor/a":
+                // Mostrar los campos de ingreso para proveedor
+                jCU1LabelNickName.setVisible(true);
+                JCU1NickNameTextField.setVisible(true);
+                jCU1LabelName.setVisible(true);
+                JCU1NameTextField.setVisible(true);
+                jCU1LabelLastName.setVisible(true);
+                JCU1LastNameTextField.setVisible(true);
+                jCU1LabelEmail.setVisible(true);
+                JCU1EmailTextField.setVisible(true);
+                jCU1LabelBirthDate.setVisible(true);
+                JCU1DateChooserBirthDate.setVisible(true);
+                jCU1LabelDescription.setVisible(true);
+                jCU1TextAreaDescription.setVisible(true);
+                jCU1ScrollPane11Description.setVisible(true);
+                jCU1LabelWebsite.setVisible(true);
+                JCU1WebsiteTextField.setVisible(true);                
+                JCU1ButtonClearFields.setEnabled(true);
+                JCU1ButtonSendData.setEnabled(true);  
+                
+                /* ==== Visibles solo para turistas ==== */
+                jCU1LabelNacionality.setVisible(false);
+                JCU1NacionalityTextField.setVisible(false);
+                /* ==== Visibles solo para turistas ==== */
+                break;
+            case "Turista":
+                // Mostrar los campos de ingreso para turista
+                jCU1LabelNickName.setVisible(true);
+                JCU1NickNameTextField.setVisible(true);
+                jCU1LabelName.setVisible(true);
+                JCU1NameTextField.setVisible(true);
+                jCU1LabelLastName.setVisible(true);
+                JCU1LastNameTextField.setVisible(true);
+                jCU1LabelEmail.setVisible(true);
+                JCU1EmailTextField.setVisible(true);
+                jCU1LabelBirthDate.setVisible(true);
+                JCU1DateChooserBirthDate.setVisible(true);
+                jCU1LabelNacionality.setVisible(true);
+                JCU1NacionalityTextField.setVisible(true);                
+                JCU1ButtonClearFields.setEnabled(true);
+                JCU1ButtonSendData.setEnabled(true);
+                
+                /* ==== Visibles solo para proveedores ==== */
+                jCU1LabelDescription.setVisible(false);
+                jCU1TextAreaDescription.setVisible(false);
+                jCU1ScrollPane11Description.setVisible(false);
+                jCU1LabelWebsite.setVisible(false);
+                JCU1WebsiteTextField.setVisible(false);
+                /* ==== Visibles solo para proveedores ==== */
+                break;
+            default:
+                jCU1LabelNickName.setVisible(false);
+                JCU1NickNameTextField.setVisible(false);
+                jCU1LabelName.setVisible(false);
+                JCU1NameTextField.setVisible(false);
+                jCU1LabelLastName.setVisible(false);
+                JCU1LastNameTextField.setVisible(false);
+                jCU1LabelEmail.setVisible(false);
+                JCU1EmailTextField.setVisible(false);
+                jCU1LabelBirthDate.setVisible(false);
+                JCU1DateChooserBirthDate.setVisible(false);
+                jCU1LabelNacionality.setVisible(false);
+                JCU1NacionalityTextField.setVisible(false);
+                jCU1LabelDescription.setVisible(false);
+                jCU1TextAreaDescription.setVisible(false);
+                jCU1ScrollPane11Description.setVisible(false);
+                jCU1LabelWebsite.setVisible(false);
+                JCU1WebsiteTextField.setVisible(false);
+                JCU1ButtonClearFields.setEnabled(false);
+                JCU1ButtonSendData.setEnabled(false);
+                break;
+        }
+    }//GEN-LAST:event_JCU1ComboBoxUserTypeActionPerformed
+
+    private void JCU1ButtonClearFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ButtonClearFieldsActionPerformed
+        JCU1ClearFields();
+    }//GEN-LAST:event_JCU1ButtonClearFieldsActionPerformed
+
+    private void JCU1ButtonSendDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ButtonSendDataActionPerformed
+        try {
+            // Se validan campos vacios, caso que haya lanzamos una excepcion.
+            if (JCU1VerifyEmtpyFields()){
+                throw new EmptyFieldsException("Algún campo ha quedado vacío");
+            }
+            
+            String selectedItem = JCU1ComboBoxUserType.getSelectedItem().toString();
+            String nickname = JCU1NickNameTextField.getText();
+            String name = JCU1NameTextField.getText();
+            String lastName = JCU1LastNameTextField.getText();
+            String email = JCU1EmailTextField.getText();
+            Date birthDate = JCU1DateChooserBirthDate.getDate();
+            
+            switch (selectedItem) {
+                case "Proveedor/a":
+                    String description = jCU1TextAreaDescription.getText();
+                    String websiteURL = (JCU1WebsiteTextField.getText().isEmpty()) 
+                            ? JCU1WebsiteTextField.getText() 
+                            : "";
+                    DTProveedor nuevoProveedor = new DTProveedor(
+                        nickname,
+                        name,
+                        lastName,
+                        email,
+                        birthDate,
+                        description,
+                        websiteURL
+                    );
+                    // controlador.altaProveedor();
+                    break;
+                    
+                case "Turista":
+                    String nacionality = JCU1NacionalityTextField.getText();
+                    DTTurista nuevoTurista = new DTTurista(
+                        nickname,
+                        name,
+                        lastName,
+                        email,
+                        birthDate,
+                        nacionality
+                    );
+                    // controlador.altaTurista();
+                    break;
+            }
+
+            JOptionPane.showMessageDialog(this, "El usuario fue dado de alta", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+            JCU1ClearFields();
+        } catch (EmptyFieldsException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
+//        } catch (MyException ex) {
+//            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_JCU1ButtonSendDataActionPerformed
+
+    public inicio(JComboBox<String> ComboBoxDepartamentoPaquete, JButton JCU1ButtonClearFields, JButton JCU1ButtonSendData, JComboBox<String> JCU1ComboBoxUserType, JDateChooser JCU1DateChooserBirthDate, JTextField JCU1EmailTextField, JTextField JCU1LastNameTextField, JTextField JCU1NacionalityTextField, JTextField JCU1NameTextField, JTextField JCU1NickNameTextField, JTextField JCU1WebsiteTextField, JDialog JDialogCamposVacios, JSpinner SpinnerDescuentoPaquete1, JSpinner SpinnerFechaAltaPaquete1, JSpinner SpinnerValidezPaquete1, JTextField TextFieldDescPaquete1, JTextField TextFieldNombrePaquete1, JButton jButton1, JButton jButton2, JButton jButton3, JButton jButton4, JButton jButton5, JButton jButton6, JButton jButtonDepartamentoDuplicadoCancelar, JButton jButtonDepartamentoDuplicadoReingresar, JButton jCU12ButtonEnviar, JButton jCU12ButtonVaciar, JDialog jCU12Dialog, JTextArea jCU12DialogTextArea, JLabel jCU12LabelDescripcion, JLabel jCU12LabelNombre, JLabel jCU12LabelURL, JSeparator jCU12Separator, JTextField jCU12TextFieldDescripcion, JTextField jCU12TextFieldNombre, JTextField jCU12TextFieldURL, JInternalFrame jCU1InternalFrameAgregarUsuario, JLabel jCU1LabelBirthDate, JLabel jCU1LabelDescription, JLabel jCU1LabelEmail, JLabel jCU1LabelLastName, JLabel jCU1LabelNacionality, JLabel jCU1LabelName, JLabel jCU1LabelNickName, JLabel jCU1LabelUserType, JLabel jCU1LabelWebsite, JScrollPane jCU1ScrollPane11Description, JTextArea jCU1TextAreaDescription, JButton jCU4ButtonActualizarTablas, JButton jCU4ButtonCancelar, JButton jCU4ButtonEnviar, JButton jCU4ButtonReingresar, JDateChooser jCU4DateChooserFecha, JDialog jCU4Dialog, JTextArea jCU4DialogTextArea, JLabel jCU4LabelCiudad, JLabel jCU4LabelCosto, JLabel jCU4LabelDepartamentos, JLabel jCU4LabelDescripcion, JLabel jCU4LabelDuracion, JLabel jCU4LabelFecha, JLabel jCU4LabelNombre, JLabel jCU4LabelProveedores, JScrollPane jCU4ScrollPaneDescripcion, JScrollPane jCU4ScrollPanelDepartamentos, JScrollPane jCU4ScrollPanelDepartamentos1, JScrollPane jCU4ScrollPanelDepartamentos2, JScrollPane jCU4ScrollPanelProveedores, JTable jCU4TableDepartamentos, JTable jCU4TableProveedores, JTextArea jCU4TextAreaDescripcion, JTextField jCU4TextFieldCiudad, JTextField jCU4TextFieldCosto, JTextField jCU4TextFieldDuracion, JTextField jCU4TextFieldNombre, JComboBox<String> jCU5ComboBoxActividad, JComboBox<String> jCU5ComboBoxDepartamento, JComboBox<String> jCU5ComboBoxPaquete, JComboBox<String> jCU5ComboBoxSalida, JLabel jCU5LabelActividad, JLabel jCU5LabelActividad1, JLabel jCU5LabelActividad2, JLabel jCU5LabelCiudad, JLabel jCU5LabelCosto, JLabel jCU5LabelDepartamento, JLabel jCU5LabelDescripcion, JLabel jCU5LabelDuracion, JLabel jCU5LabelFecha, JLabel jCU5LabelNombre, JLabel jCU5LabelSalida, JLabel jCU5LabelSalida1, JScrollPane jCU5ScrollPaneDescripcion, JTextArea jCU5TextAreaDescripcion, JTextField jCU5TextFieldCiudad, JTextField jCU5TextFieldCosto, JTextField jCU5TextFieldDuracion, JTextField jCU5TextFieldFecha, JTextField jCU5TextFieldNombre, JButton jCU6ButtonActualizarTablas, JButton jCU6ButtonCampos, JButton jCU6ButtonEnviar, JSpinner jCU6SpinnerCantMaxTuristas, JSpinner jCU6SpinnerFechaAlta, JSpinner jCU6SpinnerFechaSalida, JTable jCU6TableActividades, JTable jCU6TableDepartamentos, JTextField jCU6TextFieldLugarSalida, JTextField jCU6TextFieldNombreSalida, JComboBox<String> jCU7ComboBoxActividad, JComboBox<String> jCU7ComboBoxDepartamento, JComboBox<String> jCU7ComboBoxSalida, JTable jCU7TableConsulta, JButton jCU8ButtonCampos, JButton jCU8ButtonEnviar, JComboBox<String> jCU8ComboBoxActividad, JComboBox<String> jCU8ComboBoxDepartamento, JComboBox<String> jCU8ComboBoxSalida, JSpinner jCU8SpinnerCantTuristas, JSpinner jCU8SpinnerFechaInscripcion, JTable jCU8TableSalidas, JTable jCU8TableTuristas, JDateChooser jCU9DateChooserFecha, JSpinner jCU9SpinnerDescuentoPaquete, JSpinner jCU9SpinnerValidezPaquete, JTextField jCU9TextFieldDescPaquete, JTextField jCU9TextFieldNombrePaquete, JDialog jDialog1, JInternalFrame jInternalFrameAgregarActividadPaquete, JInternalFrame jInternalFrameAltaActividadTuristica, JInternalFrame jInternalFrameAltaDepartamento, JInternalFrame jInternalFrameAltaPaqueteActividades, JInternalFrame jInternalFrameAltaSalidaTuristica, JInternalFrame jInternalFrameConsultaActividadTuristica, JInternalFrame jInternalFrameConsultaPaquetes, JInternalFrame jInternalFrameConsultaSalidaTuristica, JInternalFrame jInternalFrameConsultarUsuario, JInternalFrame jInternalFrameInscripcionSalidaTuristica, JInternalFrame jInternalFrameModificarUsuario, JLabel jLabel1, JLabel jLabel10, JLabel jLabel11, JLabel jLabel12, JLabel jLabel13, JLabel jLabel14, JLabel jLabel15, JLabel jLabel16, JLabel jLabel17, JLabel jLabel18, JLabel jLabel19, JLabel jLabel2, JLabel jLabel20, JLabel jLabel21, JLabel jLabel22, JLabel jLabel23, JLabel jLabel24, JLabel jLabel25, JLabel jLabel26, JLabel jLabel27, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JLabel jLabel9, JMenu jMenuAcciones, JMenu jMenuActividad, JMenuItem jMenuActividadAlta, JMenuItem jMenuActividadConsulta, JMenuItem jMenuAgregarActividadPaquete, JMenuItem jMenuAltaPaquete, JMenuBar jMenuBar1, JMenuItem jMenuConsultaPaquete, JMenuItem jMenuDepartamentoAlta, JMenu jMenuPaquete, JMenu jMenuSalida, JMenuItem jMenuSalidaAlta, JMenuItem jMenuSalidaConsulta, JMenuItem jMenuSalidaInscripcion, JMenu jMenuUsuario, JMenuItem jMenuUsuarioAlta, JMenuItem jMenuUsuarioConsulta, JMenuItem jMenuUsuarioModificar, JScrollPane jScrollPane1, JScrollPane jScrollPane10, JScrollPane jScrollPane2, JScrollPane jScrollPane3, JScrollPane jScrollPane4, JScrollPane jScrollPane5, JScrollPane jScrollPane6, JScrollPane jScrollPane7, JScrollPane jScrollPane8, JScrollPane jScrollPane9, JSeparator jSeparator1, JTabbedPane jTabbedPaneCasosDeUso, JTable jTable1, JTable jTable2, JTable jTable4, JTable jTable5, JTextArea jTextArea1) throws HeadlessException {
+        this.ComboBoxDepartamentoPaquete = ComboBoxDepartamentoPaquete;
+        this.JCU1ButtonClearFields = JCU1ButtonClearFields;
+        this.JCU1ButtonSendData = JCU1ButtonSendData;
+        this.JCU1ComboBoxUserType = JCU1ComboBoxUserType;
+        this.JCU1DateChooserBirthDate = JCU1DateChooserBirthDate;
+        this.JCU1EmailTextField = JCU1EmailTextField;
+        this.JCU1LastNameTextField = JCU1LastNameTextField;
+        this.JCU1NacionalityTextField = JCU1NacionalityTextField;
+        this.JCU1NameTextField = JCU1NameTextField;
+        this.JCU1NickNameTextField = JCU1NickNameTextField;
+        this.JCU1WebsiteTextField = JCU1WebsiteTextField;
+        this.JDialogCamposVacios = JDialogCamposVacios;
+        this.SpinnerDescuentoPaquete1 = SpinnerDescuentoPaquete1;
+        this.SpinnerFechaAltaPaquete1 = SpinnerFechaAltaPaquete1;
+        this.SpinnerValidezPaquete1 = SpinnerValidezPaquete1;
+        this.TextFieldDescPaquete1 = TextFieldDescPaquete1;
+        this.TextFieldNombrePaquete1 = TextFieldNombrePaquete1;
+        this.jButton1 = jButton1;
+        this.jButton2 = jButton2;
+        this.jButton3 = jButton3;
+        this.jButton4 = jButton4;
+        this.jButton5 = jButton5;
+        this.jButton6 = jButton6;
+        this.jButtonDepartamentoDuplicadoCancelar = jButtonDepartamentoDuplicadoCancelar;
+        this.jButtonDepartamentoDuplicadoReingresar = jButtonDepartamentoDuplicadoReingresar;
+        this.jCU12ButtonEnviar = jCU12ButtonEnviar;
+        this.jCU12ButtonVaciar = jCU12ButtonVaciar;
+        this.jCU12Dialog = jCU12Dialog;
+        this.jCU12DialogTextArea = jCU12DialogTextArea;
+        this.jCU12LabelDescripcion = jCU12LabelDescripcion;
+        this.jCU12LabelNombre = jCU12LabelNombre;
+        this.jCU12LabelURL = jCU12LabelURL;
+        this.jCU12Separator = jCU12Separator;
+        this.jCU12TextFieldDescripcion = jCU12TextFieldDescripcion;
+        this.jCU12TextFieldNombre = jCU12TextFieldNombre;
+        this.jCU12TextFieldURL = jCU12TextFieldURL;
+        this.jCU1InternalFrameAgregarUsuario = jCU1InternalFrameAgregarUsuario;
+        this.jCU1LabelBirthDate = jCU1LabelBirthDate;
+        this.jCU1LabelDescription = jCU1LabelDescription;
+        this.jCU1LabelEmail = jCU1LabelEmail;
+        this.jCU1LabelLastName = jCU1LabelLastName;
+        this.jCU1LabelNacionality = jCU1LabelNacionality;
+        this.jCU1LabelName = jCU1LabelName;
+        this.jCU1LabelNickName = jCU1LabelNickName;
+        this.jCU1LabelUserType = jCU1LabelUserType;
+        this.jCU1LabelWebsite = jCU1LabelWebsite;
+        this.jCU1ScrollPane11Description = jCU1ScrollPane11Description;
+        this.jCU1TextAreaDescription = jCU1TextAreaDescription;
+        this.jCU4ButtonActualizarTablas = jCU4ButtonActualizarTablas;
+        this.jCU4ButtonCancelar = jCU4ButtonCancelar;
+        this.jCU4ButtonEnviar = jCU4ButtonEnviar;
+        this.jCU4ButtonReingresar = jCU4ButtonReingresar;
+        this.jCU4DateChooserFecha = jCU4DateChooserFecha;
+        this.jCU4Dialog = jCU4Dialog;
+        this.jCU4DialogTextArea = jCU4DialogTextArea;
+        this.jCU4LabelCiudad = jCU4LabelCiudad;
+        this.jCU4LabelCosto = jCU4LabelCosto;
+        this.jCU4LabelDepartamentos = jCU4LabelDepartamentos;
+        this.jCU4LabelDescripcion = jCU4LabelDescripcion;
+        this.jCU4LabelDuracion = jCU4LabelDuracion;
+        this.jCU4LabelFecha = jCU4LabelFecha;
+        this.jCU4LabelNombre = jCU4LabelNombre;
+        this.jCU4LabelProveedores = jCU4LabelProveedores;
+        this.jCU4ScrollPaneDescripcion = jCU4ScrollPaneDescripcion;
+        this.jCU4ScrollPanelDepartamentos = jCU4ScrollPanelDepartamentos;
+        this.jCU4ScrollPanelDepartamentos1 = jCU4ScrollPanelDepartamentos1;
+        this.jCU4ScrollPanelDepartamentos2 = jCU4ScrollPanelDepartamentos2;
+        this.jCU4ScrollPanelProveedores = jCU4ScrollPanelProveedores;
+        this.jCU4TableDepartamentos = jCU4TableDepartamentos;
+        this.jCU4TableProveedores = jCU4TableProveedores;
+        this.jCU4TextAreaDescripcion = jCU4TextAreaDescripcion;
+        this.jCU4TextFieldCiudad = jCU4TextFieldCiudad;
+        this.jCU4TextFieldCosto = jCU4TextFieldCosto;
+        this.jCU4TextFieldDuracion = jCU4TextFieldDuracion;
+        this.jCU4TextFieldNombre = jCU4TextFieldNombre;
+        this.jCU5ComboBoxActividad = jCU5ComboBoxActividad;
+        this.jCU5ComboBoxDepartamento = jCU5ComboBoxDepartamento;
+        this.jCU5ComboBoxPaquete = jCU5ComboBoxPaquete;
+        this.jCU5ComboBoxSalida = jCU5ComboBoxSalida;
+        this.jCU5LabelActividad = jCU5LabelActividad;
+        this.jCU5LabelActividad1 = jCU5LabelActividad1;
+        this.jCU5LabelActividad2 = jCU5LabelActividad2;
+        this.jCU5LabelCiudad = jCU5LabelCiudad;
+        this.jCU5LabelCosto = jCU5LabelCosto;
+        this.jCU5LabelDepartamento = jCU5LabelDepartamento;
+        this.jCU5LabelDescripcion = jCU5LabelDescripcion;
+        this.jCU5LabelDuracion = jCU5LabelDuracion;
+        this.jCU5LabelFecha = jCU5LabelFecha;
+        this.jCU5LabelNombre = jCU5LabelNombre;
+        this.jCU5LabelSalida = jCU5LabelSalida;
+        this.jCU5LabelSalida1 = jCU5LabelSalida1;
+        this.jCU5ScrollPaneDescripcion = jCU5ScrollPaneDescripcion;
+        this.jCU5TextAreaDescripcion = jCU5TextAreaDescripcion;
+        this.jCU5TextFieldCiudad = jCU5TextFieldCiudad;
+        this.jCU5TextFieldCosto = jCU5TextFieldCosto;
+        this.jCU5TextFieldDuracion = jCU5TextFieldDuracion;
+        this.jCU5TextFieldFecha = jCU5TextFieldFecha;
+        this.jCU5TextFieldNombre = jCU5TextFieldNombre;
+        this.jCU6ButtonActualizarTablas = jCU6ButtonActualizarTablas;
+        this.jCU6ButtonCampos = jCU6ButtonCampos;
+        this.jCU6ButtonEnviar = jCU6ButtonEnviar;
+        this.jCU6SpinnerCantMaxTuristas = jCU6SpinnerCantMaxTuristas;
+        this.jCU6SpinnerFechaAlta = jCU6SpinnerFechaAlta;
+        this.jCU6SpinnerFechaSalida = jCU6SpinnerFechaSalida;
+        this.jCU6TableActividades = jCU6TableActividades;
+        this.jCU6TableDepartamentos = jCU6TableDepartamentos;
+        this.jCU6TextFieldLugarSalida = jCU6TextFieldLugarSalida;
+        this.jCU6TextFieldNombreSalida = jCU6TextFieldNombreSalida;
+        this.jCU7ComboBoxActividad = jCU7ComboBoxActividad;
+        this.jCU7ComboBoxDepartamento = jCU7ComboBoxDepartamento;
+        this.jCU7ComboBoxSalida = jCU7ComboBoxSalida;
+        this.jCU7TableConsulta = jCU7TableConsulta;
+        this.jCU8ButtonCampos = jCU8ButtonCampos;
+        this.jCU8ButtonEnviar = jCU8ButtonEnviar;
+        this.jCU8ComboBoxActividad = jCU8ComboBoxActividad;
+        this.jCU8ComboBoxDepartamento = jCU8ComboBoxDepartamento;
+        this.jCU8ComboBoxSalida = jCU8ComboBoxSalida;
+        this.jCU8SpinnerCantTuristas = jCU8SpinnerCantTuristas;
+        this.jCU8SpinnerFechaInscripcion = jCU8SpinnerFechaInscripcion;
+        this.jCU8TableSalidas = jCU8TableSalidas;
+        this.jCU8TableTuristas = jCU8TableTuristas;
+        this.jCU9DateChooserFecha = jCU9DateChooserFecha;
+        this.jCU9SpinnerDescuentoPaquete = jCU9SpinnerDescuentoPaquete;
+        this.jCU9SpinnerValidezPaquete = jCU9SpinnerValidezPaquete;
+        this.jCU9TextFieldDescPaquete = jCU9TextFieldDescPaquete;
+        this.jCU9TextFieldNombrePaquete = jCU9TextFieldNombrePaquete;
+        this.jDialog1 = jDialog1;
+        this.jInternalFrameAgregarActividadPaquete = jInternalFrameAgregarActividadPaquete;
+        this.jInternalFrameAltaActividadTuristica = jInternalFrameAltaActividadTuristica;
+        this.jInternalFrameAltaDepartamento = jInternalFrameAltaDepartamento;
+        this.jInternalFrameAltaPaqueteActividades = jInternalFrameAltaPaqueteActividades;
+        this.jInternalFrameAltaSalidaTuristica = jInternalFrameAltaSalidaTuristica;
+        this.jInternalFrameConsultaActividadTuristica = jInternalFrameConsultaActividadTuristica;
+        this.jInternalFrameConsultaPaquetes = jInternalFrameConsultaPaquetes;
+        this.jInternalFrameConsultaSalidaTuristica = jInternalFrameConsultaSalidaTuristica;
+        this.jInternalFrameConsultarUsuario = jInternalFrameConsultarUsuario;
+        this.jInternalFrameInscripcionSalidaTuristica = jInternalFrameInscripcionSalidaTuristica;
+        this.jInternalFrameModificarUsuario = jInternalFrameModificarUsuario;
+        this.jLabel1 = jLabel1;
+        this.jLabel10 = jLabel10;
+        this.jLabel11 = jLabel11;
+        this.jLabel12 = jLabel12;
+        this.jLabel13 = jLabel13;
+        this.jLabel14 = jLabel14;
+        this.jLabel15 = jLabel15;
+        this.jLabel16 = jLabel16;
+        this.jLabel17 = jLabel17;
+        this.jLabel18 = jLabel18;
+        this.jLabel19 = jLabel19;
+        this.jLabel2 = jLabel2;
+        this.jLabel20 = jLabel20;
+        this.jLabel21 = jLabel21;
+        this.jLabel22 = jLabel22;
+        this.jLabel23 = jLabel23;
+        this.jLabel24 = jLabel24;
+        this.jLabel25 = jLabel25;
+        this.jLabel26 = jLabel26;
+        this.jLabel27 = jLabel27;
+        this.jLabel3 = jLabel3;
+        this.jLabel4 = jLabel4;
+        this.jLabel5 = jLabel5;
+        this.jLabel6 = jLabel6;
+        this.jLabel7 = jLabel7;
+        this.jLabel8 = jLabel8;
+        this.jLabel9 = jLabel9;
+        this.jMenuAcciones = jMenuAcciones;
+        this.jMenuActividad = jMenuActividad;
+        this.jMenuActividadAlta = jMenuActividadAlta;
+        this.jMenuActividadConsulta = jMenuActividadConsulta;
+        this.jMenuAgregarActividadPaquete = jMenuAgregarActividadPaquete;
+        this.jMenuAltaPaquete = jMenuAltaPaquete;
+        this.jMenuBar1 = jMenuBar1;
+        this.jMenuConsultaPaquete = jMenuConsultaPaquete;
+        this.jMenuDepartamentoAlta = jMenuDepartamentoAlta;
+        this.jMenuPaquete = jMenuPaquete;
+        this.jMenuSalida = jMenuSalida;
+        this.jMenuSalidaAlta = jMenuSalidaAlta;
+        this.jMenuSalidaConsulta = jMenuSalidaConsulta;
+        this.jMenuSalidaInscripcion = jMenuSalidaInscripcion;
+        this.jMenuUsuario = jMenuUsuario;
+        this.jMenuUsuarioAlta = jMenuUsuarioAlta;
+        this.jMenuUsuarioConsulta = jMenuUsuarioConsulta;
+        this.jMenuUsuarioModificar = jMenuUsuarioModificar;
+        this.jScrollPane1 = jScrollPane1;
+        this.jScrollPane10 = jScrollPane10;
+        this.jScrollPane2 = jScrollPane2;
+        this.jScrollPane3 = jScrollPane3;
+        this.jScrollPane4 = jScrollPane4;
+        this.jScrollPane5 = jScrollPane5;
+        this.jScrollPane6 = jScrollPane6;
+        this.jScrollPane7 = jScrollPane7;
+        this.jScrollPane8 = jScrollPane8;
+        this.jScrollPane9 = jScrollPane9;
+        this.jSeparator1 = jSeparator1;
+        this.jTabbedPaneCasosDeUso = jTabbedPaneCasosDeUso;
+        this.jTable1 = jTable1;
+        this.jTable2 = jTable2;
+        this.jTable4 = jTable4;
+        this.jTable5 = jTable5;
+        this.jTextArea1 = jTextArea1;
+    }
     
     private void updateDepartmentosInComboBox(JComboBox jComboBox) {
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
@@ -2307,7 +2870,6 @@ public class inicio extends javax.swing.JFrame {
             );
         }
     }
-
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
             jCU9TextFieldDescPaquete.getText().isEmpty() ||
@@ -2316,8 +2878,54 @@ public class inicio extends javax.swing.JFrame {
             return true;
         }else{
             return false;
-            }
         }
+    }
+    
+    public void JCU1ClearFields(){             
+        JCU1NickNameTextField.setText("");
+        JCU1NameTextField.setText("");
+        JCU1LastNameTextField.setText("");
+        JCU1EmailTextField.setText("");
+        JCU1DateChooserBirthDate.setDate(null);
+        JCU1NacionalityTextField.setText("");
+        jCU1TextAreaDescription.setText("");
+        JCU1WebsiteTextField.setText(""); 
+    }
+    
+    public boolean JCU1VerifyEmtpyFields(){
+        String selectedItem = JCU1ComboBoxUserType.getSelectedItem().toString();
+        switch (selectedItem) {
+            case "Proveedor/a":
+                if(JCU1NickNameTextField.getText().isEmpty() ||
+                    JCU1NameTextField.getText().isEmpty() ||
+                    JCU1LastNameTextField.getText().isEmpty() ||
+                    JCU1EmailTextField.getText().isEmpty() ||
+                    JCU1DateChooserBirthDate.getDate() == null ||
+                    jCU1TextAreaDescription.getText().isEmpty()
+                ){
+                    return true;
+                }
+                break;
+            
+            case "Turista":
+                if(JCU1NickNameTextField.getText().isEmpty() ||
+                    JCU1NameTextField.getText().isEmpty() ||
+                    JCU1LastNameTextField.getText().isEmpty() ||
+                    JCU1EmailTextField.getText().isEmpty() ||
+                    JCU1DateChooserBirthDate.getDate() == null ||
+                    JCU1NacionalityTextField.getText().isEmpty()
+                ){
+                    return true;
+                }
+                break;
+                
+            default:
+                break;
+        } 
+        return false;
+    }
+    
+    
     
     public void jCU9vaciarCampos(){
         jCU9TextFieldNombrePaquete.setText("");
@@ -2451,6 +3059,16 @@ public class inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxDepartamentoPaquete;
+    private javax.swing.JButton JCU1ButtonClearFields;
+    private javax.swing.JButton JCU1ButtonSendData;
+    private javax.swing.JComboBox<String> JCU1ComboBoxUserType;
+    private com.toedter.calendar.JDateChooser JCU1DateChooserBirthDate;
+    private javax.swing.JTextField JCU1EmailTextField;
+    private javax.swing.JTextField JCU1LastNameTextField;
+    private javax.swing.JTextField JCU1NacionalityTextField;
+    private javax.swing.JTextField JCU1NameTextField;
+    private javax.swing.JTextField JCU1NickNameTextField;
+    private javax.swing.JTextField JCU1WebsiteTextField;
     private javax.swing.JDialog JDialogCamposVacios;
     private javax.swing.JSpinner SpinnerDescuentoPaquete1;
     private javax.swing.JSpinner SpinnerFechaAltaPaquete1;
@@ -2476,6 +3094,18 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU12TextFieldDescripcion;
     private javax.swing.JTextField jCU12TextFieldNombre;
     private javax.swing.JTextField jCU12TextFieldURL;
+    private javax.swing.JInternalFrame jCU1InternalFrameAgregarUsuario;
+    private javax.swing.JLabel jCU1LabelBirthDate;
+    private javax.swing.JLabel jCU1LabelDescription;
+    private javax.swing.JLabel jCU1LabelEmail;
+    private javax.swing.JLabel jCU1LabelLastName;
+    private javax.swing.JLabel jCU1LabelNacionality;
+    private javax.swing.JLabel jCU1LabelName;
+    private javax.swing.JLabel jCU1LabelNickName;
+    private javax.swing.JLabel jCU1LabelUserType;
+    private javax.swing.JLabel jCU1LabelWebsite;
+    private javax.swing.JScrollPane jCU1ScrollPane11Description;
+    private javax.swing.JTextArea jCU1TextAreaDescription;
     private javax.swing.JButton jCU4ButtonActualizarTablas;
     private javax.swing.JButton jCU4ButtonCancelar;
     private javax.swing.JButton jCU4ButtonEnviar;
@@ -2556,7 +3186,6 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JTextField jCU9TextFieldNombrePaquete;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
-    private javax.swing.JInternalFrame jInternalFrameAgregarUsuario;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
     private javax.swing.JInternalFrame jInternalFrameAltaDepartamento;
     private javax.swing.JInternalFrame jInternalFrameAltaPaqueteActividades;
