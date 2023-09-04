@@ -148,6 +148,18 @@ public class inicio extends javax.swing.JFrame {
         jCU5ComboBoxPaquete = new javax.swing.JComboBox<>();
         jCU5LabelActividad1 = new javax.swing.JLabel();
         jCU5LabelActividad2 = new javax.swing.JLabel();
+        jCU5LabelNombre1 = new javax.swing.JLabel();
+        jCU5TextFieldNombreSalida = new javax.swing.JTextField();
+        jCU5LabelCiudad1 = new javax.swing.JLabel();
+        jCU5TextFieldLugarSalida = new javax.swing.JTextField();
+        jCU5LabelNombre2 = new javax.swing.JLabel();
+        jCU5TextFieldFechaSalida = new javax.swing.JTextField();
+        jCU5TextFieldCantidadTuristas = new javax.swing.JTextField();
+        jCU5LabelNombre3 = new javax.swing.JLabel();
+        jCU5TextFieldFechaAltaSalida = new javax.swing.JTextField();
+        jCU5LabelNombre4 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jInternalFrameAltaDepartamento = new javax.swing.JInternalFrame();
         jCU12TextFieldNombre = new javax.swing.JTextField();
         jCU12LabelNombre = new javax.swing.JLabel();
@@ -721,7 +733,7 @@ public class inicio extends javax.swing.JFrame {
 
         jCU4LabelDescripcion.setText("Descripción");
 
-        jCU4LabelDuracion.setText("Duración");
+        jCU4LabelDuracion.setText("Duración en horas");
 
         jCU4LabelCosto.setText("Costo");
 
@@ -873,7 +885,7 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jCU4LabelFecha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU4DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -909,6 +921,12 @@ public class inicio extends javax.swing.JFrame {
         });
 
         jCU5LabelSalida.setText("Salida");
+
+        jCU5ComboBoxSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5ComboBoxSalidaActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -971,6 +989,51 @@ public class inicio extends javax.swing.JFrame {
 
         jCU5LabelActividad2.setText("Información Paquete");
 
+        jCU5LabelNombre1.setText("Nombre");
+
+        jCU5TextFieldNombreSalida.setEditable(false);
+        jCU5TextFieldNombreSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5TextFieldNombreSalidaActionPerformed(evt);
+            }
+        });
+
+        jCU5LabelCiudad1.setText("Lugar de salida");
+
+        jCU5TextFieldLugarSalida.setEditable(false);
+        jCU5TextFieldLugarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5TextFieldLugarSalidaActionPerformed(evt);
+            }
+        });
+
+        jCU5LabelNombre2.setText("Fecha salida");
+
+        jCU5TextFieldFechaSalida.setEditable(false);
+        jCU5TextFieldFechaSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5TextFieldFechaSalidaActionPerformed(evt);
+            }
+        });
+
+        jCU5TextFieldCantidadTuristas.setEditable(false);
+        jCU5TextFieldCantidadTuristas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5TextFieldCantidadTuristasActionPerformed(evt);
+            }
+        });
+
+        jCU5LabelNombre3.setText("Cantidad maxima turistas");
+
+        jCU5TextFieldFechaAltaSalida.setEditable(false);
+        jCU5TextFieldFechaAltaSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU5TextFieldFechaAltaSalidaActionPerformed(evt);
+            }
+        });
+
+        jCU5LabelNombre4.setText("Fecha alta");
+
         javax.swing.GroupLayout jInternalFrameConsultaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameConsultaActividadTuristica.getContentPane());
         jInternalFrameConsultaActividadTuristica.getContentPane().setLayout(jInternalFrameConsultaActividadTuristicaLayout);
         jInternalFrameConsultaActividadTuristicaLayout.setHorizontalGroup(
@@ -990,8 +1053,8 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
                         .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCU5LabelDuracion)
-                            .addComponent(jCU5TextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jCU5TextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCU5LabelCosto)
                             .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
@@ -1025,14 +1088,45 @@ public class inicio extends javax.swing.JFrame {
                                         .addComponent(jCU5LabelActividad)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jCU5ComboBoxActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jCU5ScrollPaneDescripcion))
+                            .addComponent(jCU5ScrollPaneDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCU5LabelActividad1)
-                    .addComponent(jCU5LabelActividad2))
-                .addGap(351, 351, 351))
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU5LabelNombre1)
+                            .addComponent(jCU5LabelNombre2)
+                            .addComponent(jCU5TextFieldFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCU5TextFieldCantidadTuristas, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCU5LabelNombre3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU5LabelNombre4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU5TextFieldFechaAltaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jCU5LabelActividad1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU5TextFieldNombreSalida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCU5LabelCiudad1)
+                                    .addComponent(jCU5TextFieldLugarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU5LabelActividad2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator3)))
+                        .addContainerGap())))
         );
         jInternalFrameConsultaActividadTuristicaLayout.setVerticalGroup(
             jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1040,9 +1134,37 @@ public class inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
-                        .addComponent(jCU5LabelActividad1)
-                        .addGap(230, 230, 230)
-                        .addComponent(jCU5LabelActividad2)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCU5LabelActividad1)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                        .addComponent(jCU5LabelNombre1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCU5TextFieldNombreSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                        .addComponent(jCU5LabelCiudad1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCU5TextFieldLugarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCU5LabelNombre2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCU5TextFieldFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU5LabelNombre4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCU5TextFieldFechaAltaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU5LabelNombre3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU5TextFieldCantidadTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCU5LabelActividad2)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1)
                     .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
@@ -1093,7 +1215,7 @@ public class inicio extends javax.swing.JFrame {
                                 .addComponent(jCU5LabelSalida1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCU5ComboBoxPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 88, Short.MAX_VALUE)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1346,7 +1468,7 @@ public class inicio extends javax.swing.JFrame {
                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCU4ScrollPanelDepartamentos2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -1657,7 +1779,7 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(23, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPaneCasosDeUso.addTab("Inscripcion a Salida Turística", jInternalFrameInscripcionSalidaTuristica);
@@ -1961,7 +2083,7 @@ public class inicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2124,7 +2246,7 @@ public class inicio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPaneCasosDeUso, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
 
         pack();
@@ -2422,6 +2544,7 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jCU5ComboBoxActividad.getSelectedItem() != null){
             String nombreActividad = jCU5ComboBoxActividad.getSelectedItem().toString();
+            List<DTSalidaTuristica> salidas = controlador.obtenerSalidasTuristicas(nombreActividad);
             DTActividadTuristica dtActividadTuristica = controlador.obtenerActividadTuristica(nombreActividad);
             
             jCU5TextFieldNombre.setText(dtActividadTuristica.getNombre());
@@ -2431,6 +2554,11 @@ public class inicio extends javax.swing.JFrame {
             jCU5TextFieldCosto.setText(dtActividadTuristica.getCostoToString());
             jCU5TextFieldFecha.setText(dtActividadTuristica.getFechaAlta().toString());
             
+            jCU5ComboBoxSalida.removeAllItems();
+            
+            for(DTSalidaTuristica s : salidas){
+                jCU5ComboBoxSalida.addItem(s.getNombre());
+            }
         }
     }//GEN-LAST:event_jCU5ComboBoxActividadActionPerformed
 
@@ -2744,6 +2872,40 @@ public class inicio extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_JCU1ButtonSendDataActionPerformed
+
+    private void jCU5TextFieldNombreSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldNombreSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU5TextFieldNombreSalidaActionPerformed
+
+    private void jCU5TextFieldLugarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldLugarSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU5TextFieldLugarSalidaActionPerformed
+
+    private void jCU5TextFieldFechaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldFechaSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU5TextFieldFechaSalidaActionPerformed
+
+    private void jCU5TextFieldCantidadTuristasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldCantidadTuristasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU5TextFieldCantidadTuristasActionPerformed
+
+    private void jCU5TextFieldFechaAltaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldFechaAltaSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU5TextFieldFechaAltaSalidaActionPerformed
+
+    private void jCU5ComboBoxSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxSalidaActionPerformed
+        // TODO add your handling code here:
+        if(jCU5ComboBoxSalida.getSelectedItem() != null){
+            String nombreSalida = jCU5ComboBoxSalida.getSelectedItem().toString();
+            DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
+            
+            jCU5TextFieldNombreSalida.setText(salida.getNombre());
+            jCU5TextFieldLugarSalida.setText(salida.getLugar());
+            jCU5TextFieldFechaAltaSalida.setText(salida.getFechaAlta().toString());
+            jCU5TextFieldFechaSalida.setText(salida.getFechaSalida().toString());
+            jCU5TextFieldCantidadTuristas.setText(Integer.toString(salida.getCantidadMaxTuristas()));
+        }
+    }//GEN-LAST:event_jCU5ComboBoxSalidaActionPerformed
 
     public inicio(JComboBox<String> ComboBoxDepartamentoPaquete, JButton JCU1ButtonClearFields, JButton JCU1ButtonSendData, JComboBox<String> JCU1ComboBoxUserType, JDateChooser JCU1DateChooserBirthDate, JTextField JCU1EmailTextField, JTextField JCU1LastNameTextField, JTextField JCU1NacionalityTextField, JTextField JCU1NameTextField, JTextField JCU1NickNameTextField, JTextField JCU1WebsiteTextField, JDialog JDialogCamposVacios, JSpinner SpinnerDescuentoPaquete1, JSpinner SpinnerFechaAltaPaquete1, JSpinner SpinnerValidezPaquete1, JTextField TextFieldDescPaquete1, JTextField TextFieldNombrePaquete1, JButton jButton1, JButton jButton2, JButton jButton3, JButton jButton4, JButton jButton5, JButton jButton6, JButton jButtonDepartamentoDuplicadoCancelar, JButton jButtonDepartamentoDuplicadoReingresar, JButton jCU12ButtonEnviar, JButton jCU12ButtonVaciar, JDialog jCU12Dialog, JTextArea jCU12DialogTextArea, JLabel jCU12LabelDescripcion, JLabel jCU12LabelNombre, JLabel jCU12LabelURL, JSeparator jCU12Separator, JTextField jCU12TextFieldDescripcion, JTextField jCU12TextFieldNombre, JTextField jCU12TextFieldURL, JInternalFrame jCU1InternalFrameAgregarUsuario, JLabel jCU1LabelBirthDate, JLabel jCU1LabelDescription, JLabel jCU1LabelEmail, JLabel jCU1LabelLastName, JLabel jCU1LabelNacionality, JLabel jCU1LabelName, JLabel jCU1LabelNickName, JLabel jCU1LabelUserType, JLabel jCU1LabelWebsite, JScrollPane jCU1ScrollPane11Description, JTextArea jCU1TextAreaDescription, JButton jCU4ButtonActualizarTablas, JButton jCU4ButtonCancelar, JButton jCU4ButtonEnviar, JButton jCU4ButtonReingresar, JDateChooser jCU4DateChooserFecha, JDialog jCU4Dialog, JTextArea jCU4DialogTextArea, JLabel jCU4LabelCiudad, JLabel jCU4LabelCosto, JLabel jCU4LabelDepartamentos, JLabel jCU4LabelDescripcion, JLabel jCU4LabelDuracion, JLabel jCU4LabelFecha, JLabel jCU4LabelNombre, JLabel jCU4LabelProveedores, JScrollPane jCU4ScrollPaneDescripcion, JScrollPane jCU4ScrollPanelDepartamentos, JScrollPane jCU4ScrollPanelDepartamentos1, JScrollPane jCU4ScrollPanelDepartamentos2, JScrollPane jCU4ScrollPanelProveedores, JTable jCU4TableDepartamentos, JTable jCU4TableProveedores, JTextArea jCU4TextAreaDescripcion, JTextField jCU4TextFieldCiudad, JTextField jCU4TextFieldCosto, JTextField jCU4TextFieldDuracion, JTextField jCU4TextFieldNombre, JComboBox<String> jCU5ComboBoxActividad, JComboBox<String> jCU5ComboBoxDepartamento, JComboBox<String> jCU5ComboBoxPaquete, JComboBox<String> jCU5ComboBoxSalida, JLabel jCU5LabelActividad, JLabel jCU5LabelActividad1, JLabel jCU5LabelActividad2, JLabel jCU5LabelCiudad, JLabel jCU5LabelCosto, JLabel jCU5LabelDepartamento, JLabel jCU5LabelDescripcion, JLabel jCU5LabelDuracion, JLabel jCU5LabelFecha, JLabel jCU5LabelNombre, JLabel jCU5LabelSalida, JLabel jCU5LabelSalida1, JScrollPane jCU5ScrollPaneDescripcion, JTextArea jCU5TextAreaDescripcion, JTextField jCU5TextFieldCiudad, JTextField jCU5TextFieldCosto, JTextField jCU5TextFieldDuracion, JTextField jCU5TextFieldFecha, JTextField jCU5TextFieldNombre, JButton jCU6ButtonActualizarTablas, JButton jCU6ButtonCampos, JButton jCU6ButtonEnviar, JSpinner jCU6SpinnerCantMaxTuristas, JSpinner jCU6SpinnerFechaAlta, JSpinner jCU6SpinnerFechaSalida, JTable jCU6TableActividades, JTable jCU6TableDepartamentos, JTextField jCU6TextFieldLugarSalida, JTextField jCU6TextFieldNombreSalida, JComboBox<String> jCU7ComboBoxActividad, JComboBox<String> jCU7ComboBoxDepartamento, JComboBox<String> jCU7ComboBoxSalida, JTable jCU7TableConsulta, JButton jCU8ButtonCampos, JButton jCU8ButtonEnviar, JComboBox<String> jCU8ComboBoxActividad, JComboBox<String> jCU8ComboBoxDepartamento, JComboBox<String> jCU8ComboBoxSalida, JSpinner jCU8SpinnerCantTuristas, JSpinner jCU8SpinnerFechaInscripcion, JTable jCU8TableSalidas, JTable jCU8TableTuristas, JDateChooser jCU9DateChooserFecha, JSpinner jCU9SpinnerDescuentoPaquete, JSpinner jCU9SpinnerValidezPaquete, JTextField jCU9TextFieldDescPaquete, JTextField jCU9TextFieldNombrePaquete, JDialog jDialog1, JInternalFrame jInternalFrameAgregarActividadPaquete, JInternalFrame jInternalFrameAltaActividadTuristica, JInternalFrame jInternalFrameAltaDepartamento, JInternalFrame jInternalFrameAltaPaqueteActividades, JInternalFrame jInternalFrameAltaSalidaTuristica, JInternalFrame jInternalFrameConsultaActividadTuristica, JInternalFrame jInternalFrameConsultaPaquetes, JInternalFrame jInternalFrameConsultaSalidaTuristica, JInternalFrame jInternalFrameConsultarUsuario, JInternalFrame jInternalFrameInscripcionSalidaTuristica, JInternalFrame jInternalFrameModificarUsuario, JLabel jLabel1, JLabel jLabel10, JLabel jLabel11, JLabel jLabel12, JLabel jLabel13, JLabel jLabel14, JLabel jLabel15, JLabel jLabel16, JLabel jLabel17, JLabel jLabel18, JLabel jLabel19, JLabel jLabel2, JLabel jLabel20, JLabel jLabel21, JLabel jLabel22, JLabel jLabel23, JLabel jLabel24, JLabel jLabel25, JLabel jLabel26, JLabel jLabel27, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JLabel jLabel9, JMenu jMenuAcciones, JMenu jMenuActividad, JMenuItem jMenuActividadAlta, JMenuItem jMenuActividadConsulta, JMenuItem jMenuAgregarActividadPaquete, JMenuItem jMenuAltaPaquete, JMenuBar jMenuBar1, JMenuItem jMenuConsultaPaquete, JMenuItem jMenuDepartamentoAlta, JMenu jMenuPaquete, JMenu jMenuSalida, JMenuItem jMenuSalidaAlta, JMenuItem jMenuSalidaConsulta, JMenuItem jMenuSalidaInscripcion, JMenu jMenuUsuario, JMenuItem jMenuUsuarioAlta, JMenuItem jMenuUsuarioConsulta, JMenuItem jMenuUsuarioModificar, JScrollPane jScrollPane1, JScrollPane jScrollPane10, JScrollPane jScrollPane2, JScrollPane jScrollPane3, JScrollPane jScrollPane4, JScrollPane jScrollPane5, JScrollPane jScrollPane6, JScrollPane jScrollPane7, JScrollPane jScrollPane8, JScrollPane jScrollPane9, JSeparator jSeparator1, JTabbedPane jTabbedPaneCasosDeUso, JTable jTable1, JTable jTable2, JTable jTable4, JTable jTable5, JTextArea jTextArea1) throws HeadlessException {
         this.ComboBoxDepartamentoPaquete = ComboBoxDepartamentoPaquete;
@@ -3362,21 +3524,31 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jCU5LabelActividad1;
     private javax.swing.JLabel jCU5LabelActividad2;
     private javax.swing.JLabel jCU5LabelCiudad;
+    private javax.swing.JLabel jCU5LabelCiudad1;
     private javax.swing.JLabel jCU5LabelCosto;
     private javax.swing.JLabel jCU5LabelDepartamento;
     private javax.swing.JLabel jCU5LabelDescripcion;
     private javax.swing.JLabel jCU5LabelDuracion;
     private javax.swing.JLabel jCU5LabelFecha;
     private javax.swing.JLabel jCU5LabelNombre;
+    private javax.swing.JLabel jCU5LabelNombre1;
+    private javax.swing.JLabel jCU5LabelNombre2;
+    private javax.swing.JLabel jCU5LabelNombre3;
+    private javax.swing.JLabel jCU5LabelNombre4;
     private javax.swing.JLabel jCU5LabelSalida;
     private javax.swing.JLabel jCU5LabelSalida1;
     private javax.swing.JScrollPane jCU5ScrollPaneDescripcion;
     private javax.swing.JTextArea jCU5TextAreaDescripcion;
+    private javax.swing.JTextField jCU5TextFieldCantidadTuristas;
     private javax.swing.JTextField jCU5TextFieldCiudad;
     private javax.swing.JTextField jCU5TextFieldCosto;
     private javax.swing.JTextField jCU5TextFieldDuracion;
     private javax.swing.JTextField jCU5TextFieldFecha;
+    private javax.swing.JTextField jCU5TextFieldFechaAltaSalida;
+    private javax.swing.JTextField jCU5TextFieldFechaSalida;
+    private javax.swing.JTextField jCU5TextFieldLugarSalida;
     private javax.swing.JTextField jCU5TextFieldNombre;
+    private javax.swing.JTextField jCU5TextFieldNombreSalida;
     private javax.swing.JButton jCU6ButtonActualizarTablas;
     private javax.swing.JButton jCU6ButtonCampos;
     private javax.swing.JButton jCU6ButtonEnviar;
@@ -3473,6 +3645,8 @@ public class inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
