@@ -2331,8 +2331,9 @@ public class inicio extends javax.swing.JFrame {
                 controlador.altaDepartamento(departamento);
                 jCU12vaciarCampos();
             }catch(MyException e){
-                jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
-                jCU12Dialog.setVisible(true);
+                JOptionPane.showMessageDialog(this,e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                //jCU12DialogTextArea.setText(e.getMessage() + "Seleccione 'Cancelar' para volver atras y descartar los datos ingresados o \"Reingresar\" para volver atras y modificar los datos");
+                //jCU12Dialog.setVisible(true);
             }
         }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
@@ -3398,7 +3399,7 @@ public class inicio extends javax.swing.JFrame {
         if(jCU12TextFieldNombre.getText().isEmpty() ||
         jCU12TextFieldDescripcion.getText().isEmpty() ||
         jCU12TextFieldURL.getText().isEmpty()){
-            JDialogCamposVacios.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Algún campo ha quedado vacío", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return true;
         }else{
             return false;
