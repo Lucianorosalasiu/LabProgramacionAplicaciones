@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
 import exceptions.MyException;
+import javax.persistence.Query;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EPaqueteActividadTuristica;
@@ -311,7 +312,24 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-    
+    @Override
+    public List<String> obtenerPaqueteNombre(){
+        EntityManager em = emf.createEntityManager();
+      
+        try{
+          
+            Query query = em.createQuery("select p.nombre from EPaqueteActividadTuristica p");
+            List<String> resultado = query.getResultList();
+            System.out.println(resultado.get(0));
+            return resultado;
+          
+        }catch(Exception e){
+            List<String> resultado = null;
+            return resultado;
+        }finally{
+            em.close();
+        }
+    }
     public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida){
         EntityManager em = emf.createEntityManager();
         
@@ -334,4 +352,6 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    
 }

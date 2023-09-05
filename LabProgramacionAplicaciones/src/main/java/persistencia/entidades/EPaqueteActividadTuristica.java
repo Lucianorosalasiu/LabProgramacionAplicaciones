@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import logica.clases.ActividadTuristica;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

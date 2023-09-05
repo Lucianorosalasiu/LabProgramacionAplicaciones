@@ -42,4 +42,5 @@ public interface IDataPersistencia {
     List<DTDepartamento> obtenerDepartamentos();
     
     void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
+     List<String> obtenerPaqueteNombre();
 }

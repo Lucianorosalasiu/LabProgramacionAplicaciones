@@ -127,4 +127,12 @@ public class Controlador implements IControlador{
     public void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nicknameTurista) throws MyException {
         
     }
+    @Override
+    public List<String> obtenerPaqueteNombres(){
+         return dataPersistencia.obtenerPaqueteNombre();
+     }
+    @Override
+    public DTPaqueteActividadTuristica obtenerPaquete(String nombre){
+        return null;
+    }
 }

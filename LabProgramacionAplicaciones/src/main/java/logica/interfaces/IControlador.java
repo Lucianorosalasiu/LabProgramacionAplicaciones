@@ -40,5 +40,10 @@ public interface  IControlador {
     void altaDepartamento(DTDepartamento departamento);
     List<DTDepartamento> obtenerDepartamentos();
     
+    
     void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
+    List<String> obtenerPaqueteNombres();
+    DTPaqueteActividadTuristica obtenerPaquete(String nombre);
+    
 }
+
