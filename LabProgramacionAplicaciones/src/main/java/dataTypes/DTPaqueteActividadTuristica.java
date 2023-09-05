@@ -24,6 +24,7 @@ public class DTPaqueteActividadTuristica {
     private Date fechaAlta;
     private LinkedList<ActividadTuristica> actividades ;
     
+    public DTPaqueteActividadTuristica(){}
     public DTPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta){
         this.nombre = nombre;
         this.descripcion = descripcion;

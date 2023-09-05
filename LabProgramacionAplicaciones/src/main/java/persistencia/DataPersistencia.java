@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import logica.clases.Departamento;
 import exceptions.MyException;
 import javax.persistence.Query;
+import logica.clases.PaqueteActividadTuristica;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EPaqueteActividadTuristica;
@@ -320,7 +321,7 @@ public class DataPersistencia implements IDataPersistencia {
           
             Query query = em.createQuery("select p.nombre from EPaqueteActividadTuristica p");
             List<String> resultado = query.getResultList();
-            System.out.println(resultado.get(0));
+            
             return resultado;
           
         }catch(Exception e){
@@ -352,6 +353,88 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-    
-    
+    @Override
+    public DTPaqueteActividadTuristica obtenerPaquete(String nombre){
+        EntityManager em = emf.createEntityManager();
+        try{
+          
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",nombre)
+                    .getSingleResult();
+            return new DTPaqueteActividadTuristica(
+                                            ePaquete.getNombre(),
+                                            ePaquete.getDescripcion(),
+                                            ePaquete.getValidez(),
+                                            ePaquete.getDescuento(),
+                                            ePaquete.getFechaAlta()
+                                                  );
+        }catch(Exception e){
+            return new DTPaqueteActividadTuristica();
+        }finally{
+            em.close();
+        }
+    }
+    @Override
+    public List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete){
+          EntityManager em = emf.createEntityManager();
+      
+        try{
+           
+             EDepartamento eDepartamento = em.createQuery("select d from EDepartamento d where d.nombre = :nombre"
+                    ,EDepartamento.class)
+                    .setParameter("nombre",departamento)
+                    .getSingleResult();
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",paquete)
+                    .getSingleResult();
+            
+            EActividadTuristica eActividad = em.createQuery("select c from EActividadTuristica c WHERE c.eDepartamento.id = :idDepartamento"
+                    ,EActividadTuristica.class)
+                    .setParameter("idDepartamento",eDepartamento.getId()).getSingleResult();
+            
+            Query query = em.createNativeQuery("select nombre from actividadTuristica where EDEPARTAMENTO_ID = ?1 and actividadTuristica.id = ?2 AND actividadTuristica.id not in (select ACTIVIDAD_ID from paquetes join PAQUETE_ACTIVIDAD ON PAQUETE_ID = paquetes.id where paquetes.id = ?3)")
+                    .setParameter(1,eDepartamento.getId())
+                    .setParameter(2,eActividad.getId())
+                    .setParameter(3,ePaquete.getId());        
+            List<String> resultado = query.getResultList();
+            return resultado;
+          
+        }catch(Exception e){
+           List<String> resultado = null;
+            return resultado;
+        }finally{
+           em.close();
+        }
+    }
+    @Override
+    public void agregarActividadPaquete(String paquete,String actividad){
+        EntityManager em = emf.createEntityManager();
+        
+        
+        //try{
+            em.getTransaction().begin();
+          
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",paquete)
+                    .getSingleResult();
+           
+            EActividadTuristica eActividad = em.createQuery("SELECT c FROM EActividadTuristica c WHERE c.nombre = :nombreActividad"
+                    ,EActividadTuristica.class)
+                    .setParameter("nombreActividad",actividad)
+                    .getSingleResult();
+            ePaquete.getActividades().add(eActividad);
+             
+            em.persist(ePaquete);
+            em.getTransaction().commit();
+          
+      //  }catch(Exception e){
+      //      em.getTransaction().rollback();
+           
+      //  }finally{
+        //    em.close();
+        //}
+    }    
 }

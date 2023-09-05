@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import logica.clases.Departamento;
@@ -30,6 +31,7 @@ public class EActividadTuristica extends EBase {
     private float costo;
     private String ciudad;
     private Date fechaAlta;
+   
     @ManyToOne
     private EDepartamento eDepartamento;
     
