@@ -3,7 +3,9 @@ package persistencia;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTurista;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,10 +15,14 @@ import logica.clases.Departamento;
 import exceptions.MyException;
 import javax.persistence.Query;
 import logica.clases.PaqueteActividadTuristica;
+import logica.clases.Proveedor;
+import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EPaqueteActividadTuristica;
+import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
+import persistencia.entidades.ETurista;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,7 +45,92 @@ public class DataPersistencia implements IDataPersistencia {
             instancia = new DataPersistencia();
         return instancia;
     }
+    
+    /**
+     * 
+     * @param email del usuario, ya sea proveedor o turista
+     * @param nickname lo mismo que el email
+     * @throws MyException en caso de que exista un usuario que coincida con el
+     * nick o el email recibidos
+     */
+    @Override
+    public void existeUsuario(String email, String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();    
+        String qryProveedor = "SELECT p from EProveedor p where p.email = :emailProveedor OR p.nickname = :nicknameProveedor";
+        String qryTurista = "SELECT t from ETurista t where t.email = :emailTurista OR t.nickname = :nicknameTurista";
+        List<EProveedor> resultadoProveedor = new LinkedList<>();
+        List<ETurista> resultadoTurista = new LinkedList<>();
+        
+        try{
+            resultadoProveedor = em.createQuery(qryProveedor, EProveedor.class)
+                    .setParameter("emailProveedor", email)
+                    .setParameter("nicknameProveedor", nickname)
+                    .getResultList();
+            
+            resultadoTurista = em.createQuery(qryTurista, ETurista.class)
+                    .setParameter("emailTurista", email)
+                    .setParameter("nicknameTurista", nickname)
+                    .getResultList();  
+        }catch(Exception e){
+            throw new MyException("¡ERROR! Algo salio mal al realizar la consulta");
+        }finally{
+            em.close();
+        }   
+        
+        if(!resultadoProveedor.isEmpty() || !resultadoTurista.isEmpty() ){   
+            throw new MyException("Ya existe un usuario con el email o nickname ingresado.");
+        }
+    }
 
+    @Override
+    public void altaProveedor(Proveedor objProveedor) throws MyException {
+        EntityManager em = emf.createEntityManager();   
+        try {
+            EProveedor nProveedor = new EProveedor(
+                    objProveedor.getNickname(),
+                    objProveedor.getName(),
+                    objProveedor.getLastName(),
+                    objProveedor.getEmail(),
+                    objProveedor.getBirthDate(),
+                    objProveedor.getDescription(),
+                    objProveedor.getWebsiteURL()            
+            );
+
+            em.getTransaction().begin();
+            em.persist(nProveedor);
+            em.getTransaction().commit(); 
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new MyException("¡ERROR! Algo salio mal al insertar el nuevo proveedor");
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public void altaTurista(Turista objTurista) throws MyException {
+        EntityManager em = emf.createEntityManager();   
+        try {
+            ETurista nTurista = new ETurista(
+                    objTurista.getNickname(),
+                    objTurista.getName(),
+                    objTurista.getLastName(),
+                    objTurista.getEmail(),
+                    objTurista.getBirthDate(),
+                    objTurista.getNacionality()
+            );
+
+            em.getTransaction().begin();
+            em.persist(nTurista);
+            em.getTransaction().commit(); 
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new MyException("¡ERROR! Algo salio mal al insertar el nuevo turista");
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public void existeActividadTuristica(String nombre)throws MyException{
         EntityManager em = emf.createEntityManager();    

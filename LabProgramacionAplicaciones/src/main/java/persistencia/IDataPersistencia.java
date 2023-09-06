@@ -10,13 +10,18 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import java.util.List;
 import exceptions.MyException;
-import persistencia.entidades.EDepartamento;
+import logica.clases.Proveedor;
+import logica.clases.Turista;
 
 /**
  *
  * @author all
  */
 public interface IDataPersistencia {
+    /* CU USUARIOS */
+    void existeUsuario(String email, String nickname) throws MyException;
+    void altaProveedor(Proveedor objProveedor) throws MyException;
+    void altaTurista(Turista objTurista) throws MyException;
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;

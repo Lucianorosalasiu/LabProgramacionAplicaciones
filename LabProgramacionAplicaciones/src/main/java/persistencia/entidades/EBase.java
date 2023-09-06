@@ -24,10 +24,6 @@ public abstract class EBase implements Serializable {
 
     public EBase() {}
 
-    //    public EBase(Long id) {
-    //        this.id = id;
-    //    }
-    
     public Long getId(){
         return this.id;
     }

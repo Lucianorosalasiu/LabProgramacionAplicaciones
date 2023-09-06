@@ -9,6 +9,8 @@ import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTInscripcion;
+import dataTypes.DTProveedor;
+import dataTypes.DTTurista;
 import java.util.List;
 import exceptions.MyException;
 
@@ -17,6 +19,11 @@ import exceptions.MyException;
  * @author lucho
  */
 public interface  IControlador {
+    /* CU USUARIOS */
+    void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
+    void altaTurista(DTTurista nuevoTurista) throws MyException;
+    
+    
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento);

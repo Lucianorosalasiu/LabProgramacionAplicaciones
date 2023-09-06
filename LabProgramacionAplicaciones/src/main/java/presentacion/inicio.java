@@ -2975,8 +2975,9 @@ public class inicio extends javax.swing.JFrame {
                 case "Proveedor/a":
                     String description = jCU1TextAreaDescription.getText();
                     String websiteURL = (JCU1WebsiteTextField.getText().isEmpty()) 
-                            ? JCU1WebsiteTextField.getText() 
-                            : "";
+                            ? "" 
+                            : JCU1WebsiteTextField.getText();
+                    
                     DTProveedor nuevoProveedor = new DTProveedor(
                         nickname,
                         name,
@@ -2986,7 +2987,7 @@ public class inicio extends javax.swing.JFrame {
                         description,
                         websiteURL
                     );
-                    // controlador.altaProveedor(nuevoProveedor);
+                    controlador.altaProveedor(nuevoProveedor);
                     break;
                     
                 case "Turista":
@@ -3000,7 +3001,7 @@ public class inicio extends javax.swing.JFrame {
                         nacionality
                     );
 
-                    // controlador.altaTurista(nuevoTurista);
+                    controlador.altaTurista(nuevoTurista);
                     break;
             }
 
@@ -3008,8 +3009,8 @@ public class inicio extends javax.swing.JFrame {
             JCU1ClearFields();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
-//        } catch (MyException ex) {
-//            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
+       } catch (MyException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_JCU1ButtonSendDataActionPerformed
 

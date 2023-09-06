@@ -7,17 +7,19 @@ import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTurista;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import exceptions.MyException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import persistencia.DataPersistencia;
+import logica.clases.Proveedor;
+import logica.clases.Turista;
 import persistencia.FDataPersistencia;
 import persistencia.IDataPersistencia;
-import persistencia.entidades.EDepartamento;
+
 /**
  *
  * @author lucho
@@ -39,6 +41,50 @@ public class Controlador implements IControlador{
         return instance;
     }
        
+    /* CU USUARIOS */
+    @Override
+    public void altaProveedor(DTProveedor nuevoProveedor) throws MyException {
+        dataPersistencia.existeUsuario(
+                nuevoProveedor.getEmail(), 
+                nuevoProveedor.getNickname()
+        );
+        
+        // Si no existe el proveedor, se crea el objeto correspondiente
+        Proveedor objProveedor = new Proveedor(
+                nuevoProveedor.getNickname(), 
+                nuevoProveedor.getName(), 
+                nuevoProveedor.getLastName(), 
+                nuevoProveedor.getEmail(), 
+                nuevoProveedor.getBirthDate(), 
+                nuevoProveedor.getDescription(), 
+                nuevoProveedor.getWebsiteURL()
+        );
+        
+        // Se da de alta en la base de datos
+        dataPersistencia.altaProveedor(objProveedor);
+    }
+    
+    @Override
+    public void altaTurista(DTTurista nuevoTurista) throws MyException {
+        dataPersistencia.existeUsuario(
+                nuevoTurista.getEmail(),
+                nuevoTurista.getNickname()
+        );
+                
+        // Si no existe el turista, se crea el objeto correspondiente
+        Turista objTurista = new Turista(
+                nuevoTurista.getNickname(), 
+                nuevoTurista.getName(), 
+                nuevoTurista.getLastName(), 
+                nuevoTurista.getEmail(), 
+                nuevoTurista.getBirthDate(), 
+                nuevoTurista.getNacionality()
+        );
+              
+        // Se da de alta en la base de datos
+        dataPersistencia.altaTurista(objTurista);
+    }
+    
     @Override
     public void existeActividadTuristica(String nombre)throws MyException{
         dataPersistencia.existeActividadTuristica(nombre);
