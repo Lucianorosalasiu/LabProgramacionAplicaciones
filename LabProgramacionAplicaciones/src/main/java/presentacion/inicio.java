@@ -2780,7 +2780,9 @@ public class inicio extends javax.swing.JFrame {
             Long idDepartamento = Long.parseLong(jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString());
             
             /*conseguir proveedor seleccionado de la tabla*/
-            
+            int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
+                
+            Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor,0).toString());
             
             
             try{
@@ -2788,7 +2790,7 @@ public class inicio extends javax.swing.JFrame {
                 /*construir el dt actividad turistica*/
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre,descripcion,
                 duracion,costo,ciudad,fechaAlta);
-                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento);
+                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
                 jCU4vaciarCampos();
                 JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){

@@ -155,7 +155,7 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor){
         EntityManager em = emf.createEntityManager();   
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
@@ -164,9 +164,15 @@ public class DataPersistencia implements IDataPersistencia {
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
                 dtActividadTuristica.getFechaAlta(),eDepartamento);
+
         
         try{
             em.getTransaction().begin();
+            /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
+            EProveedor eProveedor = em.find(EProveedor.class,idProveedor);
+            /*le paso la actividad recien creada al proveedor para que la agregue a su lista*/
+            eProveedor.addActividad(nuevaActividad);
+            /*finalmente persisto la nueva actividad*/
             em.persist(nuevaActividad);
             em.getTransaction().commit();
         }catch(Exception e){
