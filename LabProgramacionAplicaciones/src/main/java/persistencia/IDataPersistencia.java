@@ -8,6 +8,7 @@ import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import java.util.List;
 import exceptions.MyException;
@@ -27,7 +28,8 @@ public interface IDataPersistencia {
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor);
+    List<DTProveedor> obtenerProveedores();
     
 
     /*CU5*/

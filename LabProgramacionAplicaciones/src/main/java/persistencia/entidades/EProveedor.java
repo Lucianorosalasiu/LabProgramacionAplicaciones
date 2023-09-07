@@ -46,4 +46,8 @@ public class EProveedor extends EUsuario {
         this.websiteURL = websiteURL;
     }
     
+    public void addActividad(EActividadTuristica nuevaActividad){
+        this.actividades.add(nuevaActividad);
+    }
+    
 }

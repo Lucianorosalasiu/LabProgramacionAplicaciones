@@ -744,14 +744,14 @@ public class inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Descripción", "Sitio web"
+                "Id", "Nickname", "Email", "Descripción"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2780,7 +2780,9 @@ public class inicio extends javax.swing.JFrame {
             Long idDepartamento = Long.parseLong(jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString());
             
             /*conseguir proveedor seleccionado de la tabla*/
-            
+            int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
+                
+            Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor,0).toString());
             
             
             try{
@@ -2788,7 +2790,7 @@ public class inicio extends javax.swing.JFrame {
                 /*construir el dt actividad turistica*/
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre,descripcion,
                 duracion,costo,ciudad,fechaAlta);
-                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento);
+                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
                 jCU4vaciarCampos();
                 JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){
@@ -3852,13 +3854,21 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
+        List<DTProveedor> dtProveedores = controlador.obtenerProveedores();
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
+        DefaultTableModel modelProveedores = (DefaultTableModel) jCU4TableProveedores.getModel();
         
         while(modelDepartamento.getRowCount() > 0){
             modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
         }
         
         modelDepartamento.fireTableDataChanged();
+        
+        while(modelProveedores.getRowCount() > 0){
+            modelProveedores.removeRow(modelProveedores.getRowCount() - 1);
+        }
+        
+        modelProveedores.fireTableDataChanged();
         
         for(DTDepartamento d: dtDepartamentos){
             Object rowData[] = new Object[4];
@@ -3868,15 +3878,15 @@ public class inicio extends javax.swing.JFrame {
             rowData[3] = d.getURL();
             modelDepartamento.addRow(rowData);
         }
-        /*temporalmente se crea un registro de proveedor para poder seguir
-        avanzando en el desarrollo, eventualmente cuando se implementen los proveedores
-        el funcionamiento sera similar al bloque de arriba*/
-        DefaultTableModel modelProveedor = (DefaultTableModel) jCU4TableProveedores.getModel();
         
-        Object rowData[] = new Object[2];
-        rowData[0] = "nombreProveedor-hardcodeado";
-        rowData[1] = "descripcionProveedor-hardcodeado";
-        modelProveedor.addRow(rowData);
+        for(DTProveedor p: dtProveedores){
+            Object rowData[] = new Object[4];
+            rowData[0] = p.getId();
+            rowData[1] = p.getNickname();
+            rowData[2] = p.getEmail();
+            rowData[3] = p.getDescription();
+            modelProveedores.addRow(rowData);
+        }
     }
     
     public void jCU12vaciarCampos(){

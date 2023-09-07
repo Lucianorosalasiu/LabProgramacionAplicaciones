@@ -155,7 +155,7 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor){
         EntityManager em = emf.createEntityManager();   
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
@@ -164,13 +164,43 @@ public class DataPersistencia implements IDataPersistencia {
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
                 dtActividadTuristica.getFechaAlta(),eDepartamento);
+
         
         try{
             em.getTransaction().begin();
+            /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
+            EProveedor eProveedor = em.find(EProveedor.class,idProveedor);
+            /*le paso la actividad recien creada al proveedor para que la agregue a su lista*/
+            eProveedor.addActividad(nuevaActividad);
+            /*finalmente persisto la nueva actividad*/
             em.persist(nuevaActividad);
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override 
+    public List<DTProveedor> obtenerProveedores(){
+        EntityManager em = emf.createEntityManager();
+        List<DTProveedor> resultados = new LinkedList<>();
+        List<EProveedor> resultados_consulta = new LinkedList<>();
+        
+        try{
+            String query = "select e from EProveedor e";
+            resultados_consulta = em.createQuery(query,EProveedor.class).getResultList();
+            
+            for(EProveedor e : resultados_consulta){
+                DTProveedor dtProveedor = new DTProveedor(
+                e.getId(),e.getNickname(),e.getEmail(),e.getDescription());
+                resultados.add(dtProveedor);
+            }
+            
+            return resultados;
+        }catch(Exception e){
+            return resultados;
         }finally{
             em.close();
         }

@@ -88,8 +88,13 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento){
-        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento);
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor){
+        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
+    }
+    
+    @Override
+    public List<DTProveedor> obtenerProveedores(){
+        return dataPersistencia.obtenerProveedores();
     }
     
     @Override
