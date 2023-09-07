@@ -298,7 +298,34 @@ public class DataPersistencia implements IDataPersistencia {
              em.close();
          }
     }
-    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete){
+        EntityManager em = emf.createEntityManager();
+         List<EActividadTuristica> resultados_consulta = new LinkedList<>();
+         List<DTActividadTuristica> resultados = new LinkedList<>();
+         
+         try{
+             EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",nomPaquete)
+                    .getSingleResult();
+             
+             EPaqueteActividadTuristica paquete = em.find(EPaqueteActividadTuristica.class,ePaquete.getId());
+             resultados_consulta = paquete.getActividades();
+             
+             for(EActividadTuristica p : resultados_consulta){
+                 DTActividadTuristica dtActividadTuristica = new
+                     DTActividadTuristica(p.getId(),p.getNombre(),null,null,0,null,null);
+                 resultados.add(dtActividadTuristica);
+             }
+             
+             return resultados;
+         }catch(Exception e){
+             return resultados;
+         }finally{
+             em.close();
+         }
+    }
     @Override
     public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
          EntityManager em = emf.createEntityManager();
@@ -590,7 +617,53 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-    
+   
+    public DTActividadTuristica CU11obtenerActividad(String nombre){
+        EntityManager em = emf.createEntityManager();
+        try{
+          
+            EActividadTuristica eActividad = em.createQuery("select p from EActividadTuristica p where p.nombre = :nombreActividad"
+                    ,EActividadTuristica.class)
+                    .setParameter("nombreActividad",nombre)
+                    .getSingleResult();
+            EActividadTuristica actividad = em.find(EActividadTuristica.class,eActividad.getId());
+            EDepartamento eDepartamento = actividad.getEDepartamento();
+            DTDepartamento dtDepartamento = new DTDepartamento(eDepartamento.getNombre(),eDepartamento.getDescripcion(),eDepartamento.getUrl());
+            return new DTActividadTuristica(actividad.getId(),
+                                            actividad.getNombre(),
+                                            actividad.getDescripcion(),
+                                            actividad.getDuracion(),
+                                            actividad.getCosto(),
+                                            actividad.getCiudad(),
+                                            actividad.getFechaAlta()
+                                                  );
+           
+        }catch(Exception e){
+            return new DTActividadTuristica();
+        }finally{
+            em.close();
+        }
+    }
+    @Override
+    public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad){
+        EntityManager em = emf.createEntityManager();
+        try{
+          
+            EActividadTuristica eActividad = em.createQuery("select p from EActividadTuristica p where p.nombre = :nombreActividad"
+                    ,EActividadTuristica.class)
+                    .setParameter("nombreActividad",nombreActividad)
+                    .getSingleResult();
+            EActividadTuristica actividad = em.find(EActividadTuristica.class,eActividad.getId());
+            EDepartamento eDepartamento = actividad.getEDepartamento();
+            DTDepartamento dtDepartamento = new DTDepartamento(eDepartamento.getNombre(),eDepartamento.getDescripcion(),eDepartamento.getUrl());
+            return  dtDepartamento;
+           
+        }catch(Exception e){
+            return new DTDepartamento();
+        }finally{
+            em.close();
+        }
+    }
     @Override
     public List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete){
           EntityManager em = emf.createEntityManager();
@@ -630,7 +703,7 @@ public class DataPersistencia implements IDataPersistencia {
         EntityManager em = emf.createEntityManager();
         
         
-        //try{
+        try{
             em.getTransaction().begin();
           
             EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
@@ -647,12 +720,12 @@ public class DataPersistencia implements IDataPersistencia {
             em.persist(ePaquete);
             em.getTransaction().commit();
           
-      //  }catch(Exception e){
-      //      em.getTransaction().rollback();
+        }catch(Exception e){
+           em.getTransaction().rollback();
            
-      //  }finally{
-        //    em.close();
-        //}
+        }finally{
+            em.close();
+        }
     }    
     
     private ESalidaTuristica obtenerSalidaPorNombre(String nombreSalida) {

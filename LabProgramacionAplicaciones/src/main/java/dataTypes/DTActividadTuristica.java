@@ -63,7 +63,6 @@ public class DTActividadTuristica {
     public DTActividadTuristica(String nombre){
         this.nombre = nombre;
     }
-    
     public String getCostoToString(){
         Float costoString = this.costo;
         return costoString.toString();

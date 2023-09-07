@@ -210,4 +210,12 @@ public class Controlador implements IControlador{
     public void agregarActividadPaquete(String paquete,String actividad){
         dataPersistencia.agregarActividadPaquete(paquete,actividad);
     }
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete){
+        return dataPersistencia.obtenerActividadesRelacionadas(nomPaquete);
+    }
+    @Override
+    public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad){
+        return dataPersistencia.CU11obtenerDepartamentoActividad(nombreActividad);
+    }
 }

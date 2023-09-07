@@ -55,6 +55,8 @@ public interface  IControlador {
     DTPaqueteActividadTuristica obtenerPaquete(String nombre);
     List<String> obtenerActividadesTuristicasCU10(String Departamento,String paquete);
     void agregarActividadPaquete(String paquete,String actividad);
+    List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
+    public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
     
 }
 

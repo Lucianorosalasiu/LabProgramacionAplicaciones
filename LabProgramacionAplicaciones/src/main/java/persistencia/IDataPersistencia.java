@@ -56,9 +56,11 @@ public interface IDataPersistencia {
     List<DTDepartamento> obtenerDepartamentos();
     
     void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
-     List<String> obtenerPaqueteNombre();
-     DTPaqueteActividadTuristica obtenerPaquete(String nombre);
-     List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete);
-     void agregarActividadPaquete(String paquete,String actividad);
+    List<String> obtenerPaqueteNombre();
+    DTPaqueteActividadTuristica obtenerPaquete(String nombre);
+    List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete);
+    void agregarActividadPaquete(String paquete,String actividad);
+    List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
+    DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
      
 }
