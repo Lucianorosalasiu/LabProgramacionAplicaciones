@@ -121,6 +121,19 @@ public class Controlador implements IControlador{
     }
    
     @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(String nombreActividad){
+        Long idActividad = 0L;
+        List <DTActividadTuristica> dtActividadesTuristicas = dataPersistencia.obtenerActividadesTuristicas();
+
+        for(DTActividadTuristica a : dtActividadesTuristicas){
+            if(a.getNombre().equals(nombreActividad)){
+                idActividad = a.getId();
+            }
+        }
+
+        return dataPersistencia.obtenerPaquetesRelacionados(idActividad);
+    }
+    @Override
     public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
         dataPersistencia.altaPaqueteActividadTuristica(dtPaquete);
     }
