@@ -19,13 +19,25 @@ _Desarrollo de una aplicacion distribuida utilizando variedad de tecnologias per
 
 ### 🛠️Requisitos para la ejecucion
 * JRE 11 o superior
-  ```sudo apt-get update```
-  ```sudo apt-get install openjdk-11-jre```
+
+  ```sudo apt update```
+  
+  ```sudo apt install openjdk-11-jre```
+  
 * MySQL v5.7 o superior
-  ```sudo apt-get install mysql-server-5.7```
+
+  ```sudo apt install mysql-server-5.7```
+  
+* Crear una base de datos llamada turismouy
+
+  ``` CREATE DATABASE turismouy;```
+  
 * Crear un usuario MySQL llamado tecnologo en el localhost
-   ```CREATE USER tecnologo@localhost IDENTIFIED BY "tecnologo";```
+
+  ```CREATE USER tecnologo@localhost IDENTIFIED BY "tecnologo";```
+  
 * Brindarle permisos
+
   ```GRANT ALL PRIVILEGES ON turismouy.* TO tecnologo@localhost WITH GRANT OPTION;```
   
  
