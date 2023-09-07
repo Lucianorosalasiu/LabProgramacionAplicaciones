@@ -33,6 +33,11 @@ public class DTPaqueteActividadTuristica {
         this.fechaAlta = fechaAlta;
         actividades = new LinkedList<ActividadTuristica>();
     }
+    
+    public DTPaqueteActividadTuristica(String nombre){
+        this.nombre = nombre;
+    }
+  
     public String getNombre(){
         return nombre;
     }

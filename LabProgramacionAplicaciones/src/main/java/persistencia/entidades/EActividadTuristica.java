@@ -5,10 +5,12 @@
 package persistencia.entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import logica.clases.Departamento;
@@ -34,6 +36,9 @@ public class EActividadTuristica extends EBase {
    
     @ManyToOne
     private EDepartamento eDepartamento;
+    
+    @ManyToMany(mappedBy = "actividades")
+    private List<EPaqueteActividadTuristica> paquetes;
     
     private EActividadTuristica(){}
     

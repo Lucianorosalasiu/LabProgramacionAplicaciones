@@ -34,6 +34,7 @@ public interface IDataPersistencia {
     List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento);
     List<DTActividadTuristica> obtenerActividadesTuristicas();
     DTActividadTuristica obtenerActividadTuristica(Long idActividad);
+    List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(Long idActividad);
 
     /*CU6*/
     void existeSalidaTuristica(String nombre) throws MyException;
