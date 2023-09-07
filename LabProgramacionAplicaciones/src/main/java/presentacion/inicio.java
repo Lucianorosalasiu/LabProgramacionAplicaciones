@@ -744,14 +744,14 @@ public class inicio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Descripción", "Sitio web"
+                "Id", "Nickname", "Email", "Descripción"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -3852,13 +3852,21 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
+        List<DTProveedor> dtProveedores = controlador.obtenerProveedores();
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
+        DefaultTableModel modelProveedores = (DefaultTableModel) jCU4TableProveedores.getModel();
         
         while(modelDepartamento.getRowCount() > 0){
             modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
         }
         
         modelDepartamento.fireTableDataChanged();
+        
+        while(modelProveedores.getRowCount() > 0){
+            modelProveedores.removeRow(modelProveedores.getRowCount() - 1);
+        }
+        
+        modelProveedores.fireTableDataChanged();
         
         for(DTDepartamento d: dtDepartamentos){
             Object rowData[] = new Object[4];
@@ -3868,15 +3876,15 @@ public class inicio extends javax.swing.JFrame {
             rowData[3] = d.getURL();
             modelDepartamento.addRow(rowData);
         }
-        /*temporalmente se crea un registro de proveedor para poder seguir
-        avanzando en el desarrollo, eventualmente cuando se implementen los proveedores
-        el funcionamiento sera similar al bloque de arriba*/
-        DefaultTableModel modelProveedor = (DefaultTableModel) jCU4TableProveedores.getModel();
         
-        Object rowData[] = new Object[2];
-        rowData[0] = "nombreProveedor-hardcodeado";
-        rowData[1] = "descripcionProveedor-hardcodeado";
-        modelProveedor.addRow(rowData);
+        for(DTProveedor p: dtProveedores){
+            Object rowData[] = new Object[4];
+            rowData[0] = p.getId();
+            rowData[1] = p.getNickname();
+            rowData[2] = p.getEmail();
+            rowData[3] = p.getDescription();
+            modelProveedores.addRow(rowData);
+        }
     }
     
     public void jCU12vaciarCampos(){

@@ -93,6 +93,11 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTProveedor> obtenerProveedores(){
+        return dataPersistencia.obtenerProveedores();
+    }
+    
+    @Override
     public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento){
         Long idDepartamento = 0L;
         

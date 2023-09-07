@@ -176,6 +176,30 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     
+    @Override 
+    public List<DTProveedor> obtenerProveedores(){
+        EntityManager em = emf.createEntityManager();
+        List<DTProveedor> resultados = new LinkedList<>();
+        List<EProveedor> resultados_consulta = new LinkedList<>();
+        
+        try{
+            String query = "select e from EProveedor e";
+            resultados_consulta = em.createQuery(query,EProveedor.class).getResultList();
+            
+            for(EProveedor e : resultados_consulta){
+                DTProveedor dtProveedor = new DTProveedor(
+                e.getId(),e.getNickname(),e.getEmail(),e.getDescription());
+                resultados.add(dtProveedor);
+            }
+            
+            return resultados;
+        }catch(Exception e){
+            return resultados;
+        }finally{
+            em.close();
+        }
+    }
+    
     @Override
     public List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento){
         EntityManager em = emf.createEntityManager();
