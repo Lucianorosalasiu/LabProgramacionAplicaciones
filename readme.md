@@ -10,15 +10,19 @@ _Desarrollo de una aplicacion distribuida utilizando variedad de tecnologias per
 ### ✔️Features:
 
 ### 💻Tech Stack:
-* [Java 8](https://docs.oracle.com/javase/8/docs/api/) Como lenguaje de desarrollo principal del equipo.
+* [Java 11](https://docs.oracle.com/javase/8/docs/api/) Como lenguaje de desarrollo principal del equipo.
 * [Maven](https://maven.apache.org/) Para gestionar dependendencias y versiones a lo largo del desarrollo.
 * [Swing](https://en.wikipedia.org/wiki/Swing_(Java)) Para el desarrollo de Interfaces de usuario incrementando la accesibilidad y la facilidad de uso.
 * [MySQL](https://www.mysql.com/) Para la gestion y el manejo de la base de datos.
 * [JPA](https://www.oracle.com/technical-resources/articles/java/jpa.html) Para el mapeo de objetos en la base de datos dandoles persistencia.
 * [EclipseLink](https://eclipse.dev/eclipselink/#jpa) Como proveedor de servicios de persistencia.
 
-### Requisitos para la ejecucion
-* Tener MySQL Server instalado
+### 🛠️Requisitos para la ejecucion
+* JRE 11 o superior
+  ```sudo apt-get update```
+  ```sudo apt-get install openjdk-11-jre```
+* MySQL v5.7 o superior
+  ```sudo apt-get install mysql-server-5.7```
 * Crear un usuario MySQL llamado tecnologo en el localhost
    ```CREATE USER tecnologo@localhost IDENTIFIED BY "tecnologo";```
 * Brindarle permisos
