@@ -40,7 +40,7 @@ public interface  IControlador {
     DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida);
     
     /*CU8*/
-    void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nicknameTurista) throws MyException;
+    void altaInscripcion(DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, String nicknameTurista) throws MyException;
     
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;

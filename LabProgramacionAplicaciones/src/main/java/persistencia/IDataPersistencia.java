@@ -6,12 +6,14 @@ package persistencia;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import java.util.List;
 import exceptions.MyException;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
+import persistencia.entidades.ESalidaTuristica;
 
 /**
  *
@@ -41,6 +43,10 @@ public interface IDataPersistencia {
     List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad);
     DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida);
     
+    /*CU8*/
+    float obtenerCostoActividad(String nombreActividad);
+    void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nickname) throws MyException;
+    
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
@@ -51,4 +57,5 @@ public interface IDataPersistencia {
      DTPaqueteActividadTuristica obtenerPaquete(String nombre);
      List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete);
      void agregarActividadPaquete(String paquete,String actividad);
+     
 }

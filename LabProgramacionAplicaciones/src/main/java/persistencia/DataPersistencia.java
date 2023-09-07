@@ -2,6 +2,7 @@ package persistencia;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
@@ -19,6 +20,7 @@ import logica.clases.Proveedor;
 import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.EDepartamento;
+import persistencia.entidades.EInscripcion;
 import persistencia.entidades.EPaqueteActividadTuristica;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
@@ -404,6 +406,74 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    @Override
+    public float obtenerCostoActividad(String nombreActividad) {
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            String query = "select a from EActividadTuristica a where a.nombre = :nombreActividad";
+            EActividadTuristica eActividadTuristica = em.createQuery(query, EActividadTuristica.class)
+                            .setParameter("nombreActividad", nombreActividad)
+                            .getSingleResult();
+            
+            return eActividadTuristica.getCosto();
+        }catch(Exception e){
+            return 0.0f;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();   
+        
+        ESalidaTuristica eSalidaTuristica = obtenerSalidaPorNombre(nombreSalida);
+            
+        // Validamos que hayan cupos para la cantidad de turistas ingresados
+        int cuposDisponibles = eSalidaTuristica.getCantidadMaxTuristas() - obtenerTotalTuristasInscriptos(nombreSalida);  
+        if (dtInscripcion.getCantidadTuristas() > cuposDisponibles) {
+            throw new MyException("La cantidad de turistas ingresada excede los cupos disponibles para la salida!");
+        }
+
+        String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+        ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                .setParameter("nickname", nickname)
+                                .getSingleResult();
+
+        // Validamos que el turista no este inscripto en la salida
+        String auxQuery = "SELECT i FROM EInscripcion i WHERE i.eTurista = :turista AND i.eSalidaTuristica = :salida";
+        List<EInscripcion> eInscripcionList = em.createQuery(auxQuery, EInscripcion.class)
+                                .setParameter("turista", eTurista)
+                                .setParameter("salida", eSalidaTuristica)
+                                .getResultList();
+
+        if (!eInscripcionList.isEmpty()) {
+            throw new MyException("El turista ya se encuentra inscripto en esta salida!");
+        }
+            
+        try{
+            em.getTransaction().begin();
+
+            EInscripcion nuevaInscripcion = new EInscripcion(
+                    eTurista,
+                    eSalidaTuristica,
+                    dtInscripcion.getFecha(),
+                    dtInscripcion.getCantidadTuristas(),
+                    dtInscripcion.getCostoTotal()
+            );
+
+            em.persist(nuevaInscripcion);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            throw new MyException("ERROR! Algo salio durante el alta de la inscripcion. ");
+        }finally{
+            em.close();
+        }
+    }
+    
     @Override
     public List<String> obtenerPaqueteNombre(){
         EntityManager em = emf.createEntityManager();
@@ -422,14 +492,13 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    @Override
     public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida){
         EntityManager em = emf.createEntityManager();
         
         try{
-            String query = "select s from ESalidaTuristica s where s.nombre = :nombreSalida";
-            ESalidaTuristica eSalidaTuristica = em.createQuery(query, ESalidaTuristica.class)
-                            .setParameter("nombreSalida", nombreSalida)
-                            .getSingleResult();
+            ESalidaTuristica eSalidaTuristica = obtenerSalidaPorNombre(nombreSalida);
             
             return new DTSalidaTuristica(
                             eSalidaTuristica.getNombre(),
@@ -444,6 +513,7 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
     @Override
     public DTPaqueteActividadTuristica obtenerPaquete(String nombre){
         EntityManager em = emf.createEntityManager();
@@ -466,6 +536,7 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
     @Override
     public List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete){
           EntityManager em = emf.createEntityManager();
@@ -499,8 +570,9 @@ public class DataPersistencia implements IDataPersistencia {
            em.close();
         }
     }
+    
     @Override
-    public void agregarActividadPaquete(String paquete,String actividad){
+    public void agregarActividadPaquete(String paquete, String actividad){
         EntityManager em = emf.createEntityManager();
         
         
@@ -528,4 +600,37 @@ public class DataPersistencia implements IDataPersistencia {
         //    em.close();
         //}
     }    
+    
+    private ESalidaTuristica obtenerSalidaPorNombre(String nombreSalida) {
+        EntityManager em = emf.createEntityManager();
+        String query = "select s from ESalidaTuristica s where s.nombre = :nombreSalida";
+        
+        return em.createQuery(query, ESalidaTuristica.class)
+                        .setParameter("nombreSalida", nombreSalida)
+                        .getSingleResult();
+    }
+    
+    private int obtenerTotalTuristasInscriptos(String nombreSalida) {
+        EntityManager em = emf.createEntityManager(); 
+        
+        String querySalida = "SELECT s FROM ESalidaTuristica s WHERE s.nombre = :nombreSalida";
+        ESalidaTuristica eSalidaTuristica = em.createQuery(querySalida, ESalidaTuristica.class)
+                                    .setParameter("nombreSalida", nombreSalida)
+                                    .getSingleResult();
+        
+        String queryTotal = "SELECT SUM(i.cantidadTuristas) FROM EInscripcion i WHERE i.eSalidaTuristica = :salida";
+        
+        long total;
+        try {
+            total = em.createQuery(queryTotal, Long.class)
+                    .setParameter("salida", eSalidaTuristica)
+                    .getSingleResult();
+        } catch (NullPointerException e) {
+            total = 0;
+        }
+
+        return (int) total;
+    }
+    
+    
 }

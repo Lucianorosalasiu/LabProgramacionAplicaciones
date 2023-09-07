@@ -23,8 +23,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "inscripcion")
 public class EInscripcion extends EBase {
-    //@ManyToOne
-    //ETurista 
+    @ManyToOne
+    ETurista eTurista; 
     
     @ManyToOne
     ESalidaTuristica eSalidaTuristica;

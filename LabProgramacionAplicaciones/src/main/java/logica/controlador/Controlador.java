@@ -170,10 +170,15 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void altaInscripcion(DTInscripcion dtInscripcion, String nombreSalida, String nicknameTurista) throws MyException {
+    public void altaInscripcion(
+            DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, String nicknameTurista) throws MyException {
+        float costoActividad = dataPersistencia.obtenerCostoActividad(nombreActividad);
         
+        dtInscripcion.setCostoTotal(costoActividad * dtInscripcion.getCantidadTuristas());
         
+        dataPersistencia.altaInscripcion(dtInscripcion, nombreSalida, nicknameTurista);
     }
+    
     @Override
     public List<String> obtenerPaqueteNombres(){
          return dataPersistencia.obtenerPaqueteNombre();

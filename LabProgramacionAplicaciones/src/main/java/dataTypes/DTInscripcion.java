@@ -17,11 +17,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTInscripcion {
-       //DTTurista turista;
-       DTSalidaTuristica salidaTuristica;
-       Date fecha;
-       int cantidadTuristas;
-       float costoTotal;
+    DTTurista turista;
+    DTSalidaTuristica salidaTuristica;
+    Date fecha;
+    int cantidadTuristas;
+    float costoTotal;
        
     public DTInscripcion(){}
     
