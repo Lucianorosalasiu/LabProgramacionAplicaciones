@@ -5,7 +5,11 @@
 package persistencia.entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +21,13 @@ import lombok.Setter;
 public class EProveedor extends EUsuario {
     private String description;
     private String websiteURL;
-
+    
+    @OneToMany
+    @JoinTable(name = "PROVEEDOR_ACTIVIDAD",
+            joinColumns = @JoinColumn(name ="PROVEEDOR_ID"),
+            inverseJoinColumns = @JoinColumn(name ="ACTIVIDAD_ID"))
+    private List<EActividadTuristica> actividades;
+    
     public EProveedor() {
         super();
     }

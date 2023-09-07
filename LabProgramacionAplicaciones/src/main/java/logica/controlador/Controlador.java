@@ -26,13 +26,10 @@ import persistencia.IDataPersistencia;
  */
 public class Controlador implements IControlador{
     private static Controlador instance = null;
-    private static ArrayList<Departamento> departamentos;
     private FDataPersistencia fabPersistencia = new FDataPersistencia();
     private IDataPersistencia dataPersistencia = fabPersistencia.getInterface();
     
-    private Controlador(){
-        departamentos = new ArrayList<Departamento>();
-    }
+    private Controlador(){}
     
     public static Controlador getInstance(){
         if(instance == null){

@@ -3708,7 +3708,6 @@ public class inicio extends javax.swing.JFrame {
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         
         while(modelDepartamento.getRowCount() > 0){
-            System.out.println(modelDepartamento.getRowCount() + "|");
             modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
         }
         
