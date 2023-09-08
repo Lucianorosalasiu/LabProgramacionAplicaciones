@@ -2018,35 +2018,33 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(jLabel25)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel24)
+                .addGap(274, 274, 274))
             .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
+                        .addComponent(jCU8ButtonActualizarTablas)
+                        .addGap(92, 92, 92)
+                        .addComponent(jCU8ButtonCampos)
+                        .addGap(77, 77, 77)
+                        .addComponent(jCU8ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel27)
                             .addComponent(jLabel26))
                         .addGap(18, 18, 18)
                         .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCU8SpinnerFechaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                        .addComponent(jCU8ButtonActualizarTablas)
-                        .addGap(92, 92, 92)
-                        .addComponent(jCU8ButtonCampos)
-                        .addGap(77, 77, 77)
-                        .addComponent(jCU8ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel24)
-                .addGap(274, 274, 274))
+                            .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16))
         );
         jInternalFrameInscripcionSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4094,19 +4092,20 @@ public class Main extends javax.swing.JFrame {
     }
       
     private void updateTuristasInTable(JTable jTable) {
-        // TODO actualizar funcion cuando este disponible consultar turistas.
-        //List<DTTuristas> dtTuristas = ;
+        List<DTTurista> dtTuristas = controlador.obtenerTuristas();
          
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
         
-        modelTable.addRow(
+        for (DTTurista dtTurista : dtTuristas) {
+            modelTable.addRow(
                 new Object[] {
-                    "diegoVillalba",
-                    "diego@mail.com",
-                    "Uruguay"
+                    dtTurista.getNickname(),
+                    dtTurista.getEmail(),
+                    dtTurista.getNacionality()
                 }
-        );
+            );
+        }
         
     }
     

@@ -247,6 +247,11 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTTurista> obtenerTuristas() {
+        return dataPersistencia.obtenerTuristas();
+    }
+    
+    @Override
     public List<String> obtenerPaqueteNombres(){
          return dataPersistencia.obtenerPaqueteNombre();
      }

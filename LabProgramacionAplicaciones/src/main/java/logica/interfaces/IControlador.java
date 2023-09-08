@@ -46,7 +46,8 @@ public interface  IControlador {
     
     /*CU8*/
     void altaInscripcion(DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, String nicknameTurista) throws MyException;
-    
+    List<DTTurista> obtenerTuristas();
+            
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;
     void altaDepartamento(DTDepartamento departamento);
