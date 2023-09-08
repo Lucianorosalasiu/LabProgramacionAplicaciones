@@ -23,5 +23,4 @@ public abstract class Usuario {
     private String lastName;
     private String email;
     private Date birthDate;
-    
 }

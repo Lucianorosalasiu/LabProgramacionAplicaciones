@@ -17,11 +17,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DTTurista {
-    private String nickname;
-    private String name;
-    private String lastName;
-    private String email;
-    private Date birthDate;
+public class DTTurista extends DTUsuario{
     private String nacionality;
+
+    public DTTurista() {
+    }
+
+    public DTTurista(String nickname, String name, String lastName, String email, Date birthDate, String nacionality) {
+        super(nickname, name, lastName, email, birthDate);
+        this.nacionality = nacionality;
+    }
+
+    public DTTurista(Long id, String nickname, String email, String nacionality) {
+        super(id, nickname, email);
+        this.nacionality = nacionality;
+    }
 }

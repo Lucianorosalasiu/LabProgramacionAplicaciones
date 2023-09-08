@@ -16,32 +16,22 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class DTProveedor {
-    private Long id;
-    private String nickname;
-    private String name;
-    private String lastName;
-    private String email;
-    private Date birthDate;
+public class DTProveedor extends DTUsuario{
     private String description;
     private String websiteURL;
 
+    public DTProveedor() {
+        super();
+    }
+    
     public DTProveedor(String nickname, String name, String lastName,String email, Date birthDate, String description, String websiteURL){
-        this.nickname = nickname;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.birthDate = this.birthDate;
+        super(nickname, name, lastName, email, birthDate);
         this.description = description;
         this.websiteURL = websiteURL;
     }
-    
-    public DTProveedor(Long id, String nickname, String email, String description){
-        this.id = id;
-        this.nickname = nickname;      
-        this.email = email; 
+
+    public DTProveedor(Long id, String nickname, String email, String description) {
+        super(id, nickname, email);
         this.description = description;
     }
-
 }

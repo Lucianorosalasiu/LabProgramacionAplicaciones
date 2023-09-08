@@ -10,6 +10,8 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 import java.util.List;
 import exceptions.MyException;
 import logica.clases.Proveedor;
@@ -25,6 +27,10 @@ public interface IDataPersistencia {
     void existeUsuario(String email, String nickname) throws MyException;
     void altaProveedor(Proveedor objProveedor) throws MyException;
     void altaTurista(Turista objTurista) throws MyException;
+    
+    List<DTTurista> obtenerTuristas();
+    void actualizarProveedor(Proveedor objProveedor) throws MyException;
+    void actualizarTurista(Turista objTurista) throws MyException;
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;

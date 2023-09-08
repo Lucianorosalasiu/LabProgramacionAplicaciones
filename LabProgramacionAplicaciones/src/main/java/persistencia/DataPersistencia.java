@@ -7,6 +7,7 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -59,8 +60,9 @@ public class DataPersistencia implements IDataPersistencia {
     public void existeUsuario(String email, String nickname) throws MyException {
         EntityManager em = emf.createEntityManager();    
         String qryProveedor = "SELECT p from EProveedor p where p.email = :emailProveedor OR p.nickname = :nicknameProveedor";
-        String qryTurista = "SELECT t from ETurista t where t.email = :emailTurista OR t.nickname = :nicknameTurista";
         List<EProveedor> resultadoProveedor = new LinkedList<>();
+       
+        String qryTurista = "SELECT t from ETurista t where t.email = :emailTurista OR t.nickname = :nicknameTurista";
         List<ETurista> resultadoTurista = new LinkedList<>();
         
         try{
@@ -69,10 +71,12 @@ public class DataPersistencia implements IDataPersistencia {
                     .setParameter("nicknameProveedor", nickname)
                     .getResultList();
             
-            resultadoTurista = em.createQuery(qryTurista, ETurista.class)
-                    .setParameter("emailTurista", email)
-                    .setParameter("nicknameTurista", nickname)
-                    .getResultList();  
+            if(resultadoProveedor.isEmpty()){  
+                resultadoTurista = em.createQuery(qryTurista, ETurista.class)
+                        .setParameter("emailTurista", email)
+                        .setParameter("nicknameTurista", nickname)
+                        .getResultList();  
+            }
         }catch(Exception e){
             throw new MyException("¡ERROR! Algo salio mal al realizar la consulta");
         }finally{
@@ -131,6 +135,43 @@ public class DataPersistencia implements IDataPersistencia {
         } finally {
             em.close();
         }
+    }
+    
+    @Override 
+    public List<DTTurista> obtenerTuristas(){
+        EntityManager em = emf.createEntityManager();
+        List<DTTurista> touristList = new LinkedList<>();
+        List<ETurista> qryResults = new LinkedList<>();
+        
+        try{
+            String query = "select t from ETurista t";
+            qryResults = em.createQuery(query,ETurista.class).getResultList();
+            
+            for(ETurista e : qryResults){
+                DTTurista turista = new DTTurista(
+                        e.getId(),
+                        e.getNickname(),
+                        e.getEmail(),
+                        e.getNacionality()
+                );
+                touristList.add(turista);
+            }
+            
+            return touristList;
+        }catch(Exception e){
+            return touristList;
+        }finally{
+            em.close();
+        }
+    }
+
+    @Override
+    public void actualizarProveedor(Proveedor objProveedor) throws MyException {
+    }
+    
+    
+    @Override
+    public void actualizarTurista(Turista objTurista) throws MyException {
     }
     
     @Override

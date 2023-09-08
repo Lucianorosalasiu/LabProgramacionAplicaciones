@@ -10,10 +10,12 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 import logica.interfaces.IControlador;
 import logica.clases.Departamento;
 import exceptions.MyException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
@@ -80,6 +82,56 @@ public class Controlador implements IControlador{
               
         // Se da de alta en la base de datos
         dataPersistencia.altaTurista(objTurista);
+    }
+    
+    @Override
+    public List<DTUsuario> obtenerUsuarios() {
+        List<DTUsuario> userList = new LinkedList<>();
+
+        // Añadir usuarios proveedores a la lista
+        List<DTProveedor> proveedores = dataPersistencia.obtenerProveedores(); 
+        userList.addAll(proveedores);
+
+        // Añadir usuarios turistas a la lista
+        List<DTTurista> turistas = dataPersistencia.obtenerTuristas();
+        userList.addAll(turistas);
+
+        return userList;
+    }
+    
+    @Override
+    public void actualizarUsuario(DTUsuario usuario) throws MyException{
+        // Se verifica el tipo de instancia recibida usando reflexión
+        if (usuario instanceof DTTurista) {
+            DTTurista turista = (DTTurista) usuario;
+            // Se realizan las operaciones necesarias con la instancia de DTTurista
+            // Se crea su objeto
+            Turista objTurista = new Turista(
+                    turista.getNickname(), 
+                    turista.getName(), 
+                    turista.getLastName(), 
+                    turista.getEmail(), 
+                    turista.getBirthDate(), 
+                    turista.getNacionality()
+            );
+            dataPersistencia.actualizarTurista(objTurista);
+        } else if (usuario instanceof DTProveedor) {
+            DTProveedor proveedor = (DTProveedor) usuario;
+            // Se realizan las operaciones necesarias con la instancia de DTProveedor
+            // En caso de que sea proveedor
+            Proveedor objProveedor = new Proveedor(
+                    proveedor.getNickname(), 
+                    proveedor.getName(), 
+                    proveedor.getLastName(), 
+                    proveedor.getEmail(), 
+                    proveedor.getBirthDate(), 
+                    proveedor.getDescription(), 
+                    proveedor.getWebsiteURL()
+            );
+            dataPersistencia.actualizarProveedor(objProveedor);
+        } else {
+            throw new MyException("Tipo de usuario no válido");
+        }
     }
     
     @Override

@@ -12,6 +12,7 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 import exceptions.DataEntryException;
 import exceptions.EmptyFieldsException;
 import java.awt.HeadlessException;
@@ -101,6 +102,10 @@ public class Main extends javax.swing.JFrame {
         JCU1ButtonSendData = new javax.swing.JButton();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
         jInternalFrameModificarUsuario = new javax.swing.JInternalFrame();
+        jCU4ScrollPanelProveedores2 = new javax.swing.JScrollPane();
+        jCU3TableUsersList = new javax.swing.JTable();
+        jCU3LabelUserList = new javax.swing.JLabel();
+        jCU3ButtonActualizarTabla = new javax.swing.JButton();
         jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
         jCU4TextFieldNombre = new javax.swing.JTextField();
         jCU4ScrollPaneDescripcion = new javax.swing.JScrollPane();
@@ -483,6 +488,11 @@ public class Main extends javax.swing.JFrame {
                 jTabbedPaneCasosDeUsoMouseClicked(evt);
             }
         });
+        jTabbedPaneCasosDeUso.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTabbedPaneCasosDeUsoComponentShown(evt);
+            }
+        });
 
         jCU1InternalFrameAgregarUsuario.setVisible(true);
 
@@ -688,16 +698,85 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Consulta de Usuario", jInternalFrameConsultarUsuario);
 
         jInternalFrameModificarUsuario.setVisible(true);
+        jInternalFrameModificarUsuario.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                jInternalFrameModificarUsuarioInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        jCU3TableUsersList.setAutoCreateRowSorter(true);
+        jCU3TableUsersList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nickname", "Email", "Tipo", "Descripción", "Nacionalidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jCU3TableUsersList.getTableHeader().setReorderingAllowed(false);
+        jCU4ScrollPanelProveedores2.setViewportView(jCU3TableUsersList);
+
+        jCU3LabelUserList.setText("Lista de Usuarios");
+
+        jCU3ButtonActualizarTabla.setText("Actualizar tabla");
+        jCU3ButtonActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU3ButtonActualizarTablaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrameModificarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameModificarUsuario.getContentPane());
         jInternalFrameModificarUsuario.getContentPane().setLayout(jInternalFrameModificarUsuarioLayout);
         jInternalFrameModificarUsuarioLayout.setHorizontalGroup(
             jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameModificarUsuarioLayout.createSequentialGroup()
+                .addGap(440, 440, 440)
+                .addComponent(jCU3LabelUserList)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameModificarUsuarioLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCU3ButtonActualizarTabla)
+                    .addComponent(jCU4ScrollPanelProveedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         jInternalFrameModificarUsuarioLayout.setVerticalGroup(
             jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameModificarUsuarioLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jCU3LabelUserList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCU4ScrollPanelProveedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jCU3ButtonActualizarTabla)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Modificar Usuario", jInternalFrameModificarUsuario);
@@ -776,6 +855,9 @@ public class Main extends javax.swing.JFrame {
         });
         jCU4TableProveedores.getTableHeader().setReorderingAllowed(false);
         jCU4ScrollPanelProveedores.setViewportView(jCU4TableProveedores);
+        if (jCU4TableProveedores.getColumnModel().getColumnCount() > 0) {
+            jCU4TableProveedores.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jCU4LabelNombre.setText("Nombre");
 
@@ -3664,6 +3746,53 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU11TextFieldDepartamentoActionPerformed
 
+    private void jCU3ButtonActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonActualizarTablaActionPerformed
+        jCU3ActualizarTabla();
+    }//GEN-LAST:event_jCU3ButtonActualizarTablaActionPerformed
+
+    private void jTabbedPaneCasosDeUsoComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTabbedPaneCasosDeUsoComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPaneCasosDeUsoComponentShown
+
+    private void jInternalFrameModificarUsuarioInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameModificarUsuarioInternalFrameActivated
+        jCU3ActualizarTabla();
+    }//GEN-LAST:event_jInternalFrameModificarUsuarioInternalFrameActivated
+
+    public void jCU3ActualizarTabla(){
+        List<DTUsuario> usuario = controlador.obtenerUsuarios();
+        DefaultTableModel modelUsuarios = (DefaultTableModel) jCU3TableUsersList.getModel();
+         
+        while(modelUsuarios.getRowCount() > 0){
+            modelUsuarios.removeRow(modelUsuarios.getRowCount() - 1);
+        }
+        
+        modelUsuarios.fireTableDataChanged();
+
+        for(DTUsuario u: usuario){
+            Object rowData[] = new Object[6];
+            rowData[0] = u.getId();
+            rowData[1] = u.getNickname();
+            rowData[2] = u.getEmail();
+            System.out.println("HOLAAA ESTOY EN USUARIOS");
+            if (usuario instanceof DTTurista) {
+                DTTurista turista = (DTTurista) usuario;
+                System.out.println("HOLAAA ESTOY EN TURISTA");
+                // Se realizan las operaciones necesarias con la instancia de DTTurista
+                rowData[3] = "Turista";
+                rowData[4] = "No aplica";
+                rowData[5] = turista.getNacionality();
+            } else if (usuario instanceof DTProveedor) {
+                DTProveedor proveedor = (DTProveedor) usuario;
+                System.out.println("HOLAAA ESTOY EN PROVEEDOR");
+                // Se realizan las operaciones necesarias con la instancia de DTProveedor
+                rowData[3] = "Proveedor";
+                rowData[4] = proveedor.getDescription();
+                rowData[5] = "No aplica";
+            }
+            modelUsuarios.addRow(rowData);
+        }
+    }
+    
     public Main(JComboBox<String> ComboBoxDepartamentoPaquete, JButton JCU1ButtonClearFields, JButton JCU1ButtonSendData, JComboBox<String> JCU1ComboBoxUserType, JDateChooser JCU1DateChooserBirthDate, JTextField JCU1EmailTextField, JTextField JCU1LastNameTextField, JTextField JCU1NacionalityTextField, JTextField JCU1NameTextField, JTextField JCU1NickNameTextField, JTextField JCU1WebsiteTextField, JDialog JDialogCamposVacios, JSpinner SpinnerDescuentoPaquete1, JSpinner SpinnerFechaAltaPaquete1, JSpinner SpinnerValidezPaquete1, JTextField TextFieldDescPaquete1, JTextField TextFieldNombrePaquete1, JButton jButton1, JButton jButton2, JButton jButton3, JButton jButton4, JButton jButton5, JButton jButton6, JButton jButtonDepartamentoDuplicadoCancelar, JButton jButtonDepartamentoDuplicadoReingresar, JButton jCU12ButtonEnviar, JButton jCU12ButtonVaciar, JDialog jCU12Dialog, JTextArea jCU12DialogTextArea, JLabel jCU12LabelDescripcion, JLabel jCU12LabelNombre, JLabel jCU12LabelURL, JSeparator jCU12Separator, JTextField jCU12TextFieldDescripcion, JTextField jCU12TextFieldNombre, JTextField jCU12TextFieldURL, JInternalFrame jCU1InternalFrameAgregarUsuario, JLabel jCU1LabelBirthDate, JLabel jCU1LabelDescription, JLabel jCU1LabelEmail, JLabel jCU1LabelLastName, JLabel jCU1LabelNacionality, JLabel jCU1LabelName, JLabel jCU1LabelNickName, JLabel jCU1LabelUserType, JLabel jCU1LabelWebsite, JScrollPane jCU1ScrollPane11Description, JTextArea jCU1TextAreaDescription, JButton jCU4ButtonActualizarTablas, JButton jCU4ButtonCancelar, JButton jCU4ButtonEnviar, JButton jCU4ButtonReingresar, JDateChooser jCU4DateChooserFecha, JDialog jCU4Dialog, JTextArea jCU4DialogTextArea, JLabel jCU4LabelCiudad, JLabel jCU4LabelCosto, JLabel jCU4LabelDepartamentos, JLabel jCU4LabelDescripcion, JLabel jCU4LabelDuracion, JLabel jCU4LabelFecha, JLabel jCU4LabelNombre, JLabel jCU4LabelProveedores, JScrollPane jCU4ScrollPaneDescripcion, JScrollPane jCU4ScrollPanelDepartamentos, JScrollPane jCU4ScrollPanelDepartamentos1, JScrollPane jCU4ScrollPanelDepartamentos2, JScrollPane jCU4ScrollPanelProveedores, JTable jCU4TableDepartamentos, JTable jCU4TableProveedores, JTextArea jCU4TextAreaDescripcion, JTextField jCU4TextFieldCiudad, JTextField jCU4TextFieldCosto, JTextField jCU4TextFieldDuracion, JTextField jCU4TextFieldNombre, JComboBox<String> jCU5ComboBoxActividad, JComboBox<String> jCU5ComboBoxDepartamento, JComboBox<String> jCU5ComboBoxPaquete, JComboBox<String> jCU5ComboBoxSalida, JLabel jCU5LabelActividad, JLabel jCU5LabelActividad1, JLabel jCU5LabelActividad2, JLabel jCU5LabelCiudad, JLabel jCU5LabelCosto, JLabel jCU5LabelDepartamento, JLabel jCU5LabelDescripcion, JLabel jCU5LabelDuracion, JLabel jCU5LabelFecha, JLabel jCU5LabelNombre, JLabel jCU5LabelSalida, JLabel jCU5LabelSalida1, JScrollPane jCU5ScrollPaneDescripcion, JTextArea jCU5TextAreaDescripcion, JTextField jCU5TextFieldCiudad, JTextField jCU5TextFieldCosto, JTextField jCU5TextFieldDuracion, JTextField jCU5TextFieldFecha, JTextField jCU5TextFieldNombre, JButton jCU6ButtonActualizarTablas, JButton jCU6ButtonCampos, JButton jCU6ButtonEnviar, JSpinner jCU6SpinnerCantMaxTuristas, JSpinner jCU6SpinnerFechaAlta, JSpinner jCU6SpinnerFechaSalida, JTable jCU6TableActividades, JTable jCU6TableDepartamentos, JTextField jCU6TextFieldLugarSalida, JTextField jCU6TextFieldNombreSalida, JComboBox<String> jCU7ComboBoxActividad, JComboBox<String> jCU7ComboBoxDepartamento, JComboBox<String> jCU7ComboBoxSalida, JTable jCU7TableConsulta, JButton jCU8ButtonCampos, JButton jCU8ButtonEnviar, JComboBox<String> jCU8ComboBoxActividad, JComboBox<String> jCU8ComboBoxDepartamento, JComboBox<String> jCU8ComboBoxSalida, JSpinner jCU8SpinnerCantTuristas, JSpinner jCU8SpinnerFechaInscripcion, JTable jCU8TableSalidas, JTable jCU8TableTuristas, JDateChooser jCU9DateChooserFecha, JSpinner jCU9SpinnerDescuentoPaquete, JSpinner jCU9SpinnerValidezPaquete, JTextField jCU9TextFieldDescPaquete, JTextField jCU9TextFieldNombrePaquete, JDialog jDialog1, JInternalFrame jInternalFrameAgregarActividadPaquete, JInternalFrame jInternalFrameAltaActividadTuristica, JInternalFrame jInternalFrameAltaDepartamento, JInternalFrame jInternalFrameAltaPaqueteActividades, JInternalFrame jInternalFrameAltaSalidaTuristica, JInternalFrame jInternalFrameConsultaActividadTuristica, JInternalFrame jInternalFrameConsultaPaquetes, JInternalFrame jInternalFrameConsultaSalidaTuristica, JInternalFrame jInternalFrameConsultarUsuario, JInternalFrame jInternalFrameInscripcionSalidaTuristica, JInternalFrame jInternalFrameModificarUsuario, JLabel jLabel1, JLabel jLabel10, JLabel jLabel11, JLabel jLabel12, JLabel jLabel13, JLabel jLabel14, JLabel jLabel15, JLabel jLabel16, JLabel jLabel17, JLabel jLabel18, JLabel jLabel19, JLabel jLabel2, JLabel jLabel20, JLabel jLabel21, JLabel jLabel22, JLabel jLabel23, JLabel jLabel24, JLabel jLabel25, JLabel jLabel26, JLabel jLabel27, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JLabel jLabel9, JMenu jMenuAcciones, JMenu jMenuActividad, JMenuItem jMenuActividadAlta, JMenuItem jMenuActividadConsulta, JMenuItem jMenuAgregarActividadPaquete, JMenuItem jMenuAltaPaquete, JMenuBar jMenuBar1, JMenuItem jMenuConsultaPaquete, JMenuItem jMenuDepartamentoAlta, JMenu jMenuPaquete, JMenu jMenuSalida, JMenuItem jMenuSalidaAlta, JMenuItem jMenuSalidaConsulta, JMenuItem jMenuSalidaInscripcion, JMenu jMenuUsuario, JMenuItem jMenuUsuarioAlta, JMenuItem jMenuUsuarioConsulta, JMenuItem jMenuUsuarioModificar, JScrollPane jScrollPane1, JScrollPane jScrollPane10, JScrollPane jScrollPane2, JScrollPane jScrollPane3, JScrollPane jScrollPane4, JScrollPane jScrollPane5, JScrollPane jScrollPane6, JScrollPane jScrollPane7, JScrollPane jScrollPane8, JScrollPane jScrollPane9, JSeparator jSeparator1, JTabbedPane jTabbedPaneCasosDeUso, JTable jTable1, JTable jTable2, JTable jTable4, JTable jTable5, JTextArea jTextArea1) throws HeadlessException {
         this.jCU10ComboBoxDepartamentoPaquete = ComboBoxDepartamentoPaquete;
         this.JCU1ButtonClearFields = JCU1ButtonClearFields;
@@ -4279,6 +4408,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU1LabelWebsite;
     private javax.swing.JScrollPane jCU1ScrollPane11Description;
     private javax.swing.JTextArea jCU1TextAreaDescription;
+    private javax.swing.JButton jCU3ButtonActualizarTabla;
+    private javax.swing.JLabel jCU3LabelUserList;
+    private javax.swing.JTable jCU3TableUsersList;
     private javax.swing.JButton jCU4ButtonActualizarTablas;
     private javax.swing.JButton jCU4ButtonCancelar;
     private javax.swing.JButton jCU4ButtonEnviar;
@@ -4299,6 +4431,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jCU4ScrollPanelDepartamentos1;
     private javax.swing.JScrollPane jCU4ScrollPanelDepartamentos2;
     private javax.swing.JScrollPane jCU4ScrollPanelProveedores;
+    private javax.swing.JScrollPane jCU4ScrollPanelProveedores2;
     private javax.swing.JTable jCU4TableDepartamentos;
     private javax.swing.JTable jCU4TableProveedores;
     private javax.swing.JTextArea jCU4TextAreaDescripcion;

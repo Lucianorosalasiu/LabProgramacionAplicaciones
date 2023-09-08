@@ -11,6 +11,7 @@ import dataTypes.DTSalidaTuristica;
 import dataTypes.DTInscripcion;
 import dataTypes.DTProveedor;
 import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 import java.util.List;
 import exceptions.MyException;
 
@@ -22,6 +23,8 @@ public interface  IControlador {
     /* CU USUARIOS */
     void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
     void altaTurista(DTTurista nuevoTurista) throws MyException;
+    List<DTUsuario> obtenerUsuarios();
+    void actualizarUsuario(DTUsuario usuario) throws MyException;
     
     
     /*CU4*/
