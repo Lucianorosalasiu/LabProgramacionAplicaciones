@@ -1602,6 +1602,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jCU6TableActividades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jCU6TableActividades.getTableHeader().setReorderingAllowed(false);
         jCU4ScrollPanelDepartamentos1.setViewportView(jCU6TableActividades);
 
@@ -1629,6 +1630,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jCU6TableDepartamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jCU6TableDepartamentos.getTableHeader().setReorderingAllowed(false);
         jCU6TableDepartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1654,9 +1656,6 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                         .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU6SpinnerFechaSalida)
-                                .addGap(202, 202, 202))
-                            .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1669,14 +1668,14 @@ public class Main extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(jCU6ButtonCampos)))
                                     .addComponent(jCU4ScrollPanelDepartamentos2, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)))
+                                .addGap(28, 28, 28))
+                            .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
+                                .addComponent(jCU6SpinnerFechaSalida)
+                                .addGap(321, 321, 321)))
                         .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCU6TextFieldLugarSalida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jCU6SpinnerCantMaxTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                                 .addGap(118, 118, 118)
                                 .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1684,10 +1683,13 @@ public class Main extends javax.swing.JFrame {
                                     .addGroup(jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(294, 294, 294))))
-                            .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(jCU4ScrollPanelDepartamentos1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrameAltaSalidaTuristicaLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jCU6SpinnerCantMaxTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel6)
                     .addComponent(jCU6SpinnerFechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jInternalFrameAltaSalidaTuristicaLayout.setVerticalGroup(
             jInternalFrameAltaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1947,6 +1949,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jCU8TableSalidas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane7.setViewportView(jCU8TableSalidas);
 
         jLabel25.setText("Turistas");
@@ -1967,6 +1970,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jCU8TableTuristas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane8.setViewportView(jCU8TableTuristas);
 
         jCU8SpinnerFechaInscripcion.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
@@ -2042,8 +2046,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel26))
                         .addGap(18, 18, 18)
                         .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCU8SpinnerFechaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jCU8SpinnerCantTuristas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU8SpinnerFechaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16))
         );
         jInternalFrameInscripcionSalidaTuristicaLayout.setVerticalGroup(
@@ -2949,7 +2953,7 @@ public class Main extends javax.swing.JFrame {
             
     private boolean CU6EmptyFields(){
         if (jCU6TableDepartamentos.getSelectedRowCount() != 1 || jCU6TableActividades.getSelectedRowCount() != 1 ||
-                jCU6TextFieldNombreSalida.getText().isEmpty() || jCU6TextFieldLugarSalida.getText().isEmpty() ||
+                jCU6TextFieldNombreSalida.getText().trim().isEmpty() || jCU6TextFieldLugarSalida.getText().trim().isEmpty() ||
                 (int) jCU6SpinnerCantMaxTuristas.getValue() == 0) {
             return true;
         }
