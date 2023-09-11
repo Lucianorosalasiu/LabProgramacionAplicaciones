@@ -40,7 +40,11 @@ import javax.swing.table.DefaultTableModel;
 import exceptions.MyException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -134,6 +138,7 @@ public class Main extends javax.swing.JFrame {
         jCU3TextFieldUserType = new javax.swing.JTextField();
         jCU3DateChooserBirthDate = new com.toedter.calendar.JDateChooser();
         jCU3LabelBirthDate = new javax.swing.JLabel();
+        jCU3ButtonEmptyFields = new javax.swing.JButton();
         jInternalFrameAltaActividadTuristica = new javax.swing.JInternalFrame();
         jCU4TextFieldNombre = new javax.swing.JTextField();
         jCU4ScrollPaneDescripcion = new javax.swing.JScrollPane();
@@ -598,7 +603,7 @@ public class Main extends javax.swing.JFrame {
         jCU1LabelDescription.setText("Descripción");
         jCU1LabelDescription.setVisible(false);
 
-        jCU1LabelWebsite.setText("URL Sitio Web");
+        jCU1LabelWebsite.setText("URL Sitio Web (opcional)");
         jCU1LabelWebsite.setVisible(false);
 
         jCU1LabelNacionality.setText("Nacionalidad");
@@ -771,7 +776,7 @@ public class Main extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -809,7 +814,7 @@ public class Main extends javax.swing.JFrame {
 
         jCU3LabelDescription.setText("Descripción");
 
-        jCU3LabelURLWebSite.setText("URL Web (opcional)");
+        jCU3LabelURLWebSite.setText("URL Sitio Web (opcional)");
 
         jLabel13.setText("Nacionalidad");
 
@@ -883,6 +888,13 @@ public class Main extends javax.swing.JFrame {
 
         jCU3LabelBirthDate.setText("Fecha de Nacimiento");
 
+        jCU3ButtonEmptyFields.setText("Vaciar campos");
+        jCU3ButtonEmptyFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU3ButtonEmptyFieldsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrameModificarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameModificarUsuario.getContentPane());
         jInternalFrameModificarUsuario.getContentPane().setLayout(jInternalFrameModificarUsuarioLayout);
         jInternalFrameModificarUsuarioLayout.setHorizontalGroup(
@@ -919,7 +931,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jCU3TextURLWebSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCU3LabelURLWebSite, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameModificarUsuarioLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addComponent(jCU3ButtonEmptyFields)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCU3ButtonUpdateData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU3ButtonActualizarTabla))
@@ -980,7 +993,8 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU3ButtonActualizarTabla)
-                    .addComponent(jCU3ButtonUpdateData))
+                    .addComponent(jCU3ButtonUpdateData)
+                    .addComponent(jCU3ButtonEmptyFields))
                 .addGap(20, 20, 20))
         );
 
@@ -4051,7 +4065,7 @@ public class Main extends javax.swing.JFrame {
                     break;
             }
             JOptionPane.showMessageDialog(this, "El usuario fue actualizado", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-            jCU3ActualizarTabla();
+            jCU3ClearAndDisable();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
        } catch (MyException ex) {
@@ -4068,18 +4082,27 @@ public class Main extends javax.swing.JFrame {
         String name = model.getValueAt(selectedRow, 1).toString();
         String lastName = model.getValueAt(selectedRow, 2).toString();
         String email = model.getValueAt(selectedRow, 3).toString();
-        Object birthDate = model.getValueAt(selectedRow, 4);
+        String birthDateString = model.getValueAt(selectedRow, 4).toString();
         String userType = model.getValueAt(selectedRow, 5).toString();
         String description = model.getValueAt(selectedRow, 6).toString();
         String webSiteURL = model.getValueAt(selectedRow, 7).toString();
         String nacionality = model.getValueAt(selectedRow, 8).toString();
-            
+        
+        String formato = "dd-MM-yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+        Date birthDate;
+        try {
+            birthDate = sdf.parse(birthDateString);
+            jCU3DateChooserBirthDate.setDate(birthDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // Se actualizan TextFields
         jCU3TextFieldNickname.setText(nickname);
         jCU3TextFieldName.setText(name);
         jCU3TextFieldLastName.setText(lastName);
         jCU3TextFieldEmail.setText(email);
-        jCU3DateChooserBirthDate.setDate((Date)birthDate);
         jCU3TextFieldUserType.setText(userType);
         
         //Se activan los TextFields editables
@@ -4090,11 +4113,14 @@ public class Main extends javax.swing.JFrame {
         // Se cargan los datos y se activan campos para cada caso particular
         if (userType == "Turista") {
             jCU3ComboBoxPaises.setSelectedItem(nacionality);
+            jCU3TextAreaDescription.setText("");
+            jCU3TextURLWebSite.setText("");
             jCU3ComboBoxPaises.setEnabled(true);
             jCU3TextAreaDescription.setEnabled(false);
             jCU3TextURLWebSite.setEnabled(false);
 
         } else if (userType == "Proveedor/a"){
+            jCU3ComboBoxPaises.setSelectedItem("Seleccionar País");
             jCU3TextAreaDescription.setText(description);
             jCU3TextURLWebSite.setText(webSiteURL);
             jCU3ComboBoxPaises.setEnabled(false);
@@ -4105,6 +4131,32 @@ public class Main extends javax.swing.JFrame {
         // Se activa el botón para actualizar datos
         jCU3ButtonUpdateData.setEnabled(true);
     }//GEN-LAST:event_jCU3TableUsersListMouseClicked
+    
+    public void jCU3ClearAndDisable(){   
+        // Se vacían todos los campos
+        jCU3TextFieldUserType.setText("");
+        jCU3TextFieldNickname.setText("");
+        jCU3TextFieldName.setText("");
+        jCU3TextFieldLastName.setText("");
+        jCU3TextFieldEmail.setText("");
+        jCU3DateChooserBirthDate.setDate(null);
+        jCU3ComboBoxPaises.setSelectedItem("Seleccionar País");
+        jCU3TextAreaDescription.setText("");
+        jCU3TextURLWebSite.setText(""); 
+        
+        // Se deshabilitan los campos y botón
+        jCU3TextFieldNickname.setEnabled(false);
+        jCU3TextFieldName.setEnabled(false);
+        jCU3TextFieldLastName.setEnabled(false);
+        jCU3TextFieldEmail.setEnabled(false);
+        jCU3DateChooserBirthDate.setEnabled(false);
+        jCU3ComboBoxPaises.setEnabled(false);
+        jCU3TextAreaDescription.setEnabled(false);
+        jCU3TextURLWebSite.setEnabled(false);
+        jCU3ButtonUpdateData.setEnabled(false);
+        
+        jCU3ActualizarTabla();
+    }
     
     public boolean JCU3VerifyEmtpyFields(){
         String userType = jCU3TextFieldUserType.getText();
@@ -4139,6 +4191,10 @@ public class Main extends javax.swing.JFrame {
     private void jCU3TextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3TextFieldUserTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU3TextFieldUserTypeActionPerformed
+
+    private void jCU3ButtonEmptyFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonEmptyFieldsActionPerformed
+        jCU3ClearAndDisable();
+    }//GEN-LAST:event_jCU3ButtonEmptyFieldsActionPerformed
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -4182,7 +4238,12 @@ public class Main extends javax.swing.JFrame {
             rowData[1] = u.getName();
             rowData[2] = u.getLastName();
             rowData[3] = u.getEmail();
-            rowData[4] = u.getBirthDate();
+            
+            // Formato deseado para la fecha
+            String formato = "dd-MM-yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(formato);
+            String birthDateString = sdf.format(u.getBirthDate());
+            rowData[4] = birthDateString;
 
             if (u instanceof DTTurista) {
                 DTTurista turista = (DTTurista) u;
@@ -4818,6 +4879,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jCU1ScrollPane11Description;
     private javax.swing.JTextArea jCU1TextAreaDescription;
     private javax.swing.JButton jCU3ButtonActualizarTabla;
+    private javax.swing.JButton jCU3ButtonEmptyFields;
     private javax.swing.JButton jCU3ButtonUpdateData;
     private javax.swing.JComboBox<String> jCU3ComboBoxPaises;
     private com.toedter.calendar.JDateChooser jCU3DateChooserBirthDate;

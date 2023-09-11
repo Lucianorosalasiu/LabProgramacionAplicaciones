@@ -668,7 +668,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jCU1LabelWebsite">
               <Properties>
-                <Property name="text" type="java.lang.String" value="URL Sitio Web"/>
+                <Property name="text" type="java.lang.String" value="URL Sitio Web (opcional)"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU1LabelWebsite.setVisible(false);"/>
@@ -829,7 +829,8 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                              <Component id="jCU3ButtonEmptyFields" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jCU3ButtonUpdateData" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU3ButtonActualizarTabla" min="-2" max="-2" attributes="0"/>
@@ -905,6 +906,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jCU3ButtonActualizarTabla" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCU3ButtonUpdateData" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU3ButtonEmptyFields" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -928,7 +930,7 @@
                         <Column editable="false" title="Nombre" type="java.lang.String"/>
                         <Column editable="false" title="Apellido" type="java.lang.String"/>
                         <Column editable="false" title="Email" type="java.lang.String"/>
-                        <Column editable="false" title="F. Nacimiento" type="java.lang.Object"/>
+                        <Column editable="false" title="F. Nacimiento" type="java.lang.String"/>
                         <Column editable="false" title="Tipo" type="java.lang.String"/>
                         <Column editable="false" title="Descripci&#xf3;n" type="java.lang.String"/>
                         <Column editable="false" title="URL Web" type="java.lang.String"/>
@@ -1029,7 +1031,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jCU3LabelURLWebSite">
               <Properties>
-                <Property name="text" type="java.lang.String" value="URL Web (opcional)"/>
+                <Property name="text" type="java.lang.String" value="URL Sitio Web (opcional)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
@@ -1161,6 +1163,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jCU3ButtonEmptyFields">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vaciar campos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU3ButtonEmptyFieldsActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
