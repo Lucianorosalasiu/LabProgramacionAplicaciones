@@ -15,7 +15,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.clases.Departamento;
 import exceptions.MyException;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import logica.clases.PaqueteActividadTuristica;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
@@ -151,7 +153,10 @@ public class DataPersistencia implements IDataPersistencia {
                 DTTurista turista = new DTTurista(
                         e.getId(),
                         e.getNickname(),
+                        e.getName(),
+                        e.getLastName(),
                         e.getEmail(),
+                        e.getBirthDate(),
                         e.getNacionality()
                 );
                 touristList.add(turista);
@@ -164,14 +169,95 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-
+    
+    @Override
+    public ETurista buscarTuristaPorNickname(String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            TypedQuery<ETurista> touristResult = em.createQuery(query, ETurista.class);
+            touristResult.setParameter("nickname", nickname);
+            return touristResult.getSingleResult();
+        } catch (NoResultException e) {
+            throw new MyException("No se encontró el turista con el nickname brindado");
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public EProveedor buscarProveedorPorNickname(String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT p FROM EProveedor p WHERE p.nickname = :nickname";
+            TypedQuery<EProveedor> providerResult = em.createQuery(query, EProveedor.class);
+            providerResult.setParameter("nickname", nickname);
+            return providerResult.getSingleResult();
+        } catch (NoResultException e) {
+            throw new MyException("No se encontró el proveedor con el nickname brindado");
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public void actualizarProveedor(Proveedor objProveedor) throws MyException {
+        EntityManager em = emf.createEntityManager();  
+        try {
+            // Se busca al EProveedor por su nickname
+            String nickname = objProveedor.getNickname();
+            EProveedor proveedorAActualizar = buscarProveedorPorNickname(nickname);
+            
+            em.getTransaction().begin();
+            
+            // Se intenta actualizar los campos del ETurista
+            proveedorAActualizar.setName(objProveedor.getName());
+            proveedorAActualizar.setLastName(objProveedor.getLastName());
+            proveedorAActualizar.setBirthDate(objProveedor.getBirthDate());
+            proveedorAActualizar.setDescription(objProveedor.getDescription());
+            proveedorAActualizar.setWebsiteURL(objProveedor.getWebsiteURL());
+            
+            // Se intenta realizar la transacción de actualización
+            em.merge(proveedorAActualizar);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el proveedor");
+        } finally {
+            em.close();
+        }
     }
     
     
     @Override
     public void actualizarTurista(Turista objTurista) throws MyException {
+        EntityManager em = emf.createEntityManager();  
+        try {
+            // Se busca al ETurista por su nickname
+            String nickname = objTurista.getNickname();
+            ETurista turistaAActualizar = buscarTuristaPorNickname(nickname);
+            
+            em.getTransaction().begin();
+            
+            // Se intenta actualizar los campos del ETurista
+            turistaAActualizar.setName(objTurista.getName());
+            turistaAActualizar.setLastName(objTurista.getLastName());
+            turistaAActualizar.setBirthDate(objTurista.getBirthDate());
+            turistaAActualizar.setNacionality(objTurista.getNacionality());
+            
+            // Se intenta realizar la transacción de actualización
+            em.merge(turistaAActualizar);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el turista");
+        } finally {
+            em.close();
+        }
     }
     
     @Override
@@ -235,7 +321,15 @@ public class DataPersistencia implements IDataPersistencia {
             
             for(EProveedor e : resultados_consulta){
                 DTProveedor dtProveedor = new DTProveedor(
-                e.getId(),e.getNickname(),e.getEmail(),e.getDescription());
+                        e.getId(),
+                        e.getNickname(),
+                        e.getName(),
+                        e.getLastName(),
+                        e.getEmail(),
+                        e.getBirthDate(),
+                        e.getDescription(),
+                        e.getWebsiteURL()
+                );
                 resultados.add(dtProveedor);
             }
             

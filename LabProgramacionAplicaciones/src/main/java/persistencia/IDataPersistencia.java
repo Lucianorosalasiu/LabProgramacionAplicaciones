@@ -16,7 +16,9 @@ import java.util.List;
 import exceptions.MyException;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
+import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
+import persistencia.entidades.ETurista;
 
 /**
  *
@@ -29,6 +31,8 @@ public interface IDataPersistencia {
     void altaTurista(Turista objTurista) throws MyException;
     
     List<DTTurista> obtenerTuristas();
+    public ETurista buscarTuristaPorNickname(String nickname) throws MyException;
+    public EProveedor buscarProveedorPorNickname(String nickname) throws MyException;
     void actualizarProveedor(Proveedor objProveedor) throws MyException;
     void actualizarTurista(Turista objTurista) throws MyException;
     
