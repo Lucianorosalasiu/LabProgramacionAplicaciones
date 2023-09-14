@@ -56,6 +56,7 @@ import org.apache.commons.csv.CSVRecord;
 public class Main extends javax.swing.JFrame {
     Fabrica fabrica = new Fabrica();
     IControlador controlador = fabrica.getInterface();
+    Boolean datosCargados = false;
     /**
      * Creates new form inicio
      */
@@ -353,6 +354,7 @@ public class Main extends javax.swing.JFrame {
         jMenuAltaPaquete = new javax.swing.JMenuItem();
         jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
+        jMenuCargarDatos = new javax.swing.JMenuItem();
 
         jCU12Dialog.setTitle("ERROR");
         jCU12Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
@@ -3031,6 +3033,14 @@ public class Main extends javax.swing.JFrame {
 
         jMenuAcciones.add(jMenuPaquete);
 
+        jMenuCargarDatos.setText("Cargar datos de prueba");
+        jMenuCargarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCargarDatosActionPerformed(evt);
+            }
+        });
+        jMenuAcciones.add(jMenuCargarDatos);
+
         jMenuBar1.add(jMenuAcciones);
 
         setJMenuBar(jMenuBar1);
@@ -4195,6 +4205,23 @@ public class Main extends javax.swing.JFrame {
     private void jCU3ButtonEmptyFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonEmptyFieldsActionPerformed
         jCU3ClearAndDisable();
     }//GEN-LAST:event_jCU3ButtonEmptyFieldsActionPerformed
+
+    private void jMenuCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarDatosActionPerformed
+        // TODO add your handling code here:
+        if(!datosCargados){
+            
+            Runtime rt = Runtime.getRuntime();
+            System.out.println(System.getProperty("user.dir"));
+            try {
+                Process pr = rt.exec("./test.sh");
+            } catch (IOException ex) {
+                System.out.println(ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            datosCargados = true;
+        }
+    }//GEN-LAST:event_jMenuCargarDatosActionPerformed
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -5065,6 +5092,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAgregarActividadPaquete;
     private javax.swing.JMenuItem jMenuAltaPaquete;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCargarDatos;
     private javax.swing.JMenuItem jMenuConsultaPaquete;
     private javax.swing.JMenuItem jMenuDepartamentoAlta;
     private javax.swing.JMenu jMenuPaquete;
