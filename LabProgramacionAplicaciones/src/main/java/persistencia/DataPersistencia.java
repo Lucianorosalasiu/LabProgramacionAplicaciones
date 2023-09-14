@@ -702,7 +702,7 @@ public class DataPersistencia implements IDataPersistencia {
             return resultado;
           
         }catch(Exception e){
-            List<String> resultado = null;
+            List<String> resultado = new LinkedList<>();
             return resultado;
         }finally{
             em.close();
@@ -801,7 +801,7 @@ public class DataPersistencia implements IDataPersistencia {
     }
     @Override
     public List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete){
-          EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
       
         try{
            
@@ -813,20 +813,15 @@ public class DataPersistencia implements IDataPersistencia {
                     ,EPaqueteActividadTuristica.class)
                     .setParameter("nombrePaquete",paquete)
                     .getSingleResult();
-            
-            EActividadTuristica eActividad = em.createQuery("select c from EActividadTuristica c WHERE c.eDepartamento.id = :idDepartamento"
-                    ,EActividadTuristica.class)
-                    .setParameter("idDepartamento",eDepartamento.getId()).getSingleResult();
-            
-            Query query = em.createNativeQuery("select nombre from actividadTuristica where EDEPARTAMENTO_ID = ?1 and actividadTuristica.id = ?2 AND actividadTuristica.id not in (select ACTIVIDAD_ID from paquetes join PAQUETE_ACTIVIDAD ON PAQUETE_ID = paquetes.id where paquetes.id = ?3)")
+
+            Query query = em.createNativeQuery("select nombre from actividadTuristica where EDEPARTAMENTO_ID = ?1 AND actividadTuristica.id not in (select ACTIVIDAD_ID from paquetes join PAQUETE_ACTIVIDAD ON PAQUETE_ID = paquetes.id where paquetes.id = ?3)")
                     .setParameter(1,eDepartamento.getId())
-                    .setParameter(2,eActividad.getId())
                     .setParameter(3,ePaquete.getId());        
             List<String> resultado = query.getResultList();
             return resultado;
           
         }catch(Exception e){
-           List<String> resultado = null;
+           List<String> resultado = new LinkedList<>();
             return resultado;
         }finally{
            em.close();
