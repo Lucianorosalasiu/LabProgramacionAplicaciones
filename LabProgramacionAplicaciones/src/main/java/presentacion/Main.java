@@ -111,6 +111,18 @@ public class Main extends javax.swing.JFrame {
         JCU1ButtonSendData = new javax.swing.JButton();
         jCU1ComboBoxPaises = new javax.swing.JComboBox<>();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
+        jCU2ComboBoxUserList = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jCU2TextFieldUserType = new javax.swing.JTextField();
+        jCU2LabelUserType = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jCU2SeparatorVertical = new javax.swing.JSeparator();
+        jCU2TextFieldName = new javax.swing.JTextField();
+        jCU2LabelName = new javax.swing.JLabel();
+        jCU2TextFieldLastName = new javax.swing.JTextField();
+        jCU2LabelLastName = new javax.swing.JLabel();
+        jCU2LabelEmail = new javax.swing.JLabel();
+        jCU2TextFieldEmail = new javax.swing.JTextField();
         jInternalFrameModificarUsuario = new javax.swing.JInternalFrame();
         jCU4ScrollPanelProveedores2 = new javax.swing.JScrollPane();
         jCU3TableUsersList = new javax.swing.JTable();
@@ -733,16 +745,112 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Alta Usuario", jCU1InternalFrameAgregarUsuario);
 
         jInternalFrameConsultarUsuario.setVisible(true);
+        jInternalFrameConsultarUsuario.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jInternalFrameConsultarUsuarioComponentShown(evt);
+            }
+        });
+
+        jCU2ComboBoxUserList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar nickname" }));
+        jCU2ComboBoxUserList.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jCU2ComboBoxUserListFocusGained(evt);
+            }
+        });
+        jCU2ComboBoxUserList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU2ComboBoxUserListActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Usuario");
+
+        jCU2TextFieldUserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU2TextFieldUserTypeActionPerformed(evt);
+            }
+        });
+        jCU2TextFieldUserType.setEditable(false);
+
+        jCU2LabelUserType.setText("Tipo de Usuario");
+
+        jCU2SeparatorVertical.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jCU2TextFieldName.setEditable(false);
+
+        jCU2LabelName.setText("Nombre");
+
+        jCU2TextFieldLastName.setEditable(false);
+
+        jCU2LabelLastName.setText("Apellido");
+
+        jCU2LabelEmail.setText("Email");
+
+        jCU2TextFieldEmail.setEditable(false);
 
         javax.swing.GroupLayout jInternalFrameConsultarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameConsultarUsuario.getContentPane());
         jInternalFrameConsultarUsuario.getContentPane().setLayout(jInternalFrameConsultarUsuarioLayout);
         jInternalFrameConsultarUsuarioLayout.setHorizontalGroup(
             jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                        .addComponent(jCU2TextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCU2TextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCU2ComboBoxUserList, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                        .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCU2LabelLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCU2LabelUserType, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                                .addComponent(jCU2TextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU2LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU2TextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCU2LabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33)
+                .addComponent(jCU2SeparatorVertical, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addGap(39, 39, 39))
         );
         jInternalFrameConsultarUsuarioLayout.setVerticalGroup(
             jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCU2ComboBoxUserList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU2LabelUserType)
+                    .addComponent(jCU2LabelName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCU2TextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCU2TextFieldUserType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU2LabelLastName)
+                    .addComponent(jCU2LabelEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU2TextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCU2TextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCU2SeparatorVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(221, 221, 221))
         );
 
         jTabbedPaneCasosDeUso.addTab("Consulta de Usuario", jInternalFrameConsultarUsuario);
@@ -870,7 +978,7 @@ public class Main extends javax.swing.JFrame {
 
         jCU3TextFieldEmail.setEnabled(false);
 
-        jCU3LabelUserType.setText("Tipo de Usuario a Modificar");
+        jCU3LabelUserType.setText("Tipo de Usuario");
 
         jCU3TextFieldUserType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4108,7 +4216,7 @@ public class Main extends javax.swing.JFrame {
         //Se activan los TextFields editables
         jCU3TextFieldName.setEnabled(true);
         jCU3TextFieldLastName.setEnabled(true);
-        jCU3DateChooserBirthDate.setEnabled(true);
+        jCU3DateChooserBirthDate.setEnabled(true);        
 
         // Se cargan los datos y se activan campos para cada caso particular
         if (userType == "Turista") {
@@ -4195,6 +4303,55 @@ public class Main extends javax.swing.JFrame {
     private void jCU3ButtonEmptyFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonEmptyFieldsActionPerformed
         jCU3ClearAndDisable();
     }//GEN-LAST:event_jCU3ButtonEmptyFieldsActionPerformed
+
+    private void jCU2ComboBoxUserListFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCU2ComboBoxUserListFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU2ComboBoxUserListFocusGained
+
+    private void jCU2ComboBoxUserListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2ComboBoxUserListActionPerformed
+        if (jCU2ComboBoxUserList.getSelectedItem() != null ){
+            String nickname = jCU2ComboBoxUserList.getSelectedItem().toString();
+            
+            if(jCU2ComboBoxUserList.getSelectedItem().toString() != "Seleccionar nickname"){
+                DTUsuario usuario = controlador.obtenerUsuario(nickname);
+
+                jCU2TextFieldName.setText(usuario.getName());
+                jCU2TextFieldLastName.setText(usuario.getLastName());
+                jCU2TextFieldEmail.setText(usuario.getEmail());
+                if (usuario instanceof DTTurista) {
+                    DTTurista turista = (DTTurista) usuario;
+                    jCU2TextFieldUserType.setText("Turista");
+                } else if (usuario instanceof DTProveedor) {
+                    DTProveedor proveedor = (DTProveedor) usuario;
+                   jCU2TextFieldUserType.setText("Proveedor/a");
+
+                }
+            }
+        }
+    }//GEN-LAST:event_jCU2ComboBoxUserListActionPerformed
+    
+    private void updateUsersInComboBox(JComboBox jComboBox) {
+        List<DTUsuario> userList = controlador.obtenerUsuarios();
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTUsuario usr : userList){
+            jComboBox.addItem(usr.getNickname());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }
+    
+    
+    private void jCU2TextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2TextFieldUserTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCU2TextFieldUserTypeActionPerformed
+
+    private void jInternalFrameConsultarUsuarioComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameConsultarUsuarioComponentShown
+        updateUsersInComboBox(jCU2ComboBoxUserList);
+    }//GEN-LAST:event_jInternalFrameConsultarUsuarioComponentShown
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -4878,6 +5035,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU1LabelWebsite;
     private javax.swing.JScrollPane jCU1ScrollPane11Description;
     private javax.swing.JTextArea jCU1TextAreaDescription;
+    private javax.swing.JComboBox<String> jCU2ComboBoxUserList;
+    private javax.swing.JLabel jCU2LabelEmail;
+    private javax.swing.JLabel jCU2LabelLastName;
+    private javax.swing.JLabel jCU2LabelName;
+    private javax.swing.JLabel jCU2LabelUserType;
+    private javax.swing.JSeparator jCU2SeparatorVertical;
+    private javax.swing.JTextField jCU2TextFieldEmail;
+    private javax.swing.JTextField jCU2TextFieldLastName;
+    private javax.swing.JTextField jCU2TextFieldName;
+    private javax.swing.JTextField jCU2TextFieldUserType;
     private javax.swing.JButton jCU3ButtonActualizarTabla;
     private javax.swing.JButton jCU3ButtonEmptyFields;
     private javax.swing.JButton jCU3ButtonUpdateData;
@@ -5027,6 +5194,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -5097,6 +5265,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTabbedPane jTabbedPaneCasosDeUso;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

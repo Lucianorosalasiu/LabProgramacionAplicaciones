@@ -24,6 +24,7 @@ public interface  IControlador {
     void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
     void altaTurista(DTTurista nuevoTurista) throws MyException;
     List<DTUsuario> obtenerUsuarios();
+    DTUsuario obtenerUsuario(String nickname);
     void actualizarUsuario(DTUsuario usuario) throws MyException;
     
     

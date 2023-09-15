@@ -98,6 +98,20 @@ public class Controlador implements IControlador{
 
         return userList;
     }
+        
+    @Override
+    public DTUsuario obtenerUsuario(String nickname) {
+        List<DTUsuario> userList = this.obtenerUsuarios();
+        
+        // Se itera a través de la lista de usuarios y busca el usuario con el nickname proporcionado
+        for (DTUsuario usuario : userList) {
+            if (usuario.getNickname().equals(nickname)) {
+                return usuario; // Devuelve el usuario cuando se encuentra la coincidencia
+            }
+        }
+        
+        return null;
+    }
     
     @Override
     public void actualizarUsuario(DTUsuario usuario) throws MyException{
