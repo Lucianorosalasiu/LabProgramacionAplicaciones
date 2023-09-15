@@ -4395,12 +4395,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameConsultarUsuarioComponentShown
     private void jMenuCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarDatosActionPerformed
         // TODO add your handling code here:
-        if(!datosCargados){
-            
+        if(!datosCargados){        
             Runtime rt = Runtime.getRuntime();
-            System.out.println(System.getProperty("user.dir"));
             try {
-                Process pr = rt.exec("./test.sh");
+                Process pr = rt.exec("./cargarDatos.sh");
             } catch (IOException ex) {
                 System.out.println(ex);
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
