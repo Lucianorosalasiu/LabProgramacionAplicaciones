@@ -441,7 +441,7 @@
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jCU1InternalFrameAgregarUsuarioInternalFrameActivated"/>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jCU1InternalFrameAgregarUsuarioComponentShown"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -454,14 +454,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="JCU1ButtonClearFields" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="JCU1ButtonSendData" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jSeparator7" max="32767" attributes="0"/>
                           <Component id="jCU1LabelWebsite" alignment="0" max="32767" attributes="0"/>
                           <Component id="JCU1WebsiteTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="jCU1LabelUserType" alignment="1" max="32767" attributes="0"/>
@@ -490,7 +486,7 @@
                                           </Group>
                                           <Component id="jCU1LabelName" min="-2" pref="300" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                                      <EmptySpace pref="179" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="JCU1DateChooserBirthDate" min="-2" pref="300" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -502,6 +498,11 @@
                                   </Group>
                                   <Component id="jCU1LabelDescription" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="JCU1ButtonClearFields" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="JCU1ButtonSendData" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="162" pref="162" max="-2" attributes="0"/>
@@ -549,16 +550,18 @@
                       <Component id="jCU1LabelDescription" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU1ScrollPane11Description" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="jCU1LabelWebsite" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="JCU1WebsiteTextField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                      <Component id="jSeparator7" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="JCU1ButtonClearFields" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JCU1ButtonSendData" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -754,6 +757,8 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator7">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameConsultarUsuario">
@@ -777,11 +782,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jCU2TextFieldLastName" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jCU2TextFieldEmail" min="-2" pref="201" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jCU2ComboBoxUserList" min="-2" pref="201" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -801,12 +801,90 @@
                                   <Component id="jCU2LabelEmail" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jCU2LabelFechaNacimiento" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU2TextFieldFechaNacimiento" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCU2TextFieldLastName" alignment="0" pref="200" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jCU2TextFieldEmail" min="-2" pref="201" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCU2ComboBoxActividadTuristica" min="-2" pref="259" max="-2" attributes="0"/>
+                                  <Component id="jCU2ComboBoxSalidaTuristica" min="-2" pref="259" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jCU2SeparatorVertical" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jSeparator6" pref="486" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparator6" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jCU2LabelActividadDescripcion" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU2TextFieldActividadNombre" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                          <Component id="jCU2LabelActividadNombre" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jCU2TextFieldActividadCiudad" max="32767" attributes="0"/>
+                                          <Component id="jCU2LabelActividadCiudad" pref="225" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU2TextFieldActividadDuracion" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="jCU2LabelActividadDuracion" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jCU2TextFieldActividadCosto" max="32767" attributes="0"/>
+                                          <Component id="jCU2LabelActividadCosto" min="-2" pref="130" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jCU2TextFieldActividadFechaAlta" max="32767" attributes="0"/>
+                                          <Component id="jCU2LabelActividadFechaAlta" pref="130" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jCU2LabelInfoActividad" min="-2" pref="350" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jCU2LabelSalidaNombre" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCU2TextFieldSalidaMaxTuristas" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCU2TextFieldSalidaNombre" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCU2TextFieldSalidaFecha" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCU2LabelSalidaFecha" alignment="0" pref="215" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="26" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jCU2TextFieldSalidaLugar" max="32767" attributes="0"/>
+                                          <Component id="jCU2TextFieldSalidaFechaAlta" max="32767" attributes="0"/>
+                                          <Component id="jCU2LabelSalidaLugar" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCU2LabelSalidaFechaAlta" alignment="0" pref="215" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCU2LabelSalidaMaxTuristas" min="-2" pref="215" max="-2" attributes="0"/>
+                                  <Component id="jCU2LabelInfoActividad1" min="-2" pref="350" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -837,17 +915,82 @@
                           <Component id="jCU2TextFieldLastName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCU2TextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jCU2LabelFechaNacimiento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCU2TextFieldFechaNacimiento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="jCU2ComboBoxActividadTuristica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="jCU2ComboBoxSalidaTuristica" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCU2SeparatorVertical" pref="516" max="32767" attributes="0"/>
+                      <Component id="jCU2SeparatorVertical" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jSeparator6" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
+                      <EmptySpace min="20" max="32767" attributes="0"/>
+                      <Component id="jCU2LabelInfoActividad" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2LabelActividadNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2LabelActividadCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2TextFieldActividadNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2TextFieldActividadCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2LabelActividadDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2LabelActividadCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2LabelActividadFechaAlta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2TextFieldActividadDuracion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2TextFieldActividadCosto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2TextFieldActividadFechaAlta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jCU2LabelActividadDescripcion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" min="-2" pref="65" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jSeparator6" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCU2LabelInfoActividad1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jCU2LabelSalidaNombre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCU2TextFieldSalidaNombre" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jCU2LabelSalidaLugar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCU2TextFieldSalidaLugar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2LabelSalidaFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2LabelSalidaFechaAlta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCU2TextFieldSalidaFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCU2TextFieldSalidaFechaAlta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="jCU2LabelSalidaMaxTuristas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCU2TextFieldSalidaMaxTuristas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -924,6 +1067,191 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldEmail.setEditable(false);"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelInfoActividad">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Informaci&#xf3;n detallada de Actividad Tur&#xed;stica"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelInfoActividad1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Informaci&#xf3;n detallada de Salida Tur&#xed;stica"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldActividadNombre">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldActividadNombre.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldActividadDuracion">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldActividadDuracion.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldActividadCiudad">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldActividadCiudad.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldActividadCosto">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldActividadCosto.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldActividadFechaAlta">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldActividadFechaAlta.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jCU2TextAreaActividadDescripcion">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU2TextAreaActividadDescripcion.setEditable(false);"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldSalidaNombre">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2TextFieldSalidaNombreActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU2TextFieldSalidaNombre.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldSalidaFecha">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldSalidaFecha.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldSalidaLugar">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jCU2TextFieldSalidaLugar.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldSalidaFechaAlta">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2TextFieldSalidaFechaAltaActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU2TextFieldSalidaFechaAlta.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldSalidaMaxTuristas">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2TextFieldSalidaMaxTuristasActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU2TextFieldSalidaMaxTuristas.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadDescripcion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadNombre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadCiudad">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ciudad"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadDuracion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Duraci&#xf3;n (hs)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadCosto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Costo ($)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadFechaAlta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha de Alta"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jCU2TextFieldFechaNacimiento">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2TextFieldFechaNacimientoActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU2TextFieldFechaNacimiento.setEditable(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelFechaNacimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha de Nacimiento"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaNombre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaLugar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lugar de Salida"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaFecha">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha de Salida"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaFechaAlta">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha de Alta"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaMaxTuristas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cantidad M&#xe1;xima de Turistas"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCU2ComboBoxActividadTuristica">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="1">
+                    <StringItem index="0" value="Seleccionar Actividad Turistica"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCU2ComboBoxSalidaTuristica">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="1">
+                    <StringItem index="0" value="Seleccionar Salida Turistica"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JInternalFrame" name="jInternalFrameModificarUsuario">
@@ -931,7 +1259,7 @@
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jInternalFrameModificarUsuarioInternalFrameActivated"/>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jInternalFrameModificarUsuarioComponentShown"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -3327,10 +3655,8 @@
                           <Component id="jCU9DateChooserFecha" alignment="0" pref="250" max="32767" attributes="0"/>
                           <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jCU9SpinnerValidezPaquete" alignment="0" pref="111" max="32767" attributes="0"/>
-                              <Component id="jCU9SpinnerDescuentoPaquete" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jCU9SpinnerValidezPaquete" alignment="0" pref="250" max="32767" attributes="0"/>
+                          <Component id="jCU9SpinnerDescuentoPaquete" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane15" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="415" max="32767" attributes="0"/>

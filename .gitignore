@@ -1,12 +1,10 @@
-/LabProgramacionAplicaciones/target/
-
-Compiled class file
+#Compiled class file
 *.class
 
-Log file
+#Log file
 *.log
 
-BlueJ files
+#BlueJ files
 .ctxt
 
 #Ignorar imagenes
@@ -16,13 +14,10 @@ BlueJ files
 /.settings/
 .cfg.xml
 
-Mobile Tools for Java (J2ME)
+#Mobile Tools for Java (J2ME)
 /LabProgramacionAplicaciones/mtj.tmp/
 
-Carpeta bin
-/bin/
-
-Package Files
+# Package Files
 #.jar
 *.war
 *.nar
@@ -31,7 +26,7 @@ Package Files
 *.tar.gz
 .rar
 
-virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 .settings
 .vscode
 hs_err_pid

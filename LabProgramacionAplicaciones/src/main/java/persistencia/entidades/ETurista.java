@@ -5,7 +5,9 @@
 package persistencia.entidades;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +18,10 @@ import lombok.Setter;
 @Table(name = "turista")
 public class ETurista extends EUsuario {
     private String nacionality;
-
+    
+    @OneToMany(mappedBy = "eTurista")
+    private List<EInscripcion> EInscripciones;
+    
     public ETurista() {
         super();
     }
