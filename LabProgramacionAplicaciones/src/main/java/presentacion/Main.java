@@ -56,6 +56,7 @@ import org.apache.commons.csv.CSVRecord;
 public class Main extends javax.swing.JFrame {
     Fabrica fabrica = new Fabrica();
     IControlador controlador = fabrica.getInterface();
+    Boolean datosCargados = false;
     /**
      * Creates new form inicio
      */
@@ -289,7 +290,6 @@ public class Main extends javax.swing.JFrame {
         jCU8ButtonActualizarTablas = new javax.swing.JButton();
         jInternalFrameAltaPaqueteActividades = new javax.swing.JInternalFrame();
         jCU9TextFieldNombrePaquete = new javax.swing.JTextField();
-        jCU9TextFieldDescPaquete = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -299,6 +299,8 @@ public class Main extends javax.swing.JFrame {
         jCU9SpinnerValidezPaquete = new javax.swing.JSpinner();
         jCU9SpinnerDescuentoPaquete = new javax.swing.JSpinner();
         jCU9DateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jCU9TextAreaDescPaquete = new javax.swing.JTextArea();
         jInternalFrameAgregarActividadPaquete = new javax.swing.JInternalFrame();
         jCU10ComboBoxDepartamentoPaquete = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -365,6 +367,7 @@ public class Main extends javax.swing.JFrame {
         jMenuAltaPaquete = new javax.swing.JMenuItem();
         jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
+        jMenuCargarDatos = new javax.swing.JMenuItem();
 
         jCU12Dialog.setTitle("ERROR");
         jCU12Dialog.setMinimumSize(new java.awt.Dimension(400, 250));
@@ -2444,6 +2447,12 @@ public class Main extends javax.swing.JFrame {
 
         jCU9DateChooserFecha.setDateFormatString("d,M,yyyy");
 
+        jCU9TextAreaDescPaquete.setColumns(20);
+        jCU9TextAreaDescPaquete.setLineWrap(true);
+        jCU9TextAreaDescPaquete.setRows(5);
+        jCU9TextAreaDescPaquete.setWrapStyleWord(true);
+        jScrollPane15.setViewportView(jCU9TextAreaDescPaquete);
+
         javax.swing.GroupLayout jInternalFrameAltaPaqueteActividadesLayout = new javax.swing.GroupLayout(jInternalFrameAltaPaqueteActividades.getContentPane());
         jInternalFrameAltaPaqueteActividades.getContentPane().setLayout(jInternalFrameAltaPaqueteActividadesLayout);
         jInternalFrameAltaPaqueteActividadesLayout.setHorizontalGroup(
@@ -2452,29 +2461,30 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(411, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
-                    .addComponent(jCU9SpinnerDescuentoPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel11)
-                    .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCU9TextFieldNombrePaquete)
-                    .addComponent(jCU9TextFieldDescPaquete)
                     .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10)
+                    .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                        .addComponent(jCU9SpinnerDescuentoPaquete, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(415, Short.MAX_VALUE))
         );
         jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU9TextFieldNombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCU9TextFieldDescPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addGap(5, 5, 5)
@@ -2489,7 +2499,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Crear Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
@@ -2672,12 +2682,14 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jCU10TablePaquetes.setColumnSelectionAllowed(true);
         jCU10TablePaquetes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCU10TablePaquetesMouseClicked(evt);
             }
         });
         jScrollPane12.setViewportView(jCU10TablePaquetes);
+        jCU10TablePaquetes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jInternalFrameAgregarActividadPaqueteLayout = new javax.swing.GroupLayout(jInternalFrameAgregarActividadPaquete.getContentPane());
         jInternalFrameAgregarActividadPaquete.getContentPane().setLayout(jInternalFrameAgregarActividadPaqueteLayout);
@@ -2836,7 +2848,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel35))
-                        .addGap(0, 98, Short.MAX_VALUE))
+                        .addGap(0, 104, Short.MAX_VALUE))
                     .addComponent(jCU11TextFieldValidez)
                     .addComponent(jCU11TextFieldFechaAlta)
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -2940,19 +2952,18 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jCU5LabelNombre22, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jCU11TextFieldNombreActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCU5LabelNombre22)
                                     .addComponent(jLabel36)
                                     .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE))
                             .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jCU11TextFieldDuracion)
                             .addComponent(jCU11TextFieldCosto)
-                            .addComponent(jCU11TextFieldCiudad))
+                            .addComponent(jCU11TextFieldCiudad)
+                            .addComponent(jCU11TextFieldNombreActividad))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2965,7 +2976,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jCU5LabelNombre22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCU11TextFieldNombreActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCU11TextFieldNombreActividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3006,7 +3017,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
         jInternalFrameConsultaPaquetesLayout.setVerticalGroup(
             jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3138,6 +3149,14 @@ public class Main extends javax.swing.JFrame {
         jMenuPaquete.add(jMenuConsultaPaquete);
 
         jMenuAcciones.add(jMenuPaquete);
+
+        jMenuCargarDatos.setText("Cargar datos de prueba");
+        jMenuCargarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCargarDatosActionPerformed(evt);
+            }
+        });
+        jMenuAcciones.add(jMenuCargarDatos);
 
         jMenuBar1.add(jMenuAcciones);
 
@@ -3322,23 +3341,36 @@ public class Main extends javax.swing.JFrame {
     private void jCU5TextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU5TextFieldFechaActionPerformed
-
+    public boolean jCU10esvacio(){
+        if(jCU10TablePaquetes.getSelectionModel().isSelectionEmpty() ||
+           jCU10TableActividades.getSelectionModel().isSelectionEmpty()){
+           JOptionPane.showMessageDialog(this, "Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
+           
+           return true;
+        }else{
+           return false;
+        }
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
-        DefaultTableModel modelActividad = (DefaultTableModel) jCU10TableActividades.getModel();
-        //obtengo la columna seleccionada
-        int columnaSeleccionadaPaquete = jCU10TablePaquetes.getSelectedColumn();
-        int columnaSeleccionadaActividad = jCU10TableActividades.getSelectedColumn();
-        //obtengo la tupla seleccionada
-        int tuplaSeleccionadaPaquete = jCU10TablePaquetes.getSelectedRow();
-        int tuplaSeleccionadaActividad = jCU10TableActividades.getSelectedRow();
-        //obtengo el contenido de la tupla seleccionada
-        String celdaSeleccionadaPaquete = modelPaquetes.getValueAt(tuplaSeleccionadaPaquete, columnaSeleccionadaPaquete).toString();
-        String celdaSeleccionadaActividad = modelActividad.getValueAt(tuplaSeleccionadaActividad, columnaSeleccionadaActividad).toString();
-       
-        controlador.agregarActividadPaquete(celdaSeleccionadaPaquete,celdaSeleccionadaActividad);
-        jCUPaquetesactualizarpaquetes(jCU10TablePaquetes);
-        jCU10Limpiar();
+        if(!jCU10esvacio()){
+            DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
+            DefaultTableModel modelActividad = (DefaultTableModel) jCU10TableActividades.getModel();
+            //obtengo la columna seleccionada
+            int columnaSeleccionadaPaquete = jCU10TablePaquetes.getSelectedColumn();
+            int columnaSeleccionadaActividad = jCU10TableActividades.getSelectedColumn();
+            //obtengo la tupla seleccionada
+            int tuplaSeleccionadaPaquete = jCU10TablePaquetes.getSelectedRow();
+            int tuplaSeleccionadaActividad = jCU10TableActividades.getSelectedRow();
+            //obtengo el contenido de la tupla seleccionada
+            String celdaSeleccionadaPaquete = modelPaquetes.getValueAt(tuplaSeleccionadaPaquete, columnaSeleccionadaPaquete).toString();
+            String celdaSeleccionadaActividad = modelActividad.getValueAt(tuplaSeleccionadaActividad, columnaSeleccionadaActividad).toString();
+
+            controlador.agregarActividadPaquete(celdaSeleccionadaPaquete,celdaSeleccionadaActividad);
+            jCUPaquetesactualizarpaquetes(jCU10TablePaquetes);
+            jCU10Limpiar();
+            JOptionPane.showMessageDialog(this, "Actividad turistica agregada a paquete!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
     public void jCU10Limpiar(){
         DefaultTableModel modelActividad = (DefaultTableModel) jCU10TableActividades.getModel();
@@ -3414,18 +3446,18 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(jCU9verificarVacios()){
-            JOptionPane.showMessageDialog(this, "Debe completar todos los campos!", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return;
         }else{
             /*tomo los datos y contruyo el datatype*/
             String nombre = jCU9TextFieldNombrePaquete.getText();
-            String desc = jCU9TextFieldDescPaquete.getText();
+            String desc = jCU9TextAreaDescPaquete.getText();
             Date fechaAlta = jCU9DateChooserFecha.getDate();
             int validez = (Integer) jCU9SpinnerValidezPaquete.getValue();
             int descuento = (Integer) jCU9SpinnerDescuentoPaquete.getValue();
             DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(nombre,desc,validez,descuento,fechaAlta);
             controlador.altaPaqueteActividadTuristica(paquete);
             jCU9vaciarCampos();
+            JOptionPane.showMessageDialog(this, "Paquete turistico dado de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             return;
             /**/
         }
@@ -3819,6 +3851,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneCasosDeUsoMouseClicked
 
     private void jCU10TablePaquetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10TablePaquetesMouseClicked
+       
+        
         DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
         //obtengo la columna seleccionada
         int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
@@ -3841,29 +3875,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteMouseClicked
         //Esta funcion es la que llena el combo box del caso de uso 10
     private void jCU10ComboBoxDepartamentoPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteActionPerformed
-        if(jCU10ComboBoxDepartamentoPaquete.getSelectedItem() != null && !jCU10TablePaquetes.getSelectionModel().isSelectionEmpty()){
-            DefaultTableModel modelActividades = (DefaultTableModel) jCU10TableActividades.getModel();
-            DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
-            //obtengo la columna seleccionada
-            int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
-            //obtengo la tupla seleccionada
-            int tuplaSeleccionada = jCU10TablePaquetes.getSelectedRow();
-            //obtengo el contenido de la tupla seleccionada
-            String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
-
-            while (modelActividades.getRowCount() > 0) {               
-                modelActividades.removeRow(modelActividades.getRowCount() - 1);
-            }
-            List<String> actividades = controlador.obtenerActividadesTuristicasCU10(jCU10ComboBoxDepartamentoPaquete.getSelectedItem().toString(), celdaSeleccionada);
-
-            for (int i = 0; i < actividades.size(); i++) {
-                Object rowData[] = new Object[1];
-                rowData[0] = actividades.get(i);
-                modelActividades.addRow(rowData);
-            }
-        }else{
-             JOptionPane.showMessageDialog(this, "Debe seleccionar un paquete!", "ALERTA", JOptionPane.WARNING_MESSAGE);
-        }
+        
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteActionPerformed
 
     private void jCU10TableActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10TableActividadesMouseClicked
@@ -3871,20 +3883,42 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU10TableActividadesMouseClicked
 
     private void jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible
-         jCU10ComboBoxDepartamentoPaquete.removeAllItems(); //limpio el combo box por las dudas
-         List<DTDepartamento> departamentos = controlador.obtenerDepartamentos(); //primero me traigo los apartamentos
-        
-       
-        //y recorro mi lista de apartamentos y los voy tirando al combo box
-        for(DTDepartamento d : departamentos){
-            jCU10ComboBoxDepartamentoPaquete.addItem(d.getNombre());
-        }
+         
         
         
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible
 
     private void jCU10ComboBoxDepartamentoPaqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteItemStateChanged
-        
+        if(jCU10ComboBoxDepartamentoPaquete.getSelectedItem() == null ){
+           
+            }else{
+                if(!jCU10TablePaquetes.getSelectionModel().isSelectionEmpty()){
+                    DefaultTableModel modelActividades = (DefaultTableModel) jCU10TableActividades.getModel();
+                    DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
+                    //obtengo la columna seleccionada
+                    int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
+                    //obtengo la tupla seleccionada
+                    int tuplaSeleccionada = jCU10TablePaquetes.getSelectedRow();
+                    //obtengo el contenido de la tupla seleccionada
+                    String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+
+                    while (modelActividades.getRowCount() > 0) {               
+                        modelActividades.removeRow(modelActividades.getRowCount() - 1);
+                    }
+                List<String> actividades = controlador.obtenerActividadesTuristicasCU10(jCU10ComboBoxDepartamentoPaquete.getSelectedItem().toString(), celdaSeleccionada);
+                if(actividades != null){
+                    for (int i = 0; i < actividades.size(); i++) {
+                        Object rowData[] = new Object[1];
+                        rowData[0] = actividades.get(i);
+                        modelActividades.addRow(rowData);
+                    }
+                }  
+                
+            }else{
+                     JOptionPane.showMessageDialog(this, "Por favor seleccione un paquete y vuelva a intentarlo", "ALERTA", JOptionPane.WARNING_MESSAGE);
+            }
+                     
+        }
        
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteItemStateChanged
 
@@ -3996,7 +4030,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU10DateChooserFechaActionPerformed
 
     private void jInternalFrameAgregarActividadPaqueteComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameAgregarActividadPaqueteComponentShown
-         
+
+        List<DTDepartamento> departamentos = controlador.obtenerDepartamentos(); //primero me traigo los apartamentos
+        
+       
+        //y recorro mi lista de apartamentos y los voy tirando al combo box
+        for(DTDepartamento d : departamentos){
+            jCU10ComboBoxDepartamentoPaquete.addItem(d.getNombre());
+        }
         jCUPaquetesactualizarpaquetes(jCU10TablePaquetes);        // TODO add your handling code here:
     }//GEN-LAST:event_jInternalFrameAgregarActividadPaqueteComponentShown
 
@@ -4037,9 +4078,9 @@ public class Main extends javax.swing.JFrame {
     private void jCU11TableActividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU11TableActividadMouseClicked
         DefaultTableModel modelActividades = (DefaultTableModel) jCU11TableActividad.getModel();
         //obtengo la columna seleccionada
-        int columnaSeleccionada = jCU11TablePaquete.getSelectedColumn();
+        int columnaSeleccionada = jCU11TableActividad.getSelectedColumn();
         //obtengo la tupla seleccionada
-        int tuplaSeleccionada = jCU11TablePaquete.getSelectedRow();
+        int tuplaSeleccionada = jCU11TableActividad.getSelectedRow();
         //obtengo el contenido de la tupla seleccionada
         String celdaSeleccionada = (String)modelActividades.getValueAt(tuplaSeleccionada, columnaSeleccionada);
         DTActividadTuristica dtActividadTuristica = controlador.obtenerActividadTuristica(celdaSeleccionada);
@@ -4352,6 +4393,22 @@ public class Main extends javax.swing.JFrame {
     private void jInternalFrameConsultarUsuarioComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameConsultarUsuarioComponentShown
         updateUsersInComboBox(jCU2ComboBoxUserList);
     }//GEN-LAST:event_jInternalFrameConsultarUsuarioComponentShown
+    private void jMenuCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarDatosActionPerformed
+        // TODO add your handling code here:
+        if(!datosCargados){
+            
+            Runtime rt = Runtime.getRuntime();
+            System.out.println(System.getProperty("user.dir"));
+            try {
+                Process pr = rt.exec("./test.sh");
+            } catch (IOException ex) {
+                System.out.println(ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            datosCargados = true;
+        }
+    }//GEN-LAST:event_jMenuCargarDatosActionPerformed
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -4542,7 +4599,7 @@ public class Main extends javax.swing.JFrame {
         this.jCU9DateChooserFecha = jCU9DateChooserFecha;
         this.jCU9SpinnerDescuentoPaquete = jCU9SpinnerDescuentoPaquete;
         this.jCU9SpinnerValidezPaquete = jCU9SpinnerValidezPaquete;
-        this.jCU9TextFieldDescPaquete = jCU9TextFieldDescPaquete;
+        //this.jCU9TextFieldDescPaquete = jCU9TextFieldDescPaquete;
         this.jCU9TextFieldNombrePaquete = jCU9TextFieldNombrePaquete;
         this.jDialog1 = jDialog1;
         this.jInternalFrameAgregarActividadPaquete = jInternalFrameAgregarActividadPaquete;
@@ -4766,9 +4823,9 @@ public class Main extends javax.swing.JFrame {
     
     public boolean jCU9verificarVacios(){
         if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
-            jCU9TextFieldDescPaquete.getText().isEmpty() ||
+            jCU9TextAreaDescPaquete.getText().isEmpty() ||
             jCU9DateChooserFecha.getDate() == null){
-            JOptionPane.showMessageDialog(null,"Quedaron campos sin rellenar, por favor intentelo nuevamente");
+            JOptionPane.showMessageDialog(null,"Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return true;
         }else{
             return false;
@@ -4823,7 +4880,7 @@ public class Main extends javax.swing.JFrame {
     
     public void jCU9vaciarCampos(){
         jCU9TextFieldNombrePaquete.setText("");
-        jCU9TextFieldDescPaquete.setText("");
+        jCU9TextAreaDescPaquete.setText("");
         jCU9DateChooserFecha.setDate(null);
         jCU9SpinnerDescuentoPaquete.setValue(0);
         jCU9SpinnerValidezPaquete.setValue(0);
@@ -5175,7 +5232,7 @@ public class Main extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jCU9DateChooserFecha;
     private javax.swing.JSpinner jCU9SpinnerDescuentoPaquete;
     private javax.swing.JSpinner jCU9SpinnerValidezPaquete;
-    private javax.swing.JTextField jCU9TextFieldDescPaquete;
+    private javax.swing.JTextArea jCU9TextAreaDescPaquete;
     private javax.swing.JTextField jCU9TextFieldNombrePaquete;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
@@ -5233,6 +5290,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAgregarActividadPaquete;
     private javax.swing.JMenuItem jMenuAltaPaquete;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCargarDatos;
     private javax.swing.JMenuItem jMenuConsultaPaquete;
     private javax.swing.JMenuItem jMenuDepartamentoAlta;
     private javax.swing.JMenu jMenuPaquete;
@@ -5253,6 +5311,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
