@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `PAQUETE_ACTIVIDAD`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PAQUETE_ACTIVIDAD` (
-  `ACTIVIDAD_ID` bigint(20) NOT NULL,
   `PAQUETE_ID` bigint(20) NOT NULL,
-  PRIMARY KEY (`ACTIVIDAD_ID`,`PAQUETE_ID`)
+  `ACTIVIDAD_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`PAQUETE_ID`,`ACTIVIDAD_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
