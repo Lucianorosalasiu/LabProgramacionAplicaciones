@@ -4066,6 +4066,8 @@ public class Main extends javax.swing.JFrame {
         jCU10TextFieldValidez.setText(""+paqueteAMostrar.getValidez());
         jCU10TextFieldDescuento.setText(""+paqueteAMostrar.getDescuento());
         jCU10DateChooserFecha.setText(paqueteAMostrar.getFechaAlta().toString());
+        
+        jCU10ComboBoxDepartamentoPaquete.setSelectedIndex(0);
     }//GEN-LAST:event_jCU10TablePaquetesMouseClicked
 
     private void jCU10ComboBoxDepartamentoPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteMouseClicked
