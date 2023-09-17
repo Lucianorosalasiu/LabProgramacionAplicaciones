@@ -7,18 +7,15 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
-import dataTypes.DTUsuario;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import logica.clases.Departamento;
 import exceptions.MyException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import logica.clases.PaqueteActividadTuristica;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
@@ -260,6 +257,117 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     
+    @Override
+    public List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista){
+        EntityManager em = emf.createEntityManager();
+        List<ESalidaTuristica> listaESalidas = new LinkedList<>();
+        List<DTSalidaTuristica> listaSalidas = new LinkedList<>();
+        List<EInscripcion> listaEInscripciones = new LinkedList<>();
+        
+        try{
+            // Se busca el turista que coincida con la id recibida
+            ETurista turista = em.find(ETurista.class,idTurista);
+            
+            // Se obtiene su lista de inscripciones
+            listaEInscripciones = turista.getEInscripciones();
+            
+            // Por cada inscripción se obtiene su salida turistica asociada
+            for(EInscripcion i : listaEInscripciones){
+                listaESalidas.add(i.getESalidaTuristica());
+            }
+            
+            
+            for(ESalidaTuristica s : listaESalidas){
+                DTSalidaTuristica salida = new DTSalidaTuristica(
+                        s.getNombre(),
+                        s.getCantidadMaxTuristas(),
+                        s.getFechaSalida(),
+                        s.getLugar(),
+                        s.getFechaAlta()                       
+                );
+                
+                listaSalidas.add(salida);
+            }
+            return listaSalidas;
+        }catch(Exception e){
+            return listaSalidas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor){
+        EntityManager em = emf.createEntityManager();
+        List<ESalidaTuristica> listaESalidas = new LinkedList<>();
+        List<DTSalidaTuristica> listaSalidas = new LinkedList<>();
+        List<EActividadTuristica> listaEActividades = new LinkedList<>();
+        
+        try{
+            // Se busca el proveedor que coincida con la id recibida
+            EProveedor proveedor = em.find(EProveedor.class,idProveedor);
+        
+            // Se obtiene su lista de de actividades
+            listaEActividades = proveedor.getActividades();
+            
+            // Por cada actividad se obtiene su salida turistica asociada
+            for(EActividadTuristica a : listaEActividades){
+                listaESalidas.addAll(a.getESalidasTuristicas());
+            }
+            
+            for(ESalidaTuristica s : listaESalidas){
+                DTSalidaTuristica salida = new DTSalidaTuristica(
+                        s.getNombre(),
+                        s.getCantidadMaxTuristas(),
+                        s.getFechaSalida(),
+                        s.getLugar(),
+                        s.getFechaAlta()                       
+                );
+                
+                listaSalidas.add(salida);
+            }
+            return listaSalidas;
+        }catch(Exception e){
+            return listaSalidas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor){           
+        EntityManager em = emf.createEntityManager();
+        List<EActividadTuristica> listaEActividades = new LinkedList<>();
+        List<DTActividadTuristica> listaActividades = new LinkedList<>();
+        
+        try{
+            // Se busca el proveedor que coincida con la id recibida
+            EProveedor proveedor = em.find(EProveedor.class,idProveedor);
+        
+            // Se obtiene su lista de de actividades
+            listaEActividades = proveedor.getActividades();
+            
+            
+            for(EActividadTuristica a : listaEActividades){
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(
+                        a.getNombre(),
+                        a.getDescripcion(),
+                        a.getDuracion(),
+                        a.getCosto(),
+                        a.getCiudad(),
+                        a.getFechaAlta()
+                );
+                
+                listaActividades.add(dtActividadTuristica);
+            }
+            return listaActividades;
+        }catch(Exception e){
+            return listaActividades;
+        }finally{
+            em.close();
+        }
+    }       
+
     @Override
     public void existeActividadTuristica(String nombre)throws MyException{
         EntityManager em = emf.createEntityManager();    

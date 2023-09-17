@@ -11,13 +11,11 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
-import dataTypes.DTUsuario;
 import java.util.List;
 import exceptions.MyException;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
 import persistencia.entidades.EProveedor;
-import persistencia.entidades.ESalidaTuristica;
 import persistencia.entidades.ETurista;
 
 /**
@@ -31,10 +29,14 @@ public interface IDataPersistencia {
     void altaTurista(Turista objTurista) throws MyException;
     
     List<DTTurista> obtenerTuristas();
-    public ETurista buscarTuristaPorNickname(String nickname) throws MyException;
-    public EProveedor buscarProveedorPorNickname(String nickname) throws MyException;
+    ETurista buscarTuristaPorNickname(String nickname) throws MyException;
+    EProveedor buscarProveedorPorNickname(String nickname) throws MyException;
     void actualizarProveedor(Proveedor objProveedor) throws MyException;
     void actualizarTurista(Turista objTurista) throws MyException;
+    
+    List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
+    List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
+    List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor); 
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;

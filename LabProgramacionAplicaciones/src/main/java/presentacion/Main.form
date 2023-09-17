@@ -810,12 +810,12 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jCU2TextFieldEmail" min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCU2ComboBoxActividadTuristica" min="-2" pref="259" max="-2" attributes="0"/>
-                                  <Component id="jCU2ComboBoxSalidaTuristica" min="-2" pref="259" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="jCU2ButtonClearFields" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jCU2LabelActividadTuristica" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jCU2ComboBoxActividadTuristica" alignment="0" pref="300" max="32767" attributes="0"/>
+                              <Component id="jCU2ComboBoxSalidaTuristica" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jCU2LabelSalidaTuristica" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -845,7 +845,7 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCU2TextFieldActividadCosto" max="32767" attributes="0"/>
+                                          <Component id="jCU2TextFieldActividadCosto" pref="169" max="32767" attributes="0"/>
                                           <Component id="jCU2LabelActividadCosto" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -919,11 +919,17 @@
                       <Component id="jCU2LabelFechaNacimiento" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU2TextFieldFechaNacimiento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                      <Component id="jCU2ComboBoxActividadTuristica" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="jCU2ComboBoxSalidaTuristica" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jCU2LabelActividadTuristica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCU2ComboBoxActividadTuristica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jCU2LabelSalidaTuristica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jCU2ComboBoxSalidaTuristica" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Component id="jCU2ButtonClearFields" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -931,9 +937,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="20" max="32767" attributes="0"/>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                       <Component id="jCU2LabelInfoActividad" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jCU2LabelActividadNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCU2LabelActividadCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1232,11 +1238,15 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="Seleccionar Actividad Turistica"/>
+                    <StringItem index="0" value="Seleccionar Actividad"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2ComboBoxActividadTuristicaActionPerformed"/>
+              </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU2ComboBoxActividadTuristica.setEnabled(false);"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
@@ -1244,12 +1254,37 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="Seleccionar Salida Turistica"/>
+                    <StringItem index="0" value="Seleccionar Salida"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2ComboBoxSalidaTuristicaActionPerformed"/>
+              </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU2ComboBoxSalidaTuristica.setEnabled(false);"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelSalidaTuristica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salidas Tur&#xed;sticas"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU2LabelActividadTuristica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Actividades Tur&#xed;sticas"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jCU2ButtonClearFields">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vaciar campos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU2ButtonClearFieldsActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU2ButtonClearFields.setEnabled(false);"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -1652,6 +1687,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU3ButtonEmptyFieldsActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jCU3ButtonEmptyFields.setEnabled(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

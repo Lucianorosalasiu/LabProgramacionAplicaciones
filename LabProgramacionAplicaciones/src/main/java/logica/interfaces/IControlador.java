@@ -27,6 +27,9 @@ public interface  IControlador {
     DTUsuario obtenerUsuario(String nickname);
     void actualizarUsuario(DTUsuario usuario) throws MyException;
     
+    List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
+    List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
+    List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor);
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
