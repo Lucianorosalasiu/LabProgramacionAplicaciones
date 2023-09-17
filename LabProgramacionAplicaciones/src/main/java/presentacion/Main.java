@@ -45,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -2088,7 +2089,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel7.setText("Cantidad máxima de turistas:");
 
-        jCU6SpinnerCantMaxTuristas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jCU6SpinnerCantMaxTuristas.setModel(new javax.swing.SpinnerNumberModel());
 
         jCU6SpinnerFechaSalida.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
 
@@ -3784,12 +3785,18 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU6TableDepartamentosMouseClicked
 
     private void jInternalFrameAltaSalidaTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
+        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerCantMaxTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerFechaSalida.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerFechaAlta.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+
         updateDepartmentosInTable(jCU6TableDepartamentos);      
         DefaultTableModel modelTableActividades = (DefaultTableModel) jCU6TableActividades.getModel();
         modelTableActividades.setRowCount(0);
     }//GEN-LAST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
 
     private void jInternalFrameInscripcionSalidaTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
+        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU8SpinnerCantTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU8SpinnerFechaInscripcion.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
         updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
         updateTuristasInTable(jCU8TableTuristas);
     }//GEN-LAST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
