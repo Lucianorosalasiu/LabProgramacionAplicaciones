@@ -155,6 +155,9 @@ public class Main extends javax.swing.JFrame {
         jCU2LabelSalidaMaxTuristas = new javax.swing.JLabel();
         jCU2ComboBoxActividadTuristica = new javax.swing.JComboBox<>();
         jCU2ComboBoxSalidaTuristica = new javax.swing.JComboBox<>();
+        jCU2LabelSalidaTuristica = new javax.swing.JLabel();
+        jCU2LabelActividadTuristica = new javax.swing.JLabel();
+        jCU2ButtonClearFields = new javax.swing.JButton();
         jInternalFrameModificarUsuario = new javax.swing.JInternalFrame();
         jCU4ScrollPanelProveedores2 = new javax.swing.JScrollPane();
         jCU3TableUsersList = new javax.swing.JTable();
@@ -890,9 +893,33 @@ public class Main extends javax.swing.JFrame {
 
         jCU2LabelSalidaMaxTuristas.setText("Cantidad Máxima de Turistas");
 
-        jCU2ComboBoxActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Actividad Turistica" }));
+        jCU2ComboBoxActividadTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Actividad" }));
+        jCU2ComboBoxActividadTuristica.setEnabled(false);
+        jCU2ComboBoxActividadTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU2ComboBoxActividadTuristicaActionPerformed(evt);
+            }
+        });
 
-        jCU2ComboBoxSalidaTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Salida Turistica" }));
+        jCU2ComboBoxSalidaTuristica.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Salida" }));
+        jCU2ComboBoxSalidaTuristica.setEnabled(false);
+        jCU2ComboBoxSalidaTuristica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU2ComboBoxSalidaTuristicaActionPerformed(evt);
+            }
+        });
+
+        jCU2LabelSalidaTuristica.setText("Salidas Turísticas");
+
+        jCU2LabelActividadTuristica.setText("Actividades Turísticas");
+
+        jCU2ButtonClearFields.setText("Vaciar campos");
+        jCU2ButtonClearFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU2ButtonClearFieldsActionPerformed(evt);
+            }
+        });
+        jCU2ButtonClearFields.setEnabled(false);
 
         javax.swing.GroupLayout jInternalFrameConsultarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameConsultarUsuario.getContentPane());
         jInternalFrameConsultarUsuario.getContentPane().setLayout(jInternalFrameConsultarUsuarioLayout);
@@ -922,11 +949,12 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jCU2TextFieldLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jCU2TextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCU2ComboBoxActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCU2ComboBoxSalidaTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jCU2ButtonClearFields)
+                    .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jCU2LabelActividadTuristica, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU2ComboBoxActividadTuristica, javax.swing.GroupLayout.Alignment.LEADING, 0, 300, Short.MAX_VALUE)
+                        .addComponent(jCU2ComboBoxSalidaTuristica, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU2LabelSalidaTuristica, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(33, 33, 33)
                 .addComponent(jCU2SeparatorVertical, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
@@ -950,7 +978,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jCU2LabelActividadDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCU2TextFieldActividadCosto)
+                                    .addComponent(jCU2TextFieldActividadCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                                     .addComponent(jCU2LabelActividadCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1006,19 +1034,25 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU2LabelFechaNacimiento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU2TextFieldFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCU2LabelActividadTuristica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU2ComboBoxActividadTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
+                .addComponent(jCU2LabelSalidaTuristica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU2ComboBoxSalidaTuristica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(jCU2ButtonClearFields)
+                .addGap(26, 26, 26))
             .addGroup(jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCU2SeparatorVertical)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jCU2LabelInfoActividad)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU2LabelActividadNombre)
                     .addComponent(jCU2LabelActividadCiudad))
@@ -1206,6 +1240,7 @@ public class Main extends javax.swing.JFrame {
                 jCU3ButtonEmptyFieldsActionPerformed(evt);
             }
         });
+        jCU3ButtonEmptyFields.setEnabled(false);
 
         javax.swing.GroupLayout jInternalFrameModificarUsuarioLayout = new javax.swing.GroupLayout(jInternalFrameModificarUsuario.getContentPane());
         jInternalFrameModificarUsuario.getContentPane().setLayout(jInternalFrameModificarUsuarioLayout);
@@ -3454,7 +3489,7 @@ public class Main extends javax.swing.JFrame {
                 DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
                 controlador.altaDepartamento(departamento);
                 jCU12vaciarCampos();
-                 JOptionPane.showMessageDialog(this,"Departamento dado de alta!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Departamento dado de alta!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             }catch(MyException e){
                 JOptionPane.showMessageDialog(this,e.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
             }
@@ -4476,8 +4511,9 @@ public class Main extends javax.swing.JFrame {
             jCU3TextURLWebSite.setEnabled(true);
         }
         
-        // Se activa el botón para actualizar datos
+        // Se activa el botón para actualizar datos y para vaciar campos
         jCU3ButtonUpdateData.setEnabled(true);
+        jCU3ButtonEmptyFields.setEnabled(true);
     }//GEN-LAST:event_jCU3TableUsersListMouseClicked
     
     public void jCU3ClearAndDisable(){   
@@ -4504,6 +4540,7 @@ public class Main extends javax.swing.JFrame {
         jCU3ButtonUpdateData.setEnabled(false);
         
         jCU3ActualizarTabla();
+        jCU3ButtonEmptyFields.setEnabled(false);
     }
     
     public boolean JCU3VerifyEmtpyFields(){
@@ -4568,10 +4605,32 @@ public class Main extends javax.swing.JFrame {
             if (usuario instanceof DTTurista) {
                 DTTurista turista = (DTTurista) usuario;
                 jCU2TextFieldUserType.setText("Turista");
+                jCU2ComboBoxSalidaTuristica.setEnabled(true);
+                jCU2ComboBoxActividadTuristica.setSelectedIndex(0);
+                jCU2ComboBoxActividadTuristica.setEnabled(false);
+                
+                updateSalidasTuristaInComboBox(
+                        turista.getId(), 
+                        jCU2ComboBoxSalidaTuristica
+                );
+                
             } else if (usuario instanceof DTProveedor) {
                 DTProveedor proveedor = (DTProveedor) usuario;
                 jCU2TextFieldUserType.setText("Proveedor/a");
+                jCU2ComboBoxSalidaTuristica.setEnabled(true);
+                jCU2ComboBoxActividadTuristica.setEnabled(true);
+                
+                updateSalidasProveedorInComboBox(
+                        proveedor.getId(),
+                        jCU2ComboBoxSalidaTuristica
+                );
+                
+                updateActividadesProveedorInComboBox(
+                        proveedor.getId(),
+                        jCU2ComboBoxActividadTuristica
+                );
             }
+            jCU2ButtonClearFields.setEnabled(true);
         } else if(selectedItem != null && selectedItem.equals("Seleccionar nickname")){
             jCU2ClearFields();
         }
@@ -4590,14 +4649,81 @@ public class Main extends javax.swing.JFrame {
         
         jComboBox.setSelectedIndex(0);
     }
+    
+    private void updateSalidasTuristaInComboBox(Long idTurista, JComboBox jComboBox){
+        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(idTurista);
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTSalidaTuristica salida : salidaList){
+            jComboBox.addItem(salida.getNombre());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }
+    
+    private void updateSalidasProveedorInComboBox(Long idProveedor, JComboBox jComboBox){
+        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(idProveedor);
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTSalidaTuristica salida : salidaList){
+            jComboBox.addItem(salida.getNombre());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }
+    
+    private void updateActividadesProveedorInComboBox(Long idProveedor, JComboBox jComboBox){
+        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(idProveedor);
+        
+        String defaultValue = (String) jComboBox.getItemAt(0);
+        jComboBox.removeAllItems();
+        jComboBox.addItem(defaultValue);
+        
+        for (DTActividadTuristica actividad : actividadList){
+            jComboBox.addItem(actividad.getNombre());
+        }
+        
+        jComboBox.setSelectedIndex(0);
+    }        
+            
     private void jCU2ClearFields() {
+        jCU2ComboBoxUserList.setSelectedIndex(0);
         jCU2TextFieldName.setText("");
         jCU2TextFieldLastName.setText("");
         jCU2TextFieldEmail.setText("");
         jCU2TextFieldUserType.setText("");
         jCU2TextFieldFechaNacimiento.setText("");
+        jCU2ComboBoxSalidaTuristica.setSelectedIndex(0);
+        jCU2ComboBoxSalidaTuristica.setEnabled(false);
+        jCU2ComboBoxActividadTuristica.setSelectedIndex(0);
+        jCU2ComboBoxActividadTuristica.setEnabled(false);
+        jCU2ButtonClearFields.setEnabled(false);
+        jCU2ClearInfoActividad();
+        jCU2ClearInfoSalida();
     }
     
+    private void jCU2ClearInfoActividad(){
+        jCU2TextFieldActividadNombre.setText("");
+        jCU2TextFieldActividadCiudad.setText("");
+        jCU2TextFieldActividadDuracion.setText("");
+        jCU2TextFieldActividadCosto.setText("");
+        jCU2TextFieldActividadFechaAlta.setText("");
+        jCU2TextAreaActividadDescripcion.setText("");
+    }
+            
+    private void jCU2ClearInfoSalida(){
+        jCU2TextFieldSalidaNombre.setText("");
+        jCU2TextFieldSalidaLugar.setText("");
+        jCU2TextFieldSalidaFecha.setText("");
+        jCU2TextFieldSalidaFechaAlta.setText("");
+        jCU2TextFieldSalidaMaxTuristas.setText("");
+    }
     
     private void jCU2TextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2TextFieldUserTypeActionPerformed
         // TODO add your handling code here:
@@ -4613,8 +4739,10 @@ public class Main extends javax.swing.JFrame {
             Runtime rt = Runtime.getRuntime();
             try {
                 Process pr = rt.exec("./cargarDatos.sh");
+                JOptionPane.showMessageDialog(this,"Los datos fueron cargados!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
-                System.out.println(ex);
+                JOptionPane.showMessageDialog(this,ex.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
+                System.out.println(ex.getMessage());
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -4647,6 +4775,58 @@ public class Main extends javax.swing.JFrame {
     private void jCU2TextFieldSalidaMaxTuristasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2TextFieldSalidaMaxTuristasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU2TextFieldSalidaMaxTuristasActionPerformed
+
+    private void jCU2ButtonClearFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2ButtonClearFieldsActionPerformed
+        jCU2ClearFields();
+    }//GEN-LAST:event_jCU2ButtonClearFieldsActionPerformed
+
+    private void jCU2ComboBoxSalidaTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2ComboBoxSalidaTuristicaActionPerformed
+        Object selectedItem = jCU2ComboBoxSalidaTuristica.getSelectedItem();
+
+        if (selectedItem != null && !selectedItem.equals("Seleccionar Salida")) {
+            String nombreSalida = selectedItem.toString();
+            DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
+            
+            // Formato deseado para la fecha
+            String formato = "dd-MM-yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(formato);
+            String fechaSalida = sdf.format(salida.getFechaSalida());
+            String fechaAlta = sdf.format(salida.getFechaAlta());
+            
+            jCU2TextFieldSalidaNombre.setText(salida.getNombre());
+            jCU2TextFieldSalidaLugar.setText(salida.getLugar());
+            jCU2TextFieldSalidaFecha.setText(fechaSalida);
+            jCU2TextFieldSalidaFechaAlta.setText(fechaAlta);
+            jCU2TextFieldSalidaMaxTuristas.setText(Integer.toString(salida.getCantidadMaxTuristas()));
+
+        } else if(selectedItem != null && selectedItem.equals("Seleccionar Salida")){
+            jCU2ClearInfoSalida();
+        }
+    }//GEN-LAST:event_jCU2ComboBoxSalidaTuristicaActionPerformed
+
+    private void jCU2ComboBoxActividadTuristicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2ComboBoxActividadTuristicaActionPerformed
+        Object selectedItem = jCU2ComboBoxActividadTuristica.getSelectedItem();
+
+        if (selectedItem != null && !selectedItem.equals("Seleccionar Actividad")) {
+            String nombreActividad = selectedItem.toString();
+            DTActividadTuristica actividad = controlador.obtenerActividadTuristica(nombreActividad);
+            
+            // Formato deseado para la fecha
+            String formato = "dd-MM-yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(formato);
+            String fechaAlta = sdf.format(actividad.getFechaAlta());
+            
+            jCU2TextFieldActividadNombre.setText(actividad.getNombre());
+            jCU2TextFieldActividadCiudad.setText(actividad.getCiudad());
+            jCU2TextFieldActividadDuracion.setText(actividad.getDuracion());
+            jCU2TextFieldActividadCosto.setText(actividad.getCostoToString());
+            jCU2TextFieldActividadFechaAlta.setText(fechaAlta);
+            jCU2TextAreaActividadDescripcion.setText(actividad.getDescripcion());
+
+        } else if(selectedItem != null && selectedItem.equals("Seleccionar Actividad")){
+            jCU2ClearInfoActividad();
+        }
+    }//GEN-LAST:event_jCU2ComboBoxActividadTuristicaActionPerformed
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -5331,6 +5511,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU1LabelWebsite;
     private javax.swing.JScrollPane jCU1ScrollPane11Description;
     private javax.swing.JTextArea jCU1TextAreaDescription;
+    private javax.swing.JButton jCU2ButtonClearFields;
     private javax.swing.JComboBox<String> jCU2ComboBoxActividadTuristica;
     private javax.swing.JComboBox<String> jCU2ComboBoxSalidaTuristica;
     private javax.swing.JComboBox<String> jCU2ComboBoxUserList;
@@ -5340,6 +5521,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU2LabelActividadDuracion;
     private javax.swing.JLabel jCU2LabelActividadFechaAlta;
     private javax.swing.JLabel jCU2LabelActividadNombre;
+    private javax.swing.JLabel jCU2LabelActividadTuristica;
     private javax.swing.JLabel jCU2LabelEmail;
     private javax.swing.JLabel jCU2LabelFechaNacimiento;
     private javax.swing.JLabel jCU2LabelInfoActividad;
@@ -5351,6 +5533,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU2LabelSalidaLugar;
     private javax.swing.JLabel jCU2LabelSalidaMaxTuristas;
     private javax.swing.JLabel jCU2LabelSalidaNombre;
+    private javax.swing.JLabel jCU2LabelSalidaTuristica;
     private javax.swing.JLabel jCU2LabelUserType;
     private javax.swing.JSeparator jCU2SeparatorVertical;
     private javax.swing.JTextArea jCU2TextAreaActividadDescripcion;

@@ -149,6 +149,21 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista){
+        return dataPersistencia.obtenerSalidasDeTurista(idTurista); 
+    }
+    
+    @Override
+    public List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor){
+        return dataPersistencia.obtenerSalidasDeProveedor(idProveedor);
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor){
+        return dataPersistencia.obtenerActividadesDeProveedor(idProveedor); 
+    }
+    
+    @Override
     public void existeActividadTuristica(String nombre)throws MyException{
         dataPersistencia.existeActividadTuristica(nombre);
     }

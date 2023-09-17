@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import logica.clases.Departamento;
 import lombok.Getter;
@@ -39,6 +40,9 @@ public class EActividadTuristica extends EBase {
     
     @ManyToMany(mappedBy = "actividades")
     private List<EPaqueteActividadTuristica> paquetes;
+    
+    @OneToMany(mappedBy = "eActividadTuristica")
+    private List<ESalidaTuristica> ESalidasTuristicas;
     
     private EActividadTuristica(){}
     
