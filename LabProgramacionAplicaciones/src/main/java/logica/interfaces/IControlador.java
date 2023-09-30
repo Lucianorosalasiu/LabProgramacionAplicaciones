@@ -5,6 +5,7 @@
 package logica.interfaces;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
@@ -65,6 +66,10 @@ public interface  IControlador {
     void agregarActividadPaquete(String paquete,String actividad);
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
     public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
+    
+    /*CU13 ALTA DE CATEGORIA*/
+    void altaCategoria(String nombre) throws MyException;
+    List<DTCategoria> obtenerCategorias ();
     
 }
 

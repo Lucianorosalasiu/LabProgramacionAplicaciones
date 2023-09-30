@@ -1,6 +1,7 @@
 package persistencia;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -13,12 +14,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
+import static java.util.Objects.isNull;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import logica.clases.Proveedor;
 import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
+import persistencia.entidades.ECategoria;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EInscripcion;
 import persistencia.entidades.EPaqueteActividadTuristica;
@@ -997,5 +1000,55 @@ public class DataPersistencia implements IDataPersistencia {
         return (int) total;
     }
     
+    @Override
+    public void altaCategoria(String nombre) throws MyException {
+        EntityManager em = emf.createEntityManager();   
+        
+        String query = "SELECT c FROM ECategoria c WHERE c.nombre = :nombre";
+        List<ECategoria> eCategorias = em.createQuery(query, ECategoria.class)
+                                .setParameter("nombre", nombre)
+                                .getResultList();
+
+        if (!eCategorias.isEmpty()){
+            throw new MyException("Ya existe una categoria con el nombre ingresado");
+        }
+                
+        try{
+            em.getTransaction().begin();
+             
+
+            ECategoria nuevaCategoria = new ECategoria(
+                    nombre
+            );
+
+            em.persist(nuevaCategoria);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            throw new MyException("ERROR! Algo salio durante el alta de la categoria. ");
+        }finally{
+            em.close();
+        }
+    }
     
+    @Override
+    public List<DTCategoria> obtenerCategorias(){
+        EntityManager em = emf.createEntityManager();
+        String query = "SELECT c FROM ECategoria c";
+        List<DTCategoria> dtCategorias = new LinkedList<>();  
+        
+        try{
+            List<ECategoria> resultado = em.createQuery(query,ECategoria.class).getResultList();
+  
+            for(ECategoria e: resultado){
+                dtCategorias.add( new DTCategoria(e.getNombre()) );
+            }
+            
+            return dtCategorias;
+        }catch(Exception e){
+            return dtCategorias;
+        }finally{
+            em.close();
+        }
+    }
 }

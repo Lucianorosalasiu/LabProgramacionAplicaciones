@@ -5,6 +5,7 @@
 package persistencia;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -75,4 +76,6 @@ public interface IDataPersistencia {
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
     DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
      
+    void altaCategoria(String nombre) throws MyException;
+    List<DTCategoria> obtenerCategorias ();
 }

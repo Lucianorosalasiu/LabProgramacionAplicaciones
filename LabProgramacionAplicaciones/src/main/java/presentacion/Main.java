@@ -383,6 +383,11 @@ public class Main extends javax.swing.JFrame {
         jCU11TextFieldFechaAltaActividad = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         jCU11TextFieldDepartamento = new javax.swing.JTextField();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jCU13TextFieldCategoria = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jCU13ButtonEnviar = new javax.swing.JButton();
+        jCU13ButtonVaciarCampos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAcciones = new javax.swing.JMenu();
         jMenuUsuario = new javax.swing.JMenu();
@@ -401,6 +406,7 @@ public class Main extends javax.swing.JFrame {
         jMenuAltaPaquete = new javax.swing.JMenuItem();
         jMenuAgregarActividadPaquete = new javax.swing.JMenuItem();
         jMenuConsultaPaquete = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuCargarDatos = new javax.swing.JMenuItem();
 
         jCU12Dialog.setTitle("ERROR");
@@ -3271,6 +3277,57 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneCasosDeUso.addTab("Consulta de Paquete de Actividades Turísticas", jInternalFrameConsultaPaquetes);
 
+        jInternalFrame1.setVisible(true);
+
+        jLabel15.setText("Nombre de Categoria");
+
+        jCU13ButtonEnviar.setText("Enviar");
+        jCU13ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU13ButtonEnviarActionPerformed(evt);
+            }
+        });
+
+        jCU13ButtonVaciarCampos.setText("Vaciar Campo");
+        jCU13ButtonVaciarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU13ButtonVaciarCamposActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCU13ButtonVaciarCampos)
+                .addGap(56, 56, 56)
+                .addComponent(jCU13ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(403, 403, 403)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jCU13TextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(421, Short.MAX_VALUE))
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(jCU13TextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU13ButtonEnviar)
+                    .addComponent(jCU13ButtonVaciarCampos))
+                .addGap(55, 55, 55))
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Alta de Categoria", jInternalFrame1);
+
         jMenuAcciones.setText("Acciones");
 
         jMenuUsuario.setText("Usuarios");
@@ -3384,6 +3441,14 @@ public class Main extends javax.swing.JFrame {
         jMenuPaquete.add(jMenuConsultaPaquete);
 
         jMenuAcciones.add(jMenuPaquete);
+
+        jMenuItem1.setText("Alta de Categoria");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAcciones.add(jMenuItem1);
 
         jMenuCargarDatos.setText("Cargar datos de prueba");
         jMenuCargarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -4451,7 +4516,7 @@ public class Main extends javax.swing.JFrame {
             jCU3ClearAndDisable();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
-       } catch (MyException ex) {
+        } catch (MyException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jCU3ButtonUpdateDataActionPerformed
@@ -4827,6 +4892,33 @@ public class Main extends javax.swing.JFrame {
             jCU2ClearInfoActividad();
         }
     }//GEN-LAST:event_jCU2ComboBoxActividadTuristicaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jTabbedPaneCasosDeUso.setSelectedIndex(12);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jCU13ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU13ButtonEnviarActionPerformed
+        try {
+            String nombreCategoria = jCU13TextFieldCategoria.getText();
+            
+            if (nombreCategoria.isEmpty()){
+                throw new EmptyFieldsException("Debe ingresar un nombre de categoria");
+            }
+            
+            controlador.altaCategoria(nombreCategoria);
+            JOptionPane.showMessageDialog(this, "Categoria dada de alta.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+            
+            jCU13TextFieldCategoria.setText("");
+        } catch (EmptyFieldsException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
+        } catch (MyException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jCU13ButtonEnviarActionPerformed
+
+    private void jCU13ButtonVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU13ButtonVaciarCamposActionPerformed
+        jCU13TextFieldCategoria.setText("");
+    }//GEN-LAST:event_jCU13ButtonVaciarCamposActionPerformed
     
     public void jCU1PoblarComboBoxPaises() {
         try {
@@ -5498,6 +5590,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jCU12TextFieldDescripcion;
     private javax.swing.JTextField jCU12TextFieldNombre;
     private javax.swing.JTextField jCU12TextFieldURL;
+    private javax.swing.JButton jCU13ButtonEnviar;
+    private javax.swing.JButton jCU13ButtonVaciarCampos;
+    private javax.swing.JTextField jCU13TextFieldCategoria;
     private javax.swing.JComboBox<String> jCU1ComboBoxPaises;
     private javax.swing.JInternalFrame jCU1InternalFrameAgregarUsuario;
     private javax.swing.JLabel jCU1LabelBirthDate;
@@ -5685,6 +5780,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextArea jCU9TextAreaDescPaquete;
     private javax.swing.JTextField jCU9TextFieldNombrePaquete;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrameAgregarActividadPaquete;
     private javax.swing.JInternalFrame jInternalFrameAltaActividadTuristica;
     private javax.swing.JInternalFrame jInternalFrameAltaDepartamento;
@@ -5702,6 +5798,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -5743,6 +5840,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCargarDatos;
     private javax.swing.JMenuItem jMenuConsultaPaquete;
     private javax.swing.JMenuItem jMenuDepartamentoAlta;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuPaquete;
     private javax.swing.JMenu jMenuSalida;
     private javax.swing.JMenuItem jMenuSalidaAlta;
