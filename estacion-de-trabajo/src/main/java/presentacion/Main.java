@@ -59,9 +59,11 @@ import org.apache.commons.csv.CSVRecord;
  * @author all
  */
 public class Main extends javax.swing.JFrame {
+
     Fabrica fabrica = new Fabrica();
     IControlador controlador = fabrica.getInterface();
     Boolean datosCargados = false;
+
     /**
      * Creates new form inicio
      */
@@ -3483,7 +3485,7 @@ public class Main extends javax.swing.JFrame {
     private void jMenuUsuarioAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuarioAltaActionPerformed
         // TODO add your handling code here:
         jTabbedPaneCasosDeUso.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_jMenuUsuarioAltaActionPerformed
 
     private void jMenuSalidaAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSalidaAltaActionPerformed
@@ -3546,21 +3548,21 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU12ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU12ButtonEnviarActionPerformed
         // TODO add your handling code here:
-        if(jCU12verificarVacios()){
+        if (jCU12verificarVacios()) {
             return;
-        }else{
+        } else {
             String nombre = jCU12TextFieldNombre.getText();
             String descripcion = jCU12TextFieldDescripcion.getText();
             String url = jCU12TextFieldURL.getText();
 
-            try{
+            try {
                 controlador.existeDepartamento(nombre);
-                DTDepartamento departamento = new DTDepartamento(nombre,descripcion,url);
+                DTDepartamento departamento = new DTDepartamento(nombre, descripcion, url);
                 controlador.altaDepartamento(departamento);
                 jCU12vaciarCampos();
-                JOptionPane.showMessageDialog(this,"Departamento dado de alta!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch(MyException e){
-                JOptionPane.showMessageDialog(this,e.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Departamento dado de alta!", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+            } catch (MyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_jCU12ButtonEnviarActionPerformed
@@ -3581,35 +3583,35 @@ public class Main extends javax.swing.JFrame {
         jCU12Dialog.setVisible(false);
     }//GEN-LAST:event_jButtonDepartamentoDuplicadoReingresarActionPerformed
 
-    private void CU6VaciarCampos(){
+    private void CU6VaciarCampos() {
         // Se limpian los campos del panel "Alta de Salida Turistica"
         updateDepartmentosInTable(jCU6TableDepartamentos);
-        
+
         DefaultTableModel modelTableActividades = (DefaultTableModel) jCU6TableActividades.getModel();
         modelTableActividades.setRowCount(0);
-        
+
         // Guardamos el valor por defecto para limpiar el combobox
         jCU6TableDepartamentos.clearSelection();
         jCU6TableActividades.clearSelection();
-        
+
         jCU6TextFieldNombreSalida.setText("");
         jCU6TextFieldLugarSalida.setText("");
-        
+
         jCU6SpinnerFechaSalida.setValue(new Date());
         jCU6SpinnerFechaAlta.setValue(new Date());
 
         jCU6SpinnerCantMaxTuristas.setValue(0);
     }
-            
-    private boolean CU6EmptyFields(){
-        if (jCU6TableDepartamentos.getSelectedRowCount() != 1 || jCU6TableActividades.getSelectedRowCount() != 1 ||
-                jCU6TextFieldNombreSalida.getText().trim().isEmpty() || jCU6TextFieldLugarSalida.getText().trim().isEmpty() ||
-                (int) jCU6SpinnerCantMaxTuristas.getValue() == 0) {
+
+    private boolean CU6EmptyFields() {
+        if (jCU6TableDepartamentos.getSelectedRowCount() != 1 || jCU6TableActividades.getSelectedRowCount() != 1
+                || jCU6TextFieldNombreSalida.getText().trim().isEmpty() || jCU6TextFieldLugarSalida.getText().trim().isEmpty()
+                || (int) jCU6SpinnerCantMaxTuristas.getValue() == 0) {
             return true;
         }
         return false;
     }
-            
+
     private void jCU4TextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4TextFieldNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU4TextFieldNombreActionPerformed
@@ -3645,18 +3647,18 @@ public class Main extends javax.swing.JFrame {
     private void jCU5TextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5TextFieldFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU5TextFieldFechaActionPerformed
-    public boolean jCU10esvacio(){
-        if(jCU10TablePaquetes.getSelectionModel().isSelectionEmpty() ||
-           jCU10TableActividades.getSelectionModel().isSelectionEmpty()){
-           JOptionPane.showMessageDialog(this, "Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
-           
-           return true;
-        }else{
-           return false;
+    public boolean jCU10esvacio() {
+        if (jCU10TablePaquetes.getSelectionModel().isSelectionEmpty()
+                || jCU10TableActividades.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(this, "Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
+
+            return true;
+        } else {
+            return false;
         }
     }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(!jCU10esvacio()){
+        if (!jCU10esvacio()) {
             DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
             DefaultTableModel modelActividad = (DefaultTableModel) jCU10TableActividades.getModel();
             //obtengo la columna seleccionada
@@ -3669,28 +3671,28 @@ public class Main extends javax.swing.JFrame {
             String celdaSeleccionadaPaquete = modelPaquetes.getValueAt(tuplaSeleccionadaPaquete, columnaSeleccionadaPaquete).toString();
             String celdaSeleccionadaActividad = modelActividad.getValueAt(tuplaSeleccionadaActividad, columnaSeleccionadaActividad).toString();
 
-            controlador.agregarActividadPaquete(celdaSeleccionadaPaquete,celdaSeleccionadaActividad);
+            controlador.agregarActividadPaquete(celdaSeleccionadaPaquete, celdaSeleccionadaActividad);
             jCUPaquetesactualizarpaquetes(jCU10TablePaquetes);
             jCU10Limpiar();
-            JOptionPane.showMessageDialog(this, "Actividad turistica agregada a paquete!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Actividad turistica agregada a paquete!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void jCU10Limpiar(){
+    public void jCU10Limpiar() {
         DefaultTableModel modelActividad = (DefaultTableModel) jCU10TableActividades.getModel();
         jCU10TextAreaDescripcion.setText(null);
         jCU10TextFieldValidez.setText(null);
         jCU10TextFieldDescuento.setText(null);
         jCU10DateChooserFecha.setText(null);
-        while (modelActividad.getRowCount() > 0) {               
-                modelActividad.removeRow(modelActividad.getRowCount() - 1);
-            }
+        while (modelActividad.getRowCount() > 0) {
+            modelActividad.removeRow(modelActividad.getRowCount() - 1);
+        }
     }
     private void jCU4ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonEnviarActionPerformed
         // TODO add your handling code here:
-        if(jCU4verificarVacios()){
+        if (jCU4verificarVacios()) {
             return;
-        }else{
+        } else {
             String nombre = jCU4TextFieldNombre.getText();
             String descripcion = jCU4TextAreaDescripcion.getText();
             String duracion = jCU4TextFieldDuracion.getText();
@@ -3700,25 +3702,24 @@ public class Main extends javax.swing.JFrame {
 
             /*conseguir la id del departamento seleccionado de la tabla*/
             int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
-                
-            Long idDepartamento = Long.parseLong(jCU4TableDepartamentos.getValueAt(indexRowDepartamento,0).toString());
-            
+
+            Long idDepartamento = Long.parseLong(jCU4TableDepartamentos.getValueAt(indexRowDepartamento, 0).toString());
+
             /*conseguir proveedor seleccionado de la tabla*/
             int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
-                
-            Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor,0).toString());
-            
-            
-            try{
+
+            Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor, 0).toString());
+
+            try {
                 controlador.existeActividadTuristica(nombre);
                 /*construir el dt actividad turistica*/
-                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre,descripcion,
-                duracion,costo,ciudad,fechaAlta);
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre, descripcion,
+                        duracion, costo, ciudad, fechaAlta);
                 controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
                 jCU4vaciarCampos();
-                JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
-            }catch(MyException e){
-                JOptionPane.showMessageDialog(this, e.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+            } catch (MyException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_jCU4ButtonEnviarActionPerformed
@@ -3749,28 +3750,25 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU4ButtonReingresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jCU9verificarVacios()){
+        if (jCU9verificarVacios()) {
             return;
-        }else{
+        } else {
             /*tomo los datos y contruyo el datatype*/
             String nombre = jCU9TextFieldNombrePaquete.getText();
             String desc = jCU9TextAreaDescPaquete.getText();
             Date fechaAlta = jCU9DateChooserFecha.getDate();
             int validez = (Integer) jCU9SpinnerValidezPaquete.getValue();
             int descuento = (Integer) jCU9SpinnerDescuentoPaquete.getValue();
-            DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(nombre,desc,validez,descuento,fechaAlta);
+            DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(nombre, desc, validez, descuento, fechaAlta);
             controlador.altaPaqueteActividadTuristica(paquete);
             jCU9vaciarCampos();
-            JOptionPane.showMessageDialog(this, "Paquete turistico dado de alta!.","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Paquete turistico dado de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
             return;
             /**/
         }
 
-
         // TODO add your handling code here:
-         
-        
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCU4ButtonActualizarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU4ButtonActualizarTablasActionPerformed
@@ -3781,23 +3779,23 @@ public class Main extends javax.swing.JFrame {
     private void jCU5ComboBoxDepartamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCU5ComboBoxDepartamentoFocusGained
         // TODO add your handling code here:
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
-        
+
         jCU5ComboBoxDepartamento.removeAllItems();
-        
-        for(DTDepartamento d: dtDepartamentos){
+
+        for (DTDepartamento d : dtDepartamentos) {
             jCU5ComboBoxDepartamento.addItem(d.getNombre());
         }
     }//GEN-LAST:event_jCU5ComboBoxDepartamentoFocusGained
 
     private void jCU5ComboBoxDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxDepartamentoActionPerformed
         // TODO add your handling code here:
-        if(jCU5ComboBoxDepartamento.getSelectedItem() != null){
+        if (jCU5ComboBoxDepartamento.getSelectedItem() != null) {
             String nombreDepartamento = jCU5ComboBoxDepartamento.getSelectedItem().toString();
             List<DTActividadTuristica> dtActividadesTuristicas = controlador.obtenerActividadesTuristicas(nombreDepartamento);
-            
+
             jCU5ComboBoxActividad.removeAllItems();
-            
-            for(DTActividadTuristica a : dtActividadesTuristicas){
+
+            for (DTActividadTuristica a : dtActividadesTuristicas) {
                 jCU5ComboBoxActividad.addItem(a.getNombre());
             }
         }
@@ -3805,7 +3803,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU5ComboBoxActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxActividadActionPerformed
         // TODO add your handling code here:
-        if(jCU5ComboBoxActividad.getSelectedItem() != null){
+        if (jCU5ComboBoxActividad.getSelectedItem() != null) {
             String nombreActividad = jCU5ComboBoxActividad.getSelectedItem().toString();
             List<DTSalidaTuristica> salidas = controlador.obtenerSalidasTuristicas(nombreActividad);
             DTActividadTuristica dtActividadTuristica = controlador.obtenerActividadTuristica(nombreActividad);
@@ -3817,17 +3815,17 @@ public class Main extends javax.swing.JFrame {
             jCU5TextFieldDuracion.setText(dtActividadTuristica.getDuracion());
             jCU5TextFieldCosto.setText(dtActividadTuristica.getCostoToString());
             jCU5TextFieldFecha.setText(dtActividadTuristica.getFechaAlta().toString());
-            
+
             jCU5ComboBoxSalida.removeAllItems();
-            
-            for(DTSalidaTuristica s : salidas){
+
+            for (DTSalidaTuristica s : salidas) {
                 jCU5ComboBoxSalida.addItem(s.getNombre());
             }
-            
+
             jCU5ComboBoxPaquete.removeAllItems();
-            
-            for(DTPaqueteActividadTuristica p : paquetes){
-            jCU5ComboBoxPaquete.addItem(p.getNombre());
+
+            for (DTPaqueteActividadTuristica p : paquetes) {
+                jCU5ComboBoxPaquete.addItem(p.getNombre());
             }
         }
     }//GEN-LAST:event_jCU5ComboBoxActividadActionPerformed
@@ -3845,29 +3843,29 @@ public class Main extends javax.swing.JFrame {
     private void jCU6ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU6ButtonEnviarActionPerformed
         try {
             // Se validan campos vacios, caso que haya lanzamos una excepcion.
-            if (CU6EmptyFields()){
+            if (CU6EmptyFields()) {
                 throw new EmptyFieldsException("");
             }
-            
+
             String nombreSalida = jCU6TextFieldNombreSalida.getText();
             int cantMaxTuristas = (int) jCU6SpinnerCantMaxTuristas.getValue();
             Date fechaSalida = (Date) jCU6SpinnerFechaSalida.getValue();
             String lugarSalida = jCU6TextFieldLugarSalida.getText();
             Date fechaAlta = (Date) jCU6SpinnerFechaAlta.getValue();
             String nombreActividad = (String) jCU6TableActividades.getValueAt(jCU6TableActividades.getSelectedRow(), 0);
-            
+
             DTSalidaTuristica dtSalidaTuristica = new DTSalidaTuristica(
-                    nombreSalida, 
+                    nombreSalida,
                     cantMaxTuristas,
                     fechaSalida,
                     lugarSalida,
                     fechaAlta
             );
-            
+
             controlador.altaSalidaTuristica(dtSalidaTuristica, nombreActividad);
-             
+
             JOptionPane.showMessageDialog(this, "Salida turistica dada de alta!", "EXITO", JOptionPane.INFORMATION_MESSAGE);
-            
+
             CU6VaciarCampos();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos!", "ALERTA", JOptionPane.WARNING_MESSAGE);
@@ -3889,18 +3887,18 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jCU6TableDepartamentosMouseClicked
 
     private void jInternalFrameAltaSalidaTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
-        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerCantMaxTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
-        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerFechaSalida.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
-        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU6SpinnerFechaAlta.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter) ((JSpinner.DefaultEditor) jCU6SpinnerCantMaxTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter) ((JSpinner.DefaultEditor) jCU6SpinnerFechaSalida.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter) ((JSpinner.DefaultEditor) jCU6SpinnerFechaAlta.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
 
-        updateDepartmentosInTable(jCU6TableDepartamentos);      
+        updateDepartmentosInTable(jCU6TableDepartamentos);
         DefaultTableModel modelTableActividades = (DefaultTableModel) jCU6TableActividades.getModel();
         modelTableActividades.setRowCount(0);
     }//GEN-LAST:event_jInternalFrameAltaSalidaTuristicaInternalFrameActivated
 
     private void jInternalFrameInscripcionSalidaTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
-        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU8SpinnerCantTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
-        ((DefaultFormatter)((JSpinner.DefaultEditor)jCU8SpinnerFechaInscripcion.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter) ((JSpinner.DefaultEditor) jCU8SpinnerCantTuristas.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
+        ((DefaultFormatter) ((JSpinner.DefaultEditor) jCU8SpinnerFechaInscripcion.getEditor()).getTextField().getFormatter()).setAllowsInvalid(false);
         updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
         updateTuristasInTable(jCU8TableTuristas);
     }//GEN-LAST:event_jInternalFrameInscripcionSalidaTuristicaComponentShown
@@ -3928,25 +3926,24 @@ public class Main extends javax.swing.JFrame {
             if (CU8EmptyFields()) {
                 throw new EmptyFieldsException("");
             }
-            
+
             int cantTuristas = (int) jCU8SpinnerCantTuristas.getValue();
-            
+
             if (cantTuristas > (int) jCU8TableSalidas.getValueAt(jCU8TableSalidas.getSelectedRow(), 1)) {
                 throw new DataEntryException("");
             }
-            
-            
+
             String nombreActividad = jCU8ComboBoxActividad.getSelectedItem().toString();
             String nombreSalida = (String) jCU8TableSalidas.getValueAt(jCU8TableSalidas.getSelectedRow(), 0);
             String nicknameTurista = (String) jCU8TableTuristas.getValueAt(jCU8TableTuristas.getSelectedRow(), 0);
             Date fechaInscripcion = (Date) jCU8SpinnerFechaInscripcion.getValue();
-            
+
             DTInscripcion dtInscripcion = new DTInscripcion(fechaInscripcion, cantTuristas);
-            
+
             controlador.altaInscripcion(dtInscripcion, nombreActividad, nombreSalida, nicknameTurista);
-            
+
             JOptionPane.showMessageDialog(this, "Inscripcion dada de alta!", "EXITO", JOptionPane.INFORMATION_MESSAGE);
-            
+
             CU8VaciarCampos();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos!", "ALERTA", JOptionPane.WARNING_MESSAGE);
@@ -4003,10 +4000,10 @@ public class Main extends javax.swing.JFrame {
                 jCU1TextAreaDescription.setVisible(true);
                 jCU1ScrollPane11Description.setVisible(true);
                 jCU1LabelWebsite.setVisible(true);
-                JCU1WebsiteTextField.setVisible(true);                
+                JCU1WebsiteTextField.setVisible(true);
                 JCU1ButtonClearFields.setEnabled(true);
-                JCU1ButtonSendData.setEnabled(true);  
-                
+                JCU1ButtonSendData.setEnabled(true);
+
                 /* ==== Visibles solo para turistas ==== */
                 jCU1LabelNacionality.setVisible(false);
                 jCU1ComboBoxPaises.setVisible(false);
@@ -4025,10 +4022,10 @@ public class Main extends javax.swing.JFrame {
                 jCU1LabelBirthDate.setVisible(true);
                 JCU1DateChooserBirthDate.setVisible(true);
                 jCU1LabelNacionality.setVisible(true);
-                jCU1ComboBoxPaises.setVisible(true);                
+                jCU1ComboBoxPaises.setVisible(true);
                 JCU1ButtonClearFields.setEnabled(true);
                 JCU1ButtonSendData.setEnabled(true);
-                
+
                 /* ==== Visibles solo para proveedores ==== */
                 jCU1LabelDescription.setVisible(false);
                 jCU1TextAreaDescription.setVisible(false);
@@ -4068,45 +4065,45 @@ public class Main extends javax.swing.JFrame {
     private void JCU1ButtonSendDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ButtonSendDataActionPerformed
         try {
             // Se validan campos vacios, caso que haya lanzamos una excepcion.
-            if (JCU1VerifyEmptyFields()){
+            if (JCU1VerifyEmptyFields()) {
                 throw new EmptyFieldsException("Algún campo ha quedado vacío");
             }
-            
+
             String selectedItem = JCU1ComboBoxUserType.getSelectedItem().toString();
             String nickname = JCU1NickNameTextField.getText();
             String name = JCU1NameTextField.getText();
             String lastName = JCU1LastNameTextField.getText();
             String email = JCU1EmailTextField.getText();
             Date birthDate = JCU1DateChooserBirthDate.getDate();
-            
+
             switch (selectedItem) {
                 case "Proveedor/a":
                     String description = jCU1TextAreaDescription.getText();
-                    String websiteURL = (JCU1WebsiteTextField.getText().isEmpty()) 
-                            ? "" 
+                    String websiteURL = (JCU1WebsiteTextField.getText().isEmpty())
+                            ? ""
                             : JCU1WebsiteTextField.getText();
-                    
+
                     DTProveedor nuevoProveedor = new DTProveedor(
-                        nickname,
-                        name,
-                        lastName,
-                        email,
-                        birthDate,
-                        description,
-                        websiteURL
+                            nickname,
+                            name,
+                            lastName,
+                            email,
+                            birthDate,
+                            description,
+                            websiteURL
                     );
                     controlador.altaProveedor(nuevoProveedor);
                     break;
-                    
+
                 case "Turista":
                     String selectedCountry = jCU1ComboBoxPaises.getSelectedItem().toString();
                     DTTurista nuevoTurista = new DTTurista(
-                        nickname,
-                        name,
-                        lastName,
-                        email,
-                        birthDate,
-                        selectedCountry
+                            nickname,
+                            name,
+                            lastName,
+                            email,
+                            birthDate,
+                            selectedCountry
                     );
 
                     controlador.altaTurista(nuevoTurista);
@@ -4117,7 +4114,7 @@ public class Main extends javax.swing.JFrame {
             JCU1ClearFields();
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
-       } catch (MyException ex) {
+        } catch (MyException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_JCU1ButtonSendDataActionPerformed
@@ -4144,10 +4141,10 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU5ComboBoxSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxSalidaActionPerformed
         // TODO add your handling code here:
-        if(jCU5ComboBoxSalida.getSelectedItem() != null){
+        if (jCU5ComboBoxSalida.getSelectedItem() != null) {
             String nombreSalida = jCU5ComboBoxSalida.getSelectedItem().toString();
             DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
-            
+
             jCU5TextFieldNombreSalida.setText(salida.getNombre());
             jCU5TextFieldLugarSalida.setText(salida.getLugar());
             jCU5TextFieldFechaAltaSalida.setText(salida.getFechaAlta().toString());
@@ -4161,81 +4158,79 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneCasosDeUsoMouseClicked
 
     private void jCU10TablePaquetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10TablePaquetesMouseClicked
-       
-        
+
         DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
         //obtengo la columna seleccionada
         int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
         //obtengo la tupla seleccionada
         int tuplaSeleccionada = jCU10TablePaquetes.getSelectedRow();
         //obtengo el contenido de la tupla seleccionada
-        String celdaSeleccionada = (String)modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+        String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
 
         DTPaqueteActividadTuristica paqueteAMostrar = controlador.obtenerPaquete(celdaSeleccionada);
         jCU10TextAreaDescripcion.setText("");
         jCU10TextAreaDescripcion.setText(paqueteAMostrar.getDescripcion());
-        jCU10TextFieldValidez.setText(""+paqueteAMostrar.getValidez());
-        jCU10TextFieldDescuento.setText(""+paqueteAMostrar.getDescuento());
+        jCU10TextFieldValidez.setText("" + paqueteAMostrar.getValidez());
+        jCU10TextFieldDescuento.setText("" + paqueteAMostrar.getDescuento());
         jCU10DateChooserFecha.setText(paqueteAMostrar.getFechaAlta().toString());
-        
+
         jCU10ComboBoxDepartamentoPaquete.setSelectedIndex(0);
     }//GEN-LAST:event_jCU10TablePaquetesMouseClicked
 
     private void jCU10ComboBoxDepartamentoPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteMouseClicked
-                
-        
+
+
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteMouseClicked
-        //Esta funcion es la que llena el combo box del caso de uso 10
+    //Esta funcion es la que llena el combo box del caso de uso 10
     private void jCU10ComboBoxDepartamentoPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteActionPerformed
-        
+
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteActionPerformed
 
     private void jCU10TableActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU10TableActividadesMouseClicked
-         
+
     }//GEN-LAST:event_jCU10TableActividadesMouseClicked
 
     private void jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible
-         
-        
-        
+
+
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuWillBecomeVisible
 
     private void jCU10ComboBoxDepartamentoPaqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaqueteItemStateChanged
-        if(jCU10ComboBoxDepartamentoPaquete.getSelectedItem() == null ){
-           
-            }else{
-                if(!jCU10TablePaquetes.getSelectionModel().isSelectionEmpty()){
-                    DefaultTableModel modelActividades = (DefaultTableModel) jCU10TableActividades.getModel();
-                    DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
-                    //obtengo la columna seleccionada
-                    int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
-                    //obtengo la tupla seleccionada
-                    int tuplaSeleccionada = jCU10TablePaquetes.getSelectedRow();
-                    //obtengo el contenido de la tupla seleccionada
-                    String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+        if (jCU10ComboBoxDepartamentoPaquete.getSelectedItem() == null) {
 
-                    while (modelActividades.getRowCount() > 0) {               
-                        modelActividades.removeRow(modelActividades.getRowCount() - 1);
-                    }
+        } else {
+            if (!jCU10TablePaquetes.getSelectionModel().isSelectionEmpty()) {
+                DefaultTableModel modelActividades = (DefaultTableModel) jCU10TableActividades.getModel();
+                DefaultTableModel modelPaquetes = (DefaultTableModel) jCU10TablePaquetes.getModel();
+                //obtengo la columna seleccionada
+                int columnaSeleccionada = jCU10TablePaquetes.getSelectedColumn();
+                //obtengo la tupla seleccionada
+                int tuplaSeleccionada = jCU10TablePaquetes.getSelectedRow();
+                //obtengo el contenido de la tupla seleccionada
+                String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+
+                while (modelActividades.getRowCount() > 0) {
+                    modelActividades.removeRow(modelActividades.getRowCount() - 1);
+                }
                 List<String> actividades = controlador.obtenerActividadesTuristicasCU10(jCU10ComboBoxDepartamentoPaquete.getSelectedItem().toString(), celdaSeleccionada);
-                if(actividades != null){
+                if (actividades != null) {
                     for (int i = 0; i < actividades.size(); i++) {
                         Object rowData[] = new Object[1];
                         rowData[0] = actividades.get(i);
                         modelActividades.addRow(rowData);
                     }
-                }  
-                
-            }else{
-                     JOptionPane.showMessageDialog(this, "Por favor seleccione un paquete y vuelva a intentarlo", "ALERTA", JOptionPane.WARNING_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione un paquete y vuelva a intentarlo", "ALERTA", JOptionPane.WARNING_MESSAGE);
             }
-                     
+
         }
-       
+
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaqueteItemStateChanged
 
     private void jCU10ComboBoxDepartamentoPaquetePopupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuCanceled
-        
+
     }//GEN-LAST:event_jCU10ComboBoxDepartamentoPaquetePopupMenuCanceled
 
     private void jInternalFrameConsultaSalidaTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameConsultaSalidaTuristicaComponentShown
@@ -4265,14 +4260,14 @@ public class Main extends javax.swing.JFrame {
     private void jCU7ComboBoxSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU7ComboBoxSalidaActionPerformed
         if (jCU7ComboBoxSalida.getSelectedItem() != null && jCU7ComboBoxSalida.getSelectedIndex() != 0) {
             DTSalidaTuristica dtSalidaTuristica = controlador.obtenerSalidaTuristica(
-                jCU7ComboBoxSalida.getSelectedItem().toString()
+                    jCU7ComboBoxSalida.getSelectedItem().toString()
             );
-                
+
             jCU7TextFieldNombreSalida.setText(dtSalidaTuristica.getNombre());
             jCU7TextFieldLugarSalida.setText(dtSalidaTuristica.getLugar());
             jCU7TextFieldFechaSalida.setText(dtSalidaTuristica.getFechaSalida().toString());
             jCU7TextFieldFechaAltaSalida.setText(dtSalidaTuristica.getFechaAlta().toString());
-            jCU7TextFieldCantidadTuristas.setText(String.valueOf(dtSalidaTuristica.getCantidadMaxTuristas()));  
+            jCU7TextFieldCantidadTuristas.setText(String.valueOf(dtSalidaTuristica.getCantidadMaxTuristas()));
         } else {
             CU7VaciarCampos();
         }
@@ -4308,16 +4303,16 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU5ComboBoxPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU5ComboBoxPaqueteActionPerformed
         // TODO add your handling code here:
-        if(jCU5ComboBoxPaquete.getSelectedItem() != null){
+        if (jCU5ComboBoxPaquete.getSelectedItem() != null) {
             String nombrePaquete = jCU5ComboBoxPaquete.getSelectedItem().toString();
             DTPaqueteActividadTuristica dtPaquete = controlador.obtenerPaquete(nombrePaquete);
-            
+
             jCU5TextFieldNombrePaquete.setText(dtPaquete.getNombre());
             jCU5TextAreaDescripcionPaquete.setText(dtPaquete.getDescripcion());
             jCU5TextFieldValidezPaquete.setText(Integer.toString(dtPaquete.getValidez()));
             jCU5TextFieldDescuentoPaquete.setText(Float.toString(dtPaquete.getDescuento()));
             jCU5TextFieldFechaAltaPaquete.setText(dtPaquete.getFechaAlta().toString());
-            
+
         }
     }//GEN-LAST:event_jCU5ComboBoxPaqueteActionPerformed
 
@@ -4344,17 +4339,16 @@ public class Main extends javax.swing.JFrame {
     private void jInternalFrameAgregarActividadPaqueteComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameAgregarActividadPaqueteComponentShown
 
         List<DTDepartamento> departamentos = controlador.obtenerDepartamentos(); //primero me traigo los apartamentos
-        
-       
+
         //y recorro mi lista de apartamentos y los voy tirando al combo box
-        for(DTDepartamento d : departamentos){
+        for (DTDepartamento d : departamentos) {
             jCU10ComboBoxDepartamentoPaquete.addItem(d.getNombre());
         }
         jCUPaquetesactualizarpaquetes(jCU10TablePaquetes);        // TODO add your handling code here:
     }//GEN-LAST:event_jInternalFrameAgregarActividadPaqueteComponentShown
 
     private void jInternalFrameConsultaPaquetesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameConsultaPaquetesComponentShown
-       jCUPaquetesactualizarpaquetes(jCU11TablePaquete);  // TODO add your handling code here:
+        jCUPaquetesactualizarpaquetes(jCU11TablePaquete);  // TODO add your handling code here:
     }//GEN-LAST:event_jInternalFrameConsultaPaquetesComponentShown
 
     private void jCU11TablePaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU11TablePaqueteMouseClicked
@@ -4365,26 +4359,26 @@ public class Main extends javax.swing.JFrame {
         //obtengo la tupla seleccionada
         int tuplaSeleccionada = jCU11TablePaquete.getSelectedRow();
         //obtengo el contenido de la tupla seleccionada
-        String celdaSeleccionada = (String)modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
-        
+        String celdaSeleccionada = (String) modelPaquetes.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+
         DTPaqueteActividadTuristica paqueteAMostrar = controlador.obtenerPaquete(celdaSeleccionada);
         jCU11TextAreaDescripcion.setText("");
         jCU11TextAreaDescripcion.setText(paqueteAMostrar.getDescripcion());
-        jCU11TextFieldValidez.setText(""+paqueteAMostrar.getValidez());
-        jCU11TextFieldDescuento.setText(""+paqueteAMostrar.getDescuento());
-        jCU11TextFieldFechaAlta.setText(paqueteAMostrar.getFechaAlta().toString()); 
+        jCU11TextFieldValidez.setText("" + paqueteAMostrar.getValidez());
+        jCU11TextFieldDescuento.setText("" + paqueteAMostrar.getDescuento());
+        jCU11TextFieldFechaAlta.setText(paqueteAMostrar.getFechaAlta().toString());
         List<DTActividadTuristica> actividades = controlador.obtenerActividadesRelacionadas(celdaSeleccionada);
-        
-        while(modelActividades.getRowCount() > 0){
+
+        while (modelActividades.getRowCount() > 0) {
             modelActividades.removeRow(modelActividades.getRowCount() - 1);
         }
-  
-        for(int i = 0; i < actividades.size(); i++){
+
+        for (int i = 0; i < actividades.size(); i++) {
             Object rowData[] = new Object[1];
             rowData[0] = actividades.get(i).getNombre();
             modelActividades.addRow(rowData);
         }
-        
+
     }//GEN-LAST:event_jCU11TablePaqueteMouseClicked
 
     private void jCU11TableActividadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU11TableActividadMouseClicked
@@ -4394,7 +4388,7 @@ public class Main extends javax.swing.JFrame {
         //obtengo la tupla seleccionada
         int tuplaSeleccionada = jCU11TableActividad.getSelectedRow();
         //obtengo el contenido de la tupla seleccionada
-        String celdaSeleccionada = (String)modelActividades.getValueAt(tuplaSeleccionada, columnaSeleccionada);
+        String celdaSeleccionada = (String) modelActividades.getValueAt(tuplaSeleccionada, columnaSeleccionada);
         DTActividadTuristica dtActividadTuristica = controlador.obtenerActividadTuristica(celdaSeleccionada);
         jCU11TextAreaDescripcionActividad.setText(dtActividadTuristica.getDescripcion());
         jCU11TextFieldDuracion.setText(dtActividadTuristica.getDuracion());
@@ -4402,10 +4396,10 @@ public class Main extends javax.swing.JFrame {
         jCU11TextFieldCosto.setText(dtActividadTuristica.getCostoToString());
         jCU11TextFieldCiudad.setText(dtActividadTuristica.getCiudad());
         jCU11TextFieldFechaAltaActividad.setText(dtActividadTuristica.getFechaAlta().toString());
-        
+
         jCU11TextFieldDepartamento.setText(controlador.CU11obtenerDepartamentoActividad(celdaSeleccionada).getNombre());
-        
-        
+
+
     }//GEN-LAST:event_jCU11TableActividadMouseClicked
 
     private void jCU11TextFieldDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU11TextFieldDuracionActionPerformed
@@ -4431,7 +4425,7 @@ public class Main extends javax.swing.JFrame {
     private void jCU3ButtonActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonActualizarTablaActionPerformed
         jCU3ActualizarTabla();
     }//GEN-LAST:event_jCU3ButtonActualizarTablaActionPerformed
-    
+
     public void jCU3PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -4449,14 +4443,14 @@ public class Main extends javax.swing.JFrame {
 
             // Agregar los datos al JComboBox
             for (String dato : datos) {
-                jCU3ComboBoxPaises.addItem(dato);  
+                jCU3ComboBoxPaises.addItem(dato);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     private void jCU3TextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3TextFieldNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU3TextFieldNameActionPerformed
@@ -4472,45 +4466,45 @@ public class Main extends javax.swing.JFrame {
     private void jCU3ButtonUpdateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3ButtonUpdateDataActionPerformed
         try {
             // Se validan campos vacios, caso que haya lanzamos una excepcion.
-            if (JCU3VerifyEmtpyFields()){
+            if (JCU3VerifyEmtpyFields()) {
                 throw new EmptyFieldsException("Algún campo ha quedado vacío");
             }
-            
+
             String userType = jCU3TextFieldUserType.getText();
             String nickname = jCU3TextFieldNickname.getText();
             String name = jCU3TextFieldName.getText();
             String lastName = jCU3TextFieldLastName.getText();
             String email = jCU3TextFieldEmail.getText();
             Date birthDate = jCU3DateChooserBirthDate.getDate();
-            
+
             switch (userType) {
                 case "Proveedor/a":
                     String description = jCU3TextAreaDescription.getText();
-                    String websiteURL = (jCU3TextURLWebSite.getText().isEmpty()) 
-                            ? "" 
+                    String websiteURL = (jCU3TextURLWebSite.getText().isEmpty())
+                            ? ""
                             : jCU3TextURLWebSite.getText();
-                    
+
                     DTProveedor nuevoProveedor = new DTProveedor(
-                        nickname,
-                        name,
-                        lastName,
-                        email,
-                        birthDate,
-                        description,
-                        websiteURL
+                            nickname,
+                            name,
+                            lastName,
+                            email,
+                            birthDate,
+                            description,
+                            websiteURL
                     );
                     controlador.actualizarUsuario(nuevoProveedor);
                     break;
-                    
+
                 case "Turista":
                     String selectedCountry = jCU3ComboBoxPaises.getSelectedItem().toString();
                     DTTurista nuevoTurista = new DTTurista(
-                        nickname,
-                        name,
-                        lastName,
-                        email,
-                        birthDate,
-                        selectedCountry
+                            nickname,
+                            name,
+                            lastName,
+                            email,
+                            birthDate,
+                            selectedCountry
                     );
 
                     controlador.actualizarUsuario(nuevoTurista);
@@ -4528,7 +4522,7 @@ public class Main extends javax.swing.JFrame {
     private void jCU3TableUsersListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCU3TableUsersListMouseClicked
         int selectedRow = jCU3TableUsersList.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) jCU3TableUsersList.getModel();
-        
+
         // Se obtienen los datos de la fila seleccionada
         String nickname = model.getValueAt(selectedRow, 0).toString();
         String name = model.getValueAt(selectedRow, 1).toString();
@@ -4539,7 +4533,7 @@ public class Main extends javax.swing.JFrame {
         String description = model.getValueAt(selectedRow, 6).toString();
         String webSiteURL = model.getValueAt(selectedRow, 7).toString();
         String nacionality = model.getValueAt(selectedRow, 8).toString();
-        
+
         String formato = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
         Date birthDate;
@@ -4549,18 +4543,18 @@ public class Main extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         // Se actualizan TextFields
         jCU3TextFieldNickname.setText(nickname);
         jCU3TextFieldName.setText(name);
         jCU3TextFieldLastName.setText(lastName);
         jCU3TextFieldEmail.setText(email);
         jCU3TextFieldUserType.setText(userType);
-        
+
         //Se activan los TextFields editables
         jCU3TextFieldName.setEnabled(true);
         jCU3TextFieldLastName.setEnabled(true);
-        jCU3DateChooserBirthDate.setEnabled(true);        
+        jCU3DateChooserBirthDate.setEnabled(true);
 
         // Se cargan los datos y se activan campos para cada caso particular
         if (userType == "Turista") {
@@ -4571,7 +4565,7 @@ public class Main extends javax.swing.JFrame {
             jCU3TextAreaDescription.setEnabled(false);
             jCU3TextURLWebSite.setEnabled(false);
 
-        } else if (userType == "Proveedor/a"){
+        } else if (userType == "Proveedor/a") {
             jCU3ComboBoxPaises.setSelectedItem("Seleccionar País");
             jCU3TextAreaDescription.setText(description);
             jCU3TextURLWebSite.setText(webSiteURL);
@@ -4579,13 +4573,13 @@ public class Main extends javax.swing.JFrame {
             jCU3TextAreaDescription.setEnabled(true);
             jCU3TextURLWebSite.setEnabled(true);
         }
-        
+
         // Se activa el botón para actualizar datos y para vaciar campos
         jCU3ButtonUpdateData.setEnabled(true);
         jCU3ButtonEmptyFields.setEnabled(true);
     }//GEN-LAST:event_jCU3TableUsersListMouseClicked
-    
-    public void jCU3ClearAndDisable(){   
+
+    public void jCU3ClearAndDisable() {
         // Se vacían todos los campos
         jCU3TextFieldUserType.setText("");
         jCU3TextFieldNickname.setText("");
@@ -4595,8 +4589,8 @@ public class Main extends javax.swing.JFrame {
         jCU3DateChooserBirthDate.setDate(null);
         jCU3ComboBoxPaises.setSelectedItem("Seleccionar País");
         jCU3TextAreaDescription.setText("");
-        jCU3TextURLWebSite.setText(""); 
-        
+        jCU3TextURLWebSite.setText("");
+
         // Se deshabilitan los campos y botón
         jCU3TextFieldNickname.setEnabled(false);
         jCU3TextFieldName.setEnabled(false);
@@ -4607,41 +4601,39 @@ public class Main extends javax.swing.JFrame {
         jCU3TextAreaDescription.setEnabled(false);
         jCU3TextURLWebSite.setEnabled(false);
         jCU3ButtonUpdateData.setEnabled(false);
-        
+
         jCU3ActualizarTabla();
         jCU3ButtonEmptyFields.setEnabled(false);
     }
-    
-    public boolean JCU3VerifyEmtpyFields(){
+
+    public boolean JCU3VerifyEmtpyFields() {
         String userType = jCU3TextFieldUserType.getText();
         switch (userType) {
             case "Proveedor/a":
-                if( jCU3TextFieldName.getText().isEmpty() ||
-                    jCU3TextFieldLastName.getText().isEmpty() ||
-                    jCU3DateChooserBirthDate.getDate() == null ||
-                    jCU3TextAreaDescription.getText().isEmpty()
-                ){
+                if (jCU3TextFieldName.getText().isEmpty()
+                        || jCU3TextFieldLastName.getText().isEmpty()
+                        || jCU3DateChooserBirthDate.getDate() == null
+                        || jCU3TextAreaDescription.getText().isEmpty()) {
                     return true;
                 }
                 break;
-            
+
             case "Turista":
                 String selectedCountry = jCU3ComboBoxPaises.getSelectedItem().toString();
-                if( jCU3TextFieldName.getText().isEmpty() ||
-                    jCU3TextFieldLastName.getText().isEmpty() ||
-                    jCU3DateChooserBirthDate.getDate() == null ||
-                    selectedCountry == "Seleccionar País"
-                ){
+                if (jCU3TextFieldName.getText().isEmpty()
+                        || jCU3TextFieldLastName.getText().isEmpty()
+                        || jCU3DateChooserBirthDate.getDate() == null
+                        || selectedCountry == "Seleccionar País") {
                     return true;
                 }
                 break;
-                
+
             default:
                 break;
-        } 
+        }
         return false;
     }
-    
+
     private void jCU3TextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU3TextFieldUserTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU3TextFieldUserTypeActionPerformed
@@ -4660,107 +4652,107 @@ public class Main extends javax.swing.JFrame {
         if (selectedItem != null && !selectedItem.equals("Seleccionar nickname")) {
             String nickname = selectedItem.toString();
             DTUsuario usuario = controlador.obtenerUsuario(nickname);
-            
+
             // Formato deseado para la fecha
             String formato = "dd-MM-yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(formato);
             String birthDateString = sdf.format(usuario.getBirthDate());
-            
+
             jCU2TextFieldName.setText(usuario.getName());
             jCU2TextFieldLastName.setText(usuario.getLastName());
             jCU2TextFieldEmail.setText(usuario.getEmail());
             jCU2TextFieldFechaNacimiento.setText(birthDateString);
-            
+
             if (usuario instanceof DTTurista) {
                 DTTurista turista = (DTTurista) usuario;
                 jCU2TextFieldUserType.setText("Turista");
                 jCU2ComboBoxSalidaTuristica.setEnabled(true);
                 jCU2ComboBoxActividadTuristica.setSelectedIndex(0);
                 jCU2ComboBoxActividadTuristica.setEnabled(false);
-                
+
                 updateSalidasTuristaInComboBox(
-                        turista.getId(), 
+                        turista.getId(),
                         jCU2ComboBoxSalidaTuristica
                 );
-                
+
             } else if (usuario instanceof DTProveedor) {
                 DTProveedor proveedor = (DTProveedor) usuario;
                 jCU2TextFieldUserType.setText("Proveedor/a");
                 jCU2ComboBoxSalidaTuristica.setEnabled(true);
                 jCU2ComboBoxActividadTuristica.setEnabled(true);
-                
+
                 updateSalidasProveedorInComboBox(
                         proveedor.getId(),
                         jCU2ComboBoxSalidaTuristica
                 );
-                
+
                 updateActividadesProveedorInComboBox(
                         proveedor.getId(),
                         jCU2ComboBoxActividadTuristica
                 );
             }
             jCU2ButtonClearFields.setEnabled(true);
-        } else if(selectedItem != null && selectedItem.equals("Seleccionar nickname")){
+        } else if (selectedItem != null && selectedItem.equals("Seleccionar nickname")) {
             jCU2ClearFields();
         }
     }//GEN-LAST:event_jCU2ComboBoxUserListActionPerformed
-    
+
     private void updateUsersInComboBox(JComboBox jComboBox) {
         List<DTUsuario> userList = controlador.obtenerUsuarios();
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTUsuario usr : userList){
+
+        for (DTUsuario usr : userList) {
             jComboBox.addItem(usr.getNickname());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-    
-    private void updateSalidasTuristaInComboBox(Long idTurista, JComboBox jComboBox){
+
+    private void updateSalidasTuristaInComboBox(Long idTurista, JComboBox jComboBox) {
         List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(idTurista);
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTSalidaTuristica salida : salidaList){
+
+        for (DTSalidaTuristica salida : salidaList) {
             jComboBox.addItem(salida.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-    
-    private void updateSalidasProveedorInComboBox(Long idProveedor, JComboBox jComboBox){
+
+    private void updateSalidasProveedorInComboBox(Long idProveedor, JComboBox jComboBox) {
         List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(idProveedor);
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTSalidaTuristica salida : salidaList){
+
+        for (DTSalidaTuristica salida : salidaList) {
             jComboBox.addItem(salida.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-    
-    private void updateActividadesProveedorInComboBox(Long idProveedor, JComboBox jComboBox){
+
+    private void updateActividadesProveedorInComboBox(Long idProveedor, JComboBox jComboBox) {
         List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(idProveedor);
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTActividadTuristica actividad : actividadList){
+
+        for (DTActividadTuristica actividad : actividadList) {
             jComboBox.addItem(actividad.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
-    }        
-            
+    }
+
     private void jCU2ClearFields() {
         jCU2ComboBoxUserList.setSelectedIndex(0);
         jCU2TextFieldName.setText("");
@@ -4776,8 +4768,8 @@ public class Main extends javax.swing.JFrame {
         jCU2ClearInfoActividad();
         jCU2ClearInfoSalida();
     }
-    
-    private void jCU2ClearInfoActividad(){
+
+    private void jCU2ClearInfoActividad() {
         jCU2TextFieldActividadNombre.setText("");
         jCU2TextFieldActividadCiudad.setText("");
         jCU2TextFieldActividadDuracion.setText("");
@@ -4785,15 +4777,15 @@ public class Main extends javax.swing.JFrame {
         jCU2TextFieldActividadFechaAlta.setText("");
         jCU2TextAreaActividadDescripcion.setText("");
     }
-            
-    private void jCU2ClearInfoSalida(){
+
+    private void jCU2ClearInfoSalida() {
         jCU2TextFieldSalidaNombre.setText("");
         jCU2TextFieldSalidaLugar.setText("");
         jCU2TextFieldSalidaFecha.setText("");
         jCU2TextFieldSalidaFechaAlta.setText("");
         jCU2TextFieldSalidaMaxTuristas.setText("");
     }
-    
+
     private void jCU2TextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU2TextFieldUserTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCU2TextFieldUserTypeActionPerformed
@@ -4804,17 +4796,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameConsultarUsuarioComponentShown
     private void jMenuCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCargarDatosActionPerformed
         // TODO add your handling code here:
-        if(!datosCargados){        
+        if (!datosCargados) {
             Runtime rt = Runtime.getRuntime();
             try {
                 Process pr = rt.exec("./cargarDatos.sh");
-                JOptionPane.showMessageDialog(this,"Los datos fueron cargados!","ÉXITO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Los datos fueron cargados!", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this,ex.getMessage(),"ALERTA",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
                 System.out.println(ex.getMessage());
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             datosCargados = true;
         }
     }//GEN-LAST:event_jMenuCargarDatosActionPerformed
@@ -4855,20 +4847,20 @@ public class Main extends javax.swing.JFrame {
         if (selectedItem != null && !selectedItem.equals("Seleccionar Salida")) {
             String nombreSalida = selectedItem.toString();
             DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
-            
+
             // Formato deseado para la fecha
             String formato = "dd-MM-yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(formato);
             String fechaSalida = sdf.format(salida.getFechaSalida());
             String fechaAlta = sdf.format(salida.getFechaAlta());
-            
+
             jCU2TextFieldSalidaNombre.setText(salida.getNombre());
             jCU2TextFieldSalidaLugar.setText(salida.getLugar());
             jCU2TextFieldSalidaFecha.setText(fechaSalida);
             jCU2TextFieldSalidaFechaAlta.setText(fechaAlta);
             jCU2TextFieldSalidaMaxTuristas.setText(Integer.toString(salida.getCantidadMaxTuristas()));
 
-        } else if(selectedItem != null && selectedItem.equals("Seleccionar Salida")){
+        } else if (selectedItem != null && selectedItem.equals("Seleccionar Salida")) {
             jCU2ClearInfoSalida();
         }
     }//GEN-LAST:event_jCU2ComboBoxSalidaTuristicaActionPerformed
@@ -4879,12 +4871,12 @@ public class Main extends javax.swing.JFrame {
         if (selectedItem != null && !selectedItem.equals("Seleccionar Actividad")) {
             String nombreActividad = selectedItem.toString();
             DTActividadTuristica actividad = controlador.obtenerActividadTuristica(nombreActividad);
-            
+
             // Formato deseado para la fecha
             String formato = "dd-MM-yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(formato);
             String fechaAlta = sdf.format(actividad.getFechaAlta());
-            
+
             jCU2TextFieldActividadNombre.setText(actividad.getNombre());
             jCU2TextFieldActividadCiudad.setText(actividad.getCiudad());
             jCU2TextFieldActividadDuracion.setText(actividad.getDuracion());
@@ -4892,7 +4884,7 @@ public class Main extends javax.swing.JFrame {
             jCU2TextFieldActividadFechaAlta.setText(fechaAlta);
             jCU2TextAreaActividadDescripcion.setText(actividad.getDescripcion());
 
-        } else if(selectedItem != null && selectedItem.equals("Seleccionar Actividad")){
+        } else if (selectedItem != null && selectedItem.equals("Seleccionar Actividad")) {
             jCU2ClearInfoActividad();
         }
     }//GEN-LAST:event_jCU2ComboBoxActividadTuristicaActionPerformed
@@ -4904,14 +4896,14 @@ public class Main extends javax.swing.JFrame {
     private void jCU13ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU13ButtonEnviarActionPerformed
         try {
             String nombreCategoria = jCU13TextFieldCategoria.getText();
-            
-            if (nombreCategoria.isEmpty()){
+
+            if (nombreCategoria.isEmpty()) {
                 throw new EmptyFieldsException("Debe ingresar un nombre de categoria");
             }
-            
+
             controlador.altaCategoria(nombreCategoria);
             JOptionPane.showMessageDialog(this, "Categoria dada de alta.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-            
+
             jCU13TextFieldCategoria.setText("");
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
@@ -4923,7 +4915,7 @@ public class Main extends javax.swing.JFrame {
     private void jCU13ButtonVaciarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU13ButtonVaciarCamposActionPerformed
         jCU13TextFieldCategoria.setText("");
     }//GEN-LAST:event_jCU13ButtonVaciarCamposActionPerformed
-    
+
     public void jCU1PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -4941,32 +4933,31 @@ public class Main extends javax.swing.JFrame {
 
             // Agregar los datos al JComboBox
             for (String dato : datos) {
-                jCU1ComboBoxPaises.addItem(dato);  
+                jCU1ComboBoxPaises.addItem(dato);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    
-    public void jCU3ActualizarTabla(){
+
+    public void jCU3ActualizarTabla() {
         List<DTUsuario> usuario = controlador.obtenerUsuarios();
         DefaultTableModel modelUsuarios = (DefaultTableModel) jCU3TableUsersList.getModel();
-         
-        while(modelUsuarios.getRowCount() > 0){
+
+        while (modelUsuarios.getRowCount() > 0) {
             modelUsuarios.removeRow(modelUsuarios.getRowCount() - 1);
         }
-        
+
         modelUsuarios.fireTableDataChanged();
-        
+
         for (DTUsuario u : usuario) {
             Object rowData[] = new Object[9];
             rowData[0] = u.getNickname();
             rowData[1] = u.getName();
             rowData[2] = u.getLastName();
             rowData[3] = u.getEmail();
-            
+
             // Formato deseado para la fecha
             String formato = "dd-MM-yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(formato);
@@ -4989,7 +4980,7 @@ public class Main extends javax.swing.JFrame {
             modelUsuarios.addRow(rowData);
         }
     }
-   
+
     public Main(JComboBox<String> ComboBoxDepartamentoPaquete, JButton JCU1ButtonClearFields, JButton JCU1ButtonSendData, JComboBox<String> JCU1ComboBoxUserType, JDateChooser JCU1DateChooserBirthDate, JTextField JCU1EmailTextField, JTextField JCU1LastNameTextField, JTextField JCU1NacionalityTextField, JTextField JCU1NameTextField, JTextField JCU1NickNameTextField, JTextField JCU1WebsiteTextField, JDialog JDialogCamposVacios, JSpinner SpinnerDescuentoPaquete1, JSpinner SpinnerFechaAltaPaquete1, JSpinner SpinnerValidezPaquete1, JTextField TextFieldDescPaquete1, JTextField TextFieldNombrePaquete1, JButton jButton1, JButton jButton2, JButton jButton3, JButton jButton4, JButton jButton5, JButton jButton6, JButton jButtonDepartamentoDuplicadoCancelar, JButton jButtonDepartamentoDuplicadoReingresar, JButton jCU12ButtonEnviar, JButton jCU12ButtonVaciar, JDialog jCU12Dialog, JTextArea jCU12DialogTextArea, JLabel jCU12LabelDescripcion, JLabel jCU12LabelNombre, JLabel jCU12LabelURL, JSeparator jCU12Separator, JTextField jCU12TextFieldDescripcion, JTextField jCU12TextFieldNombre, JTextField jCU12TextFieldURL, JInternalFrame jCU1InternalFrameAgregarUsuario, JLabel jCU1LabelBirthDate, JLabel jCU1LabelDescription, JLabel jCU1LabelEmail, JLabel jCU1LabelLastName, JLabel jCU1LabelNacionality, JLabel jCU1LabelName, JLabel jCU1LabelNickName, JLabel jCU1LabelUserType, JLabel jCU1LabelWebsite, JScrollPane jCU1ScrollPane11Description, JTextArea jCU1TextAreaDescription, JButton jCU4ButtonActualizarTablas, JButton jCU4ButtonCancelar, JButton jCU4ButtonEnviar, JButton jCU4ButtonReingresar, JDateChooser jCU4DateChooserFecha, JDialog jCU4Dialog, JTextArea jCU4DialogTextArea, JLabel jCU4LabelCiudad, JLabel jCU4LabelCosto, JLabel jCU4LabelDepartamentos, JLabel jCU4LabelDescripcion, JLabel jCU4LabelDuracion, JLabel jCU4LabelFecha, JLabel jCU4LabelNombre, JLabel jCU4LabelProveedores, JScrollPane jCU4ScrollPaneDescripcion, JScrollPane jCU4ScrollPanelDepartamentos, JScrollPane jCU4ScrollPanelDepartamentos1, JScrollPane jCU4ScrollPanelDepartamentos2, JScrollPane jCU4ScrollPanelProveedores, JTable jCU4TableDepartamentos, JTable jCU4TableProveedores, JTextArea jCU4TextAreaDescripcion, JTextField jCU4TextFieldCiudad, JTextField jCU4TextFieldCosto, JTextField jCU4TextFieldDuracion, JTextField jCU4TextFieldNombre, JComboBox<String> jCU5ComboBoxActividad, JComboBox<String> jCU5ComboBoxDepartamento, JComboBox<String> jCU5ComboBoxPaquete, JComboBox<String> jCU5ComboBoxSalida, JLabel jCU5LabelActividad, JLabel jCU5LabelActividad1, JLabel jCU5LabelActividad2, JLabel jCU5LabelCiudad, JLabel jCU5LabelCosto, JLabel jCU5LabelDepartamento, JLabel jCU5LabelDescripcion, JLabel jCU5LabelDuracion, JLabel jCU5LabelFecha, JLabel jCU5LabelNombre, JLabel jCU5LabelSalida, JLabel jCU5LabelSalida1, JScrollPane jCU5ScrollPaneDescripcion, JTextArea jCU5TextAreaDescripcion, JTextField jCU5TextFieldCiudad, JTextField jCU5TextFieldCosto, JTextField jCU5TextFieldDuracion, JTextField jCU5TextFieldFecha, JTextField jCU5TextFieldNombre, JButton jCU6ButtonActualizarTablas, JButton jCU6ButtonCampos, JButton jCU6ButtonEnviar, JSpinner jCU6SpinnerCantMaxTuristas, JSpinner jCU6SpinnerFechaAlta, JSpinner jCU6SpinnerFechaSalida, JTable jCU6TableActividades, JTable jCU6TableDepartamentos, JTextField jCU6TextFieldLugarSalida, JTextField jCU6TextFieldNombreSalida, JComboBox<String> jCU7ComboBoxActividad, JComboBox<String> jCU7ComboBoxDepartamento, JComboBox<String> jCU7ComboBoxSalida, JTable jCU7TableConsulta, JButton jCU8ButtonCampos, JButton jCU8ButtonEnviar, JComboBox<String> jCU8ComboBoxActividad, JComboBox<String> jCU8ComboBoxDepartamento, JComboBox<String> jCU8ComboBoxSalida, JSpinner jCU8SpinnerCantTuristas, JSpinner jCU8SpinnerFechaInscripcion, JTable jCU8TableSalidas, JTable jCU8TableTuristas, JDateChooser jCU9DateChooserFecha, JSpinner jCU9SpinnerDescuentoPaquete, JSpinner jCU9SpinnerValidezPaquete, JTextField jCU9TextFieldDescPaquete, JTextField jCU9TextFieldNombrePaquete, JDialog jDialog1, JInternalFrame jInternalFrameAgregarActividadPaquete, JInternalFrame jInternalFrameAltaActividadTuristica, JInternalFrame jInternalFrameAltaDepartamento, JInternalFrame jInternalFrameAltaPaqueteActividades, JInternalFrame jInternalFrameAltaSalidaTuristica, JInternalFrame jInternalFrameConsultaActividadTuristica, JInternalFrame jInternalFrameConsultaPaquetes, JInternalFrame jInternalFrameConsultaSalidaTuristica, JInternalFrame jInternalFrameConsultarUsuario, JInternalFrame jInternalFrameInscripcionSalidaTuristica, JInternalFrame jInternalFrameModificarUsuario, JLabel jLabel1, JLabel jLabel10, JLabel jLabel11, JLabel jLabel12, JLabel jLabel13, JLabel jLabel14, JLabel jLabel15, JLabel jLabel16, JLabel jLabel17, JLabel jLabel18, JLabel jLabel19, JLabel jLabel2, JLabel jLabel20, JLabel jLabel21, JLabel jLabel22, JLabel jLabel23, JLabel jLabel24, JLabel jLabel25, JLabel jLabel26, JLabel jLabel27, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JLabel jLabel6, JLabel jLabel7, JLabel jLabel8, JLabel jLabel9, JMenu jMenuAcciones, JMenu jMenuActividad, JMenuItem jMenuActividadAlta, JMenuItem jMenuActividadConsulta, JMenuItem jMenuAgregarActividadPaquete, JMenuItem jMenuAltaPaquete, JMenuBar jMenuBar1, JMenuItem jMenuConsultaPaquete, JMenuItem jMenuDepartamentoAlta, JMenu jMenuPaquete, JMenu jMenuSalida, JMenuItem jMenuSalidaAlta, JMenuItem jMenuSalidaConsulta, JMenuItem jMenuSalidaInscripcion, JMenu jMenuUsuario, JMenuItem jMenuUsuarioAlta, JMenuItem jMenuUsuarioConsulta, JMenuItem jMenuUsuarioModificar, JScrollPane jScrollPane1, JScrollPane jScrollPane10, JScrollPane jScrollPane2, JScrollPane jScrollPane3, JScrollPane jScrollPane4, JScrollPane jScrollPane5, JScrollPane jScrollPane6, JScrollPane jScrollPane7, JScrollPane jScrollPane8, JScrollPane jScrollPane9, JSeparator jSeparator1, JTabbedPane jTabbedPaneCasosDeUso, JTable jTable1, JTable jTable2, JTable jTable4, JTable jTable5, JTextArea jTextArea1) throws HeadlessException {
         this.jCU10ComboBoxDepartamentoPaquete = ComboBoxDepartamentoPaquete;
         this.JCU1ButtonClearFields = JCU1ButtonClearFields;
@@ -5004,13 +4995,13 @@ public class Main extends javax.swing.JFrame {
         this.JDialogCamposVacios = JDialogCamposVacios;
 //        this.SpinnerDescuentoPaquete1 = SpinnerDescuentoPaquete1;
         //this.SpinnerFechaAltaPaquete1 = SpinnerFechaAltaPaquete1;
-       // this.SpinnerValidezPaquete1 = SpinnerValidezPaquete1;
-       // this.TextFieldDescPaquete1 = TextFieldDescPaquete1;
-       // this.TextFieldNombrePaquete1 = TextFieldNombrePaquete1;
+        // this.SpinnerValidezPaquete1 = SpinnerValidezPaquete1;
+        // this.TextFieldDescPaquete1 = TextFieldDescPaquete1;
+        // this.TextFieldNombrePaquete1 = TextFieldNombrePaquete1;
         this.jButton1 = jButton1;
         //this.jButton2 = jButton2;
         this.jButton3 = jButton3;
-       /// this.jButton4 = jButton4;
+        /// this.jButton4 = jButton4;
         this.jButton5 = jButton5;
         this.jButton6 = jButton6;
         this.jButtonDepartamentoDuplicadoCancelar = jButtonDepartamentoDuplicadoCancelar;
@@ -5134,8 +5125,8 @@ public class Main extends javax.swing.JFrame {
 //        this.jLabel13 = jLabel13;
 //        this.jLabel14 = jLabel14;
 //        this.jLabel15 = jLabel15;
-  //      this.jLabel16 = jLabel16;
- //       this.jLabel17 = jLabel17;
+        //      this.jLabel16 = jLabel16;
+        //       this.jLabel17 = jLabel17;
 //        this.jLabel18 = jLabel18;
         this.jLabel19 = jLabel19;
         this.jLabel2 = jLabel2;
@@ -5184,56 +5175,56 @@ public class Main extends javax.swing.JFrame {
         this.jSeparator1 = jSeparator1;
         this.jTabbedPaneCasosDeUso = jTabbedPaneCasosDeUso;
         //this.jTable1 = jTable1;
-       // this.jCU10TableActividades = jTable2;
+        // this.jCU10TableActividades = jTable2;
         this.jCU11TableActividad = jTable4;
         this.jCU11TablePaquete = jTable5;
         this.jTextArea1 = jTextArea1;
     }
-    
+
     private void CU7VaciarCampos() {
-            jCU7TextFieldNombreSalida.setText("");
-            jCU7TextFieldLugarSalida.setText("");
-            jCU7TextFieldFechaSalida.setText("");
-            jCU7TextFieldFechaAltaSalida.setText("");
-            jCU7TextFieldCantidadTuristas.setText("");
+        jCU7TextFieldNombreSalida.setText("");
+        jCU7TextFieldLugarSalida.setText("");
+        jCU7TextFieldFechaSalida.setText("");
+        jCU7TextFieldFechaAltaSalida.setText("");
+        jCU7TextFieldCantidadTuristas.setText("");
     }
-    
+
     private void updateDepartmentosInComboBox(JComboBox jComboBox) {
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTDepartamento dtDepartamento : dtDepartamentos){
+
+        for (DTDepartamento dtDepartamento : dtDepartamentos) {
             jComboBox.addItem(dtDepartamento.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-    
+
     private void updateDepartmentosInTable(JTable jTable) {
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
-        
+
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
-        
-        for (DTDepartamento dtDepartamento : dtDepartamentos){
+
+        for (DTDepartamento dtDepartamento : dtDepartamentos) {
             modelTable.addRow(
                     new Object[]{
                         dtDepartamento.getNombre(), dtDepartamento.getDescripcion(), dtDepartamento.getURL()
                     }
             );
         }
-       
+
     }
-    
+
     private void updateActividadesInTable(JTable jTable, String nombreDepartamento) {
         List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesTuristicas(nombreDepartamento);
 
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
-        
+
         for (DTActividadTuristica dtActividadTuristica : dtActividades) {
             modelTable.addRow(
                     new Object[]{
@@ -5245,41 +5236,41 @@ public class Main extends javax.swing.JFrame {
 
     private void updateActividadesInComboBox(JComboBox jComboBox, String nombreDepartamento) {
         List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesTuristicas(nombreDepartamento);
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTActividadTuristica dtActividad : dtActividades){
+
+        for (DTActividadTuristica dtActividad : dtActividades) {
             jComboBox.addItem(dtActividad.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-        
+
     private void updateSalidasInComboBox(JComboBox jComboBox, String nombreActividad) {
         List<DTSalidaTuristica> dtSalidas = controlador.obtenerSalidasTuristicas(nombreActividad);
-        
+
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();
         jComboBox.addItem(defaultValue);
-        
-        for (DTSalidaTuristica dtSalida : dtSalidas){
+
+        for (DTSalidaTuristica dtSalida : dtSalidas) {
             jComboBox.addItem(dtSalida.getNombre());
         }
-        
+
         jComboBox.setSelectedIndex(0);
     }
-   
+
     private void updateSalidasInTable(JTable jTable, String nombreActividad) {
         List<DTSalidaTuristica> dtSalidas = controlador.obtenerSalidasTuristicas(nombreActividad);
-        
+
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
-        
-        for (DTSalidaTuristica dtSalida : dtSalidas){
+
+        for (DTSalidaTuristica dtSalida : dtSalidas) {
             modelTable.addRow(
-                    new Object[] {
+                    new Object[]{
                         dtSalida.getNombre(),
                         dtSalida.getCantidadMaxTuristas(),
                         dtSalida.getFechaSalida(),
@@ -5288,65 +5279,65 @@ public class Main extends javax.swing.JFrame {
             );
         }
     }
-      
+
     private void updateTuristasInTable(JTable jTable) {
         List<DTTurista> dtTuristas = controlador.obtenerTuristas();
-         
+
         DefaultTableModel modelTable = (DefaultTableModel) jTable.getModel();
         modelTable.setRowCount(0);
-        
+
         for (DTTurista dtTurista : dtTuristas) {
             modelTable.addRow(
-                new Object[] {
-                    dtTurista.getNickname(),
-                    dtTurista.getEmail(),
-                    dtTurista.getNacionality()
-                }
+                    new Object[]{
+                        dtTurista.getNickname(),
+                        dtTurista.getEmail(),
+                        dtTurista.getNacionality()
+                    }
             );
         }
-        
+
     }
-    
-    private boolean CU8EmptyFields(){
-        if ((jCU8ComboBoxDepartamento.getSelectedItem() == null || jCU8ComboBoxDepartamento.getSelectedIndex() == 0) ||
-            (jCU8ComboBoxActividad.getSelectedItem() == null || jCU8ComboBoxActividad.getSelectedIndex() == 0) ||
-            jCU8TableSalidas.getSelectedRowCount() != 1 || jCU8TableTuristas.getSelectedRowCount() != 1 ||
-            (int) jCU8SpinnerCantTuristas.getValue() == 0) {
+
+    private boolean CU8EmptyFields() {
+        if ((jCU8ComboBoxDepartamento.getSelectedItem() == null || jCU8ComboBoxDepartamento.getSelectedIndex() == 0)
+                || (jCU8ComboBoxActividad.getSelectedItem() == null || jCU8ComboBoxActividad.getSelectedIndex() == 0)
+                || jCU8TableSalidas.getSelectedRowCount() != 1 || jCU8TableTuristas.getSelectedRowCount() != 1
+                || (int) jCU8SpinnerCantTuristas.getValue() == 0) {
             return true;
         }
         return false;
     }
-    
-    private void CU8VaciarCampos(){
+
+    private void CU8VaciarCampos() {
         // Se limpian los campos del panel "Inscripcion a Salida Turistica"
         updateDepartmentosInComboBox(jCU8ComboBoxDepartamento);
-        
+
         // Guardamos el valor por defecto para limpiar el combobox
         String defaultValue = jCU8ComboBoxActividad.getItemAt(0);
         jCU8ComboBoxActividad.removeAllItems();
         jCU8ComboBoxActividad.addItem(defaultValue);
-        
+
         DefaultTableModel modelSalidas = (DefaultTableModel) jCU8TableSalidas.getModel();
         modelSalidas.setRowCount(0);
-        
+
         updateTuristasInTable(jCU8TableTuristas);
-                
+
         jCU8SpinnerFechaInscripcion.setValue(new Date());
         jCU8SpinnerCantTuristas.setValue(0);
     }
-    
-    public boolean jCU9verificarVacios(){
-        if (jCU9TextFieldNombrePaquete.getText().isEmpty() ||
-            jCU9TextAreaDescPaquete.getText().isEmpty() ||
-            jCU9DateChooserFecha.getDate() == null){
-            JOptionPane.showMessageDialog(null,"Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
+
+    public boolean jCU9verificarVacios() {
+        if (jCU9TextFieldNombrePaquete.getText().isEmpty()
+                || jCU9TextAreaDescPaquete.getText().isEmpty()
+                || jCU9DateChooserFecha.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Quedaron campos sin rellenar, por favor intentelo nuevamente", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public void JCU1ClearFields(){             
+
+    public void JCU1ClearFields() {
         JCU1NickNameTextField.setText("");
         JCU1NameTextField.setText("");
         JCU1LastNameTextField.setText("");
@@ -5355,53 +5346,50 @@ public class Main extends javax.swing.JFrame {
         jCU1ComboBoxPaises.setSelectedIndex(0);
         JCU1ComboBoxUserType.setSelectedIndex(0);
         jCU1TextAreaDescription.setText("");
-        JCU1WebsiteTextField.setText(""); 
+        JCU1WebsiteTextField.setText("");
     }
-    
-    public boolean JCU1VerifyEmptyFields(){
+
+    public boolean JCU1VerifyEmptyFields() {
         String selectedItem = JCU1ComboBoxUserType.getSelectedItem().toString();
         switch (selectedItem) {
             case "Proveedor/a":
-                if(JCU1NickNameTextField.getText().isEmpty() ||
-                    JCU1NameTextField.getText().isEmpty() ||
-                    JCU1LastNameTextField.getText().isEmpty() ||
-                    JCU1EmailTextField.getText().isEmpty() ||
-                    JCU1DateChooserBirthDate.getDate() == null ||
-                    jCU1TextAreaDescription.getText().isEmpty()
-                ){
+                if (JCU1NickNameTextField.getText().isEmpty()
+                        || JCU1NameTextField.getText().isEmpty()
+                        || JCU1LastNameTextField.getText().isEmpty()
+                        || JCU1EmailTextField.getText().isEmpty()
+                        || JCU1DateChooserBirthDate.getDate() == null
+                        || jCU1TextAreaDescription.getText().isEmpty()) {
                     return true;
                 }
                 break;
-            
+
             case "Turista":
                 String selectedCountry = jCU1ComboBoxPaises.getSelectedItem().toString();
-                if(JCU1NickNameTextField.getText().isEmpty() ||
-                    JCU1NameTextField.getText().isEmpty() ||
-                    JCU1LastNameTextField.getText().isEmpty() ||
-                    JCU1EmailTextField.getText().isEmpty() ||
-                    JCU1DateChooserBirthDate.getDate() == null ||
-                    selectedCountry == "Seleccionar País"
-                ){
+                if (JCU1NickNameTextField.getText().isEmpty()
+                        || JCU1NameTextField.getText().isEmpty()
+                        || JCU1LastNameTextField.getText().isEmpty()
+                        || JCU1EmailTextField.getText().isEmpty()
+                        || JCU1DateChooserBirthDate.getDate() == null
+                        || selectedCountry == "Seleccionar País") {
                     return true;
                 }
                 break;
-                
+
             default:
                 break;
-        } 
+        }
         return false;
     }
-    
-    
-    public void jCU9vaciarCampos(){
+
+    public void jCU9vaciarCampos() {
         jCU9TextFieldNombrePaquete.setText("");
         jCU9TextAreaDescPaquete.setText("");
         jCU9DateChooserFecha.setDate(null);
         jCU9SpinnerDescuentoPaquete.setValue(0);
         jCU9SpinnerValidezPaquete.setValue(0);
     }
-    
-    public void jCU4vaciarCampos(){
+
+    public void jCU4vaciarCampos() {
         jCU4TextFieldNombre.setText("");
         jCU4TextAreaDescripcion.setText("");
         jCU4TextFieldCiudad.setText("");
@@ -5409,72 +5397,73 @@ public class Main extends javax.swing.JFrame {
         jCU4TextFieldDuracion.setText("");
         jCU4DateChooserFecha.setDate(null);
     }
-    
-    public boolean jCU4verificarVacios(){
+
+    public boolean jCU4verificarVacios() {
         int indexRowDepartamento = jCU4TableDepartamentos.getSelectedRow();
         int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
-        
-        if(jCU4TextFieldNombre.getText().isEmpty() ||
-           jCU4TextAreaDescripcion.getText().isEmpty() ||
-           jCU4TextFieldCiudad.getText().isEmpty() ||
-           jCU4TextFieldCosto.getText().isEmpty() ||
-           jCU4TextFieldDuracion.getText().isEmpty() ||
-           jCU4DateChooserFecha.getDate() == null || indexRowDepartamento == -1 ||
-           indexRowProveedor == -1){
-            JOptionPane.showMessageDialog(this,"Se detectaron campos o parametros vacios, vuelva y complete la informacion antes de continuar.","ALERTA",JOptionPane.WARNING_MESSAGE);
+
+        if (jCU4TextFieldNombre.getText().isEmpty()
+                || jCU4TextAreaDescripcion.getText().isEmpty()
+                || jCU4TextFieldCiudad.getText().isEmpty()
+                || jCU4TextFieldCosto.getText().isEmpty()
+                || jCU4TextFieldDuracion.getText().isEmpty()
+                || jCU4DateChooserFecha.getDate() == null || indexRowDepartamento == -1
+                || indexRowProveedor == -1) {
+            JOptionPane.showMessageDialog(this, "Se detectaron campos o parametros vacios, vuelva y complete la informacion antes de continuar.", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public void jCUPaquetesactualizarpaquetes(JTable panelPaquete){
+
+    public void jCUPaquetesactualizarpaquetes(JTable panelPaquete) {
         List<String> PaquetesNombres = controlador.obtenerPaqueteNombres();
         DefaultTableModel modelPaquetes = (DefaultTableModel) panelPaquete.getModel();
-        
-        while(modelPaquetes.getRowCount() > 0){
+
+        while (modelPaquetes.getRowCount() > 0) {
             modelPaquetes.removeRow(modelPaquetes.getRowCount() - 1);
         }
-       
-        
-        for(int i = 0; i < PaquetesNombres.size(); i++){
+
+        for (int i = 0; i < PaquetesNombres.size(); i++) {
             Object rowData[] = new Object[1];
             rowData[0] = PaquetesNombres.get(i);
             modelPaquetes.addRow(rowData);
         }
     }
+
     /**
-     * @dtDepartamentos lista de dtDepartamentos que se van a convertir en registros
-     * la logica es la siguiente:
-     * 1.consigo los registros a poner
-     * 2.consigo el modelo de la tabla
-     * 3.borro los registros ya existentes en caso de que existan asi no tengo registros duplicados
-     * @fireTableDataChanged 4.actualizo la tabla para que sepa que le borre los registros
-     * 5.cargo los nuevos registros actualizados
-     * 
-     * TODO falta agregar la misma logica para la parte de proveedores cuando esten
+     * @dtDepartamentos lista de dtDepartamentos que se van a convertir en
+     * registros la logica es la siguiente: 1.consigo los registros a poner
+     * 2.consigo el modelo de la tabla 3.borro los registros ya existentes en
+     * caso de que existan asi no tengo registros duplicados
+     * @fireTableDataChanged 4.actualizo la tabla para que sepa que le borre los
+     * registros 5.cargo los nuevos registros actualizados
+     *
+     * TODO falta agregar la misma logica para la parte de proveedores cuando
+     * esten
      */
-   
-    public void jCU4actualizarTablas(){
+
+    public void jCU4actualizarTablas() {
         // TODO add your handling code here:
 
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
         List<DTProveedor> dtProveedores = controlador.obtenerProveedores();
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         DefaultTableModel modelProveedores = (DefaultTableModel) jCU4TableProveedores.getModel();
-        
-        while(modelDepartamento.getRowCount() > 0){
+
+        while (modelDepartamento.getRowCount() > 0) {
             modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
         }
-        
+
         modelDepartamento.fireTableDataChanged();
-        
-        while(modelProveedores.getRowCount() > 0){
+
+        while (modelProveedores.getRowCount() > 0) {
             modelProveedores.removeRow(modelProveedores.getRowCount() - 1);
         }
-        
+
         modelProveedores.fireTableDataChanged();
-        
-        for(DTDepartamento d: dtDepartamentos){
+
+        for (DTDepartamento d : dtDepartamentos) {
             Object rowData[] = new Object[4];
             rowData[0] = d.getId();
             rowData[1] = d.getNombre();
@@ -5482,8 +5471,8 @@ public class Main extends javax.swing.JFrame {
             rowData[3] = d.getURL();
             modelDepartamento.addRow(rowData);
         }
-        
-        for(DTProveedor p: dtProveedores){
+
+        for (DTProveedor p : dtProveedores) {
             Object rowData[] = new Object[4];
             rowData[0] = p.getId();
             rowData[1] = p.getNickname();
@@ -5492,24 +5481,24 @@ public class Main extends javax.swing.JFrame {
             modelProveedores.addRow(rowData);
         }
     }
-    
-    public void jCU12vaciarCampos(){
+
+    public void jCU12vaciarCampos() {
         jCU12TextFieldNombre.setText("");
         jCU12TextFieldDescripcion.setText("");
         jCU12TextFieldURL.setText("");
     }
-    
-    public boolean jCU12verificarVacios(){
-        if(jCU12TextFieldNombre.getText().isEmpty() ||
-        jCU12TextFieldDescripcion.getText().isEmpty() ||
-        jCU12TextFieldURL.getText().isEmpty()){
+
+    public boolean jCU12verificarVacios() {
+        if (jCU12TextFieldNombre.getText().isEmpty()
+                || jCU12TextFieldDescripcion.getText().isEmpty()
+                || jCU12TextFieldURL.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Algún campo ha quedado vacío", "ALERTA", JOptionPane.WARNING_MESSAGE);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -8,11 +8,13 @@
 *.ctxt
 
 #Ignorar imagenes
-/servidor-central/src/img/
+/sestacion-de-trabajo/src/main/resources/img/
 
 #Settings
 /.settings/
 *.cfg.xml
+.settings
+.vscode
 
 #Mobile Tools for Java (J2ME)
 /servidor-central/mtj.tmp/
@@ -26,13 +28,10 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-.settings
-.vscode
+
 hs_err_pid
 /.metadata/
 /Servers/
-/servidor-central/bin/
-/servidor-central/.settings/
 /servidor-central/target/
 /estacion-de-trabajo/target/
+/servidor-web/target/
