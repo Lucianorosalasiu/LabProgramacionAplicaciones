@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="puConexionBD" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>persistencia.entidades.EBase</class>
+    <class>persistencia.entidades.EDepartamento</class>
+    <class>persistencia.entidades.EActividadTuristica</class>
+    <class>persistencia.entidades.ESalidaTuristica</class>
+    <class>persistencia.entidades.EInscripcion</class>
+    <class>persistencia.entidades.EPaqueteActividadTuristica</class>
+    <class>persistencia.entidades.EProveedor</class>
+    <class>persistencia.entidades.EUsuario</class>
+    <class>persistencia.entidades.ETurista</class>
+    <class>persistencia.entidades.ECategoria</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/turismouy?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="tecnologo"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="tecnologo"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.sharedCache.mode" value="NONE"/>
+    </properties>
+  </persistence-unit>
+</persistence>
