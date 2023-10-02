@@ -1,5 +1,6 @@
 package persistencia;
 
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
@@ -403,7 +404,6 @@ public class DataPersistencia implements IDataPersistencia {
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
                 dtActividadTuristica.getFechaAlta(),eDepartamento);
 
-        
         try{
             em.getTransaction().begin();
             /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
@@ -1047,6 +1047,48 @@ public class DataPersistencia implements IDataPersistencia {
             return dtCategorias;
         }catch(Exception e){
             return dtCategorias;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesSinConfirmar(){
+        EntityManager em = emf.createEntityManager();
+        String query = "SELECT a FROM EActividadTuristica a";
+        List<DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+        List<EActividadTuristica> resultado = new LinkedList<>();
+        try{
+            resultado = em.createQuery(query,EActividadTuristica.class).getResultList();
+            
+            for( EActividadTuristica r : resultado ){
+                if(r.getEstadoActividad() == EstadoActividad.AGREGADA){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(r.getId(),
+                    r.getNombre(),r.getDescripcion());
+                    dtActividadesTuristicas.add(dtActividadTuristica);
+                }
+            }
+            
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void validarActividad(Long id, EstadoActividad estado){
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            em.getTransaction().begin();
+                EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, id);  
+                eActividadTuristica.setEstadoActividad(estado);
+                em.persist(eActividadTuristica);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
         }finally{
             em.close();
         }

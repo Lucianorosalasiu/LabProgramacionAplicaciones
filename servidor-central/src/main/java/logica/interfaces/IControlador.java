@@ -4,6 +4,7 @@
  */
 package logica.interfaces;
 
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
@@ -70,6 +71,10 @@ public interface  IControlador {
     /*CU13 ALTA DE CATEGORIA*/
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();
+    
+    /*CU14 CONFIRMAR CATEGORIA*/
+    List<DTActividadTuristica> obtenerActividadesSinConfirmar();
+    void validarActividad(Long id, EstadoActividad estado);
     
 }
 
