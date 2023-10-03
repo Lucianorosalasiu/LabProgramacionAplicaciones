@@ -303,6 +303,14 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuActividadConsultaActionPerformed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuActividadValidar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Confirmar/Rechazar Actividad"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuActividadValidarActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuDepartamentoAlta">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Alta de Departamento"/>

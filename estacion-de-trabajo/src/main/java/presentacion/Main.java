@@ -410,6 +410,7 @@ public class Main extends javax.swing.JFrame {
         jMenuActividad = new javax.swing.JMenu();
         jMenuActividadAlta = new javax.swing.JMenuItem();
         jMenuActividadConsulta = new javax.swing.JMenuItem();
+        jMenuActividadValidar = new javax.swing.JMenuItem();
         jMenuDepartamentoAlta = new javax.swing.JMenuItem();
         jMenuSalida = new javax.swing.JMenu();
         jMenuSalidaAlta = new javax.swing.JMenuItem();
@@ -3469,6 +3470,14 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuActividad.add(jMenuActividadConsulta);
 
+        jMenuActividadValidar.setText("Confirmar/Rechazar Actividad");
+        jMenuActividadValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActividadValidarActionPerformed(evt);
+            }
+        });
+        jMenuActividad.add(jMenuActividadValidar);
+
         jMenuDepartamentoAlta.setText("Alta de Departamento");
         jMenuDepartamentoAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5045,6 +5054,11 @@ public class Main extends javax.swing.JFrame {
         jCU14ActualizarTabla();
     }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaComponentShown
 
+    private void jMenuActividadValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActividadValidarActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(13);
+    }//GEN-LAST:event_jMenuActividadValidarActionPerformed
+
     public void jCU1PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -5981,6 +5995,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
     private javax.swing.JMenuItem jMenuActividadConsulta;
+    private javax.swing.JMenuItem jMenuActividadValidar;
     private javax.swing.JMenuItem jMenuAgregarActividadPaquete;
     private javax.swing.JMenuItem jMenuAltaPaquete;
     private javax.swing.JMenuBar jMenuBar1;
