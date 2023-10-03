@@ -4,6 +4,7 @@
  */
 package logica.clases;
 
+import Enums.EstadoActividad;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class ActividadTuristica {
     private String ciudad;
     private Date fechaAlta;
     private Departamento departamento;
+    private EstadoActividad estadoActividad;
     
     public ActividadTuristica(String nombre, String descripcion, String duracion,
             float costo, String ciudad, Date fechaAlta, Departamento departamento){

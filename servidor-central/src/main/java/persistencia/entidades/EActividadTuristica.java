@@ -4,10 +4,13 @@
  */
 package persistencia.entidades;
 
+import Enums.EstadoActividad;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -44,6 +47,10 @@ public class EActividadTuristica extends EBase {
     @OneToMany(mappedBy = "eActividadTuristica")
     private List<ESalidaTuristica> ESalidasTuristicas;
     
+    @Column(name = "ESTADOACTIVIDAD")
+    @Enumerated(EnumType.STRING)
+    private EstadoActividad estadoActividad;
+    
     private EActividadTuristica(){}
     
     public EActividadTuristica(String nombre, String descripcion, String duracion,
@@ -55,5 +62,6 @@ public class EActividadTuristica extends EBase {
         this.ciudad = ciudad;
         this.fechaAlta = fechaAlta;
         this.eDepartamento = eDepartamento;
+        this.estadoActividad = EstadoActividad.AGREGADA;
     }
 }

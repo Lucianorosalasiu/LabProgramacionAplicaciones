@@ -63,6 +63,13 @@ public class DTActividadTuristica {
     public DTActividadTuristica(String nombre){
         this.nombre = nombre;
     }
+    
+    public DTActividadTuristica(Long id, String nombre, String descripcion){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
     public String getCostoToString(){
         Float costoString = this.costo;
         return costoString.toString();

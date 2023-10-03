@@ -16,6 +16,10 @@ _Desarrollo de una aplicacion distribuida utilizando variedad de tecnologias per
 * [MySQL](https://www.mysql.com/) Para la gestion y el manejo de la base de datos.
 * [JPA](https://www.oracle.com/technical-resources/articles/java/jpa.html) Para el mapeo de objetos en la base de datos dandoles persistencia.
 * [EclipseLink](https://eclipse.dev/eclipselink/#jpa) Como proveedor de servicios de persistencia.
+* [Tomcat](https://tomcat.apache.org/) Como webserver.
+* [JSP](https://en.wikipedia.org/wiki/Jakarta_Server_Pages) Para lograr Server-Side Rendering de datos dinamicos obtenidos por el servidor.
+* [Servlets](https://www.geeksforgeeks.org/introduction-java-servlets/) Manejo y control de peticiones y respuestas HTTP.
+* [Bootstrap](https://getbootstrap.com/) Estilos pre-diseñados logrando un front end moderno y responsive en un corto periodo de tiempo.
 
 ### 🛠️Requisitos para la ejecucion
 * JRE 11 o superior

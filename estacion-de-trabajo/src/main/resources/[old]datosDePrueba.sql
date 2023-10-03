@@ -35,7 +35,7 @@ CREATE TABLE `PAQUETE_ACTIVIDAD` (
 
 LOCK TABLES `PAQUETE_ACTIVIDAD` WRITE;
 /*!40000 ALTER TABLE `PAQUETE_ACTIVIDAD` DISABLE KEYS */;
-INSERT INTO `PAQUETE_ACTIVIDAD` VALUES (124,70),(124,71),(125,70),(125,73),(125,74);
+INSERT INTO `PAQUETE_ACTIVIDAD` VALUES (124,70),(124,71),(125,73),(125,74);
 /*!40000 ALTER TABLE `PAQUETE_ACTIVIDAD` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +59,7 @@ CREATE TABLE `PROVEEDOR_ACTIVIDAD` (
 
 LOCK TABLES `PROVEEDOR_ACTIVIDAD` WRITE;
 /*!40000 ALTER TABLE `PROVEEDOR_ACTIVIDAD` DISABLE KEYS */;
-INSERT INTO `PROVEEDOR_ACTIVIDAD` VALUES (11,70),(11,71),(11,1151),(11,1201),(11,1251),(11,1301),(11,1351),(11,1401),(11,1451),(11,1501),(11,1551),(11,1601),(11,1651),(12,75),(12,76),(13,73),(13,74);
+INSERT INTO `PROVEEDOR_ACTIVIDAD` VALUES (11,70),(11,71),(12,75),(12,76),(13,73),(13,74);
 /*!40000 ALTER TABLE `PROVEEDOR_ACTIVIDAD` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `SEQUENCE` (
 
 LOCK TABLES `SEQUENCE` WRITE;
 /*!40000 ALTER TABLE `SEQUENCE` DISABLE KEYS */;
-INSERT INTO `SEQUENCE` VALUES ('SEQ_GEN_TABLE',1700);
+INSERT INTO `SEQUENCE` VALUES ('SEQ_GEN_TABLE',150);
 /*!40000 ALTER TABLE `SEQUENCE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +103,6 @@ CREATE TABLE `actividadTuristica` (
   `FECHAALTA` datetime DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
   `EDEPARTAMENTO_ID` bigint(20) DEFAULT NULL,
-  `ESTADOACTIVIDAD` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NOMBRE` (`NOMBRE`),
   KEY `FK_actividadTuristica_EDEPARTAMENTO_ID` (`EDEPARTAMENTO_ID`),
@@ -117,31 +116,8 @@ CREATE TABLE `actividadTuristica` (
 
 LOCK TABLES `actividadTuristica` WRITE;
 /*!40000 ALTER TABLE `actividadTuristica` DISABLE KEYS */;
-INSERT INTO `actividadTuristica` VALUES (70,'Rocha',800,'Festival gastronomico de productos locales en Rocha','3','2022-07-20 00:00:00','Degusta',52,'CONFIRMADA'),(71,'Rocha',500,'En el mes aniversario del Club Deportivo Union de Rocha te invitamos a una merienda deliciosa.','3','2022-07-21 00:00:00','Teatro con Sabores',52,'CONFIRMADA'),(73,'Colonia del Sacramento',400,'Con guia especializado y en varios idiomas. Varios circuitos posibles.','2','2022-08-01 00:00:00','Tour por Colonia del Sacramento',62,'CONFIRMADA'),(74,'Colonia del Sacramento',800,'Restaurante en la renovada Plaza de Toros con menu internacional','2','2022-08-01 00:00:00','Almuerzo en el Real de San Carlos',62,'CONFIRMADA'),(75,'Tranqueras',300,'Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.','2','2022-08-01 00:00:00','Almuerzo en Valle del Lunarejo',56,'CONFIRMADA'),(76,'Tranqueras',150,'Cabalgata por el area protegida. Varios recorridos para elegir.','2','2022-08-01 00:00:00','Cabalgata en Valle del Lunarejo',56,'CONFIRMADA'),(1651,'PDE',1,'fuera del caso de uso de confirmar/rechazar esta actividad no deberia ser listada, de ser asi falta un filtro en persistencia','1','2023-10-19 12:11:02','no listar esta actividad',15,'AGREGADA');
+INSERT INTO `actividadTuristica` VALUES (70,'Rocha',800,'Festival gastronomico de productos locales en Rocha','3','2022-07-20 00:00:00','Degusta',52),(71,'Rocha',500,'En el mes aniversario del Club Deportivo Union de Rocha te invitamos a una merienda deliciosa.','3','2022-07-21 00:00:00','Teatro con Sabores',52),(73,'Colonia del Sacramento',400,'Con guia especializado y en varios idiomas. Varios circuitos posibles.','2','2022-08-01 00:00:00','Tour por Colonia del Sacramento',62),(74,'Colonia del Sacramento',800,'Restaurante en la renovada Plaza de Toros con menu internacional','2','2022-08-01 00:00:00','Almuerzo en el Real de San Carlos',62),(75,'Tranqueras',300,'Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.','2','2022-08-01 00:00:00','Almuerzo en Valle del Lunarejo',56),(76,'Tranqueras',150,'Cabalgata por el area protegida. Varios recorridos para elegir.','2','2022-08-01 00:00:00','Cabalgata en Valle del Lunarejo',56);
 /*!40000 ALTER TABLE `actividadTuristica` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `categoria`
---
-
-DROP TABLE IF EXISTS `categoria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categoria` (
-  `ID` bigint(20) NOT NULL,
-  `NOMBRE` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categoria`
---
-
-LOCK TABLES `categoria` WRITE;
-/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -199,7 +175,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES (113,3,2400,'2022-08-15 10:59:00',101,1),(114,5,4000,'2022-08-16 11:36:00',102,5),(115,3,1200,'2023-08-18 11:36:00',106,1),(116,1,400,'2023-08-19 11:39:00',106,2),(118,1,500,'2023-08-19 11:42:00',103,9),(119,10,5000,'2023-08-20 11:44:00',104,9),(120,2,1000,'2023-08-20 11:46:00',104,7),(121,1,500,'2023-08-21 11:47:00',104,3),(122,1,800,'2023-08-21 11:48:00',108,8),(1101,1,800,'2023-09-19 16:42:43',101,10),(1102,1,800,'2023-09-19 16:43:08',102,10);
+INSERT INTO `inscripcion` VALUES (113,3,2400,'2022-08-15 10:59:00',101,1),(114,5,4000,'2022-08-16 11:36:00',102,5),(115,3,1200,'2023-08-18 11:36:00',106,1),(116,1,400,'2023-08-19 11:39:00',106,2),(117,2,1600,'2023-08-19 11:41:00',108,10),(118,1,500,'2023-08-19 11:42:00',103,9),(119,10,5000,'2023-08-20 11:44:00',104,9),(120,2,1000,'2023-08-20 11:46:00',104,7),(121,1,500,'2023-08-21 11:47:00',104,3),(122,1,800,'2023-08-21 11:48:00',108,8);
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,4 +312,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-03 12:14:24
+-- Dump completed on 2023-09-14 12:25:06

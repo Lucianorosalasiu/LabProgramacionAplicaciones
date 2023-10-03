@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica.controlador;
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
@@ -314,5 +315,15 @@ public class Controlador implements IControlador{
     @Override
     public List<DTCategoria> obtenerCategorias(){
         return dataPersistencia.obtenerCategorias();
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesSinConfirmar(){
+        return dataPersistencia.obtenerActividadesSinConfirmar();
+    }
+    
+    @Override
+    public void validarActividad(Long id, EstadoActividad estado){
+        dataPersistencia.validarActividad(id, estado);
     }
 }

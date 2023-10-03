@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
@@ -78,4 +79,8 @@ public interface IDataPersistencia {
      
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();
+    
+    /*CU 14 CONFIRMAR CATEGORIA*/
+    List<DTActividadTuristica> obtenerActividadesSinConfirmar();
+    void validarActividad(Long id, EstadoActividad estado);
 }

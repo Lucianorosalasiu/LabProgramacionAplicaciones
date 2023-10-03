@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
@@ -394,6 +395,12 @@ public class Main extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jCU13ButtonEnviar = new javax.swing.JButton();
         jCU13ButtonVaciarCampos = new javax.swing.JButton();
+        jInternalFrameValidarActividadTuristica = new javax.swing.JInternalFrame();
+        jCU14ScrollPane = new javax.swing.JScrollPane();
+        jCU14TableActividadesSinValidar = new javax.swing.JTable();
+        jCU14ButtonAceptar = new javax.swing.JButton();
+        jCU14ButtonRechazar = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAcciones = new javax.swing.JMenu();
         jMenuUsuario = new javax.swing.JMenu();
@@ -403,6 +410,7 @@ public class Main extends javax.swing.JFrame {
         jMenuActividad = new javax.swing.JMenu();
         jMenuActividadAlta = new javax.swing.JMenuItem();
         jMenuActividadConsulta = new javax.swing.JMenuItem();
+        jMenuActividadValidar = new javax.swing.JMenuItem();
         jMenuDepartamentoAlta = new javax.swing.JMenuItem();
         jMenuSalida = new javax.swing.JMenu();
         jMenuSalidaAlta = new javax.swing.JMenuItem();
@@ -3334,6 +3342,86 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPaneCasosDeUso.addTab("Alta de Categoria", jInternalFrame1);
 
+        jInternalFrameValidarActividadTuristica.setVisible(true);
+        jInternalFrameValidarActividadTuristica.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jInternalFrameValidarActividadTuristicaComponentHidden(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jInternalFrameValidarActividadTuristicaComponentShown(evt);
+            }
+        });
+
+        jCU14TableActividadesSinValidar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Descripción"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jCU14ScrollPane.setViewportView(jCU14TableActividadesSinValidar);
+
+        jCU14ButtonAceptar.setText("Aceptar");
+        jCU14ButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU14ButtonAceptarActionPerformed(evt);
+            }
+        });
+
+        jCU14ButtonRechazar.setText("Rechazar");
+        jCU14ButtonRechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU14ButtonRechazarActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Lista de actividades agregadas sin confirmar en el sistema");
+
+        javax.swing.GroupLayout jInternalFrameValidarActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameValidarActividadTuristica.getContentPane());
+        jInternalFrameValidarActividadTuristica.getContentPane().setLayout(jInternalFrameValidarActividadTuristicaLayout);
+        jInternalFrameValidarActividadTuristicaLayout.setHorizontalGroup(
+            jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCU14ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1073, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jCU14ButtonRechazar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCU14ButtonAceptar))
+                    .addGroup(jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jInternalFrameValidarActividadTuristicaLayout.setVerticalGroup(
+            jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCU14ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCU14ButtonAceptar)
+                    .addComponent(jCU14ButtonRechazar))
+                .addGap(7, 7, 7))
+        );
+
+        jTabbedPaneCasosDeUso.addTab("Aceptar/Rechazar Actividad Turística", jInternalFrameValidarActividadTuristica);
+
         jMenuAcciones.setText("Acciones");
 
         jMenuUsuario.setText("Usuarios");
@@ -3381,6 +3469,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenuActividad.add(jMenuActividadConsulta);
+
+        jMenuActividadValidar.setText("Confirmar/Rechazar Actividad");
+        jMenuActividadValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuActividadValidarActionPerformed(evt);
+            }
+        });
+        jMenuActividad.add(jMenuActividadValidar);
 
         jMenuDepartamentoAlta.setText("Alta de Departamento");
         jMenuDepartamentoAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -4916,6 +5012,53 @@ public class Main extends javax.swing.JFrame {
         jCU13TextFieldCategoria.setText("");
     }//GEN-LAST:event_jCU13ButtonVaciarCamposActionPerformed
 
+    private void jCU14ButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU14ButtonAceptarActionPerformed
+        // TODO add your handling code here:
+        if(jCU14TableActividadesSinValidar.getSelectedRow() > -1){
+            try{
+                Long id = Long.parseLong(jCU14TableActividadesSinValidar.getValueAt(jCU14TableActividadesSinValidar.getSelectedRow(), 0).toString());
+                controlador.validarActividad(id, EstadoActividad.CONFIRMADA);
+                JOptionPane.showMessageDialog(this, "Actividad confirmada.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+                jCU14ActualizarTabla();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Algo salio mal.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Debes seleccionar la actividad sobre la que quieres actuar", "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jCU14ButtonAceptarActionPerformed
+
+    private void jCU14ButtonRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU14ButtonRechazarActionPerformed
+        // TODO add your handling code here:
+        if(jCU14TableActividadesSinValidar.getSelectedRow() > -1){
+            try{
+                Long id = Long.parseLong(jCU14TableActividadesSinValidar.getValueAt(jCU14TableActividadesSinValidar.getSelectedRow(), 0).toString());
+                controlador.validarActividad(id, EstadoActividad.RECHAZADA);
+                JOptionPane.showMessageDialog(this, "Actividad rechazada.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+                jCU14ActualizarTabla();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Algo salio mal.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Debes seleccionar la actividad sobre la que quieres actuar", "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jCU14ButtonRechazarActionPerformed
+
+    private void jInternalFrameValidarActividadTuristicaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaComponentHidden
+        // TODO add your handling code here:
+        jCU14ActualizarTabla();
+    }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaComponentHidden
+
+    private void jInternalFrameValidarActividadTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaComponentShown
+        // TODO add your handling code here:
+        jCU14ActualizarTabla();
+    }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaComponentShown
+
+    private void jMenuActividadValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuActividadValidarActionPerformed
+        // TODO add your handling code here:
+        jTabbedPaneCasosDeUso.setSelectedIndex(13);
+    }//GEN-LAST:event_jMenuActividadValidarActionPerformed
+
     public void jCU1PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -5498,6 +5641,25 @@ public class Main extends javax.swing.JFrame {
             return false;
         }
     }
+    
+    public void jCU14ActualizarTabla(){
+        List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesSinConfirmar();
+        DefaultTableModel modelActividades = (DefaultTableModel) jCU14TableActividadesSinValidar.getModel();
+
+        while (modelActividades.getRowCount() > 0) {
+            modelActividades.removeRow(modelActividades.getRowCount() - 1);
+        }
+        
+        modelActividades.fireTableDataChanged();
+        
+        for (DTActividadTuristica a : dtActividades) {
+            Object rowData[] = new Object[3];
+            rowData[0] = a.getId();
+            rowData[1] = a.getNombre();
+            rowData[2] = a.getDescripcion();
+            modelActividades.addRow(rowData);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -5586,6 +5748,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jCU13ButtonEnviar;
     private javax.swing.JButton jCU13ButtonVaciarCampos;
     private javax.swing.JTextField jCU13TextFieldCategoria;
+    private javax.swing.JButton jCU14ButtonAceptar;
+    private javax.swing.JButton jCU14ButtonRechazar;
+    private javax.swing.JScrollPane jCU14ScrollPane;
+    private javax.swing.JTable jCU14TableActividadesSinValidar;
     private javax.swing.JComboBox<String> jCU1ComboBoxPaises;
     private javax.swing.JInternalFrame jCU1InternalFrameAgregarUsuario;
     private javax.swing.JLabel jCU1LabelBirthDate;
@@ -5785,6 +5951,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrameConsultarUsuario;
     private javax.swing.JInternalFrame jInternalFrameInscripcionSalidaTuristica;
     private javax.swing.JInternalFrame jInternalFrameModificarUsuario;
+    private javax.swing.JInternalFrame jInternalFrameValidarActividadTuristica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -5792,6 +5959,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -5827,6 +5995,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuActividad;
     private javax.swing.JMenuItem jMenuActividadAlta;
     private javax.swing.JMenuItem jMenuActividadConsulta;
+    private javax.swing.JMenuItem jMenuActividadValidar;
     private javax.swing.JMenuItem jMenuAgregarActividadPaquete;
     private javax.swing.JMenuItem jMenuAltaPaquete;
     private javax.swing.JMenuBar jMenuBar1;
