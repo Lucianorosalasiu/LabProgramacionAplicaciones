@@ -316,7 +316,9 @@ public class DataPersistencia implements IDataPersistencia {
             
             // Por cada actividad se obtiene su salida turistica asociada
             for(EActividadTuristica a : listaEActividades){
-                listaESalidas.addAll(a.getESalidasTuristicas());
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    listaESalidas.addAll(a.getESalidasTuristicas());
+                }
             }
             
             for(ESalidaTuristica s : listaESalidas){
@@ -353,16 +355,18 @@ public class DataPersistencia implements IDataPersistencia {
             
             
             for(EActividadTuristica a : listaEActividades){
-                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(
-                        a.getNombre(),
-                        a.getDescripcion(),
-                        a.getDuracion(),
-                        a.getCosto(),
-                        a.getCiudad(),
-                        a.getFechaAlta()
-                );
-                
-                listaActividades.add(dtActividadTuristica);
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(
+                            a.getNombre(),
+                            a.getDescripcion(),
+                            a.getDuracion(),
+                            a.getCosto(),
+                            a.getCiudad(),
+                            a.getFechaAlta()
+                    );
+
+                    listaActividades.add(dtActividadTuristica);
+                }
             }
             return listaActividades;
         }catch(Exception e){
@@ -464,10 +468,12 @@ public class DataPersistencia implements IDataPersistencia {
                     .setParameter("idDepartamento",idDepartamento).getResultList();
             
             for(EActividadTuristica a : resultados){
-                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getNombre(),a.getDescripcion(),
-                a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
-                
-                dtActividadesTuristicas.add(dtActividadTuristica);
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getNombre(),a.getDescripcion(),
+                    a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+
+                    dtActividadesTuristicas.add(dtActividadTuristica);
+                }
             }
             return dtActividadesTuristicas;
         }catch(Exception e){
@@ -488,10 +494,12 @@ public class DataPersistencia implements IDataPersistencia {
             resultados = em.createQuery(consulta,EActividadTuristica.class).getResultList();
             
             for(EActividadTuristica a : resultados){
-                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getId(),a.getNombre(),a.getDescripcion(),
-                a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
-                
-                dtActividadesTuristicas.add(dtActividadTuristica);
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getId(),a.getNombre(),a.getDescripcion(),
+                    a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+
+                    dtActividadesTuristicas.add(dtActividadTuristica);
+                }
             }
             return dtActividadesTuristicas;
         }catch(Exception e){
@@ -504,15 +512,17 @@ public class DataPersistencia implements IDataPersistencia {
     @Override
     public DTActividadTuristica obtenerActividadTuristica(Long idActividad){
         EntityManager em = emf.createEntityManager();
-        
         try{
             EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, idActividad);
-            
-            DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
-                    eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
-                    eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta());
-
-            return dtActividadTuristica;
+            if(eActividadTuristica.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
+                        eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
+                        eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta());
+                return dtActividadTuristica;
+            }else{
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(); 
+                return dtActividadTuristica;
+            }       
         }catch(Exception e){
             DTActividadTuristica dtActividadTuristica = new DTActividadTuristica();
             return dtActividadTuristica;
@@ -529,14 +539,16 @@ public class DataPersistencia implements IDataPersistencia {
          
          try{
              EActividadTuristica actividad = em.find(EActividadTuristica.class,idActividad);
-             resultados_consulta = actividad.getPaquetes();
              
-             for(EPaqueteActividadTuristica p : resultados_consulta){
-                 DTPaqueteActividadTuristica dtPaqueteActividadTuristica = new
-                     DTPaqueteActividadTuristica(p.getNombre());
-                 resultados.add(dtPaqueteActividadTuristica);
+             if(actividad.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                resultados_consulta = actividad.getPaquetes();
+
+                for(EPaqueteActividadTuristica p : resultados_consulta){
+                    DTPaqueteActividadTuristica dtPaqueteActividadTuristica = new
+                        DTPaqueteActividadTuristica(p.getNombre());
+                    resultados.add(dtPaqueteActividadTuristica);
+                }
              }
-             
              return resultados;
          }catch(Exception e){
              return resultados;
@@ -560,11 +572,12 @@ public class DataPersistencia implements IDataPersistencia {
              resultados_consulta = paquete.getActividades();
              
              for(EActividadTuristica p : resultados_consulta){
-                 DTActividadTuristica dtActividadTuristica = new
-                     DTActividadTuristica(p.getId(),p.getNombre(),null,null,0,null,null);
-                 resultados.add(dtActividadTuristica);
+                 if(p.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    DTActividadTuristica dtActividadTuristica = new
+                        DTActividadTuristica(p.getId(),p.getNombre(),null,null,0,null,null);
+                    resultados.add(dtActividadTuristica);
+                 }
              }
-             
              return resultados;
          }catch(Exception e){
              return resultados;
@@ -683,18 +696,19 @@ public class DataPersistencia implements IDataPersistencia {
             EActividadTuristica eActividadTuristica = em.createQuery(query, EActividadTuristica.class)
                                     .setParameter("nombreActividad", nombreActividad)
                                     .getSingleResult();
+            if(eActividadTuristica.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                ESalidaTuristica nuevaSalida = new ESalidaTuristica(
+                        dtSalidaTuristica.getNombre(),
+                        dtSalidaTuristica.getCantidadMaxTuristas(),
+                        dtSalidaTuristica.getFechaSalida(),
+                        dtSalidaTuristica.getLugar(),
+                        dtSalidaTuristica.getFechaAlta(),
+                        eActividadTuristica
+                );
 
-            ESalidaTuristica nuevaSalida = new ESalidaTuristica(
-                    dtSalidaTuristica.getNombre(),
-                    dtSalidaTuristica.getCantidadMaxTuristas(),
-                    dtSalidaTuristica.getFechaSalida(),
-                    dtSalidaTuristica.getLugar(),
-                    dtSalidaTuristica.getFechaAlta(),
-                    eActividadTuristica
-            );
-
-            em.persist(nuevaSalida);
-            em.getTransaction().commit();
+                em.persist(nuevaSalida);
+                em.getTransaction().commit();
+            }
         }catch(Exception e){
             em.getTransaction().rollback();
             throw new MyException("ERROR! Algo salio durante el alta de la salida turistica. ");

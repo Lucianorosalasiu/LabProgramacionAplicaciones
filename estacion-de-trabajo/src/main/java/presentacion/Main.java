@@ -3342,28 +3342,6 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.addTab("Alta de Categoria", jInternalFrame1);
 
         jInternalFrameValidarActividadTuristica.setVisible(true);
-        jInternalFrameValidarActividadTuristica.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jInternalFrameValidarActividadTuristicaFocusGained(evt);
-            }
-        });
-        jInternalFrameValidarActividadTuristica.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-                jInternalFrameValidarActividadTuristicaInternalFrameActivated(evt);
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
         jInternalFrameValidarActividadTuristica.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 jInternalFrameValidarActividadTuristicaComponentHidden(evt);
@@ -5057,24 +5035,13 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCU14ButtonRechazarActionPerformed
 
-    private void jInternalFrameValidarActividadTuristicaInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaInternalFrameActivated
-        // TODO add your handling code here:
-        jCU14ActualizarTabla();
-    }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaInternalFrameActivated
-
-    private void jInternalFrameValidarActividadTuristicaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaFocusGained
-
     private void jInternalFrameValidarActividadTuristicaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaComponentHidden
         // TODO add your handling code here:
-        System.out.println("me fui");
         jCU14ActualizarTabla();
     }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaComponentHidden
 
     private void jInternalFrameValidarActividadTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameValidarActividadTuristicaComponentShown
         // TODO add your handling code here:
-        System.out.println("me vineee");
         jCU14ActualizarTabla();
     }//GEN-LAST:event_jInternalFrameValidarActividadTuristicaComponentShown
 

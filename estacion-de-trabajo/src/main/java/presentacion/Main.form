@@ -4583,8 +4583,6 @@
             <Property name="visible" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jInternalFrameValidarActividadTuristicaFocusGained"/>
-            <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jInternalFrameValidarActividadTuristicaInternalFrameActivated"/>
             <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jInternalFrameValidarActividadTuristicaComponentHidden"/>
             <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jInternalFrameValidarActividadTuristicaComponentShown"/>
           </Events>
