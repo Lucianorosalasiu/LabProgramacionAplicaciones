@@ -217,7 +217,6 @@ CREATE TABLE `paquetes` (
   `FECHAALTA` datetime DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
   `VALIDEZ` int(11) DEFAULT NULL,
-  `ESTADOPAQUETE` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NOMBRE` (`NOMBRE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -229,7 +228,7 @@ CREATE TABLE `paquetes` (
 
 LOCK TABLES `paquetes` WRITE;
 /*!40000 ALTER TABLE `paquetes` DISABLE KEYS */;
-INSERT INTO `paquetes` VALUES (124,'Actividades para hacer en familia y disfrutar arte y gastronomia',20,'2022-08-10 00:00:00','Disfrutar Rocha',60,0),(125,'Paseos por el casco historico y se puede terminar con Almuerzo en la plaza de Toros',15,'2022-08-01 00:00:00','Un dia en Colonia ',45,0);
+INSERT INTO `paquetes` VALUES (124,'Actividades para hacer en familia y disfrutar arte y gastronomia',20,'2022-08-10 00:00:00','Disfrutar Rocha',60),(125,'Paseos por el casco historico y se puede terminar con Almuerzo en la plaza de Toros',15,'2022-08-01 00:00:00','Un dia en Colonia ',45);
 /*!40000 ALTER TABLE `paquetes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,4 +336,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-03 20:08:53
+-- Dump completed on 2023-10-03 12:14:24

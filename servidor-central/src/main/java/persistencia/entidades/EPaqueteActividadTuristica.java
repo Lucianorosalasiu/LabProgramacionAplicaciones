@@ -35,6 +35,8 @@ public class EPaqueteActividadTuristica extends EBase{
     private int validez;
     private float descuento;
     private Date fechaAlta;
+    @Column(name = "ESTADOPAQUETE")
+    private boolean ESTADOPAQUETE;/*true = confirmado || false = no confirmado */
     @OneToMany
     @JoinTable(name = "PAQUETE_ACTIVIDAD",
             joinColumns = @JoinColumn(name = "PAQUETE_ID"),
@@ -52,6 +54,7 @@ public class EPaqueteActividadTuristica extends EBase{
         this.validez = validez;
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
+        this.ESTADOPAQUETE = false;
         actividades = null;
     }
 }

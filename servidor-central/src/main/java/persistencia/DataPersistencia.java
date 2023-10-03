@@ -821,7 +821,7 @@ public class DataPersistencia implements IDataPersistencia {
       
         try{
           
-            Query query = em.createQuery("select p.nombre from EPaqueteActividadTuristica p");
+            Query query = em.createQuery("select p.nombre from EPaqueteActividadTuristica p where p.ESTADOPAQUETE = 0");
             List<String> resultado = query.getResultList();
             
             return resultado;
@@ -939,7 +939,7 @@ public class DataPersistencia implements IDataPersistencia {
                     .setParameter("nombrePaquete",paquete)
                     .getSingleResult();
 
-            Query query = em.createNativeQuery("select nombre from actividadTuristica where EDEPARTAMENTO_ID = ?1 AND actividadTuristica.id not in (select ACTIVIDAD_ID from paquetes join PAQUETE_ACTIVIDAD ON PAQUETE_ID = paquetes.id where paquetes.id = ?3)")
+            Query query = em.createNativeQuery("select nombre from actividadTuristica where EDEPARTAMENTO_ID = ?1 AND ESTADOACTIVIDAD = 'CONFIRMADA'AND actividadTuristica.id not in (select ACTIVIDAD_ID from paquetes join PAQUETE_ACTIVIDAD ON PAQUETE_ID = paquetes.id where paquetes.id = ?3)")
                     .setParameter(1,eDepartamento.getId())
                     .setParameter(3,ePaquete.getId());        
             List<String> resultado = query.getResultList();
