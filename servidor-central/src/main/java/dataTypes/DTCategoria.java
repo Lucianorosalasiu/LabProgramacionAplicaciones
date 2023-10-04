@@ -17,5 +17,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTCategoria {
+    Long Id;
     String nombre;
+    
+    /*constructor caso sin id*/
+    public DTCategoria (String nombre){
+        this.nombre = nombre;
+    }
+    
 }

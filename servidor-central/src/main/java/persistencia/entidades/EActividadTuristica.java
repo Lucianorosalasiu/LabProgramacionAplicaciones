@@ -51,6 +51,12 @@ public class EActividadTuristica extends EBase {
     @Enumerated(EnumType.STRING)
     private EstadoActividad estadoActividad;
     
+    @ManyToMany
+    @JoinTable(name ="ACTIVIDAD_CATEGORIA",
+            joinColumns = @JoinColumn (name = "ACTIVIDAD_ID"),
+            inverseJoinColumns = @JoinColumn (name = "CATEGORIA_ID"))
+    private List<ECategoria> categorias;
+    
     private EActividadTuristica(){}
     
     public EActividadTuristica(String nombre, String descripcion, String duracion,
@@ -63,5 +69,18 @@ public class EActividadTuristica extends EBase {
         this.fechaAlta = fechaAlta;
         this.eDepartamento = eDepartamento;
         this.estadoActividad = EstadoActividad.AGREGADA;
+    }
+    
+    public EActividadTuristica(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento, List<ECategoria> categorias){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+        this.eDepartamento = eDepartamento;
+        this.estadoActividad = EstadoActividad.AGREGADA;
+        this.categorias = categorias;
     }
 }

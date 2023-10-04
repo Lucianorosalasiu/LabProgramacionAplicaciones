@@ -5,6 +5,7 @@
 package dataTypes;
 
 import java.util.Date;
+import java.util.List;
 import logica.clases.Departamento;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,8 @@ public class DTActividadTuristica {
     private String ciudad;
     private Date fechaAlta;
     private Departamento departamento;
+    private List<Long> categorias;
+    private String categoriasString;
     
     public DTActividadTuristica(){}
     
@@ -58,6 +61,17 @@ public class DTActividadTuristica {
         this.costo = costo;
         this.ciudad = ciudad;
         this.fechaAlta = fechaAlta;
+    }
+    
+    public DTActividadTuristica(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, String categoriasString){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+        this.categoriasString = categoriasString;
     }
     
     public DTActividadTuristica(String nombre){

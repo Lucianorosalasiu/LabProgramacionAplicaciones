@@ -398,16 +398,27 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias){
         EntityManager em = emf.createEntityManager();   
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
         
+        List<ECategoria> eCategorias = new LinkedList<>();
+        
+        for(Long l : categorias){
+            eCategorias.add(em.find(ECategoria.class, l));
+        }
+        
         EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),eDepartamento);
+                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias);
 
+        /*vinculo la categoria con las actividades que la tienen*/
+        for(ECategoria e : eCategorias){    
+            e.addActividad(nuevaActividad);
+        }
+        
         try{
             em.getTransaction().begin();
             /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
@@ -512,12 +523,19 @@ public class DataPersistencia implements IDataPersistencia {
     @Override
     public DTActividadTuristica obtenerActividadTuristica(Long idActividad){
         EntityManager em = emf.createEntityManager();
+        String categoriasString = "";
         try{
             EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, idActividad);
             if(eActividadTuristica.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                
+                for( ECategoria e : eActividadTuristica.getCategorias()){
+                    categoriasString += "|" + e.getNombre();
+                }
+                
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
                         eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
-                        eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta());
+                        eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta(),
+                categoriasString);
                 return dtActividadTuristica;
             }else{
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(); 
@@ -1055,7 +1073,7 @@ public class DataPersistencia implements IDataPersistencia {
             List<ECategoria> resultado = em.createQuery(query,ECategoria.class).getResultList();
   
             for(ECategoria e: resultado){
-                dtCategorias.add( new DTCategoria(e.getNombre()) );
+                dtCategorias.add( new DTCategoria(e.getId(),e.getNombre()) );
             }
             
             return dtCategorias;
