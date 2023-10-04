@@ -398,7 +398,7 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias){
         EntityManager em = emf.createEntityManager();   
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);

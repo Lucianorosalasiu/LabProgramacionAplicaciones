@@ -51,6 +51,7 @@ import java.util.logging.Logger;
 import java.util.Date;
 import java.util.List;
 import java.awt.HeadlessException;
+import java.util.LinkedList;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -3860,13 +3861,21 @@ public class Main extends javax.swing.JFrame {
             int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
 
             Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor, 0).toString());
+            
+            /*conseguir las categorias*/
+            List<Long> categorias = new LinkedList<>();
+            int[] indexRowCategorias = jCU4TableCategorias.getSelectedRows();
+ 
+            for (int i = 0 ; i < indexRowCategorias.length; i++) {
+                categorias.add(Long.parseLong(jCU4TableCategorias.getValueAt(indexRowCategorias[i], 0).toString()));
+            }
 
             try {
                 controlador.existeActividadTuristica(nombre);
                 /*construir el dt actividad turistica*/
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre, descripcion,
                         duracion, costo, ciudad, fechaAlta);
-                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
+                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor,categorias);
                 jCU4vaciarCampos();
                 jCU4actualizarTablas();
                 JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
