@@ -1055,7 +1055,7 @@ public class DataPersistencia implements IDataPersistencia {
             List<ECategoria> resultado = em.createQuery(query,ECategoria.class).getResultList();
   
             for(ECategoria e: resultado){
-                dtCategorias.add( new DTCategoria(e.getNombre()) );
+                dtCategorias.add( new DTCategoria(e.getId(),e.getNombre()) );
             }
             
             return dtCategorias;
