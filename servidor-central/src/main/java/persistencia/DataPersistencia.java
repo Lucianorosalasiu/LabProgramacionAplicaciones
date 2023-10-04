@@ -403,11 +403,22 @@ public class DataPersistencia implements IDataPersistencia {
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
         
+        List<ECategoria> eCategorias = new LinkedList<>();
+        
+        for(Long l : categorias){
+            eCategorias.add(em.find(ECategoria.class, l));
+        }
+        
         EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),eDepartamento);
+                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias);
 
+        /*vinculo la categoria con las actividades que la tienen*/
+        for(ECategoria e : eCategorias){    
+            e.addActividad(nuevaActividad);
+        }
+        
         try{
             em.getTransaction().begin();
             /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
