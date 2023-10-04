@@ -1715,6 +1715,7 @@
           </Properties>
           <Events>
             <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="jInternalFrameAltaActividadTuristicaInternalFrameActivated"/>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jInternalFrameAltaActividadTuristicaComponentShown"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -1751,23 +1752,25 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCU4LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCU4LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCU4LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jCU4LabelDescripcion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCU4LabelDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCU4LabelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCU4TextFieldDuracion" alignment="0" max="32767" attributes="0"/>
                                               <Component id="jCU4ScrollPaneDescripcion" alignment="0" pref="264" max="32767" attributes="0"/>
                                               <Component id="jCU4TextFieldNombre" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jCU4LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCU4DateChooserFecha" alignment="0" pref="264" max="32767" attributes="0"/>
+                                              <Component id="jCU4ComboBoxCategoria" alignment="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jCU4LabelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jCU4DateChooserFecha" alignment="0" min="-2" pref="264" max="-2" attributes="0"/>
+                                          <Component id="jCU4LabelNombre1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jCU4ScrollPanelProveedores" pref="382" max="32767" attributes="0"/>
+                                      <Component id="jCU4ScrollPanelProveedores" pref="393" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1780,7 +1783,7 @@
                                       <Component id="jCU4LabelDepartamentos" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="292" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jCU4ScrollPanelDepartamentos" pref="404" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -1808,7 +1811,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jCU4TextFieldNombre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jCU4LabelNombre1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCU4ComboBoxCategoria" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jCU4LabelDescripcion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jCU4ScrollPaneDescripcion" min="-2" max="-2" attributes="0"/>
@@ -1834,7 +1841,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCU4DateChooserFecha" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jCU4ScrollPanelProveedores" pref="0" max="32767" attributes="0"/>
+                          <Component id="jCU4ScrollPanelProveedores" pref="480" max="32767" attributes="0"/>
                           <Component id="jCU4ScrollPanelDepartamentos" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -2046,6 +2053,22 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU4ButtonActualizarTablasActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCU4ComboBoxCategoria">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU4LabelNombre1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Categoria"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

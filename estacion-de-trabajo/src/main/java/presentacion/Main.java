@@ -20,6 +20,7 @@ import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
 import com.toedter.calendar.JDateChooser;
+import dataTypes.DTCategoria;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -216,6 +217,8 @@ public class Main extends javax.swing.JFrame {
         jCU4DateChooserFecha = new com.toedter.calendar.JDateChooser();
         jButton6 = new javax.swing.JButton();
         jCU4ButtonActualizarTablas = new javax.swing.JButton();
+        jCU4ComboBoxCategoria = new javax.swing.JComboBox<>();
+        jCU4LabelNombre1 = new javax.swing.JLabel();
         jInternalFrameConsultaActividadTuristica = new javax.swing.JInternalFrame();
         jCU5LabelDepartamento = new javax.swing.JLabel();
         jCU5ComboBoxDepartamento = new javax.swing.JComboBox<>();
@@ -1385,6 +1388,11 @@ public class Main extends javax.swing.JFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        jInternalFrameAltaActividadTuristica.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jInternalFrameAltaActividadTuristicaComponentShown(evt);
+            }
+        });
 
         jCU4TextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1514,6 +1522,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jCU4ComboBoxCategoria.setToolTipText("");
+
+        jCU4LabelNombre1.setText("Categoria");
+
         javax.swing.GroupLayout jInternalFrameAltaActividadTuristicaLayout = new javax.swing.GroupLayout(jInternalFrameAltaActividadTuristica.getContentPane());
         jInternalFrameAltaActividadTuristica.getContentPane().setLayout(jInternalFrameAltaActividadTuristicaLayout);
         jInternalFrameAltaActividadTuristicaLayout.setHorizontalGroup(
@@ -1537,19 +1549,21 @@ public class Main extends javax.swing.JFrame {
                                         .addGap(6, 6, 6))))
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCU4LabelDescripcion)
-                                    .addComponent(jCU4LabelDuracion)
-                                    .addComponent(jCU4LabelNombre)
-                                    .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jCU4TextFieldDuracion, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jCU4ScrollPaneDescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                                        .addComponent(jCU4TextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jCU4LabelFecha)
-                                    .addComponent(jCU4DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jCU4LabelDescripcion)
+                                        .addComponent(jCU4LabelDuracion)
+                                        .addComponent(jCU4LabelNombre)
+                                        .addComponent(jCU4TextFieldDuracion)
+                                        .addComponent(jCU4ScrollPaneDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                        .addComponent(jCU4TextFieldNombre)
+                                        .addComponent(jCU4LabelFecha)
+                                        .addComponent(jCU4DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                                        .addComponent(jCU4ComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jCU4LabelNombre1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                                .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelProveedores)
@@ -1558,7 +1572,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelDepartamentos)
                                 .addGap(0, 292, Short.MAX_VALUE))
-                            .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1579,7 +1593,11 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jCU4TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCU4LabelNombre1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCU4ComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCU4LabelDescripcion)
                         .addGap(4, 4, 4)
                         .addComponent(jCU4ScrollPaneDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1601,7 +1619,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jCU4LabelFecha)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU4DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -5059,6 +5077,18 @@ public class Main extends javax.swing.JFrame {
         jTabbedPaneCasosDeUso.setSelectedIndex(13);
     }//GEN-LAST:event_jMenuActividadValidarActionPerformed
 
+    private void jInternalFrameAltaActividadTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaComponentShown
+        // TODO add your handling code here
+        //obtener las categorias volver
+        List<DTCategoria> dtCategorias = controlador.obtenerCategorias();
+        
+        jCU4ComboBoxCategoria.removeAllItems();
+        
+        for(DTCategoria c : dtCategorias){
+            jCU4ComboBoxCategoria.addItem(c.getNombre());
+        }
+    }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaComponentShown
+
     public void jCU1PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -5546,6 +5576,7 @@ public class Main extends javax.swing.JFrame {
         int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
 
         if (jCU4TextFieldNombre.getText().isEmpty()
+                || jCU4ComboBoxCategoria.getSelectedIndex() < 0
                 || jCU4TextAreaDescripcion.getText().isEmpty()
                 || jCU4TextFieldCiudad.getText().isEmpty()
                 || jCU4TextFieldCosto.getText().isEmpty()
@@ -5833,6 +5864,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jCU4ButtonCancelar;
     private javax.swing.JButton jCU4ButtonEnviar;
     private javax.swing.JButton jCU4ButtonReingresar;
+    private javax.swing.JComboBox<String> jCU4ComboBoxCategoria;
     private com.toedter.calendar.JDateChooser jCU4DateChooserFecha;
     private javax.swing.JDialog jCU4Dialog;
     private javax.swing.JTextArea jCU4DialogTextArea;
@@ -5843,6 +5875,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU4LabelDuracion;
     private javax.swing.JLabel jCU4LabelFecha;
     private javax.swing.JLabel jCU4LabelNombre;
+    private javax.swing.JLabel jCU4LabelNombre1;
     private javax.swing.JLabel jCU4LabelProveedores;
     private javax.swing.JScrollPane jCU4ScrollPaneDescripcion;
     private javax.swing.JScrollPane jCU4ScrollPanelDepartamentos;
