@@ -26,6 +26,7 @@ public class DTActividadTuristica {
     private Date fechaAlta;
     private Departamento departamento;
     private List<Long> categorias;
+    private String categoriasString;
     
     public DTActividadTuristica(){}
     
@@ -62,16 +63,15 @@ public class DTActividadTuristica {
         this.fechaAlta = fechaAlta;
     }
     
-    public DTActividadTuristica(Long id, String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, List<Long> categorias){
-        this.id = id;
+    public DTActividadTuristica(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, String categoriasString){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.costo = costo;
         this.ciudad = ciudad;
         this.fechaAlta = fechaAlta;
-        this.categorias = categorias;
+        this.categoriasString = categoriasString;
     }
     
     public DTActividadTuristica(String nombre){
@@ -87,5 +87,5 @@ public class DTActividadTuristica {
     public String getCostoToString(){
         Float costoString = this.costo;
         return costoString.toString();
-    } 
+    }
 }
