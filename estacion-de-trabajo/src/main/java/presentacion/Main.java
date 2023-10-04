@@ -3868,6 +3868,7 @@ public class Main extends javax.swing.JFrame {
                         duracion, costo, ciudad, fechaAlta);
                 controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor);
                 jCU4vaciarCampos();
+                jCU4actualizarTablas();
                 JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
             } catch (MyException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
@@ -5116,21 +5117,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jInternalFrameAltaActividadTuristicaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jInternalFrameAltaActividadTuristicaComponentShown
         // TODO add your handling code here
-        List<DTCategoria> dtCategorias = controlador.obtenerCategorias();
-        DefaultTableModel modelCategorias = (DefaultTableModel) jCU4TableCategorias.getModel();
-
-        while (modelCategorias.getRowCount() > 0) {
-            modelCategorias.removeRow(modelCategorias.getRowCount() - 1);
-        }
-
-        modelCategorias.fireTableDataChanged();
-
-        for (DTCategoria c : dtCategorias) {
-            Object rowData[] = new Object[2];
-            rowData[0] = c.getId();
-            rowData[1] = c.getNombre();
-            modelCategorias.addRow(rowData);
-        }
+        jCU4actualizarTablas();
     }//GEN-LAST:event_jInternalFrameAltaActividadTuristicaComponentShown
 
     public void jCU1PoblarComboBoxPaises() {
@@ -5668,8 +5655,11 @@ public class Main extends javax.swing.JFrame {
 
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
         List<DTProveedor> dtProveedores = controlador.obtenerProveedores();
+        List<DTCategoria> dtCategorias = controlador.obtenerCategorias();
+        
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         DefaultTableModel modelProveedores = (DefaultTableModel) jCU4TableProveedores.getModel();
+        DefaultTableModel modelCategorias = (DefaultTableModel) jCU4TableCategorias.getModel();
 
         while (modelDepartamento.getRowCount() > 0) {
             modelDepartamento.removeRow(modelDepartamento.getRowCount() - 1);
@@ -5682,6 +5672,12 @@ public class Main extends javax.swing.JFrame {
         }
 
         modelProveedores.fireTableDataChanged();
+        
+        while (modelCategorias.getRowCount() > 0) {
+            modelCategorias.removeRow(modelCategorias.getRowCount() - 1);
+        }
+
+        modelCategorias.fireTableDataChanged();
 
         for (DTDepartamento d : dtDepartamentos) {
             Object rowData[] = new Object[4];
@@ -5699,6 +5695,13 @@ public class Main extends javax.swing.JFrame {
             rowData[2] = p.getEmail();
             rowData[3] = p.getDescription();
             modelProveedores.addRow(rowData);
+        }
+
+        for (DTCategoria c : dtCategorias) {
+            Object rowData[] = new Object[2];
+            rowData[0] = c.getId();
+            rowData[1] = c.getNombre();
+            modelCategorias.addRow(rowData);
         }
     }
 
