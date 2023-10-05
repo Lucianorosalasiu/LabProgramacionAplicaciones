@@ -10,8 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     </head>
-    <body>
-        <h1>Header</h1>
-    </body>
+    <header>
+        <h1>Turismo UY!</h1> <p class="text-body-secondary">Grupo 1 []</p>
+    </header>
 </html>
