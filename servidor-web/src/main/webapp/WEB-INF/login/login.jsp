@@ -9,7 +9,6 @@
 <html class="h-100">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>TurismoUy | Login</title>
     </head>
 
@@ -28,7 +27,12 @@
                   <input type="password" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="d-flex justify-content-evenly align-items-center">
-                    <button type="submit" class="btn btn-secondary">Iniciar sesión como invitado</button>
+                    <button type="submit" class="btn btn-secondary" onclick="redirect()">Iniciar sesión como invitado</button>
+                    <script>
+                        function redirect (){
+                         window.location.href = "/turismouy/home";
+                        }
+                    </script>
                     <button type="submit" class="btn btn-primary" >Enviar</button>
                 </div>
             </form>
