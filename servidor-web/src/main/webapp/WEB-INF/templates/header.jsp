@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     </head>
-    <body>
-        <h1>Header</h1>
-    </body>
+    <header class="bg-primary bg-gradient text-light d-flex align-items-center flex-grow-0 justify-content-between p-2">
+        <h1>Turismo Uy!</h1>
+        <a class="text-light" href="/turismouy/login">Iniciar sesión</a>
+    </header>
 </html>
