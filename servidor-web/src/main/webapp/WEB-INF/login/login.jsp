@@ -18,6 +18,7 @@
         <h5>esto es un placeholder para visualizar los datos de sesion nomas</h5>
         <h5>tu session.nickname es: <%=session.getAttribute("sessionNickname")%></h5>
         <h5>tu session.email es: <%=session.getAttribute("sessionEmail")%></h5>
+        <h5>tu session.type es: <%=session.getAttribute("sessionType")%></h5>
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <form action="/turismouy/login" method="post">
                 <div class="mb-3">
