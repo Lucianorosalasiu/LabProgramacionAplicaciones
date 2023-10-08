@@ -85,5 +85,9 @@ public interface IDataPersistencia {
     void validarActividad(Long id, EstadoActividad estado);
 
     
+    /* Servidor Web */
+    
+    /* CU Alta Salida Turistica */
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
+    
 }

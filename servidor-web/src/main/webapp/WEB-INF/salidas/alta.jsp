@@ -68,6 +68,11 @@
                       </tbody>
                     </table>
                     <div class="mt-5">
+                        <% if (request.getAttribute("errorMessage") != null) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= request.getAttribute("errorMessage") %>
+                            </div>
+                        <% } %>
                         <select class="m-3" name="actividad" required>
                             <option value="" disabled selected>- seleccione una actividad -</option>
                             <%

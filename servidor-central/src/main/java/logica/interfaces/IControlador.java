@@ -76,7 +76,11 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesSinConfirmar();
     void validarActividad(Long id, EstadoActividad estado);
     
+    
     /* Servidor Web */
+    
+    /* CU Alta Salida Turistica*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
+    void altaSalidaTuristicaConImagen(DTSalidaTuristica dtSalidaTuristica, String nombreActividad, String imagen) throws MyException;
 }
 

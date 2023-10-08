@@ -331,4 +331,14 @@ public class Controlador implements IControlador{
     public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
         return dataPersistencia.obtenerActividadesTuristicas(nombreDepartamento, idProveedor);
     }
+    
+    @Override
+    public void altaSalidaTuristicaConImagen(DTSalidaTuristica dtSalidaTuristica, String nombreActividad, String imagen) 
+            throws MyException {
+        // TODO aplicar lógica para guardar la imagen en el servidor
+        dataPersistencia.existeSalidaTuristica(dtSalidaTuristica.getNombre());
+        dataPersistencia.altaSalidaTuristica(dtSalidaTuristica, nombreActividad);
+    }
+
+    
 }
