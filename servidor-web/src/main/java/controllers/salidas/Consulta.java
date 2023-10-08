@@ -4,12 +4,17 @@
  */
 package controllers.salidas;
 
+import dataTypes.DTActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -28,19 +33,35 @@ public class Consulta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Consulta</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Consulta at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        
+        String departamento = request.getParameter("departamento");
+        String actividad = request.getParameter("actividad");
+        String salida = request.getParameter("salida");
+        List<DTActividadTuristica> actividades = new ArrayList();
+        List<DTSalidaTuristica> salidas = new ArrayList();
+        DTSalidaTuristica selectedSalida = null;
+        
+        if (departamento != null) {
+            actividades = controlador.obtenerActividadesTuristicas(departamento);
+            
+            if (actividad != null) {
+                salidas = controlador.obtenerSalidasTuristicas(actividad);
+                
+                if (salida != null) {
+                    selectedSalida = controlador.obtenerSalidaTuristica(salida);
+                }
+            }
         }
+        
+        
+        request.setAttribute("actividades", actividades);
+        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("salidas", salidas);
+        request.setAttribute("selectedSalida", selectedSalida);
+        request.getRequestDispatcher("/WEB-INF/salidas/consulta.jsp").
+                forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
