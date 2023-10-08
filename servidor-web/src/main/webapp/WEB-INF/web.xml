@@ -17,6 +17,10 @@
         <servlet-class>controllers.Login</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controllers.Logout</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AltaSalida</servlet-name>
         <servlet-class>controllers.salidas.Alta</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet>
         <servlet-name>Inscripcion</servlet-name>
         <servlet-class>controllers.salidas.Inscripcion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultaActividad</servlet-name>
+        <servlet-class>controllers.actividades.ConsultaActividad</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -41,6 +49,10 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AltaSalida</servlet-name>
         <url-pattern>/altasalida</url-pattern>
     </servlet-mapping>
@@ -51,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>Inscripcion</servlet-name>
         <url-pattern>/inscripcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultaActividad</servlet-name>
+        <url-pattern>/consultaactividad</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

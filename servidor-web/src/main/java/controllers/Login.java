@@ -4,12 +4,21 @@
  */
 package controllers;
 
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+import logica.clases.Proveedor;
+import logica.clases.Turista;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
+import dataTypes.DTTurista;
+import dataTypes.DTUsuario;
 
 /**
  *
@@ -32,8 +41,51 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession objSesion = request.getSession();
+        /*si bien el nombre de la variable es nickname tambien
+        contempla que en dicho campo ingrese el email del usuario*/
+        String nickname = request.getParameter("nickname");
+        String error = null;
+        
+        /*realiza la logica del login solo si los campos contienen datos*/
+        if(validateParameters(request)){
+            try {
+                Fabrica fabrica = new Fabrica();
+                IControlador controlador = fabrica.getInterface();
+
+                List<DTUsuario> usuarios = controlador.obtenerUsuarios();
+                
+                for(DTUsuario u : usuarios){
+                    if(u.getNickname().equals(nickname) || u.getEmail().equals(nickname)){
+                       /*falta preguntar por la contraseña cuando este implementada*/
+                       
+                       /*pregunto por el tipo de usuario*/
+                       String sessionType = "";
+                       if(u instanceof DTTurista){
+                           sessionType = "TURISTA";
+                       }else{
+                           sessionType = "PROVEEDOR";
+                       }
+
+                       request.getSession().setAttribute("sessionNickname", u.getNickname());
+                       request.getSession().setAttribute("sessionEmail", u.getEmail());
+                       request.getSession().setAttribute("sessionType", sessionType);
+                       request.getSession().setAttribute("isLogged",true);
+                    }
+                }
+            } catch (Exception e) {
+                error = e.getMessage();
+            }
+        }
+        
+        /*si los campos no contenian datos o cuando se termine con la logica, se redirige*/
         request.getRequestDispatcher("/WEB-INF/login/login.jsp")
-                .forward(request, response);
+                    .forward(request, response);   
+    }
+    
+    private boolean validateParameters(HttpServletRequest request){
+        return(request.getParameter("nickname") != null) &&
+            (request.getParameter("password") != null);
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
