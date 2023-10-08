@@ -102,7 +102,7 @@
                             </div>
                             <div class="col m-3">
                                 <label>Cantidad max. de Turistas</label>
-                                <input type="number" class="form-control" name="cantidadMaxTuristas" value="${param.cantidadMaxTuristas}" required>
+                                <input type="number" min="0" class="form-control" name="cantidadMaxTuristas" value="${param.cantidadMaxTuristas}" required>
                             </div>
                         </div>
                         <div class="row">

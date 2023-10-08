@@ -24,6 +24,10 @@
         <servlet-name>Consulta</servlet-name>
         <servlet-class>controllers.salidas.Consulta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Inscripcion</servlet-name>
+        <servlet-class>controllers.salidas.Inscripcion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -43,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>Consulta</servlet-name>
         <url-pattern>/consultasalida</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Inscripcion</servlet-name>
+        <url-pattern>/inscripcion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
