@@ -56,6 +56,8 @@ public class Login extends HttpServlet {
                 for(DTUsuario u : usuarios){
                     if(u.getNickname().equals(nickname) || u.getEmail().equals(nickname)){
                        /*falta preguntar por la contraseña cuando este implementada*/
+                       
+                       /*pregunto por el tipo de usuario*/
                        String sessionType = "";
                        if(u instanceof DTTurista){
                            sessionType = "TURISTA";
@@ -66,6 +68,7 @@ public class Login extends HttpServlet {
                        request.getSession().setAttribute("sessionNickname", u.getNickname());
                        request.getSession().setAttribute("sessionEmail", u.getEmail());
                        request.getSession().setAttribute("sessionType", sessionType);
+                       request.getSession().setAttribute("isLogged",true);
                     }
                 }
             } catch (Exception e) {
