@@ -23,7 +23,12 @@
                      <%}else{%>
                         <span type="button" class="badge text-bg-warning">Proveedor</span>
                      <%}%>
-                    <button type="button" class="btn btn-outline-danger">Cerrar sesión</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="logout()">Cerrar sesión</button>
+                    <script>
+                        function logout (){
+                            window.location.href = "/turismouy/logout";
+                        }
+                    </script>
                 </div>
             <%}else{%>
                 <div class="d-flex justify-content-end align-items-center gap-2">
