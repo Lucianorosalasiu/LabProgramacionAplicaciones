@@ -326,4 +326,9 @@ public class Controlador implements IControlador{
     public void validarActividad(Long id, EstadoActividad estado){
         dataPersistencia.validarActividad(id, estado);
     }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
+        return dataPersistencia.obtenerActividadesTuristicas(nombreDepartamento, idProveedor);
+    }
 }

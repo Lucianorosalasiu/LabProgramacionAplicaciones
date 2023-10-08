@@ -76,5 +76,7 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesSinConfirmar();
     void validarActividad(Long id, EstadoActividad estado);
     
+    /* Servidor Web */
+    List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
 }
 

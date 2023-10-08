@@ -1125,4 +1125,40 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
+        EntityManager em = emf.createEntityManager();
+        List<DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+
+        try{
+            EProveedor eProveedor = em.find(EProveedor.class, idProveedor);
+            
+            for( EActividadTuristica actividad : eProveedor.getActividades() ){
+                
+                if (actividad.getEDepartamento().getNombre().equals(nombreDepartamento)) {
+                    
+                    if(actividad.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                        dtActividadesTuristicas.add(
+                                new DTActividadTuristica(
+                                        actividad.getNombre(),
+                                        actividad.getDescripcion(),
+                                        actividad.getDuracion(),
+                                        actividad.getCosto(),
+                                        actividad.getCiudad(),
+                                        actividad.getFechaAlta()
+                                    ));
+                    }
+                    
+                }
+                
+            }
+            
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
 }

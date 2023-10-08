@@ -83,4 +83,7 @@ public interface IDataPersistencia {
     /*CU 14 CONFIRMAR CATEGORIA*/
     List<DTActividadTuristica> obtenerActividadesSinConfirmar();
     void validarActividad(Long id, EstadoActividad estado);
+
+    
+    List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
 }
