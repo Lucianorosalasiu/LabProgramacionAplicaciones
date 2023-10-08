@@ -28,6 +28,10 @@
         <servlet-name>Inscripcion</servlet-name>
         <servlet-class>controllers.salidas.Inscripcion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConsultaActividad</servlet-name>
+        <servlet-class>controllers.actividades.ConsultaActividad</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>Inscripcion</servlet-name>
         <url-pattern>/inscripcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultaActividad</servlet-name>
+        <url-pattern>/consultaactividad</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

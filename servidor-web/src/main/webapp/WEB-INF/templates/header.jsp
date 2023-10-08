@@ -20,8 +20,8 @@
             <ul class="w-100 list-unstyled m-0 d-flex flex-row p-2 justify-content-around align-items-center">
                 <li><a class="fs-5 p-2 text-dark" href="/turismouy/home">Inicio</a></li>
                 <li><a class="fs-5 p-2 text-dark" href="/turismouy/home">Usuarios</a></li>
-                <li><a class="fs-5 p-2 text-dark" href="/turismouy/home">Actividades</a></li>
-                <li><a class="fs-5 p-2 text-dark" href="/turismouy/home">Salidas</a></li>
+                <li><a class="fs-5 p-2 text-dark" href="/turismouy/consultaactividad">Actividades</a></li>
+                <li><a class="fs-5 p-2 text-dark" href="/turismouy/altasalida">Salidas</a></li>
                 <li><a class="fs-5 p-2 text-dark" href="/turismouy/home">Paquetes</a></li>
             </ul>
         </div>
