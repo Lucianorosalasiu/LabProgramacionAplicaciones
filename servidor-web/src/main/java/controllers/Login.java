@@ -4,12 +4,17 @@
  */
 package controllers;
 
+import dataTypes.DTUsuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import logica.clases.Proveedor;
+import logica.clases.Turista;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -32,8 +37,35 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/login/login.jsp")
-                .forward(request, response);
+        HttpSession objSesion = request.getSession();
+        String nickname = request.getParameter("nickname");
+        String error = null;
+        
+        if(validateParameters(request)){
+            try {
+                Fabrica fabrica = new Fabrica();
+                IControlador controlador = fabrica.getInterface();
+
+                DTUsuario usuario = controlador.obtenerUsuario(nickname);
+                String sessionNickname = usuario.getNickname();
+                String sessionEmail = usuario.getEmail();
+
+                request.getSession().setAttribute("sessionNickname", sessionNickname);
+                request.getSession().setAttribute("sessionEmail", sessionEmail);
+
+            } catch (Exception e) {
+                error = e.getMessage();
+            }
+
+            request.getRequestDispatcher("/WEB-INF/login/login.jsp")
+                    .forward(request, response);
+        }
+        
+    }
+    
+    private boolean validateParameters(HttpServletRequest request){
+        return(request.getParameter("nickname") != null) &&
+            (request.getParameter("password") != null);
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

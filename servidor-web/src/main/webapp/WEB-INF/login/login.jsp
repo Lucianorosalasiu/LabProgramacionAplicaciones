@@ -15,25 +15,28 @@
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
 
     <body class="h-100 d-flex flex-column">
+        <h5>esto es un placeholder para visualizar los datos de sesion nomas</h5>
+        <h5>tu session.nickname es: <%=session.getAttribute("sessionNickname")%></h5>
+        <h5>tu session.email es: <%=session.getAttribute("sessionEmail")%></h5>
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <form>
+            <form action="/turismouy/login" method="post">
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text">Puede que compartamos tus datos con alguien, oops!</div>
+                  <label class="form-label">Nickname</label>
+                  <input type="text" class="form-control" name="nickname">
+                  <div class="form-text">Puede que compartamos tus datos con alguien, oops!</div>
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <label class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" name="password">
                 </div>
                 <div class="d-flex justify-content-evenly align-items-center">
-                    <button type="submit" class="btn btn-secondary" onclick="redirect()">Iniciar sesión como invitado</button>
+                    <button type="button" class="btn btn-secondary" onclick="redirect()">Iniciar sesión como invitado</button>
                     <script>
                         function redirect (){
                          window.location.href = "/turismouy/home";
                         }
                     </script>
-                    <button type="submit" class="btn btn-primary" >Enviar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
             </form>
         </div>
