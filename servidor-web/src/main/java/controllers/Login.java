@@ -45,7 +45,8 @@ public class Login extends HttpServlet {
         /*si bien el nombre de la variable es nickname tambien
         contempla que en dicho campo ingrese el email del usuario*/
         String nickname = request.getParameter("nickname");
-        String error = null;
+        String errorMessage = null;
+        Boolean existeUsuario = false;
         
         /*realiza la logica del login solo si los campos contienen datos*/
         if(validateParameters(request)){
@@ -56,29 +57,38 @@ public class Login extends HttpServlet {
                 List<DTUsuario> usuarios = controlador.obtenerUsuarios();
                 
                 for(DTUsuario u : usuarios){
+                     /*falta preguntar por la contraseña cuando este implementada*/
+                     /* && u.getPassword().equals(password)*/
                     if(u.getNickname().equals(nickname) || u.getEmail().equals(nickname)){
-                       /*falta preguntar por la contraseña cuando este implementada*/
-                       
-                       /*pregunto por el tipo de usuario*/
-                       String sessionType = "";
-                       if(u instanceof DTTurista){
-                           sessionType = "TURISTA";
-                       }else{
-                           sessionType = "PROVEEDOR";
-                       }
+                        /*pregunto por el tipo de usuario*/
+                        String sessionType = "";
+                            if(u instanceof DTTurista){
+                                sessionType = "TURISTA";
+                            }else{
+                                sessionType = "PROVEEDOR";
+                            }
 
-                       request.getSession().setAttribute("sessionNickname", u.getNickname());
-                       request.getSession().setAttribute("sessionEmail", u.getEmail());
-                       request.getSession().setAttribute("sessionType", sessionType);
-                       request.getSession().setAttribute("isLogged",true);
+                        /*guardo los atributos que me interesan en la sesion*/
+                        request.getSession().setAttribute("sessionNickname", u.getNickname());
+                        request.getSession().setAttribute("sessionEmail", u.getEmail());
+                        request.getSession().setAttribute("sessionType", sessionType);
+                        request.getSession().setAttribute("isLogged",true);
+                        existeUsuario = true;
                     }
                 }
+                
+                if(!existeUsuario){
+                    errorMessage = "Nombre de usuario o contraseña incorrectas.";
+                    request.setAttribute("errorMessage", errorMessage);
+                }
+                
             } catch (Exception e) {
-                error = e.getMessage();
+                errorMessage = e.getMessage();
+                request.setAttribute("errorMessage", errorMessage);
             }
         }
         
-        /*si los campos no contenian datos o cuando se termine con la logica, se redirige*/
+        /*cuando se termine con la logica o hayan campos vacios, se redirige*/
         request.getRequestDispatcher("/WEB-INF/login/login.jsp")
                     .forward(request, response);   
     }
