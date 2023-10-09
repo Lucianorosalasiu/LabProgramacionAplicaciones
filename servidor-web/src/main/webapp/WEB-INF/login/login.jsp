@@ -15,10 +15,6 @@
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
 
     <body class="h-100 d-flex flex-column">
-        <h5>esto es un placeholder para visualizar los datos de sesion nomas</h5>
-        <h5>tu session.nickname es: <%=session.getAttribute("sessionNickname")%></h5>
-        <h5>tu session.email es: <%=session.getAttribute("sessionEmail")%></h5>
-        <h5>tu session.type es: <%=session.getAttribute("sessionType")%></h5>
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <form action="/turismouy/login" method="post">
                 <div class="mb-3">
@@ -39,7 +35,19 @@
                     </script>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
+                <%if(request.getAttribute("errorMessage") != null){%>
+                    <div class="mt-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
+                        <p class="m-0"><%=request.getAttribute("errorMessage")%></p>
+                    </div>
+                <%}%>
+                
+                <%if(request.getSession().getAttribute("isLogged") != null){%>
+                    <script>         
+                         window.location.href = "/turismouy/home";
+                    </script>
+                <%}%>
             </form>
+            
         </div>
     </body>
 
