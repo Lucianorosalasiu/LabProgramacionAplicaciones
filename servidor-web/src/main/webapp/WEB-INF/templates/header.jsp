@@ -45,7 +45,7 @@
         <div class="w-100 d-flex bg-body-secondary">
             <ul class="w-100 list-unstyled m-0 d-flex flex-row p-2 justify-content-around align-items-center">
                 <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/home">Inicio</a></li>
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/home">Usuarios</a></li>
+                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/altausuario">Usuarios</a></li>
                 <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/consultaactividad">Actividades</a></li>
                 <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/altasalida">Salidas</a></li>
                 <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/home">Paquetes</a></li>
