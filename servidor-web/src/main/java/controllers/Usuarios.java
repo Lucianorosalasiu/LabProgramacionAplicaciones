@@ -47,7 +47,7 @@ public class Usuarios extends HttpServlet {
                         
 			request.setAttribute("usuarios", usrs);
 			
-			request.getRequestDispatcher("/WEB-INF/usuarios/listar.jsp").
+			request.getRequestDispatcher("/WEB-INF/usuarios/consulta.jsp").
 					forward(request, response);	
 		}             
     }

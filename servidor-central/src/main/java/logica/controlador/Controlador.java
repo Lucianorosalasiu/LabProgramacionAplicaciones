@@ -60,7 +60,6 @@ public class Controlador implements IControlador{
                 nuevoProveedor.getDescription(), 
                 nuevoProveedor.getWebsiteURL()
         );
-        
         // Se da de alta en la base de datos
         dataPersistencia.altaProveedor(objProveedor);
     }

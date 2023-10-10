@@ -5,9 +5,10 @@
 package logica.clases;
 
 import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 /**
  *
@@ -16,11 +17,40 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 public abstract class Usuario {
-    private String nickname;
-    private String name;
-    private String lastName;
-    private String email;
-    private Date birthDate;
+    protected String nickname;
+    protected String name;
+    protected String lastName;
+    protected String email;
+    protected Date birthDate;
+    protected String password;
+    protected String imagePath;
+
+    public Usuario(String nickname, String name, String lastName, String email, Date birthDate, String password, String imagePath) {
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.password = password;
+        this.imagePath = imagePath;
+    }
+
+    public Usuario(String nickname, String name, String lastName, String email, Date birthDate) {
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
+
+    private String hashPassword(String password){
+        String hashedPassword = BCrypt.haspw(password, BCrypt.gensalt());
+        return hashedPassword;
+    }
+    
+    private boolean verifyPassword(String inputPassword, String hashedPassword){
+       return BCrypt.checkpw(inputPassword, hashedPassword);
+    }
 }
+

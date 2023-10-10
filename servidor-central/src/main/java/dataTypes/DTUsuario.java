@@ -18,12 +18,14 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public abstract class DTUsuario {
-    private Long id;
-    private String nickname;
-    private String name;
-    private String lastName;
-    private String email;
-    private Date birthDate;
+    protected Long id;
+    protected String nickname;
+    protected String name;
+    protected String lastName;
+    protected String email;
+    protected Date birthDate;
+    protected String password;
+    protected String imagePath;
 
     public DTUsuario() {}
 
@@ -34,6 +36,18 @@ public abstract class DTUsuario {
         this.email = email;
         this.birthDate = birthDate;
     }
+
+    public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate, String password, String imagePath) {
+        this.id = id;
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.password = password;
+        this.imagePath = imagePath;
+    }
+    
         
     public DTUsuario(Long id, String nickname, String email) {
         this.id = id;

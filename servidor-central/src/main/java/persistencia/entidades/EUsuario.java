@@ -35,6 +35,8 @@ public abstract class EUsuario extends EBase {
     protected String email;
     @Temporal(TemporalType.DATE)
     protected Date birthDate;
+    protected String password;
+    protected String imagePath;
 
     public EUsuario() { }
 
