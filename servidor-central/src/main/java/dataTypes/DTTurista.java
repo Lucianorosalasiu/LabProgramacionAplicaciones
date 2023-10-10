@@ -23,13 +23,32 @@ public class DTTurista extends DTUsuario{
     public DTTurista() {
     }
 
-    public DTTurista(String nickname, String name, String lastName, String email, Date birthDate, String nacionality) {
-        super(nickname, name, lastName, email, birthDate);
+    public DTTurista(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate,
+            String password, 
+            String imagePath,
+            String nacionality
+    ) {
+        super(nickname, name, lastName, email, birthDate, password, imagePath);
         this.nacionality = nacionality;
     }
     
-    public DTTurista(Long id, String nickname, String name, String lastName, String email, Date birthDate, String nacionality) {
-        super(id, nickname, name, lastName, email, birthDate);
+    public DTTurista(
+            Long id, 
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate, 
+            String password,
+            String imagePath,
+            String nacionality
+    ) {
+        super(id, nickname, name, lastName, email, birthDate, password, imagePath);
         this.nacionality = nacionality;
     }
 

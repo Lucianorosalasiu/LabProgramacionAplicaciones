@@ -8,6 +8,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -16,7 +17,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 public abstract class DTUsuario {
     protected Long id;
     protected String nickname;
@@ -29,14 +29,33 @@ public abstract class DTUsuario {
 
     public DTUsuario() {}
 
-    public DTUsuario(String nickname, String name, String lastName, String email, Date birthDate) {
+    public DTUsuario(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate, 
+            String password, 
+            String imagePath
+    ) {
         this.nickname = nickname;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
+        this.password = hashPassword(password);
+        this.imagePath = imagePath;
     }
-
+    
+    public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate) {
+        this.id = id;
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+    }    
+        
     public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate, String password, String imagePath) {
         this.id = id;
         this.nickname = nickname;
@@ -44,7 +63,7 @@ public abstract class DTUsuario {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.password = password;
+        this.password = hashPassword(password);
         this.imagePath = imagePath;
     }
     
@@ -54,4 +73,13 @@ public abstract class DTUsuario {
         this.nickname = nickname;
         this.email = email;
     }  
+    
+    private String hashPassword(String password){
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+    
+    public boolean verifyPassword(String inputPassword, String hashedPassword){
+       inputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt());
+       return BCrypt.checkpw(inputPassword, hashedPassword);
+    }
 }

@@ -21,6 +21,7 @@ import logica.interfaces.IControlador;
 
 import com.toedter.calendar.JDateChooser;
 import dataTypes.DTCategoria;
+import exceptions.NonEqualPasswordException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -122,6 +123,10 @@ public class Main extends javax.swing.JFrame {
         JCU1ButtonSendData = new javax.swing.JButton();
         jCU1ComboBoxPaises = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
+        jCU1LabelPassword1 = new javax.swing.JLabel();
+        jCU1LabelPassword2 = new javax.swing.JLabel();
+        JCU1Password1Field = new javax.swing.JPasswordField();
+        JCU1Password2Field = new javax.swing.JPasswordField();
         jInternalFrameConsultarUsuario = new javax.swing.JInternalFrame();
         jCU2ComboBoxUserList = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
@@ -705,50 +710,72 @@ public class Main extends javax.swing.JFrame {
         jCU1ComboBoxPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar País" }));
         jCU1ComboBoxPaises.setVisible(false);
 
+        jCU1LabelPassword1.setText("Contraseña");
+        jCU1LabelPassword1.setVisible(false);
+
+        jCU1LabelPassword2.setText("Confirmación de Contraseña");
+        jCU1LabelPassword2.setVisible(false);
+
+        JCU1Password1Field.setVisible(false);
+
+        JCU1Password2Field.setVisible(false);
+
         javax.swing.GroupLayout jCU1InternalFrameAgregarUsuarioLayout = new javax.swing.GroupLayout(jCU1InternalFrameAgregarUsuario.getContentPane());
         jCU1InternalFrameAgregarUsuario.getContentPane().setLayout(jCU1InternalFrameAgregarUsuarioLayout);
         jCU1InternalFrameAgregarUsuarioLayout.setHorizontalGroup(
             jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
                 .addGap(143, 143, 143)
-                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator7)
-                    .addComponent(jCU1LabelWebsite, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JCU1WebsiteTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCU1LabelUserType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JCU1ComboBoxUserType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCU1ScrollPane11Description, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator7)
+                            .addComponent(jCU1LabelWebsite, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCU1WebsiteTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCU1LabelUserType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JCU1ComboBoxUserType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
                                 .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JCU1LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jCU1LabelLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jCU1ScrollPane11Description, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(JCU1LastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jCU1LabelLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jCU1LabelNacionality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jCU1ComboBoxPaises, 0, 300, Short.MAX_VALUE)))
+                                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(JCU1NameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                                .addComponent(JCU1NickNameTextField)
+                                                .addComponent(jCU1LabelNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jCU1LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 370, Short.MAX_VALUE)
+                                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(JCU1DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jCU1LabelBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                                .addComponent(JCU1EmailTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jCU1LabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jCU1LabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                                .addComponent(JCU1ButtonClearFields)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCU1LabelNacionality, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCU1ComboBoxPaises, 0, 300, Short.MAX_VALUE)))
-                            .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
-                                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(JCU1NameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                        .addComponent(JCU1NickNameTextField)
-                                        .addComponent(jCU1LabelNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jCU1LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
-                                .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JCU1DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jCU1LabelBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                        .addComponent(JCU1EmailTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jCU1LabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jCU1LabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
-                        .addComponent(JCU1ButtonClearFields)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JCU1ButtonSendData)))
-                .addGap(162, 162, 162))
+                                .addComponent(JCU1ButtonSendData)))
+                        .addGap(162, 162, 162))
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(JCU1Password1Field)
+                            .addComponent(jCU1LabelPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createSequentialGroup()
+                        .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCU1LabelPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(JCU1Password2Field))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jCU1InternalFrameAgregarUsuarioLayout.setVerticalGroup(
             jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -789,7 +816,15 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU1LabelWebsite)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JCU1WebsiteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jCU1LabelPassword1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JCU1Password1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jCU1LabelPassword2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JCU1Password2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1078,7 +1113,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU2SeparatorVertical)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameConsultarUsuarioLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(jCU2LabelInfoActividad)
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1365,7 +1400,7 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCU3TextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jCU3DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU3ButtonActualizarTabla)
                     .addComponent(jCU3ButtonUpdateData)
@@ -1626,7 +1661,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
-                        .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                        .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCU4ButtonEnviar)
@@ -1650,7 +1685,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(jCU4LabelDuracion)
                                         .addGap(4, 4, 4)
                                         .addComponent(jCU4TextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 111, Short.MAX_VALUE)
+                                        .addGap(18, 180, Short.MAX_VALUE)
                                         .addComponent(jCU4LabelCosto)
                                         .addGap(4, 4, 4)
                                         .addComponent(jCU4TextFieldCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2109,7 +2144,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jCU5LabelSalida1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCU5ComboBoxPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 46, Short.MAX_VALUE)))
+                        .addGap(0, 128, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -2172,21 +2207,21 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU12LabelNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(jCU12LabelDescripcion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(jCU12LabelURL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU12TextFieldURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jCU12Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU12ButtonVaciar)
                     .addComponent(jCU12ButtonEnviar))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Alta Departamento", jInternalFrameAltaDepartamento);
@@ -2547,7 +2582,7 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jCU5LabelCiudad2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCU7TextFieldLugarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                         .addComponent(jCU5LabelNombre6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCU7TextFieldFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2812,7 +2847,7 @@ public class Main extends javax.swing.JFrame {
         jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU9TextFieldNombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2834,7 +2869,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jTabbedPaneCasosDeUso.addTab("Crear Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
@@ -3051,7 +3086,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAgregarActividadPaqueteLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
                     .addGroup(jInternalFrameAgregarActividadPaqueteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane12))
@@ -3359,7 +3394,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
                     .addComponent(jScrollPane5)
                     .addGroup(jInternalFrameConsultaPaquetesLayout.createSequentialGroup()
                         .addGroup(jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3413,7 +3448,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(jCU13TextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU13ButtonEnviar)
                     .addComponent(jCU13ButtonVaciarCampos))
@@ -3493,7 +3528,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU14ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCU14ButtonAceptar)
                     .addComponent(jCU14ButtonRechazar))
@@ -3885,12 +3920,12 @@ public class Main extends javax.swing.JFrame {
             int indexRowProveedor = jCU4TableProveedores.getSelectedRow();
 
             Long idProveedor = Long.parseLong(jCU4TableProveedores.getValueAt(indexRowProveedor, 0).toString());
-            
+
             /*conseguir las categorias*/
             List<Long> categorias = new LinkedList<>();
             int[] indexRowCategorias = jCU4TableCategorias.getSelectedRows();
- 
-            for (int i = 0 ; i < indexRowCategorias.length; i++) {
+
+            for (int i = 0; i < indexRowCategorias.length; i++) {
                 categorias.add(Long.parseLong(jCU4TableCategorias.getValueAt(indexRowCategorias[i], 0).toString()));
             }
 
@@ -3899,7 +3934,7 @@ public class Main extends javax.swing.JFrame {
                 /*construir el dt actividad turistica*/
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(nombre, descripcion,
                         duracion, costo, ciudad, fechaAlta);
-                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor,categorias);
+                controlador.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor, categorias);
                 jCU4vaciarCampos();
                 jCU4actualizarTablas();
                 JOptionPane.showMessageDialog(this, "Actividad Turística dada de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
@@ -4172,77 +4207,101 @@ public class Main extends javax.swing.JFrame {
         switch (selectedItem) {
             case "Proveedor/a":
                 // Mostrar los campos de ingreso para proveedor
-                jCU1LabelNickName.setVisible(true);
-                JCU1NickNameTextField.setVisible(true);
-                jCU1LabelName.setVisible(true);
-                JCU1NameTextField.setVisible(true);
-                jCU1LabelLastName.setVisible(true);
-                JCU1LastNameTextField.setVisible(true);
-                jCU1LabelEmail.setVisible(true);
-                JCU1EmailTextField.setVisible(true);
-                jCU1LabelBirthDate.setVisible(true);
-                JCU1DateChooserBirthDate.setVisible(true);
-                jCU1LabelDescription.setVisible(true);
-                jCU1TextAreaDescription.setVisible(true);
-                jCU1ScrollPane11Description.setVisible(true);
-                jCU1LabelWebsite.setVisible(true);
-                JCU1WebsiteTextField.setVisible(true);
-                JCU1ButtonClearFields.setEnabled(true);
-                JCU1ButtonSendData.setEnabled(true);
-
-                /* ==== Visibles solo para turistas ==== */
-                jCU1LabelNacionality.setVisible(false);
-                jCU1ComboBoxPaises.setVisible(false);
-                /* ==== Visibles solo para turistas ==== */
+                jCU1MostrarCamposProveedor();
                 break;
             case "Turista":
                 // Mostrar los campos de ingreso para turista
-                jCU1LabelNickName.setVisible(true);
-                JCU1NickNameTextField.setVisible(true);
-                jCU1LabelName.setVisible(true);
-                JCU1NameTextField.setVisible(true);
-                jCU1LabelLastName.setVisible(true);
-                JCU1LastNameTextField.setVisible(true);
-                jCU1LabelEmail.setVisible(true);
-                JCU1EmailTextField.setVisible(true);
-                jCU1LabelBirthDate.setVisible(true);
-                JCU1DateChooserBirthDate.setVisible(true);
-                jCU1LabelNacionality.setVisible(true);
-                jCU1ComboBoxPaises.setVisible(true);
-                JCU1ButtonClearFields.setEnabled(true);
-                JCU1ButtonSendData.setEnabled(true);
-
-                /* ==== Visibles solo para proveedores ==== */
-                jCU1LabelDescription.setVisible(false);
-                jCU1TextAreaDescription.setVisible(false);
-                jCU1ScrollPane11Description.setVisible(false);
-                jCU1LabelWebsite.setVisible(false);
-                JCU1WebsiteTextField.setVisible(false);
-                /* ==== Visibles solo para proveedores ==== */
+                jCU1MostrarCamposTurista();
                 break;
             default:
-                jCU1LabelNickName.setVisible(false);
-                JCU1NickNameTextField.setVisible(false);
-                jCU1LabelName.setVisible(false);
-                JCU1NameTextField.setVisible(false);
-                jCU1LabelLastName.setVisible(false);
-                JCU1LastNameTextField.setVisible(false);
-                jCU1LabelEmail.setVisible(false);
-                JCU1EmailTextField.setVisible(false);
-                jCU1LabelBirthDate.setVisible(false);
-                JCU1DateChooserBirthDate.setVisible(false);
-                jCU1LabelNacionality.setVisible(false);
-                jCU1ComboBoxPaises.setVisible(false);
-                jCU1LabelDescription.setVisible(false);
-                jCU1TextAreaDescription.setVisible(false);
-                jCU1ScrollPane11Description.setVisible(false);
-                jCU1LabelWebsite.setVisible(false);
-                JCU1WebsiteTextField.setVisible(false);
-                JCU1ButtonClearFields.setEnabled(false);
-                JCU1ButtonSendData.setEnabled(false);
+                jCU1OcultarCampos();
                 break;
         }
     }//GEN-LAST:event_JCU1ComboBoxUserTypeActionPerformed
+
+    public void jCU1MostrarCamposProveedor() {
+        jCU1LabelNickName.setVisible(true);
+        JCU1NickNameTextField.setVisible(true);
+        jCU1LabelName.setVisible(true);
+        JCU1NameTextField.setVisible(true);
+        jCU1LabelLastName.setVisible(true);
+        JCU1LastNameTextField.setVisible(true);
+        jCU1LabelEmail.setVisible(true);
+        JCU1EmailTextField.setVisible(true);
+        jCU1LabelBirthDate.setVisible(true);
+        JCU1DateChooserBirthDate.setVisible(true);
+        jCU1LabelDescription.setVisible(true);
+        jCU1TextAreaDescription.setVisible(true);
+        jCU1ScrollPane11Description.setVisible(true);
+        jCU1LabelWebsite.setVisible(true);
+        JCU1WebsiteTextField.setVisible(true);
+        jCU1LabelPassword1.setVisible(true);
+        JCU1Password1Field.setVisible(true);
+        jCU1LabelPassword2.setVisible(true);
+        JCU1Password2Field.setVisible(true);        
+        JCU1ButtonClearFields.setEnabled(true);
+        JCU1ButtonSendData.setEnabled(true);
+
+        /* ==== Visibles solo para turistas ==== */
+        jCU1LabelNacionality.setVisible(false);
+        jCU1ComboBoxPaises.setVisible(false);
+        /* ==== Visibles solo para turistas ==== */
+    }
+
+    public void jCU1MostrarCamposTurista() {
+        jCU1LabelNickName.setVisible(true);
+        JCU1NickNameTextField.setVisible(true);
+        jCU1LabelName.setVisible(true);
+        JCU1NameTextField.setVisible(true);
+        jCU1LabelLastName.setVisible(true);
+        JCU1LastNameTextField.setVisible(true);
+        jCU1LabelEmail.setVisible(true);
+        JCU1EmailTextField.setVisible(true);
+        jCU1LabelBirthDate.setVisible(true);
+        JCU1DateChooserBirthDate.setVisible(true);
+        jCU1LabelNacionality.setVisible(true);
+        jCU1ComboBoxPaises.setVisible(true);
+        jCU1LabelPassword1.setVisible(true);
+        JCU1Password1Field.setVisible(true);
+        jCU1LabelPassword2.setVisible(true);
+        JCU1Password2Field.setVisible(true);
+        JCU1ButtonClearFields.setEnabled(true);
+        JCU1ButtonSendData.setEnabled(true);
+
+        /* ==== Visibles solo para proveedores ==== */
+        jCU1LabelDescription.setVisible(false);
+        jCU1TextAreaDescription.setVisible(false);
+        jCU1ScrollPane11Description.setVisible(false);
+        jCU1LabelWebsite.setVisible(false);
+        JCU1WebsiteTextField.setVisible(false);
+        /* ==== Visibles solo para proveedores ==== */
+    }
+
+    public void jCU1OcultarCampos() {
+        jCU1LabelNickName.setVisible(false);
+        JCU1NickNameTextField.setVisible(false);
+        jCU1LabelName.setVisible(false);
+        JCU1NameTextField.setVisible(false);
+        jCU1LabelLastName.setVisible(false);
+        JCU1LastNameTextField.setVisible(false);
+        jCU1LabelEmail.setVisible(false);
+        JCU1EmailTextField.setVisible(false);
+        jCU1LabelBirthDate.setVisible(false);
+        JCU1DateChooserBirthDate.setVisible(false);
+        jCU1LabelNacionality.setVisible(false);
+        jCU1ComboBoxPaises.setVisible(false);
+        jCU1LabelDescription.setVisible(false);
+        jCU1TextAreaDescription.setVisible(false);
+        jCU1ScrollPane11Description.setVisible(false);
+        jCU1LabelWebsite.setVisible(false);
+        JCU1WebsiteTextField.setVisible(false);
+        jCU1LabelPassword1.setVisible(false);
+        JCU1Password1Field.setVisible(false);
+        jCU1LabelPassword2.setVisible(false);
+        JCU1Password2Field.setVisible(false);
+        JCU1ButtonClearFields.setEnabled(false);
+        JCU1ButtonSendData.setEnabled(false);
+    }
 
     private void JCU1ButtonClearFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ButtonClearFieldsActionPerformed
         JCU1ClearFields();
@@ -4261,7 +4320,20 @@ public class Main extends javax.swing.JFrame {
             String lastName = JCU1LastNameTextField.getText();
             String email = JCU1EmailTextField.getText();
             Date birthDate = JCU1DateChooserBirthDate.getDate();
+            
+            char[] passwordChars1 = JCU1Password1Field.getPassword();
+            String password1 = new String(passwordChars1);
+            char[] passwordChars2 = JCU1Password2Field.getPassword();
+            String password2 = new String(passwordChars2);
 
+            if(!password1.equals(password2)){
+                throw new NonEqualPasswordException("Las contraseñas ingresadas no coinciden");
+            }
+            String imagePath = "";
+//                    String imagePath = (JCU1ImagePathTextField.getText().isEmpty())
+//                            ? ""
+//                            : JCU1ImagePathTextField.getText();
+            
             switch (selectedItem) {
                 case "Proveedor/a":
                     String description = jCU1TextAreaDescription.getText();
@@ -4275,6 +4347,8 @@ public class Main extends javax.swing.JFrame {
                             lastName,
                             email,
                             birthDate,
+                            password1,
+                            imagePath,
                             description,
                             websiteURL
                     );
@@ -4289,6 +4363,8 @@ public class Main extends javax.swing.JFrame {
                             lastName,
                             email,
                             birthDate,
+                            password1,
+                            imagePath,
                             selectedCountry
                     );
 
@@ -4298,6 +4374,8 @@ public class Main extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "El usuario fue dado de alta", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
             JCU1ClearFields();
+        } catch (NonEqualPasswordException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
         } catch (EmptyFieldsException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ALERTA", JOptionPane.WARNING_MESSAGE);
         } catch (MyException ex) {
@@ -4676,6 +4754,8 @@ public class Main extends javax.swing.JFrame {
                             lastName,
                             email,
                             birthDate,
+                            "",
+                            "",
                             description,
                             websiteURL
                     );
@@ -4690,6 +4770,8 @@ public class Main extends javax.swing.JFrame {
                             lastName,
                             email,
                             birthDate,
+                            "",
+                            "",
                             selectedCountry
                     );
 
@@ -5104,32 +5186,32 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU14ButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU14ButtonAceptarActionPerformed
         // TODO add your handling code here:
-        if(jCU14TableActividadesSinValidar.getSelectedRow() > -1){
-            try{
+        if (jCU14TableActividadesSinValidar.getSelectedRow() > -1) {
+            try {
                 Long id = Long.parseLong(jCU14TableActividadesSinValidar.getValueAt(jCU14TableActividadesSinValidar.getSelectedRow(), 0).toString());
                 controlador.validarActividad(id, EstadoActividad.CONFIRMADA);
                 JOptionPane.showMessageDialog(this, "Actividad confirmada.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
                 jCU14ActualizarTabla();
-            }catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Algo salio mal.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar la actividad sobre la que quieres actuar", "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jCU14ButtonAceptarActionPerformed
 
     private void jCU14ButtonRechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU14ButtonRechazarActionPerformed
         // TODO add your handling code here:
-        if(jCU14TableActividadesSinValidar.getSelectedRow() > -1){
-            try{
+        if (jCU14TableActividadesSinValidar.getSelectedRow() > -1) {
+            try {
                 Long id = Long.parseLong(jCU14TableActividadesSinValidar.getValueAt(jCU14TableActividadesSinValidar.getSelectedRow(), 0).toString());
                 controlador.validarActividad(id, EstadoActividad.RECHAZADA);
                 JOptionPane.showMessageDialog(this, "Actividad rechazada.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
                 jCU14ActualizarTabla();
-            }catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Algo salio mal.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar la actividad sobre la que quieres actuar", "ERROR", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jCU14ButtonRechazarActionPerformed
@@ -5646,7 +5728,7 @@ public class Main extends javax.swing.JFrame {
                 || jCU4TextFieldCiudad.getText().isEmpty()
                 || jCU4TextFieldCosto.getText().isEmpty()
                 || jCU4TextFieldDuracion.getText().isEmpty()
-                || jCU4DateChooserFecha.getDate() == null 
+                || jCU4DateChooserFecha.getDate() == null
                 || indexRowDepartamento == -1
                 || indexRowProveedor == -1
                 || indexRowCategorias == -1) {
@@ -5683,14 +5765,13 @@ public class Main extends javax.swing.JFrame {
      * TODO falta agregar la misma logica para la parte de proveedores cuando
      * esten
      */
-
     public void jCU4actualizarTablas() {
         // TODO add your handling code here:
 
         List<DTDepartamento> dtDepartamentos = controlador.obtenerDepartamentos();
         List<DTProveedor> dtProveedores = controlador.obtenerProveedores();
         List<DTCategoria> dtCategorias = controlador.obtenerCategorias();
-        
+
         DefaultTableModel modelDepartamento = (DefaultTableModel) jCU4TableDepartamentos.getModel();
         DefaultTableModel modelProveedores = (DefaultTableModel) jCU4TableProveedores.getModel();
         DefaultTableModel modelCategorias = (DefaultTableModel) jCU4TableCategorias.getModel();
@@ -5706,7 +5787,7 @@ public class Main extends javax.swing.JFrame {
         }
 
         modelProveedores.fireTableDataChanged();
-        
+
         while (modelCategorias.getRowCount() > 0) {
             modelCategorias.removeRow(modelCategorias.getRowCount() - 1);
         }
@@ -5755,17 +5836,17 @@ public class Main extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    public void jCU14ActualizarTabla(){
+
+    public void jCU14ActualizarTabla() {
         List<DTActividadTuristica> dtActividades = controlador.obtenerActividadesSinConfirmar();
         DefaultTableModel modelActividades = (DefaultTableModel) jCU14TableActividadesSinValidar.getModel();
 
         while (modelActividades.getRowCount() > 0) {
             modelActividades.removeRow(modelActividades.getRowCount() - 1);
         }
-        
+
         modelActividades.fireTableDataChanged();
-        
+
         for (DTActividadTuristica a : dtActividades) {
             Object rowData[] = new Object[3];
             rowData[0] = a.getId();
@@ -5820,6 +5901,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField JCU1LastNameTextField;
     private javax.swing.JTextField JCU1NameTextField;
     private javax.swing.JTextField JCU1NickNameTextField;
+    private javax.swing.JPasswordField JCU1Password1Field;
+    private javax.swing.JPasswordField JCU1Password2Field;
     private javax.swing.JTextField JCU1WebsiteTextField;
     private javax.swing.JDialog JDialogCamposVacios;
     private javax.swing.JButton jButton1;
@@ -5875,6 +5958,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jCU1LabelNacionality;
     private javax.swing.JLabel jCU1LabelName;
     private javax.swing.JLabel jCU1LabelNickName;
+    private javax.swing.JLabel jCU1LabelPassword1;
+    private javax.swing.JLabel jCU1LabelPassword2;
     private javax.swing.JLabel jCU1LabelUserType;
     private javax.swing.JLabel jCU1LabelWebsite;
     private javax.swing.JScrollPane jCU1ScrollPane11Description;

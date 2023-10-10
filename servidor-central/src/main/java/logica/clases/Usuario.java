@@ -7,8 +7,6 @@ package logica.clases;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
-import org.mindrot.jbcrypt.BCrypt;
-
 
 /**
  *
@@ -42,15 +40,6 @@ public abstract class Usuario {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-    }
-
-    private String hashPassword(String password){
-        String hashedPassword = BCrypt.haspw(password, BCrypt.gensalt());
-        return hashedPassword;
-    }
-    
-    private boolean verifyPassword(String inputPassword, String hashedPassword){
-       return BCrypt.checkpw(inputPassword, hashedPassword);
     }
 }
 

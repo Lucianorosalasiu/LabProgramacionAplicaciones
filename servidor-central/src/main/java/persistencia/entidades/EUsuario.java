@@ -48,6 +48,23 @@ public abstract class EUsuario extends EBase {
         this.email = email;
         this.birthDate = birthDate;
     }
-    
-    
+
+    public EUsuario(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate, 
+            String password, 
+            String imagePath
+    ) {
+        super();
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.password = password;
+        this.imagePath = imagePath;
+    }  
 }

@@ -13,30 +13,51 @@ import lombok.Setter;
  *
  * @author alexis
  */
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class DTProveedor extends DTUsuario{
+public class DTProveedor extends DTUsuario {
+
     private String description;
     private String websiteURL;
 
     public DTProveedor() {
         super();
     }
-    
-    public DTProveedor(String nickname, String name, String lastName,String email, Date birthDate, String description, String websiteURL){
-        super(nickname, name, lastName, email, birthDate);
+
+    public DTProveedor(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate,
+            String password, 
+            String imagePath,
+            String description, 
+            String websiteURL
+    ) {
+        super(nickname, name, lastName, email, birthDate, password, imagePath);
         this.description = description;
         this.websiteURL = websiteURL;
     }
 
-    public DTProveedor(Long id, String nickname, String name, String lastName, String email, Date birthDate, String description, String websiteURL) {
-        super(id, nickname, name, lastName, email, birthDate);
+    public DTProveedor(
+            Long id, 
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate, 
+            String password, 
+            String imagePath,
+            String description, 
+            String websiteURL
+    ) {
+        super(id, nickname, name, lastName, email, birthDate, password, imagePath);
         this.description = description;
         this.websiteURL = websiteURL;
     }
-    
+
     public DTProveedor(Long id, String nickname, String email, String description) {
         super(id, nickname, email);
         this.description = description;

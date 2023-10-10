@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
-import static java.util.Objects.isNull;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -101,6 +100,8 @@ public class DataPersistencia implements IDataPersistencia {
                     objProveedor.getLastName(),
                     objProveedor.getEmail(),
                     objProveedor.getBirthDate(),
+                    objProveedor.getPassword(),
+                    objProveedor.getImagePath(),
                     objProveedor.getDescription(),
                     objProveedor.getWebsiteURL()            
             );
@@ -126,6 +127,8 @@ public class DataPersistencia implements IDataPersistencia {
                     objTurista.getLastName(),
                     objTurista.getEmail(),
                     objTurista.getBirthDate(),
+                    objTurista.getPassword(),
+                    objTurista.getImagePath(),
                     objTurista.getNacionality()
             );
 
@@ -150,15 +153,17 @@ public class DataPersistencia implements IDataPersistencia {
             String query = "select t from ETurista t";
             qryResults = em.createQuery(query,ETurista.class).getResultList();
             
-            for(ETurista e : qryResults){
+            for(ETurista t : qryResults){
                 DTTurista turista = new DTTurista(
-                        e.getId(),
-                        e.getNickname(),
-                        e.getName(),
-                        e.getLastName(),
-                        e.getEmail(),
-                        e.getBirthDate(),
-                        e.getNacionality()
+                        t.getId(),
+                        t.getNickname(),
+                        t.getName(),
+                        t.getLastName(),
+                        t.getEmail(),
+                        t.getBirthDate(),
+                        t.getPassword(),
+                        t.getImagePath(),
+                        t.getNacionality()
                 );
                 touristList.add(turista);
             }
@@ -439,22 +444,24 @@ public class DataPersistencia implements IDataPersistencia {
     public List<DTProveedor> obtenerProveedores(){
         EntityManager em = emf.createEntityManager();
         List<DTProveedor> resultados = new LinkedList<>();
-        List<EProveedor> resultados_consulta = new LinkedList<>();
+        List<EProveedor> qryResult = new LinkedList<>();
         
         try{
             String query = "select e from EProveedor e";
-            resultados_consulta = em.createQuery(query,EProveedor.class).getResultList();
+            qryResult = em.createQuery(query,EProveedor.class).getResultList();
             
-            for(EProveedor e : resultados_consulta){
+            for(EProveedor p : qryResult){
                 DTProveedor dtProveedor = new DTProveedor(
-                        e.getId(),
-                        e.getNickname(),
-                        e.getName(),
-                        e.getLastName(),
-                        e.getEmail(),
-                        e.getBirthDate(),
-                        e.getDescription(),
-                        e.getWebsiteURL()
+                        p.getId(),
+                        p.getNickname(),
+                        p.getName(),
+                        p.getLastName(),
+                        p.getEmail(),
+                        p.getBirthDate(),
+                        p.getPassword(),
+                        p.getImagePath(),
+                        p.getDescription(),
+                        p.getWebsiteURL()
                 );
                 resultados.add(dtProveedor);
             }

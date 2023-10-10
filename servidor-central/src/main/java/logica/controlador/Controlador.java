@@ -14,9 +14,7 @@ import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import logica.interfaces.IControlador;
-import logica.clases.Departamento;
 import exceptions.MyException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import logica.clases.Proveedor;
@@ -26,7 +24,7 @@ import persistencia.IDataPersistencia;
 
 /**
  *
- * @author lucho
+ * @author todos
  */
 public class Controlador implements IControlador{
     private static Controlador instance = null;
@@ -56,7 +54,9 @@ public class Controlador implements IControlador{
                 nuevoProveedor.getName(), 
                 nuevoProveedor.getLastName(), 
                 nuevoProveedor.getEmail(), 
-                nuevoProveedor.getBirthDate(), 
+                nuevoProveedor.getBirthDate(),
+                nuevoProveedor.getPassword(),
+                nuevoProveedor.getImagePath(), 
                 nuevoProveedor.getDescription(), 
                 nuevoProveedor.getWebsiteURL()
         );
@@ -77,7 +77,9 @@ public class Controlador implements IControlador{
                 nuevoTurista.getName(), 
                 nuevoTurista.getLastName(), 
                 nuevoTurista.getEmail(), 
-                nuevoTurista.getBirthDate(), 
+                nuevoTurista.getBirthDate(),
+                nuevoTurista.getPassword(),
+                nuevoTurista.getImagePath(), 
                 nuevoTurista.getNacionality()
         );
               
@@ -113,7 +115,7 @@ public class Controlador implements IControlador{
         
         return null;
     }
-    
+     
     @Override
     public void actualizarUsuario(DTUsuario usuario) throws MyException{
         // Se verifica el tipo de instancia recibida usando reflexión
@@ -126,7 +128,9 @@ public class Controlador implements IControlador{
                     turista.getName(), 
                     turista.getLastName(), 
                     turista.getEmail(), 
-                    turista.getBirthDate(), 
+                    turista.getBirthDate(),
+                    turista.getPassword(),
+                    turista.getImagePath(),
                     turista.getNacionality()
             );
             dataPersistencia.actualizarTurista(objTurista);
@@ -139,7 +143,9 @@ public class Controlador implements IControlador{
                     proveedor.getName(), 
                     proveedor.getLastName(), 
                     proveedor.getEmail(), 
-                    proveedor.getBirthDate(), 
+                    proveedor.getBirthDate(),
+                    proveedor.getPassword(),
+                    proveedor.getImagePath(),
                     proveedor.getDescription(), 
                     proveedor.getWebsiteURL()
             );

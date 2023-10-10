@@ -31,11 +31,12 @@ public class ETurista extends EUsuario {
             String name,
             String lastName, 
             String email, 
-            Date birthDate, 
+            Date birthDate,
+            String password,
+            String imagePath,
             String nacionality
     ) {
-        super(nickname, name, lastName, email, birthDate);
+        super(nickname, name, lastName, email, birthDate, password, imagePath);
         this.nacionality = nacionality; 
     }
-
 }

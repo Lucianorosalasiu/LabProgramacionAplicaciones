@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
-import logica.clases.Proveedor;
-import logica.clases.Turista;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import dataTypes.DTTurista;
@@ -59,6 +57,8 @@ public class Login extends HttpServlet {
                 for(DTUsuario u : usuarios){
                      /*falta preguntar por la contraseña cuando este implementada*/
                      /* && u.getPassword().equals(password)*/
+                     /* u.verifyPassword(password, u.getPassword())*/
+                     
                     if(u.getNickname().equals(nickname) || u.getEmail().equals(nickname)){
                         /*pregunto por el tipo de usuario*/
                         String sessionType = "";
