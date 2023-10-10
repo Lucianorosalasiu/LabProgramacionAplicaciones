@@ -115,6 +115,24 @@ public class Controlador implements IControlador{
         
         return null;
     }
+    
+    @Override
+    /**
+     * Busca la coincidencia de un turista o un proveedor basandose en Email o Nickname
+     * @nickname valor que puede ser el Email o el Nickname del usuario
+     */
+    public DTUsuario obtenerUsuarioAlternativo(String nickname) {
+        List<DTUsuario> userList = this.obtenerUsuarios();
+        
+        // Se itera a través de la lista de usuarios y busca el usuario con el nickname proporcionado
+        for (DTUsuario usuario : userList) {
+            if (usuario.getNickname().equals(nickname) || usuario.getEmail().equals(nickname)) {
+                return usuario; // Devuelve el usuario cuando se encuentra la coincidencia
+            }
+        }
+        
+        return null;
+    }
      
     @Override
     public void actualizarUsuario(DTUsuario usuario) throws MyException{

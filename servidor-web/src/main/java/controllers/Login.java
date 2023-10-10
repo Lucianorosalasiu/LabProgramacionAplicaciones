@@ -5,6 +5,7 @@
 package controllers;
 
 
+import dataTypes.DTProveedor;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -43,6 +44,7 @@ public class Login extends HttpServlet {
         /*si bien el nombre de la variable es nickname tambien
         contempla que en dicho campo ingrese el email del usuario*/
         String nickname = request.getParameter("nickname");
+        String password = request.getParameter("password");
         String errorMessage = null;
         Boolean existeUsuario = false;
         
@@ -51,37 +53,34 @@ public class Login extends HttpServlet {
             try {
                 Fabrica fabrica = new Fabrica();
                 IControlador controlador = fabrica.getInterface();
-
-                List<DTUsuario> usuarios = controlador.obtenerUsuarios();
                 
-                for(DTUsuario u : usuarios){
-                     /*falta preguntar por la contraseña cuando este implementada*/
-                     /* && u.getPassword().equals(password)*/
-                     /* u.verifyPassword(password, u.getPassword())*/
-                     
-                    if(u.getNickname().equals(nickname) || u.getEmail().equals(nickname)){
-                        /*pregunto por el tipo de usuario*/
-                        String sessionType = "";
-                            if(u instanceof DTTurista){
-                                sessionType = "TURISTA";
-                            }else{
-                                sessionType = "PROVEEDOR";
-                            }
-
-                        /*guardo los atributos que me interesan en la sesion*/
-                        request.getSession().setAttribute("sessionNickname", u.getNickname());
-                        request.getSession().setAttribute("sessionEmail", u.getEmail());
-                        request.getSession().setAttribute("sessionType", sessionType);
-                        request.getSession().setAttribute("isLogged",true);
-                        existeUsuario = true;
-                    }
-                }
-                
-                if(!existeUsuario){
+                DTUsuario usuario = controlador.obtenerUsuarioAlternativo(nickname);
+                if(usuario == null){
                     errorMessage = "Nombre de usuario o contraseña incorrectas.";
                     request.setAttribute("errorMessage", errorMessage);
-                }
-                
+                }else{
+                    //falta agregar la validacion por contraseña
+                    //&& usuario.verifyPassword(password, usuario.getPassword())
+                    if(nickname.equals(usuario.getEmail()) ||
+                            nickname.equals(usuario.getNickname())){
+                        String sessionType = "N/A";
+
+                        if(usuario instanceof DTTurista){
+                            sessionType = "TURISTA";
+                        }else if(usuario instanceof DTProveedor){
+                            sessionType = "PROVEEDOR";
+                        }
+                        
+                        request.getSession().setAttribute("sessionNickname", usuario.getNickname());
+                        request.getSession().setAttribute("sessionEmail", usuario.getEmail());
+                        request.getSession().setAttribute("sessionType", sessionType);
+                        request.getSession().setAttribute("isLogged",true);
+                    }else{
+                        //errorMessage = "PassError | usuario.verifyPassword = " + Boolean.toString(usuario.verifyPassword(password, usuario.getPassword()))
+                                //+ " | usuario.getPassword() = " +  usuario.getPassword() + " | password = " + password;
+                        //request.setAttribute("errorMessage", errorMessage);
+                    }
+                }  
             } catch (Exception e) {
                 errorMessage = e.getMessage();
                 request.setAttribute("errorMessage", errorMessage);
