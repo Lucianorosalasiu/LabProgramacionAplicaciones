@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
-       <title>TurismoUy | Consulta actividades turisticas</title>
+       <title>TurismoUy | Consulta actividades turísticas</title>
     </head>
     
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
