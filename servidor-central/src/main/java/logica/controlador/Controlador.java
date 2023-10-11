@@ -174,6 +174,33 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public String obtenerHashTurista(Long id){
+        return dataPersistencia.obtenerHashTurista(id);
+    }
+    
+    @Override
+    public String obtenerHashProveedor(Long id){
+        return dataPersistencia.obtenerHashProveedor(id);
+    }
+    
+    @Override
+    /**
+     * busca en la tabla turista el hash que corresponda a la id, si esta operacion devuelve null,
+     * lo busca en proveedor
+     * 
+     * @return null si no se encontro en ninguna tabla, o el hash en caso de haber sido encontrado
+     */
+    public String obtenerHash(Long id){
+        String hash = obtenerHashTurista(id);
+        if(hash == null){
+            hash = obtenerHashProveedor(id);
+            return hash;
+        }else{
+            return hash;
+        }
+    }
+    
+    @Override
     public List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista){
         return dataPersistencia.obtenerSalidasDeTurista(idTurista); 
     }

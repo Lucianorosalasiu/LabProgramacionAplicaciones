@@ -45,8 +45,9 @@ public class Login extends HttpServlet {
         contempla que en dicho campo ingrese el email del usuario*/
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
+        String sessionType = "N/A";
         String errorMessage = null;
-        Boolean existeUsuario = false;
+        String hash = "";
         
         /*realiza la logica del login solo si los campos contienen datos*/
         if(validateParameters(request)){
@@ -55,32 +56,22 @@ public class Login extends HttpServlet {
                 IControlador controlador = fabrica.getInterface();
                 
                 DTUsuario usuario = controlador.obtenerUsuarioAlternativo(nickname);
-                if(usuario == null){
+                //si no existe un usuario con esas credenciales
+                if(usuario == null || !usuario.verifyPassword(password, controlador.obtenerHash(usuario.getId()))){
                     errorMessage = "Nombre de usuario o contraseña incorrectas.";
                     request.setAttribute("errorMessage", errorMessage);
-                }else{
-                    //falta agregar la validacion por contraseña
-                    //&& usuario.verifyPassword(password, usuario.getPassword())
-                    if(nickname.equals(usuario.getEmail()) ||
-                            nickname.equals(usuario.getNickname())){
-                        String sessionType = "N/A";
-
-                        if(usuario instanceof DTTurista){
-                            sessionType = "TURISTA";
-                        }else if(usuario instanceof DTProveedor){
-                            sessionType = "PROVEEDOR";
-                        }
-                        
-                        request.getSession().setAttribute("sessionNickname", usuario.getNickname());
-                        request.getSession().setAttribute("sessionEmail", usuario.getEmail());
-                        request.getSession().setAttribute("sessionType", sessionType);
-                        request.getSession().setAttribute("isLogged",true);
-                    }else{
-                        //errorMessage = "PassError | usuario.verifyPassword = " + Boolean.toString(usuario.verifyPassword(password, usuario.getPassword()))
-                                //+ " | usuario.getPassword() = " +  usuario.getPassword() + " | password = " + password;
-                        //request.setAttribute("errorMessage", errorMessage);
+                }else if(usuario.verifyPassword(password, controlador.obtenerHash(usuario.getId()))){
+                    //en caso de que si exista un usuario con esas credenciales
+                    if(usuario instanceof DTTurista){
+                        sessionType = "TURISTA";
+                    }else if(usuario instanceof DTProveedor){
+                        sessionType = "PROVEEDOR";
                     }
-                }  
+                    request.getSession().setAttribute("sessionNickname", usuario.getNickname());
+                    request.getSession().setAttribute("sessionEmail", usuario.getEmail());
+                    request.getSession().setAttribute("sessionType", sessionType);
+                    request.getSession().setAttribute("isLogged",true);
+                }
             } catch (Exception e) {
                 errorMessage = e.getMessage();
                 request.setAttribute("errorMessage", errorMessage);
