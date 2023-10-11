@@ -21,6 +21,10 @@
         <servlet-class>controllers.Logout</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AltaUsuario</servlet-name>
+        <servlet-class>controllers.usuarios.Alta</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AltaSalida</servlet-name>
         <servlet-class>controllers.salidas.Alta</servlet-class>
     </servlet>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaUsuario</servlet-name>
+        <url-pattern>/altausuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AltaSalida</servlet-name>

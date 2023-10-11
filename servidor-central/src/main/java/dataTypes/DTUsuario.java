@@ -66,7 +66,6 @@ public abstract class DTUsuario {
         this.password = hashPassword(password);
         this.imagePath = imagePath;
     }
-    
         
     public DTUsuario(Long id, String nickname, String email) {
         this.id = id;
@@ -79,7 +78,7 @@ public abstract class DTUsuario {
     }
     
     public boolean verifyPassword(String inputPassword, String hashedPassword){
-       inputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt());
+       //inputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt());
        return BCrypt.checkpw(inputPassword, hashedPassword);
     }
 }

@@ -115,6 +115,24 @@ public class Controlador implements IControlador{
         
         return null;
     }
+    
+    @Override
+    /**
+     * Busca la coincidencia de un turista o un proveedor basandose en Email o Nickname
+     * @nickname valor que puede ser el Email o el Nickname del usuario
+     */
+    public DTUsuario obtenerUsuarioAlternativo(String nickname) {
+        List<DTUsuario> userList = this.obtenerUsuarios();
+        
+        // Se itera a través de la lista de usuarios y busca el usuario con el nickname proporcionado
+        for (DTUsuario usuario : userList) {
+            if (usuario.getNickname().equals(nickname) || usuario.getEmail().equals(nickname)) {
+                return usuario; // Devuelve el usuario cuando se encuentra la coincidencia
+            }
+        }
+        
+        return null;
+    }
      
     @Override
     public void actualizarUsuario(DTUsuario usuario) throws MyException{
@@ -152,6 +170,33 @@ public class Controlador implements IControlador{
             dataPersistencia.actualizarProveedor(objProveedor);
         } else {
             throw new MyException("Tipo de usuario no válido");
+        }
+    }
+    
+    @Override
+    public String obtenerHashTurista(Long id){
+        return dataPersistencia.obtenerHashTurista(id);
+    }
+    
+    @Override
+    public String obtenerHashProveedor(Long id){
+        return dataPersistencia.obtenerHashProveedor(id);
+    }
+    
+    @Override
+    /**
+     * busca en la tabla turista el hash que corresponda a la id, si esta operacion devuelve null,
+     * lo busca en proveedor
+     * 
+     * @return null si no se encontro en ninguna tabla, o el hash en caso de haber sido encontrado
+     */
+    public String obtenerHash(Long id){
+        String hash = obtenerHashTurista(id);
+        if(hash == null){
+            hash = obtenerHashProveedor(id);
+            return hash;
+        }else{
+            return hash;
         }
     }
     

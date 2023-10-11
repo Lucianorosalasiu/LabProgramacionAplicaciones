@@ -26,14 +26,20 @@
                   <label class="form-label">Contraseña</label>
                   <input type="password" class="form-control" name="password">
                 </div>
-                <div class="d-flex justify-content-evenly align-items-center">
-                    <button type="button" class="btn btn-secondary" onclick="redirect()">Iniciar sesión como invitado</button>
+                <div class="d-flex justify-content-evenly align-items-center gap-2">
+                    <button type="button" class="btn btn-secondary" onclick="toHome()">Navegar como invitado</button>
                     <script>
-                        function redirect (){
+                        function toHome (){
                          window.location.href = "/turismouy/home";
                         }
                     </script>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-primary" onclick="toNewUser()">Registrarse</button>
+                    <script>
+                        function toNewUser (){
+                         window.location.href = "/turismouy/altausuario";
+                        }
+                    </script>
+                    <button type="submit" class="btn btn-success">Iniciar sesión</button>
                 </div>
                 <%if(request.getAttribute("errorMessage") != null){%>
                     <div class="mt-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
