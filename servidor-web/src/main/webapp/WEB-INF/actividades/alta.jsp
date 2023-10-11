@@ -1,6 +1,6 @@
 <%-- 
-    Document   : consulta
-    Created on : Oct 8, 2023, 6:14:14 PM
+    Document   : alta
+    Created on : Oct 11, 2023, 4:57:31 PM
     Author     : ignfer
 --%>
 
@@ -10,11 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
-       <title>TurismoUy | Consulta actividades turísticas</title>
+       <title>TurismoUy | Alta actividad turística</title>
     </head>
     
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        
+    
     <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1">
             <h1>Hello World! from consulta actividad turistica</h1>

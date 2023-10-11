@@ -6,7 +6,6 @@ package controllers.actividades;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,8 +15,7 @@ import java.util.List;
  *
  * @author ignfer
  */
-@WebServlet(name = "ConsultaActividad", urlPatterns = {"/ConsultaActividad"})
-public class ConsultaActividad extends HttpServlet {
+public class AltaActividad extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,7 +28,7 @@ public class ConsultaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
+        request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);
     }
 
