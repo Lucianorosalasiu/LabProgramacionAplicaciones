@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>   
     </head>
     <header class=" w-100 bg-dark text-light d-flex align-items-center flex-grow-0 flex-column">
         <div class="w-100 d-flex justify-content-between align-items-center p-2">
@@ -42,14 +43,56 @@
                 </div>
             <%}%>
         </div>
-        <div class="w-100 d-flex bg-body-secondary">
-            <ul class="w-100 list-unstyled m-0 d-flex flex-row p-2 justify-content-around align-items-center">
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/home">Inicio</a></li>
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/altausuario">Usuarios</a></li>
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/consultaactividad">Actividades</a></li>
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/altasalida">Salidas</a></li>
-                <li><a class="fs-5 p-2 text-dark text-decoration-none" href="/turismouy/home">Paquetes</a></li>
-            </ul>
+        <div class="w-100 d-flex flex-row flex-wrap bg-body-secondary justify-content-evenly">
+            
+            <button type="button" class="flex-grow-1 btn btn-outline-primary rounded-0" onclick="toHome()">Inicio</button>
+            <script>
+                function toHome(){
+                    window.location.href = "/turismouy/home";
+                }
+            </script>
+            
+            <div class="dropdown flex-grow-1">
+                <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Usuarios
+                </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/turismouy/altausuario">Alta usuario</a></li>
+                        <li><a class="dropdown-item" href="#">Consulta usuarios</a></li>
+                        <li><a class="dropdown-item" href="#">Modificar datos de usuario</a></li>
+                    </ul>
+            </div>
+            
+            <div class="dropdown flex-grow-1">
+                <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Actividades turísticas
+                </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/turismouy/altaactividad">Alta de actividad</a></li>
+                        <li><a class="dropdown-item" href="#">Consulta actividades</a></li>
+                    </ul>
+            </div>
+            
+            <div class="dropdown flex-grow-1">
+                <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Salidas turísticas
+                </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/turismouy/altasalida">Alta de salida</a></li>
+                        <li><a class="dropdown-item" href="#">Consulta de salida</a></li>
+                        <li><a class="dropdown-item" href="#">Inscripción a salida</a></li>
+                    </ul>
+            </div>
+            
+            <div class="dropdown flex-grow-1">
+                <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Paquetes
+                </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Consulta de paquete</a></li>  
+                        <li><a class="dropdown-item" href="#">Compra de paquete</a></li>  
+                    </ul>
+            </div>
         </div>
     </header>
 </html>
