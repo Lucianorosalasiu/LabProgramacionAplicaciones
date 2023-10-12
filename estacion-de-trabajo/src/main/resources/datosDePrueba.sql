@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `ACTIVIDAD_CATEGORIA`
+--
+
+DROP TABLE IF EXISTS `ACTIVIDAD_CATEGORIA`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ACTIVIDAD_CATEGORIA` (
+  `ACTIVIDAD_ID` bigint(20) NOT NULL,
+  `CATEGORIA_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ACTIVIDAD_ID`,`CATEGORIA_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ACTIVIDAD_CATEGORIA`
+--
+
+LOCK TABLES `ACTIVIDAD_CATEGORIA` WRITE;
+/*!40000 ALTER TABLE `ACTIVIDAD_CATEGORIA` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ACTIVIDAD_CATEGORIA` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `PAQUETE_ACTIVIDAD`
 --
 
@@ -83,7 +106,7 @@ CREATE TABLE `SEQUENCE` (
 
 LOCK TABLES `SEQUENCE` WRITE;
 /*!40000 ALTER TABLE `SEQUENCE` DISABLE KEYS */;
-INSERT INTO `SEQUENCE` VALUES ('SEQ_GEN_TABLE',1700);
+INSERT INTO `SEQUENCE` VALUES ('SEQ_GEN_TABLE',1750);
 /*!40000 ALTER TABLE `SEQUENCE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +140,7 @@ CREATE TABLE `actividadTuristica` (
 
 LOCK TABLES `actividadTuristica` WRITE;
 /*!40000 ALTER TABLE `actividadTuristica` DISABLE KEYS */;
-INSERT INTO `actividadTuristica` VALUES (70,'Rocha',800,'Festival gastronomico de productos locales en Rocha','3','2022-07-20 00:00:00','Degusta',52,'CONFIRMADA'),(71,'Rocha',500,'En el mes aniversario del Club Deportivo Union de Rocha te invitamos a una merienda deliciosa.','3','2022-07-21 00:00:00','Teatro con Sabores',52,'CONFIRMADA'),(73,'Colonia del Sacramento',400,'Con guia especializado y en varios idiomas. Varios circuitos posibles.','2','2022-08-01 00:00:00','Tour por Colonia del Sacramento',62,'CONFIRMADA'),(74,'Colonia del Sacramento',800,'Restaurante en la renovada Plaza de Toros con menu internacional','2','2022-08-01 00:00:00','Almuerzo en el Real de San Carlos',62,'CONFIRMADA'),(75,'Tranqueras',300,'Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.','2','2022-08-01 00:00:00','Almuerzo en Valle del Lunarejo',56,'CONFIRMADA'),(76,'Tranqueras',150,'Cabalgata por el area protegida. Varios recorridos para elegir.','2','2022-08-01 00:00:00','Cabalgata en Valle del Lunarejo',56,'CONFIRMADA'),(1651,'PDE',1,'fuera del caso de uso de confirmar/rechazar esta actividad no deberia ser listada, de ser asi falta un filtro en persistencia','1','2023-10-19 12:11:02','no listar esta actividad',15,'AGREGADA');
+INSERT INTO `actividadTuristica` VALUES (70,'Rocha',800,'Festival gastronomico de productos locales en Rocha','3','2022-07-20 00:00:00','Degusta',52,'CONFIRMADA'),(71,'Rocha',500,'En el mes aniversario del Club Deportivo Union de Rocha te invitamos a una merienda deliciosa.','3','2022-07-21 00:00:00','Teatro con Sabores',52,'CONFIRMADA'),(73,'Colonia del Sacramento',400,'Con guia especializado y en varios idiomas. Varios circuitos posibles.','2','2022-08-01 00:00:00','Tour por Colonia del Sacramento',62,'CONFIRMADA'),(74,'Colonia del Sacramento',800,'Restaurante en la renovada Plaza de Toros con menu internacional','2','2022-08-01 00:00:00','Almuerzo en el Real de San Carlos',62,'CONFIRMADA'),(75,'Tranqueras',300,'Almuerzo en la Posada con ticket fijo. Menu que incluye bebida y postre casero.','2','2022-08-01 00:00:00','Almuerzo en Valle del Lunarejo',56,'CONFIRMADA'),(76,'Tranqueras',150,'Cabalgata por el area protegida. Varios recorridos para elegir.','2','2022-08-01 00:00:00','Cabalgata en Valle del Lunarejo',56,'CONFIRMADA');
 /*!40000 ALTER TABLE `actividadTuristica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +164,31 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1701,'Aventura y Deporte'),(1702,'Campo y Naturaleza'),(1703,'Cultura y Patrimonio'),(1704,'Gastronomia'),(1705,'Turismo Playas');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria_actividadTuristica`
+--
+
+DROP TABLE IF EXISTS `categoria_actividadTuristica`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria_actividadTuristica` (
+  `ECategoria_ID` bigint(20) NOT NULL,
+  `actividades_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ECategoria_ID`,`actividades_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria_actividadTuristica`
+--
+
+LOCK TABLES `categoria_actividadTuristica` WRITE;
+/*!40000 ALTER TABLE `categoria_actividadTuristica` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria_actividadTuristica` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -341,4 +388,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-03 20:08:53
+-- Dump completed on 2023-10-12 18:42:44
