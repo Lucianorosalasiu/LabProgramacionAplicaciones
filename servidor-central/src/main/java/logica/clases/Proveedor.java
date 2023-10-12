@@ -26,6 +26,20 @@ public class Proveedor extends Usuario{
             String lastName, 
             String email, 
             Date birthDate,
+            String description,
+            String websiteURL
+    ) {
+        super(nickname, name, lastName, email, birthDate);
+        this.description = description;
+        this.websiteURL = websiteURL;
+    }
+    
+    public Proveedor(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate,
             String password,
             String imagePath,
             String description,

@@ -473,73 +473,69 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jSeparator7" max="32767" attributes="0"/>
-                                  <Component id="jCU1LabelWebsite" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="JCU1WebsiteTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jCU1LabelUserType" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="JCU1ComboBoxUserType" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Component id="jSeparator7" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jCU1LabelUserType" alignment="1" max="32767" attributes="0"/>
+                          <Component id="JCU1ComboBoxUserType" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCU1ScrollPane11Description" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCU1ScrollPane11Description" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="JCU1LastNameTextField" min="-2" pref="301" max="-2" attributes="0"/>
-                                                  <Component id="jCU1LabelLastName" alignment="0" min="-2" pref="301" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jCU1LabelNacionality" max="32767" attributes="0"/>
-                                                  <Component id="jCU1ComboBoxPaises" pref="300" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="JCU1NameTextField" pref="300" max="32767" attributes="0"/>
-                                                      <Component id="JCU1NickNameTextField" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="jCU1LabelNickName" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="jCU1LabelName" min="-2" pref="300" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace pref="370" max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="JCU1DateChooserBirthDate" min="-2" pref="300" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jCU1LabelBirthDate" pref="300" max="32767" attributes="0"/>
-                                                      <Component id="JCU1EmailTextField" alignment="1" max="32767" attributes="0"/>
-                                                      <Component id="jCU1LabelEmail" alignment="1" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Component id="jCU1LabelDescription" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="JCU1LastNameTextField" min="-2" pref="301" max="-2" attributes="0"/>
+                                          <Component id="jCU1LabelLastName" alignment="0" min="-2" pref="301" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jCU1LabelNacionality" max="32767" attributes="0"/>
+                                          <Component id="jCU1ComboBoxPaises" pref="300" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="JCU1ButtonClearFields" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="JCU1ButtonSendData" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="JCU1NameTextField" pref="300" max="32767" attributes="0"/>
+                                              <Component id="JCU1NickNameTextField" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jCU1LabelNickName" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jCU1LabelName" min="-2" pref="300" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="370" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="JCU1DateChooserBirthDate" min="-2" pref="300" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jCU1LabelBirthDate" pref="300" max="32767" attributes="0"/>
+                                              <Component id="JCU1EmailTextField" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jCU1LabelEmail" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
+                                  <Component id="jCU1LabelDescription" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="162" pref="162" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="JCU1Password1Field" max="32767" attributes="0"/>
-                                  <Component id="jCU1LabelPassword1" pref="300" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="JCU1ButtonClearFields" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="JCU1ButtonSendData" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jCU1LabelPassword2" pref="300" max="32767" attributes="0"/>
                                   <Component id="JCU1Password2Field" max="32767" attributes="0"/>
+                                  <Component id="JCU1WebsiteTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="JCU1Password1Field" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jCU1LabelPassword1" alignment="1" pref="300" max="32767" attributes="0"/>
+                                  <Component id="jCU1LabelWebsite" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jCU1LabelPreview" alignment="2" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="jCU1ButtonSelectPhoto" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="162" pref="162" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -584,18 +580,28 @@
                       <Component id="jCU1LabelDescription" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCU1ScrollPane11Description" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jCU1LabelWebsite" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JCU1WebsiteTextField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
-                      <Component id="jCU1LabelPassword1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JCU1Password1Field" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="jCU1LabelPassword2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JCU1Password2Field" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="jCU1LabelWebsite" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="JCU1WebsiteTextField" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                              <Component id="jCU1LabelPassword1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="JCU1Password1Field" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="jCU1LabelPassword2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="JCU1Password2Field" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jCU1ButtonSelectPhoto" min="-2" pref="22" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCU1LabelPreview" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jSeparator7" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -825,6 +831,39 @@
             <Component class="javax.swing.JPasswordField" name="JCU1Password2Field">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JCU1Password2Field.setVisible(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jCU1ButtonSelectPhoto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seleccionar Foto"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCU1ButtonSelectPhotoActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU1ButtonSelectPhoto.setVisible(false);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jCU1LabelPreview">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="4a" green="49" red="45" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Vista previa"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder>
+                      <Color PropertyName="highlight" blue="99" green="99" red="99" type="rgb"/>
+                    </EtchetBorder>
+                  </Border>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jCU1LabelPreview.setVisible(false);"/>
               </AuxValues>
             </Component>
           </SubComponents>

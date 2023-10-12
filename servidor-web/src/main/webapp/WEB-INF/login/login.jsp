@@ -16,9 +16,9 @@
 
     <body class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <form action="/turismouy/login" method="post">
+            <form action="/login" method="post">
                 <div class="mb-3">
-                  <label class="form-label">Nickname</label>
+                  <label class="form-label">Nickname o Email</label>
                   <input type="text" class="form-control" name="nickname">
                   <div class="form-text">Puede que compartamos tus datos con alguien, oops!</div>
                 </div>
@@ -30,13 +30,13 @@
                     <button type="button" class="btn btn-secondary" onclick="toHome()">Navegar como invitado</button>
                     <script>
                         function toHome (){
-                         window.location.href = "/turismouy/home";
+                         window.location.href = "/home";
                         }
                     </script>
                     <button type="button" class="btn btn-primary" onclick="toNewUser()">Registrarse</button>
                     <script>
                         function toNewUser (){
-                         window.location.href = "/turismouy/altausuario";
+                         window.location.href = "/altausuario";
                         }
                     </script>
                     <button type="submit" class="btn btn-success">Iniciar sesión</button>
@@ -49,7 +49,7 @@
                 
                 <%if(request.getSession().getAttribute("isLogged") != null){%>
                     <script>         
-                         window.location.href = "/turismouy/home";
+                         window.location.href = "/home";
                     </script>
                 <%}%>
             </form>

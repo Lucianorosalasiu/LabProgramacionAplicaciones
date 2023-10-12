@@ -19,7 +19,7 @@
     
     <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1">
-            <form method="post" action="/turismouy/altasalida" >
+            <form method="post" action="/altasalida" >
                 <div class="m-3">
                     <select name="departamento" onchange="this.form.submit();">
                         <option value="" disabled selected>- seleccione un departamento -</option>

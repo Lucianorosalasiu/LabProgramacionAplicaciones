@@ -5,7 +5,7 @@
 package controllers;
 
 
-import dataTypes.DTProveedor;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.List;
+import dataTypes.DTProveedor;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import dataTypes.DTTurista;
@@ -44,10 +44,9 @@ public class Login extends HttpServlet {
         /*si bien el nombre de la variable es nickname tambien
         contempla que en dicho campo ingrese el email del usuario*/
         String nickname = request.getParameter("nickname");
-        String password = request.getParameter("password");
+        String loginPassword = request.getParameter("password");
         String sessionType = "N/A";
         String errorMessage = null;
-        String hash = "";
         
         /*realiza la logica del login solo si los campos contienen datos*/
         if(validateParameters(request)){
@@ -57,10 +56,10 @@ public class Login extends HttpServlet {
                 
                 DTUsuario usuario = controlador.obtenerUsuarioAlternativo(nickname);
                 //si no existe un usuario con esas credenciales
-                if(usuario == null || !usuario.verifyPassword(password, controlador.obtenerHash(usuario.getId()))){
+                if(usuario == null || !usuario.verifyPassword(loginPassword,usuario.getPassword())){                    
                     errorMessage = "Nombre de usuario o contraseña incorrectas.";
                     request.setAttribute("errorMessage", errorMessage);
-                }else if(usuario.verifyPassword(password, controlador.obtenerHash(usuario.getId()))){
+                }else if(usuario.verifyPassword(loginPassword, usuario.getPassword())){  
                     //en caso de que si exista un usuario con esas credenciales
                     if(usuario instanceof DTTurista){
                         sessionType = "TURISTA";

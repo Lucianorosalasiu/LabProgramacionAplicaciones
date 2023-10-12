@@ -49,13 +49,14 @@ public class Controlador implements IControlador{
         );
         
         // Si no existe el proveedor, se crea el objeto correspondiente
+        String hashedPassword = nuevoProveedor.hashPassword(nuevoProveedor.getPassword());
         Proveedor objProveedor = new Proveedor(
                 nuevoProveedor.getNickname(), 
                 nuevoProveedor.getName(), 
                 nuevoProveedor.getLastName(), 
                 nuevoProveedor.getEmail(), 
                 nuevoProveedor.getBirthDate(),
-                nuevoProveedor.getPassword(),
+                hashedPassword,
                 nuevoProveedor.getImagePath(), 
                 nuevoProveedor.getDescription(), 
                 nuevoProveedor.getWebsiteURL()
@@ -72,13 +73,14 @@ public class Controlador implements IControlador{
         );
                 
         // Si no existe el turista, se crea el objeto correspondiente
+        String hashedPassword = nuevoTurista.hashPassword(nuevoTurista.getPassword());
         Turista objTurista = new Turista(
                 nuevoTurista.getNickname(), 
                 nuevoTurista.getName(), 
                 nuevoTurista.getLastName(), 
                 nuevoTurista.getEmail(), 
                 nuevoTurista.getBirthDate(),
-                nuevoTurista.getPassword(),
+                hashedPassword,
                 nuevoTurista.getImagePath(), 
                 nuevoTurista.getNacionality()
         );
@@ -147,8 +149,6 @@ public class Controlador implements IControlador{
                     turista.getLastName(), 
                     turista.getEmail(), 
                     turista.getBirthDate(),
-                    turista.getPassword(),
-                    turista.getImagePath(),
                     turista.getNacionality()
             );
             dataPersistencia.actualizarTurista(objTurista);
@@ -162,41 +162,12 @@ public class Controlador implements IControlador{
                     proveedor.getLastName(), 
                     proveedor.getEmail(), 
                     proveedor.getBirthDate(),
-                    proveedor.getPassword(),
-                    proveedor.getImagePath(),
                     proveedor.getDescription(), 
                     proveedor.getWebsiteURL()
             );
             dataPersistencia.actualizarProveedor(objProveedor);
         } else {
             throw new MyException("Tipo de usuario no válido");
-        }
-    }
-    
-    @Override
-    public String obtenerHashTurista(Long id){
-        return dataPersistencia.obtenerHashTurista(id);
-    }
-    
-    @Override
-    public String obtenerHashProveedor(Long id){
-        return dataPersistencia.obtenerHashProveedor(id);
-    }
-    
-    @Override
-    /**
-     * busca en la tabla turista el hash que corresponda a la id, si esta operacion devuelve null,
-     * lo busca en proveedor
-     * 
-     * @return null si no se encontro en ninguna tabla, o el hash en caso de haber sido encontrado
-     */
-    public String obtenerHash(Long id){
-        String hash = obtenerHashTurista(id);
-        if(hash == null){
-            hash = obtenerHashProveedor(id);
-            return hash;
-        }else{
-            return hash;
         }
     }
     

@@ -42,8 +42,22 @@ public abstract class DTUsuario {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.password = hashPassword(password);
+        this.password = password;
         this.imagePath = imagePath;
+    }
+    
+    public DTUsuario(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate
+    ) {
+        this.nickname = nickname;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
     }
     
     public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate) {
@@ -62,7 +76,7 @@ public abstract class DTUsuario {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.password = hashPassword(password);
+        this.password = password;
         this.imagePath = imagePath;
     }
         
@@ -72,12 +86,11 @@ public abstract class DTUsuario {
         this.email = email;
     }  
     
-    private String hashPassword(String password){
+    public String hashPassword(String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
     
     public boolean verifyPassword(String inputPassword, String hashedPassword){
-       //inputPassword = BCrypt.hashpw(inputPassword, BCrypt.gensalt());
        return BCrypt.checkpw(inputPassword, hashedPassword);
     }
 }
