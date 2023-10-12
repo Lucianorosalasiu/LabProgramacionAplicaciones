@@ -5667,6 +5667,8 @@ public class Main extends javax.swing.JFrame {
         JCU1ComboBoxUserType.setSelectedIndex(0);
         jCU1TextAreaDescription.setText("");
         JCU1WebsiteTextField.setText("");
+        JCU1Password1Field.setText("");
+        JCU1Password2Field.setText("");
     }
 
     public boolean JCU1VerifyEmptyFields() {
