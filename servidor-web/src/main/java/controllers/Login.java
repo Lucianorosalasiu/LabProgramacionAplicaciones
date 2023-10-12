@@ -66,6 +66,7 @@ public class Login extends HttpServlet {
                     }else if(usuario instanceof DTProveedor){
                         sessionType = "PROVEEDOR";
                     }
+                    request.getSession().setAttribute("id", usuario.getId());
                     request.getSession().setAttribute("sessionNickname", usuario.getNickname());
                     request.getSession().setAttribute("sessionEmail", usuario.getEmail());
                     request.getSession().setAttribute("sessionType", sessionType);

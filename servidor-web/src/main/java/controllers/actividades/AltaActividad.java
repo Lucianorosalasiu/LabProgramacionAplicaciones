@@ -15,7 +15,9 @@ import java.util.List;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -39,38 +41,64 @@ public class AltaActividad extends HttpServlet {
             throws ServletException, IOException {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-        String infoStr = "campos vacios";
+        String errorMessage = null;
         
         if(validateParameters(request)){
-        
-            String departamento = request.getParameter("departamento");
-            List<DTActividadTuristica> actividades = new LinkedList<>();
-        
-            infoStr = "depto: " + departamento + "| nombre: " + request.getParameter("nombre") +
-                    "| descr: " + request.getParameter("descripcion") + "| duracion: " + request.getParameter("duracion") +
-                    "| costo: " + request.getParameter("costo") + "| ciudad: " + request.getParameter("ciudad") +
-                    "| categorias: ";
-        
-            if(request.getParameterValues("categoria") != null){
-                List<String> categorias = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
-                for(String c : categorias){
-                    infoStr += c;
+            try{
+                String departamento = request.getParameter("departamento");
+                String nombre = request.getParameter("nombre");
+                String descripcion = request.getParameter("descripcion");
+                String duracion = request.getParameter("duracion");
+                Float costo = Float.parseFloat(request.getParameter("costo"));
+                String ciudad = request.getParameter("ciudad");
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+                Date fecha = dateFormat.parse(request.getParameter("fecha"));
+                
+                List<Long> idCategoriasLong = new LinkedList<>();
+                
+                //obtengo todas las categorias seleccionadas
+                if(request.getParameterValues("categoria") != null){
+                    List<String> idCategoriasString = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
+                    //parseo cada una de ellas de string a float
+                    for(String c : idCategoriasString){
+                        try {
+                            idCategoriasLong.add(Long.parseLong(c));
+                        } catch (Exception e) {
+
+                        }
+                    }
                 }
+
+                //obtengo idProveedor
+                Long idProveedor = (Long)request.getSession().getAttribute("id");
+
+                //obtengo idDepartamento
+                Long idDepartamento = Long.parseLong(request.getParameter("departamento"));
+
+
+                DTActividadTuristica nuevaActividadTuristica = new DTActividadTuristica(nombre, descripcion, duracion, costo, ciudad, fecha);
+                 
+                //debug de alta actividad
+                //errorMessage = "depto: " + departamento + "| nombre: " + nombre +
+                //        "| descr: " + descripcion + "| duracion: " + duracion +
+                //        "| costo: " + costo + "| ciudad: " + ciudad +
+                //        "| idProveedor: " + idProveedor + "| idDepartamento: " + idDepartamento +
+                //        "| fecha: " + fecha;
+                
+                controlador.existeActividadTuristica(nombre);
+                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong);
+                request.setAttribute("success", true);
+            }catch(Exception e){
+                errorMessage = e.getMessage();  
+                request.setAttribute("errorMessage", errorMessage);
             }
-            
-            //falta
-        //id departamento
-        //id proveedor
-        //lista de id categorias
-        //controlador.altaActividadTuristica();
-            
         }
-        
         
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
         
-        request.setAttribute("info", infoStr);
+        request.setAttribute("errorMessage", errorMessage);
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);
     }
@@ -116,7 +144,8 @@ public class AltaActividad extends HttpServlet {
                 !request.getParameter("costo").equals("") &&
                 request.getParameter("ciudad") != null &&
                 !request.getParameter("ciudad").equals("") &&
-                request.getParameter("categoria") != null);
+                request.getParameter("categoria") != null) &&
+                request.getParameter("fecha") != null;
     }
 
     /**
