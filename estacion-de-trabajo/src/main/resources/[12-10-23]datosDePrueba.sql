@@ -217,6 +217,7 @@ CREATE TABLE `paquetes` (
   `FECHAALTA` datetime DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
   `VALIDEZ` int(11) DEFAULT NULL,
+  `ESTADOPAQUETE` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NOMBRE` (`NOMBRE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -228,7 +229,7 @@ CREATE TABLE `paquetes` (
 
 LOCK TABLES `paquetes` WRITE;
 /*!40000 ALTER TABLE `paquetes` DISABLE KEYS */;
-INSERT INTO `paquetes` VALUES (124,'Actividades para hacer en familia y disfrutar arte y gastronomia',20,'2022-08-10 00:00:00','Disfrutar Rocha',60),(125,'Paseos por el casco historico y se puede terminar con Almuerzo en la plaza de Toros',15,'2022-08-01 00:00:00','Un dia en Colonia ',45);
+INSERT INTO `paquetes` VALUES (124,'Actividades para hacer en familia y disfrutar arte y gastronomia',20,'2022-08-10 00:00:00','Disfrutar Rocha',60,0),(125,'Paseos por el casco historico y se puede terminar con Almuerzo en la plaza de Toros',15,'2022-08-01 00:00:00','Un dia en Colonia ',45,0);
 /*!40000 ALTER TABLE `paquetes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,9 +245,11 @@ CREATE TABLE `proveedor` (
   `BIRTHDATE` date DEFAULT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
+  `IMAGEPATH` varchar(255) DEFAULT NULL,
   `LASTNAME` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `NICKNAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
   `WEBSITEURL` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
@@ -260,7 +263,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-INSERT INTO `proveedor` VALUES (11,'1970-09-14','Hola! me llamo Washington y soy el encargado\ndel portal de turismo del departamento de Rocha -\nUruguay','washington@turismorocha.gub.uy','Rocha','Washington','washington','http://turismorocha.gub.uy/'),(12,'1965-06-27','Pablo es el presidente de la Sociedad de Fomento\nTuristico de Rivera (conocida como Socfomturriv)','eldiez@socfomturriv.org.uy','Bengoechea','Pablo','eldiez','http://wwww.socfomturriv.org.uy'),(13,'1990-12-31','Departamento de Turismo del Departamento de Colo-\nnia','meche@colonia.gub.uy','Venn','Mercedes','meche','https://colonia.gub.uy/turismo');
+INSERT INTO `proveedor` VALUES (11,'1970-09-14','Hola! me llamo Washington y soy el encargado\ndel portal de turismo del departamento de Rocha -\nUruguay','washington@turismorocha.gub.uy','tinyurl.com/3whe8372','Rocha','Washington','washington','$2a$10$Df10g0qs95whKNttjwT3wO33qwTtX8TwcW7KKc7fO2KeXmWAKkTvy','http://turismorocha.gub.uy/'),(12,'1965-06-27','Pablo es el presidente de la Sociedad de Fomento\nTuristico de Rivera (conocida como Socfomturriv)','eldiez@socfomturriv.org.uy','tinyurl.com/mu4jeas3','Bengoechea','Pablo','eldiez','$2a$10$tOSjoupkc0Zl9mgUER706.dJRXJka554UqDoWqcymzg1e7Wiago9K','http://wwww.socfomturriv.org.uy'),(13,'1990-12-31','Departamento de Turismo del Departamento de Colo-\nnia','meche@colonia.gub.uy','tinyurl.com/4hs4v9c5','Venn','Mercedes','meche','$2a$10$71wwQBYom.15YXRwA5SrkuBeeNuEcIXG1dtFMi6mPng4Ttj.HyaRm','https://colonia.gub.uy/turismo');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,10 +310,12 @@ CREATE TABLE `turista` (
   `ID` bigint(20) NOT NULL,
   `BIRTHDATE` date DEFAULT NULL,
   `EMAIL` varchar(255) DEFAULT NULL,
+  `IMAGEPATH` varchar(255) DEFAULT NULL,
   `LASTNAME` varchar(255) DEFAULT NULL,
   `NACIONALITY` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `NICKNAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
   UNIQUE KEY `NICKNAME` (`NICKNAME`)
@@ -323,7 +328,7 @@ CREATE TABLE `turista` (
 
 LOCK TABLES `turista` WRITE;
 /*!40000 ALTER TABLE `turista` DISABLE KEYS */;
-INSERT INTO `turista` VALUES (1,'1927-02-23','mirtha.legrand.ok@hotmail.com.ar','Martínez','Argentina','Rosa María','lachiqui'),(2,'1926-04-21','isabelita@thecrown.co.uk','Windsor ','Reino Unido','Elizabeth','isabelita'),(3,'1937-12-31','anibal@fing.edu.uy ','Lecter ','Lituania','Anibal ','anibal '),(4,'1990-04-15','e.waston@gmail.com','Waston','Reino Unido','Emma','waston'),(5,'1971-07-30','suavemente@hotmail.com','Lacio','Estados Unidos de América','Elvis','elelvis'),(6,'2004-02-19','eleven11@gmail.com','Once','España','Eleven','eleven11'),(7,'1999-05-01','bobesponja@nickelodeon.com','Esponja','Japón','Bob','bobesponja'),(8,'1976-04-11','eltony@manya.org.uy','Pacheco','Uruguay','Antonio','tony'),(9,'1976-03-17','chino@trico.org.uy','Recoba','Uruguay','Alvaro','chino'),(10,'1922-02-07','johann.sebastian@gmail.com','Mastropiero','Austria','Johann Sebastian','mastropiero');
+INSERT INTO `turista` VALUES (1,'1927-02-23','mirtha.legrand.ok@hotmail.com.ar','tinyurl.com/2e3s66tw','Martínez','Argentina','Rosa María','lachiqui','$2a$10$iW/cH.zYyl0.4weN8hrvzu1OIYzgIF8S0JPuw/03Z2m8RiOfLYzte'),(2,'1926-04-21','isabelita@thecrown.co.uk','tinyurl.com/ycy8mbrn','Windsor ','Reino Unido','Elizabeth','isabelita','$2a$10$s2GeW2iItIKM4UTsQq2hxexflu.dlIf4.2tNB62CjsCKEoUsIeIvS'),(3,'1937-12-31','anibal@fing.edu.uy','tinyurl.com/y2u3tybh','Lecter','Lituania','Anibal ','anibal','$2a$10$BJY6lprbg/0/0e/OSFM7tOh6WIM.1lT2Qns.4nu61ivO8aMY1cplC'),(4,'1990-04-15','e.waston@gmail.com','tinyurl.com/2p9ed8et','Waston','Reino Unido','Emma','waston','$2a$10$DFqTm1v0HeFNpp1krcTiYOwlo09q1IS1mNU56BmEHiXh8i/0ETNDC'),(5,'1971-07-30','suavemente@hotmail.com','tinyurl.com/mtwppxxz','Lacio','Estados Unidos de América','Elvis','elelvis','$2a$10$DOcO6NjJjP9YPFDnZ7.7PuybUOttK1mnvPutzxZMoXI61g8MCansq'),(6,'2004-02-19','eleven11@gmail.com','tinyurl.com/3ztpasya','Once','España','Eleven','eleven11','$2a$10$RVNEfiiwHBBe0yplqjho1.IxMjrjX3pDljNdRGyaY5DJv8eRxIpfq'),(7,'1999-05-01','bobesponja@nickelodeon.com','tinyurl.com/43zymcch','Esponja','Japón','Bob','bobesponja','$2a$10$qZmRTRPDgIYY3jclfFtKyuNNIWrugN1cbax5XLIYM6zkMy2WHGTX2'),(8,'1976-04-11','eltony@manya.org.uy','tinyurl.com/mr3a38w4','Pacheco','Uruguay','Antonio','tony','$2a$10$dqTh/eqBEVHOFEwBOBfYBOk0rqY7wUuilp81/JF4pCy25InKJl6Xa'),(9,'1976-03-17','chino@trico.org.uy','tinyurl.com/2b556k7t','Recoba','Uruguay','Alvaro','chino','$2a$10$wjEm9SfVIZF.fAbxV.DkaOVtQ1u6ZGlzVs7rA3xN0O85JXTQU7Uei'),(10,'1922-02-07','johann.sebastian@gmail.com','tinyurl.com/3mbeyawm','Mastropiero','Austria','Johann Sebastian','mastropiero','$2a$10$bZlKWARbmTqdd6DavGkTCeLgJyQKyfWHuXoA/H9KJznSpiT7Yfmf6');
 /*!40000 ALTER TABLE `turista` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -336,4 +341,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-03 12:14:24
+-- Dump completed on 2023-10-03 20:08:53
