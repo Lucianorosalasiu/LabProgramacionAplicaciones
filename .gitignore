@@ -7,9 +7,6 @@
 #BlueJ files
 *.ctxt
 
-#Ignorar imagenes
-/sestacion-de-trabajo/src/main/resources/img/
-
 #Settings
 /.settings/
 *.cfg.xml
@@ -20,8 +17,8 @@
 /servidor-central/mtj.tmp/
 
 # Package Files
-#.jar
-#.war
+*.jar
+*.war
 *.nar
 *.ear
 *.zip

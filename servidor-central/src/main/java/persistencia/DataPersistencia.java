@@ -28,7 +28,6 @@ import persistencia.entidades.EPaqueteActividadTuristica;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
 import persistencia.entidades.ETurista;
-import persistencia.entidades.EUsuario;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -263,36 +262,6 @@ public class DataPersistencia implements IDataPersistencia {
             }
             throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el turista");
         } finally {
-            em.close();
-        }
-    }
-    
-    @Override
-    public String obtenerHashTurista(Long id){
-        EntityManager em = emf.createEntityManager();
-        String hash = null;
-        try {
-            String consulta = "SELECT e.password FROM ETurista e WHERE e.id = :id";
-            hash = em.createQuery(consulta, String.class).setParameter("id", id).getSingleResult();
-            return hash;
-        } catch (Exception e) {
-            return hash;
-        }finally{
-            em.close();
-        }
-    }
-    
-    @Override
-    public String obtenerHashProveedor(Long id){
-        EntityManager em = emf.createEntityManager();
-        String hash = null;
-        try {
-            String consulta = "SELECT e.password FROM EProveedor e WHERE e.id = :id";
-            hash = em.createQuery(consulta, String.class).setParameter("id", id).getSingleResult();
-            return hash;
-        } catch (Exception e) {
-            return hash;
-        }finally{
             em.close();
         }
     }

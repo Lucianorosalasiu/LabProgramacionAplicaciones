@@ -29,8 +29,6 @@ public interface IDataPersistencia {
     void existeUsuario(String email, String nickname) throws MyException;
     void altaProveedor(Proveedor objProveedor) throws MyException;
     void altaTurista(Turista objTurista) throws MyException;
-    String obtenerHashTurista(Long id);
-    String obtenerHashProveedor(Long id);
     
     List<DTTurista> obtenerTuristas();
     ETurista buscarTuristaPorNickname(String nickname) throws MyException;

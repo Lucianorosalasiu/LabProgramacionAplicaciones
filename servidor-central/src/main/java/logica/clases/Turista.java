@@ -17,7 +17,19 @@ import lombok.Setter;
 @Getter
 public class Turista extends Usuario{
     private String nacionality;
-
+    
+    public Turista(
+            String nickname,
+            String name,
+            String lastName, 
+            String email, 
+            Date birthDate,
+            String nacionality
+    ) {
+        super(nickname, name, lastName, email, birthDate);
+        this.nacionality = nacionality; 
+    }
+    
     public Turista(
             String nickname,
             String name,

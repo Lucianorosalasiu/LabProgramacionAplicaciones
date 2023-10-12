@@ -17,7 +17,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTProveedor extends DTUsuario {
-
     private String description;
     private String websiteURL;
 
@@ -25,6 +24,20 @@ public class DTProveedor extends DTUsuario {
         super();
     }
 
+    public DTProveedor(
+            String nickname, 
+            String name, 
+            String lastName, 
+            String email, 
+            Date birthDate, 
+            String description,
+            String websiteURL
+    ) {
+        super(nickname, name, lastName, email, birthDate);
+        this.description = description;
+        this.websiteURL = websiteURL;
+    }
+    
     public DTProveedor(
             String nickname, 
             String name, 

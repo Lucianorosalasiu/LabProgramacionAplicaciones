@@ -27,7 +27,7 @@
                     <button type="button" class="btn btn-outline-danger" onclick="logout()">Cerrar sesión</button>
                     <script>
                         function logout (){
-                            window.location.href = "/turismouy/logout";
+                            window.location.href = "/logout";
                         }
                     </script>
                 </div>
@@ -37,7 +37,7 @@
                     <button type="button" class="btn btn-outline-success" onclick="toLogin()">Iniciar sesión</button>
                     <script>
                         function toLogin (){
-                            window.location.href = "/turismouy/login";
+                            window.location.href = "/login";
                         }
                     </script>
                 </div>
@@ -48,7 +48,7 @@
             <button type="button" class="flex-grow-1 btn btn-outline-primary rounded-0" onclick="toHome()">Inicio</button>
             <script>
                 function toHome(){
-                    window.location.href = "/turismouy/home";
+                    window.location.href = "/home";
                 }
             </script>
             
@@ -57,7 +57,7 @@
                     Usuarios
                 </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/turismouy/altausuario">Alta usuario</a></li>
+                        <li><a class="dropdown-item" href="/altausuario">Alta usuario</a></li>
                         <li><a class="dropdown-item" href="#">Consulta usuarios</a></li>
                         <li><a class="dropdown-item" href="#">Modificar datos de usuario</a></li>
                     </ul>
@@ -68,7 +68,7 @@
                     Actividades turísticas
                 </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/turismouy/altaactividad">Alta de actividad</a></li>
+                        <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
                         <li><a class="dropdown-item" href="#">Consulta actividades</a></li>
                     </ul>
             </div>
@@ -78,7 +78,7 @@
                     Salidas turísticas
                 </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/turismouy/altasalida">Alta de salida</a></li>
+                        <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
                         <li><a class="dropdown-item" href="#">Consulta de salida</a></li>
                         <li><a class="dropdown-item" href="#">Inscripción a salida</a></li>
                     </ul>

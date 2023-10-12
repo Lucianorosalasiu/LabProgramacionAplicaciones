@@ -18,7 +18,7 @@
     
    <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1">
-            <form method="post" action="/turismouy/inscripcion" id="inscripcionForm">
+            <form method="post" action="/inscripcion" id="inscripcionForm">
                 <div class="m-3">
                     <select name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>

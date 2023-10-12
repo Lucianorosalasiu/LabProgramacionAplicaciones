@@ -28,11 +28,7 @@ public interface  IControlador {
     List<DTUsuario> obtenerUsuarios();
     DTUsuario obtenerUsuario(String nickname);
     DTUsuario obtenerUsuarioAlternativo(String nickname);
-    void actualizarUsuario(DTUsuario usuario) throws MyException;
-    String obtenerHashTurista(Long id);
-    String obtenerHashProveedor(Long id);
-    String obtenerHash(Long id);
-    
+    void actualizarUsuario(DTUsuario usuario) throws MyException;    
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
     List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor);
