@@ -4,12 +4,21 @@
  */
 package controllers.actividades;
 
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+
+import dataTypes.DTActividadTuristica;
+import dataTypes.DTCategoria;
+import java.util.Arrays;
+import java.util.LinkedList;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -28,6 +37,28 @@ public class AltaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        
+        String departamento = request.getParameter("departamento");
+        List<DTActividadTuristica> actividades = new LinkedList<>();
+        
+        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("categorias", controlador.obtenerCategorias());
+        String infoStr = "depto: " + departamento + "| nombre: " + request.getParameter("nombre") +
+                "| descr: " + request.getParameter("descripcion") + "| duracion: " + request.getParameter("duracion") +
+                "| costo: " + request.getParameter("costo") + "| ciudad: " + request.getParameter("ciudad") +
+                "| categorias: ";
+        
+        if(request.getParameterValues("categoria") != null){
+            List<String> categorias = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
+        for(String c : categorias){
+            infoStr += c;
+        }
+        }
+        
+        
+        request.setAttribute("info", infoStr);
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);
     }
