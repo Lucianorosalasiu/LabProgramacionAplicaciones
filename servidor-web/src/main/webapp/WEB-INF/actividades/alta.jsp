@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <label>Categorias<span class="text-info"> (Ctrl + Click izquierdo selección multiple).</span></label>
                     <select name="categoria" class="form-select" multiple>
-                    <%for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){%> 
+                        <%for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){%> 
                     
                     <option value="<%=c.getId()%>"><%=c.getNombre()%></option>
                     

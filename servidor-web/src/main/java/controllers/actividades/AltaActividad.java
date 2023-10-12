@@ -39,24 +39,36 @@ public class AltaActividad extends HttpServlet {
             throws ServletException, IOException {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
+        String infoStr = "campos vacios";
         
-        String departamento = request.getParameter("departamento");
-        List<DTActividadTuristica> actividades = new LinkedList<>();
+        if(validateParameters(request)){
+        
+            String departamento = request.getParameter("departamento");
+            List<DTActividadTuristica> actividades = new LinkedList<>();
+        
+            infoStr = "depto: " + departamento + "| nombre: " + request.getParameter("nombre") +
+                    "| descr: " + request.getParameter("descripcion") + "| duracion: " + request.getParameter("duracion") +
+                    "| costo: " + request.getParameter("costo") + "| ciudad: " + request.getParameter("ciudad") +
+                    "| categorias: ";
+        
+            if(request.getParameterValues("categoria") != null){
+                List<String> categorias = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
+                for(String c : categorias){
+                    infoStr += c;
+                }
+            }
+            
+            //falta
+        //id departamento
+        //id proveedor
+        //lista de id categorias
+        //controlador.altaActividadTuristica();
+            
+        }
+        
         
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
-        String infoStr = "depto: " + departamento + "| nombre: " + request.getParameter("nombre") +
-                "| descr: " + request.getParameter("descripcion") + "| duracion: " + request.getParameter("duracion") +
-                "| costo: " + request.getParameter("costo") + "| ciudad: " + request.getParameter("ciudad") +
-                "| categorias: ";
-        
-        if(request.getParameterValues("categoria") != null){
-            List<String> categorias = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
-        for(String c : categorias){
-            infoStr += c;
-        }
-        }
-        
         
         request.setAttribute("info", infoStr);
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
@@ -90,6 +102,21 @@ public class AltaActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    private boolean validateParameters(HttpServletRequest request){
+        return(request.getParameter("departamento") != null &&
+                request.getParameter("nombre") != null &&
+                !request.getParameter("nombre").equals("") &&
+                request.getParameter("descripcion") != null &&
+                !request.getParameter("descripcion").equals("") &&
+                request.getParameter("duracion") != null &&
+                !request.getParameter("duracion").equals("") &&
+                request.getParameter("costo") != null &&
+                !request.getParameter("costo").equals("") &&
+                request.getParameter("ciudad") != null &&
+                !request.getParameter("ciudad").equals("") &&
+                request.getParameter("categoria") != null);
     }
 
     /**
