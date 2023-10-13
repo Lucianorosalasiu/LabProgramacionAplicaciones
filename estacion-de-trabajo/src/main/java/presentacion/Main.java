@@ -22,7 +22,6 @@ import logica.interfaces.IControlador;
 import com.toedter.calendar.JDateChooser;
 import dataTypes.DTCategoria;
 import exceptions.NonEqualPasswordException;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 
 import javax.swing.JButton;
@@ -56,11 +55,7 @@ import java.util.List;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -4411,7 +4406,7 @@ public class Main extends javax.swing.JFrame {
             String password1 = new String(passwordChars1);
             char[] passwordChars2 = JCU1Password2Field.getPassword();
             String password2 = new String(passwordChars2);
-            String imagePath = null;
+            String imagePath = "";
 
             if(!password1.equals(password2)){
                 throw new NonEqualPasswordException("Las contraseñas ingresadas no coinciden");
@@ -5782,7 +5777,10 @@ public class Main extends javax.swing.JFrame {
                         || JCU1LastNameTextField.getText().isEmpty()
                         || JCU1EmailTextField.getText().isEmpty()
                         || JCU1DateChooserBirthDate.getDate() == null
-                        || jCU1TextAreaDescription.getText().isEmpty()) {
+                        || JCU1Password1Field.getPassword().length == 0
+                        || JCU1Password2Field.getPassword().length == 0
+                        || jCU1TextAreaDescription.getText().isEmpty()
+                ) {
                     return true;
                 }
                 break;
@@ -5794,7 +5792,10 @@ public class Main extends javax.swing.JFrame {
                         || JCU1LastNameTextField.getText().isEmpty()
                         || JCU1EmailTextField.getText().isEmpty()
                         || JCU1DateChooserBirthDate.getDate() == null
-                        || selectedCountry == "Seleccionar País") {
+                        || JCU1Password1Field.getPassword().length == 0
+                        || JCU1Password2Field.getPassword().length == 0
+                        || selectedCountry == "Seleccionar País"
+                ) {
                     return true;
                 }
                 break;
