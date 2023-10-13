@@ -4,6 +4,96 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 /* 
     Created on : 5 oct. 2023, 11:56:24
-    Author     : progav
+    Author     : alexis
 */
 
+hr {
+  background-color: #212529;
+}
+
+.jumbotron {
+  margin-top: 30px;
+}
+
+.welcome {
+  height: 30px;
+  padding: 1px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.hidden-div {
+  display: none;
+}
+
+.medium-image {
+  width: 150px;
+  height: 150px;
+}
+
+#logo {
+  color: #ffc107;
+}
+
+#logo-title {
+  font-size: medium;
+}
+
+#label-insert-photo {
+  padding-top: 6%;
+}
+
+.align-left {
+  text-align: left;
+}
+
+/* ------------------------------ Tables styles ----------------------------- */
+table {
+  background-color: #f8f9fa;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 4px;
+}
+
+/*Selector que provee la opción de colorear una fila de por medio en una tabla*/
+tr:nth-child(even) {
+  /*El parámetro puede ser odd también*/
+  background-color: #aaaaaa;
+}
+
+table thead th {
+  color: #dddddd;
+  text-align: center;
+  border: solid 1px #dddddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+table tbody td {
+  text-align: center;
+  border: solid 1px #dddddd;
+  padding: 8px;
+}
+/* ---------------------------- End Tables styles --------------------------- */
+
+/*.error-legend {
+  background-color: #212529;
+  color: #dddddd;
+  padding: 3px 6px;
+  margin-bottom: 0px;
+}
+
+.error-fieldset {
+  border: solid 1px;
+}
+
+.error-msg{
+  margin-bottom: 0px;
+}
+*/

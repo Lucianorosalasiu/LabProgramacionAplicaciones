@@ -11,16 +11,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="/WEB-INF/templates/head.jsp"/>
-        <title>Usuarios</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>TurismoUy | Consulta Usuario</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <div id="listar" class="main">
             <% 
-                    List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
+                List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
 
-                    for(DTUsuario u: usuarios){
+                for(DTUsuario u: usuarios){
             %>
             <div class="usuario">
                 <!--<img src="/media/images/defecto.gif" alt="foto"/>-->

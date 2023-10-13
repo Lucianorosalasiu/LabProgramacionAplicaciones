@@ -9,20 +9,12 @@
         <servlet-class>controllers.Home</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Usuarios</servlet-name>
-        <servlet-class>controllers.Usuarios</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controllers.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>controllers.Logout</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AltaUsuario</servlet-name>
-        <servlet-class>controllers.usuarios.Alta</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AltaSalida</servlet-name>
@@ -44,13 +36,21 @@
         <servlet-name>AltaActividad</servlet-name>
         <servlet-class>controllers.actividades.AltaActividad</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AltaUsuario</servlet-name>
+        <servlet-class>controllers.usuarios.AltaUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConsultaUsuario</servlet-name>
+        <servlet-class>controllers.usuarios.ConsultaUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificacionUsuario</servlet-name>
+        <servlet-class>controllers.usuarios.ModificacionUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Usuarios</servlet-name>
-        <url-pattern>/usuarios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -59,10 +59,6 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AltaUsuario</servlet-name>
-        <url-pattern>/altausuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AltaSalida</servlet-name>
@@ -83,6 +79,18 @@
     <servlet-mapping>
         <servlet-name>AltaActividad</servlet-name>
         <url-pattern>/altaactividad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaUsuario</servlet-name>
+        <url-pattern>/altausuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultaUsuario</servlet-name>
+        <url-pattern>/consultausuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificacionUsuario</servlet-name>
+        <url-pattern>/modificacionusuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
