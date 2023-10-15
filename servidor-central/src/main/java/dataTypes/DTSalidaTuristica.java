@@ -24,6 +24,7 @@ public class DTSalidaTuristica {
     private String lugar;
     private Date fechaAlta;
     private DTActividadTuristica dtActividadTuristica;
+    private byte[] imagen;
     
     public DTSalidaTuristica(String nombre, int cantidadMaxTuristas, Date fechaSalida, String lugar, Date fechaAlta) {
         this.nombre = nombre;
@@ -31,6 +32,15 @@ public class DTSalidaTuristica {
         this.fechaSalida = fechaSalida;
         this.lugar = lugar;
         this.fechaAlta = fechaAlta;
+    }
+    
+    public DTSalidaTuristica(String nombre, int cantidadMaxTuristas, Date fechaSalida, String lugar, Date fechaAlta, byte[] imagen) {
+        this.nombre = nombre;
+        this.cantidadMaxTuristas = cantidadMaxTuristas;
+        this.fechaSalida = fechaSalida;
+        this.lugar = lugar;
+        this.fechaAlta = fechaAlta;
+        this.imagen = imagen;
     }
     
     public DTSalidaTuristica(){};

@@ -30,6 +30,7 @@ public class ESalidaTuristica extends EBase {
     private Date fechaSalida;
     private String lugar;
     private Date fechaAlta;
+    private byte[] imagen;
     
     @ManyToOne
     private EActividadTuristica eActividadTuristica;

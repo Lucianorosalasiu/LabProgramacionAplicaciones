@@ -81,6 +81,6 @@ public interface  IControlador {
     
     /* CU Alta Salida Turistica*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
-    void altaSalidaTuristicaConImagen(DTSalidaTuristica dtSalidaTuristica, String nombreActividad, String imagen) throws MyException;
+    
 }
 

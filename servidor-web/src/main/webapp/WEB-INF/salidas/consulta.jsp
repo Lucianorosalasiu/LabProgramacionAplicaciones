@@ -133,12 +133,20 @@
                     <h4>
                         <%= selectedSalida2.getNombre() %>
                     </h4>
-                    <div class="container">
+                    <div class="container w-100">
                         <div class="row">
                             <div class="col-sm-3">
-                                IMAGEN
+                            <% 
+                                String base64imagen = (String) request.getAttribute("imagenSalida");
+                                if (!base64imagen.isEmpty()) {
+                            %>
+                                <img width="250" height="200" src="data:image/jpeg;base64,<%= base64imagen %>">
+                                
+                            <% 
+                                }
+                            %>
                             </div>
-                            <div class="col-sm-9">
+                            <div <% if (!base64imagen.isEmpty()) { %> class="col-sm-9" <% } %>>
                                 <fieldset disabled>
                                     <div class="row">
                                         <div class="col m-3">

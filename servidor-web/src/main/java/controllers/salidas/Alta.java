@@ -9,24 +9,32 @@ import dataTypes.DTSalidaTuristica;
 import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import static java.util.Objects.isNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import model.TipoUsuario;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author diego
  */
 
+
+@MultipartConfig
 public class Alta extends HttpServlet {
 
     public Alta() {
@@ -35,6 +43,12 @@ public class Alta extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
+        String userType = (String) request.getSession().getAttribute("sessionType");
+        
+        if (isNull(userType) || !userType.equals("PROVEEDOR")) {
+            response.sendError(403); 
+            return;
+        }
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
@@ -44,7 +58,7 @@ public class Alta extends HttpServlet {
         
         if (departamento != null) {
             actividades = controlador.obtenerActividadesTuristicas(
-                departamento, 11L
+                departamento, (Long) request.getSession().getAttribute("id")
             );
         }
         
@@ -52,19 +66,29 @@ public class Alta extends HttpServlet {
         
         if (validateParameters(request)) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-
+            
+            Part imagePart = request.getPart("imagen");
+            byte[] newImage = null;
+            if (imagePart != null) {
+                InputStream imageFile = imagePart.getInputStream();
+                newImage = IOUtils.toByteArray(imageFile);
+                
+                IOUtils.closeQuietly(imageFile);
+            }
+            
             DTSalidaTuristica dtSalidaTuristica = new DTSalidaTuristica(
                                             request.getParameter("nombre"),
                                             Integer.parseInt(request.getParameter("cantidadMaxTuristas")),
                                             dateFormat.parse(request.getParameter("fechaSalida")),
                                             request.getParameter("lugar"),
-                                            new Date()
+                                            new Date(),
+                                            newImage
                                         );
             try {
-                controlador.altaSalidaTuristicaConImagen(
+                controlador.altaSalidaTuristica(
                                         dtSalidaTuristica, 
-                                        request.getParameter("actividad"),
-                                        "");
+                                        request.getParameter("actividad")
+                );
                 
                 request.setAttribute("successMessage", "Salida dada de Alta!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
@@ -84,21 +108,6 @@ public class Alta extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/salidas/alta.jsp").
                 forward(request, response); 
             
-        
-        /*
-        Logica una vez se implemente el login
-        
-        
-        TipoUsuario tipoUsuario = (TipoUsuario) request.getSession().getAttribute("tipo");
-        
-        if (tipoUsuario == TipoUsuario.PROVEEDOR) {
-
-        
-        } else {
-            response.sendError(403); 
-            request.getRequestDispatcher("/WEB-INF/errorPages/403.jsp")
-                    .include(request, response);
-        }*/
     }
     
     private boolean validateParameters(HttpServletRequest request){

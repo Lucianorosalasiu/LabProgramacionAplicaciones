@@ -728,6 +728,7 @@ public class DataPersistencia implements IDataPersistencia {
                         dtSalidaTuristica.getFechaSalida(),
                         dtSalidaTuristica.getLugar(),
                         dtSalidaTuristica.getFechaAlta(),
+                        dtSalidaTuristica.getImagen(),
                         eActividadTuristica
                 );
 
@@ -735,6 +736,7 @@ public class DataPersistencia implements IDataPersistencia {
                 em.getTransaction().commit();
             }
         }catch(Exception e){
+            System.out.println(e.getMessage());
             em.getTransaction().rollback();
             throw new MyException("ERROR! Algo salio durante el alta de la salida turistica. ");
         }finally{
@@ -871,7 +873,8 @@ public class DataPersistencia implements IDataPersistencia {
                             eSalidaTuristica.getCantidadMaxTuristas(),
                             eSalidaTuristica.getFechaSalida(),
                             eSalidaTuristica.getLugar(),
-                            eSalidaTuristica.getFechaAlta()
+                            eSalidaTuristica.getFechaAlta(),
+                            eSalidaTuristica.getImagen()
                         );
         }catch(Exception e){
             return new DTSalidaTuristica();

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -42,6 +43,7 @@ public class Consulta extends HttpServlet {
         List<DTActividadTuristica> actividades = new ArrayList();
         List<DTSalidaTuristica> salidas = new ArrayList();
         DTSalidaTuristica selectedSalida = null;
+        String imagen = null;
         
         if (departamento != null) {
             actividades = controlador.obtenerActividadesTuristicas(departamento);
@@ -51,6 +53,7 @@ public class Consulta extends HttpServlet {
                 
                 if (salida != null) {
                     selectedSalida = controlador.obtenerSalidaTuristica(salida);
+                    imagen = Base64.getEncoder().encodeToString(selectedSalida.getImagen());
                 }
             }
         }
@@ -60,6 +63,8 @@ public class Consulta extends HttpServlet {
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("salidas", salidas);
         request.setAttribute("selectedSalida", selectedSalida);
+        request.setAttribute("imagenSalida", imagen);
+        
         request.getRequestDispatcher("/WEB-INF/salidas/consulta.jsp").
                 forward(request, response);
     }

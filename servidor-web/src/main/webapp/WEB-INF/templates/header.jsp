@@ -71,8 +71,8 @@
                 </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
-                        <li><a class="dropdown-item" href="#">Consulta de salida</a></li>
-                        <li><a class="dropdown-item" href="#">Inscripción a salida</a></li>
+                        <li><a class="dropdown-item" href="/consultasalida">Consulta de salida</a></li>
+                        <li><a class="dropdown-item" href="/inscripcion">Inscripción a salida</a></li>
                     </ul>
             </div>
             
