@@ -7,24 +7,31 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTUsuario"%>
 <%@page import="java.util.List"%> 
-<%--<%@page errorPage="/WEB-INF/errorPages/500.jsp" %>--%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>
+        <link rel="stylesheet" href="assets/css/styles.css"/>
         <title>TurismoUy | Consulta Usuario</title>
     </head>
-    <body>
+    <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        <div id="listar" class="main">
+        
+        <div id="listar" class="container py-5 min-vh-70 main ">
             <% 
                 List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
 
                 for(DTUsuario u: usuarios){
             %>
             <div class="usuario">
-                <!--<img src="/media/images/defecto.gif" alt="foto"/>-->
+                <%
+                    String urlFoto = u.getImagePath() == null || u.getImagePath().isEmpty()
+                        ? "assets/img/defecto.jpg"
+                        : (u.getImagePath().contains("tinyurl") 
+                            ? "https://" + u.getImagePath() 
+                            : u.getImagePath());
+                %>
+                <img src="<%= urlFoto %>" class="rounded-circle" alt="foto">
 
                 <div class="derecha">
                     <a class="nombre" href="?usuario=<%= u.getEmail()  %>">
@@ -36,9 +43,8 @@
                     </span>
                 </div>
             </div>		
-            <% } %>
+                <% } %>
         </div>
-
 
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>

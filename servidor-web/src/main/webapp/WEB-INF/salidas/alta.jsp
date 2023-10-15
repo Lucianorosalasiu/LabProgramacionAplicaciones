@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Alta Salida</title>
     </head>
     
@@ -122,7 +122,7 @@
                 </div>                
             </form> 
         </div>
+            
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>        
     </body>
-    
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </html>

@@ -1,25 +1,30 @@
 <%-- 
     Document   : 403
     Created on : 5 oct. 2023, 12:48:33
-    Author     : progav
+    Author     : todos
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Turismouy | Error</title>
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
+        <link rel="stylesheet" href="assets/css/styles.css"/>
+        <title>Turismouy | Error 403</title>
     </head>
-    
+
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
-    
-    <body class="h-100 d-flex flex-column">
-        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <h1>No cuenta con los permisos necesarios para acceder aquí</h1>
+
+    <body id="error_page" class="h-100 d-flex flex-column">
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1 titulo_error">
+            403: Acceso no autorizado     
         </div>
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+            <p>
+                No cuentas con los permisos necesarios para acceder aquí. 
+                Si deseas, puedes <a href="/home">volver</a> al inicio.
+            </p>
+        </div>
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
-    
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
-    
 </html>

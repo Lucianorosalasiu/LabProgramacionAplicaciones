@@ -11,13 +11,8 @@ hr {
   background-color: #212529;
 }
 
-.jumbotron {
-  margin-top: 30px;
-}
-
-.welcome {
-  height: 30px;
-  padding: 1px;
+#label-insert-photo {
+  padding-top: 6%;
 }
 
 .text-center {
@@ -28,29 +23,17 @@ hr {
   float: right;
 }
 
-.hidden-div {
+.align-left {
+  text-align: left;
+}
+
+.hidden {
   display: none;
 }
 
 .medium-image {
   width: 150px;
   height: 150px;
-}
-
-#logo {
-  color: #ffc107;
-}
-
-#logo-title {
-  font-size: medium;
-}
-
-#label-insert-photo {
-  padding-top: 6%;
-}
-
-.align-left {
-  text-align: left;
 }
 
 /* ------------------------------ Tables styles ----------------------------- */
@@ -82,18 +65,74 @@ table tbody td {
 }
 /* ---------------------------- End Tables styles --------------------------- */
 
-/*.error-legend {
-  background-color: #212529;
-  color: #dddddd;
-  padding: 3px 6px;
-  margin-bottom: 0px;
+/* Perfil */
+
+#perfil_izquierda {
+    float:left;
+    border-right: 2px solid #DDDDDD;
+    padding: 25px;
+    margin: 25px;
 }
 
-.error-fieldset {
-  border: solid 1px;
+#perfil_derecha {
+    padding: 25px;
+    margin: 25px;
 }
 
-.error-msg{
-  margin-bottom: 0px;
+/* Pagina de error */
+
+.error {
+    background-color:#FFEBE8;
+    border: 2px solid #DD3C10;
+    padding: 6px;
+    margin-bottom: 15px;
 }
-*/
+
+#error_page {
+    color: black;
+}
+
+#error_page .titulo_error {
+    font-size: 4em;
+    margin-left: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#error_page .main pre {
+    color: #000000;
+}
+
+#error_page .main {
+    margin-bottom: 30px;
+}
+
+#error_page p {
+    text-align: center;
+}
+
+/** Listar **/
+
+#listar .usuario {
+    border-bottom: 1px solid #CCCCCC;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    width: 50%;
+}
+
+#listar .usuario:last-child {
+    border-bottom: none;
+}
+
+#listar .usuario img {
+    width: 60px;
+    height: 60px;
+}
+
+#listar .usuario .email {
+    display: block;
+    font-size: 0.8em;
+}
+#listar .usuario .derecha {
+    display: inline-block;
+}

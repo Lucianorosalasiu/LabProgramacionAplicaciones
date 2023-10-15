@@ -326,9 +326,9 @@ CREATE TABLE `salidaTuristica` (
   `CANTIDADMAXTURISTAS` int(11) DEFAULT NULL,
   `FECHAALTA` datetime DEFAULT NULL,
   `FECHASALIDA` datetime DEFAULT NULL,
+  `IMAGEN` longblob DEFAULT NULL,
   `LUGAR` varchar(255) DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
-  `IMAGEN` longblob DEFAULT NULL,
   `EACTIVIDADTURISTICA_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NOMBRE` (`NOMBRE`),
@@ -343,7 +343,7 @@ CREATE TABLE `salidaTuristica` (
 
 LOCK TABLES `salidaTuristica` WRITE;
 /*!40000 ALTER TABLE `salidaTuristica` DISABLE KEYS */;
-INSERT INTO `salidaTuristica` VALUES (101,20,'2022-07-21 10:59:00','2022-08-20 17:00:00','Sociedad Agropecuaria de Rocha','Degusta Agosto',70),(102,20,'2022-07-22 11:03:00','2022-03-09 17:00:00','Sociedad Agropecuaria de Rocha','Degusta Setiembre',70),(103,30,'2022-07-23 11:05:00','2022-09-04 18:00:00','Club Deportivo Union','Teatro con Sabores 1',71),(104,30,'2022-07-23 11:10:00','2022-09-11 18:00:00','Club Deportivo Union','Teatro con Sabores 2',71),(105,5,'2022-08-05 11:11:00','2022-09-11 10:00:00','Encuentro en la base del Faro','Tour Colonia del Sacramento 11-09',73),(106,5,'2022-08-05 11:14:00','2022-09-18 10:00:00','Encuentro en la base del Faro','Tour Colonia del Sacramento 18-09',73),(107,5,'2022-08-04 11:16:00','2023-09-18 12:00:00','Restaurante de la Plaza de Toros','Almuerzo 1',74),(108,5,'2022-08-04 11:18:00','2022-09-25 12:00:00','Restaurante de la Plaza de Toros','Almuerzo 2 ',74),(109,4,'2022-08-15 11:21:00','2022-09-10 12:00:00','Posada Del Lunarejo','Almuerzo 3 ',75),(110,4,'2022-08-15 11:22:00','2022-09-11 12:00:00','Posada Del Lunarejo','Almuerzo 4',75),(111,4,'2022-08-15 11:24:00','2022-09-10 16:00:00','Posada del Lunarejo','Cabalgata 1',76),(112,4,'2023-08-15 11:25:00','2022-09-11 16:00:00','Posada del Lunarejo','Cabalgata 2 ',76);
+INSERT INTO `salidaTuristica` VALUES (101,20,'2022-07-21 10:59:00','2022-08-20 17:00:00','NULL', 'Sociedad Agropecuaria de Rocha','Degusta Agosto',70),(102,20,'2022-07-22 11:03:00','2022-03-09 17:00:00','NULL','Sociedad Agropecuaria de Rocha','Degusta Setiembre',70),(103,30,'2022-07-23 11:05:00','2022-09-04 18:00:00','NULL','Club Deportivo Union','Teatro con Sabores 1',71),(104,30,'2022-07-23 11:10:00','2022-09-11 18:00:00','NULL','Club Deportivo Union','Teatro con Sabores 2',71),(105,5,'2022-08-05 11:11:00','2022-09-11 10:00:00','NULL','Encuentro en la base del Faro','Tour Colonia del Sacramento 11-09',73),(106,5,'2022-08-05 11:14:00','2022-09-18 10:00:00','NULL','Encuentro en la base del Faro','Tour Colonia del Sacramento 18-09',73),(107,5,'2022-08-04 11:16:00','2023-09-18 12:00:00','NULL','Restaurante de la Plaza de Toros','Almuerzo 1',74),(108,5,'2022-08-04 11:18:00','2022-09-25 12:00:00','NULL','Restaurante de la Plaza de Toros','Almuerzo 2 ',74),(109,4,'2022-08-15 11:21:00','2022-09-10 12:00:00','NULL','Posada Del Lunarejo','Almuerzo 3 ',75),(110,4,'2022-08-15 11:22:00','2022-09-11 12:00:00','NULL','Posada Del Lunarejo','Almuerzo 4',75),(111,4,'2022-08-15 11:24:00','2022-09-10 16:00:00','NULL','Posada del Lunarejo','Cabalgata 1',76),(112,4,'2023-08-15 11:25:00','2022-09-11 16:00:00','NULL','Posada del Lunarejo','Cabalgata 2 ',76);
 /*!40000 ALTER TABLE `salidaTuristica` ENABLE KEYS */;
 UNLOCK TABLES;
 

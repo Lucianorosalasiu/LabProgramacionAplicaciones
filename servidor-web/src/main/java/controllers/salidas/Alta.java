@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
-import model.TipoUsuario;
 import org.apache.commons.io.IOUtils;
 
 /**
