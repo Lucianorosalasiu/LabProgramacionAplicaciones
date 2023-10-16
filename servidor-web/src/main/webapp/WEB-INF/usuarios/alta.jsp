@@ -1,7 +1,7 @@
 <%-- 
     Document   : altausuario
     Created on : Oct 10, 2023, 2:24:31 PM
-    Author     : ignfer
+    Author     : alexis
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,12 +18,16 @@
 
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        
         <main>
             <!--<div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">-->
-            <div class="container py-5 min-vh-70">
+            <div class="container py-5 min-vh-70 flex-grow-1">
                 <h3>Alta de usuario</h3>
                 <hr />
+                <% if (request.getAttribute("errorMessage") != null) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= request.getAttribute("errorMessage") %>
+                    </div>
+                 <% } %>
                 <form 
                     id="signup-form" 
                     action="/altausuario"
@@ -31,9 +35,94 @@
                     enctype="multipart/form-data"
                     class="row g-3 needs-validation" 
                     novalidate
-                >
-                    <!-- -------------------------- Ingreso del email -------------------------- -->
+                    >
+                    <!-- ------------------------ Ingreso del nickname ------------------------- -->
                     <div class="col-md-4">
+                        <label for="input-nickname" class="form-label">Nombre de usuario sin espacios</label>
+                        <input
+                            type="text"
+                            id="input-nickname"
+                            class="form-control"
+                            name="nickname"
+                            placeholder="johnDoe"
+                            <% if (request.getAttribute("nickname") != null) { %>
+                            value="<%= request.getParameter("nickname") %>"
+                            <% } %>
+                            required
+                            />
+                    </div>
+                    <!-- --------------------- Ingreso del nombre --------------------- -->
+                    <div class="col-md-4">
+                        <label for="input-name" class="form-label">
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            id="input-name"
+                            class="form-control"
+                            name="name"
+                            placeholder="John"
+                            <% if (request.getAttribute("name") != null) { %>
+                            value="<%= request.getParameter("name") %>"
+                            <% } %>
+                            required
+                            />
+                    </div>
+                    <!-- ----------------------- Ingreso del apellido ----------------------- -->
+                    <div class="col-md-4">
+                        <label for="input-lastname" class="form-label">Apellido</label>
+                        <input
+                            type="text"
+                            id="input-lastname"
+                            class="form-control"
+                            name="lastName"
+                            placeholder="Doe"
+                            <% if (request.getAttribute("lastName") != null) { %>
+                            value="<%= request.getParameter("lastName") %>"
+                            <% } %>
+                            required
+                            />
+                    </div>                  
+                    <!-- ---------------------- Ingreso de la contraseña ----------------------- -->
+                    <div class="col-md-4">
+                        <label for="input-password" class="form-label">Contraseña</label>
+                        <input
+                            type="password"
+                            id="input-password"
+                            class="form-control"
+                            name="password"
+                            placeholder="Ingrese una contraseña segura"
+                            required
+                            />
+                    </div>
+                    <!-- ---- Ingreso de la confirmación de contraseña ---- -->
+                    <div class="col-md-4">
+                        <label for="input-confirm-password" class="form-label">Confirmación de contraseña</label>
+                        <input
+                            type="password"
+                            id="input-confirm-password"
+                            class="form-control"
+                            name="confirmPassword"
+                            placeholder="Repite la contraseña previamente ingresada"
+                            required
+                            />
+                    </div>
+                    <!-- --------- Ingreso de la fecha de nacimiento ---------- -->
+                    <div class="col-md-4">
+                        <label for="input-birthdate" class="form-label">Fecha de nacimiento</label>
+                        <input
+                            type="date"
+                            id="input-birthdate"
+                            class="form-control"
+                            name="birthdate"
+                            <% if (request.getAttribute("birthdate") != null) { %>
+                            value="<%= request.getParameter("birthdate") %>"
+                            <% } %>
+                            required
+                            />
+                    </div>
+                    <!-- --------------- Ingreso del email --------------- -->
+                    <div class="col-md-6">
                         <label for="input-email" class="form-label">Email</label>
                         <div class="input-group">
                             <span class="input-group-text" id="inputGroupFusion">@</span>
@@ -44,85 +133,78 @@
                                 name="email"
                                 aria-describedby="inputGroupFusion"
                                 placeholder="john-doe@example.com"
+                                <% if (request.getAttribute("email") != null) { %>
+                                value="<%= request.getParameter("email") %>"
+                                <% } %>
                                 required
                                 />
                         </div>
                     </div>
-                    <!-- --------------------- Ingreso del nombre --------------------- -->
-                    <div class="col-md-4">
-                        <label for="input-full-name" class="form-label">
-                            Nombre
+                    <!-- -------------------- Selección del tipo de usuario --------------------- -->
+                    <div class='col-md-6'>
+                        <label for='select-user-type' class='form-label'>Tipo de usuario</label>
+                        <select
+                            id='select-user-type'
+                            class='form-control'
+                            name='userType'
+                            required
+                            >
+                            <option value=''>Selecciona el tipo de usuario</option>
+                            <option value='proveedor'>Proveedor/a</option>
+                            <option value='turista'>Turista</option>
+                        </select>
+                    </div>
+                    <!-- ----- Ingreso de la nacionalidad del turista ----- -->
+                    <div class="col-md-4" id="nacionality-div">
+                        <label for="input-nacionality" class="form-label">
+                            Nacionalidad
                         </label>
                         <input
                             type="text"
-                            id="input-full-name"
+                            id="input-nacionality"
                             class="form-control"
-                            name="fullName"
-                            placeholder="John Doe"
-                            required
-                        />
-                    </div>
-                    <!-- ------------------------- Ingreso de la edad -------------------------- -->
-                    <div class="col-md-4">
-                        <label for="input-age" class="form-label">Edad</label>
-                        <input
-                            type="number"
-                            id="input-age"
-                            class="form-control"
-                            name="age"
-                            placeholder="La edad debe ser mayor a 15"
-                            required
+                            name="nacionality"
+                            placeholder="Uruguay"
                             />
                     </div>
-                    <!-- ---------------------- Ingreso de la contraseña ----------------------- -->
-                    <div class="col-md-8">
-                        <label for="input-password" class="form-label">Contraseña</label>
-                        <input
-                            type="password"
-                            id="input-password"
-                            class="form-control"
-                            name="password"
-                            placeholder="Ingrese una contraseña alternando caractéres"
-                            required
-                            />
-                    </div>
-                    <!-- ------------------------ Ingreso del telefono ------------------------- -->
-                    <div class="col-md-4">
-                        <label for="input-telephone" class="form-label">Teléfono</label>
+                    <!-- ----- Ingreso del sitio web del proveedor ----- -->
+                    <div class="col-md-6" id="website-div">
+                        <label for="input-website" class="form-label">
+                            URL del Sitio Web (Opcional)
+                        </label>
                         <input
                             type="text"
-                            id="input-telephone"
+                            id="input-website"
                             class="form-control"
-                            name="phone"
-                            placeholder="+598123456789"
-                            required
+                            name="website"
+                            placeholder="https://example.com"
                             />
                     </div>
-                    <!-- ----------------------- Ingreso de la dirección ----------------------- -->
-                    <div class="col-md-12">
-                        <label for="input-address" class="form-label">Dirección</label>
-                        <input
-                            type="text"
-                            id="input-address"
-                            class="form-control"
-                            name="address"
-                            placeholder="Calle Juan Pérez N°10"
-                            required
-                            />
+                    <!-- ----- Ingreso de la descripción del proveedor ----- -->
+                    <div class='form-group' id="description-div">
+                        <label for='input-description' class='form-label'>Descripción</label>
+                        <textarea
+                            id='input-description'
+                            class='form-control'
+                            name='description'
+                            type='text'
+                            cols='30'
+                            rows='4'
+                            placeholder='Una breve descripción de mi persona'
+                            ></textarea>
                     </div>
+                    <hr />
                     <!-- -------------------- Ingreso de la foto de perfil --------------------- -->
                     <div class="col-md-7">
                         <label id="label-insert-photo" for="input-photo" class="form-label"
-                               >Foto</label
+                               >Foto (Opcional)</label
                         >
                         <br />
                         <input type="file" id="input-photo" name="photo" accept="image/*" />
                     </div>
                     <!-- ------------------ Vista previa de la foto de perfil ------------------ -->
                     <div class="col-md-5 text-center">
-                        <label for="image-preview" class="form-label"
-                               >Vista previa foto</label
-                        >
+                        <label>Vista previa foto</label>
                         <br />
                         <img
                             id="image-preview"
@@ -145,6 +227,9 @@
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 
         <!-- -------------------------- Inicio de scripts -------------------------- -->
-        <script src="assets/js/signupFormValidator.js"></script>
+        <!-- Validación de campos a nivel de front -->
+        <script src="assets/js/usuarios/signupFormValidator.js"></script>
+        <!-- Mostrar u ocultar campos según el tipo de usuario seleccionado -->
+        <script src="assets/js/usuarios/toggleFields.js"></script>
     </body>
 </html>

@@ -10,7 +10,7 @@
 <%@page import="dataTypes.DTProveedor"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
         <link rel="stylesheet" href="assets/css/styles.css"/>
@@ -18,18 +18,12 @@
     </head>
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
-
         <%
             DTUsuario usr = (DTUsuario) request.getAttribute("usuario"); 
-
-            if (usr instanceof DTTurista) {
-                DTTurista turista = (DTTurista) usr;
-
-            } else if (usr instanceof DTProveedor) {
-                DTProveedor proveedor = (DTProveedor) usr;
-            }
         %>
-        <div id="perfil" class ="main">
+        <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
+            <h3>Perfil de usuario</h3>
+            <hr />
             <div id="perfil_izquierda">
                 <%
                     String urlFoto = usr.getImagePath() == null || usr.getImagePath().isEmpty()

@@ -11,15 +11,18 @@
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
         <title>TurismoUy | Modificación Usuario</title>
     </head>
-    
-     
+
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        
-        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <h1>Vista de Modificación de Usuario</h1>
+        <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
+            <h3>Modificar datos de usuario</h3>
+            <hr />
+            <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+                <h1>Vista de Modificación de Usuario</h1>
+            </div>
         </div>
-        
+
+
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>   
 </html>

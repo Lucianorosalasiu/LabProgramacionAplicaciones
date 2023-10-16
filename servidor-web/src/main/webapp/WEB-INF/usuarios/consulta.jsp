@@ -8,7 +8,7 @@
 <%@page import="dataTypes.DTUsuario"%>
 <%@page import="java.util.List"%> 
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
         <link rel="stylesheet" href="assets/css/styles.css"/>
@@ -16,8 +16,10 @@
     </head>
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        
-        <div id="listar" class="container py-5 min-vh-70 main">
+
+        <div id="listar" class="container py-5 min-vh-70 flex-grow-1">
+            <h3>Consulta de usuario</h3>
+            <hr />
             <% 
                 List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
 
@@ -34,7 +36,7 @@
                 <img src="<%= urlFoto %>" class="rounded-circle" alt="foto">
 
                 <div class="derecha">
-                    <a class="nombre" href="?consultausuario=<%= u.getEmail()  %>">
+                    <a class="nombre" href="?usuario=<%= u.getEmail()  %>">
                         <%= u.getName() %>
                     </a>
 
@@ -43,9 +45,8 @@
                     </span>
                 </div>
             </div>		
-                <% } %>
+            <% } %>
         </div>
-
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
 </html>
