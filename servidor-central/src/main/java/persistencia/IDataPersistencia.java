@@ -42,8 +42,9 @@ public interface IDataPersistencia {
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias, byte[] foto);
     List<DTProveedor> obtenerProveedores();
+    byte[] obtenerFotoActividadTuristica(Long id);
     
 
     /*CU5*/

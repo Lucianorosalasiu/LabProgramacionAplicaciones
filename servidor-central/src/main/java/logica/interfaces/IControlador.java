@@ -35,8 +35,9 @@ public interface  IControlador {
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto);
     List<DTProveedor> obtenerProveedores();
+    byte[] obtenerFotoActividadTuristica(Long id);
     
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
@@ -83,4 +84,3 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     
 }
-
