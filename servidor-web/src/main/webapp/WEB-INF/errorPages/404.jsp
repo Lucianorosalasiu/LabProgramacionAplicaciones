@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <link rel="stylesheet" href="assets/css/styles.css"/>

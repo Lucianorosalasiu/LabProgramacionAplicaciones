@@ -8,76 +8,62 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 hr {
-  background-color: #212529;
+    background-color: #212529;
 }
 
 #label-insert-photo {
-  padding-top: 6%;
+    padding-top: 6%;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .float-right {
-  float: right;
+    float: right;
 }
 
 .align-left {
-  text-align: left;
+    text-align: left;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .medium-image {
-  width: 150px;
-  height: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 /* ------------------------------ Tables styles ----------------------------- */
 table {
-  background-color: #f8f9fa;
-  border-collapse: collapse;
-  width: 100%;
-  border-radius: 4px;
+    background-color: #f8f9fa;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 4px;
 }
 
 /*Selector que provee la opción de colorear una fila de por medio en una tabla*/
 tr:nth-child(even) {
-  /*El parámetro puede ser odd también*/
-  background-color: #aaaaaa;
+    /*El parámetro puede ser odd también*/
+    background-color: #aaaaaa;
 }
 
 table thead th {
-  color: #dddddd;
-  text-align: center;
-  border: solid 1px #dddddd;
-  padding-top: 10px;
-  padding-bottom: 10px;
+    color: #dddddd;
+    text-align: center;
+    border: solid 1px #dddddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 table tbody td {
-  text-align: center;
-  border: solid 1px #dddddd;
-  padding: 8px;
+    text-align: center;
+    border: solid 1px #dddddd;
+    padding: 8px;
 }
 /* ---------------------------- End Tables styles --------------------------- */
-
-/* Perfil */
-
-#perfil_izquierda {
-    float:left;
-    border-right: 2px solid #DDDDDD;
-    padding: 25px;
-    margin: 25px;
-}
-
-#perfil_derecha {
-    padding: 25px;
-    margin: 25px;
-}
 
 /* Pagina de error */
 
@@ -135,4 +121,40 @@ table tbody td {
 }
 #listar .usuario .derecha {
     display: inline-block;
+}
+
+/* Perfil */
+
+#perfil_izquierda {
+    float:left;
+    border-right: 2px solid #DDDDDD;
+    padding: 25px;
+    margin: 25px;
+}
+
+#perfil_derecha {
+    padding: 25px;
+    margin: 25px;
+}
+
+.main {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.93);
+    border: 1px solid #CCCCCC;
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0 0 8px #FFFFFF;
+    padding: 30px;
+}
+
+.rotulo {
+    display: block;
+    float: left;
+    width: 140px;
+    font-size: 12px;
+    color:#808080;
+}
+
+.valor {
+    font-size: 12px;
 }

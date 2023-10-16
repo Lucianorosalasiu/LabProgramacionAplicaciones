@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTActividadTuristica"%>
 <%@page import="dataTypes.DTDepartamento"%>
-<%@page import="java.util.List"%> 
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>

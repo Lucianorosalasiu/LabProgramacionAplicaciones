@@ -1,7 +1,7 @@
 <%-- 
     Document   : header
     Created on : 5 oct. 2023, 09:32:22
-    Author     : progav
+    Author     : todos
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,7 @@
 
         <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){%>
         <div class="d-flex flex-column gap-2">
-            <p> @<%=session.getAttribute("sessionNickname")%></p>
+            <a href="/consultausuario?usuario=<%=session.getAttribute("sessionNickname")%>"> @<%=session.getAttribute("sessionNickname")%></a>
             <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
             <span class="flex-grow-0 badge text-bg-info">Turista</span>
             <%}else{%>

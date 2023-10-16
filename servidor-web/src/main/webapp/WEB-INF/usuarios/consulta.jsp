@@ -17,7 +17,7 @@
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         
-        <div id="listar" class="container py-5 min-vh-70 main ">
+        <div id="listar" class="container py-5 min-vh-70 main">
             <% 
                 List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
 
@@ -34,7 +34,7 @@
                 <img src="<%= urlFoto %>" class="rounded-circle" alt="foto">
 
                 <div class="derecha">
-                    <a class="nombre" href="?usuario=<%= u.getEmail()  %>">
+                    <a class="nombre" href="?consultausuario=<%= u.getEmail()  %>">
                         <%= u.getName() %>
                     </a>
 

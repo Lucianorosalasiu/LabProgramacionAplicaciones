@@ -28,6 +28,7 @@
                     id="signup-form" 
                     action="/altausuario"
                     method="post"
+                    enctype="multipart/form-data"
                     class="row g-3 needs-validation" 
                     novalidate
                 >
