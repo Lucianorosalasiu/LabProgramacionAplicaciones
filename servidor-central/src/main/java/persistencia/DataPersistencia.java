@@ -403,7 +403,7 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias){
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto){
         EntityManager em = emf.createEntityManager();   
         
         EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
@@ -417,7 +417,7 @@ public class DataPersistencia implements IDataPersistencia {
         EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias);
+                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias,foto);
 
         /*vinculo la categoria con las actividades que la tienen*/
         for(ECategoria e : eCategorias){    
@@ -436,6 +436,26 @@ public class DataPersistencia implements IDataPersistencia {
         }catch(Exception e){
             em.getTransaction().rollback();
         }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public byte[] obtenerFotoActividadTuristica(Long id){
+        EntityManager em = emf.createEntityManager();
+        byte[] foto = null;
+        try {
+            em.getTransaction().begin();
+
+            // Supongamos que tienes una entidad llamada 'MiEntidad' que mapea la tabla con el campo 'longblobColumn'.
+            EActividadTuristica actividad = em.find(EActividadTuristica.class, id); // 'id' es el identificador único del registro que deseas consultar.
+
+            if (actividad != null) {
+                foto = actividad.getFoto();
+            }
+            em.getTransaction().commit();
+            return foto;
+        } finally {
             em.close();
         }
     }

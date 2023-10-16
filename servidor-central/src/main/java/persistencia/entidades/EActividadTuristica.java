@@ -13,11 +13,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import logica.clases.Departamento;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +39,9 @@ public class EActividadTuristica extends EBase {
     private float costo;
     private String ciudad;
     private Date fechaAlta;
+    @Column(name = "IMAGEN")
+    @Lob
+    private byte [] foto;
    
     @ManyToOne
     private EDepartamento eDepartamento;
@@ -56,7 +61,6 @@ public class EActividadTuristica extends EBase {
             joinColumns = @JoinColumn (name = "ACTIVIDAD_ID"),
             inverseJoinColumns = @JoinColumn (name = "CATEGORIA_ID"))
     private List<ECategoria> categorias;
-    
     private EActividadTuristica(){}
     
     public EActividadTuristica(String nombre, String descripcion, String duracion,
@@ -82,5 +86,19 @@ public class EActividadTuristica extends EBase {
         this.eDepartamento = eDepartamento;
         this.estadoActividad = EstadoActividad.AGREGADA;
         this.categorias = categorias;
+    }
+    
+    public EActividadTuristica(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento, List<ECategoria> categorias, byte [] foto){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+        this.eDepartamento = eDepartamento;
+        this.estadoActividad = EstadoActividad.AGREGADA;
+        this.categorias = categorias;
+        this.foto = foto;
     }
 }
