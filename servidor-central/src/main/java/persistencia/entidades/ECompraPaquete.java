@@ -8,7 +8,10 @@ import dataTypes.DTUsuario;
 import java.util.Date;
 import java.util.Date;
 import java.util.LinkedList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,9 +29,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "COMPRAS_PAQUETE")
 public class ECompraPaquete extends EBase{
-    @OneToOne
+    
     private ETurista COMPRADOR;
-    @OneToOne
     private EPaqueteActividadTuristica PAQUETE;
     private int CANTTURISTAS;
     private Date VENCIMIENTO;

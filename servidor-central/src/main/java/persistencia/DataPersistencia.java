@@ -1312,7 +1312,8 @@ public class DataPersistencia implements IDataPersistencia {
     @Override
     public void agregarCompraPaquete(DTCompraPaquete compra){
         EntityManager em = emf.createEntityManager();
-         try{
+            System.out.println(compra.getPAQUETE().getNombre());
+        try{
             EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
                     ,EPaqueteActividadTuristica.class)
                     .setParameter("nombrePaquete",compra.getPAQUETE().getNombre())
@@ -1325,17 +1326,19 @@ public class DataPersistencia implements IDataPersistencia {
             nuevaCompra = new ECompraPaquete(
                     eTurista,
                     ePaquete,
-                    compra.getCANTTURISTAS(),
+                    compra.getCANTTURISTAS(),             
+                    compra.getVENCIMIENTO(),
                     compra.getFECHACOMPRA(),
-                    compra.getVENCIMIENTO(), 
                     compra.getCOSTO());
+         
              em.getTransaction().begin();
              em.persist(nuevaCompra);
              em.getTransaction().commit();
-         }catch(Exception e){
+        }catch(Exception e){
              em.getTransaction().rollback();
-         }finally{
+        }finally{
             em.close();
-         }
+        }
     }
+    
 }

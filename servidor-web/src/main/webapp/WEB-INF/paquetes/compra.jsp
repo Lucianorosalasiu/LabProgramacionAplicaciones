@@ -85,12 +85,12 @@
                     </div>
                 </div>
             <div class="container w-100">
-            <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
+             <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
                 <button type="submit" class="btn btn-success" name="BOTON" value="compra">Realizar Compra</button>
-                <%}else{%>
+               <%}else{%>
                 <label>Solo los <span class="text-info"> turistas </span> pueden comprar paquetes</label>
                 <button type="button" class="btn btn-success disabled" tabindex="-1">Realizar Compra</button>
-            <%}%>
+            <%}%> 
             
             <button type="button" class="btn btn-danger">Cancelar</button>                       
             </div>    
