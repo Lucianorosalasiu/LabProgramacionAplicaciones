@@ -48,7 +48,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
-                <li><a class="dropdown-item" href="#">Consulta actividades</a></li>
+                <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
         </div>
 
