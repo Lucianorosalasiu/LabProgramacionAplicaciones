@@ -52,8 +52,8 @@ public class CompraPaquete extends HttpServlet {
             long idTurista = (long)request.getSession().getAttribute("id");
             
             DTTurista turista = controlador.obtenerTurista(idTurista);
-            DTPaqueteActividadTuristica paquete = controlador.obtenerPaquete(request.getParameter("nombre"));
-            c.add(Calendar.DATE, Integer.parseInt(request.getParameter("validez")));
+            DTPaqueteActividadTuristica paquete = controlador.obtenerPaqueteCosto(request.getParameter("paquetes"));
+            c.add(Calendar.DATE, paquete.getValidez());
             vencimiento = c.getTime();
             DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,0,vencimiento,alta,paquete.getCosto());
             controlador.agregarCompraPaquete(compra);
