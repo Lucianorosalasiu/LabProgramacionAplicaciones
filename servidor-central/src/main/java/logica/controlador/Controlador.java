@@ -223,6 +223,21 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicasConId(String nombreDepartamento){
+        Long idDepartamento = 0L;
+        
+        List<DTDepartamento> departamentos = dataPersistencia.obtenerDepartamentos();
+        
+        for(DTDepartamento de : departamentos){
+            if(de.getNombre().equals(nombreDepartamento)){
+                idDepartamento = de.getId();
+            }
+        }
+        
+        return dataPersistencia.obtenerActividadesTuristicasConId(idDepartamento);
+    }
+    
+    @Override
     public DTActividadTuristica obtenerActividadTuristica(String nombreActividad){
         Long idActividad = 0L;
         List <DTActividadTuristica> dtActividadesTuristicas = dataPersistencia.obtenerActividadesTuristicas();

@@ -9,6 +9,10 @@
 <%@page import="dataTypes.DTDepartamento"%>
 <%@page import="dataTypes.DTCategoria"%>
 <%@page import="java.util.List"%> 
+<%@page import="java.util.Base64"%> 
+<%@page import="logica.fabrica.Fabrica"%> 
+<%@page import="logica.interfaces.IControlador"%> 
+
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -59,17 +63,26 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success">Enviar</button>    
+            <button type="submit" class="btn btn-success">Consultar</button>    
                 
             </form>
    
             <%if(request.getAttribute("actividades") != null){%>
             <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center">
                 <% 
-                    for(DTActividadTuristica actividad : (List<DTActividadTuristica>) request.getAttribute("actividades")){
+                    Fabrica fabrica = new Fabrica();
+                    IControlador controlador = fabrica.getInterface();
+                    String imageDataUri = "";
+                        for(DTActividadTuristica actividad : (List<DTActividadTuristica>) request.getAttribute("actividades")){
+                            byte [] foto = controlador.obtenerFotoActividadTuristica(actividad.getId());
+                                if(foto != null){
+                                    String imagenBase64 = Base64.getEncoder().encodeToString(foto);
+                                    String contentType = "image/jpeg";
+                                    imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
+                                }
                 %>
                     <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="<%= imageDataUri %>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title"><%=actividad.getNombre()%></h5>
                           <p class="card-text"><%=actividad.getDescripcion()%></p>

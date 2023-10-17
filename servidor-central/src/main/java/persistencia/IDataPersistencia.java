@@ -50,6 +50,7 @@ public interface IDataPersistencia {
 
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento);
+    List<DTActividadTuristica> obtenerActividadesTuristicasConId(Long idDepartamento);
     List<DTActividadTuristica> obtenerActividadesTuristicas();
     DTActividadTuristica obtenerActividadTuristica(Long idActividad);
     List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(Long idActividad);
