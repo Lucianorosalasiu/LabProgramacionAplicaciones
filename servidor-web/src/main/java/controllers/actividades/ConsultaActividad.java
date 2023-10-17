@@ -4,6 +4,8 @@
  */
 package controllers.actividades;
 
+import dataTypes.DTCategoria;
+import dataTypes.DTDepartamento;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,12 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
  * @author ignfer
  */
-@WebServlet(name = "ConsultaActividad", urlPatterns = {"/ConsultaActividad"})
 public class ConsultaActividad extends HttpServlet {
 
     /**
@@ -30,6 +33,41 @@ public class ConsultaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        String errorMessage = null;
+        
+        if(validateParameters(request)){
+            try {
+                String departamento = request.getParameter("departamento");
+                request.setAttribute("actividades", controlador.obtenerActividadesTuristicas(departamento));
+            } catch (Exception e) {
+                errorMessage = e.getMessage();  
+                request.setAttribute("errorMessage", errorMessage);
+            }
+        }
+        
+        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("categorias", controlador.obtenerCategorias());
+        
+//        List<DTCategoria> categorias = (List<DTCategoria>) request.getAttribute("categorias");
+//        List<DTDepartamento> departamentos = (List<DTDepartamento>) request.getAttribute("departamentos");
+//        
+//        errorMessage = "VALIDATE_PARAMETERS = " + validateParameters(request) +
+//                "|categorias.size(): " + categorias.size() +
+//                "|departamentos.size(): " + departamentos.size();
+//        
+//        for(DTCategoria c : categorias){
+//            errorMessage+="|" + c.getId() + "|" + c.getNombre();
+//        }
+//        
+//        for(DTDepartamento d : departamentos){
+//            errorMessage+="|" + d.getId() + "|" + d.getNombre();
+//        }
+//        
+//        
+//        request.setAttribute("errorMessage", errorMessage);
+        
         request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
                     .forward(request, response);
     }
@@ -61,6 +99,11 @@ public class ConsultaActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    private boolean validateParameters(HttpServletRequest request){
+    return(request.getParameter("departamento") != null ||
+            request.getParameter("categoria") != null);
     }
 
     /**
