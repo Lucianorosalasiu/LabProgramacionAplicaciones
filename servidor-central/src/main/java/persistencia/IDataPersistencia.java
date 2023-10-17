@@ -7,6 +7,7 @@ package persistencia;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -77,6 +78,11 @@ public interface IDataPersistencia {
     void agregarActividadPaquete(String paquete,String actividad);
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
     DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
+    List<String> obtenerPaqueteNombresActividades();
+    void agregarCompraPaquete(DTCompraPaquete compra);
+    DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
+    List<DTPaqueteActividadTuristica>obtenerPaquetes();
+    public DTTurista obtenerTurista(long idTurista);
      
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();

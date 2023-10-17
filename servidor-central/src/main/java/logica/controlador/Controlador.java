@@ -6,6 +6,7 @@ package logica.controlador;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -357,6 +358,24 @@ public class Controlador implements IControlador{
     public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
         return dataPersistencia.obtenerActividadesTuristicas(nombreDepartamento, idProveedor);
     }
-
-    
+    @Override
+    public List<String> obtenerPaqueteNombresActividades(){
+        return dataPersistencia.obtenerPaqueteNombresActividades();
+    }
+    @Override
+    public void agregarCompraPaquete(DTCompraPaquete compra){
+        dataPersistencia.agregarCompraPaquete(compra);
+    }
+    @Override
+    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre){
+         return dataPersistencia.obtenerPaqueteCosto(nombre);
+    }
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetes(){
+        return dataPersistencia.obtenerPaquetes();
+    }
+    @Override
+    public DTTurista obtenerTurista(long idTurista){
+        return dataPersistencia.obtenerTurista(idTurista);
+    }
 }

@@ -19,7 +19,7 @@
     <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1">
             <form method="post" action="/consultasalida" id="consultaForm">
-                <div class="m-3">
+                <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                     <select name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 

@@ -22,8 +22,9 @@ public class DTPaqueteActividadTuristica {
     private int validez;
     private float descuento;
     private Date fechaAlta;
+    private float costo;
     private LinkedList<ActividadTuristica> actividades ;
-    
+    private byte[] imagen;
     public DTPaqueteActividadTuristica(){}
     public DTPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta){
         this.nombre = nombre;
@@ -31,27 +32,24 @@ public class DTPaqueteActividadTuristica {
         this.validez = validez;
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
+        costo = 0;
         actividades = new LinkedList<ActividadTuristica>();
+        imagen = null;
+    }
+    public DTPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta,float costo){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.validez = validez;
+        this.descuento = descuento;
+        this.fechaAlta = fechaAlta;
+        this.costo = costo;
+        actividades = new LinkedList<ActividadTuristica>();
+        imagen = null;
     }
     
     public DTPaqueteActividadTuristica(String nombre){
         this.nombre = nombre;
     }
   
-    public String getNombre(){
-        return nombre;
-    }
-    public String getDesc(){
-        return descripcion;
-    }
-    public int getValidez(){
-        return validez;
-    }
-    public float getDescuento(){
-        return descuento;
-    }
-    public Date getFechaAlta(){
-        return fechaAlta;
-    }
     
 }

@@ -3,6 +3,7 @@ package persistencia;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -22,6 +23,7 @@ import logica.clases.Proveedor;
 import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.ECategoria;
+import persistencia.entidades.ECompraPaquete;
 import persistencia.entidades.EDepartamento;
 import persistencia.entidades.EInscripcion;
 import persistencia.entidades.EPaqueteActividadTuristica;
@@ -602,6 +604,41 @@ public class DataPersistencia implements IDataPersistencia {
          }
     }
     @Override
+    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre){
+        EntityManager em = emf.createEntityManager();
+        float costo = 0;
+        List<EActividadTuristica> resultados_consulta = new LinkedList<>();
+        List<DTActividadTuristica> resultados = new LinkedList<>();
+        try{
+          
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",nombre)
+                    .getSingleResult();
+            EPaqueteActividadTuristica paquete = em.find(EPaqueteActividadTuristica.class,ePaquete.getId());
+            resultados_consulta = paquete.getActividades();
+            
+            for(EActividadTuristica p : resultados_consulta){
+                 if(p.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    costo = costo + p.getCosto();
+                 }
+             }
+            
+            return new DTPaqueteActividadTuristica(
+                                            ePaquete.getNombre(),
+                                            ePaquete.getDescripcion(),
+                                            ePaquete.getValidez(),
+                                            ePaquete.getDescuento(),
+                                            ePaquete.getFechaAlta(),
+                                            costo
+                                                  );
+        }catch(Exception e){
+            return new DTPaqueteActividadTuristica();
+        }finally{
+            em.close();
+        }
+    }
+    @Override
     public List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete){
         EntityManager em = emf.createEntityManager();
          List<EActividadTuristica> resultados_consulta = new LinkedList<>();
@@ -619,7 +656,7 @@ public class DataPersistencia implements IDataPersistencia {
              for(EActividadTuristica p : resultados_consulta){
                  if(p.getEstadoActividad() == EstadoActividad.CONFIRMADA){
                     DTActividadTuristica dtActividadTuristica = new
-                        DTActividadTuristica(p.getId(),p.getNombre(),null,null,0,null,null);
+                        DTActividadTuristica(p.getId(),p.getNombre(),p.getDescripcion(),p.getDuracion(),p.getCosto(),p.getCiudad(),p.getFechaAlta());
                     resultados.add(dtActividadTuristica);
                  }
              }
@@ -876,6 +913,26 @@ public class DataPersistencia implements IDataPersistencia {
         }catch(Exception e){
             List<String> resultado = new LinkedList<>();
             return resultado;
+        }finally{
+            em.close();
+        }
+    }
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetes(){
+        EntityManager em = emf.createEntityManager();
+        List<DTPaqueteActividadTuristica> dtresultados = new LinkedList<>();
+        try{      
+            Query query = em.createNativeQuery("select distinct nombre from paquetes inner join PAQUETE_ACTIVIDAD ON paquetes.ID = PAQUETE_ACTIVIDAD.PAQUETE_ID");                        
+            List<String> resultados = query.getResultList();
+            
+            for (String epaquete : resultados){
+                dtresultados.add(obtenerPaqueteCosto(epaquete));
+            }
+            return dtresultados;
+          
+        }catch(Exception e){
+            List<DTPaqueteActividadTuristica> resultados = new LinkedList<>();
+            return resultados;
         }finally{
             em.close();
         }
@@ -1191,5 +1248,68 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-    
+    @Override
+    public List<String> obtenerPaqueteNombresActividades(){
+        EntityManager em = emf.createEntityManager();
+      
+        try{
+      
+            Query query = em.createNativeQuery("select distinct nombre from paquetes inner join PAQUETE_ACTIVIDAD ON paquetes.ID = PAQUETE_ACTIVIDAD.PAQUETE_ID");
+                          
+            List<String> resultado = query.getResultList();
+            return resultado;
+          
+        }catch(Exception e){
+           List<String> resultado = new LinkedList<>();
+            return resultado;
+        }finally{
+           em.close();
+        }
+    }
+    @Override
+    public DTTurista obtenerTurista(long idTurista){
+       EntityManager em = emf.createEntityManager();
+
+       try{
+
+           ETurista eTurista = em.find(ETurista.class, idTurista);
+           DTTurista dtTurista = new DTTurista(eTurista.getId(),eTurista.getNickname(),eTurista.getEmail(),eTurista.getNacionality());
+           return dtTurista;
+
+       }catch(Exception e){
+            DTTurista dtTurista  = new DTTurista();
+           return dtTurista;
+       }finally{
+          em.close();
+       }
+    }
+    @Override
+    public void agregarCompraPaquete(DTCompraPaquete compra){
+        EntityManager em = emf.createEntityManager();
+         try{
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",compra.getPAQUETE().getNombre())
+                    .getSingleResult();
+            ETurista eTurista = em.createQuery("select t from ETurista t where t.id = :turistaId"
+                    ,ETurista.class)
+                    .setParameter("turistaId",compra.getCOMPRADOR().getId())
+                    .getSingleResult();
+            ECompraPaquete nuevaCompra;
+            nuevaCompra = new ECompraPaquete(
+                    eTurista,
+                    ePaquete,
+                    compra.getCANTTURISTAS(),
+                    compra.getFECHACOMPRA(),
+                    compra.getVENCIMIENTO(), 
+                    compra.getCOSTO());
+             em.getTransaction().begin();
+             em.persist(nuevaCompra);
+             em.getTransaction().commit();
+         }catch(Exception e){
+             em.getTransaction().rollback();
+         }finally{
+            em.close();
+         }
+    }
 }

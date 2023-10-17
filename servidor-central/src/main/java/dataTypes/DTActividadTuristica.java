@@ -88,4 +88,5 @@ public class DTActividadTuristica {
         Float costoString = this.costo;
         return costoString.toString();
     }
+    
 }

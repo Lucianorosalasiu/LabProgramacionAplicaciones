@@ -145,7 +145,10 @@ table tbody td {
     font-size: 12px;
     color:#808080;
 }
+.cancelar {
+    background-color: #f44336;
 
+} 
 .valor {
     font-size: 12px;
 }

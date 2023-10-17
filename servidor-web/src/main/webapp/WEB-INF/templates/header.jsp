@@ -68,8 +68,8 @@
                 Paquetes
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Consulta de paquete</a></li>  
-                <li><a class="dropdown-item" href="#">Compra de paquete</a></li>  
+                <li><a class="dropdown-item" href="/consultapaquete">Consulta de paquete</a></li>  
+                <li><a class="dropdown-item" href="/comprapaquete">Compra de paquete</a></li>  
             </ul>
         </div>
     </div>
