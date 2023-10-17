@@ -449,8 +449,7 @@ public class DataPersistencia implements IDataPersistencia {
         try {
             em.getTransaction().begin();
 
-            // Supongamos que tienes una entidad llamada 'MiEntidad' que mapea la tabla con el campo 'longblobColumn'.
-            EActividadTuristica actividad = em.find(EActividadTuristica.class, id); // 'id' es el identificador único del registro que deseas consultar.
+            EActividadTuristica actividad = em.find(EActividadTuristica.class, id);
 
             if (actividad != null) {
                 foto = actividad.getFoto();
@@ -510,6 +509,33 @@ public class DataPersistencia implements IDataPersistencia {
             for(EActividadTuristica a : resultados){
                 if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
                     DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getNombre(),a.getDescripcion(),
+                    a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+
+                    dtActividadesTuristicas.add(dtActividadTuristica);
+                }
+            }
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicasConId(Long idDepartamento){
+        EntityManager em = emf.createEntityManager();
+        List<EActividadTuristica> resultados = new LinkedList<>();
+        List <DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+        
+        try{
+            String consulta = "select a from EActividadTuristica a where a.eDepartamento.id = :idDepartamento";
+            resultados = em.createQuery(consulta,EActividadTuristica.class)
+                    .setParameter("idDepartamento",idDepartamento).getResultList();
+            
+            for(EActividadTuristica a : resultados){
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getId(),a.getNombre(),a.getDescripcion(),
                     a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
 
                     dtActividadesTuristicas.add(dtActividadTuristica);

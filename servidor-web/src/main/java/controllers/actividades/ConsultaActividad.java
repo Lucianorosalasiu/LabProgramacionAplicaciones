@@ -4,6 +4,7 @@
  */
 package controllers.actividades;
 
+import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import java.io.IOException;
@@ -12,7 +13,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.List;
+import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -40,13 +45,13 @@ public class ConsultaActividad extends HttpServlet {
         if(validateParameters(request)){
             try {
                 String departamento = request.getParameter("departamento");
-                request.setAttribute("actividades", controlador.obtenerActividadesTuristicas(departamento));
+                request.setAttribute("actividades", controlador.obtenerActividadesTuristicasConId(departamento)); 
             } catch (Exception e) {
                 errorMessage = e.getMessage();  
                 request.setAttribute("errorMessage", errorMessage);
             }
         }
-        
+
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
         
