@@ -7,6 +7,7 @@ package logica.interfaces;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
@@ -35,11 +36,13 @@ public interface  IControlador {
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto);
     List<DTProveedor> obtenerProveedores();
+    byte[] obtenerFotoActividadTuristica(Long id);
     
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
+    List<DTActividadTuristica> obtenerActividadesTuristicasConId(String nombreDepartamento);
     DTActividadTuristica obtenerActividadTuristica(String nombreActividad);
     List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(String nombreActividad);
 
@@ -67,7 +70,11 @@ public interface  IControlador {
     void agregarActividadPaquete(String paquete,String actividad);
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
     public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
-    
+    public List<String> obtenerPaqueteNombresActividades();
+    void agregarCompraPaquete(DTCompraPaquete compra);
+    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
+    public List<DTPaqueteActividadTuristica> obtenerPaquetes();
+    public DTTurista obtenerTurista(long idTurista);
     /*CU13 ALTA DE CATEGORIA*/
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();
@@ -83,4 +90,3 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     
 }
-

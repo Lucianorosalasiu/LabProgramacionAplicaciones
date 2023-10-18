@@ -2,30 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.actividades;
+package controllers.paquetes;
 
 import dataTypes.DTActividadTuristica;
-import dataTypes.DTCategoria;
-import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashSet;
 import java.util.List;
-import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
 /**
  *
- * @author ignfer
+ * @author lucho
  */
-public class ConsultaActividad extends HttpServlet {
+public class ConsultaPaquete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +36,36 @@ public class ConsultaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-        String errorMessage = null;
         
-        if(validateParameters(request)){
-            try {
-                String departamento = request.getParameter("departamento");
-                request.setAttribute("actividades", controlador.obtenerActividadesTuristicasConId(departamento)); 
-            } catch (Exception e) {
-                errorMessage = e.getMessage();  
-                request.setAttribute("errorMessage", errorMessage);
+        String paquete = request.getParameter("paquetes");
+        String actividad = request.getParameter("actividad");
+         List<DTActividadTuristica> actividades = new ArrayList();
+        DTActividadTuristica actividadCompleta = null;
+        DTPaqueteActividadTuristica pa = null;
+        String imagen = null;
+        
+        if (paquete != null) {
+            pa = controlador.obtenerPaqueteCosto(paquete);
+            actividades = controlador.obtenerActividadesRelacionadas(paquete);
+            if(actividad != null){
+                actividadCompleta = controlador.obtenerActividadTuristica(actividad);
             }
         }
-
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
-        request.setAttribute("categorias", controlador.obtenerCategorias());
         
-//        List<DTCategoria> categorias = (List<DTCategoria>) request.getAttribute("categorias");
-//        List<DTDepartamento> departamentos = (List<DTDepartamento>) request.getAttribute("departamentos");
-//        
-//        errorMessage = "VALIDATE_PARAMETERS = " + validateParameters(request) +
-//                "|categorias.size(): " + categorias.size() +
-//                "|departamentos.size(): " + departamentos.size();
-//        
-//        for(DTCategoria c : categorias){
-//            errorMessage+="|" + c.getId() + "|" + c.getNombre();
-//        }
-//        
-//        for(DTDepartamento d : departamentos){
-//            errorMessage+="|" + d.getId() + "|" + d.getNombre();
-//        }
-//        
-//        
-//        request.setAttribute("errorMessage", errorMessage);
+        request.setAttribute("actividades", actividades);
+        request.setAttribute("actividad", actividadCompleta);
         
-        request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
-                    .forward(request, response);
+        request.setAttribute("paqueteEnteros", pa);
+        request.setAttribute("paquetes", controlador.obtenerPaqueteNombres());
+        request.setAttribute("imagenSalida", imagen);
+        
+        
+        
+         request.getRequestDispatcher("/WEB-INF/paquetes/consulta.jsp").
+                forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -104,11 +95,6 @@ public class ConsultaActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-    
-    private boolean validateParameters(HttpServletRequest request){
-    return(request.getParameter("departamento") != null ||
-            request.getParameter("categoria") != null);
     }
 
     /**

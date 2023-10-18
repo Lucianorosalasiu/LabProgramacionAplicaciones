@@ -15,17 +15,22 @@ import java.util.List;
 
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author ignfer
  */
+@MultipartConfig
 public class AltaActividad extends HttpServlet {
 
     /**
@@ -86,8 +91,16 @@ public class AltaActividad extends HttpServlet {
                 //        "| idProveedor: " + idProveedor + "| idDepartamento: " + idDepartamento +
                 //        "| fecha: " + fecha;
                 
+                Part imagePart = request.getPart("imagen");
+                byte[] newImage = null;
+                if (imagePart != null) {
+                    InputStream imageFile = imagePart.getInputStream();
+                    newImage = IOUtils.toByteArray(imageFile);
+                    IOUtils.closeQuietly(imageFile);
+                }
+                
                 controlador.existeActividadTuristica(nombre);
-                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong);
+                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage);
                 request.setAttribute("success", true);
             }catch(Exception e){
                 errorMessage = e.getMessage();  

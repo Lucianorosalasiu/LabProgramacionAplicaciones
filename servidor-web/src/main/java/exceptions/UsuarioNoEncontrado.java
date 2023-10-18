@@ -6,12 +6,10 @@ package exceptions;
 
 /**
  *
- * @author alexis
+ * @author progav
  */
-public class NonEqualPasswordException extends Exception {
-
-    public NonEqualPasswordException(String message) {
+public class UsuarioNoEncontrado extends Exception{
+    public UsuarioNoEncontrado(String message) {
         super(message);
-    }
-    
+    }   
 }

@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
         contempla que en dicho campo ingrese el email del usuario*/
         String nickname = request.getParameter("nickname");
         String loginPassword = request.getParameter("password");
-        String sessionType = "N/A";
+        String sessionType = "VISITANTE";
         String errorMessage = null;
         
         /*realiza la logica del login solo si los campos contienen datos*/

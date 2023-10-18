@@ -8,8 +8,8 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Turismouy | Exito</title>
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
+        <title>Turismouy | Éxito</title>
     </head>
     
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
@@ -18,8 +18,7 @@
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <h1><%= request.getAttribute("successMessage") %></h1>
         </div>
+    
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
-    
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
-    
 </html>

@@ -6,12 +6,25 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
+        <link rel="stylesheet" href="assets/css/styles.css"/>
+        <title>Turismouy | Error 500</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    
+    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    
+    <body id="error_page" class="h-100 d-flex flex-column">
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1 titulo_error">
+            500: Error de servidor    
+        </div>
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+            <p>
+                Ha ocurrido un error al procesar la información. 
+                Si deseas, puedes <a href="/home">volver</a> al inicio.
+            </p>
+        </div>
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
 </html>

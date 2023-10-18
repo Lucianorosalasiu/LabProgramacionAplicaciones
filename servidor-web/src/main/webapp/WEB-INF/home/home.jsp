@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Home</title>
     </head>
     
@@ -16,9 +16,8 @@
     
     <body class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <h1>Hello World! from home.jsp</h1>
-        </div>
+            <h1>¡Bienvenido a la página de inicio de TurismoUY!</h1>
+        </div>    
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
-    
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </html>

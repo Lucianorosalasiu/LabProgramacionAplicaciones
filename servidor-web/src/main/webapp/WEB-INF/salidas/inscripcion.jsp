@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Inscripcion</title>
     </head>
     
@@ -162,6 +162,9 @@
                 %>
             </form>
         </div>
+                
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>  
+    
         <script>
             function cleanParameters(parameters) {
                 var form = document.getElementById("inscripcionForm");
@@ -187,6 +190,4 @@
             
         </script>
     </body>
-        
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </html>

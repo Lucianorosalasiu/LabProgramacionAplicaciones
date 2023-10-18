@@ -12,7 +12,6 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
        <title>TurismoUy | Alta actividad turística</title>
     </head>
@@ -21,7 +20,7 @@
     
     <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-            <form class="d-flex flex-column gap-2 p-2" method="post" action="/altaactividad">
+            <form class="d-flex flex-column gap-2 p-2" method="post" action="/altaactividad" enctype="multipart/form-data">
                 
                 <%if(request.getAttribute("errorMessage") != null){%>
 
@@ -82,7 +81,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Imagen de la actividad <span class="text-info">(Opcional).</span></label>
-                    <input class="form-control" type="file" id="formFile">
+                    <input name="imagen" class="form-control" type="file" id="formFile" accept="image/*">
                 </div>
                     
                 <div class="form-group">
@@ -109,7 +108,7 @@
                 <%}%>
             </form>
         </div>    
+            
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
-
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </html>

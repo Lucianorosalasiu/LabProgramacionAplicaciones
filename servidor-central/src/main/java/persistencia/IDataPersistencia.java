@@ -7,6 +7,7 @@ package persistencia;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -42,12 +43,14 @@ public interface IDataPersistencia {
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
-    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias);
+    void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias, byte[] foto);
     List<DTProveedor> obtenerProveedores();
+    byte[] obtenerFotoActividadTuristica(Long id);
     
 
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento);
+    List<DTActividadTuristica> obtenerActividadesTuristicasConId(Long idDepartamento);
     List<DTActividadTuristica> obtenerActividadesTuristicas();
     DTActividadTuristica obtenerActividadTuristica(Long idActividad);
     List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(Long idActividad);
@@ -76,6 +79,11 @@ public interface IDataPersistencia {
     void agregarActividadPaquete(String paquete,String actividad);
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
     DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
+    List<String> obtenerPaqueteNombresActividades();
+    void agregarCompraPaquete(DTCompraPaquete compra);
+    DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
+    List<DTPaqueteActividadTuristica>obtenerPaquetes();
+    public DTTurista obtenerTurista(long idTurista);
      
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();

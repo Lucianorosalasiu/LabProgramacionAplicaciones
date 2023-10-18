@@ -48,6 +48,14 @@
         <servlet-name>ModificacionUsuario</servlet-name>
         <servlet-class>controllers.usuarios.ModificacionUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConsultaPaquete</servlet-name>
+        <servlet-class>controllers.paquetes.ConsultaPaquete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompraPaquete</servlet-name>
+        <servlet-class>controllers.paquetes.CompraPaquete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -92,14 +100,25 @@
         <servlet-name>ModificacionUsuario</servlet-name>
         <url-pattern>/modificacionusuario</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsultaPaquete</servlet-name>
+        <url-pattern>/consultapaquete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompraPaquete</servlet-name>
+        <url-pattern>/comprapaquete</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <error-page>
         <error-code>403</error-code>
         <location>/WEB-INF/errorPages/403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/errorPages/404.jsp</location>
     </error-page>
 </web-app>

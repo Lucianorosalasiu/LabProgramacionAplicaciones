@@ -10,16 +10,16 @@
 <!DOCTYPE html>
 <html class="h-100">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Consulta Salida</title>
     </head>
-    
+
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
-    
+
     <body class="h-100 d-flex flex-column">
         <div class="flex-grow-1">
             <form method="post" action="/consultasalida" id="consultaForm">
-                <div class="m-3">
+                <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                     <select name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
@@ -42,28 +42,28 @@
                     </h4>
                     <table class="table">
                         <thead>
-                        <tr>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Duración</th>
-                          <th scope="col">Costo</th>
-                          <th scope="col">Ciudad</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% 
-                            List <DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
-                            for(DTActividadTuristica actividad : actividades){
-                        %>
-                        <tr>
-                          <td><%= actividad.getNombre() %></td>
-                          <td><%= actividad.getDescripcion() %></td>
-                          <td><%= actividad.getDuracion() %></td>
-                          <td><%= actividad.getCosto() %></td>
-                          <td><%= actividad.getCiudad() %></td>
-                        </tr>		
-                        <% } %>
-                      </tbody>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Duración</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Ciudad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                List <DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
+                                for(DTActividadTuristica actividad : actividades){
+                            %>
+                            <tr>
+                                <td><%= actividad.getNombre() %></td>
+                                <td><%= actividad.getDescripcion() %></td>
+                                <td><%= actividad.getDuracion() %></td>
+                                <td><%= actividad.getCosto() %></td>
+                                <td><%= actividad.getCiudad() %></td>
+                            </tr>		
+                            <% } %>
+                        </tbody>
                     </table>
                 </div>
                 <div class="m-3">
@@ -89,26 +89,26 @@
                     </h4>
                     <table class="table">
                         <thead>
-                        <tr>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Cantidad Max. Turistas</th>
-                          <th scope="col">Fecha Salida</th>
-                          <th scope="col">Lugar de Salida</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% 
-                            List <DTSalidaTuristica> salidas = (List<DTSalidaTuristica>) request.getAttribute("salidas");
-                            for(DTSalidaTuristica salida : salidas){
-                        %>
-                        <tr>
-                          <td><%= salida.getNombre() %></td>
-                          <td><%= salida.getCantidadMaxTuristas() %></td>
-                          <td><%= salida.getFechaSalida() %></td>
-                          <td><%= salida.getLugar() %></td>
-                        </tr>		
-                        <% } %>
-                      </tbody>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad Max. Turistas</th>
+                                <th scope="col">Fecha Salida</th>
+                                <th scope="col">Lugar de Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                List <DTSalidaTuristica> salidas = (List<DTSalidaTuristica>) request.getAttribute("salidas");
+                                for(DTSalidaTuristica salida : salidas){
+                            %>
+                            <tr>
+                                <td><%= salida.getNombre() %></td>
+                                <td><%= salida.getCantidadMaxTuristas() %></td>
+                                <td><%= salida.getFechaSalida() %></td>
+                                <td><%= salida.getLugar() %></td>
+                            </tr>		
+                            <% } %>
+                        </tbody>
                     </table>
                 </div>
                 <div class="m-3">
@@ -126,25 +126,25 @@
                     </select>
                 </div>
                 <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
-                <%
-                    DTSalidaTuristica selectedSalida2 = (DTSalidaTuristica) request.getAttribute("selectedSalida");
-                    if (selectedSalida2 != null && selectedSalida1 != null) {
-                %>
+                    <%
+                        DTSalidaTuristica selectedSalida2 = (DTSalidaTuristica) request.getAttribute("selectedSalida");
+                        if (selectedSalida2 != null && selectedSalida1 != null) {
+                    %>
                     <h4>
                         <%= selectedSalida2.getNombre() %>
                     </h4>
                     <div class="container w-100">
                         <div class="row">
                             <div class="col-sm-3">
-                            <% 
-                                String base64imagen = (String) request.getAttribute("imagenSalida");
-                                if (!base64imagen.isEmpty()) {
-                            %>
+                                <% 
+                                    String base64imagen = (String) request.getAttribute("imagenSalida");
+                                    if (!base64imagen.isEmpty()) {
+                                %>
                                 <img width="250" height="200" src="data:image/jpeg;base64,<%= base64imagen %>">
-                                
-                            <% 
-                                }
-                            %>
+
+                                <% 
+                                    }
+                                %>
                             </div>
                             <div <% if (!base64imagen.isEmpty()) { %> class="col-sm-9" <% } %>>
                                 <fieldset disabled>
@@ -180,11 +180,14 @@
                 %>
             </form>
         </div>
+
+        <jsp:include page="/WEB-INF/templates/footer.jsp"/>
+
         <script>
             function cleanParameters(parameters) {
                 var form = document.getElementById("consultaForm");
 
-                parameters.forEach(function(fieldName) {
+                parameters.forEach(function (fieldName) {
                     if (form.elements[fieldName]) {
                         form.elements[fieldName].value = null;
                     }
@@ -192,23 +195,21 @@
             }
 
             var departamentoSelect = document.querySelector('select[name="departamento"]');
-            departamentoSelect.addEventListener('change', function() {
+            departamentoSelect.addEventListener('change', function () {
                 cleanParameters(["actividad", "salida"]);
-                document.getElementById("consultaForm").submit(); 
+                document.getElementById("consultaForm").submit();
             });
 
             var actividadSelect = document.querySelector('select[name="actividad"]');
-            actividadSelect.addEventListener('change', function() {
+            actividadSelect.addEventListener('change', function () {
                 cleanParameters(["salida"]);
-                document.getElementById("consultaForm").submit(); 
+                document.getElementById("consultaForm").submit();
             });
-            
+
             var salidaSelect = document.querySelector('select[name="salida"]');
-            salidaSelect.addEventListener('change', function() {
+            salidaSelect.addEventListener('change', function () {
                 document.getElementById("consultaForm").submit();
             });
         </script>
     </body>
-    
-    <jsp:include page="/WEB-INF/templates/footer.jsp"/>
 </html>

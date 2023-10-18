@@ -2,30 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.actividades;
+package controllers.paquetes;
 
 import dataTypes.DTActividadTuristica;
-import dataTypes.DTCategoria;
-import dataTypes.DTDepartamento;
+import dataTypes.DTCompraPaquete;
+import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTurista;
+import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
-
 /**
  *
- * @author ignfer
+ * @author lucho
  */
-public class ConsultaActividad extends HttpServlet {
+public class CompraPaquete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,41 +42,28 @@ public class ConsultaActividad extends HttpServlet {
             throws ServletException, IOException {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-        String errorMessage = null;
-        
-        if(validateParameters(request)){
-            try {
-                String departamento = request.getParameter("departamento");
-                request.setAttribute("actividades", controlador.obtenerActividadesTuristicasConId(departamento)); 
-            } catch (Exception e) {
-                errorMessage = e.getMessage();  
-                request.setAttribute("errorMessage", errorMessage);
-            }
+        List<DTPaqueteActividadTuristica> paquetesEnteros = controlador.obtenerPaquetes();
+        request.setAttribute("paquetesEnteros", paquetesEnteros);
+        Date alta = new Date();
+        Date vencimiento = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(vencimiento);
+        if(request.getParameter("BOTON") != null){
+            long idTurista = (long)request.getSession().getAttribute("id");
+            
+            DTTurista turista = controlador.obtenerTurista(idTurista);
+            DTPaqueteActividadTuristica paquete = controlador.obtenerPaqueteCosto(request.getParameter("paquetes"));
+            c.add(Calendar.DATE, paquete.getValidez());
+            vencimiento = c.getTime();
+            DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,0,vencimiento,alta,paquete.getCosto());
+            controlador.agregarCompraPaquete(compra);
+            request.setAttribute("successMessage", "Compra realizada!");
+                request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
+                        .forward(request, response);
+                return;
         }
-
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
-        request.setAttribute("categorias", controlador.obtenerCategorias());
-        
-//        List<DTCategoria> categorias = (List<DTCategoria>) request.getAttribute("categorias");
-//        List<DTDepartamento> departamentos = (List<DTDepartamento>) request.getAttribute("departamentos");
-//        
-//        errorMessage = "VALIDATE_PARAMETERS = " + validateParameters(request) +
-//                "|categorias.size(): " + categorias.size() +
-//                "|departamentos.size(): " + departamentos.size();
-//        
-//        for(DTCategoria c : categorias){
-//            errorMessage+="|" + c.getId() + "|" + c.getNombre();
-//        }
-//        
-//        for(DTDepartamento d : departamentos){
-//            errorMessage+="|" + d.getId() + "|" + d.getNombre();
-//        }
-//        
-//        
-//        request.setAttribute("errorMessage", errorMessage);
-        
-        request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
-                    .forward(request, response);
+         request.getRequestDispatcher("/WEB-INF/paquetes/compra.jsp").
+                forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -104,11 +93,8 @@ public class ConsultaActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-    
-    private boolean validateParameters(HttpServletRequest request){
-    return(request.getParameter("departamento") != null ||
-            request.getParameter("categoria") != null);
+         request.getRequestDispatcher("/WEB-INF/paquetes/compra.jsp").
+                forward(request, response);
     }
 
     /**

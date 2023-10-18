@@ -6,6 +6,7 @@ package logica.controlador;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
 import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
@@ -192,8 +193,13 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias){
-        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor, categorias);
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto){
+        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor, categorias, foto);
+    }
+    
+    @Override
+    public byte[] obtenerFotoActividadTuristica(Long id){
+        return dataPersistencia.obtenerFotoActividadTuristica(id);
     }
     
     @Override
@@ -214,6 +220,21 @@ public class Controlador implements IControlador{
         }
         
         return dataPersistencia.obtenerActividadesTuristicas(idDepartamento);
+    }
+    
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicasConId(String nombreDepartamento){
+        Long idDepartamento = 0L;
+        
+        List<DTDepartamento> departamentos = dataPersistencia.obtenerDepartamentos();
+        
+        for(DTDepartamento de : departamentos){
+            if(de.getNombre().equals(nombreDepartamento)){
+                idDepartamento = de.getId();
+            }
+        }
+        
+        return dataPersistencia.obtenerActividadesTuristicasConId(idDepartamento);
     }
     
     @Override
@@ -352,6 +373,24 @@ public class Controlador implements IControlador{
     public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
         return dataPersistencia.obtenerActividadesTuristicas(nombreDepartamento, idProveedor);
     }
-
-    
+    @Override
+    public List<String> obtenerPaqueteNombresActividades(){
+        return dataPersistencia.obtenerPaqueteNombresActividades();
+    }
+    @Override
+    public void agregarCompraPaquete(DTCompraPaquete compra){
+        dataPersistencia.agregarCompraPaquete(compra);
+    }
+    @Override
+    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre){
+         return dataPersistencia.obtenerPaqueteCosto(nombre);
+    }
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetes(){
+        return dataPersistencia.obtenerPaquetes();
+    }
+    @Override
+    public DTTurista obtenerTurista(long idTurista){
+        return dataPersistencia.obtenerTurista(idTurista);
+    }
 }
