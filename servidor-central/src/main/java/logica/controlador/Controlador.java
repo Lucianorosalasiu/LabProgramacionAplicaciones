@@ -393,4 +393,9 @@ public class Controlador implements IControlador{
     public DTTurista obtenerTurista(long idTurista){
         return dataPersistencia.obtenerTurista(idTurista);
     }
+    
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas) {
+        return dataPersistencia.obtenerPaquetesCompradosDisponibles(idTurista, nombreSalida, cantTuristas);
+    }
 }

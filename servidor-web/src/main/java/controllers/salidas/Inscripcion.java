@@ -5,6 +5,7 @@
 package controllers.salidas;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +36,7 @@ public class Inscripcion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Long idUser = (Long) request.getSession().getAttribute("id");
         String userType = (String) request.getSession().getAttribute("sessionType");
         
         if (isNull(userType) || !userType.equals("TURISTA")) {
@@ -46,9 +48,15 @@ public class Inscripcion extends HttpServlet {
         IControlador controlador = fabrica.getInterface();
         
         String departamento = request.getParameter("departamento");
+        
         String actividad = request.getParameter("actividad");
+        String formaPago = request.getParameter("formaPago");
+        String salida = request.getParameter("salida");
+        String cantidadTuristas = request.getParameter("cantidadTuristas");
+        
         List<DTActividadTuristica> actividades = new ArrayList();
         List<DTSalidaTuristica> salidas = new ArrayList();
+        List<DTPaqueteActividadTuristica> paquetes = new ArrayList();
         
         if (departamento != null) {
             actividades = controlador.obtenerActividadesTuristicas(departamento);
@@ -56,12 +64,27 @@ public class Inscripcion extends HttpServlet {
             if (actividad != null) {
                 salidas = controlador.obtenerSalidasTuristicas(actividad);
                 
+                if (formaPago != null && salida != null && !cantidadTuristas.isBlank()) {
+                    Integer cantTuristas = Integer.valueOf(cantidadTuristas);
+                    if (formaPago.equals("paquete")) {
+                        paquetes = controlador.obtenerPaquetesComprados(
+                                        idUser, 
+                                        salida, 
+                                        cantTuristas);
+                        
+                    }
+                }
+                
             }
         }
+        
+        // TODO realizar la inscripcion con paquetes
         
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("actividades", actividades);
         request.setAttribute("salidas", salidas);
+        request.setAttribute("paquetes", paquetes);
+        
         request.getRequestDispatcher("/WEB-INF/salidas/inscripcion.jsp").
                 forward(request, response);
         

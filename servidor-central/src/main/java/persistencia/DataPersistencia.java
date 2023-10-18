@@ -914,6 +914,8 @@ public class DataPersistencia implements IDataPersistencia {
                     dtInscripcion.getCantidadTuristas(),
                     dtInscripcion.getCostoTotal()
             );
+            
+            
 
             em.persist(nuevaInscripcion);
             em.getTransaction().commit();
@@ -1309,6 +1311,7 @@ public class DataPersistencia implements IDataPersistencia {
           em.close();
        }
     }
+    
     @Override
     public void agregarCompraPaquete(DTCompraPaquete compra){
         EntityManager em = emf.createEntityManager();
@@ -1340,5 +1343,63 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
+    
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetesCompradosDisponibles(Long idTurista, String nombreSalida, int cantTuristas) {
+        EntityManager em = emf.createEntityManager();
+        
+        List<DTPaqueteActividadTuristica> dtresultados = new LinkedList<>();
+        try{
+            ETurista eTurista = em.find(ETurista.class, idTurista);
+            
+            // Obtenemos los paquetes comprados por el turista
+            String queryPaquetes = "SELECT c.PAQUETE FROM ECompraPaquete c "
+                    + "WHERE c.COMPRADOR = :turista AND c.VENCIMIENTO > CURRENT_DATE AND c.CANTTURISTAS >= :cantTuristas";
+            List<EPaqueteActividadTuristica> ePaquetesTurista = em.createQuery(queryPaquetes, EPaqueteActividadTuristica.class)
+                            .setParameter("turista", eTurista)
+                            .setParameter("cantTuristas", cantTuristas)
+                            .getResultList();
+            
+            if (ePaquetesTurista.isEmpty()) return dtresultados; // Si no compro paquetes aún return vacío
+            
+            // Obtenemos la actividad correspondiente a la salida ingresada
+            String queryActividad = "SELECT a.nombre FROM EActividadTuristica a JOIN ESalidaTuristica s "
+                    + "ON s.eActividadTuristica = a WHERE s.nombre = :nombreSalida";
+            String nombreActividad = em.createQuery(queryActividad, String.class)
+                            .setParameter("nombreSalida", nombreSalida)
+                            .getSingleResult();
+            
+            // Obtenemos los paquete disponibles para la nombreActividad
+            String queryPaquetesActividad = "SELECT a.paquetes FROM EActividadTuristica a WHERE a.nombre = :actividad"; 
+            List<EPaqueteActividadTuristica> ePaquetesActividad = em.createQuery(queryPaquetesActividad, EPaqueteActividadTuristica.class)
+                            .setParameter("actividad", nombreActividad)
+                            .getResultList();
+            
+            for (EPaqueteActividadTuristica ePaquete : ePaquetesActividad){
+                if (ePaquetesTurista.stream()
+                        .anyMatch(e -> (e.getId().compareTo(ePaquete.getId())) == 0)) {
+                    
+                    dtresultados.add(new DTPaqueteActividadTuristica(
+                            ePaquete.getNombre(),
+                            ePaquete.getDescripcion(),
+                            ePaquete.getValidez(),
+                            ePaquete.getDescuento(),
+                            ePaquete.getFechaAlta()
+                            )
+                    );
+                }
+
+            }
+            return dtresultados;
+          
+        }catch(Exception e){
+            return dtresultados;
+        }finally{
+            em.close();
+        }
+        
+    }
+    
+    
     
 }

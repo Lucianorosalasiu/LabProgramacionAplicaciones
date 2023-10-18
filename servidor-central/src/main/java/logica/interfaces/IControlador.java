@@ -88,5 +88,6 @@ public interface  IControlador {
     
     /* CU Alta Salida Turistica*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
+    List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas);
     
 }
