@@ -44,8 +44,24 @@ public class ConsultaActividad extends HttpServlet {
         
         if(validateParameters(request)){
             try {
-                String departamento = request.getParameter("departamento");
-                request.setAttribute("actividades", controlador.obtenerActividadesTuristicasConId(departamento)); 
+                if(request.getParameter("departamento") != null){
+                    String departamento = request.getParameter("departamento");
+                    List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasConId(departamento);
+                        if(actividades.size() < 1){
+                            request.setAttribute("actividades",null);
+                        }else{
+                            request.setAttribute("actividades", actividades); 
+                        }
+                }else if(request.getParameter("categoria") != null){
+                    String categoria = request.getParameter("categoria");
+                    List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasPorCategoria(categoria);
+                        if(actividades.size() < 1){
+                            request.setAttribute("actividades",null);
+                        }else{
+                            request.setAttribute("actividades", actividades); 
+                        }
+                }
+ 
             } catch (Exception e) {
                 errorMessage = e.getMessage();  
                 request.setAttribute("errorMessage", errorMessage);

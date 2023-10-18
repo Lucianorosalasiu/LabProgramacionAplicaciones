@@ -32,10 +32,10 @@
                 </div>
 
                 <%}%>
-                     
+            <label>Seleccione un valor por el cual buscar actividades turísticas</label>         
             <div class="form-group">
                 <label>Departamento</label>
-                <select class="text-light form-select bg-primary" name="departamento">
+                <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
                     <option value="" disabled selected>- seleccione un departamento -</option>
                     <% 
                         for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
@@ -50,20 +50,18 @@
                 
             <div class="form-group">
                 <label>Categoria</label>
-                <select class="text-light form-select bg-primary" name="categoria">
+                <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
                     <option value="" disabled selected>- seleccione una categoria -</option>
                     <% 
                         for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
                             String nombreCategoria = c.getNombre();
                     %>
-                    <option value="<%=c.getId()%>">
+                    <option value="<%=nombreCategoria%>">
                         <%= nombreCategoria %>
                     </option>		
                     <% } %>
                 </select>
-            </div>
-
-            <button type="submit" class="btn btn-success">Consultar</button>    
+            </div> 
                 
             </form>
    
@@ -91,7 +89,10 @@
                     </div>
                 <% } %>
             </div>
-            <% } %>
+            <% }else{%>
+            <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center p-2">
+                <label>No se encontraron actividades turisticas con los parametros indicados. <a href="/altaactividad">Crea una tu mismo!</a></label><%}%>
+            </div>
         </div>
         
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>

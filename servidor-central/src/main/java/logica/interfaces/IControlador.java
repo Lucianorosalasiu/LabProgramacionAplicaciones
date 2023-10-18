@@ -43,6 +43,7 @@ public interface  IControlador {
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento);
     List<DTActividadTuristica> obtenerActividadesTuristicasConId(String nombreDepartamento);
+    List<DTActividadTuristica> obtenerActividadesTuristicasPorCategoria(String nombreCategoria);
     DTActividadTuristica obtenerActividadTuristica(String nombreActividad);
     List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(String nombreActividad);
 
