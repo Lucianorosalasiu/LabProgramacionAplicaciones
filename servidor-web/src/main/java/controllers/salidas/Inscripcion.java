@@ -4,9 +4,12 @@
  */
 package controllers.salidas;
 
+import Enums.TipoInscripcion;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
+import exceptions.MyException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
@@ -38,6 +42,7 @@ public class Inscripcion extends HttpServlet {
             throws ServletException, IOException {
         Long idUser = (Long) request.getSession().getAttribute("id");
         String userType = (String) request.getSession().getAttribute("sessionType");
+        String nickname = (String) request.getSession().getAttribute("sessionNickname");
         
         if (isNull(userType) || !userType.equals("TURISTA")) {
             response.sendError(403); 
@@ -47,23 +52,24 @@ public class Inscripcion extends HttpServlet {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
         
-        String departamento = request.getParameter("departamento");
-        
+        String departamento = request.getParameter("departamento"); 
         String actividad = request.getParameter("actividad");
         String formaPago = request.getParameter("formaPago");
         String salida = request.getParameter("salida");
         String cantidadTuristas = request.getParameter("cantidadTuristas");
+        String error = null;
+       
         
         List<DTActividadTuristica> actividades = new ArrayList();
         List<DTSalidaTuristica> salidas = new ArrayList();
         List<DTPaqueteActividadTuristica> paquetes = new ArrayList();
-        
+
         if (departamento != null) {
             actividades = controlador.obtenerActividadesTuristicas(departamento);
-            
+
             if (actividad != null) {
                 salidas = controlador.obtenerSalidasTuristicas(actividad);
-                
+
                 if (formaPago != null && salida != null && !cantidadTuristas.isBlank()) {
                     Integer cantTuristas = Integer.valueOf(cantidadTuristas);
                     if (formaPago.equals("paquete")) {
@@ -71,15 +77,65 @@ public class Inscripcion extends HttpServlet {
                                         idUser, 
                                         salida, 
                                         cantTuristas);
-                        
                     }
                 }
-                
             }
         }
         
-        // TODO realizar la inscripcion con paquetes
+        if (request.getParameter("BOTON") != null) {
+            if (!validateRequest(request)) {
+                error = "Complete todos los campos";
+            } else {
+                try {
+                    DTInscripcion dtInscripcion = new DTInscripcion(
+                                            new Date(),
+                                            Integer.parseInt(cantidadTuristas)
+                                        );
+
+                    String nombrePaquete = request.getParameter("paquete");
+
+                    if (formaPago.equals("paquete")) { 
+                        float costoActividad = controlador.obtenerCostoActividad(actividad);
+                        float descuento = paquetes.stream()
+                                .filter(p -> p.getNombre().equals(nombrePaquete))
+                                .findFirst()
+                                .get()
+                                .getDescuento();
+
+                        float costoUnitario = costoActividad - (costoActividad * (descuento/100)); 
+                        float costoTotal = Integer.parseInt(cantidadTuristas) * costoUnitario;
+
+                        dtInscripcion.setCostoTotal(costoTotal);
+                        dtInscripcion.setTipo(TipoInscripcion.PAQUETE);   
+                    } else {
+                        dtInscripcion.setTipo(TipoInscripcion.GENERAL);  
+                    }
+
+                    controlador.altaInscripcion(dtInscripcion, 
+                            actividad, 
+                            salida, 
+                            nickname
+                    );
+
+                    if (formaPago.equals("paquete")) { 
+                        controlador.usarPaquete(idUser, nombrePaquete, Integer.parseInt(cantidadTuristas));   
+                    }
+                    
+                    request.setAttribute("successMessage", "Inscripción realizada correctamente!");
+                    request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
+                            .forward(request, response);
+                    return;
+                    
+                } catch (MyException ex) {
+                    error = ex.getMessage();
+                }
+            }
+            
+            
+        }
         
+        
+        request.setAttribute("errorMessage", error);
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("actividades", actividades);
         request.setAttribute("salidas", salidas);
@@ -90,6 +146,19 @@ public class Inscripcion extends HttpServlet {
         
     }
 
+    private boolean validateRequest(HttpServletRequest request){
+        if (request.getParameter("formaPago") == null || 
+                request.getParameter("salida") == null ||
+                request.getParameter("cantidadTuristas") == null) {
+            return false;
+        }
+        if (request.getParameter("paquete") == null && request.getParameter("formaPago").equals("paquete")) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

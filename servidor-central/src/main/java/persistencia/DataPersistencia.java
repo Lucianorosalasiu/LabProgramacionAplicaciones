@@ -1400,6 +1400,35 @@ public class DataPersistencia implements IDataPersistencia {
         
     }
     
+    @Override
+    public void usarPaquete(Long idTurista, String nombrePaquete, int cantTuristas) {
+        EntityManager em = emf.createEntityManager();
+        
+        try{
+            ETurista eTurista = em.find(ETurista.class, idTurista);
+            
+            String queryPaquete = "SELECT p FROM EPaqueteActividadTuristica p WHERE p.nombre = :nombre";
+            EPaqueteActividadTuristica ePaquete = em.createQuery(queryPaquete, EPaqueteActividadTuristica.class)
+                                        .setParameter("nombre", nombrePaquete)
+                                        .getSingleResult();
+            
+            String queryCompra = "SELECT c FROM ECompraPaquete c WHERE c.COMPRADOR = :turista AND c.PAQUETE = :paquete";
+            ECompraPaquete eCompra = em.createQuery(queryCompra, ECompraPaquete.class)
+                            .setParameter("turista", eTurista)
+                            .setParameter("paquete", ePaquete)
+                            .getSingleResult();
+            
+            eCompra.setCANTTURISTAS(eCompra.getCANTTURISTAS() - cantTuristas);
+            
+            em.getTransaction().begin();
+            em.merge(eCompra);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
     
     
 }

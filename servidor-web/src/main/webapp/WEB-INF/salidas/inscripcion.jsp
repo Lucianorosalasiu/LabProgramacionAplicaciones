@@ -179,19 +179,31 @@
                                 <% } %>
                               </tbody>
                             </table>
+                            <select name="paquete" class="mb-3" required>
+                                <option value="" disabled selected>- seleccione un paquete -</option>
+                                <% 
+                                    String selectedPaquete = request.getParameter("paquete");
+                                    for(DTPaqueteActividadTuristica paquete : paquetes){
+                                        String nombrePaquete = paquete.getNombre();
+                                %>
+                                <option value="<%= nombrePaquete %>" <% if (nombrePaquete.equals(selectedPaquete)) { %>selected <% } %>>
+                                    <%= nombrePaquete %>
+                                </option>		
+                                <% } %>
+                            </select>
                             <%
                                         } else {
                             %>
                             <label>No cuenta con paquetes para esta salida. </label>
                             <%
-                                        }   
+                                        }
                                     }
                                 }
                             %>
                         </div>
                                         
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-secondary">
+                            <button type="submit" class="btn btn-secondary" name="BOTON" value="submit">
                                 Enviar
                             </button>
                         </div>
@@ -229,17 +241,17 @@
             });
             
             var salidaSelect = document.querySelector('select[name="salida"]');
-            actividadSelect.addEventListener('change', function() {
+            salidaSelect.addEventListener('change', function() {
                 cleanParameters([]);
             });
             
             var pagoSelect = document.querySelector('select[name="formaPago"]');
-            actividadSelect.addEventListener('change', function() {
+            pagoSelect.addEventListener('change', function() {
                 cleanParameters([]);
             });
             
-            var actividadSelect = document.querySelector('input[name="cantidadTuristas"]');
-            actividadSelect.addEventListener('change', function() {
+            var cantTuristas = document.querySelector('input[name="cantidadTuristas"]');
+            cantTuristas.addEventListener('change', function() {
                 cleanParameters([]);
             });
         </script>

@@ -312,9 +312,11 @@ public class Controlador implements IControlador{
     @Override
     public void altaInscripcion(
             DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, String nicknameTurista) throws MyException {
-        float costoActividad = dataPersistencia.obtenerCostoActividad(nombreActividad);
-        
-        dtInscripcion.setCostoTotal(costoActividad * dtInscripcion.getCantidadTuristas());
+        if (dtInscripcion.getCostoTotal() == 0) {
+            float costoActividad = dataPersistencia.obtenerCostoActividad(nombreActividad);
+
+            dtInscripcion.setCostoTotal(costoActividad * dtInscripcion.getCantidadTuristas());
+        }
         
         dataPersistencia.altaInscripcion(dtInscripcion, nombreSalida, nicknameTurista);
     }
@@ -398,4 +400,15 @@ public class Controlador implements IControlador{
     public List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas) {
         return dataPersistencia.obtenerPaquetesCompradosDisponibles(idTurista, nombreSalida, cantTuristas);
     }
+    
+    @Override
+    public void usarPaquete(Long idTurista, String nombrePaquete, int cantTuristas) {
+        dataPersistencia.usarPaquete(idTurista, nombrePaquete, cantTuristas);
+    }
+    
+    @Override
+    public float obtenerCostoActividad(String nombreActividad) {
+        return dataPersistencia.obtenerCostoActividad(nombreActividad);
+    }
+    
 }
