@@ -34,9 +34,10 @@ public class ETurista extends EUsuario {
             Date birthDate,
             String password,
             String imagePath,
+            byte [] photo,
             String nacionality
     ) {
-        super(nickname, name, lastName, email, birthDate, password, imagePath);
+        super(nickname, name, lastName, email, birthDate, password, imagePath, photo);
         this.nacionality = nacionality; 
     }
 }

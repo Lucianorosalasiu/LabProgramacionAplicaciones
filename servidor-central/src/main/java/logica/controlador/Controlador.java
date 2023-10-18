@@ -18,8 +18,6 @@ import logica.interfaces.IControlador;
 import exceptions.MyException;
 import java.util.LinkedList;
 import java.util.List;
-import logica.clases.Proveedor;
-import logica.clases.Turista;
 import persistencia.FDataPersistencia;
 import persistencia.IDataPersistencia;
 
@@ -49,21 +47,12 @@ public class Controlador implements IControlador{
                 nuevoProveedor.getNickname()
         );
         
-        // Si no existe el proveedor, se crea el objeto correspondiente
+        // Si no existe el proveedor, se hashea el password para almacenarlo en la BD
         String hashedPassword = nuevoProveedor.hashPassword(nuevoProveedor.getPassword());
-        Proveedor objProveedor = new Proveedor(
-                nuevoProveedor.getNickname(), 
-                nuevoProveedor.getName(), 
-                nuevoProveedor.getLastName(), 
-                nuevoProveedor.getEmail(), 
-                nuevoProveedor.getBirthDate(),
-                hashedPassword,
-                nuevoProveedor.getImagePath(), 
-                nuevoProveedor.getDescription(), 
-                nuevoProveedor.getWebsiteURL()
-        );
+        nuevoProveedor.setPassword(hashedPassword);
+
         // Se da de alta en la base de datos
-        dataPersistencia.altaProveedor(objProveedor);
+        dataPersistencia.altaProveedor(nuevoProveedor);
     }
     
     @Override
@@ -75,19 +64,10 @@ public class Controlador implements IControlador{
                 
         // Si no existe el turista, se crea el objeto correspondiente
         String hashedPassword = nuevoTurista.hashPassword(nuevoTurista.getPassword());
-        Turista objTurista = new Turista(
-                nuevoTurista.getNickname(), 
-                nuevoTurista.getName(), 
-                nuevoTurista.getLastName(), 
-                nuevoTurista.getEmail(), 
-                nuevoTurista.getBirthDate(),
-                hashedPassword,
-                nuevoTurista.getImagePath(), 
-                nuevoTurista.getNacionality()
-        );
+        nuevoTurista.setPassword(hashedPassword);
               
         // Se da de alta en la base de datos
-        dataPersistencia.altaTurista(objTurista);
+        dataPersistencia.altaTurista(nuevoTurista);
     }
     
     @Override
@@ -143,30 +123,11 @@ public class Controlador implements IControlador{
         if (usuario instanceof DTTurista) {
             DTTurista turista = (DTTurista) usuario;
             // Se realizan las operaciones necesarias con la instancia de DTTurista
-            // Se crea su objeto
-            Turista objTurista = new Turista(
-                    turista.getNickname(), 
-                    turista.getName(), 
-                    turista.getLastName(), 
-                    turista.getEmail(), 
-                    turista.getBirthDate(),
-                    turista.getNacionality()
-            );
-            dataPersistencia.actualizarTurista(objTurista);
+            dataPersistencia.actualizarTurista(turista);
         } else if (usuario instanceof DTProveedor) {
             DTProveedor proveedor = (DTProveedor) usuario;
             // Se realizan las operaciones necesarias con la instancia de DTProveedor
-            // En caso de que sea proveedor
-            Proveedor objProveedor = new Proveedor(
-                    proveedor.getNickname(), 
-                    proveedor.getName(), 
-                    proveedor.getLastName(), 
-                    proveedor.getEmail(), 
-                    proveedor.getBirthDate(),
-                    proveedor.getDescription(), 
-                    proveedor.getWebsiteURL()
-            );
-            dataPersistencia.actualizarProveedor(objProveedor);
+            dataPersistencia.actualizarProveedor(proveedor);
         } else {
             throw new MyException("Tipo de usuario no válido");
         }

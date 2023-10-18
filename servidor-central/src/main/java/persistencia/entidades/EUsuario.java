@@ -12,7 +12,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +36,7 @@ public abstract class EUsuario extends EBase {
     protected Date birthDate;
     protected String password;
     protected String imagePath;
+    protected byte[] photo;
 
     public EUsuario() { }
 
@@ -56,7 +56,8 @@ public abstract class EUsuario extends EBase {
             String email, 
             Date birthDate, 
             String password, 
-            String imagePath
+            String imagePath,
+            byte[] photo
     ) {
         super();
         this.nickname = nickname;
@@ -66,5 +67,6 @@ public abstract class EUsuario extends EBase {
         this.birthDate = birthDate;
         this.password = password;
         this.imagePath = imagePath;
+        this.photo = photo;
     }  
 }

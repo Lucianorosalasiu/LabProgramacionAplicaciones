@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTUsuario"%>
 <%@page import="java.util.List"%> 
+<%@page import="java.util.Base64"%> 
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -26,15 +27,22 @@
                 for(DTUsuario u: usuarios){
             %>
             <div class="usuario">
-                <%
-                    String urlFoto = u.getImagePath() == null || u.getImagePath().isEmpty()
-                        ? "assets/img/defecto.jpg"
-                        : (u.getImagePath().contains("tinyurl") 
-                            ? "https://" + u.getImagePath() 
-                            : u.getImagePath());
+                <% 
+                    if(u.getPhoto() != null ){
+                        String imagenConvertida = Base64.getEncoder().encodeToString(u.getPhoto());
+                        String base64imagen = imagenConvertida ;
                 %>
-                <img src="<%= urlFoto %>" class="rounded-circle" alt="foto">
-
+                        <img src="data:image/jpeg;base64,<%= base64imagen %>" class="rounded-circle>    
+                <%    
+                    } else {
+                    String imageURL = u.getImagePath() == null || u.getImagePath().isBlank()
+                        ? "assets/img/defecto.jpg"
+                        : "https://" + u.getImagePath();                     
+                %>
+                <img src="<%= imageURL %>" class="rounded-circle">
+                <%    
+                    }
+                %>
                 <div class="derecha">
                     <a class="nombre" href="?usuario=<%= u.getEmail()  %>">
                         <%= u.getName() %>

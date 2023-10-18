@@ -93,19 +93,20 @@ public class DataPersistencia implements IDataPersistencia {
     }
 
     @Override
-    public void altaProveedor(Proveedor objProveedor) throws MyException {
+    public void altaProveedor(DTProveedor proveedor) throws MyException {
         EntityManager em = emf.createEntityManager();   
         try {
             EProveedor nProveedor = new EProveedor(
-                    objProveedor.getNickname(),
-                    objProveedor.getName(),
-                    objProveedor.getLastName(),
-                    objProveedor.getEmail(),
-                    objProveedor.getBirthDate(),
-                    objProveedor.getPassword(),
-                    objProveedor.getImagePath(),
-                    objProveedor.getDescription(),
-                    objProveedor.getWebsiteURL()            
+                    proveedor.getNickname(),
+                    proveedor.getName(),
+                    proveedor.getLastName(),
+                    proveedor.getEmail(),
+                    proveedor.getBirthDate(),
+                    proveedor.getPassword(),
+                    proveedor.getImagePath(),
+                    proveedor.getPhoto(),
+                    proveedor.getDescription(),
+                    proveedor.getWebsiteURL()            
             );
 
             em.getTransaction().begin();
@@ -120,18 +121,19 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void altaTurista(Turista objTurista) throws MyException {
+    public void altaTurista(DTTurista turista) throws MyException {
         EntityManager em = emf.createEntityManager();   
         try {
             ETurista nTurista = new ETurista(
-                    objTurista.getNickname(),
-                    objTurista.getName(),
-                    objTurista.getLastName(),
-                    objTurista.getEmail(),
-                    objTurista.getBirthDate(),
-                    objTurista.getPassword(),
-                    objTurista.getImagePath(),
-                    objTurista.getNacionality()
+                    turista.getNickname(),
+                    turista.getName(),
+                    turista.getLastName(),
+                    turista.getEmail(),
+                    turista.getBirthDate(),
+                    turista.getPassword(),
+                    turista.getImagePath(),
+                    turista.getPhoto(),
+                    turista.getNacionality()
             );
 
             em.getTransaction().begin();
@@ -209,21 +211,21 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void actualizarProveedor(Proveedor objProveedor) throws MyException {
+    public void actualizarProveedor(DTProveedor proveedor) throws MyException {
         EntityManager em = emf.createEntityManager();  
         try {
             // Se busca al EProveedor por su nickname
-            String nickname = objProveedor.getNickname();
+            String nickname = proveedor.getNickname();
             EProveedor proveedorAActualizar = buscarProveedorPorNickname(nickname);
             
             em.getTransaction().begin();
             
             // Se intenta actualizar los campos del ETurista
-            proveedorAActualizar.setName(objProveedor.getName());
-            proveedorAActualizar.setLastName(objProveedor.getLastName());
-            proveedorAActualizar.setBirthDate(objProveedor.getBirthDate());
-            proveedorAActualizar.setDescription(objProveedor.getDescription());
-            proveedorAActualizar.setWebsiteURL(objProveedor.getWebsiteURL());
+            proveedorAActualizar.setName(proveedor.getName());
+            proveedorAActualizar.setLastName(proveedor.getLastName());
+            proveedorAActualizar.setBirthDate(proveedor.getBirthDate());
+            proveedorAActualizar.setDescription(proveedor.getDescription());
+            proveedorAActualizar.setWebsiteURL(proveedor.getWebsiteURL());
             
             // Se intenta realizar la transacción de actualización
             em.merge(proveedorAActualizar);
@@ -240,20 +242,20 @@ public class DataPersistencia implements IDataPersistencia {
     
     
     @Override
-    public void actualizarTurista(Turista objTurista) throws MyException {
+    public void actualizarTurista(DTTurista turista) throws MyException {
         EntityManager em = emf.createEntityManager();  
         try {
             // Se busca al ETurista por su nickname
-            String nickname = objTurista.getNickname();
+            String nickname = turista.getNickname();
             ETurista turistaAActualizar = buscarTuristaPorNickname(nickname);
             
             em.getTransaction().begin();
             
             // Se intenta actualizar los campos del ETurista
-            turistaAActualizar.setName(objTurista.getName());
-            turistaAActualizar.setLastName(objTurista.getLastName());
-            turistaAActualizar.setBirthDate(objTurista.getBirthDate());
-            turistaAActualizar.setNacionality(objTurista.getNacionality());
+            turistaAActualizar.setName(turista.getName());
+            turistaAActualizar.setLastName(turista.getLastName());
+            turistaAActualizar.setBirthDate(turista.getBirthDate());
+            turistaAActualizar.setNacionality(turista.getNacionality());
             
             // Se intenta realizar la transacción de actualización
             em.merge(turistaAActualizar);

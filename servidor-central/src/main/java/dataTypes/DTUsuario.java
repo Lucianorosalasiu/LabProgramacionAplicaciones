@@ -25,6 +25,7 @@ public abstract class DTUsuario {
     protected Date birthDate;
     protected String password;
     protected String imagePath;
+    protected byte[] photo;
 
     public DTUsuario() {}
 
@@ -35,7 +36,8 @@ public abstract class DTUsuario {
             String email, 
             Date birthDate, 
             String password, 
-            String imagePath
+            String imagePath,
+            byte [] photo
     ) {
         this.nickname = nickname;
         this.name = name;
@@ -44,6 +46,7 @@ public abstract class DTUsuario {
         this.birthDate = birthDate;
         this.password = password;
         this.imagePath = imagePath;
+        this.photo = photo;
     }
     
     public DTUsuario(

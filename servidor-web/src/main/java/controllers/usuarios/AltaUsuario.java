@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,33 +79,35 @@ public class AltaUsuario extends HttpServlet {
         String name = "";
         String lastName = "";
         String email = "";
-
+        String birthdate = "";
+                
         String error = null;
         try {
             if (this.validateParameters(request)) {
+                birthdate = request.getParameter("birthdate");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthDateParsed = dateFormat.parse(birthdate);
                 nickname = request.getParameter("nickname");
                 name = request.getParameter("name");
                 lastName = request.getParameter("lastName");
                 email = request.getParameter("email");
-                Date birthDate = dateFormat.parse(request.getParameter("birthdate"));
                 String password = request.getParameter("password");
                 
+                byte[] photo = null;
+
                 Part imagePart = request.getPart("photo");
-                byte[] newImage = null;
                 if (imagePart != null) {
                     InputStream imageFile = imagePart.getInputStream();
-                    newImage = IOUtils.toByteArray(imageFile);
+                    photo = IOUtils.toByteArray(imageFile);
                     IOUtils.closeQuietly(imageFile);
                 }
-                // ToDo: De momento no se carga la imagen. Falta arreglar esto
-                String imagePath = "";
+                
                 
                 String userType = request.getParameter("userType");
                 switch (userType) {
                     case "proveedor":
                         String description = request.getParameter("description");
-                        String websiteURL = request.getParameter("website").isEmpty()
+                        String websiteURL = request.getParameter("website").isBlank()
                                 ? ""
                                 : request.getParameter("website");
 
@@ -115,9 +116,10 @@ public class AltaUsuario extends HttpServlet {
                                 name,
                                 lastName,
                                 email,
-                                birthDate,
+                                birthDateParsed,
                                 password,
-                                imagePath,
+                                "",
+                                photo,
                                 description,
                                 websiteURL
                         );
@@ -131,9 +133,10 @@ public class AltaUsuario extends HttpServlet {
                                 name,
                                 lastName,
                                 email,
-                                birthDate,
+                                birthDateParsed,
                                 password,
-                                imagePath,
+                                "",
+                                photo,
                                 nacionality
                         );
 
@@ -149,6 +152,8 @@ public class AltaUsuario extends HttpServlet {
             error = ex.getMessage();
         } catch (ParseException ex) {
             Logger.getLogger(AltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendError(500);
+            return;
         }
         
         /* En caso de error, se mandan los atributos básicos previamente ingresados 
@@ -158,6 +163,7 @@ public class AltaUsuario extends HttpServlet {
         request.setAttribute("name",name);
         request.setAttribute("lastName",lastName);
         request.setAttribute("email",email);
+        request.setAttribute("birthdate",birthdate);
         request.getRequestDispatcher("/WEB-INF/usuarios/alta.jsp").
                 forward(request, response);  
     }
@@ -170,28 +176,28 @@ public class AltaUsuario extends HttpServlet {
     private boolean validateParameters(HttpServletRequest request)
             throws EmptyFieldsException, NonEqualPasswordException {
         // 1. Comprobar si alguno de los campos obligatorios está vacío
-        if (request.getParameter("nickname") == null
-                || request.getParameter("name") == null
-                || request.getParameter("lastName") == null
-                || request.getParameter("password") == null
-                || request.getParameter("confirmPassword") == null
-                || request.getParameter("birthdate") == null
-                || request.getParameter("email") == null) {
+        if (request.getParameter("nickname").isBlank()
+                || request.getParameter("name").isBlank()
+                || request.getParameter("lastName").isBlank()
+                || request.getParameter("password").isBlank()
+                || request.getParameter("confirmPassword").isBlank()
+                || request.getParameter("birthdate").isBlank()
+                || request.getParameter("email").isBlank()) {
             throw new EmptyFieldsException("Algún campo ha quedado vacío");
         }
 
         // 2. Comprobar si se seleccionó un tipo de usuario
         String userType = request.getParameter("userType");
-        if (userType == null) {
+        if (userType.isBlank()) {
             throw new EmptyFieldsException("Algún campo ha quedado vacío");
         }
 
         // 3. Comprobar campos específicos según el tipo de usuario
-        if ("proveedor".equals(userType) && request.getParameter("description") == null) {
+        if (userType.equals("proveedor") && request.getParameter("description").isBlank()) {
             throw new EmptyFieldsException("Algún campo ha quedado vacío");
         }
 
-        if ("turista".equals(userType) && request.getParameter("nacionality") == null) {
+        if (userType.equals("turista") && request.getParameter("nacionality").isBlank()) {
             throw new EmptyFieldsException("Algún campo ha quedado vacío");
         }
 

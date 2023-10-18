@@ -16,8 +16,6 @@ import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
 import java.util.List;
 import exceptions.MyException;
-import logica.clases.Proveedor;
-import logica.clases.Turista;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ETurista;
 
@@ -28,14 +26,14 @@ import persistencia.entidades.ETurista;
 public interface IDataPersistencia {
     /* CU USUARIOS */
     void existeUsuario(String email, String nickname) throws MyException;
-    void altaProveedor(Proveedor objProveedor) throws MyException;
-    void altaTurista(Turista objTurista) throws MyException;
+    void altaProveedor(DTProveedor proveedor) throws MyException;
+    void altaTurista(DTTurista turista) throws MyException;
     
     List<DTTurista> obtenerTuristas();
     ETurista buscarTuristaPorNickname(String nickname) throws MyException;
     EProveedor buscarProveedorPorNickname(String nickname) throws MyException;
-    void actualizarProveedor(Proveedor objProveedor) throws MyException;
-    void actualizarTurista(Turista objTurista) throws MyException;
+    void actualizarProveedor(DTProveedor proveedor) throws MyException;
+    void actualizarTurista(DTTurista turista) throws MyException;
     
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);

@@ -18,21 +18,21 @@ const toggleFields = () => {
         websiteDiv.style.display = 'none';
         descriptionDiv.style.display = 'none';
         inputNacionality.required = true;
-        inputDescription.style.required = false;
+        inputDescription.required = false;
     } else if (userTypeSelect.value === 'proveedor') {
         // Mostrar campos de sitio web y descripción, ocultar nacionalidad
         nacionalityDiv.style.display = 'none';
         websiteDiv.style.display = 'block';
         descriptionDiv.style.display = 'block';
         inputNacionality.required = false;
-        inputDescription.style.required = true;
+        inputDescription.required = true;
     } else {
         // Si no se selecciona un tipo de usuario, ocultar todos los campos
         nacionalityDiv.style.display = 'none';
         websiteDiv.style.display = 'none';
         descriptionDiv.style.display = 'none';
         inputNacionality.required = false;
-        inputDescription.style.required = false;
+        inputDescription.required = false;
     }
 };
 

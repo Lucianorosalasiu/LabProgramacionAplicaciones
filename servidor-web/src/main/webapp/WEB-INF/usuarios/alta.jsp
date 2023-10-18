@@ -170,7 +170,8 @@
                     <!-- ----- Ingreso del sitio web del proveedor ----- -->
                     <div class="col-md-6" id="website-div">
                         <label for="input-website" class="form-label">
-                            URL del Sitio Web (Opcional)
+                            URL del Sitio Web 
+                            <span class="text-info"> (Opcional)</span>
                         </label>
                         <input
                             type="text"
@@ -196,9 +197,14 @@
                     <hr />
                     <!-- -------------------- Ingreso de la foto de perfil --------------------- -->
                     <div class="col-md-7">
-                        <label id="label-insert-photo" for="input-photo" class="form-label"
-                               >Foto (Opcional)</label
+                        <label 
+                            id="label-insert-photo"
+                            for="input-photo"
+                            class="form-label"
                         >
+                            Foto
+                            <span class="text-info"> (Opcional)</span>
+                        </label>
                         <br />
                         <input type="file" id="input-photo" name="photo" accept="image/*" />
                     </div>
@@ -231,5 +237,7 @@
         <script src="assets/js/usuarios/signupFormValidator.js"></script>
         <!-- Mostrar u ocultar campos según el tipo de usuario seleccionado -->
         <script src="assets/js/usuarios/toggleFields.js"></script>
+        <!-- Cargar vista previa de la imagen seleccionada en el form -->
+        <script src="assets/js/usuarios/imagePreview.js"></script>
     </body>
 </html>

@@ -40,10 +40,11 @@ public class EProveedor extends EUsuario {
             Date birthDate,
             String password,
             String imagePath,
+            byte [] photo,
             String description, 
             String websiteURL
     ) {
-        super(nickname, name, lastName, email, birthDate, password, imagePath);
+        super(nickname, name, lastName, email, birthDate, password, imagePath, photo);
         this.description = description;
         this.websiteURL = websiteURL;
     }

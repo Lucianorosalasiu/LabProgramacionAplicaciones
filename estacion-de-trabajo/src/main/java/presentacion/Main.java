@@ -4411,6 +4411,28 @@ public class Main extends javax.swing.JFrame {
         JCU1ClearFields();
     }//GEN-LAST:event_JCU1ButtonClearFieldsActionPerformed
 
+    private byte[] jCU1GetPhoto(){
+        // Paso 1: Obtener el Image del ImageIcon
+        ImageIcon imageIcon = (ImageIcon) jCU1LabelPreview.getIcon();
+        Image image = imageIcon.getImage();
+
+        // Paso 2: Convertir el Image en un arreglo de bytes (byte array)
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = bufferedImage.createGraphics();
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "jpg", baos);
+            byte[] imageData = baos.toByteArray();        
+            return imageData;
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     private String jCU1GuardarImagen(String nickname){
         String imagePath = null;
         // Se obtiene el icono guardado en el JLabel
@@ -4472,14 +4494,18 @@ public class Main extends javax.swing.JFrame {
             String password1 = new String(passwordChars1);
             char[] passwordChars2 = JCU1Password2Field.getPassword();
             String password2 = new String(passwordChars2);
+            
+            byte[] photo = null;
             String imagePath = "";
 
             if(!password1.equals(password2)){
                 throw new NonEqualPasswordException("Las contraseñas ingresadas no coinciden");
             }
+                        
+            /*conseguir la imagen si existe*/
 
             if (jCU1LabelPreview.getIcon() != null){
-                imagePath = jCU1GuardarImagen(nickname);
+                photo = jCU1GetPhoto();
             }
                   
             switch (selectedItem) {
@@ -4497,6 +4523,7 @@ public class Main extends javax.swing.JFrame {
                             birthDate,
                             password1,
                             imagePath,
+                            photo,
                             description,
                             websiteURL
                     );
@@ -4513,6 +4540,7 @@ public class Main extends javax.swing.JFrame {
                             birthDate,
                             password1,
                             imagePath,
+                            photo,
                             selectedCountry
                     );
 
@@ -5383,18 +5411,22 @@ public class Main extends javax.swing.JFrame {
 
     private void jCU1ButtonSelectPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU1ButtonSelectPhotoActionPerformed
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "jpeg", "png", "gif"));
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
-            String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-            ImageIcon imageIcon = new ImageIcon(imagePath);
-            Image image = imageIcon.getImage();
-            // Ajusta el tamaño de la imagen
-            ImageIcon imgPreview = new ImageIcon(image.getScaledInstance(185, 120, Image.SCALE_SMOOTH));
-            jCU1LabelPreview.setIcon(imgPreview);
-//            jCU1LabelPreview.setPreferredSize(new Dimension(185, 120)); // Establece el tamaño deseado
-//            jCU1LabelPreview.setIcon(imageIcon);
+            File selectedFile = fileChooser.getSelectedFile();
+            
+            try{
+                byte[] foto = Files.readAllBytes(selectedFile.toPath());
+                ImageIcon imageIcon = new ImageIcon(foto);
+                Image image = imageIcon.getImage();
+                // Ajusta el tamaño de la imagen
+                ImageIcon imgPreview = new ImageIcon(image.getScaledInstance(185, 120, Image.SCALE_SMOOTH));
+                jCU4LabelPreview.setIcon(imgPreview);
+            } catch(IOException ex){
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jCU1ButtonSelectPhotoActionPerformed
 
