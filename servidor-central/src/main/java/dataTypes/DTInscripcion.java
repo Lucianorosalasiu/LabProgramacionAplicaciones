@@ -4,6 +4,7 @@
  */
 package dataTypes;
 
+import Enums.TipoInscripcion;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,8 @@ public class DTInscripcion {
     Date fecha;
     int cantidadTuristas;
     float costoTotal;
+    
+    TipoInscripcion tipo;
        
     public DTInscripcion(){}
     
