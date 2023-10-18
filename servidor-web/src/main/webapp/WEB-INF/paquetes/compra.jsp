@@ -8,16 +8,16 @@
 <%@page import="dataTypes.DTDepartamento, dataTypes.DTActividadTuristica, dataTypes.DTSalidaTuristica,dataTypes.DTPaqueteActividadTuristica"%>
 <%@page import="java.util.List"%> 
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Compra de Paquete</title>
     </head>
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
     <body class="h-100 d-flex flex-column">
-        <div class="flex-grow-1">
-            <form method="post" action="/comprapaquete" id="consultaForm">
-                <div class="m-3">
+        <div class="d-flex flex-grow-1 flex-column">
+            <form class="d-flex flex-column flex-grow-1" method="post" action="/comprapaquete" id="consultaForm">
+                <div class="flex-grow-1 m-3">
                     <label>Paquetes<span class="text-info"> - Seleccione un paquete para listar su informacion.</span></label>
                     <select name="paquetes" class="form-select" single>
                         <option value="" disabled selected>- seleccionar paquete -</option>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="container w-100">
+            <div class="container w-100 p-2">
              <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
                 <button type="submit" class="btn btn-success" name="BOTON" value="compra">Realizar Compra</button>
                <%}else{%>
@@ -117,6 +117,7 @@
             
             
     </script>
-    </body>
+    
     <jsp:include page="/WEB-INF/templates/footer.jsp"/>
+    </body>
 </html>

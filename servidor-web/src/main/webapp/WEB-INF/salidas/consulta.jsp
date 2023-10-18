@@ -17,8 +17,8 @@
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
 
     <body class="h-100 d-flex flex-column">
-        <div class="flex-grow-1">
-            <form method="post" action="/consultasalida" id="consultaForm">
+        <div class="d-flex flex-grow-1 flex-column">
+            <form class="flex-grow-1" method="post" action="/consultasalida" id="consultaForm">
                 <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                     <select name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>
