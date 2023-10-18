@@ -199,6 +199,11 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTActividadTuristica> obtenerActividadesTuristicasPorCategoria(String nombreCategoria){
+        return dataPersistencia.obtenerActividadesTuristicasPorCategoria(nombreCategoria);
+    }
+    
+    @Override
     public DTActividadTuristica obtenerActividadTuristica(String nombreActividad){
         Long idActividad = 0L;
         List <DTActividadTuristica> dtActividadesTuristicas = dataPersistencia.obtenerActividadesTuristicas();

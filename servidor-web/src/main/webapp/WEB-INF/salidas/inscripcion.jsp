@@ -17,8 +17,8 @@
     <jsp:include page="/WEB-INF/templates/header.jsp"/>
     
    <body class="h-100 d-flex flex-column">
-        <div class="flex-grow-1">
-            <form method="post" action="/inscripcion" id="inscripcionForm">
+        <div class="d-flex flex-column flex-grow-1">
+            <form class="flex-grow-1" method="post" action="/inscripcion" id="inscripcionForm">
                 <div class="m-3">
                     <select name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>
@@ -254,6 +254,20 @@
             cantTuristas.addEventListener('change', function() {
                 cleanParameters([]);
             });
+        </script>
+        
+        <script>
+            // Restaura la posición del scroll después de recargar la página
+            window.onload = function() {
+                if (sessionStorage.getItem('scrollPosition')) {
+                    window.scrollTo(0, sessionStorage.getItem('scrollPosition'));
+                }
+            };
+
+            // Guarda la posición del scroll antes de recargar la página
+            window.onbeforeunload = function() {
+                sessionStorage.setItem('scrollPosition', window.scrollY);
+            };
         </script>
     </body>
 </html>
