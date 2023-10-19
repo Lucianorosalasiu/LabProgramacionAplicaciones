@@ -5472,7 +5472,7 @@ public class Main extends javax.swing.JFrame {
                 Image image = imageIcon.getImage();
                 // Ajusta el tamaño de la imagen
                 ImageIcon imgPreview = new ImageIcon(image.getScaledInstance(185, 120, Image.SCALE_SMOOTH));
-                jCU4LabelPreview.setIcon(imgPreview);
+                jCU1LabelPreview.setIcon(imgPreview);
             } catch(IOException ex){
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }

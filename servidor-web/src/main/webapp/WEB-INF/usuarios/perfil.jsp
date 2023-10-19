@@ -14,31 +14,27 @@
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
         <link rel="stylesheet" href="assets/css/styles.css"/>
-        <title>TurismoUy | Mi perfil</title>
+        <title>TurismoUy | Perfil de Usuario</title>
     </head>
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <%
-            DTUsuario usr = (DTUsuario) request.getAttribute("usuario"); 
+            DTUsuario usr = (DTUsuario) request.getAttribute("usuario");
+            String profileImageUrl = usr.getProfileImageUrl();
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
-            <h3>Perfil de usuario</h3>
+            <h3>Perfil del usuario: 
+                <span class="text-info float-right"> <%= usr.getNickname() %></span>
+            </h3>
             <hr />
             <div id="perfil_izquierda">
-                <%
-                    String urlFoto = usr.getImagePath() == null || usr.getImagePath().isEmpty()
-                        ? "assets/img/defecto.jpg"
-                        : (usr.getImagePath().contains("tinyurl") 
-                            ? "https://" + usr.getImagePath() 
-                            : usr.getImagePath());
-                %>
-                <img src="<%= urlFoto %>" alt="foto">
+                <img src="<%= profileImageUrl %>">
             </div>
             <div id="perfil_derecha">
                 <div class="contenedor">
                     <h2>Información básica</h2>
-                    <label class="rotulo">Nombre:</label>
-                    <label class="valor"><%= usr.getName() %></label>
+                    <label class="rotulo">Nombre completo:</label>
+                    <label class="valor"><%= usr.getName()%> <%= usr.getLastName()%></label>
                     <br/>
                     <label class="rotulo">Fecha de nacimiento:</label>
                     <label class="valor">
@@ -47,6 +43,24 @@
                             new SimpleDateFormat("dd-MM-yyyy").format(usr.getBirthDate())
                         %>
                     </label>
+                    <br/>
+                    <%
+                    if (usr instanceof DTTurista) {
+                        DTTurista turista = (DTTurista) usr;
+                    %>        
+                        <label class="rotulo">País de Orígen</label>
+                        <label class="valor"><%= turista.getNacionality() %></label>
+                        <br/>
+                    <%
+                    } else if (usr instanceof DTProveedor) {
+                        DTProveedor proveedor = (DTProveedor) usr;
+                    %>
+                        <br/>
+                        <label class="rotulo">Descripción:</label>
+                        <label class="valor"><%= proveedor.getDescription() %></label>  
+                    <%
+                    }
+                    %> 
                 </div>
 
                 <div class="contenedor">
@@ -57,6 +71,20 @@
                             <%= usr.getEmail() %>
                         </a>
                     </label>
+                    <br/>
+                    <%
+                    if (usr instanceof DTProveedor) {
+                        DTProveedor proveedor = (DTProveedor) usr;
+                    %>    
+                    <label class="rotulo">Sitio web:</label>
+                    <label class="valor">
+                        <a href="<%= proveedor.getWebsiteURL() %>">
+                            <%= proveedor.getWebsiteURL() %>
+                        </a>
+                    </label>
+                    <%
+                    }
+                    %> 
                 </div>
             </div>
         </div>

@@ -4,8 +4,6 @@
  */
 package controllers.usuarios;
 
-import dataTypes.DTProveedor;
-import dataTypes.DTTurista;
 import java.util.List;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

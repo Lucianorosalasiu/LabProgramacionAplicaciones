@@ -59,9 +59,10 @@ public class DTTurista extends DTUsuario{
             Date birthDate, 
             String password,
             String imagePath,
+            byte [] photo,
             String nacionality
     ) {
-        super(id, nickname, name, lastName, email, birthDate, password, imagePath);
+        super(id, nickname, name, lastName, email, birthDate, password, imagePath, photo);
         this.nacionality = nacionality;
     }
 

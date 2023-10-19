@@ -9,7 +9,7 @@ const toggleFields = () => {
     const nacionalityDiv = document.getElementById('nacionality-div');
     const websiteDiv = document.getElementById('website-div');
     const descriptionDiv = document.getElementById('description-div');
-    const inputNacionality = document.getElementById('input-nacionality');
+    const nacionalitySelect = document.getElementById('select-nacionality');
     const inputDescription = document.getElementById('input-description');
 
     if (userTypeSelect.value === 'turista') {
@@ -17,21 +17,21 @@ const toggleFields = () => {
         nacionalityDiv.style.display = 'block';
         websiteDiv.style.display = 'none';
         descriptionDiv.style.display = 'none';
-        inputNacionality.required = true;
+        nacionalitySelect.required = true;
         inputDescription.required = false;
     } else if (userTypeSelect.value === 'proveedor') {
         // Mostrar campos de sitio web y descripción, ocultar nacionalidad
         nacionalityDiv.style.display = 'none';
         websiteDiv.style.display = 'block';
         descriptionDiv.style.display = 'block';
-        inputNacionality.required = false;
+        nacionalitySelect.required = false;
         inputDescription.required = true;
     } else {
         // Si no se selecciona un tipo de usuario, ocultar todos los campos
         nacionalityDiv.style.display = 'none';
         websiteDiv.style.display = 'none';
         descriptionDiv.style.display = 'none';
-        inputNacionality.required = false;
+        nacionalitySelect.required = false;
         inputDescription.required = false;
     }
 };

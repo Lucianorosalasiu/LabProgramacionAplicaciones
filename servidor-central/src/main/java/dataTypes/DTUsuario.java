@@ -4,6 +4,7 @@
  */
 package dataTypes;
 
+import java.util.Base64;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -72,7 +73,7 @@ public abstract class DTUsuario {
         this.birthDate = birthDate;
     }    
         
-    public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate, String password, String imagePath) {
+    public DTUsuario(Long id, String nickname, String name, String lastName, String email, Date birthDate, String password, String imagePath, byte [] photo) {
         this.id = id;
         this.nickname = nickname;
         this.name = name;
@@ -81,6 +82,7 @@ public abstract class DTUsuario {
         this.birthDate = birthDate;
         this.password = password;
         this.imagePath = imagePath;
+        this.photo = photo;
     }
         
     public DTUsuario(Long id, String nickname, String email) {
@@ -95,5 +97,20 @@ public abstract class DTUsuario {
     
     public boolean verifyPassword(String inputPassword, String hashedPassword){
        return BCrypt.checkpw(inputPassword, hashedPassword);
+    }
+    
+    // Método válido para visualizar las imagenes desde la web, no desde Swing
+    public String getProfileImageUrl() {
+        if (this.photo != null) {
+            // Si hay una imagen de perfil en formato blob, se convierte a Base64
+            String encodedImage = Base64.getEncoder().encodeToString(photo);
+            return "data:image/jpeg;base64," + encodedImage;
+        } else if (this.imagePath != null && !this.imagePath.isBlank()) {
+            // Si hay una ruta de imagen
+            return "https://" + this.imagePath;
+        } else {
+            // Si no se encuentra una imagen, usa la imagen por defecto
+            return "assets/img/defecto.jpg";
+        }
     }
 }

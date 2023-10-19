@@ -64,10 +64,11 @@ public class DTProveedor extends DTUsuario {
             Date birthDate, 
             String password, 
             String imagePath,
+            byte [] photo,
             String description, 
             String websiteURL
     ) {
-        super(id, nickname, name, lastName, email, birthDate, password, imagePath);
+        super(id, nickname, name, lastName, email, birthDate, password, imagePath, photo);
         this.description = description;
         this.websiteURL = websiteURL;
     }

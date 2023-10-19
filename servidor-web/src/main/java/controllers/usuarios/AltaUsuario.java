@@ -156,16 +156,20 @@ public class AltaUsuario extends HttpServlet {
             return;
         }
         
-        /* En caso de error, se mandan los atributos básicos previamente ingresados 
-        en el formulario, para evitar cargarlos nuevamente*/
+        /* En caso de error, se cargan los atributos básicos previamente 
+        ingresados en el form, para evitar escribirlos nuevamente cuando se 
+        recargue la vista con el get.
+        Además, se carga el mensaje de error.
+        */
+        
         request.setAttribute("errorMessage", error);
         request.setAttribute("nickname", nickname);
         request.setAttribute("name",name);
         request.setAttribute("lastName",lastName);
         request.setAttribute("email",email);
         request.setAttribute("birthdate",birthdate);
-        request.getRequestDispatcher("/WEB-INF/usuarios/alta.jsp").
-                forward(request, response);  
+        
+        this.doGet(request, response);
     }
 
     /**

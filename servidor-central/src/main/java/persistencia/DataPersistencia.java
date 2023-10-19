@@ -167,6 +167,7 @@ public class DataPersistencia implements IDataPersistencia {
                         t.getBirthDate(),
                         t.getPassword(),
                         t.getImagePath(),
+                        t.getPhoto(),
                         t.getNacionality()
                 );
                 touristList.add(turista);
@@ -483,6 +484,7 @@ public class DataPersistencia implements IDataPersistencia {
                         p.getBirthDate(),
                         p.getPassword(),
                         p.getImagePath(),
+                        p.getPhoto(),
                         p.getDescription(),
                         p.getWebsiteURL()
                 );

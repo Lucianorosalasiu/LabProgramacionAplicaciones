@@ -156,16 +156,18 @@
                     </div>
                     <!-- ----- Ingreso de la nacionalidad del turista ----- -->
                     <div class="col-md-4" id="nacionality-div">
-                        <label for="input-nacionality" class="form-label">
+                        <label for="select-nacionality" class="form-label">
                             Nacionalidad
                         </label>
-                        <input
+                        <select
                             type="text"
-                            id="input-nacionality"
+                            id="select-nacionality"
                             class="form-control"
                             name="nacionality"
-                            placeholder="Uruguay"
-                            />
+                            required
+                            >
+                            <option value=''>Selecciona el país</option>
+                        </select>
                     </div>
                     <!-- ----- Ingreso del sitio web del proveedor ----- -->
                     <div class="col-md-6" id="website-div">
@@ -237,6 +239,8 @@
         <script src="assets/js/usuarios/signupFormValidator.js"></script>
         <!-- Mostrar u ocultar campos según el tipo de usuario seleccionado -->
         <script src="assets/js/usuarios/toggleFields.js"></script>
+        <!-- Cargar los países del campo select a través de un CSV -->
+        <script src="assets/js/usuarios/loadCountryList.js"></script>
         <!-- Cargar vista previa de la imagen seleccionada en el form -->
         <script src="assets/js/usuarios/imagePreview.js"></script>
     </body>
