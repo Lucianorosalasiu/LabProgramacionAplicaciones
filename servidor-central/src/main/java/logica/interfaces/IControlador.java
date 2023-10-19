@@ -46,6 +46,7 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesTuristicasPorCategoria(String nombreCategoria);
     DTActividadTuristica obtenerActividadTuristica(String nombreActividad);
     List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(String nombreActividad);
+    DTActividadTuristica obtenerActividadTuristicaNull(Long idActividad);
 
     /*CU6*/
     void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException;

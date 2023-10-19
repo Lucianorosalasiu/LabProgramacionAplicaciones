@@ -17,11 +17,16 @@
     
     <body id="error_page" class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1 titulo_error">
-            404: Recurso no encontrado    
+            <p class="fw-bold">404: Recurso no encontrado</p>
         </div>
+        
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+            <img class="" width="100" height="100" src="/assets/img/404.png" alt="Error 404"/>
+        </div>
+        
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <p>
-                La página a la cual estás intentando acceder no existe. 
+                La página a la cual estás intentando acceder <span class="fw-bold text-danger">no existe.</span>
                 Si deseas, puedes <a href="/home">volver</a> al inicio.
             </p>
         </div>

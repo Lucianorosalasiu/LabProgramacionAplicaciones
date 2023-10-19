@@ -17,11 +17,16 @@
     
     <body id="error_page" class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1 titulo_error">
-            500: Error de servidor    
+            <p class="fw-bold">500: Error de servidor</p>
         </div>
+        
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+            <img class="" width="100" height="100" src="/assets/img/500.png" alt="Error 500"/>
+        </div>
+        
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <p>
-                Ha ocurrido un error al procesar la información. 
+                Ha ocurrido un <span class="fw-bold text-danger">error al procesar la información.</span> 
                 Si deseas, puedes <a href="/home">volver</a> al inicio.
             </p>
         </div>

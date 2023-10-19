@@ -215,6 +215,11 @@ public class Controlador implements IControlador{
         }
         return dataPersistencia.obtenerActividadTuristica(idActividad);
     }
+    
+    @Override
+    public DTActividadTuristica obtenerActividadTuristicaNull(Long idActividad){
+        return dataPersistencia.obtenerActividadTuristicaNull(idActividad);
+    }
    
     @Override
     public List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionados(String nombreActividad){
