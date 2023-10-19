@@ -84,7 +84,7 @@
                         <div class="card-body">
                           <h5 class="card-title"><%=actividad.getNombre()%></h5>
                           <p class="card-text"><%=actividad.getDescripcion()%></p>
-                          <a href="#" class="btn btn-primary">Ver detalles</a>
+                          <a href="?idActividad=<%=actividad.getId()%>" class="btn btn-primary">Ver detalles</a>
                         </div>
                     </div>
                 <% } %>

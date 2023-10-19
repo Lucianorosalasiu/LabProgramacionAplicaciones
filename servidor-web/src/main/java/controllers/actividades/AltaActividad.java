@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
+import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import org.apache.commons.io.IOUtils;
@@ -44,6 +45,13 @@ public class AltaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String userType = (String) request.getSession().getAttribute("sessionType");
+        
+        if (isNull(userType) || !userType.equals("PROVEEDOR")) {
+            response.sendError(403); 
+            return;
+        }
+        
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
         String errorMessage = null;

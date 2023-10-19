@@ -7,6 +7,7 @@ package controllers.actividades;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
+import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -42,55 +43,58 @@ public class ConsultaActividad extends HttpServlet {
         IControlador controlador = fabrica.getInterface();
         String errorMessage = null;
         
-        if(validateParameters(request)){
-            try {
-                if(request.getParameter("departamento") != null){
-                    String departamento = request.getParameter("departamento");
-                    List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasConId(departamento);
-                        if(actividades.size() < 1){
-                            request.setAttribute("actividades",null);
-                        }else{
-                            request.setAttribute("actividades", actividades); 
-                        }
-                }else if(request.getParameter("categoria") != null){
-                    String categoria = request.getParameter("categoria");
-                    List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasPorCategoria(categoria);
-                        if(actividades.size() < 1){
-                            request.setAttribute("actividades",null);
-                        }else{
-                            request.setAttribute("actividades", actividades); 
-                        }
-                }
- 
-            } catch (Exception e) {
-                errorMessage = e.getMessage();  
-                request.setAttribute("errorMessage", errorMessage);
-            }
-        }
-
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
         
-//        List<DTCategoria> categorias = (List<DTCategoria>) request.getAttribute("categorias");
-//        List<DTDepartamento> departamentos = (List<DTDepartamento>) request.getAttribute("departamentos");
-//        
-//        errorMessage = "VALIDATE_PARAMETERS = " + validateParameters(request) +
-//                "|categorias.size(): " + categorias.size() +
-//                "|departamentos.size(): " + departamentos.size();
-//        
-//        for(DTCategoria c : categorias){
-//            errorMessage+="|" + c.getId() + "|" + c.getNombre();
-//        }
-//        
-//        for(DTDepartamento d : departamentos){
-//            errorMessage+="|" + d.getId() + "|" + d.getNombre();
-//        }
-//        
-//        
-//        request.setAttribute("errorMessage", errorMessage);
-        
+        //en caso de que no se haya seleccionado ninguna actividad, se listan todas
+        if(request.getParameter("idActividad") == null){
+            if(validateParameters(request)){
+                try {
+                    if(request.getParameter("departamento") != null){
+                        String departamento = request.getParameter("departamento");
+                        List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasConId(departamento);
+                            if(actividades.size() < 1){
+                                request.setAttribute("actividades",null);
+                            }else{
+                                request.setAttribute("actividades", actividades); 
+                            }
+                    }else if(request.getParameter("categoria") != null){
+                        String categoria = request.getParameter("categoria");
+                        List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasPorCategoria(categoria);
+                            if(actividades.size() < 1){
+                                request.setAttribute("actividades",null);
+                            }else{
+                                request.setAttribute("actividades", actividades); 
+                            }
+                    }
+
+                } catch (Exception e) {
+                    errorMessage = e.getMessage();  
+                    request.setAttribute("errorMessage", errorMessage);
+                }
+            }
         request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
                     .forward(request, response);
+        }else{
+            Long idActividad = Long.parseLong(request.getParameter("idActividad"));
+            DTActividadTuristica actividad;
+            try {
+                //metodo que busca actividad por su id y si no la encuentra devuelve null a diferencia
+                //de metodos previamente existentes
+                actividad = controlador.obtenerActividadTuristicaNull(idActividad);
+                if(actividad == null){
+                    throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
+                }
+            } catch (MyException ex) {
+                response.sendError(404);
+                return;
+            }
+            
+            request.setAttribute("actividad",actividad);
+            
+            request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
+                        .forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

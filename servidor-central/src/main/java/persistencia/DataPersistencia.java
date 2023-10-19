@@ -527,6 +527,33 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
+    public DTActividadTuristica obtenerActividadTuristicaNull(Long idActividad){
+        EntityManager em = emf.createEntityManager();
+        String categoriasString = "";
+        try{
+            EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, idActividad);
+            if(eActividadTuristica.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                
+                for( ECategoria e : eActividadTuristica.getCategorias()){
+                    categoriasString += "|" + e.getNombre();
+                }
+                
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
+                        eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
+                        eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta(),
+                categoriasString);
+                return dtActividadTuristica;
+            }else{
+                return null;
+            }       
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
     public List<DTActividadTuristica> obtenerActividadesTuristicasConId(Long idDepartamento){
         EntityManager em = emf.createEntityManager();
         List<EActividadTuristica> resultados = new LinkedList<>();
