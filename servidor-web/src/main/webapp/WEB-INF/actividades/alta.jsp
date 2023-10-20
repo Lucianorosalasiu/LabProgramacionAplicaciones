@@ -30,14 +30,6 @@
 
                 <%}%>
                 
-                <%if(request.getAttribute("success") != null){%>
-
-                <div class="mt-3 p-3 bg-success bg-opacity-10 border border-success rounded text-success">
-                    <p class="m-0">Actividad dada de alta correctamente!.</p>
-                </div>
-
-                <%}%>
-                
                 <div class="form-group">
                     <label>Departamento</label>
                     <select class="text-light form-select bg-primary" name="departamento">

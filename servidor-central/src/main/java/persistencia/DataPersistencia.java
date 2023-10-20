@@ -538,7 +538,7 @@ public class DataPersistencia implements IDataPersistencia {
                     categoriasString += "|" + e.getNombre();
                 }
                 
-                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getNombre(),
+                DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getId(),eActividadTuristica.getNombre(),
                         eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
                         eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta(),
                 categoriasString);

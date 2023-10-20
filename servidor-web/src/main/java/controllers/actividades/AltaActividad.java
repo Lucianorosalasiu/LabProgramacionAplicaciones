@@ -109,7 +109,10 @@ public class AltaActividad extends HttpServlet {
                 
                 controlador.existeActividadTuristica(nombre);
                 controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage);
-                request.setAttribute("success", true);
+                request.setAttribute("successMessage", "Actividad turistica dada de alta!");
+                request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
+                        .forward(request, response);
+                return;
             }catch(Exception e){
                 errorMessage = e.getMessage();  
                 request.setAttribute("errorMessage", errorMessage);

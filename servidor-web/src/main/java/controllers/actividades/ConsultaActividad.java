@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.Base64;
 import java.util.List;
 import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
@@ -90,8 +91,26 @@ public class ConsultaActividad extends HttpServlet {
                 return;
             }
             
-            request.setAttribute("actividad",actividad);
+
+            String imageDataUri = "";
+
+            byte [] foto = controlador.obtenerFotoActividadTuristica(actividad.getId());
+            if(foto != null){
+                String imagenBase64 = Base64.getEncoder().encodeToString(foto);
+                String contentType = "image/jpeg";
+                imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
+            }
             
+            String categorias = "";
+            try {
+               categorias += actividad.getCategoriasString(); 
+            } catch (Exception e) {
+            }
+            
+            
+            request.setAttribute("categorias", categorias);
+            request.setAttribute("foto", imageDataUri);
+            request.setAttribute("actividad",actividad);
             request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
                         .forward(request, response);
         }
