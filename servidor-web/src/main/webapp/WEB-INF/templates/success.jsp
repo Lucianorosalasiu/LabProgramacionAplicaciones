@@ -16,7 +16,11 @@
     
     <body class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
-            <h1><%= request.getAttribute("successMessage") %></h1>
+            <h1 class="fw-bold text-success"><%= request.getAttribute("successMessage") %></h1>
+        </div>
+        
+        <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
+            <img class="" width="100" height="100" src="/assets/img/success.png" alt="Éxito"/>
         </div>
     
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
