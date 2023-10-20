@@ -74,6 +74,18 @@ public class DTActividadTuristica {
         this.categoriasString = categoriasString;
     }
     
+    public DTActividadTuristica(Long id,String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, String categoriasString){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+        this.categoriasString = categoriasString;
+    }
+    
     public DTActividadTuristica(String nombre){
         this.nombre = nombre;
     }
