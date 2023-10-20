@@ -7,9 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <header class=" w-100 bg-dark text-light d-flex align-items-center flex-grow-0 flex-column">
-    <div class="w-100 d-flex justify-content-between align-items-center p-2">
-        <h1>Turismo Uy!</h1>
-
+    <div class="w-100 d-flex justify-content-between align-items-center p-2"> 
+        <div class="d-flex align-items-center">
+            <h1 class="fw-bold">Turismo Uy!</h1>
+                <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){%>
+                    <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
+                        <img class="" width="50" height="50" src="/assets/img/mateTurista.png" alt="Matienzo"/>
+                    <%}else{%>
+                        <img class="" width="50" height="50" src="/assets/img/mateProveedor.png" alt="Matienzo"/>
+                    <%}%>
+                <%}else{%>
+                        <img class="" width="50" height="50" src="/assets/img/mate.png" alt="Matienzo"/>
+                <%}%>
+        </div>
+        
         <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){%>
         <div class="d-flex flex-column gap-2">
             <a href="/consultausuario?usuario=<%=session.getAttribute("sessionNickname")%>"> @<%=session.getAttribute("sessionNickname")%></a>
