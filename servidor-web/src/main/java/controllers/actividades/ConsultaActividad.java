@@ -7,6 +7,8 @@ package controllers.actividades;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
+import dataTypes.DTPaqueteActividadTuristica;
+import dataTypes.DTSalidaTuristica;
 import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -18,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.Base64;
+import java.util.LinkedList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
@@ -105,9 +108,27 @@ public class ConsultaActividad extends HttpServlet {
             try {
                categorias += actividad.getCategoriasString(); 
             } catch (Exception e) {
+                
             }
             
+            List<DTSalidaTuristica> salidas = new LinkedList<>();
+            try{
+                salidas = controlador.obtenerSalidasTuristicas(actividad.getNombre());
+            }catch(Exception ex){
+                response.sendError(404);
+                return;
+            }
             
+            List<DTPaqueteActividadTuristica> paquetes = new LinkedList<>(); 
+            try{
+                paquetes = controlador.obtenerPaquetesRelacionadosCompletos(actividad.getId());
+            }catch(Exception ex){
+                response.sendError(404);
+                return;
+            }
+            
+            request.setAttribute("paquetes", paquetes);
+            request.setAttribute("salidas",salidas);
             request.setAttribute("categorias", categorias);
             request.setAttribute("foto", imageDataUri);
             request.setAttribute("actividad",actividad);

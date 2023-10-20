@@ -694,6 +694,33 @@ public class DataPersistencia implements IDataPersistencia {
              em.close();
          }
     }
+    
+    @Override
+    public List<DTPaqueteActividadTuristica> obtenerPaquetesRelacionadosCompletos(Long idActividad){
+         EntityManager em = emf.createEntityManager();
+         List<EPaqueteActividadTuristica> resultados_consulta = new LinkedList<>();
+         List<DTPaqueteActividadTuristica> resultados = new LinkedList<>();
+         
+         try{
+             EActividadTuristica actividad = em.find(EActividadTuristica.class,idActividad);
+             
+             if(actividad.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                resultados_consulta = actividad.getPaquetes();
+
+                for(EPaqueteActividadTuristica p : resultados_consulta){
+                    DTPaqueteActividadTuristica dtPaqueteActividadTuristica = new
+                        DTPaqueteActividadTuristica(p.getNombre(),p.getDescripcion(),p.getValidez(),p.getDescuento(),p.getFechaAlta());
+                    resultados.add(dtPaqueteActividadTuristica);
+                }
+             }
+             return resultados;
+         }catch(Exception e){
+             return resultados;
+         }finally{
+             em.close();
+         }
+    }
+    
     @Override
     public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre){
         EntityManager em = emf.createEntityManager();
