@@ -6,14 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTDepartamento, dataTypes.DTActividadTuristica, dataTypes.DTSalidaTuristica,dataTypes.DTPaqueteActividadTuristica"%>
+
 <%@page import="java.util.List"%> 
+<%@page import="java.util.Base64"%> 
+<%@page import="logica.fabrica.Fabrica"%> 
+<%@page import="logica.interfaces.IControlador"%> 
 <!DOCTYPE html>
 <html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>  
         <title>Turismouy | Compra de Paquete</title>
     </head>
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+     <jsp:include page="/WEB-INF/templates/header.jsp"/> 
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-grow-1 flex-column">
             <form class="d-flex flex-column flex-grow-1" method="post" action="/comprapaquete" id="consultaForm">
@@ -50,8 +54,26 @@
                         <div class="row">
                             
                             <div  class="col-sm-9" >
+                                <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center">
+                                    <% 
+                                        Fabrica fabrica = new Fabrica();
+                                        IControlador controlador = fabrica.getInterface();
+                                        String imageDataUri = "";
+                                                byte [] foto = controlador.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
+                                                    if(foto != null){
+                                                        String imagenBase64 = Base64.getEncoder().encodeToString(foto);
+                                                        String contentType = "image/jpeg";
+                                                        imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
+                                                    }
+                                    %>
+                                
+                                
+                                </div>
                                 <fieldset disabled>
                                     <div class="row">
+                                        <div class="col m-3">
+                                        <img src="<%= imageDataUri %>" width="400" height="200" class="card-img-top" alt="...">
+                                        </div>
                                         <div class="col m-3">
                                             <label>Nombre</label>
                                             <input type="text" name="nombre" class="form-control" value="<%= paqueteSeleccionado.getNombre() %>" >
@@ -76,11 +98,21 @@
                                         </div>
                                         <div class="col m-3">
                                             <label>Costo</label>
-                                            <input type="text" name="costo" class="form-control" value="<%= paqueteSeleccionado.getCosto() %>" >
+                                            <input type="number" name="costo"  id="costo" class="form-control" value="<%= paqueteSeleccionado.getCosto() %>" >
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
+                            <div class="form-group">
+                                 <label>Ingrese la cantidad de personas que asistiran al paquete</label>
+                                <input name="personas" type="number" class="form-control" id="personas" value="0" min=0 onChange="updateInfo();">
+                            </div>
+                            <fieldset disabled>            
+                                <div class="form-group">
+                                    <label>Costo Total de la compra</label>
+                                    <input type="text" name="costoT"  id="costoT" class="form-control" value="0" min=0 >
+                                </div>
+                            </fieldset disabled>
                         </div>
                     </div>
                 </div>
@@ -109,7 +141,11 @@
                     }
                 });
             }
-
+            function updateInfo() {
+                var cantidadPersonas = document.getElementById("personas").value;
+                var costo = document.getElementById("costo").value;
+                document.getElementById("costoT").value = costo*cantidadPersonas;
+            }
             var paquetesSelect = document.querySelector('select[name="paquetes"]');
             paquetesSelect.addEventListener('change', function () {   
                 document.getElementById("consultaForm").submit()

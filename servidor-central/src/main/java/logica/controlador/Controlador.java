@@ -235,8 +235,12 @@ public class Controlador implements IControlador{
         return dataPersistencia.obtenerPaquetesRelacionados(idActividad);
     }
     @Override
-    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
-        dataPersistencia.altaPaqueteActividadTuristica(dtPaquete);
+    public DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad){
+        return dataPersistencia.obtenerFotoActividadTuristicaID(actividad);
+    }
+    @Override
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete, byte [] foto){
+        dataPersistencia.altaPaqueteActividadTuristica(dtPaquete, foto);
     }
     
     /**
@@ -365,6 +369,10 @@ public class Controlador implements IControlador{
     @Override
     public DTTurista obtenerTurista(long idTurista){
         return dataPersistencia.obtenerTurista(idTurista);
+    }
+    @Override
+    public byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete){
+        return dataPersistencia.obtenerFotoPaqueteActividadTuristica(selectedPaquete);
     }
     
     @Override

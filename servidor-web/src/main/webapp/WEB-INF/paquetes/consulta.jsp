@@ -7,6 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTDepartamento, dataTypes.DTActividadTuristica, dataTypes.DTSalidaTuristica,dataTypes.DTPaqueteActividadTuristica"%>
 <%@page import="java.util.List"%> 
+<%@page import="java.util.List"%> 
+<%@page import="java.util.Base64"%> 
+<%@page import="logica.fabrica.Fabrica"%> 
+<%@page import="logica.interfaces.IControlador"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -47,6 +51,20 @@
                             <div  class="col-sm-9" >
                                 <fieldset disabled>
                                     <div class="row">
+                                        <% 
+                                        Fabrica fabrica = new Fabrica();
+                                        IControlador controlador = fabrica.getInterface();
+                                        String imageDataUri = "";
+                                                byte [] foto = controlador.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
+                                                    if(foto != null){
+                                                        String imagenBase64 = Base64.getEncoder().encodeToString(foto);
+                                                        String contentType = "image/jpeg";
+                                                        imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
+                                                    }
+                                        %>
+                                        <div class="col m-3">
+                                            <img src="<%= imageDataUri %>" width="400" height="200" class="card-img-top" alt="...">
+                                        </div>
                                         <div class="col m-3">
                                             <label>Nombre</label>
                                             <input type="text" class="form-control" value="<%= paquete.getNombre() %>" >
@@ -97,13 +115,27 @@
                  <%                      
                     if (selectedActividad != null) {
                     DTActividadTuristica actividad = (DTActividadTuristica) request.getAttribute("actividad");
+                    DTActividadTuristica actividadFoto = controlador.obtenerFotoActividadTuristicaID(selectedActividad);
+                    String image = "";
+                        
+                            byte [] foto2 = controlador.obtenerFotoActividadTuristica(actividadFoto.getId());
+                                if(foto2 != null){
+                                    String imagenBase64 = Base64.getEncoder().encodeToString(foto2);
+                                    String contentType = "image/jpeg";
+                                    image = "data:" + contentType + ";base64," + imagenBase64;
+                                }
                 %>
                 <div class="container w-100">
                         <div class="row">
                             
                             <div  class="col-sm-9" >
+                                
                                 <fieldset disabled>
                                     <div class="row">
+                                        <div class="col m-3">
+                                            <img src="<%= image %>" width="400" height="200" class="card-img-top" alt="...">
+                                        </div>
+                                        
                                         <div class="col m-3">
                                             <label>Nombre</label>
                                             <input type="text" class="form-control" value="<%= actividad.getNombre() %>" >

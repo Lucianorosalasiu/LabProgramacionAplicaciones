@@ -42,27 +42,34 @@ public class CompraPaquete extends HttpServlet {
             throws ServletException, IOException {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
+        
         List<DTPaqueteActividadTuristica> paquetesEnteros = controlador.obtenerPaquetes();
         request.setAttribute("paquetesEnteros", paquetesEnteros);
+        
+        int cantPersonas = 0;
+        
         Date alta = new Date();
         Date vencimiento = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(vencimiento);
+        
         if(request.getParameter("BOTON") != null){
             long idTurista = (long)request.getSession().getAttribute("id");
+            int cantidadPersonas = Integer.parseInt(request.getParameter("personas"));
             
             DTTurista turista = controlador.obtenerTurista(idTurista);
             DTPaqueteActividadTuristica paquete = controlador.obtenerPaqueteCosto(request.getParameter("paquetes"));
             c.add(Calendar.DATE, paquete.getValidez());
             vencimiento = c.getTime();
-            DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,0,vencimiento,alta,paquete.getCosto());
+            
+            DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
+            
             controlador.agregarCompraPaquete(compra);
-            request.setAttribute("successMessage", "Compra realizada!");
-                request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
-                        .forward(request, response);
-                return;
+            
+            
         }
-         request.getRequestDispatcher("/WEB-INF/paquetes/compra.jsp").
+        
+        request.getRequestDispatcher("/WEB-INF/paquetes/compra.jsp").
                 forward(request, response);
     }
 

@@ -374,6 +374,8 @@ public class Main extends javax.swing.JFrame {
         jCU9DateChooserFecha = new com.toedter.calendar.JDateChooser();
         jScrollPane15 = new javax.swing.JScrollPane();
         jCU9TextAreaDescPaquete = new javax.swing.JTextArea();
+        jCU9ButtonSeleccionarFoto = new javax.swing.JButton();
+        jCU9LabelPreview = new javax.swing.JLabel();
         jInternalFrameAgregarActividadPaquete = new javax.swing.JInternalFrame();
         jCU10ComboBoxDepartamentoPaquete = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -783,7 +785,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(JCU1NickNameTextField)
                                         .addComponent(jCU1LabelNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jCU1LabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 469, Short.MAX_VALUE)
                                 .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JCU1DateChooserBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jCU1InternalFrameAgregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1081,7 +1083,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jCU2LabelActividadDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCU2TextFieldActividadCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                    .addComponent(jCU2TextFieldActividadCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
                                     .addComponent(jCU2LabelActividadCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addGroup(jInternalFrameConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1389,7 +1391,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jCU4ScrollPanelProveedores2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCU3LabelUserList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jInternalFrameModificarUsuarioLayout.setVerticalGroup(
             jInternalFrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1699,7 +1701,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(166, 166, 166))
                     .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addGroup(jInternalFrameAltaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                            .addComponent(jCU4ScrollPanelProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                             .addComponent(jCU4ScrollPanelCategorias)
                             .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                                 .addComponent(jCU4LabelProveedores1)
@@ -1709,7 +1711,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jCU4LabelDepartamentos)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addComponent(jCU4ScrollPanelDepartamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaActividadTuristicaLayout.createSequentialGroup()
                         .addGap(187, 187, 187)
                         .addComponent(jCU4ButtonActualizarTablas)
@@ -2032,7 +2034,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(jCU5LabelActividad)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jCU5ComboBoxActividad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jCU5ScrollPaneDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE))
+                            .addComponent(jCU5ScrollPaneDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createSequentialGroup()
                         .addGroup(jInternalFrameConsultaActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2259,7 +2261,7 @@ public class Main extends javax.swing.JFrame {
         jInternalFrameAltaDepartamentoLayout.setHorizontalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrameAltaDepartamentoLayout.createSequentialGroup()
-                .addContainerGap(497, Short.MAX_VALUE)
+                .addContainerGap(552, Short.MAX_VALUE)
                 .addGroup(jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCU12LabelNombre)
                     .addComponent(jCU12TextFieldNombre)
@@ -2272,7 +2274,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jCU12ButtonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCU12TextFieldURL)
                     .addComponent(jCU12Separator))
-                .addContainerGap(496, Short.MAX_VALUE))
+                .addContainerGap(552, Short.MAX_VALUE))
         );
         jInternalFrameAltaDepartamentoLayout.setVerticalGroup(
             jInternalFrameAltaDepartamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2626,7 +2628,7 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jInternalFrameConsultaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCU5LabelCiudad2)
                             .addComponent(jCU7TextFieldLugarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                         .addGroup(jInternalFrameConsultaSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCU7TextFieldFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCU5LabelNombre6))
@@ -2822,7 +2824,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addGroup(jInternalFrameInscripcionSalidaTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameInscripcionSalidaTuristicaLayout.createSequentialGroup()
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2916,30 +2918,43 @@ public class Main extends javax.swing.JFrame {
         jCU9TextAreaDescPaquete.setWrapStyleWord(true);
         jScrollPane15.setViewportView(jCU9TextAreaDescPaquete);
 
+        jCU9ButtonSeleccionarFoto.setText("Seleccionar Foto");
+        jCU9ButtonSeleccionarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCU9ButtonSeleccionarFotoActionPerformed(evt);
+            }
+        });
+
+        jCU9LabelPreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jCU9LabelPreview.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jCU9LabelPreview.setFocusable(false);
+
         javax.swing.GroupLayout jInternalFrameAltaPaqueteActividadesLayout = new javax.swing.GroupLayout(jInternalFrameAltaPaqueteActividades.getContentPane());
         jInternalFrameAltaPaqueteActividades.getContentPane().setLayout(jInternalFrameAltaPaqueteActividadesLayout);
         jInternalFrameAltaPaqueteActividadesLayout.setHorizontalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                .addContainerGap(506, Short.MAX_VALUE)
-                .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(jCU9TextFieldNombrePaquete)
-                    .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10)
-                    .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jCU9SpinnerDescuentoPaquete)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(508, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
+                .addContainerGap(562, Short.MAX_VALUE)
+                .addGroup(jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jCU9ButtonSeleccionarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCU9TextFieldNombrePaquete, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCU9SpinnerValidezPaquete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jCU9SpinnerDescuentoPaquete, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jCU9LabelPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
         jInternalFrameAltaPaqueteActividadesLayout.setVerticalGroup(
             jInternalFrameAltaPaqueteActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameAltaPaqueteActividadesLayout.createSequentialGroup()
-                .addContainerGap(99, Short.MAX_VALUE)
+                .addContainerGap(151, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU9TextFieldNombrePaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2959,9 +2974,13 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCU9DateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jCU9ButtonSeleccionarFoto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCU9LabelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jButton1)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(92, 92, 92))
         );
 
         jTabbedPaneCasosDeUso.addTab("Crear Paquete de Actividades Turísticas", jInternalFrameAltaPaqueteActividades);
@@ -3310,7 +3329,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel35))
-                        .addGap(0, 168, Short.MAX_VALUE))
+                        .addGap(0, 205, Short.MAX_VALUE))
                     .addComponent(jCU11TextFieldValidez)
                     .addComponent(jCU11TextFieldFechaAlta)
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -3420,7 +3439,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE))
                             .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jCU11TextFieldDuracion)
                             .addComponent(jCU11TextFieldCosto)
@@ -3479,7 +3498,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
         jInternalFrameConsultaPaquetesLayout.setVerticalGroup(
             jInternalFrameConsultaPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3531,7 +3550,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(jCU13TextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addContainerGap(711, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3603,7 +3622,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jInternalFrameValidarActividadTuristicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCU14ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1252, Short.MAX_VALUE)
+                    .addComponent(jCU14ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1363, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrameValidarActividadTuristicaLayout.createSequentialGroup()
                         .addComponent(jCU14ButtonRechazar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -4065,6 +4084,27 @@ public class Main extends javax.swing.JFrame {
             return null;
         }
     }
+    private byte[] jCU9obtenerFoto(){
+        // Paso 1: Obtener el Image del ImageIcon
+        ImageIcon imageIcon = (ImageIcon) jCU9LabelPreview.getIcon();
+        Image image = imageIcon.getImage();
+
+        // Paso 2: Convertir el Image en un arreglo de bytes (byte array)
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = bufferedImage.createGraphics();
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "jpg", baos);
+            byte[] imageData = baos.toByteArray();        
+            return imageData;
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         JDialogCamposVacios.setVisible(false);
@@ -4101,7 +4141,12 @@ public class Main extends javax.swing.JFrame {
             int validez = (Integer) jCU9SpinnerValidezPaquete.getValue();
             int descuento = (Integer) jCU9SpinnerDescuentoPaquete.getValue();
             DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(nombre, desc, validez, descuento, fechaAlta);
-            controlador.altaPaqueteActividadTuristica(paquete);
+            
+            byte[] foto = null;
+            if (jCU9LabelPreview.getIcon() != null){
+                foto = jCU9obtenerFoto();
+            }
+            controlador.altaPaqueteActividadTuristica(paquete,foto);
             jCU9vaciarCampos();
             JOptionPane.showMessageDialog(this, "Paquete turistico dado de alta!.", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -5500,6 +5545,27 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCU4ButtonSeleccionarFotoActionPerformed
 
+    private void jCU9ButtonSeleccionarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCU9ButtonSeleccionarFotoActionPerformed
+       JFileChooser JCU9fileChooser = new JFileChooser();
+       JCU9fileChooser.setFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "jpeg", "png", "gif")); 
+       int returnValue = JCU9fileChooser.showOpenDialog(null);
+       
+       if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = JCU9fileChooser.getSelectedFile();
+            
+            try{
+                byte[] foto = Files.readAllBytes(selectedFile.toPath());
+                ImageIcon imageIcon = new ImageIcon(foto);
+                Image image = imageIcon.getImage();
+                // Ajusta el tamaño de la imagen
+                ImageIcon imgPreview = new ImageIcon(image.getScaledInstance(269, 124, Image.SCALE_SMOOTH));
+                jCU9LabelPreview.setIcon(imgPreview);
+            }catch(Exception ex){
+            
+            }
+        }
+    }//GEN-LAST:event_jCU9ButtonSeleccionarFotoActionPerformed
+
     public void jCU1PoblarComboBoxPaises() {
         try {
             // Leer el archivo CSV
@@ -6418,7 +6484,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner jCU8SpinnerFechaInscripcion;
     private javax.swing.JTable jCU8TableSalidas;
     private javax.swing.JTable jCU8TableTuristas;
+    private javax.swing.JButton jCU9ButtonSeleccionarFoto;
     private com.toedter.calendar.JDateChooser jCU9DateChooserFecha;
+    private javax.swing.JLabel jCU9LabelPreview;
     private javax.swing.JSpinner jCU9SpinnerDescuentoPaquete;
     private javax.swing.JSpinner jCU9SpinnerValidezPaquete;
     private javax.swing.JTextArea jCU9TextAreaDescPaquete;

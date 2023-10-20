@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import logica.clases.ActividadTuristica;
@@ -35,6 +36,9 @@ public class EPaqueteActividadTuristica extends EBase{
     private int validez;
     private float descuento;
     private Date fechaAlta;
+    @Column(name = "IMAGEN")
+    @Lob
+    private byte [] foto;
     @Column(name = "ESTADOPAQUETE")
     private boolean ESTADOPAQUETE;/*true = confirmado || false = no confirmado */
     @OneToMany
@@ -48,6 +52,17 @@ public class EPaqueteActividadTuristica extends EBase{
     public EPaqueteActividadTuristica() {
     }
     
+    
+    public EPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta,byte [] foto){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.validez = validez;
+        this.descuento = descuento;
+        this.fechaAlta = fechaAlta;
+        this.ESTADOPAQUETE = false;
+        actividades = null;
+        this.foto = foto;
+    }
     public EPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta){
         this.nombre = nombre;
         this.descripcion = descripcion;

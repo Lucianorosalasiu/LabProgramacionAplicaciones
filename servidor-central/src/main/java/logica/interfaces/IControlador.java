@@ -65,18 +65,21 @@ public interface  IControlador {
     List<DTDepartamento> obtenerDepartamentos();
     
     /*CU PAQUETES*/
-    void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
+    void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete, byte [] foto);
     List<String> obtenerPaqueteNombres();
     DTPaqueteActividadTuristica obtenerPaquete(String nombre);
     List<String> obtenerActividadesTuristicasCU10(String Departamento,String paquete);
     void agregarActividadPaquete(String paquete,String actividad);
     List<DTActividadTuristica> obtenerActividadesRelacionadas(String nomPaquete);
-    public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
-    public List<String> obtenerPaqueteNombresActividades();
+    DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad);
+    List<String> obtenerPaqueteNombresActividades();
     void agregarCompraPaquete(DTCompraPaquete compra);
-    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
-    public List<DTPaqueteActividadTuristica> obtenerPaquetes();
-    public DTTurista obtenerTurista(long idTurista);
+     DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
+    List<DTPaqueteActividadTuristica> obtenerPaquetes();
+    DTTurista obtenerTurista(long idTurista);
+    byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete);
+    DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad);
+    
     /*CU13 ALTA DE CATEGORIA*/
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();

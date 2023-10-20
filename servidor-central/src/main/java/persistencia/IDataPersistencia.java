@@ -72,7 +72,7 @@ public interface IDataPersistencia {
     void altaDepartamento(DTDepartamento departamento);
     List<DTDepartamento> obtenerDepartamentos();
     
-    void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete);
+    void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete, byte [] foto);
     List<String> obtenerPaqueteNombre();
     DTPaqueteActividadTuristica obtenerPaquete(String nombre);
     List<String> obtenerActividadesTuristicasCU10(String departamento,String paquete);
@@ -83,8 +83,9 @@ public interface IDataPersistencia {
     void agregarCompraPaquete(DTCompraPaquete compra);
     DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
     List<DTPaqueteActividadTuristica>obtenerPaquetes();
-    public DTTurista obtenerTurista(long idTurista);
-     
+    DTTurista obtenerTurista(long idTurista);
+    byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete);
+    DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad);         
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();
     

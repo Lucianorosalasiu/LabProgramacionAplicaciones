@@ -445,6 +445,7 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     
+    
     @Override
     public byte[] obtenerFotoActividadTuristica(Long id){
         EntityManager em = emf.createEntityManager();
@@ -721,7 +722,7 @@ public class DataPersistencia implements IDataPersistencia {
                                             ePaquete.getValidez(),
                                             ePaquete.getDescuento(),
                                             ePaquete.getFechaAlta(),
-                                            costo
+                                            costo * ((100 - ePaquete.getDescuento()) / 100)
                                                   );
         }catch(Exception e){
             return new DTPaqueteActividadTuristica();
@@ -759,10 +760,10 @@ public class DataPersistencia implements IDataPersistencia {
          }
     }
     @Override
-    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete){
+    public void altaPaqueteActividadTuristica(DTPaqueteActividadTuristica dtPaquete, byte [] foto){
          EntityManager em = emf.createEntityManager();
          
-         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta());
+         EPaqueteActividadTuristica nuevoPaquete = new EPaqueteActividadTuristica(dtPaquete.getNombre(),dtPaquete.getDescripcion(),dtPaquete.getValidez(),dtPaquete.getDescuento(),dtPaquete.getFechaAlta(),foto);
          try{
              em.getTransaction().begin();
              em.persist(nuevoPaquete);
@@ -1358,6 +1359,48 @@ public class DataPersistencia implements IDataPersistencia {
         }finally{
            em.close();
         }
+    }
+    @Override
+    public DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad){
+        EntityManager em = emf.createEntityManager();
+        try{
+          
+            EActividadTuristica Eactividad = em.createQuery("select a from EActividadTuristica a where a.nombre = :nombreActividad"
+                    ,EActividadTuristica.class)
+                    .setParameter("nombreActividad",actividad)
+                    .getSingleResult();
+            return new DTActividadTuristica(Eactividad.getId(),
+                                            Eactividad.getNombre(),
+                                            Eactividad.getDescripcion(),
+                                            Eactividad.getDuracion(),
+                                            Eactividad.getCosto(),
+                                            Eactividad.getCiudad(),
+                                            Eactividad.getFechaAlta()
+                                                  );
+            
+        }catch(Exception e){
+            return  null;
+        }finally{
+            em.close();
+        }
+    }
+    @Override
+    public byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete){
+        EntityManager em = emf.createEntityManager();
+        try{
+          
+            EPaqueteActividadTuristica ePaquete = em.createQuery("select p from EPaqueteActividadTuristica p where p.nombre = :nombrePaquete"
+                    ,EPaqueteActividadTuristica.class)
+                    .setParameter("nombrePaquete",selectedPaquete)
+                    .getSingleResult();
+            return ePaquete.getFoto();
+            
+        }catch(Exception e){
+            return  null;
+        }finally{
+            em.close();
+        }
+    
     }
     @Override
     public DTTurista obtenerTurista(long idTurista){
