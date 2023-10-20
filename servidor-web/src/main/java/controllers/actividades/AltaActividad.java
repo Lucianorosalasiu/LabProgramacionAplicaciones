@@ -122,7 +122,6 @@ public class AltaActividad extends HttpServlet {
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
         
-        request.setAttribute("errorMessage", errorMessage);
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);
     }
