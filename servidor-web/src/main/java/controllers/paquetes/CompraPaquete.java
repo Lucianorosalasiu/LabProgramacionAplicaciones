@@ -63,11 +63,15 @@ public class CompraPaquete extends HttpServlet {
             vencimiento = c.getTime();
             
             DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
-           
-            controlador.agregarCompraPaquete(compra);
-            request.setAttribute("successMessage", "Compra realizada!");
+            if(controlador.compraExiste(compra)){
+                controlador.agregarCompraPaquete(compra);
+                request.setAttribute("successMessage", "Compra realizada!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);
+            }else{   
+                request.setAttribute("errorMessage", "Ya has comprado este paquete");
+            }
+            
                 return;
         }
         if(request.getParameter("cancelar") != null){
