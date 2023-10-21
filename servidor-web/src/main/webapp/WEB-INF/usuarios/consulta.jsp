@@ -19,7 +19,7 @@
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
 
         <div id="listar" class="container py-5 min-vh-70 flex-grow-1">
-            <h3>Consulta de usuario</h3>
+            <h3>Listado de usuarios</h3>
             <hr />
             <%
             List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");

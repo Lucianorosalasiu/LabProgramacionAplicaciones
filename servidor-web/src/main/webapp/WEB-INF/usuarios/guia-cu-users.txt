@@ -18,10 +18,6 @@ y compras de paquetes (costo, cantidad turistas, vencimiento, etc).
 Si el usuario selecciona una actividad turística, una salida turística, o un paquete se muestra la información detallada, tal como se indica en los casos de uso Consulta de Actividad Turística, Consulta de Salida Turística y Consulta de Paquete de Actividades Turísticas, respectivamente.
 
 ==================================================================================================================================
-Caso de Uso:  Modificar Datos de Usuario
-Actores: Proveedor, Turista
-
-El caso de uso comienza cuando el usuario desea modificar su perfil. Para ello el sistema muestra todos los datos básicos del usuario a modificar y (opcionalmente) su imagen.
  
 El usuario puede editar todos los datos básicos (menos el nickname y el correo electrónico) y (opcionalmente) la imagen.
 
