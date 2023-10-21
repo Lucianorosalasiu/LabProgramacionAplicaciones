@@ -48,7 +48,7 @@
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Usuarios
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="/altausuario">Alta usuario</a></li>
                 <li><a class="dropdown-item" href="/consultausuario">Consulta usuarios</a></li>
                 <!--<li><a class="dropdown-item" href="/modificacionusuario">Modificar datos de usuario</a></li>-->
@@ -59,7 +59,7 @@
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 Actividades turísticas
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+            <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton2">
                 <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
                 <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
@@ -69,7 +69,7 @@
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                 Salidas turísticas
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+            <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton3">
                 <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
                 <li><a class="dropdown-item" href="/consultasalida">Consulta de salida</a></li>
                 <li><a class="dropdown-item" href="/inscripcion">Inscripción a salida</a></li>
@@ -80,7 +80,7 @@
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
                 Paquetes
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+            <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton4">
                 <li><a class="dropdown-item" href="/consultapaquete">Consulta de paquete</a></li>  
                 <li><a class="dropdown-item" href="/comprapaquete">Compra de paquete</a></li>  
             </ul>
