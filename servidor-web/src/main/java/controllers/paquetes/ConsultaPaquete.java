@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -44,20 +45,32 @@ public class ConsultaPaquete extends HttpServlet {
         String actividad = request.getParameter("actividad");
          List<DTActividadTuristica> actividades = new ArrayList();
         DTActividadTuristica actividadCompleta = null;
+        
         DTPaqueteActividadTuristica pa = null;
         String imagen = null;
-        
+        String categorias = "";
+        LinkedHashSet<String> hash = new LinkedHashSet<String>();
         if (paquete != null) {
             pa = controlador.obtenerPaqueteCosto(paquete);
             actividades = controlador.obtenerActividadesRelacionadas(paquete);
+            for (DTActividadTuristica a : actividades){
+                DTActividadTuristica actividadCategoria = controlador.obtenerActividadTuristicaNull(a.getId());
+                categorias += actividadCategoria.getCategoriasString();
+            }
+            String[] categoriasSeparadas = categorias.split("\\|");
+            for(String c :categoriasSeparadas){
+                hash.add(c);
+            }
             if(actividad != null){
                 actividadCompleta = controlador.obtenerActividadTuristica(actividad);
+                
+                
             }
         }
         
         request.setAttribute("actividades", actividades);
         request.setAttribute("actividad", actividadCompleta);
-        
+        request.setAttribute("categorias", hash);
         request.setAttribute("paqueteEnteros", pa);
         request.setAttribute("paquetes", controlador.obtenerPaqueteNombres());
         request.setAttribute("imagenSalida", imagen);
@@ -80,6 +93,7 @@ public class ConsultaPaquete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 

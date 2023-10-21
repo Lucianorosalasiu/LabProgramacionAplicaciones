@@ -11,6 +11,9 @@
 <%@page import="java.util.Base64"%> 
 <%@page import="logica.fabrica.Fabrica"%> 
 <%@page import="logica.interfaces.IControlador"%>
+<%@page import="java.util.HashSet"%> 
+<%@page import="java.util.LinkedHashSet"%> 
+
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -61,6 +64,7 @@
                                                         String contentType = "image/jpeg";
                                                         imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
                                                     }
+                                                 LinkedHashSet<String> categorias = ( LinkedHashSet<String>) request.getAttribute("categorias");
                                         %>
                                         <div class="col m-3">
                                             <img src="<%= imageDataUri %>" width="400" height="200" class="card-img-top" alt="...">
@@ -75,6 +79,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="d-flex gap-2">
+                                            <% 
+                                            
+                                            for (String categoriaIndividual : categorias) {%>
+                                                <span class="badge text-bg-success"><%=categoriaIndividual%></span>
+                                            <%}%>
+                                          </div>
                                         <div class="col m-3">
                                             <label>Fecha de Alta</label>
                                             <input type="text" class="form-control" value="<%= paquete.getFechaAlta() %>" >

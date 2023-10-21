@@ -1270,7 +1270,32 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-    
+    @Override
+    public boolean compraExiste(DTCompraPaquete compra){
+        EntityManager em = emf.createEntityManager();
+       
+        
+        try{
+            String queryPaquete = "SELECT p FROM EPaqueteActividadTuristica p WHERE p.nombre = :nombre";
+            EPaqueteActividadTuristica ePaquete = em.createQuery(queryPaquete, EPaqueteActividadTuristica.class)
+                                        .setParameter("nombre", compra.getPAQUETE().getNombre())
+                                        .getSingleResult();
+            
+            Query query = em.createNativeQuery(" select a from ECompraPaquete a where a.COMPRADOR_ID = :?1 AND a.PAQUETE_ID = :?2")
+                    .setParameter(1,compra.getCOMPRADOR().getId())
+                    .setParameter(2,ePaquete.getId());        
+            List<String> resultados = query.getResultList();
+           
+            if(resultados != null){
+                return false;
+            }
+            return true;
+        }catch(Exception e){
+            return true;
+        }finally{
+            em.close();
+        }
+    }
     @Override
     public List<DTCategoria> obtenerCategorias(){
         EntityManager em = emf.createEntityManager();

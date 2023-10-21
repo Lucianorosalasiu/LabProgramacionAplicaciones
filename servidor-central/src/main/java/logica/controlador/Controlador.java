@@ -240,6 +240,10 @@ public class Controlador implements IControlador{
         return dataPersistencia.obtenerPaquetesRelacionados(idActividad);
     }
     @Override
+    public boolean compraExiste(DTCompraPaquete compra){
+        return dataPersistencia.compraExiste(compra);
+    }
+    @Override
     public DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad){
         return dataPersistencia.obtenerFotoActividadTuristicaID(actividad);
     }

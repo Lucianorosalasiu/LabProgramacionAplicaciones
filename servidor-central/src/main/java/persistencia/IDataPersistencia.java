@@ -89,6 +89,7 @@ public interface IDataPersistencia {
     DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad);         
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();
+    boolean compraExiste(DTCompraPaquete compra);
     
     /*CU 14 CONFIRMAR CATEGORIA*/
     List<DTActividadTuristica> obtenerActividadesSinConfirmar();

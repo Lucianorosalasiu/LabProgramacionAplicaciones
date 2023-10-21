@@ -80,7 +80,7 @@ public interface  IControlador {
     DTTurista obtenerTurista(long idTurista);
     byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete);
     DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad);
-    
+    boolean compraExiste(DTCompraPaquete compra);
     /*CU13 ALTA DE CATEGORIA*/
     void altaCategoria(String nombre) throws MyException;
     List<DTCategoria> obtenerCategorias ();

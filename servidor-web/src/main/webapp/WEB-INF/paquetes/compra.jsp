@@ -110,7 +110,7 @@
                             <fieldset disabled>            
                                 <div class="form-group">
                                     <label>Costo Total de la compra</label>
-                                    <input type="text" name="costoT"  id="costoT" class="form-control" value="0" min=0 >
+                                    <input type="text" name="costoT"  id="costoT" class="form-control" value="0" min=1 >
                                 </div>
                             </fieldset disabled>
                         </div>
@@ -123,10 +123,17 @@
                 <label>Solo los <span class="text-info"> turistas </span> pueden comprar paquetes</label>
                 <button type="button" class="btn btn-success disabled" tabindex="-1">Realizar Compra</button>
             <%}%> 
-            
-            <button type="button" class="btn btn-danger">Cancelar</button>                       
+            <%if(request.getAttribute("errorMessage") != null){%>
+
+                <div class="mt-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
+                    <p class="m-0"><%=request.getAttribute("errorMessage")%></p>
+                </div>
+
+            <%}%>
+            <button  type="button" value="cancelar" class="btn btn-danger" onclick="location.href = '/home'">Cancelar</button>   
+            <label><span class="text-info"> (este boton lo redirigira al inicio) </span></label>
             </div>    
-            </form>
+            
         </div>
                                         
         <% } %>
@@ -150,7 +157,11 @@
             paquetesSelect.addEventListener('change', function () {   
                 document.getElementById("consultaForm").submit()
             });
-            
+            var reset = document.querySelector('select[name="reset"]');
+            paquetesSelect.addEventListener('change', function () {
+                cleanParameters(["paquete"]);
+            document.getElementById("consultaForm").submit();
+            });
             
     </script>
     
