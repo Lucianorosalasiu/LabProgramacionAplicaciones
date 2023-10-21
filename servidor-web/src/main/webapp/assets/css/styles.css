@@ -121,6 +121,14 @@ table tbody td {
 
 /* Perfil */
 
+#titulo-perfil{
+    display: inline;
+}
+
+#editar-perfil{
+    display: inline;
+}
+
 #perfil_izquierda {
     float:left;
     border-right: 2px solid #DDDDDD;

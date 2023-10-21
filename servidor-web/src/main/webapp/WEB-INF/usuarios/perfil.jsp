@@ -20,12 +20,27 @@
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <%
             DTUsuario usr = (DTUsuario) request.getAttribute("usuario");
+            String userLogged = (String) request.getSession().getAttribute("sessionNickname");
             String profileImageUrl = usr.getProfileImageUrl();
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
-            <h3>Perfil del usuario: 
-                <span class="text-info float-right"> <%= usr.getNickname() %></span>
+            <h3 id="titulo-perfil">Perfil del usuario:
+                <span class="text-info">  <%= usr.getNickname() %> </span>
             </h3>
+            <%
+                if(usr.getNickname().equals(userLogged)){
+            %>
+
+            <a href="/modificacionusuario?usuario=<%= usr.getEmail() %>" 
+                   id="editar-perfil" 
+                   type="button" 
+                   class="btn btn-primary float-right"
+                >
+                   Editar Perfil
+                </a>            
+            <%
+                }
+            %>        
             <hr />
             <div id="perfil_izquierda">
                 <img src="<%= profileImageUrl %>">

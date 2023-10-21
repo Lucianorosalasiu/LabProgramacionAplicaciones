@@ -10,8 +10,6 @@
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>
         <link rel="stylesheet" href="assets/css/styles.css" />
-        <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
-        <script src="assets/js/sweetalert2.min.js"></script>
         <title>TurismoUy | Alta Usuario</title>
     </head>
 

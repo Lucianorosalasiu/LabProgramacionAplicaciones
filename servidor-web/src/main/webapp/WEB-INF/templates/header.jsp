@@ -9,18 +9,20 @@
 <header class=" w-100 bg-dark text-light d-flex align-items-center flex-grow-0 flex-column">
     <div class="w-100 d-flex justify-content-between align-items-center p-2"> 
         <div class="d-flex align-items-center">
-            <h1 class="fw-bold">Turismo Uy!</h1>
+            <a class="navbar-brand" aria-current="page" href="/home">
+                <h1 class="fw-bold">Turismo Uy!</h1>
                 <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){%>
-                    <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
-                        <img class="" width="50" height="50" src="/assets/img/mateTurista.png" alt="Matienzo"/>
-                    <%}else{%>
-                        <img class="" width="50" height="50" src="/assets/img/mateProveedor.png" alt="Matienzo"/>
-                    <%}%>
+                <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
+                <img class="bx bx-rotate-90 bx-tada bx-md" width="50" height="50" src="/assets/img/mateTurista.png" alt="Matienzo"/>
                 <%}else{%>
-                        <img class="" width="50" height="50" src="/assets/img/mate.png" alt="Matienzo"/>
+                <img class="bx bx-rotate-90 bx-tada bx-md" width="50" height="50" src="/assets/img/mateProveedor.png" alt="Matienzo"/>
                 <%}%>
+                <%}else{%>
+                <img class="bx bx-rotate-90 bx-tada bx-md" width="50" height="50" src="/assets/img/mate.png" alt="Matienzo"/>
+                <%}%>
+            </a>
         </div>
-        
+
         <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){%>
         <div class="d-flex flex-column gap-2">
             <a href="/consultausuario?usuario=<%=session.getAttribute("sessionNickname")%>"> @<%=session.getAttribute("sessionNickname")%></a>
@@ -40,7 +42,7 @@
     </div>
     <div class="w-100 d-flex flex-row flex-wrap bg-body-secondary justify-content-evenly">
 
-        <a href="/home" type="button" class="flex-grow-1 btn btn-outline-primary rounded-0">Inicio</a>
+        <!--<a href="/home" type="button" class="flex-grow-1 btn btn-outline-primary rounded-0">Inicio</a>-->
 
         <div class="dropdown flex-grow-1">
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,25 +51,25 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="/altausuario">Alta usuario</a></li>
                 <li><a class="dropdown-item" href="/consultausuario">Consulta usuarios</a></li>
-                <li><a class="dropdown-item" href="/modificacionusuario">Modificar datos de usuario</a></li>
+                <!--<li><a class="dropdown-item" href="/modificacionusuario">Modificar datos de usuario</a></li>-->
             </ul>
         </div>
 
         <div class="dropdown flex-grow-1">
-            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 Actividades turísticas
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
                 <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
         </div>
 
         <div class="dropdown flex-grow-1">
-            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                 Salidas turísticas
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                 <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
                 <li><a class="dropdown-item" href="/consultasalida">Consulta de salida</a></li>
                 <li><a class="dropdown-item" href="/inscripcion">Inscripción a salida</a></li>
@@ -75,10 +77,10 @@
         </div>
 
         <div class="dropdown flex-grow-1">
-            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
                 Paquetes
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
                 <li><a class="dropdown-item" href="/consultapaquete">Consulta de paquete</a></li>  
                 <li><a class="dropdown-item" href="/comprapaquete">Compra de paquete</a></li>  
             </ul>

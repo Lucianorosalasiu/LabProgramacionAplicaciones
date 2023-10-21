@@ -4,12 +4,17 @@
  */
 package controllers.usuarios;
 
+import dataTypes.DTUsuario;
+import exceptions.UsuarioNoEncontrado;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import static java.util.Objects.isNull;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -27,14 +32,39 @@ public class ModificacionUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String userType = (String) request.getSession().getAttribute("sessionType");
-        if (isNull(userType)) {
+        String queryUser = request.getParameter("usuario");
+        /* Si no hay usuario logueado o no se pasa un usuario a modificar en 
+        la query, no es posible editar el perfil */
+        if (isNull(userType) || isNull(queryUser)) {
             response.sendError(403);
             return;
         }
+        String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
+        String sessionNickname = (String) request.getSession().getAttribute("sessionNickname");
+        
+        /* El usuario logueado no puede editar un perfil que no es el suyo. */
+        if (
+            !queryUser.equals(sessionEmail)
+            && !queryUser.equals(sessionNickname)
+        ){
+            response.sendError(403);
+            return;
+        }
+        
+        /* Si el usuario logueado coincide con el perfil a editar */
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+
+        DTUsuario usr = controlador.obtenerUsuarioAlternativo(queryUser);
+
+        // Se setea el usuario
+        request.setAttribute("usuario", usr);
+
         request.getRequestDispatcher("/WEB-INF/usuarios/modificacion.jsp")
                 .forward(request, response);
-    }
+    }   
 
     /**
      * Handles the HTTP <code>POST</code> method.
