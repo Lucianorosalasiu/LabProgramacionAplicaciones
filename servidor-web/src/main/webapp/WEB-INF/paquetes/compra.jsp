@@ -123,18 +123,16 @@
                 <label>Solo los <span class="text-info"> turistas </span> pueden comprar paquetes</label>
                 <button type="button" class="btn btn-success disabled" tabindex="-1">Realizar Compra</button>
             <%}%> 
-            <%if(request.getAttribute("errorMessage") != null){%>
-
-                <div class="mt-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
-                    <p class="m-0"><%=request.getAttribute("errorMessage")%></p>
-                </div>
-
-            <%}%>
+           
             <button  type="button" value="cancelar" class="btn btn-danger" onclick="location.href = '/home'">Cancelar</button>   
             <label><span class="text-info"> (este boton lo redirigira al inicio) </span></label>
             </div>    
-            
-        </div>
+            <%if(request.getAttribute("errorMessage") != null){%>
+                <div class="m-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
+                    <p class="m-0"><%=request.getAttribute("errorMessage")%></p>
+                </div>
+                <%}%>
+            </div>
                                         
         <% } %>
         

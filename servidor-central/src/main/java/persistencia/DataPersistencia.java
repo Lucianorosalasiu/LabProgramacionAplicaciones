@@ -1301,17 +1301,17 @@ public class DataPersistencia implements IDataPersistencia {
                                         .setParameter("nombre", compra.getPAQUETE().getNombre())
                                         .getSingleResult();
             
-            Query query = em.createNativeQuery(" select a from ECompraPaquete a where a.COMPRADOR_ID = :?1 AND a.PAQUETE_ID = :?2")
+            Query query = em.createNativeQuery(" select * from COMPRAS_PAQUETE  where COMPRADOR_ID = ?1 AND PAQUETE_ID = ?3")
                     .setParameter(1,compra.getCOMPRADOR().getId())
-                    .setParameter(2,ePaquete.getId());        
+                    .setParameter(3,ePaquete.getId());        
             List<String> resultados = query.getResultList();
            
-            if(resultados != null){
-                return false;
+            if(resultados.isEmpty()){
+                return true;
             }
-            return true;
+            return false;
         }catch(Exception e){
-            return true;
+            return false;
         }finally{
             em.close();
         }
