@@ -9,7 +9,7 @@
 <html class="h-100">
     <head>
         <jsp:include page="/WEB-INF/templates/head.jsp"/>  
-        <link rel="stylesheet" href="assets/css/styles.css"/>
+        <link rel="stylesheet" href="assets/css/error.css"/>
         <title>Turismouy | Error 500</title>
     </head>
     

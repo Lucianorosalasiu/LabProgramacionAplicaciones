@@ -16,6 +16,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -227,6 +230,12 @@ public class DataPersistencia implements IDataPersistencia {
             proveedorAActualizar.setBirthDate(proveedor.getBirthDate());
             proveedorAActualizar.setDescription(proveedor.getDescription());
             proveedorAActualizar.setWebsiteURL(proveedor.getWebsiteURL());
+            if(proveedor.getPhoto() != null){
+                proveedorAActualizar.setPhoto(proveedor.getPhoto());
+            }
+            if((proveedor.getPassword() != null) && !proveedor.getPassword().isBlank()){
+                proveedorAActualizar.setPassword(proveedor.getPassword());
+            }
             
             // Se intenta realizar la transacción de actualización
             em.merge(proveedorAActualizar);
@@ -235,6 +244,8 @@ public class DataPersistencia implements IDataPersistencia {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println(Arrays.toString(e.getStackTrace()) + e.getMessage());
             throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el proveedor");
         } finally {
             em.close();
@@ -258,6 +269,13 @@ public class DataPersistencia implements IDataPersistencia {
             turistaAActualizar.setBirthDate(turista.getBirthDate());
             turistaAActualizar.setNacionality(turista.getNacionality());
             
+            if(turista.getPhoto() != null){
+                turistaAActualizar.setPhoto(turista.getPhoto());
+            }
+            if((turista.getPassword() != null) && !turista.getPassword().isBlank()){
+                turistaAActualizar.setPassword(turista.getPassword());
+            }
+            
             // Se intenta realizar la transacción de actualización
             em.merge(turistaAActualizar);
             em.getTransaction().commit();
@@ -265,6 +283,8 @@ public class DataPersistencia implements IDataPersistencia {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println(Arrays.toString(e.getStackTrace()) + e.getMessage());
             throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el turista");
         } finally {
             em.close();

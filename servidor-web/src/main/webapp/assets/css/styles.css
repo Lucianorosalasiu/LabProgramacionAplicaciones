@@ -36,70 +36,12 @@ hr {
     height: 150px;
 }
 
-/* ------------------------------ Tables styles ----------------------------- */
-table {
-    background-color: #f8f9fa;
-    border-collapse: collapse;
-    width: 100%;
-    border-radius: 4px;
-}
-
-/*Selector que provee la opción de colorear una fila de por medio en una tabla*/
-tr:nth-child(even) {
-    /*El parámetro puede ser odd también*/
-    background-color: #aaaaaa;
-}
-
-table thead th {
-    color: #dddddd;
-    text-align: center;
-    border: solid 1px #dddddd;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-table tbody td {
-    text-align: center;
-    border: solid 1px #dddddd;
-    padding: 8px;
-}
-/* ---------------------------- End Tables styles --------------------------- */
-
-/* Pagina de error */
-
-.error {
-    background-color:#FFEBE8;
-    border: 2px solid #DD3C10;
-    padding: 6px;
-    margin-bottom: 15px;
-}
-
-#error_page {
-    color: black;
-}
-
-#error_page .titulo_error {
-    font-size: 4em;
-    margin-left: 25px;
-    margin-top: 20px;
-    text-align: center;
-}
-
-#error_page .main {
-    margin-bottom: 30px;
-}
-
-#error_page p {
-    text-align: center;
-}
-
 /** Listar **/
 
 #listar .usuario {
     border-bottom: 1px solid #CCCCCC;
     margin-top: 10px;
     padding-bottom: 15px;
-    width: 50%;
 }
 
 #listar .usuario:last-child {
@@ -153,10 +95,36 @@ table tbody td {
     font-size: 12px;
     color:#808080;
 }
-.cancelar {
-    background-color: #f44336;
 
-} 
 .valor {
     font-size: 12px;
 }
+
+/* ------------------------------ Tables styles ----------------------------- */
+/*table {
+    background-color: #f8f9fa;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 4px;
+}
+
+Selector que provee la opción de colorear una fila de por medio en una tabla
+tr:nth-child(even) {
+    El parámetro puede ser odd también
+    background-color: #aaaaaa;
+}
+
+table thead th {
+    color: #dddddd;
+    text-align: center;
+    border: solid 1px #dddddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+table tbody td {
+    text-align: center;
+    border: solid 1px #dddddd;
+    padding: 8px;
+}*/
+/* ---------------------------- End Tables styles --------------------------- */

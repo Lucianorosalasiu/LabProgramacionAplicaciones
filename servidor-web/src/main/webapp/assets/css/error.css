@@ -1,0 +1,36 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 21 oct. 2023, 15:54:40
+    Author     : alexis
+*/
+
+/* Pagina de error */
+
+.error {
+    background-color:#FFEBE8;
+    border: 2px solid #DD3C10;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+#error_page {
+    color: black;
+}
+
+#error_page .titulo_error {
+    font-size: 4em;
+    margin-left: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#error_page .main {
+    margin-bottom: 30px;
+}
+
+#error_page p {
+    text-align: center;
+}
