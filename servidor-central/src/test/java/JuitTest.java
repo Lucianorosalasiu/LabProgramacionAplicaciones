@@ -215,6 +215,7 @@ public class JuitTest {
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
         assertEquals(false,resultados.contains("Teatro con Sabores"));
     }
+    
     @Test
     public void Test17() throws MyException{
         Fabrica fabrica = new Fabrica();
@@ -411,7 +412,7 @@ public class JuitTest {
        Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
        
-        controlador.validarActividad(null,null);
+        controlador.validarActividad(70L,EstadoActividad.CONFIRMADA);
         DTDepartamento resultado = controlador.CU11obtenerDepartamentoActividad("Degusta");
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
         assertEquals("Rocha",resultado.getNombre());
@@ -493,7 +494,79 @@ public class JuitTest {
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
        
     }
+     
+    @Test
+    public void testManejoDeExcepciones() {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        try {
+            DTTurista testTurista = new DTTurista(222L, "d", "d", "d");
+            DTProveedor test = new DTProveedor(222L,"s", "s", "s"); 
+            controlador.actualizarUsuario(testTurista);
+            
+            fail("Se esperaba una excepción, pero no se lanzó.");
+        } catch (MyException esperada) {
+            // La excepción fue lanzada, lo que es lo esperado.
+            assertEquals("¡ERROR! Algo salio mal al intentar actualizar el turista", esperada.getMessage());
+            
+        }
+        
+    }
+    
+    @Test
+    public void testManejoDeExcepciones2() {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        try {
+            DTTurista testTurista = new DTTurista(222L, "d", "d", "d");
+            DTProveedor test = new DTProveedor(222L,"s", "s", "s"); 
+            controlador.actualizarUsuario(test);
+            
+            fail("Se esperaba una excepción, pero no se lanzó.");
+        } catch (MyException esperada) {
+            // La excepción fue lanzada, lo que es lo esperado.
+            assertEquals("¡ERROR! Algo salio mal al intentar actualizar el proveedor", esperada.getMessage());
+           
+        }
+        
+    }
      @Test
+    public void testManejoDeExcepciones3() {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        try {
+            DTInscripcion test = new DTInscripcion();
+            test.setCantidadTuristas(788955458);
+            
+            controlador.altaInscripcion(test, "Degusta", "Degusta Agosto", "anibal");
+            
+            fail("Se esperaba una excepción, pero no se lanzó.");
+        } catch (MyException esperada) {
+            // La excepción fue lanzada, lo que es lo esperado.
+            assertEquals("La cantidad de turistas ingresada excede los cupos disponibles para la salida!", esperada.getMessage());
+            
+        }
+        
+    }
+    @Test
+    public void testManejoDeExcepciones4() {
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        try {
+            DTInscripcion test = new DTInscripcion();
+            test.setCantidadTuristas(788955458);
+            controlador.obtenerCostoActividad("");
+            controlador.altaInscripcion(test, "Degusta", "Degusta Agosto", "anibal");
+            
+            fail("Se esperaba una excepción, pero no se lanzó.");
+        } catch (MyException esperada) {
+            // La excepción fue lanzada, lo que es lo esperado.
+            assertEquals("La cantidad de turistas ingresada excede los cupos disponibles para la salida!", esperada.getMessage());
+            
+        }
+        
+    }
+    @Test
     public void Test39() throws MyException{
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
@@ -522,7 +595,7 @@ public class JuitTest {
         testActividad1.setFechaAlta(date);
         testActividad1.setNombre("test");
         controlador.obtenerPaquetesComprados(1L, "Degusta Agosto", 2);
-        controlador.usarPaquete(3L, "Disfrutar Rocha", 1);
+        
         byte [] testimage2 = controlador.obtenerFotoPaqueteActividadTuristica("Disfrutar Rocha");
         controlador.altaActividadTuristica(testActividad, Long.MIN_VALUE, Long.MIN_VALUE,testlist, null);
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
@@ -531,7 +604,6 @@ public class JuitTest {
         controlador.agregarActividadPaquete("","");
         
     }
-    
     @Test
     public void Test41() throws MyException{
         Fabrica fabrica = new Fabrica();
