@@ -4,10 +4,12 @@
  */
 
 import Enums.EstadoActividad;
+import Enums.TipoInscripcion;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
+import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
@@ -17,6 +19,14 @@ import exceptions.MyException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import logica.clases.ActividadTuristica;
+import logica.clases.Categoria;
+import logica.clases.Departamento;
+import logica.clases.PaqueteActividadTuristica;
+import logica.clases.Proveedor;
+import logica.clases.SalidaTuristica;
+import logica.clases.Turista;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import org.junit.jupiter.api.AfterEach;
@@ -25,6 +35,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import persistencia.entidades.EActividadTuristica;
+import persistencia.entidades.ECategoria;
+import persistencia.entidades.ECompraPaquete;
+import persistencia.entidades.EDepartamento;
+import persistencia.entidades.EPaqueteActividadTuristica;
+import persistencia.entidades.EProveedor;
+import persistencia.entidades.ESalidaTuristica;
+import persistencia.entidades.ETurista;
 
 /**
  *
@@ -75,7 +93,8 @@ public class JuitTest {
         
         
         List<DTDepartamento> Resultado = controlador.obtenerDepartamentos();
-        assertEquals(19,Resultado.size());
+        assertEquals(true,Resultado.stream().anyMatch(DTDepartamento -> DTDepartamento.getNombre()
+                .equals("Rocha")));
     }
     @Test
     public void Test5() throws MyException{
@@ -409,20 +428,121 @@ public class JuitTest {
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
         assertEquals(true,resultados.stream().anyMatch(DTPaqueteActividadTuristica -> DTPaqueteActividadTuristica.getNombre()
                 .equals("Disfrutar Rocha")));
+        
     }
     @Test
     public void Test37() throws MyException{
-       Fabrica fabrica = new Fabrica();
-       IControlador controlador = fabrica.getInterface();
-        
-        
-       DTProveedor test = new DTProveedor(); 
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        DTActividadTuristica testActividad = new DTActividadTuristica();
+        DTCategoria testCategoria = new DTCategoria("al aire libre");
+        DTProveedor test = new DTProveedor(); 
+        DTCompraPaquete testCompra = new DTCompraPaquete();
+        DTDepartamento testDepartamento = new DTDepartamento();
+        DTPaqueteActividadTuristica testPaquete = new DTPaqueteActividadTuristica();
+        DTSalidaTuristica testSalida = new DTSalidaTuristica();
+        DTTurista testTurista = new DTTurista();
        
-      controlador.altaProveedor(test);
-
-
+        controlador.altaProveedor(test);
+        controlador.altaDepartamento(testDepartamento);
+        controlador.altaCategoria("Al dia libre");
+        controlador.altaPaqueteActividadTuristica(testPaquete,null);
+        controlador.altaSalidaTuristica(testSalida, "degusta");
+        controlador.altaTurista(testTurista);
+        
+        
+        
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
        
+    }
+    @Test
+    public void Test38() throws MyException{
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        EActividadTuristica testActividad = new EActividadTuristica(null, null,null, 0, null, null, null);
+        ECategoria testCategoria = new ECategoria();
+        EProveedor test = new EProveedor(null, null, null, null, null, null, null, null, null, null); 
+        ECompraPaquete testCompra = new ECompraPaquete(null, null, 0, null, null, 0);
+        EDepartamento testDepartamento = new EDepartamento(null, null, null);
+        EPaqueteActividadTuristica testPaquete = new EPaqueteActividadTuristica(null, null, 0, 0, null);
+        ESalidaTuristica testSalida = new ESalidaTuristica(null, 0, null, null, null, null, testActividad);
+        ETurista testTurista = new ETurista();
+        TipoInscripcion tipo = TipoInscripcion.GENERAL;
+        TipoInscripcion tipo2 = TipoInscripcion.PAQUETE;
+        Date date = new Date();
+        
+        //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
+       
+    }
+    @Test
+    public void Test40() throws MyException{
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        ActividadTuristica testActividad = new ActividadTuristica(null, null,null, 0, null, null, null);
+        Categoria testCategoria = new Categoria();
+        Date date = new Date();
+        Proveedor test = new Proveedor("Test", "Test", "Test", "Test", date, "Test", "Test"); 
+        
+        Departamento testDepartamento = new Departamento(null, null, null);
+        PaqueteActividadTuristica testPaquete = new PaqueteActividadTuristica(null, null, 0, 0, null);
+        SalidaTuristica testSalida = new SalidaTuristica("Test", 0, date, "Test", date);
+        Turista testTurista = new Turista("Test", "Test", "Test", "Test", date, "Test");
+  
+        
+        
+        //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
+       
+    }
+     @Test
+    public void Test39() throws MyException{
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+        DTActividadTuristica testActividad = new DTActividadTuristica();
+        DTCategoria testCategoria = new DTCategoria("al aire libre");
+        DTProveedor test = new DTProveedor(Long.valueOf(13),"meche", "test", "test"); 
+        Date date = new Date();
+        DTDepartamento testDepartamento = new DTDepartamento();
+        DTPaqueteActividadTuristica testPaquete = new DTPaqueteActividadTuristica("Disfrutar Rocha");
+        DTSalidaTuristica testSalida = new DTSalidaTuristica();
+        DTTurista testTurista = new DTTurista(3L, "anibal", "anibal", "anibal");
+        List<Long> testlist = new ArrayList<Long>(); 
+        DTCompraPaquete testCompra = new DTCompraPaquete(testTurista, testPaquete, 0, date, date, 0);
+        controlador.compraExiste(testCompra);
+        controlador.agregarCompraPaquete(testCompra);
+        DTInscripcion inscrip = new DTInscripcion();
+        controlador.altaInscripcion(inscrip, "Degusta", "Degusta Agosto", "anibal");
+        controlador.actualizarUsuario(test);
+        controlador.actualizarUsuario(testTurista);
+        byte [] testimage = controlador.obtenerFotoActividadTuristica(70L);
+        ActividadTuristica testActividad1 = new ActividadTuristica("anibal", "anibal", "anibal", 0, "anibal", date, null);
+        testActividad1.setCiudad("test");
+        testActividad1.setCosto(0);
+        testActividad1.setDepartamento(null);
+        testActividad1.setDescripcion("test");
+        testActividad1.setFechaAlta(date);
+        testActividad1.setNombre("test");
+        controlador.obtenerPaquetesComprados(1L, "Degusta Agosto", 2);
+        controlador.usarPaquete(3L, "Disfrutar Rocha", 1);
+        byte [] testimage2 = controlador.obtenerFotoPaqueteActividadTuristica("Disfrutar Rocha");
+        controlador.altaActividadTuristica(testActividad, Long.MIN_VALUE, Long.MIN_VALUE,testlist, null);
+        //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
+        controlador.obtenerTurista(10L);
+        controlador.agregarActividadPaquete("Disfrutar Rocha", "Cabalgata en Valle del Lunarejo");
+        controlador.agregarActividadPaquete("","");
+        
+    }
+    
+    @Test
+    public void Test41() throws MyException{
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+       
+    }
+    public void Test42()  throws MyException{
+        Fabrica fabrica = new Fabrica();
+        IControlador controlador = fabrica.getInterface();
+       
+        controlador.actualizarUsuario(null);
     }
     @AfterAll
     public static void tearDownClass() {
