@@ -1128,32 +1128,7 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
    
-    public DTActividadTuristica CU11obtenerActividad(String nombre){
-        EntityManager em = emf.createEntityManager();
-        try{
-          
-            EActividadTuristica eActividad = em.createQuery("select p from EActividadTuristica p where p.nombre = :nombreActividad"
-                    ,EActividadTuristica.class)
-                    .setParameter("nombreActividad",nombre)
-                    .getSingleResult();
-            EActividadTuristica actividad = em.find(EActividadTuristica.class,eActividad.getId());
-            EDepartamento eDepartamento = actividad.getEDepartamento();
-            DTDepartamento dtDepartamento = new DTDepartamento(eDepartamento.getNombre(),eDepartamento.getDescripcion(),eDepartamento.getUrl());
-            return new DTActividadTuristica(actividad.getId(),
-                                            actividad.getNombre(),
-                                            actividad.getDescripcion(),
-                                            actividad.getDuracion(),
-                                            actividad.getCosto(),
-                                            actividad.getCiudad(),
-                                            actividad.getFechaAlta()
-                                                  );
-           
-        }catch(Exception e){
-            return new DTActividadTuristica();
-        }finally{
-            em.close();
-        }
-    }
+    
     @Override
     public DTDepartamento CU11obtenerDepartamentoActividad(String nombreActividad){
         EntityManager em = emf.createEntityManager();
@@ -1582,37 +1557,6 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
         
-    }
-    
-    @Override
-    public void usarPaquete(Long idTurista, String nombrePaquete, int cantTuristas) {
-        EntityManager em = emf.createEntityManager();
-        
-        try{
-            ETurista eTurista = em.find(ETurista.class, idTurista);
-            
-            String queryPaquete = "SELECT p FROM EPaqueteActividadTuristica p WHERE p.nombre = :nombre";
-            EPaqueteActividadTuristica ePaquete = em.createQuery(queryPaquete, EPaqueteActividadTuristica.class)
-                                        .setParameter("nombre", nombrePaquete)
-                                        .getSingleResult();
-            
-            String queryCompra = "SELECT c FROM ECompraPaquete c WHERE c.COMPRADOR = :turista AND c.PAQUETE = :paquete";
-            ECompraPaquete eCompra = em.createQuery(queryCompra, ECompraPaquete.class)
-                            .setParameter("turista", eTurista)
-                            .setParameter("paquete", ePaquete)
-                            .getSingleResult();
-            
-            eCompra.setCANTTURISTAS(eCompra.getCANTTURISTAS() - cantTuristas);
-            
-            em.getTransaction().begin();
-            em.merge(eCompra);
-            em.getTransaction().commit();
-        }catch(Exception e){
-            em.getTransaction().rollback();
-        }finally{
-            em.close();
-        }
-    }
-    
+    } 
     
 }

@@ -116,10 +116,6 @@ public class Inscripcion extends HttpServlet {
                             salida, 
                             nickname
                     );
-
-                    if (formaPago.equals("paquete")) { 
-                        controlador.usarPaquete(idUser, nombrePaquete, Integer.parseInt(cantidadTuristas));   
-                    }
                     
                     request.setAttribute("successMessage", "Inscripción realizada correctamente!");
                     request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
