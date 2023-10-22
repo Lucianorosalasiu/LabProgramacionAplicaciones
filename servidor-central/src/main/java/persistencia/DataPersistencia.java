@@ -85,6 +85,7 @@ public class DataPersistencia implements IDataPersistencia {
                         .getResultList();  
             }
         }catch(Exception e){
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("¡ERROR! Algo salio mal al realizar la consulta");
         }finally{
             em.close();
@@ -117,6 +118,7 @@ public class DataPersistencia implements IDataPersistencia {
             em.getTransaction().commit(); 
         } catch (Exception e) {
             em.getTransaction().rollback();
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("¡ERROR! Algo salio mal al insertar el nuevo proveedor");
         } finally {
             em.close();
@@ -144,6 +146,7 @@ public class DataPersistencia implements IDataPersistencia {
             em.getTransaction().commit(); 
         } catch (Exception e) {
             em.getTransaction().rollback();
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("¡ERROR! Algo salio mal al insertar el nuevo turista");
         } finally {
             em.close();
@@ -193,6 +196,7 @@ public class DataPersistencia implements IDataPersistencia {
             touristResult.setParameter("nickname", nickname);
             return touristResult.getSingleResult();
         } catch (NoResultException e) {
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("No se encontró el turista con el nickname brindado");
         } finally {
             em.close();
@@ -208,6 +212,7 @@ public class DataPersistencia implements IDataPersistencia {
             providerResult.setParameter("nickname", nickname);
             return providerResult.getSingleResult();
         } catch (NoResultException e) {
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("No se encontró el proveedor con el nickname brindado");
         } finally {
             em.close();
@@ -245,8 +250,7 @@ public class DataPersistencia implements IDataPersistencia {
                 em.getTransaction().rollback();
             }
             Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
-            System.out.println(Arrays.toString(e.getStackTrace()) + e.getMessage());
-            throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el proveedor");
+            throw new MyException("ERROR! Algo salio mal al intentar actualizar el proveedor");
         } finally {
             em.close();
         }
@@ -285,7 +289,7 @@ public class DataPersistencia implements IDataPersistencia {
             }
             Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             System.out.println(Arrays.toString(e.getStackTrace()) + e.getMessage());
-            throw new MyException("¡ERROR! Algo salio mal al intentar actualizar el turista");
+            throw new MyException("ERROR! Algo salio mal al intentar actualizar el turista");
         } finally {
             em.close();
         }

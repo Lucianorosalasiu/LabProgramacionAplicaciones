@@ -4,6 +4,9 @@
  */
 const nacionalitySelect = document.getElementById('select-nacionality');
 
+// Verificar el valor seleccionado en el select
+const selectedValue = nacionalitySelect.value;
+
 // Función para cargar y analizar el archivo CSV de forma asíncrona
 const getCountryListFromCSV = async () => {
     try {
@@ -18,10 +21,13 @@ const getCountryListFromCSV = async () => {
             const line = lines[i].trim(); // Eliminar espacios en blanco
             const [nombre] = line.replace(/"/g, '').split(','); // Eliminar comillas y obtener el primer valor
             if (nombre) {
-                const option = document.createElement('option');
-                option.value = nombre.trim();
-                option.textContent = nombre.trim();
-                nacionalitySelect.appendChild(option);
+                // Verificar si el país coincide con el valor seleccionado
+                if (nombre !== selectedValue) {
+                    const option = document.createElement('option');
+                    option.value = nombre.trim();
+                    option.textContent = nombre.trim();
+                    nacionalitySelect.appendChild(option);
+                }
             }
         }
     } catch (error) {

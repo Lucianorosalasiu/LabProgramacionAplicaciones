@@ -28,13 +28,13 @@
             <div class="container py-5 min-vh-70 flex-grow-1">
                 <h3>Editar perfil</h3>
                 <hr />
-                <% if (request.getAttribute("errorMessage") != null) { %>
+                <% if (request.getParameter("errorMessage") != null) { %>
                 <div class="alert alert-danger" role="alert">
-                    <%= request.getAttribute("errorMessage") %>
+                    <%= request.getParameter("errorMessage") %>
                 </div>
                 <% } %>
                 <form 
-                    id="modify-user-form" 
+                    id="new-form" 
                     action="/modificacionusuario"
                     method="post"
                     enctype="multipart/form-data"
@@ -176,7 +176,9 @@
                     <hr />
                     <!-- ---------------------- Ingreso de la contraseña ----------------------- -->
                     <div class="col-md-4">
-                        <label for="input-password" class="form-label">Nueva contraseña</label>
+                        <label for="input-password" class="form-label">Nueva contraseña
+                            <span class="text-info"> (Opcional)</span>
+                        </label>
                         <input
                             type="password"
                             id="input-password"
@@ -187,7 +189,9 @@
                     </div>
                     <!-- ---- Ingreso de la confirmación de contraseña ---- -->
                     <div class="col-md-4">
-                        <label for="input-confirm-password" class="form-label">Confirmación de nueva contraseña</label>
+                        <label for="input-confirm-password" class="form-label">Confirmación de nueva contraseña
+                            <span class="text-info"> (Opcional)</span>
+                        </label>
                         <input
                             type="password"
                             id="input-confirm-password"
@@ -224,14 +228,22 @@
                     <!-- --- Botones para crear usuario o ir al inicio de sesión --- -->
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-success">
-                            Crear usuario
+                            Actualizar datos
                         </button>
-                        <a href="/login" type="button" class="btn btn-primary">Iniciar sesión</a>
+                        <a href="/consultausuario?usuario=<%=session.getAttribute("sessionNickname")%>" type="button" class="btn btn-primary">Volver al perfil</a>
                     </div>
                 </form>
             </div>
         </main>
 
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
+        
+        <!-- -------------------------- Inicio de scripts -------------------------- -->        
+        <!-- Validación de campos a nivel de front -->
+        <script src="assets/js/usuarios/formValidator.js"></script>
+        <!-- Cargar los países del campo select a través de un CSV -->
+        <script src="assets/js/usuarios/loadCountryList.js"></script>
+        <!-- Cargar vista previa de la imagen seleccionada en el form -->
+        <script src="assets/js/usuarios/imagePreview.js"></script>
     </body>   
 </html>

@@ -27,7 +27,7 @@
                     </div>
                  <% } %>
                 <form 
-                    id="signup-form" 
+                    id="new-form" 
                     action="/altausuario"
                     method="post"
                     enctype="multipart/form-data"
@@ -234,7 +234,7 @@
 
         <!-- -------------------------- Inicio de scripts -------------------------- -->
         <!-- Validación de campos a nivel de front -->
-        <script src="assets/js/usuarios/signupFormValidator.js"></script>
+        <script src="assets/js/usuarios/formValidator.js"></script>
         <!-- Mostrar u ocultar campos según el tipo de usuario seleccionado -->
         <script src="assets/js/usuarios/toggleFields.js"></script>
         <!-- Cargar los países del campo select a través de un CSV -->

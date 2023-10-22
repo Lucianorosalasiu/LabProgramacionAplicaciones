@@ -69,6 +69,7 @@ public class Login extends HttpServlet {
                     request.getSession().setAttribute("id", usuario.getId());
                     request.getSession().setAttribute("sessionNickname", usuario.getNickname());
                     request.getSession().setAttribute("sessionEmail", usuario.getEmail());
+                    request.getSession().setAttribute("sessionPhoto", usuario.getProfileImageUrl());
                     request.getSession().setAttribute("sessionType", sessionType);
                     request.getSession().setAttribute("isLogged",true);
                 }

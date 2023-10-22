@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/gulpfile.js to edit this template
  */
 
-const signupForm = document.querySelector('#signup-form');
+const signupForm = document.querySelector('#new-form');
 const file = document.querySelector('#input-photo');
 const image = document.querySelector('#image-preview');
 
