@@ -390,11 +390,6 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void usarPaquete(Long idTurista, String nombrePaquete, int cantTuristas) {
-        dataPersistencia.usarPaquete(idTurista, nombrePaquete, cantTuristas);
-    }
-    
-    @Override
     public float obtenerCostoActividad(String nombreActividad) {
         return dataPersistencia.obtenerCostoActividad(nombreActividad);
     }
