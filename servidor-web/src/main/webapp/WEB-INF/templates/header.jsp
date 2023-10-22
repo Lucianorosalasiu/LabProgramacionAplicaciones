@@ -77,8 +77,8 @@
                     </a>
                 </li>
                 <li class="nav-item">   
-                    <a href="/altausuario" type="button" class="btn btn-light">
-                        Alta de Usuario
+                    <a href="/altausuario" type="button" class="btn btn-outline-light">
+                        Registrarse
                     </a>
                 </li>
             </ul>

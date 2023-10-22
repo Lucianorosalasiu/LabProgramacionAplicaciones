@@ -20,6 +20,7 @@ import exceptions.MyException;
 import webExceptions.NonEqualPasswordException;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -112,7 +113,10 @@ public class ModificacionUsuario extends HttpServlet {
                 byte[] photo = null;
 
                 Part imagePart = request.getPart("photo");
-                if (imagePart != null) {
+                if (imagePart != null 
+                    && imagePart.getSubmittedFileName() != null 
+                    && !imagePart.getSubmittedFileName().isEmpty()
+                ){
                     InputStream imageFile = imagePart.getInputStream();
                     photo = IOUtils.toByteArray(imageFile);
                     IOUtils.closeQuietly(imageFile);
@@ -171,19 +175,19 @@ public class ModificacionUsuario extends HttpServlet {
             return;
         }
         
-        /* En caso de error, se cargan los atributos básicos previamente 
-        ingresados en el form, para evitar escribirlos nuevamente cuando se 
-        recargue la vista con el get.
-        Además, se carga el mensaje de error.
-        */
+        /* En caso de error, se carga el mensaje de error como parámetro 
+        del response. */
         
-        // Crear la URL con el parámetro de consulta
+        /* Primero se codifica el mensaje de error para evitar que se vea mal */
+        String encodedError = URLEncoder.encode(error, "UTF-8");
+        
+        /* Luego se crea la URL con el parámetro de consulta */
         String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
         String url = "/modificacionusuario?usuario=" + sessionEmail + 
-            "&errorMessage=" + error;
+            "&errorMessage=" + encodedError;
 
-        /* Redirigir a la nueva URL pasando el usuario que está modificando el 
-        perfil y el error que se obtuvo*/
+        /* Y por último se redirige a la nueva URL pasando el usuario que 
+        se está intentando modificar el perfil y el error codíficado. */
         response.sendRedirect(request.getContextPath() + url);
     }        
 

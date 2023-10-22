@@ -98,7 +98,10 @@ public class AltaUsuario extends HttpServlet {
                 byte[] photo = null;
 
                 Part imagePart = request.getPart("photo");
-                if (imagePart != null) {
+                if (imagePart != null 
+                    && imagePart.getSubmittedFileName() != null 
+                    && !imagePart.getSubmittedFileName().isEmpty()
+                ){
                     InputStream imageFile = imagePart.getInputStream();
                     photo = IOUtils.toByteArray(imageFile);
                     IOUtils.closeQuietly(imageFile);

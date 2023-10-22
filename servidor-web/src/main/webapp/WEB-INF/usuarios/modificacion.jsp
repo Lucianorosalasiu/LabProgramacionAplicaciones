@@ -110,7 +110,7 @@
                             value="<%=
                             // Formato deseado para la fecha
                             new SimpleDateFormat("yyyy-MM-dd").format(usr.getBirthDate())
-                                 %>"
+                            %>"
                             required
                             />
                     </div>
@@ -118,58 +118,58 @@
                     if (usr instanceof DTTurista) {
                         DTTurista turista = (DTTurista) usr;
                     %>        
-                        <!-- ----- Ingreso de la nacionalidad del turista ----- -->
-                        <div class="col-md-4" id="nacionality-div">
-                            <label for="select-nacionality" class="form-label">
-                                Nacionalidad
-                            </label>
-                            <select
-                                type="text"
-                                id="select-nacionality"
-                                class="form-control"
-                                name="nacionality"
-                                required
-                                >
-                                <option value=''>Selecciona el país</option>
-                                <option value="<%=turista.getNacionality()%>" selected>
-                                    <%=turista.getNacionality()%>
-                                </option>
-                            </select>
-                        </div>  
-                        <br/>
+                    <!-- ----- Ingreso de la nacionalidad del turista ----- -->
+                    <div class="col-md-4" id="nacionality-div">
+                        <label for="select-nacionality" class="form-label">
+                            Nacionalidad
+                        </label>
+                        <select
+                            type="text"
+                            id="select-nacionality"
+                            class="form-control"
+                            name="nacionality"
+                            required
+                            >
+                            <option value=''>Selecciona el país</option>
+                            <option value="<%=turista.getNacionality()%>" selected>
+                                <%=turista.getNacionality()%>
+                            </option>
+                        </select>
+                    </div>  
+                    <br/>
                     <%
                     } else if (usr instanceof DTProveedor) {
                         DTProveedor proveedor = (DTProveedor) usr;
                     %>
-                        <!-- ----- Ingreso del sitio web del proveedor ----- -->
-                        <div class="col-md-6" id="website-div">
-                            <label for="input-website" class="form-label">
-                                URL del Sitio Web 
-                                <span class="text-info"> (Opcional)</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="input-website"
-                                class="form-control"
-                                name="website"
-                                value="<%= proveedor.getWebsiteURL() %>"
-                                placeholder="https://example.com"
-                                />
-                        </div>
-                        <!-- ----- Ingreso de la descripción del proveedor ----- -->
-                        <div class='form-group' id="description-div">
-                            <label for='input-description' class='form-label'>Descripción</label>
-                            <textarea
-                                id='input-description'
-                                class='form-control'
-                                name='description'
-                                type='text'
-                                cols='30'
-                                rows='4'
-                                value="<%= proveedor.getDescription() %>"
-                                placeholder='Una breve descripción de mi persona'
-                                ></textarea>
-                        </div>
+                    <!-- ----- Ingreso del sitio web del proveedor ----- -->
+                    <div class="col-md-6" id="website-div">
+                        <label for="input-website" class="form-label">
+                            URL del Sitio Web 
+                            <span class="text-info"> (Opcional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="input-website"
+                            class="form-control"
+                            name="website"
+                            value="<%= proveedor.getWebsiteURL() %>"
+                            placeholder="https://example.com"
+                            />
+                    </div>
+                    <!-- ----- Ingreso de la descripción del proveedor ----- -->
+                    <div class='form-group' id="description-div">
+                        <label for='input-description' class='form-label'>Descripción</label>
+                        <textarea
+                            id='input-description'
+                            class='form-control'
+                            name='description'
+                            type='text'
+                            cols='30'
+                            rows='4'
+                            placeholder='Una breve descripción de tu persona'
+                        ><%= proveedor.getDescription() %>
+                        </textarea>
+                    </div>
                     <%
                     }
                     %> 
@@ -237,7 +237,7 @@
         </main>
 
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
-        
+
         <!-- -------------------------- Inicio de scripts -------------------------- -->        
         <!-- Validación de campos a nivel de front -->
         <script src="assets/js/usuarios/formValidator.js"></script>

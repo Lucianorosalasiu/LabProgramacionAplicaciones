@@ -4557,50 +4557,7 @@ public class Main extends javax.swing.JFrame {
             return null;
         }
     }
-    
-    private String jCU1GuardarImagen(String nickname){
-        String imagePath = null;
-        // Se obtiene el icono guardado en el JLabel
-        Icon icon = jCU1LabelPreview.getIcon();
-
-        // Se verifica si el icono es una instancia de ImageIcon
-        if (icon instanceof ImageIcon) {
-            // Se convierte el icono a ImageIcon y se obtiene la imagen
-            ImageIcon imageIcon = (ImageIcon) icon;
-            Image image = imageIcon.getImage();
-
-            // Se define el directorio donde guardar la imagen
-            String destinationPath = "../servidor-central/img/";
-            // Se crea un objeto File para la carpeta de destino
-            File destinationFolder = new File(destinationPath);
-            
-            // Si no existe el directorio se crea
-            if (!destinationFolder.exists()) {
-                destinationFolder.mkdir();
-            }
-            
-           // Ruta completa del archivo
-           imagePath = destinationPath + nickname + ".jpeg";
-
-           // Guarda la imagen en la ruta especificada
-           try {
-               BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
-               Graphics2D g2d = bufferedImage.createGraphics();
-               g2d.drawImage(image, 0, 0, null);
-               g2d.dispose();
-
-               // Se crea un objeto File con la ruta final
-               File imageFile = new File(imagePath);
-               ImageIO.write(bufferedImage, "jpg", imageFile);
-               return imagePath;
-           } catch (IOException e) {
-               JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
-           }
-        }
         
-        return imagePath;
-    }
-    
     private void JCU1ButtonSendDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCU1ButtonSendDataActionPerformed
         try {
             // Se validan campos vacios, caso que haya lanzamos una excepcion.

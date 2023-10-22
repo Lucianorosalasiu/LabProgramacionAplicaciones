@@ -191,7 +191,7 @@
                             type='text'
                             cols='30'
                             rows='4'
-                            placeholder='Una breve descripción de mi persona'
+                            placeholder='Una breve descripción de tu persona'
                             ></textarea>
                     </div>
                     <hr />

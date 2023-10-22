@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/gulpfile.js to edit this template
  */
 const nacionalitySelect = document.getElementById('select-nacionality');
-
-// Verificar el valor seleccionado en el select
-const selectedValue = nacionalitySelect.value;
+const inputDescription = document.getElementById('input-description');
 
 // Función para cargar y analizar el archivo CSV de forma asíncrona
 const getCountryListFromCSV = async () => {
+    // Verificar el valor seleccionado en el select
+    const selectedValue = nacionalitySelect.value;
     try {
         const response = await fetch('assets/paises.csv');
         if (!response.ok) {
@@ -35,5 +35,10 @@ const getCountryListFromCSV = async () => {
     }
 };
 
-getCountryListFromCSV();
+/* Se verifica si el inputDescription tiene algún valor. Ya que si tiene 
+ * significa que se está dando de alta o modificando un proveedor y no es 
+ * necesario cargar la lista de países. Ya que corresponde solo a los turistas.*/
 
+if (inputDescription.value === '') {
+    getCountryListFromCSV();
+}

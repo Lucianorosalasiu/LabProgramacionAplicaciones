@@ -101,7 +101,7 @@ public abstract class DTUsuario {
     
     // Método válido para visualizar las imagenes desde la web, no desde Swing
     public String getProfileImageUrl() {
-        if (this.photo != null) {
+        if (this.photo != null && !this.photo.equals("")) {
             // Si hay una imagen de perfil en formato blob, se convierte a Base64
             String encodedImage = Base64.getEncoder().encodeToString(photo);
             return "data:image/jpeg;base64," + encodedImage;

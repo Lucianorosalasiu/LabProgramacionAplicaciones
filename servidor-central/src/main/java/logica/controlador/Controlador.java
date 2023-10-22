@@ -118,15 +118,19 @@ public class Controlador implements IControlador{
     }
      
     @Override
-    public void actualizarUsuario(DTUsuario usuario) throws MyException{
+    public void actualizarUsuario(DTUsuario usuario) throws MyException {
+        if((usuario.getPassword() != null) && !usuario.getPassword().isBlank()){
+            String hashedPassword = usuario.hashPassword(usuario.getPassword());
+            usuario.setPassword(hashedPassword);
+        }
         // Se verifica el tipo de instancia recibida usando reflexión
         if (usuario instanceof DTTurista) {
-            DTTurista turista = (DTTurista) usuario;
             // Se realizan las operaciones necesarias con la instancia de DTTurista
+            DTTurista turista = (DTTurista) usuario;
             dataPersistencia.actualizarTurista(turista);
         } else if (usuario instanceof DTProveedor) {
-            DTProveedor proveedor = (DTProveedor) usuario;
             // Se realizan las operaciones necesarias con la instancia de DTProveedor
+            DTProveedor proveedor = (DTProveedor) usuario;
             dataPersistencia.actualizarProveedor(proveedor);
         } else {
             throw new MyException("Tipo de usuario no válido");
