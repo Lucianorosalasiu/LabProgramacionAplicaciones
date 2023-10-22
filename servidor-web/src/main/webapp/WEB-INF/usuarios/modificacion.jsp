@@ -176,7 +176,7 @@
                     <hr />
                     <!-- ---------------------- Ingreso de la contraseña ----------------------- -->
                     <div class="col-md-4">
-                        <label for="input-password" class="form-label">Contraseña</label>
+                        <label for="input-password" class="form-label">Nueva contraseña</label>
                         <input
                             type="password"
                             id="input-password"
@@ -187,7 +187,7 @@
                     </div>
                     <!-- ---- Ingreso de la confirmación de contraseña ---- -->
                     <div class="col-md-4">
-                        <label for="input-confirm-password" class="form-label">Confirmación de contraseña</label>
+                        <label for="input-confirm-password" class="form-label">Confirmación de nueva contraseña</label>
                         <input
                             type="password"
                             id="input-confirm-password"
@@ -215,6 +215,7 @@
                         <br />
                         <img
                             id="image-preview"
+                            src="<%= profileImageUrl %>"
                             width="150"
                             height="150"
                             class="rounded-circle"

@@ -6,8 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dataTypes.DTUsuario"%>
+<%@page import="dataTypes.DTTurista"%>
+<%@page import="dataTypes.DTProveedor"%>
 <%@page import="java.util.List"%> 
-<%@page import="java.util.Base64"%> 
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -36,7 +37,18 @@
                         <span class="email">
                             <%= u.getEmail() %>
                         </span>
-                    </div>
+                    </div>                        
+                    <% if (u instanceof DTTurista) {
+                    %>
+                    <span class="text-info float-right"> Turista </span>
+                    <%
+                    } else if(u instanceof DTProveedor){     
+                    %>
+                    <span class="text-warning float-right"> Proveedor </span>
+                    <%
+                    }
+                    %>      
+
                 </div>
             <% } %>
         </div>

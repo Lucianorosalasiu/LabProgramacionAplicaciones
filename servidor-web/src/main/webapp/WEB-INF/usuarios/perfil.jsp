@@ -25,7 +25,16 @@
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
             <h3 id="titulo-perfil">Perfil del usuario:
-                <span class="text-info">  <%= usr.getNickname() %> </span>
+                <% if (usr instanceof DTTurista) {
+                %>
+                    <span class="text-info">  <%= usr.getNickname() %> </span>
+                <%
+                } else if(usr instanceof DTProveedor){     
+                %>
+                    <span class="text-warning"> <%= usr.getNickname() %> </span>
+                <%
+                }
+                %>   
             </h3>
             <%
                 if(usr.getNickname().equals(userLogged)){
