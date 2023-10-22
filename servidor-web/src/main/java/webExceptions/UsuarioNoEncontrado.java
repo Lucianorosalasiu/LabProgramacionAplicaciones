@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package exceptions;
+package webExceptions;
 
 /**
  *
- * @author alexis
+ * @author progav
  */
-public class NonEqualPasswordException extends Exception {
-
-    public NonEqualPasswordException(String message) {
+public class UsuarioNoEncontrado extends Exception{
+    public UsuarioNoEncontrado(String message) {
         super(message);
-    }
-    
+    }   
 }

@@ -22,8 +22,6 @@ import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import logica.clases.Proveedor;
-import logica.clases.Turista;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.ECategoria;
 import persistencia.entidades.ECompraPaquete;

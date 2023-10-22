@@ -18,8 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import logica.clases.Departamento;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

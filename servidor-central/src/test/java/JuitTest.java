@@ -3,6 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 import Enums.EstadoActividad;
 import Enums.TipoInscripcion;
 import dataTypes.DTActividadTuristica;
@@ -16,27 +27,6 @@ import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import exceptions.MyException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import logica.clases.ActividadTuristica;
-import logica.clases.Categoria;
-import logica.clases.Departamento;
-import logica.clases.PaqueteActividadTuristica;
-import logica.clases.Proveedor;
-import logica.clases.SalidaTuristica;
-import logica.clases.Turista;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import persistencia.FDataPersistencia;
-import persistencia.IDataPersistencia;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.ECategoria;
 import persistencia.entidades.ECompraPaquete;
@@ -45,6 +35,12 @@ import persistencia.entidades.EPaqueteActividadTuristica;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
 import persistencia.entidades.ETurista;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
+import logica.clases.ActividadTuristica;
+import logica.clases.Departamento;
+import logica.clases.PaqueteActividadTuristica;
+
 
 /**
  *
@@ -479,20 +475,12 @@ public class JuitTest {
     }
     @Test
     public void Test40() throws MyException{
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
         ActividadTuristica testActividad = new ActividadTuristica(null, null,null, 0, null, null, null);
-        Categoria testCategoria = new Categoria();
         Date date = new Date();
-        Proveedor test = new Proveedor("Test", "Test", "Test", "Test", date, "Test", "Test"); 
         
         Departamento testDepartamento = new Departamento(null, null, null);
         PaqueteActividadTuristica testPaquete = new PaqueteActividadTuristica(null, null, 0, 0, null);
-        SalidaTuristica testSalida = new SalidaTuristica("Test", 0, date, "Test", date);
-        Turista testTurista = new Turista("Test", "Test", "Test", "Test", date, "Test");
-  
-        
-        
+       
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
        
     }
@@ -584,6 +572,20 @@ public class JuitTest {
         DTPaqueteActividadTuristica testPaquete = new DTPaqueteActividadTuristica("Disfrutar Rocha");
         DTSalidaTuristica testSalida = new DTSalidaTuristica();
         DTTurista testTurista = new DTTurista(3L, "anibal", "anibal", "anibal");
+        
+        byte[] photo = null;
+        DTTurista testTurista2 = new DTTurista(
+                "ROBERTITO", 
+                "Roberto", 
+                "Robertez", 
+                "robert@mail.com", 
+                date, 
+                "", 
+                "", 
+                photo, 
+                "Islandés"
+        );
+                    
         List<Long> testlist = new ArrayList<Long>(); 
         DTCompraPaquete testCompra = new DTCompraPaquete(testTurista, testPaquete, 0, date, date, 0);
         controlador.compraExiste(testCompra);

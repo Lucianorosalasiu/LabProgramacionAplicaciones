@@ -5,8 +5,6 @@
 package dataTypes;
 
 import java.util.Date;
-import java.util.LinkedList;
-import logica.clases.ActividadTuristica;
 import lombok.Getter;
 import lombok.Setter;
 

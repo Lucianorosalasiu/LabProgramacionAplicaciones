@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logica.clases;
-import java.awt.List;
 import java.util.Date;
 import java.util.LinkedList;
 import lombok.Getter;

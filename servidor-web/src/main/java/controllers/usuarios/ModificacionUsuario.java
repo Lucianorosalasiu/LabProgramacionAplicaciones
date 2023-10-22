@@ -15,9 +15,9 @@ import java.io.IOException;
 import static java.util.Objects.isNull;
 
 import dataTypes.DTUsuario;
-import exceptions.EmptyFieldsException;
+import webExceptions.EmptyFieldsException;
 import exceptions.MyException;
-import exceptions.NonEqualPasswordException;
+import webExceptions.NonEqualPasswordException;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -96,22 +96,17 @@ public class ModificacionUsuario extends HttpServlet {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
 
-        String nickname = "";
-        String name = "";
-        String lastName = "";
-        String email = "";
-        String birthdate = "";
-                
         String error = null;
         try {
             if (this.validateParameters(request)) {
-                birthdate = request.getParameter("birthdate");
+                String nickname = (String) request.getSession().getAttribute("sessionNickname");
+                String email = (String) request.getSession().getAttribute("sessionEmail");
+                
+                String birthdate = request.getParameter("birthdate");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date birthDateParsed = dateFormat.parse(birthdate);
-                nickname = request.getParameter("nickname");
-                name = request.getParameter("name");
-                lastName = request.getParameter("lastName");
-                email = request.getParameter("email");
+                String name = request.getParameter("name");
+                String lastName = request.getParameter("lastName");
                 String password = request.getParameter("password");
                 
                 byte[] photo = null;

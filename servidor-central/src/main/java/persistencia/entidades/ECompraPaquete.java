@@ -4,20 +4,10 @@
  */
 package persistencia.entidades;
 
-import dataTypes.DTUsuario;
+
 import java.util.Date;
-import java.util.Date;
-import java.util.LinkedList;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import logica.clases.ActividadTuristica;
-import logica.clases.PaqueteActividadTuristica;
-import logica.clases.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 /**

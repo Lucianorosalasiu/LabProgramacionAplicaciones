@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dataTypes.DTUsuario;
-import exceptions.UsuarioNoEncontrado;
+import webExceptions.UsuarioNoEncontrado;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 

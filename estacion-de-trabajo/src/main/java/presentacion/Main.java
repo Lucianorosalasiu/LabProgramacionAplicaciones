@@ -13,15 +13,16 @@ import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
-import exceptions.DataEntryException;
-import exceptions.EmptyFieldsException;
 import exceptions.MyException;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
+import guiExceptions.DataEntryException;
+import guiExceptions.EmptyFieldsException;
+
 import com.toedter.calendar.JDateChooser;
 import dataTypes.DTCategoria;
-import exceptions.NonEqualPasswordException;
+import guiExceptions.NonEqualPasswordException;
 import java.awt.Graphics2D;
 
 import javax.swing.JButton;

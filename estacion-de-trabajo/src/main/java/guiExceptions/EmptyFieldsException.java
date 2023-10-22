@@ -1,4 +1,4 @@
-package exceptions;
+package guiExceptions;
 
 
 public class EmptyFieldsException extends Exception {

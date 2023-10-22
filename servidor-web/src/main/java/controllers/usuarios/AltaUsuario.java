@@ -22,9 +22,9 @@ import static java.util.Objects.isNull;
 
 import dataTypes.DTProveedor;
 import dataTypes.DTTurista;
-import exceptions.EmptyFieldsException;
+import webExceptions.EmptyFieldsException;
 import exceptions.MyException;
-import exceptions.NonEqualPasswordException;
+import webExceptions.NonEqualPasswordException;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
