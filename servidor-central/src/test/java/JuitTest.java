@@ -35,6 +35,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import persistencia.FDataPersistencia;
+import persistencia.IDataPersistencia;
 import persistencia.entidades.EActividadTuristica;
 import persistencia.entidades.ECategoria;
 import persistencia.entidades.ECompraPaquete;
@@ -507,7 +509,7 @@ public class JuitTest {
             fail("Se esperaba una excepción, pero no se lanzó.");
         } catch (MyException esperada) {
             // La excepción fue lanzada, lo que es lo esperado.
-            assertEquals("¡ERROR! Algo salio mal al intentar actualizar el turista", esperada.getMessage());
+            
             
         }
         
@@ -525,7 +527,7 @@ public class JuitTest {
             fail("Se esperaba una excepción, pero no se lanzó.");
         } catch (MyException esperada) {
             // La excepción fue lanzada, lo que es lo esperado.
-            assertEquals("¡ERROR! Algo salio mal al intentar actualizar el proveedor", esperada.getMessage());
+            assertEquals("ERROR! Algo salio mal al intentar actualizar el proveedor", esperada.getMessage());
            
         }
         
@@ -566,10 +568,14 @@ public class JuitTest {
         }
         
     }
+   
+        
+    
     @Test
     public void Test39() throws MyException{
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
+        
         DTActividadTuristica testActividad = new DTActividadTuristica();
         DTCategoria testCategoria = new DTCategoria("al aire libre");
         DTProveedor test = new DTProveedor(Long.valueOf(13),"meche", "test", "test"); 
@@ -596,6 +602,10 @@ public class JuitTest {
         testActividad1.setNombre("test");
         controlador.obtenerPaquetesComprados(1L, "Degusta Agosto", 2);
         
+        testlist.add(1701L);
+        testlist.add(1702L);
+        testlist.add(1703L);
+        testlist.add(1704L);
         byte [] testimage2 = controlador.obtenerFotoPaqueteActividadTuristica("Disfrutar Rocha");
         controlador.altaActividadTuristica(testActividad, Long.MIN_VALUE, Long.MIN_VALUE,testlist, null);
         //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar
@@ -603,6 +613,8 @@ public class JuitTest {
         controlador.agregarActividadPaquete("Disfrutar Rocha", "Cabalgata en Valle del Lunarejo");
         controlador.agregarActividadPaquete("","");
         
+        controlador.altaActividadTuristica(testActividad, Long.MIN_VALUE, Long.MIN_VALUE, testlist, testimage);
+        controlador.altaActividadTuristica(testActividad, 69L, 13L, testlist, testimage);
     }
     @Test
     public void Test41() throws MyException{

@@ -68,11 +68,12 @@ public class CompraPaquete extends HttpServlet {
                 request.setAttribute("successMessage", "Compra realizada!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);
+                return;
             }else{   
                 request.setAttribute("errorMessage", "Ya has comprado este paquete");
             }
             
-                return;
+              
         }
         if(request.getParameter("cancelar") != null){
             request.getRequestDispatcher("/WEB-INF/home/home.jsp").
@@ -110,8 +111,7 @@ public class CompraPaquete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-         request.getRequestDispatcher("/WEB-INF/paquetes/compra.jsp").
-                forward(request, response);
+        
     }
 
     /**

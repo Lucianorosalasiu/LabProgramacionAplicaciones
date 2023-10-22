@@ -130,7 +130,7 @@ public class ModificacionUsuario extends HttpServlet {
                         String websiteURL = request.getParameter("website").isBlank()
                                 ? ""
                                 : request.getParameter("website");
-s
+
                         DTProveedor nuevoProveedor = new DTProveedor(
                                 nickname,
                                 name,
