@@ -121,6 +121,7 @@
             </div>
             <br/>
             <hr/>
+
             <%
                 Fabrica fabrica = new Fabrica();
                 IControlador controlador = fabrica.getInterface();
@@ -130,12 +131,39 @@
             if (usr instanceof DTTurista) {
                 DTTurista turista = (DTTurista) usr;
                 List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(userID);
-            %>  
+            %>
             <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
+                <h3 class="text-center">Salidas Turísticas:</h3>
+                <div class="table-responsive-lg">
+                    <table class="table align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fecha Salida</th>
+                                <th>Lugar de Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            for (DTSalidaTuristica salida : salidaList) {     
+                            %>
+                            <tr>
+                                <td><%= salida.getNombre() %></td>
+                                <td><%=
+                                    // Formato deseado para la fecha
+                                    new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
+                                    %>
+                                </td>
+                                <td><%= salida.getLugar() %></td>
+                            </tr>		
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
                 <form id="form" class="row g-3">
                     <div class='col-lg-5'>
                         <label for='select-salida' class='form-label'>
-                            <h4>Salidas Turísticas a las que se inscribió:</h4>
+                            <h4>Ver detalles de Salida Turística</h4>
                         </label>
                         <select
                             id='select-salida'
@@ -161,10 +189,62 @@
                 List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(userID);
             %>
             <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
+                <h3 class="text-center">Actividades Turísticas:</h3>
+                <div class="table-responsive-lg">
+                    <table class="table align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Ciudad</th>
+                                <th>Duración</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            for (DTActividadTuristica actividad : actividadList) {    
+                            %>
+                            <tr>
+                                <td><%= actividad.getNombre() %></td>
+                                <td><%= actividad.getCiudad() %></td>
+                                <td><%= actividad.getDuracion() %></td>
+                                <td><%= actividad.getDescripcion() %></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="text-center">Salidas Turísticas asociadas:</h3>
+                <div class="table-responsive-lg">
+                    <table class="table align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Lugar de Salida</th>
+                                <th>Fecha Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            for (DTSalidaTuristica salida : salidaList) {     
+                            %>
+                            <tr>
+                                <td><%= salida.getNombre() %></td>
+                                <td><%= salida.getLugar() %></td>
+                                <td><%=
+                                    // Formato deseado para la fecha
+                                    new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
+                                    %>
+                                </td>
+                            </tr>		
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
                 <form id="form" class="row g-3">
                     <div class='col-lg-5'>
                         <label for='select-actividad-proveedor' class='form-label'>
-                            <h4>Actividades Turísticas que ofrece:</h4>
+                            <h4>Ver detalles de Actividad Turísticas</h4>
                         </label>
                         <select
                             id='select-actividad-proveedor'
@@ -185,7 +265,7 @@
                     <div class='col-lg-2'></div>
                     <div class='col-lg-5'>
                         <label for='select-salida-proveedor' class='form-label'>
-                            <h4>Salidas Turísticas asociadas:</h4>
+                            <h4>Ver detalles de Salida Turística</h4>
                         </label>
                         <select
                             id='select-salida-proveedor'
@@ -205,7 +285,7 @@
                 </form>
             </div>
             <% } %> 
-        </div>
+        </div>  
 
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>

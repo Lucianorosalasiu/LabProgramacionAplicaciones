@@ -13,7 +13,3 @@ Si el usuario selecciona una actividad turística, una salida turística, o un
 paquete se muestra la información detallada, tal como se indica en los casos de 
 uso Consulta de Actividad Turística, Consulta de Salida Turística y Consulta de 
 Paquete de Actividades Turísticas, respectivamente.
-
-
-
-

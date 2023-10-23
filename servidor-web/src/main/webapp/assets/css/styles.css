@@ -97,19 +97,6 @@ hr {
 }
 
 /* ------------------------------ Tables styles ----------------------------- */
-/*table {
-    background-color: #f8f9fa;
-    border-collapse: collapse;
-    width: 100%;
-    border-radius: 4px;
-}
-
-Selector que provee la opción de colorear una fila de por medio en una tabla
-tr:nth-child(even) {
-    El parámetro puede ser odd también
-    background-color: #aaaaaa;
-}
-
 table thead th {
     color: #dddddd;
     text-align: center;
@@ -122,5 +109,5 @@ table tbody td {
     text-align: center;
     border: solid 1px #dddddd;
     padding: 8px;
-}*/
+}
 /* ---------------------------- End Tables styles --------------------------- */
