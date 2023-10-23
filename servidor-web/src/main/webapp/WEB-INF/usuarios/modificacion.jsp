@@ -126,7 +126,7 @@
                         <select
                             type="text"
                             id="select-nacionality"
-                            class="form-control"
+                            class="form-select"
                             name="nacionality"
                             required
                             >

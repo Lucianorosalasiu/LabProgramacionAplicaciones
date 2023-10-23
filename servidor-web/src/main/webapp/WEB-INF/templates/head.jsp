@@ -21,5 +21,3 @@
 <link rel="manifest" href="assets/favicon/site.webmanifest">
 <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-
-

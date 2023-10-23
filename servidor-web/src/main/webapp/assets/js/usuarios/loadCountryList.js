@@ -39,6 +39,10 @@ const getCountryListFromCSV = async () => {
  * significa que se está dando de alta o modificando un proveedor y no es 
  * necesario cargar la lista de países. Ya que corresponde solo a los turistas.*/
 
-if (inputDescription.value === '') {
+if (inputDescription !== null) {
+    if (inputDescription.value === ""){
+        getCountryListFromCSV();
+    }
+} else {
     getCountryListFromCSV();
 }

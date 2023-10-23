@@ -143,7 +143,7 @@
                         <label for='select-user-type' class='form-label'>Tipo de usuario</label>
                         <select
                             id='select-user-type'
-                            class='form-control'
+                            class='form-select'
                             name='userType'
                             required
                             >
@@ -160,7 +160,7 @@
                         <select
                             type="text"
                             id="select-nacionality"
-                            class="form-control"
+                            class="form-select"
                             name="nacionality"
                             required
                             >
