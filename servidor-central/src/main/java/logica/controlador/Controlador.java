@@ -148,8 +148,19 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public List<DTSalidaTuristica> obtenerSalidasDeProveedorCompleto(long idProveedor){
+        return dataPersistencia.obtenerSalidasDeProveedorCompleto(idProveedor);
+    }
+
+    
+    @Override
     public List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor){
         return dataPersistencia.obtenerActividadesDeProveedor(idProveedor); 
+    }
+        
+    @Override
+    public List<DTActividadTuristica> obtenerActividadesDeProveedorCompleto(long idProveedor){
+        return dataPersistencia.obtenerActividadesDeProveedorCompleto(idProveedor);
     }
     
     @Override

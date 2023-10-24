@@ -31,7 +31,7 @@
                 <div class="usuario">
                     <img src="<%= profileImageUrl %>" class="rounded-circle">
                     <div class="derecha">
-                        <a class="nombre" href="?usuario=<%= u.getEmail() %>">
+                        <a class="nombre" href="?usuario=<%= u.getNickname() %>">
                             <%= u.getName() %>
                         </a>
                         <span class="email">

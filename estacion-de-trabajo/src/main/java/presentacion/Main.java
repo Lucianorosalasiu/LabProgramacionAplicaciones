@@ -5286,7 +5286,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void updateActividadesProveedorInComboBox(Long idProveedor, JComboBox jComboBox) {
-        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(idProveedor);
+        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(idProveedor);
 
         String defaultValue = (String) jComboBox.getItemAt(0);
         jComboBox.removeAllItems();

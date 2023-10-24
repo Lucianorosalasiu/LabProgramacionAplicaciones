@@ -26,6 +26,8 @@ public class DTSalidaTuristica {
     private DTActividadTuristica dtActividadTuristica;
     private byte[] imagen;
     
+    public DTSalidaTuristica(){};
+    
     public DTSalidaTuristica(String nombre, int cantidadMaxTuristas, Date fechaSalida, String lugar, Date fechaAlta) {
         this.nombre = nombre;
         this.cantidadMaxTuristas = cantidadMaxTuristas;
@@ -42,6 +44,4 @@ public class DTSalidaTuristica {
         this.fechaAlta = fechaAlta;
         this.imagen = imagen;
     }
-    
-    public DTSalidaTuristica(){};
 }

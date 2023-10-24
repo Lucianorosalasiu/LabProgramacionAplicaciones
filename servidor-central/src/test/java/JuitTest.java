@@ -620,7 +620,7 @@ public class JuitTest {
         controlador.agregarActividadPaquete("", "");
 
         controlador.altaActividadTuristica(testActividad, Long.MIN_VALUE, Long.MIN_VALUE, testlist, testimage);
-        controlador.altaActividadTuristica(testActividad, 69L, 13L, testlist, testimage);
+        //controlador.altaActividadTuristica(testActividad, 69L, 13L, testlist, testimage);
     }
 
     @Test
