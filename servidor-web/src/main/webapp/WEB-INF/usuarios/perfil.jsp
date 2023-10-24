@@ -32,22 +32,25 @@
             String profileImageUrl = usr.getProfileImageUrl();
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
-            <h3 id="titulo-perfil">Perfil del usuario:
-                <% if (usr instanceof DTTurista) {
-                %>
-                <span class="text-info">  <%= usr.getNickname() %> </span>
-                <%
-                } else if(usr instanceof DTProveedor){     
-                %>
-                <span class="text-warning"> <%= usr.getNickname() %> </span>
-                <%
-                }
-                %>   
-            </h3>
             <%
-                if(usr.getNickname().equals(userLogged)){
+                if(!usr.getNickname().equals(userLogged)){
             %>
-
+                <h3 id="titulo-perfil">Perfil del usuario:
+                    <% if (usr instanceof DTTurista) {
+                    %>
+                    <span class="text-info">  <%= usr.getNickname() %> </span>
+                    <%
+                    } else if(usr instanceof DTProveedor){     
+                    %>
+                    <span class="text-warning"> <%= usr.getNickname() %> </span>
+                    <%
+                    }
+                    %>   
+                </h3>
+            <%
+                } else {
+            %>
+            <h3 id="titulo-perfil">Mi Perfil</h3>
             <a href="/modificacionusuario?usuario=<%= usr.getEmail() %>" 
                id="editar-perfil" 
                type="button" 
@@ -125,12 +128,11 @@
             <%
                 Fabrica fabrica = new Fabrica();
                 IControlador controlador = fabrica.getInterface();
-                Long userID = usr.getId();
                 Long sessionID = (Long) request.getSession().getAttribute("id");
 
             if (usr instanceof DTTurista) {
                 DTTurista turista = (DTTurista) usr;
-                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(userID);
+                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
             %>
             <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
                 <h3 class="text-center">Salidas Turísticas:</h3>
@@ -160,133 +162,79 @@
                         </tbody>
                     </table>
                 </div>
-                <form id="form" class="row g-3">
-                    <div class='col-lg-5'>
-                        <label for='select-salida' class='form-label'>
-                            <h4>Ver detalles de Salida Turística</h4>
-                        </label>
-                        <select
-                            id='select-salida'
-                            class='form-select'
-                            name='salidaTurista'
-                            >
-                            <option value=''>Selecciona una salida</option>
-                            <% 
-                            for (DTSalidaTuristica salida : salidaList) {     
-                            %>
-                            <option value="<%= salida.getNombre() %>">
-                                <%= salida.getNombre() %>
-                            </option>		
-                            <% } %>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <%
-            } else if (usr instanceof DTProveedor) {
-                DTProveedor proveedor = (DTProveedor) usr;
-                List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(userID);
-                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(userID);
-            %>
-            <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
-                <h3 class="text-center">Actividades Turísticas:</h3>
-                <div class="table-responsive-lg">
-                    <table class="table align-middle">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Ciudad</th>
-                                <th>Duración</th>
-                                <th>Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% 
-                            for (DTActividadTuristica actividad : actividadList) {    
-                            %>
-                            <tr>
-                                <td><%= actividad.getNombre() %></td>
-                                <td><%= actividad.getCiudad() %></td>
-                                <td><%= actividad.getDuracion() %></td>
-                                <td><%= actividad.getDescripcion() %></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
-                </div>
-                <h3 class="text-center">Salidas Turísticas asociadas:</h3>
-                <div class="table-responsive-lg">
-                    <table class="table align-middle">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Lugar de Salida</th>
-                                <th>Fecha Salida</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% 
-                            for (DTSalidaTuristica salida : salidaList) {     
-                            %>
-                            <tr>
-                                <td><%= salida.getNombre() %></td>
-                                <td><%= salida.getLugar() %></td>
-                                <td><%=
-                                    // Formato deseado para la fecha
-                                    new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
-                                    %>
-                                </td>
-                            </tr>		
-                            <% } %>
-                        </tbody>
-                    </table>
-                </div>
-                <form id="form" class="row g-3">
-                    <div class='col-lg-5'>
-                        <label for='select-actividad-proveedor' class='form-label'>
-                            <h4>Ver detalles de Actividad Turísticas</h4>
-                        </label>
-                        <select
-                            id='select-actividad-proveedor'
-                            class='form-select'
-                            name='actividadProveedor'
-                            >
-                            <option value=''>Selecciona una actividad</option>
-                            <% 
-                            for (DTActividadTuristica actividad : actividadList) {    
-                            %>
-                            <option value="<%= actividad.getNombre() %>">
-                                <%= actividad.getNombre() %>
-                            </option>		
-                            <% } %>
-                        </select>
-                    </div>
-                    <!-- Div que actua como separador -->
-                    <div class='col-lg-2'></div>
-                    <div class='col-lg-5'>
-                        <label for='select-salida-proveedor' class='form-label'>
-                            <h4>Ver detalles de Salida Turística</h4>
-                        </label>
-                        <select
-                            id='select-salida-proveedor'
-                            class='form-select'
-                            name='salidaProveedor'
-                            >
-                            <option value=''>Selecciona una salida</option>
-                            <% 
-                            for (DTSalidaTuristica salida : salidaList) {     
-                            %>
-                            <option value="<%= salida.getNombre() %>">
-                                <%= salida.getNombre() %>
-                            </option>		
-                            <% } %>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <% } %> 
-        </div>  
+                <%
+                } else if (usr instanceof DTProveedor) {
+                    DTProveedor proveedor = (DTProveedor) usr;
+                    List<DTActividadTuristica> actividadList;
+                    List<DTSalidaTuristica> salidaList;
 
+                    if(proveedor.getId() == sessionID) {
+                        actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
+                        salidaList = controlador.obtenerSalidasDeProveedorCompleto(proveedor.getId());
+                    } else {
+                        actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
+                        salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
+                }
+                %>
+                <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
+                    <h3 class="text-center">Actividades Turísticas:</h3>
+                    <div class="table-responsive-lg">
+                        <table class="table align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Ciudad</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                for (DTActividadTuristica actividad : actividadList) {
+                                %>
+                                <tr>
+                                    <td>
+                                        <a href="consultaactividad?idActividad=<%= actividad.getId() %>" >
+                                            <%= actividad.getNombre() %>
+                                        </a>
+                                    </td>
+                                    <td><%= actividad.getCiudad() %></td>
+                                    <td><%= actividad.getDescripcion() %></td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3 class="text-center">Salidas Turísticas asociadas:</h3>
+                    <div class="table-responsive-lg">
+                        <table class="table align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Lugar de Salida</th>
+                                    <th>Fecha Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                for (DTSalidaTuristica salida : salidaList) {     
+                                %>
+                                <tr>
+                                    <td><%= salida.getNombre() %></td>
+                                    <td><%= salida.getLugar() %></td>
+                                    <td><%=
+                                        // Formato deseado para la fecha
+                                        new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
+                                        %>
+                                    </td>
+                                </tr>		
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %> 
+                </div>  
+            </div>
+        </div>
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
     </body>
 </html>

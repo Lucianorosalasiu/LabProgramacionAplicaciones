@@ -3,13 +3,8 @@ En caso de que un Turista consulte su propio perfil, adicionalmente verá la
 información de las inscripciones a las salidas (costo, cantidad turistas, etc) 
 y compras de paquetes (costo, cantidad turistas, vencimiento, etc).
 
-
-PROVEEDORES:
-En caso de que un Proveedor consulte su propio perfil, adicionalmente verá las
-actividades turísticas en los estados “Agregada” y “Rechazada”. 
-
 USUARIOS EN GENERAL:
-Si el usuario selecciona una actividad turística, una salida turística, o un 
-paquete se muestra la información detallada, tal como se indica en los casos de 
-uso Consulta de Actividad Turística, Consulta de Salida Turística y Consulta de 
+Si el usuario selecciona una salida turística, o un paquete se muestra la
+información detallada, tal como se indica en los casos de uso Consulta de 
+Actividad Turística, Consulta de Salida Turística y Consulta de 
 Paquete de Actividades Turísticas, respectivamente.

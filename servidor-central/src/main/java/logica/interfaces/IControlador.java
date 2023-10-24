@@ -33,6 +33,8 @@ public interface  IControlador {
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
     List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor);
+    List<DTSalidaTuristica> obtenerSalidasDeProveedorCompleto(long idProveedor);
+    List<DTActividadTuristica> obtenerActividadesDeProveedorCompleto(long idProveedor);
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;

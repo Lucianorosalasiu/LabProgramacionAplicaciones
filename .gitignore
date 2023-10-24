@@ -17,8 +17,8 @@
 /servidor-central/mtj.tmp/
 
 # Package Files
-*.jar
-*.war
+#*.jar
+#*.war
 *.nar
 *.ear
 *.zip
