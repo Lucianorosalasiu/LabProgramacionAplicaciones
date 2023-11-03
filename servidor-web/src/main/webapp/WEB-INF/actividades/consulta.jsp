@@ -30,7 +30,7 @@
         
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column flex-grow-1 justify-content-start">
-            <form class="d-flex flex-row gap-2 p-2 w-100 justify-content-between align-items-center border-bottom border-info" method="post" action="/consultaactividad">
+            <form class="d-flex flex-row gap-2 p-2 w-100 justify-content-center align-items-center border-bottom border-info" method="post" action="/consultaactividad">
                 <%if(request.getAttribute("errorMessage") != null){%>
 
                 <div class="mt-3 p-3 bg-danger bg-opacity-10 border border-danger rounded text-danger">
@@ -38,36 +38,38 @@
                 </div>
 
                 <%}%>
-            <label>Seleccione un valor por el cual buscar actividades turísticas</label>         
-            <div class="form-group">
-                <label>Departamento</label>
-                <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
-                    <option value="" disabled selected>- seleccione un departamento -</option>
-                    <% 
-                        for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
-                            String nombreDepartamento = departamento.getNombre();
-                    %>
-                    <option value="<%= departamento.getNombre() %>">
-                        <%= nombreDepartamento %>
-                    </option>		
-                    <% } %>
-                </select>
+            <div class="d-flex flex-column flex-wrap">
+                <label>Seleccione un valor por el cual buscar actividades turísticas</label>         
+                <div class="form-group">
+                    <label>Departamento</label>
+                    <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
+                        <option value="" disabled selected>- seleccione un departamento -</option>
+                        <% 
+                            for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
+                                String nombreDepartamento = departamento.getNombre();
+                        %>
+                        <option value="<%= departamento.getNombre() %>">
+                            <%= nombreDepartamento %>
+                        </option>		
+                        <% } %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
+                        <option value="" disabled selected>- seleccione una categoria -</option>
+                        <% 
+                            for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
+                                String nombreCategoria = c.getNombre();
+                        %>
+                        <option value="<%=nombreCategoria%>">
+                            <%= nombreCategoria %>
+                        </option>		
+                        <% } %>
+                    </select>
+                </div> 
             </div>
-                
-            <div class="form-group">
-                <label>Categoria</label>
-                <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
-                    <option value="" disabled selected>- seleccione una categoria -</option>
-                    <% 
-                        for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
-                            String nombreCategoria = c.getNombre();
-                    %>
-                    <option value="<%=nombreCategoria%>">
-                        <%= nombreCategoria %>
-                    </option>		
-                    <% } %>
-                </select>
-            </div> 
                 
             </form>
    
