@@ -47,7 +47,7 @@ public class AltaActividad extends HttpServlet {
             throws ServletException, IOException {
         String userType = (String) request.getSession().getAttribute("sessionType");
         
-        if (isNull(userType) || !userType.equals("PROVEEDOR")) {
+        if (isNull(userType) || !userType.equals("PROVEEDOR") || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403); 
             return;
         }

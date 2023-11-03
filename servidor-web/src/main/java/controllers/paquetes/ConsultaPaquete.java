@@ -37,7 +37,12 @@ public class ConsultaPaquete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
+        if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
+            response.sendError(403); 
+            return;
+        }
+        
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
         

@@ -53,7 +53,7 @@ public class ModificacionUsuario extends HttpServlet {
         String queryUser = request.getParameter("usuario");
         /* Si no hay usuario logueado o no se pasa un usuario a modificar en 
         la query, no es posible editar el perfil */
-        if (isNull(userType) || isNull(queryUser)) {
+        if (isNull(userType) || isNull(queryUser) || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403);
             return;
         }

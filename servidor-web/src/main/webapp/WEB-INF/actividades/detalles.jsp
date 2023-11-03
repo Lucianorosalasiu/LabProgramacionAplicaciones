@@ -17,7 +17,13 @@
         <title>Turismouy | Consulta actividad</title>
     </head>
     
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%
+    String userAgent = request.getHeader("User-Agent");
+    if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
+            <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
+    <%}else{%>
+        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%}%>
     <%
         DTActividadTuristica actividad = (DTActividadTuristica) request.getAttribute("actividad");
         List<DTSalidaTuristica> salidas = (List<DTSalidaTuristica>) request.getAttribute("salidas");
@@ -35,7 +41,7 @@
                 <%}%>
             </div>
             <div class="container w-100">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div  class="col-sm-9" >
                             <fieldset disabled>
                                 <div class="row">
@@ -48,9 +54,9 @@
                                         <label>Id</label>
                                         <input type="text" class="form-control" value="#<%= actividad.getId() %>" >
                                     </div>
-                                    <div class="col m-3">
-                                        <label>Descripcion</label>
-                                        <textarea rows = "4" cols = "40" disabled><%= actividad.getDescripcion() %></textarea>
+                                    <div class="col d-flex flex-column">
+                                        <label>Descripción</label>
+                                        <textarea rows = "4" disabled><%= actividad.getDescripcion() %> </textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -73,64 +79,70 @@
                                         <label>Fecha alta</label>
                                         <input class="form-control" type="text" value="<%=actividad.getFechaAlta()%>" readonly>
                                     </div>
-                                    <div class="col m-3">
+                                </div>
+                                <div class="row">
+                                    <div class="col m-3 d-flex flex-column">
                                         <label>Foto</label>
-                                        <img src="<%= foto %>" class="card-img-top" alt="...">
+                                        <img src="<%= foto %>" class="card-img-top" alt="..." style="max-width: 500px">
                                     </div>
                                 </div>
                             </fieldset>
                         </div>
                     </div>
                                     
+                    <div class="border rounded border-tertiary p-2 overflow-x-scroll">
                     <h4>Salidas disponibles de la actividad <span class="fw-bold text-primary"><%= actividad.getNombre() %></span></h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cantidad Max. Turistas</th>
-                                <th scope="col">Fecha Salida</th>
-                                <th scope="col">Lugar de Salida</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% 
-                                for(DTSalidaTuristica salida : salidas){
-                            %>
-                            <tr>
-                                <td><%= salida.getNombre() %></td>
-                                <td><%= salida.getCantidadMaxTuristas() %></td>
-                                <td><%= salida.getFechaSalida() %></td>
-                                <td><%= salida.getLugar() %></td>
-                            </tr>		
-                            <% } %>
-                        </tbody>
-                    </table>
-                    
-                    <h4>Paquetes que contienen a la actividad <span class="fw-bold text-primary"><%= actividad.getNombre() %></span></h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Descuento</th>
-                                <th scope="col">Fecha de alta</th>
-                                <th scope="col">Validez</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% 
-                                for(DTPaqueteActividadTuristica paquete : paquetes){
-                            %>
-                            <tr>
-                                <td><%= paquete.getNombre() %></td>
-                                <td><%= paquete.getDescripcion() %></td>
-                                <td><%= paquete.getDescuento() %></td>
-                                <td><%= paquete.getFechaAlta() %></td>
-                                <td><%= paquete.getValidez() %></td>
-                            </tr>		
-                            <% } %>
-                        </tbody>
-                    </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad Max. Turistas</th>
+                                    <th scope="col">Fecha Salida</th>
+                                    <th scope="col">Lugar de Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                    for(DTSalidaTuristica salida : salidas){
+                                %>
+                                <tr>
+                                    <td><%= salida.getNombre() %></td>
+                                    <td><%= salida.getCantidadMaxTuristas() %></td>
+                                    <td><%= salida.getFechaSalida() %></td>
+                                    <td><%= salida.getLugar() %></td>
+                                </tr>		
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                            
+                    <div class="border rounded border-tertiary p-2 mt-2 overflow-x-scroll">
+                        <h4>Paquetes que contienen a la actividad <span class="fw-bold text-primary"><%= actividad.getNombre() %></span></h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Descuento</th>
+                                    <th scope="col">Fecha de alta</th>
+                                    <th scope="col">Validez</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% 
+                                    for(DTPaqueteActividadTuristica paquete : paquetes){
+                                %>
+                                <tr>
+                                    <td><%= paquete.getNombre() %></td>
+                                    <td><%= paquete.getDescripcion() %></td>
+                                    <td><%= paquete.getDescuento() %></td>
+                                    <td><%= paquete.getFechaAlta() %></td>
+                                    <td><%= paquete.getValidez() %></td>
+                                </tr>		
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         

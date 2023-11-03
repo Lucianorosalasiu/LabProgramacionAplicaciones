@@ -11,9 +11,14 @@
         <jsp:include page="/WEB-INF/templates/head.jsp"/> 
         <title>TurismoUy | Login</title>
     </head>
-
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
-
+    <%
+    String userAgent = request.getHeader("User-Agent");
+    if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
+            <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
+    <%}else{%>
+        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%}%>
+    
     <body class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">
             <form action="/login" method="post">
@@ -26,19 +31,21 @@
                     <label class="form-label">Contraseña</label>
                     <input type="password" class="form-control" name="password">
                 </div>
-                <div class="d-flex justify-content-evenly align-items-center gap-2">
+                <div class="d-flex flex-wrap justify-content-evenly align-items-center gap-2">
                     <button type="button" class="btn btn-secondary" onclick="toHome()">Navegar como invitado</button>
                     <script>
                         function toHome() {
                             window.location.href = "/home";
                         }
                     </script>
+                    <%if(!userAgent.toLowerCase().contains("mobile")){%>
                     <button type="button" class="btn btn-primary" onclick="toNewUser()">Registrarse</button>
                     <script>
                         function toNewUser() {
                             window.location.href = "/altausuario";
                         }
                     </script>
+                    <%}%>
                     <button type="submit" class="btn btn-success">Iniciar sesión</button>
                 </div>
                 <%if(request.getAttribute("errorMessage") != null){%>

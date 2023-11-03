@@ -14,13 +14,19 @@
         <title>Turismouy | Consulta Salida</title>
     </head>
 
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%
+    String userAgent = request.getHeader("User-Agent");
+    if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
+            <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
+    <%}else{%>
+        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%}%>
 
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-grow-1 flex-column">
             <form class="flex-grow-1" method="post" action="/consultasalida" id="consultaForm">
                 <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-                    <select name="departamento">
+                    <select class="text-light form-select bg-primary m-2" name="departamento">
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
                             String selectedDepartamento = request.getParameter("departamento");
@@ -36,7 +42,8 @@
                 <%
                     if (selectedDepartamento != null) {
                 %>
-                <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
+
+                <div class="overflow-x-scroll p-2 m-2 border rounded border-tertiary">
                     <h4>
                         Actividades de <%= selectedDepartamento %>
                     </h4>
@@ -66,8 +73,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="m-3">
-                    <select name="actividad">
+                <div class="m-2">
+                    <select class="text-light form-select bg-primary" name="actividad">
                         <option value="" disabled selected>- seleccione una actividad -</option>
                         <% 
                             String selectedActividad = request.getParameter("actividad");
@@ -80,7 +87,7 @@
                         <% } %>
                     </select>
                 </div>
-                <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
+                <div class="overflow-x-scroll p-2 m-2 border rounded border-tertiary">
                     <%
                         if (selectedActividad != null) {
                     %>
@@ -111,8 +118,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="m-3">
-                    <select name="salida">
+                <div class="m-2">
+                    <select class="text-light form-select bg-primary" name="salida">
                         <option value="" disabled selected>- seleccione una salida -</option>
                         <% 
                             String selectedSalida1 = request.getParameter("salida");
@@ -125,7 +132,7 @@
                         <% } %>
                     </select>
                 </div>
-                <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
+                <div class="overflow-x-scroll p-2 m-2 border rounded border-tertiary">
                     <%
                         DTSalidaTuristica selectedSalida2 = (DTSalidaTuristica) request.getAttribute("selectedSalida");
                         if (selectedSalida2 != null && selectedSalida1 != null) {
@@ -146,6 +153,7 @@
                                     }
                                 %>
                             </div>
+                        </div>
                             <div <% if (!base64imagen.isEmpty()) { %> class="col-sm-9" <% } %>>
                                 <fieldset disabled>
                                     <div class="row">
@@ -170,7 +178,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <%
