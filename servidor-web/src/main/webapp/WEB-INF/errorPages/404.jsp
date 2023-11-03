@@ -13,7 +13,13 @@
         <title>Turismouy | Error 404</title>
     </head>
     
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%
+    String userAgent = request.getHeader("User-Agent");
+    if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
+            <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
+    <%}else{%>
+        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%}%>
     
     <body id="error_page" class="h-100 d-flex flex-column">
         <div class="d-flex justify-content-center align-items-center p-4 flex-grow-1 titulo_error">

@@ -44,7 +44,7 @@ public class Inscripcion extends HttpServlet {
         String userType = (String) request.getSession().getAttribute("sessionType");
         String nickname = (String) request.getSession().getAttribute("sessionNickname");
         
-        if (isNull(userType) || !userType.equals("TURISTA")) {
+        if (isNull(userType) || !userType.equals("TURISTA") || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403); 
             return;
         }

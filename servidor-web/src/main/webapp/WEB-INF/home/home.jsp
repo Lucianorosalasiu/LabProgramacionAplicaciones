@@ -12,7 +12,13 @@
         <title>Turismouy | Home</title>
     </head>
 
-    <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%
+    String userAgent = request.getHeader("User-Agent");
+    if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
+            <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
+    <%}else{%>
+        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+    <%}%>
 
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column justify-content-start align-items-center p-5 flex-grow-1">
