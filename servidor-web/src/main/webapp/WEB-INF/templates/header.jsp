@@ -93,9 +93,10 @@
                 Usuarios
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="/altausuario">Alta usuario</a></li>
+                <%if(request.getSession().getAttribute("isLogged") == null){%>
+                    <li><a class="dropdown-item" href="/altausuario">Alta usuario</a></li>
+                <%}%>
                 <li><a class="dropdown-item" href="/consultausuario">Consulta usuarios</a></li>
-                <!--<li><a class="dropdown-item" href="/modificacionusuario">Modificar datos de usuario</a></li>-->
             </ul>
         </div>
 
@@ -104,7 +105,9 @@
                 Actividades turísticas
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
+                <%if("PROVEEDOR".equals((String) session.getAttribute("sessionType"))){%>
+                    <li><a class="dropdown-item" href="/altaactividad">Alta de actividad</a></li>
+                <%}%>
                 <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
         </div>
@@ -114,9 +117,13 @@
                 Salidas turísticas
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton3">
-                <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
+                <%if("PROVEEDOR".equals((String) session.getAttribute("sessionType"))){%>
+                    <li><a class="dropdown-item" href="/altasalida">Alta de salida</a></li>
+                <%}%>
                 <li><a class="dropdown-item" href="/consultasalida">Consulta de salida</a></li>
-                <li><a class="dropdown-item" href="/inscripcion">Inscripción a salida</a></li>
+                <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
+                    <li><a class="dropdown-item" href="/inscripcion">Inscripción a salida</a></li>
+                <%}%>                
             </ul>
         </div>
 
@@ -125,8 +132,10 @@
                 Paquetes
             </button>
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton4">
-                <li><a class="dropdown-item" href="/consultapaquete">Consulta de paquete</a></li>  
-                <li><a class="dropdown-item" href="/comprapaquete">Compra de paquete</a></li>  
+                <li><a class="dropdown-item" href="/consultapaquete">Consulta de paquete</a></li>
+                <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
+                    <li><a class="dropdown-item" href="/comprapaquete">Compra de paquete</a></li>  
+                <%}%>  
             </ul>
         </div>
     </div>
