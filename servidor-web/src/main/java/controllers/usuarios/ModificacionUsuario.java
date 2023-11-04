@@ -51,16 +51,24 @@ public class ModificacionUsuario extends HttpServlet {
         
         String userType = (String) request.getSession().getAttribute("sessionType");
         String queryUser = request.getParameter("usuario");
-        /* Si no hay usuario logueado o no se pasa un usuario a modificar en 
-        la query, no es posible editar el perfil */
-        if (isNull(userType) || isNull(queryUser) || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
+                
+        /* Si no hay usuario logueado o se accede desde un celular,
+        no es posible editar el perfil */
+        if (isNull(userType) || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403);
             return;
         }
+        
+        /*Si no se pasa un usuario a modificar como parámetro de la query,
+        no es posible acceder al servlet. */
+        if (isNull(queryUser)) {
+            response.sendError(404);
+            return;
+        }
+        
         String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
         String sessionNickname = (String) request.getSession().getAttribute("sessionNickname");
-        
-        /* El usuario logueado no puede editar un perfil que no es el suyo. */
+        /* El usuario logueado solo puede editar su propio perfil. */
         if (
             !queryUser.equals(sessionEmail)
             && !queryUser.equals(sessionNickname)
