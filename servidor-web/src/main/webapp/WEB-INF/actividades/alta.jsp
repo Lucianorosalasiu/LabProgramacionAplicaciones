@@ -48,31 +48,37 @@
                 
                 <div class="form-group">
                   <label >Nombre de la actividad<span class="text-danger"> (debe ser unico). </span></label>
-                  <input name="nombre" class="form-control" id="exampleInputEmail1" placeholder="Ingresa un nombre">
+                  <input name="nombre" class="form-control" placeholder="Ingresa un nombre">
                 </div>
                 
                 <div class="form-group">
                   <label>Descripción</label>
-                  <textarea name="descripcion" class="form-control" id="exampleInputPassword1" placeholder="Ingresa una descripción"></textarea>
+                  <textarea name="descripcion" class="form-control" placeholder="Ingresa una descripción"></textarea>
                 </div>
                 
                 <div class="form-group">
                   <label>Duración en horas</label>
-                  <input name="duracion" type="number" class="form-control" id="exampleInputEmail1" value="0" min="0">
+                  <input name="duracion" type="number" class="form-control" value="0" min="0">
                 </div>
                 
                 <div class="form-group">
                   <label>Costo en pesos uruguayos</label>
-                  <input name="costo" type="number" class="form-control" id="exampleInputEmail1" value="0" min="0">
+                  <input name="costo" type="number" class="form-control" value="0" min="0">
                 </div>
                 
                 <div class="form-group">
                   <label>Ciudad</label>
-                  <input name="ciudad" type="text" class="form-control" id="exampleInputEmail1">
+                  <input name="ciudad" type="text" class="form-control">
+                </div>
+                    
+                <div class="form-group">
+                    <label><span class="text-info">(Opcional)</span>ID de video de youtube ej: www.youtube.com/watch?v=<span class="text-info">Z5vZovv8cPk</span></label>
+                  
+                  <input name="url" type="text" class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Imagen de la actividad <span class="text-info">(Opcional).</span></label>
+                    <label class="form-label"><span class="text-info">(Opcional)</span>Imagen de la actividad </label>
                     <input name="imagen" class="form-control" type="file" id="formFile" accept="image/*">
                 </div>
                     

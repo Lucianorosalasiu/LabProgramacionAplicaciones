@@ -517,7 +517,49 @@ public class DataPersistencia implements IDataPersistencia {
         EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
         dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
                 dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
-                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias,foto);
+                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias,foto,"");
+
+        /*vinculo la categoria con las actividades que la tienen*/
+        for(ECategoria e : eCategorias){    
+            e.addActividad(nuevaActividad);
+        }
+        
+        try{
+            em.getTransaction().begin();
+            /*consigo el proveedor al que le voy a agregar esta actividad a su lista*/
+            EProveedor eProveedor = em.find(EProveedor.class,idProveedor);
+            /*le paso la actividad recien creada al proveedor para que la agregue a su lista*/
+            eProveedor.addActividad(nuevaActividad);
+            /*finalmente persisto la nueva actividad*/
+            em.persist(nuevaActividad);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto, String url){
+        EntityManager em = emf.createEntityManager();   
+        
+        EDepartamento eDepartamento = em.find(EDepartamento.class,idDepartamento);
+        
+        List<ECategoria> eCategorias = new LinkedList<>();
+        
+        for(Long l : categorias){
+            eCategorias.add(em.find(ECategoria.class, l));
+        }
+        
+        if(url == null){
+            url = "";
+        }
+        
+        EActividadTuristica nuevaActividad = new EActividadTuristica(dtActividadTuristica.getNombre(),
+        dtActividadTuristica.getDescripcion(),dtActividadTuristica.getDuracion(),
+                dtActividadTuristica.getCosto(),dtActividadTuristica.getCiudad(),
+                dtActividadTuristica.getFechaAlta(),eDepartamento,eCategorias,foto,url);
 
         /*vinculo la categoria con las actividades que la tienen*/
         for(ECategoria e : eCategorias){    
@@ -556,6 +598,27 @@ public class DataPersistencia implements IDataPersistencia {
             em.getTransaction().commit();
             return foto;
         } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public String obtenerUrlVideo(Long id){
+        EntityManager em = emf.createEntityManager();
+        String url = "";
+        try {
+            em.getTransaction().begin();
+
+            EActividadTuristica actividad = em.find(EActividadTuristica.class, id);
+
+            if (actividad != null) {
+                url = actividad.getUrl();
+            }
+            em.getTransaction().commit();
+            return url;
+        } catch(Exception e) {
+            return url;
+        }finally {
             em.close();
         }
     }
