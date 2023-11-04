@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
+import static java.util.Objects.isNull;
 import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -43,6 +44,18 @@ public class ConsultaActividad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String userType = (String) request.getSession().getAttribute("sessionType");
+        //si estas en mobile y no estas registrado
+        //o
+        //si estas en mobile, estas registrado pero no como turista
+        if ( request.getHeader("User-Agent").toLowerCase().contains("mobile") && isNull(userType)
+                || request.getHeader("User-Agent").toLowerCase().contains("mobile") &&
+                !isNull(userType) && !userType.equals("TURISTA")) {
+            response.sendError(403); 
+            return;
+        }
+        
+        
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
         String errorMessage = null;

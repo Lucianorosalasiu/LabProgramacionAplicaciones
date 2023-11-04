@@ -79,6 +79,8 @@
         </div>
     </nav>
     <div class="w-100 d-flex flex-row flex-wrap bg-body-secondary justify-content-evenly">
+        <%if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged") &&
+        "TURISTA".equals((String) session.getAttribute("sessionType"))){%>
         <div class="dropdown flex-grow-1">
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 Actividades turísticas
@@ -87,7 +89,7 @@
                 <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
         </div>
-
+        <%}%>
         <div class="dropdown flex-grow-1">
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                 Salidas turísticas
