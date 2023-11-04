@@ -54,20 +54,26 @@ public class JuitTest {
 
     @BeforeAll
     public static void setUpClass() {
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        Runtime rt = Runtime.getRuntime();
+        try {
+            rt.exec("./cargarDatos.sh");
+            System.out.println("Los datos de prueba fueron cargados!");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(JuitTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @BeforeEach
     public void setUp() {
-    
+
     }
-    
+
     @AfterEach
     public void tearDown() {
-    
+
     }
-    
+
     @Test
     public void Test1() {
         Fabrica fabrica = new Fabrica();
@@ -107,8 +113,8 @@ public class JuitTest {
 
     @Test
     public void Test5() throws MyException {
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        // Fabrica fabrica = new Fabrica();
+        // IControlador controlador = fabrica.getInterface();
         Date date = new Date();
         DTProveedor proveedor = new DTProveedor("jorge", "jorge", "jorge", "jorge", date, "jorge", "jorge");
         //controlador.altaProveedor(proveedor);
@@ -116,8 +122,8 @@ public class JuitTest {
 
     @Test
     public void Test6() throws MyException {
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        // Fabrica fabrica = new Fabrica();
+        // IControlador controlador = fabrica.getInterface();
         Date date = new Date();
         DTTurista turista = new DTTurista("A", "AA", "jor2gito", "jorgi2to", date, "jorg2ito");
         //controlador.altaTurista(turista);
@@ -470,8 +476,8 @@ public class JuitTest {
 
     @Test
     public void Test38() throws MyException {
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        // Fabrica fabrica = new Fabrica();
+        // IControlador controlador = fabrica.getInterface();
         EActividadTuristica testActividad = new EActividadTuristica(null, null, null, 0, null, null, null);
         ECategoria testCategoria = new ECategoria();
         EProveedor test = new EProveedor(null, null, null, null, null, null, null, null, null, null);
@@ -627,9 +633,8 @@ public class JuitTest {
     public void Test41() throws MyException {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
         Runtime rt = Runtime.getRuntime();

@@ -4,22 +4,16 @@
  */
 package controllers.paquetes;
 
-import dataTypes.DTActividadTuristica;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
-import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
@@ -28,6 +22,7 @@ import logica.interfaces.IControlador;
  *
  * @author lucho
  */
+
 public class CompraPaquete extends HttpServlet {
 
     /**
@@ -42,7 +37,8 @@ public class CompraPaquete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
+        String userType = (String) request.getSession().getAttribute("sessionType");
+        if (isNull(userType) || !userType.equals("TURISTA") || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403); 
             return;
         }
