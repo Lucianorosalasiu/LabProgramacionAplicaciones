@@ -60,6 +60,7 @@ public class EActividadTuristica extends EBase {
             inverseJoinColumns = @JoinColumn (name = "CATEGORIA_ID"))
     private List<ECategoria> categorias;
     private EActividadTuristica(){}
+    private String url;
     
     public EActividadTuristica(String nombre, String descripcion, String duracion,
             float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento){
@@ -98,5 +99,20 @@ public class EActividadTuristica extends EBase {
         this.estadoActividad = EstadoActividad.AGREGADA;
         this.categorias = categorias;
         this.foto = foto;
+    }
+    
+    public EActividadTuristica(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento, List<ECategoria> categorias, byte [] foto, String url){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.ciudad = ciudad;
+        this.fechaAlta = fechaAlta;
+        this.eDepartamento = eDepartamento;
+        this.estadoActividad = EstadoActividad.AGREGADA;
+        this.categorias = categorias;
+        this.foto = foto;
+        this.url = url;
     }
 }

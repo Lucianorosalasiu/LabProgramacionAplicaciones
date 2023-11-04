@@ -64,6 +64,7 @@ public class AltaActividad extends HttpServlet {
                 String duracion = request.getParameter("duracion");
                 Float costo = Float.parseFloat(request.getParameter("costo"));
                 String ciudad = request.getParameter("ciudad");
+                String url = request.getParameter("url");
                 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
                 Date fecha = dateFormat.parse(request.getParameter("fecha"));
@@ -108,7 +109,7 @@ public class AltaActividad extends HttpServlet {
                 }
                 
                 controlador.existeActividadTuristica(nombre);
-                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage);
+                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage, url);
                 request.setAttribute("successMessage", "Actividad turistica dada de alta!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);
@@ -121,7 +122,7 @@ public class AltaActividad extends HttpServlet {
         
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
-        
+
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);
     }

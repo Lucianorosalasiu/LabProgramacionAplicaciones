@@ -174,8 +174,18 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto, String url){
+        dataPersistencia.altaActividadTuristica(dtActividadTuristica, idDepartamento, idProveedor, categorias, foto, url);
+    }
+    
+    @Override
     public byte[] obtenerFotoActividadTuristica(Long id){
         return dataPersistencia.obtenerFotoActividadTuristica(id);
+    }
+    
+    @Override
+    public String obtenerUrlVideo(Long id){
+        return dataPersistencia.obtenerUrlVideo(id);
     }
     
     @Override

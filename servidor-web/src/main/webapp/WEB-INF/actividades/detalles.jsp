@@ -30,6 +30,7 @@
         List<DTPaqueteActividadTuristica> paquetes = (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetes");
         String foto = (String) request.getAttribute("foto");
         String categorias = (String) request.getAttribute("categorias");
+        String urlVideo = (String) request.getAttribute("urlVideo");
     %>
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column flex-grow-1 justify-content-start p-2">
@@ -81,11 +82,18 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col m-3 d-flex flex-column">
+                                    <div class="col m-3 d-flex flex-column align-items-center">
                                         <label>Foto</label>
                                         <img src="<%= foto %>" class="card-img-top" alt="..." style="max-width: 500px">
                                     </div>
                                 </div>
+                                <%if(!urlVideo.equals("")){%>
+                                <div class="row">
+                                    <div class="col m-3 d-flex flex-column ratio ratio-16x9">
+                                        <iframe src="https://www.youtube.com/embed/<%=urlVideo%>" title="YouTube video" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <%}%>
                             </fieldset>
                         </div>
                     </div>
