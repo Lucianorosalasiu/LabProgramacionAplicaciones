@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -43,7 +44,7 @@ public class Consulta extends HttpServlet {
         List<DTActividadTuristica> actividades = new ArrayList();
         List<DTSalidaTuristica> salidas = new ArrayList();
         DTSalidaTuristica selectedSalida = null;
-        String imagen = null;
+        String imagen = "";
         
         if (departamento != null) {
             actividades = controlador.obtenerActividadesTuristicas(departamento);
@@ -53,7 +54,9 @@ public class Consulta extends HttpServlet {
                 
                 if (salida != null) {
                     selectedSalida = controlador.obtenerSalidaTuristica(salida);
-                    imagen = Base64.getEncoder().encodeToString(selectedSalida.getImagen());
+                    if (!isNull(selectedSalida.getImagen())) {
+                        imagen = Base64.getEncoder().encodeToString(selectedSalida.getImagen());   
+                    }
                 }
             }
         }
