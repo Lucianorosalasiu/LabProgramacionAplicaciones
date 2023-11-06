@@ -4,6 +4,8 @@
  */
 package dataTypes;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import java.util.Date;
 import java.util.List;
 import lombok.Getter;
@@ -15,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTActividadTuristica {
     private Long id;
     private String nombre;

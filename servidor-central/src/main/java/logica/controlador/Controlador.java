@@ -16,6 +16,7 @@ import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import logica.interfaces.IControlador;
 import exceptions.MyException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import persistencia.FDataPersistencia;
@@ -309,7 +310,7 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
+    public ArrayList<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
         return dataPersistencia.obtenerSalidasTuristicas(nombreActividad);
     }
     
@@ -381,7 +382,7 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
+    public ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
         return dataPersistencia.obtenerActividadesTuristicas(nombreDepartamento, idProveedor);
     }
     @Override

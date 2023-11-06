@@ -10,7 +10,20 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
+        
+        <service.package>webservices</service.package>
+        <jakarta.xml.ws-api.version>4.0.0</jakarta.xml.ws-api.version>
+        <jaxws-rt.version>4.0.0</jaxws-rt.version>
+        <jaxws-ri.version>4.0.0</jaxws-ri.version>
+        <jaxws-maven-plugin.version>4.0.0</jaxws-maven-plugin.version>
+        
+        <version.maven.jakarta.xml.bind-api>3.0.0</version.maven.jakarta.xml.bind-api>
+        <version.maven.jakarta.activation.api>2.0.0</version.maven.jakarta.activation.api>
+        <version.maven.jaxb.impl>3.0.0</version.maven.jaxb.impl>
+        <version.maven.jaxb.xjc>3.0.0</version.maven.jaxb.xjc>
+        
     </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -27,9 +40,74 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+            
+            <!-- webservices -->
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>${jaxws-maven-plugin.version}</version>
+                <configuration>
+                    <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                    <extension>true</extension>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>wsdl</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>http://localhost:8889/wsActividadController?wsdl</wsdlUrl>
+                                <wsdlUrl>http://localhost:8889/wsSalidaController?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun.xml.ws</groupId>
+                        <artifactId>jaxws-tools</artifactId>
+                        <version>4.0.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
+    
     <dependencies>
+        <!-- javax -->
+        
+        <!-- webservices -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-tools</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>4.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>${jakarta.xml.ws-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-ri</artifactId>
+            <version>${jaxws-ri.version}</version>
+            <type>pom</type>
+        </dependency>
+        
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
