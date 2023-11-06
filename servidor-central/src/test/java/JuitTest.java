@@ -39,9 +39,6 @@ import persistencia.entidades.ESalidaTuristica;
 import persistencia.entidades.ETurista;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
-import logica.clases.ActividadTuristica;
-import logica.clases.Departamento;
-import logica.clases.PaqueteActividadTuristica;
 
 /**
  *
@@ -494,17 +491,6 @@ public class JuitTest {
     }
 
     @Test
-    public void Test40() throws MyException {
-        ActividadTuristica testActividad = new ActividadTuristica(null, null, null, 0, null, null, null);
-        Date date = new Date();
-
-        Departamento testDepartamento = new Departamento(null, null, null);
-        PaqueteActividadTuristica testPaquete = new PaqueteActividadTuristica(null, null, 0, 0, null);
-
-        //con la linea rara en el campo de actual estoy viendo si la lista contiene al menos un objeto y de ese objeto tiro el equals con lo que quiero checkar      
-    }
-
-    @Test
     public void testManejoDeExcepciones() {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
@@ -605,13 +591,6 @@ public class JuitTest {
         controlador.actualizarUsuario(test);
         controlador.actualizarUsuario(testTurista);
         byte[] testimage = controlador.obtenerFotoActividadTuristica(70L);
-        ActividadTuristica testActividad1 = new ActividadTuristica("anibal", "anibal", "anibal", 0, "anibal", date, null);
-        testActividad1.setCiudad("test");
-        testActividad1.setCosto(0);
-        testActividad1.setDepartamento(null);
-        testActividad1.setDescripcion("test");
-        testActividad1.setFechaAlta(date);
-        testActividad1.setNombre("test");
         controlador.obtenerPaquetesComprados(1L, "Degusta Agosto", 2);
 
         testlist.add(1701L);

@@ -6,7 +6,6 @@ package dataTypes;
 
 import java.util.Date;
 import java.util.LinkedList;
-import logica.clases.ActividadTuristica;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,7 @@ public class DTPaqueteActividadTuristica {
     private float descuento;
     private Date fechaAlta;
     private float costo;
-    private LinkedList<ActividadTuristica> actividades ;
+    private LinkedList<DTActividadTuristica> actividades ;
     private byte[] imagen;
     public DTPaqueteActividadTuristica(){}
     public DTPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta){
@@ -33,7 +32,7 @@ public class DTPaqueteActividadTuristica {
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
         costo = 0;
-        actividades = new LinkedList<ActividadTuristica>();
+        actividades = new LinkedList<DTActividadTuristica>();
         imagen = null;
     }
     public DTPaqueteActividadTuristica(String nombre, String descripcion, int validez,float descuento,Date fechaAlta,float costo){
@@ -43,7 +42,7 @@ public class DTPaqueteActividadTuristica {
         this.descuento = descuento;
         this.fechaAlta = fechaAlta;
         this.costo = costo;
-        actividades = new LinkedList<ActividadTuristica>();
+        actividades = new LinkedList<DTActividadTuristica>();
         imagen = null;
     }
     
