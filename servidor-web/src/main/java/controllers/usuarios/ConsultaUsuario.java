@@ -41,7 +41,12 @@ public class ConsultaUsuario extends HttpServlet {
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-
+        
+        /* Se utiliza el webservice para obtener las operaciones*/   
+//        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+//        webservice.WSUsuarioController port = service.getWSUsuarioControllerPort(); 
+        
+        
         String emailUsuario = request.getParameter("usuario");
 
         if (emailUsuario == null) {

@@ -1,36 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package dataTypes;
+package webService.dataTypesWS;
 
-import java.util.Date;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 /**
  *
- * @author ignfer
+ * @author alexis
  */
 @Getter
 @Setter
-public class DTActividadTuristica {
+@NoArgsConstructor
+@AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
+public class DTActividadTuristicaWS {
     private Long id;
     private String nombre;
     private String descripcion;
     private String duracion;
     private float costo;
     private String ciudad;
-    private Date fechaAlta;
-    private DTDepartamento departamento;
-    private List<Long> categorias;
+    private LocalDate fechaAlta;
+    private DTDepartamentoWS departamento;
+    private ArrayList<Long> categorias;
     private String categoriasString;
     
-    public DTActividadTuristica(){}
-    
-    public DTActividadTuristica(String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, DTDepartamento departamento){
+    public DTActividadTuristicaWS(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, LocalDate fechaAlta, DTDepartamentoWS departamento){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -41,8 +44,8 @@ public class DTActividadTuristica {
     }
     
     /*constructor sin el departamento*/
-    public DTActividadTuristica(String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta){
+    public DTActividadTuristicaWS(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, LocalDate fechaAlta){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -51,8 +54,8 @@ public class DTActividadTuristica {
         this.fechaAlta = fechaAlta;
     }
     
-    public DTActividadTuristica(Long id, String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta){
+    public DTActividadTuristicaWS(Long id, String nombre, String descripcion, String duracion,
+            float costo, String ciudad, LocalDate fechaAlta){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -62,8 +65,8 @@ public class DTActividadTuristica {
         this.fechaAlta = fechaAlta;
     }
     
-    public DTActividadTuristica(String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, String categoriasString){
+    public DTActividadTuristicaWS(String nombre, String descripcion, String duracion,
+            float costo, String ciudad, LocalDate fechaAlta, String categoriasString){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -73,8 +76,8 @@ public class DTActividadTuristica {
         this.categoriasString = categoriasString;
     }
     
-    public DTActividadTuristica(Long id,String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, String categoriasString){
+    public DTActividadTuristicaWS(Long id,String nombre, String descripcion, String duracion,
+            float costo, String ciudad, LocalDate fechaAlta, String categoriasString){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -85,11 +88,11 @@ public class DTActividadTuristica {
         this.categoriasString = categoriasString;
     }
     
-    public DTActividadTuristica(String nombre){
+    public DTActividadTuristicaWS(String nombre){
         this.nombre = nombre;
     }
     
-    public DTActividadTuristica(Long id, String nombre, String descripcion){
+    public DTActividadTuristicaWS(Long id, String nombre, String descripcion){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;

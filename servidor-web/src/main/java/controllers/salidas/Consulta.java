@@ -38,6 +38,10 @@ public class Consulta extends HttpServlet {
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
         
+        /* Se utiliza el webservice para obtener las operaciones*/   
+        // webservice.WSSalidaControllerService service = new webservice.WSSalidaControllerService();
+        // webservice.WSSalidaController port = service.getWSSalidaControllerPort();        
+        
         String departamento = request.getParameter("departamento");
         String actividad = request.getParameter("actividad");
         String salida = request.getParameter("salida");
@@ -51,6 +55,7 @@ public class Consulta extends HttpServlet {
             
             if (actividad != null) {
                 salidas = controlador.obtenerSalidasTuristicas(actividad);
+                // ArrayList<DTSalidaTuristicaWS> salidas = port.obtenerSalidasTuristicas(actividad);
                 
                 if (salida != null) {
                     selectedSalida = controlador.obtenerSalidaTuristica(salida);

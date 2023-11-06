@@ -23,6 +23,16 @@
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column justify-content-start align-items-center p-5 flex-grow-1">
             <h1 class="fw-bold text-primary">¡Bienvenido!</h1>
+            
+            <!-- Prueba de conectividad con los WebServices -->
+            <hr/>
+            <h1 class="text-success">Ping WS Usuario: <%= request.getAttribute("pingUsuario") %></h1>
+            <h1 class="text-danger">Ping WS Actividad: <%= request.getAttribute("pingActividad") %></h1>
+            <h1 class="text-info">Ping WS Salida: <%= request.getAttribute("pingSalida") %></h1>
+            <h1 class="text-dark-emphasis">Ping WS Paquete: <%= request.getAttribute("pingPaquete") %></h1>
+            <hr/>
+            <!-- Prueba de conectividad con los WebServices -->
+            
             <div class="d-flex justify-content-around flex-row flex-wrap gap-2">
                 <div class="card" style="width: 18rem;">
                     <div class="d-flex justify-content-center align-items-center pt-2">

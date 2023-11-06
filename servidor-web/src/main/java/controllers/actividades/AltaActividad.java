@@ -54,6 +54,7 @@ public class AltaActividad extends HttpServlet {
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
+        
         String errorMessage = null;
         
         if(validateParameters(request)){

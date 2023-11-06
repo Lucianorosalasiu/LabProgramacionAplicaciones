@@ -1,52 +1,120 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package webService;
 
+import Enums.TipoInscripcion;
+import webService.dataTypesWS.DTInscripcionWS;
+import webService.dataTypesWS.DTSalidaTuristicaWS;
 import dataTypes.DTInscripcion;
 import dataTypes.DTSalidaTuristica;
 import exceptions.MyException;
-import java.util.ArrayList;
-import jakarta.jws.WebService;
-import jakarta.jws.WebMethod;
-import jakarta.jws.soap.SOAPBinding;
-import jakarta.jws.soap.SOAPBinding.ParameterStyle;
-import jakarta.jws.soap.SOAPBinding.Style;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+
+import java.util.ArrayList;
+
 import lombok.NoArgsConstructor;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.xml.ws.Endpoint;
+import utils.DateConverter;
 
 /**
  *
  * @author diego
  */
-
 @WebService
-@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
+@SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 @NoArgsConstructor
 public class WSSalidaController {
+
     private Fabrica fabrica = new Fabrica();
     private IControlador controlador = fabrica.getInterface();
+    private Endpoint endpoint = null;
+
+    @WebMethod(exclude = true)
+    public void publish() {
+        endpoint = Endpoint.publish("http://localhost:8889/ws/Salida", this);
+    }
+
+    @WebMethod(exclude = true)
+    public Endpoint getEndpoint() {
+        return endpoint;
+    }
     
     @WebMethod
-    public void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException {
+    public String ping() {
+    	return "pong";
+    }
+
+    @WebMethod
+    public void altaSalidaTuristica(DTSalidaTuristicaWS dTSalidaTuristicaWS, String nombreActividad) throws MyException {
+
+        /*Se construye el DTSalidaTuristica a partir del DTSalidaTuristicaWS*/
+        DTSalidaTuristica dtSalidaTuristica = new DTSalidaTuristica(
+                dTSalidaTuristicaWS.getNombre(),
+                dTSalidaTuristicaWS.getCantidadMaxTuristas(),
+                DateConverter.convertToDate(dTSalidaTuristicaWS.getFechaSalida()),
+                dTSalidaTuristicaWS.getLugar(),
+                DateConverter.convertToDate(dTSalidaTuristicaWS.getFechaAlta()),
+                dTSalidaTuristicaWS.getImagen()
+        );
+
         controlador.altaSalidaTuristica(dtSalidaTuristica, nombreActividad);
     }
-    
+
     @WebMethod
-    public ArrayList<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad){
-        return controlador.obtenerSalidasTuristicas(nombreActividad);
+    public ArrayList<DTSalidaTuristicaWS> obtenerSalidasTuristicas(String nombreActividad) {
+        ArrayList<DTSalidaTuristicaWS> listDTSalidasWS = new ArrayList<>();
+
+        /* Se obtiene la lista de DTsalidas y se parsea a DTsalidasWS*/
+        ArrayList<DTSalidaTuristica> listDTSalidas = controlador.obtenerSalidasTuristicas(nombreActividad);
+        for (DTSalidaTuristica st : listDTSalidas) {
+            listDTSalidasWS.add(
+                    new DTSalidaTuristicaWS(
+                            st.getNombre(),
+                            st.getCantidadMaxTuristas(),
+                            DateConverter.convertToLocalDate(st.getFechaSalida()),
+                            st.getLugar(),
+                            DateConverter.convertToLocalDate(st.getFechaAlta())
+                    )
+            );
+        }
+
+        return listDTSalidasWS;
     }
-    
+
     @WebMethod
-    public DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida) {
-        return controlador.obtenerSalidaTuristica(nombreSalida);
+    public DTSalidaTuristicaWS obtenerSalidaTuristica(String nombreSalida) {
+
+        DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
+
+        return new DTSalidaTuristicaWS(
+                salida.getNombre(),
+                salida.getCantidadMaxTuristas(),
+                DateConverter.convertToLocalDate(salida.getFechaSalida()),
+                salida.getLugar(),
+                DateConverter.convertToLocalDate(salida.getFechaSalida()),
+                salida.getImagen()
+        );
     }
-    
+
     @WebMethod
-    public void altaInscripcion(DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, 
+    public void altaInscripcion(DTInscripcionWS dTInscripcionWS, String nombreActividad, String nombreSalida,
             String nicknameTurista) throws MyException {
+
+        /*Se construye el DTInscripcion a partir del DTInscripcionWS*/
+        DTInscripcion dtInscripcion = new DTInscripcion(
+                DateConverter.convertToDate(dTInscripcionWS.getFecha()),
+                dTInscripcionWS.getCantidadTuristas()
+        );
+
+        if (dTInscripcionWS.getTipo() == TipoInscripcion.PAQUETE) {
+            dtInscripcion.setCostoTotal(dTInscripcionWS.getCostoTotal());
+            dtInscripcion.setTipo(TipoInscripcion.PAQUETE);
+        } else if (dTInscripcionWS.getTipo() == TipoInscripcion.GENERAL) {
+            dtInscripcion.setTipo(TipoInscripcion.GENERAL);
+        }
+
         controlador.altaInscripcion(dtInscripcion, nombreActividad, nombreSalida, nicknameTurista);
     }
 }

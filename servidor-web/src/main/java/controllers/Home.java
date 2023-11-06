@@ -8,7 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -22,23 +21,6 @@ public class Home extends HttpServlet {
     }
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-                request.getRequestDispatcher("/WEB-INF/home/home.jsp")
-                    .forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -49,31 +31,36 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        /* WebService Usuarios: */
+        webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        /* WebService Actividades: */
+        webservice.WSActividadControllerService a = new webservice.WSActividadControllerService();
+        webservice.WSActividadController portA = a.getWSActividadControllerPort();
+
+        /* WebService Salidas: */
+        webservice.WSSalidaControllerService s = new webservice.WSSalidaControllerService();
+        webservice.WSSalidaController portS = s.getWSSalidaControllerPort();
+
+        /* WebService Paquetes: */
+        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
+        webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
+        
+        
+        String responsePingUsuarioWS = portU.ping();
+        String responsePingActividadWS = portA.ping();
+        String responsePingSalidaWS = portS.ping();
+        String responsePingPaqueteWS = portP.ping();
+        
+        request.setAttribute("pingUsuario", responsePingUsuarioWS);
+        request.setAttribute("pingActividad", responsePingActividadWS);
+        request.setAttribute("pingSalida", responsePingSalidaWS);
+        request.setAttribute("pingPaquete", responsePingPaqueteWS);
+        
+        request.getRequestDispatcher("/WEB-INF/home/home.jsp")
+                .forward(request, response);
+    }
 
 }
