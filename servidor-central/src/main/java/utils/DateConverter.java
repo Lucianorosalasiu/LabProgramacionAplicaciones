@@ -1,5 +1,8 @@
-package utils;
+    package utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.Instant;
@@ -26,5 +29,17 @@ public class DateConverter {
 
         ZoneId zoneId = ZoneId.systemDefault();
         return Date.from(localDate.atStartOfDay(zoneId).toInstant());
+    }
+    
+    public static String dateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+        
+        return dateFormat.format(date);
+    }
+    
+    public static Date stringToDate(String date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        
+        return formatter.parse(date);
     }
 }

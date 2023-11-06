@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
-<%@page import="dataTypes.DTDepartamento"%>
-<%@page import="java.util.List"%>
+<%@page import="webservice.DtActividadesCollectionWS"%>
+<%@page import="webservice.DtActividadTuristicaWS"%>
+<%@page import="webservice.DtDepartamentosCollectionWS"%>
+<%@page import="webservice.DtDepartamentoWS"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -25,7 +26,8 @@
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
                             String selectedDepartamento = request.getParameter("departamento");
-                            for(DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")){
+                            DtDepartamentosCollectionWS departamentos = (DtDepartamentosCollectionWS) request.getAttribute("departamentos");
+                            for(DtDepartamentoWS departamento : departamentos.getDepartamentos()){
                                 String nombreDepartamento = departamento.getNombre();
                         %>
                         <option value="<%= nombreDepartamento %>" <% if (nombreDepartamento.equals(selectedDepartamento)) { %>selected <% } %>>
@@ -54,8 +56,8 @@
                       </thead>
                       <tbody>
                         <% 
-                            List <DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
-                            for(DTActividadTuristica actividad : actividades){
+                            DtActividadesCollectionWS actividades = (DtActividadesCollectionWS) request.getAttribute("actividades");
+                            for(DtActividadTuristicaWS actividad : actividades.getActividades()){
                         %>
                         <tr>
                           <td><%= actividad.getNombre() %></td>
@@ -77,7 +79,7 @@
                             <option value="" disabled selected>- seleccione una actividad -</option>
                             <%
                                 String selectedActividad = request.getParameter("actividad"); 
-                                for(DTActividadTuristica actividad : actividades){
+                                for(DtActividadTuristicaWS actividad : actividades.getActividades()){
                                 String nombreActividad = actividad.getNombre();
                             %>
                             <option value="<%= nombreActividad %>" <% if (nombreActividad.equals(selectedActividad)) { %>selected <% } %>>

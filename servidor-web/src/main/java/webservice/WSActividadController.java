@@ -26,15 +26,25 @@ public interface WSActividadController {
 
     /**
      * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/pingRequest", output = "http://webService/WSActividadController/pingResponse")
+    public String ping();
+
+    /**
+     * 
      * @param arg1
      * @param arg0
      * @return
-     *     returns webservice.ArrayList
+     *     returns webservice.DtActividadesCollectionWS
      */
     @WebMethod
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSActividadController/obtenerActividadesTuristicasRequest", output = "http://webService/WSActividadController/obtenerActividadesTuristicasResponse")
-    public ArrayList obtenerActividadesTuristicas(
+    public DtActividadesCollectionWS obtenerActividadesTuristicas(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
@@ -43,11 +53,24 @@ public interface WSActividadController {
     /**
      * 
      * @return
-     *     returns java.lang.String
+     *     returns webservice.DtDepartamentosCollectionWS
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webService/WSActividadController/pingRequest", output = "http://webService/WSActividadController/pingResponse")
-    public String ping();
+    @Action(input = "http://webService/WSActividadController/obtenerDepartamentosRequest", output = "http://webService/WSActividadController/obtenerDepartamentosResponse")
+    public DtDepartamentosCollectionWS obtenerDepartamentos();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadesTuristicasPorDepartamentoRequest", output = "http://webService/WSActividadController/obtenerActividadesTuristicasPorDepartamentoResponse")
+    public DtActividadesCollectionWS obtenerActividadesTuristicasPorDepartamento(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
 
 }
