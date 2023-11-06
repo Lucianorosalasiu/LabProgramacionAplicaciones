@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
@@ -1079,10 +1080,10 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
+    public ArrayList<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad) {
         EntityManager em = emf.createEntityManager();
         List<ESalidaTuristica> resultados;
-        List <DTSalidaTuristica> dtActividadesTuristicas = new LinkedList<>();
+        ArrayList<DTSalidaTuristica> dtActividadesTuristicas = new ArrayList<>();
         
         try{
             String query = "select s from ESalidaTuristica s where s.eActividadTuristica.nombre = :nombreActividad";
@@ -1197,9 +1198,9 @@ public class DataPersistencia implements IDataPersistencia {
         }
     }
     @Override
-    public List<DTPaqueteActividadTuristica> obtenerPaquetes(){
+    public ArrayList<DTPaqueteActividadTuristica> obtenerPaquetes(){
         EntityManager em = emf.createEntityManager();
-        List<DTPaqueteActividadTuristica> dtresultados = new LinkedList<>();
+        ArrayList<DTPaqueteActividadTuristica> dtresultados = new ArrayList<>();
         try{      
             Query query = em.createNativeQuery("select distinct nombre from paquetes inner join PAQUETE_ACTIVIDAD ON paquetes.ID = PAQUETE_ACTIVIDAD.PAQUETE_ID");                        
             List<String> resultados = query.getResultList();
@@ -1210,8 +1211,7 @@ public class DataPersistencia implements IDataPersistencia {
             return dtresultados;
           
         }catch(Exception e){
-            List<DTPaqueteActividadTuristica> resultados = new LinkedList<>();
-            return resultados;
+            return new ArrayList<>();
         }finally{
             em.close();
         }
@@ -1493,9 +1493,9 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
+    public ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor){
         EntityManager em = emf.createEntityManager();
-        List<DTActividadTuristica> dtActividadesTuristicas = new LinkedList<>();
+        ArrayList<DTActividadTuristica> dtActividadesTuristicas = new ArrayList<>();
 
         try{
             EProveedor eProveedor = em.find(EProveedor.class, idProveedor);

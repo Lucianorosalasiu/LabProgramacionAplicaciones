@@ -16,6 +16,7 @@ import dataTypes.DTSalidaTuristica;
 import dataTypes.DTTurista;
 import java.util.List;
 import exceptions.MyException;
+import java.util.ArrayList;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ETurista;
 
@@ -65,7 +66,7 @@ public interface IDataPersistencia {
     void altaSalidaTuristica(DTSalidaTuristica dtSalidaTuristica, String nombreActividad) throws MyException;
     
     /*CU7*/
-    List<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad);
+    ArrayList<DTSalidaTuristica> obtenerSalidasTuristicas(String nombreActividad);
     DTSalidaTuristica obtenerSalidaTuristica(String nombreSalida);
     
     /*CU8*/
@@ -103,6 +104,6 @@ public interface IDataPersistencia {
     /* Servidor Web */
     
     /* CU Alta Salida Turistica */
-    List<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
+    ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     List<DTPaqueteActividadTuristica> obtenerPaquetesCompradosDisponibles(Long idTurista, String nombreSalida, int cantTuristas);
 }

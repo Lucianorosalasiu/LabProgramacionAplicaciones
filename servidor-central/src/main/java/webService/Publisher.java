@@ -4,7 +4,7 @@
  */
 package webService;
 
-import javax.xml.ws.Endpoint;
+import jakarta.xml.ws.Endpoint;
 
 /*
  * @author diego
@@ -12,6 +12,7 @@ import javax.xml.ws.Endpoint;
 public class Publisher {
     
     public static void main(String args[]) {
-        Endpoint.publish("http://localhost:8889/publisher", new TurismouyWS());
+        Endpoint.publish("http://localhost:8889/wsSalidaController", new WSSalidaController());
+        Endpoint.publish("http://localhost:8889/wsActividadController", new WSActividadController());
     }
 }
