@@ -16,8 +16,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -443,6 +446,43 @@ public class DataPersistencia implements IDataPersistencia {
             return listaActividades;
         }catch(Exception e){
             return listaActividades;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public ArrayList<DTActividadTuristica> obtenerActividadesFinalizables(long idProveedor){           
+        EntityManager em = emf.createEntityManager();
+        List<EActividadTuristica> listaEActividades = new LinkedList<>();
+        List<DTActividadTuristica> listaActividades = new LinkedList<>();
+        
+        try{
+            // Se busca el proveedor que coincida con la id recibida
+            EProveedor proveedor = em.find(EProveedor.class,idProveedor);
+        
+            // Se obtiene su lista de de actividades
+            listaEActividades = proveedor.getActividades();
+            
+            for(EActividadTuristica a : listaEActividades){
+                if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA && obtenerSalidasTuristicasVigentes(a.getNombre()).size() == 0){
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(
+                            a.getId(),
+                            a.getNombre(),
+                            a.getDescripcion(),
+                            a.getDuracion(),
+                            a.getCosto(),
+                            a.getCiudad(),
+                            a.getFechaAlta()
+                    );
+                    listaActividades.add(dtActividadTuristica);
+                }
+            }
+            ArrayList<DTActividadTuristica> resultado = new ArrayList<>(listaActividades);
+            return resultado;
+        }catch(Exception e){
+            ArrayList<DTActividadTuristica> resultado = new ArrayList<>(listaActividades);
+            return resultado;
         }finally{
             em.close();
         }
@@ -1108,6 +1148,41 @@ public class DataPersistencia implements IDataPersistencia {
                             s.getFechaAlta()
                         )
                 );
+            }
+            return dtActividadesTuristicas;
+        }catch(Exception e){
+            return dtActividadesTuristicas;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public ArrayList<DTSalidaTuristica> obtenerSalidasTuristicasVigentes(String nombreActividad) {
+        EntityManager em = emf.createEntityManager();
+        List<ESalidaTuristica> resultados;
+        ArrayList<DTSalidaTuristica> dtActividadesTuristicas = new ArrayList<>();
+        
+        try{
+            String query = "select s from ESalidaTuristica s where s.eActividadTuristica.nombre = :nombreActividad";
+            resultados = em.createQuery(query, ESalidaTuristica.class)
+                            .setParameter("nombreActividad", nombreActividad)
+                            .getResultList();
+            
+            LocalDate currentDate = LocalDate.now();
+            
+            for(ESalidaTuristica s : resultados){
+                LocalDate salidaDate = s.getFechaAlta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if(!currentDate.isAfter(salidaDate)){
+                    dtActividadesTuristicas.add(    
+                            new DTSalidaTuristica(
+                                s.getNombre(),
+                                s.getCantidadMaxTuristas(),
+                                s.getFechaSalida(),
+                                s.getLugar(),
+                                s.getFechaAlta()
+                            )
+                    );
+                }
             }
             return dtActividadesTuristicas;
         }catch(Exception e){

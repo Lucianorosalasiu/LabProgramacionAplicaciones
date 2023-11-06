@@ -41,6 +41,7 @@ public interface IDataPersistencia {
     List<DTSalidaTuristica> obtenerSalidasDeProveedorCompleto(long idProveedor);
     List<DTActividadTuristica> obtenerActividadesDeProveedor(long idProveedor);
     List<DTActividadTuristica> obtenerActividadesDeProveedorCompleto(long idProveedor);
+    ArrayList<DTActividadTuristica> obtenerActividadesFinalizables(long idProveedor);
     
     /*CU4*/
     void existeActividadTuristica(String nombre)throws MyException;
