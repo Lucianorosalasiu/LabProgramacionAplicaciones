@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import persistencia.entidades.EActividadTuristica_;
 
 /**
  *
@@ -26,7 +27,9 @@ public class DTActividadTuristica {
     private DTDepartamento departamento;
     private List<Long> categorias;
     private String categoriasString;
-    
+    private int cantidadVistas;
+    private String url;
+            
     public DTActividadTuristica(){}
     
     public DTActividadTuristica(String nombre, String descripcion, String duracion,
@@ -74,7 +77,7 @@ public class DTActividadTuristica {
     }
     
     public DTActividadTuristica(Long id,String nombre, String descripcion, String duracion,
-            float costo, String ciudad, Date fechaAlta, String categoriasString){
+            float costo, String ciudad, Date fechaAlta, String categoriasString, int cantidadVistas, String url){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -83,6 +86,8 @@ public class DTActividadTuristica {
         this.ciudad = ciudad;
         this.fechaAlta = fechaAlta;
         this.categoriasString = categoriasString;
+        this.cantidadVistas = cantidadVistas;
+        this.url = url;
     }
     
     public DTActividadTuristica(String nombre){

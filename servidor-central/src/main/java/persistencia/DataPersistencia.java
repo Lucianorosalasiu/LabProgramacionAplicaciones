@@ -691,6 +691,7 @@ public class DataPersistencia implements IDataPersistencia {
         EntityManager em = emf.createEntityManager();
         String categoriasString = "";
         try{
+            em.getTransaction().begin();
             EActividadTuristica eActividadTuristica = em.find(EActividadTuristica.class, idActividad);
             if(eActividadTuristica.getEstadoActividad() == EstadoActividad.CONFIRMADA){
                 
@@ -701,7 +702,13 @@ public class DataPersistencia implements IDataPersistencia {
                 DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(eActividadTuristica.getId(),eActividadTuristica.getNombre(),
                         eActividadTuristica.getDescripcion(),eActividadTuristica.getDuracion(),
                         eActividadTuristica.getCosto(),eActividadTuristica.getCiudad(),eActividadTuristica.getFechaAlta(),
-                categoriasString);
+                categoriasString,eActividadTuristica.getCantidadVistas(), eActividadTuristica.getUrl());
+                
+                //si consulte por esta actividad es porque la quiero visualizar por lo que le sumo +1 a la cantidad de vistas;
+                int vistasActuales = eActividadTuristica.getCantidadVistas();
+                vistasActuales += 1;
+                eActividadTuristica.setCantidadVistas(vistasActuales);
+                em.getTransaction().commit();
                 return dtActividadTuristica;
             }else{
                 return null;
