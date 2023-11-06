@@ -7,15 +7,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for MyException complex type.
+ * <p>Java class for ParseException complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="MyException"&gt;
+ * &lt;complexType name="ParseException"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="errorOffset" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -26,12 +27,30 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MyException", propOrder = {
+@XmlType(name = "ParseException", propOrder = {
+    "errorOffset",
     "message"
 })
-public class MyException {
+public class ParseException {
 
+    protected int errorOffset;
     protected String message;
+
+    /**
+     * Gets the value of the errorOffset property.
+     * 
+     */
+    public int getErrorOffset() {
+        return errorOffset;
+    }
+
+    /**
+     * Sets the value of the errorOffset property.
+     * 
+     */
+    public void setErrorOffset(int value) {
+        this.errorOffset = value;
+    }
 
     /**
      * Gets the value of the message property.

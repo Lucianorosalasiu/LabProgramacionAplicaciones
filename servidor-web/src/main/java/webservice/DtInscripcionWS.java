@@ -8,9 +8,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para dtInscripcionWS complex type.
+ * <p>Java class for dtInscripcionWS complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="dtInscripcionWS"&gt;
@@ -51,7 +51,7 @@ public class DtInscripcionWS {
     protected TipoInscripcion tipo;
 
     /**
-     * Obtiene el valor de la propiedad turista.
+     * Gets the value of the turista property.
      * 
      * @return
      *     possible object is
@@ -63,7 +63,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad turista.
+     * Sets the value of the turista property.
      * 
      * @param value
      *     allowed object is
@@ -75,7 +75,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad salidaTuristica.
+     * Gets the value of the salidaTuristica property.
      * 
      * @return
      *     possible object is
@@ -87,7 +87,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad salidaTuristica.
+     * Sets the value of the salidaTuristica property.
      * 
      * @param value
      *     allowed object is
@@ -99,7 +99,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad fecha.
+     * Gets the value of the fecha property.
      * 
      * @return
      *     possible object is
@@ -111,7 +111,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad fecha.
+     * Sets the value of the fecha property.
      * 
      * @param value
      *     allowed object is
@@ -123,7 +123,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidadTuristas.
+     * Gets the value of the cantidadTuristas property.
      * 
      */
     public int getCantidadTuristas() {
@@ -131,7 +131,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad cantidadTuristas.
+     * Sets the value of the cantidadTuristas property.
      * 
      */
     public void setCantidadTuristas(int value) {
@@ -139,7 +139,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad costoTotal.
+     * Gets the value of the costoTotal property.
      * 
      */
     public float getCostoTotal() {
@@ -147,7 +147,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad costoTotal.
+     * Sets the value of the costoTotal property.
      * 
      */
     public void setCostoTotal(float value) {
@@ -155,7 +155,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad tipo.
+     * Gets the value of the tipo property.
      * 
      * @return
      *     possible object is
@@ -167,7 +167,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Define el valor de la propiedad tipo.
+     * Sets the value of the tipo property.
      * 
      * @param value
      *     allowed object is

@@ -4,19 +4,24 @@
  */
 package controllers.salidas;
 
-import dataTypes.DTActividadTuristica;
-import dataTypes.DTSalidaTuristica;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 import static java.util.Objects.isNull;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import webservice.DatatypeConfigurationException_Exception;
+import webservice.DtActividadesCollectionWS;
+import webservice.DtSalidaTuristicaWS;
+import webservice.DtSalidasCollectionWS;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
+import webservice.WSSalidaController;
+import webservice.WSSalidaControllerService;
 
 /**
  *
@@ -34,31 +39,29 @@ public class Consulta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+            throws ServletException, IOException, DatatypeConfigurationException_Exception {
+        WSSalidaControllerService salidaController = new WSSalidaControllerService();
+        WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
         
-        /* Se utiliza el webservice para obtener las operaciones*/   
-        // webservice.WSSalidaControllerService service = new webservice.WSSalidaControllerService();
-        // webservice.WSSalidaController port = service.getWSSalidaControllerPort();        
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
         
         String departamento = request.getParameter("departamento");
         String actividad = request.getParameter("actividad");
         String salida = request.getParameter("salida");
-        List<DTActividadTuristica> actividades = new ArrayList();
-        List<DTSalidaTuristica> salidas = new ArrayList();
-        DTSalidaTuristica selectedSalida = null;
+        DtActividadesCollectionWS actividades = new DtActividadesCollectionWS();
+        DtSalidasCollectionWS salidas = new DtSalidasCollectionWS();
+        DtSalidaTuristicaWS selectedSalida = null;
         String imagen = "";
         
         if (departamento != null) {
-            actividades = controlador.obtenerActividadesTuristicas(departamento);
+            actividades = actividadPort.obtenerActividadesTuristicasPorDepartamento(departamento);
             
             if (actividad != null) {
-                salidas = controlador.obtenerSalidasTuristicas(actividad);
-                // ArrayList<DTSalidaTuristicaWS> salidas = port.obtenerSalidasTuristicas(actividad);
+                salidas = salidaPort.obtenerSalidasTuristicas(actividad);
                 
                 if (salida != null) {
-                    selectedSalida = controlador.obtenerSalidaTuristica(salida);
+                    selectedSalida = salidaPort.obtenerSalidaTuristica(salida);
                     if (!isNull(selectedSalida.getImagen())) {
                         imagen = Base64.getEncoder().encodeToString(selectedSalida.getImagen());   
                     }
@@ -68,7 +71,7 @@ public class Consulta extends HttpServlet {
         
         
         request.setAttribute("actividades", actividades);
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
         request.setAttribute("salidas", salidas);
         request.setAttribute("selectedSalida", selectedSalida);
         request.setAttribute("imagenSalida", imagen);
@@ -89,7 +92,11 @@ public class Consulta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DatatypeConfigurationException_Exception ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,7 +110,11 @@ public class Consulta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DatatypeConfigurationException_Exception ex) {
+            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

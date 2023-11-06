@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author alexis
@@ -22,13 +20,13 @@ import java.time.LocalDate;
 public class DTSalidaTuristicaWS {
     private String nombre;
     private int cantidadMaxTuristas;
-    private LocalDate fechaSalida;
+    private String fechaSalida;
     private String lugar;
-    private LocalDate fechaAlta;
+    private String fechaAlta;
     private DTActividadTuristicaWS dtActividadTuristica;
     private byte[] imagen;
     
-    public DTSalidaTuristicaWS(String nombre, int cantidadMaxTuristas, LocalDate fechaSalida, String lugar, LocalDate fechaAlta) {
+    public DTSalidaTuristicaWS(String nombre, int cantidadMaxTuristas, String fechaSalida, String lugar, String fechaAlta) {
         this.nombre = nombre;
         this.cantidadMaxTuristas = cantidadMaxTuristas;
         this.fechaSalida = fechaSalida;
@@ -36,7 +34,7 @@ public class DTSalidaTuristicaWS {
         this.fechaAlta = fechaAlta;
     }
     
-    public DTSalidaTuristicaWS(String nombre, int cantidadMaxTuristas, LocalDate fechaSalida, String lugar, LocalDate fechaAlta, byte[] imagen) {
+    public DTSalidaTuristicaWS(String nombre, int cantidadMaxTuristas, String fechaSalida, String lugar, String fechaAlta, byte[] imagen) {
         this.nombre = nombre;
         this.cantidadMaxTuristas = cantidadMaxTuristas;
         this.fechaSalida = fechaSalida;

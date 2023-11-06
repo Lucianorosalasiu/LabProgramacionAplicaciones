@@ -16,7 +16,10 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import java.text.ParseException;
+import javax.xml.datatype.DatatypeConfigurationException;
 import utils.DateConverter;
+import webService.dataTypesWS.DTSalidasCollectionWS;
 
 /**
  *
@@ -47,15 +50,15 @@ public class WSSalidaController {
     }
 
     @WebMethod
-    public void altaSalidaTuristica(DTSalidaTuristicaWS dTSalidaTuristicaWS, String nombreActividad) throws MyException {
+    public void altaSalidaTuristica(DTSalidaTuristicaWS dTSalidaTuristicaWS, String nombreActividad) throws MyException, ParseException {
 
         /*Se construye el DTSalidaTuristica a partir del DTSalidaTuristicaWS*/
         DTSalidaTuristica dtSalidaTuristica = new DTSalidaTuristica(
                 dTSalidaTuristicaWS.getNombre(),
                 dTSalidaTuristicaWS.getCantidadMaxTuristas(),
-                DateConverter.convertToDate(dTSalidaTuristicaWS.getFechaSalida()),
+                DateConverter.stringToDate(dTSalidaTuristicaWS.getFechaSalida()),
                 dTSalidaTuristicaWS.getLugar(),
-                DateConverter.convertToDate(dTSalidaTuristicaWS.getFechaAlta()),
+                DateConverter.stringToDate(dTSalidaTuristicaWS.getFechaAlta()),
                 dTSalidaTuristicaWS.getImagen()
         );
 
@@ -63,7 +66,7 @@ public class WSSalidaController {
     }
 
     @WebMethod
-    public ArrayList<DTSalidaTuristicaWS> obtenerSalidasTuristicas(String nombreActividad) {
+    public DTSalidasCollectionWS obtenerSalidasTuristicas(String nombreActividad) throws DatatypeConfigurationException {
         ArrayList<DTSalidaTuristicaWS> listDTSalidasWS = new ArrayList<>();
 
         /* Se obtiene la lista de DTsalidas y se parsea a DTsalidasWS*/
@@ -73,27 +76,30 @@ public class WSSalidaController {
                     new DTSalidaTuristicaWS(
                             st.getNombre(),
                             st.getCantidadMaxTuristas(),
-                            DateConverter.convertToLocalDate(st.getFechaSalida()),
+                            DateConverter.dateToString(st.getFechaSalida()),
                             st.getLugar(),
-                            DateConverter.convertToLocalDate(st.getFechaAlta())
+                            DateConverter.dateToString(st.getFechaAlta())
                     )
             );
         }
-
-        return listDTSalidasWS;
+            
+        DTSalidasCollectionWS collection = new DTSalidasCollectionWS();
+        collection.setSalidas(listDTSalidasWS);
+        
+        return collection;
     }
 
     @WebMethod
-    public DTSalidaTuristicaWS obtenerSalidaTuristica(String nombreSalida) {
+    public DTSalidaTuristicaWS obtenerSalidaTuristica(String nombreSalida) throws DatatypeConfigurationException {
 
         DTSalidaTuristica salida = controlador.obtenerSalidaTuristica(nombreSalida);
 
         return new DTSalidaTuristicaWS(
                 salida.getNombre(),
                 salida.getCantidadMaxTuristas(),
-                DateConverter.convertToLocalDate(salida.getFechaSalida()),
+                DateConverter.dateToString(salida.getFechaSalida()),
                 salida.getLugar(),
-                DateConverter.convertToLocalDate(salida.getFechaSalida()),
+                DateConverter.dateToString(salida.getFechaAlta()),
                 salida.getImagen()
         );
     }

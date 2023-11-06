@@ -4,9 +4,6 @@
  */
 package controllers.salidas;
 
-import dataTypes.DTActividadTuristica;
-import dataTypes.DTSalidaTuristica;
-import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -15,17 +12,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import static java.util.Objects.isNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
 import org.apache.commons.io.IOUtils;
+
+import webservice.DtActividadesCollectionWS;
+import webservice.DtSalidaTuristicaWS;
+import webservice.MyException_Exception;
+import webservice.ParseException_Exception;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
+import webservice.WSSalidaController;
+import webservice.WSSalidaControllerService;
 
 /**
  *
@@ -49,14 +52,18 @@ public class Alta extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        WSSalidaControllerService salidaController = new WSSalidaControllerService();
+        WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
+        
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
+        
         
         String departamento = request.getParameter("departamento");
-        List<DTActividadTuristica> actividades = new ArrayList();
+        DtActividadesCollectionWS actividades = new DtActividadesCollectionWS();
         
         if (departamento != null) {
-            actividades = controlador.obtenerActividadesTuristicas(
+            actividades = actividadPort.obtenerActividadesTuristicas(
                 departamento, (Long) request.getSession().getAttribute("id")
             );
         }
@@ -64,8 +71,9 @@ public class Alta extends HttpServlet {
         String error = null;
         
         if (validateParameters(request)) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-            
+            SimpleDateFormat datePickerFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
             Part imagePart = request.getPart("imagen");
             byte[] newImage = null;
             if (imagePart != null) {
@@ -75,16 +83,18 @@ public class Alta extends HttpServlet {
                 IOUtils.closeQuietly(imageFile);
             }
             
-            DTSalidaTuristica dtSalidaTuristica = new DTSalidaTuristica(
-                                            request.getParameter("nombre"),
-                                            Integer.parseInt(request.getParameter("cantidadMaxTuristas")),
-                                            dateFormat.parse(request.getParameter("fechaSalida")),
-                                            request.getParameter("lugar"),
-                                            new Date(),
-                                            newImage
-                                        );
+            Date fechaSalida = datePickerFormat.parse(request.getParameter("fechaSalida"));
+            
+            DtSalidaTuristicaWS dtSalidaTuristica = new DtSalidaTuristicaWS();
+            dtSalidaTuristica.setNombre(request.getParameter("nombre"));
+            dtSalidaTuristica.setLugar(request.getParameter("lugar"));
+            dtSalidaTuristica.setCantidadMaxTuristas(Integer.parseInt(request.getParameter("cantidadMaxTuristas")));
+            dtSalidaTuristica.setFechaSalida(dateFormat.format(fechaSalida));
+            dtSalidaTuristica.setFechaAlta(dateFormat.format(new Date()));
+            dtSalidaTuristica.setImagen(newImage);
+            
             try {
-                controlador.altaSalidaTuristica(
+                salidaPort.altaSalidaTuristica(
                                         dtSalidaTuristica, 
                                         request.getParameter("actividad")
                 );
@@ -93,17 +103,17 @@ public class Alta extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);
                 return;
-            } catch (MyException ex) {
+            } catch (MyException_Exception | ParseException_Exception ex) {
                 error = ex.getMessage();
-                
             }
+            
         }
         
         request.setAttribute("errorMessage", error);
         
         request.setAttribute("departamento", departamento);
         request.setAttribute("actividades", actividades);
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
         request.getRequestDispatcher("/WEB-INF/salidas/alta.jsp").
                 forward(request, response); 
             

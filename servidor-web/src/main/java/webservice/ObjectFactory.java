@@ -30,11 +30,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayList }
+     * Create an instance of {@link DtActividadesCollectionWS }
      * 
      */
-    public ArrayList createArrayList() {
-        return new ArrayList();
+    public DtActividadesCollectionWS createDtActividadesCollectionWS() {
+        return new DtActividadesCollectionWS();
+    }
+
+    /**
+     * Create an instance of {@link DtActividadTuristicaWS }
+     * 
+     */
+    public DtActividadTuristicaWS createDtActividadTuristicaWS() {
+        return new DtActividadTuristicaWS();
+    }
+
+    /**
+     * Create an instance of {@link LocalDate }
+     * 
+     */
+    public LocalDate createLocalDate() {
+        return new LocalDate();
+    }
+
+    /**
+     * Create an instance of {@link DtDepartamentoWS }
+     * 
+     */
+    public DtDepartamentoWS createDtDepartamentoWS() {
+        return new DtDepartamentoWS();
+    }
+
+    /**
+     * Create an instance of {@link DtDepartamentosCollectionWS }
+     * 
+     */
+    public DtDepartamentosCollectionWS createDtDepartamentosCollectionWS() {
+        return new DtDepartamentosCollectionWS();
     }
 
 }

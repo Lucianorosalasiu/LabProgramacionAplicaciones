@@ -39,45 +39,57 @@ public interface WSSalidaController {
      * 
      * @param arg1
      * @param arg0
+     * @throws ParseException_Exception
      * @throws MyException_Exception
      */
     @WebMethod
     @Action(input = "http://webService/WSSalidaController/altaSalidaTuristicaRequest", output = "http://webService/WSSalidaController/altaSalidaTuristicaResponse", fault = {
-        @FaultAction(className = MyException_Exception.class, value = "http://webService/WSSalidaController/altaSalidaTuristica/Fault/MyException")
+        @FaultAction(className = MyException_Exception.class, value = "http://webService/WSSalidaController/altaSalidaTuristica/Fault/MyException"),
+        @FaultAction(className = ParseException_Exception.class, value = "http://webService/WSSalidaController/altaSalidaTuristica/Fault/ParseException")
     })
     public void altaSalidaTuristica(
         @WebParam(name = "arg0", partName = "arg0")
         DtSalidaTuristicaWS arg0,
         @WebParam(name = "arg1", partName = "arg1")
         String arg1)
-        throws MyException_Exception
+        throws MyException_Exception, ParseException_Exception
     ;
 
     /**
      * 
      * @param arg0
      * @return
-     *     returns webservice.ArrayList
+     *     returns webservice.DtSalidasCollectionWS
+     * @throws DatatypeConfigurationException_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webService/WSSalidaController/obtenerSalidasTuristicasRequest", output = "http://webService/WSSalidaController/obtenerSalidasTuristicasResponse")
-    public ArrayList obtenerSalidasTuristicas(
+    @Action(input = "http://webService/WSSalidaController/obtenerSalidasTuristicasRequest", output = "http://webService/WSSalidaController/obtenerSalidasTuristicasResponse", fault = {
+        @FaultAction(className = DatatypeConfigurationException_Exception.class, value = "http://webService/WSSalidaController/obtenerSalidasTuristicas/Fault/DatatypeConfigurationException")
+    })
+    public DtSalidasCollectionWS obtenerSalidasTuristicas(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0)
+        throws DatatypeConfigurationException_Exception
+    ;
 
     /**
      * 
      * @param arg0
      * @return
      *     returns webservice.DtSalidaTuristicaWS
+     * @throws DatatypeConfigurationException_Exception
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webService/WSSalidaController/obtenerSalidaTuristicaRequest", output = "http://webService/WSSalidaController/obtenerSalidaTuristicaResponse")
+    @Action(input = "http://webService/WSSalidaController/obtenerSalidaTuristicaRequest", output = "http://webService/WSSalidaController/obtenerSalidaTuristicaResponse", fault = {
+        @FaultAction(className = DatatypeConfigurationException_Exception.class, value = "http://webService/WSSalidaController/obtenerSalidaTuristica/Fault/DatatypeConfigurationException")
+    })
     public DtSalidaTuristicaWS obtenerSalidaTuristica(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0)
+        throws DatatypeConfigurationException_Exception
+    ;
 
     /**
      * 

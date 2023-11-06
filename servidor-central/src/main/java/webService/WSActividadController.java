@@ -5,6 +5,7 @@
 package webService;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.util.ArrayList;
@@ -14,8 +15,12 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import java.util.List;
 import utils.DateConverter;
 import webService.dataTypesWS.DTActividadTuristicaWS;
+import webService.dataTypesWS.DTActividadesCollectionWS;
+import webService.dataTypesWS.DTDepartamentoWS;
+import webService.dataTypesWS.DTDepartamentosCollectionWS;
 
 /**
  *
@@ -46,7 +51,59 @@ public class WSActividadController {
     }
 
     @WebMethod
-    public ArrayList<DTActividadTuristicaWS> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor) {
+    public DTDepartamentosCollectionWS obtenerDepartamentos() {
+        ArrayList<DTDepartamentoWS> listDTDepartamentoWS = new ArrayList<>();
+        
+        /* Se obtiene la lista de DTDepartamento y se parsea a DTDepartamentoWS*/
+        List<DTDepartamento> listDTDepartamento = controlador.obtenerDepartamentos();
+        
+        for (DTDepartamento dtDepartamento : listDTDepartamento) {
+            listDTDepartamentoWS.add(
+                    new DTDepartamentoWS(
+                            dtDepartamento.getId(),
+                            dtDepartamento.getNombre(),
+                            dtDepartamento.getDescripcion(),
+                            dtDepartamento.getURL()
+                    )
+            );
+        }
+        
+        DTDepartamentosCollectionWS collection = new DTDepartamentosCollectionWS();
+        collection.setDepartamentos(listDTDepartamentoWS);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesTuristicasPorDepartamento(String nombreDepartamento){
+        ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
+
+        /* Se obtiene la lista de DTActividad y se parsea a DTActividadWS*/
+        List<DTActividadTuristica> listDTActividad = controlador.obtenerActividadesTuristicas(
+                nombreDepartamento
+        );
+
+        for (DTActividadTuristica at : listDTActividad) {
+            listDTActividadWS.add(
+                    new DTActividadTuristicaWS(
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getDuracion(),
+                            at.getCosto(),
+                            at.getCiudad(),
+                            DateConverter.convertToLocalDate(at.getFechaAlta())
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(listDTActividadWS);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor) {
         ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
 
         /* Se obtiene la lista de DTActividad y se parsea a DTActividadWS*/
@@ -67,6 +124,10 @@ public class WSActividadController {
                     )
             );
         }
-        return listDTActividadWS;
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(listDTActividadWS);
+        
+        return collection;
     }
 }

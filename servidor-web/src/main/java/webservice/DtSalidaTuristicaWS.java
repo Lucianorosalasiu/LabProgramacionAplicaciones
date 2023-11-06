@@ -7,9 +7,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para dtSalidaTuristicaWS complex type.
+ * <p>Java class for dtSalidaTuristicaWS complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="dtSalidaTuristicaWS"&gt;
@@ -18,9 +18,9 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="cantidadMaxTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="fechaSalida" type="{http://webService/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fechaSalida" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="lugar" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="fechaAlta" type="{http://webService/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fechaAlta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="dtActividadTuristica" type="{http://webService/}dtActividadTuristicaWS" minOccurs="0"/&gt;
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
@@ -45,14 +45,14 @@ public class DtSalidaTuristicaWS {
 
     protected String nombre;
     protected int cantidadMaxTuristas;
-    protected LocalDate fechaSalida;
+    protected String fechaSalida;
     protected String lugar;
-    protected LocalDate fechaAlta;
+    protected String fechaAlta;
     protected DtActividadTuristicaWS dtActividadTuristica;
     protected byte[] imagen;
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -64,7 +64,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +76,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad cantidadMaxTuristas.
+     * Gets the value of the cantidadMaxTuristas property.
      * 
      */
     public int getCantidadMaxTuristas() {
@@ -84,7 +84,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Define el valor de la propiedad cantidadMaxTuristas.
+     * Sets the value of the cantidadMaxTuristas property.
      * 
      */
     public void setCantidadMaxTuristas(int value) {
@@ -92,31 +92,31 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaSalida.
+     * Gets the value of the fechaSalida property.
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getFechaSalida() {
+    public String getFechaSalida() {
         return fechaSalida;
     }
 
     /**
-     * Define el valor de la propiedad fechaSalida.
+     * Sets the value of the fechaSalida property.
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setFechaSalida(LocalDate value) {
+    public void setFechaSalida(String value) {
         this.fechaSalida = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad lugar.
+     * Gets the value of the lugar property.
      * 
      * @return
      *     possible object is
@@ -128,7 +128,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Define el valor de la propiedad lugar.
+     * Sets the value of the lugar property.
      * 
      * @param value
      *     allowed object is
@@ -140,31 +140,31 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaAlta.
+     * Gets the value of the fechaAlta property.
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getFechaAlta() {
+    public String getFechaAlta() {
         return fechaAlta;
     }
 
     /**
-     * Define el valor de la propiedad fechaAlta.
+     * Sets the value of the fechaAlta property.
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setFechaAlta(LocalDate value) {
+    public void setFechaAlta(String value) {
         this.fechaAlta = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad dtActividadTuristica.
+     * Gets the value of the dtActividadTuristica property.
      * 
      * @return
      *     possible object is
@@ -176,7 +176,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Define el valor de la propiedad dtActividadTuristica.
+     * Sets the value of the dtActividadTuristica property.
      * 
      * @param value
      *     allowed object is
@@ -188,7 +188,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad imagen.
+     * Gets the value of the imagen property.
      * 
      * @return
      *     possible object is
@@ -199,7 +199,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Define el valor de la propiedad imagen.
+     * Sets the value of the imagen property.
      * 
      * @param value
      *     allowed object is
