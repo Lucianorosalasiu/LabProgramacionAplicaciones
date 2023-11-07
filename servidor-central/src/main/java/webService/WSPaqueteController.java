@@ -24,7 +24,7 @@ public class WSPaqueteController {
 
     @WebMethod(exclude = true)
     public void publish() {
-        endpoint = Endpoint.publish("http://localhost:8889/ws/Paquete", this);
+        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Paquete", this);
     }
 
     @WebMethod(exclude = true)

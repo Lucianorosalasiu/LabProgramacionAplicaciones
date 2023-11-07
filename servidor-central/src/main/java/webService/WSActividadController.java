@@ -37,7 +37,7 @@ public class WSActividadController {
 
     @WebMethod(exclude = true)
     public void publish() {
-        endpoint = Endpoint.publish("http://localhost:8889/ws/Actividad", this);
+        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Actividad", this);
     }
 
     @WebMethod(exclude = true)
