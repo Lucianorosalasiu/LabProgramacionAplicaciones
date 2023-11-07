@@ -106,11 +106,11 @@ public class WSSalidaController {
 
     @WebMethod
     public void altaInscripcion(DTInscripcionWS dTInscripcionWS, String nombreActividad, String nombreSalida,
-            String nicknameTurista) throws MyException {
+            String nicknameTurista) throws MyException, ParseException {
 
         /*Se construye el DTInscripcion a partir del DTInscripcionWS*/
         DTInscripcion dtInscripcion = new DTInscripcion(
-                DateConverter.convertToDate(dTInscripcionWS.getFecha()),
+                DateConverter.stringToDate(dTInscripcionWS.getFecha()),
                 dTInscripcionWS.getCantidadTuristas()
         );
 

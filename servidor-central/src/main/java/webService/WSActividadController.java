@@ -130,4 +130,9 @@ public class WSActividadController {
         
         return collection;
     }
+    
+    @WebMethod
+    public float obtenerCostoActividad(String nombreActividad) {
+        return controlador.obtenerCostoActividad(nombreActividad);
+    }
 }

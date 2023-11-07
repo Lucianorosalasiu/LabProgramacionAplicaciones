@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="turista" type="{http://webService/}dtTuristaWS" minOccurs="0"/&gt;
  *         &lt;element name="salidaTuristica" type="{http://webService/}dtSalidaTuristicaWS" minOccurs="0"/&gt;
- *         &lt;element name="fecha" type="{http://webService/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="cantidadTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="costoTotal" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
  *         &lt;element name="tipo" type="{http://webService/}tipoInscripcion" minOccurs="0"/&gt;
@@ -44,7 +44,7 @@ public class DtInscripcionWS {
 
     protected DtTuristaWS turista;
     protected DtSalidaTuristicaWS salidaTuristica;
-    protected LocalDate fecha;
+    protected String fecha;
     protected int cantidadTuristas;
     protected float costoTotal;
     @XmlSchemaType(name = "string")
@@ -103,10 +103,10 @@ public class DtInscripcionWS {
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -115,10 +115,10 @@ public class DtInscripcionWS {
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setFecha(LocalDate value) {
+    public void setFecha(String value) {
         this.fecha = value;
     }
 

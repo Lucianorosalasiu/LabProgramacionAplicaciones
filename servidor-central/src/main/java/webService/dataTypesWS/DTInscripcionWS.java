@@ -23,13 +23,13 @@ import java.time.LocalDate;
 public class DTInscripcionWS {
     DTTuristaWS turista;
     DTSalidaTuristicaWS salidaTuristica;
-    LocalDate fecha;
+    String fecha;
     int cantidadTuristas;
     float costoTotal;
     
     TipoInscripcion tipo;
         
-    public DTInscripcionWS(LocalDate fecha, int cantidadTuristas) {
+    public DTInscripcionWS(String fecha, int cantidadTuristas) {
         this.fecha = fecha;
         this.cantidadTuristas = cantidadTuristas;
     }

@@ -5,8 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTDepartamento, dataTypes.DTActividadTuristica, dataTypes.DTSalidaTuristica, dataTypes.DTPaqueteActividadTuristica"%>
-<%@page import="java.util.List"%> 
+<%@page import="webservice.DtDepartamentoWS, webservice.DtDepartamentosCollectionWS"%>
+<%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
+<%@page import="webservice.DtSalidaTuristicaWS, webservice.DtSalidasCollectionWS"%>
+<%@page import="webservice.DtPaqueteWS, webservice.DtPaquetesCollectionWS"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -24,7 +26,8 @@
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
                             String selectedDepartamento = request.getParameter("departamento");
-                            for(DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")){
+                            DtDepartamentosCollectionWS departamentos = (DtDepartamentosCollectionWS) request.getAttribute("departamentos");
+                            for(DtDepartamentoWS departamento : departamentos.getDepartamentos()){
                                 String nombreDepartamento = departamento.getNombre();
                         %>
                         <option value="<%= nombreDepartamento %>" <% if (nombreDepartamento.equals(selectedDepartamento)) { %>selected <% } %>>
@@ -52,8 +55,8 @@
                       </thead>
                       <tbody>
                         <% 
-                            List <DTActividadTuristica> actividades = (List<DTActividadTuristica>) request.getAttribute("actividades");
-                            for(DTActividadTuristica actividad : actividades){
+                            DtActividadesCollectionWS actividades = (DtActividadesCollectionWS) request.getAttribute("actividades");
+                            for(DtActividadTuristicaWS actividad : actividades.getActividades()){
                         %>
                         <tr>
                           <td><%= actividad.getNombre() %></td>
@@ -71,7 +74,7 @@
                         <option value="" disabled selected>- seleccione una actividad -</option>
                         <% 
                             String selectedActividad = request.getParameter("actividad");
-                            for(DTActividadTuristica actividad : (List<DTActividadTuristica>) request.getAttribute("actividades")){
+                            for(DtActividadTuristicaWS actividad : actividades.getActividades()){
                                 String nombreActividad = actividad.getNombre();
                         %>
                         <option value="<%= nombreActividad %>" <% if (nombreActividad.equals(selectedActividad)) { %>selected <% } %>>
@@ -98,8 +101,8 @@
                       </thead>
                       <tbody>
                         <% 
-                            List <DTSalidaTuristica> salidas = (List<DTSalidaTuristica>) request.getAttribute("salidas");
-                            for(DTSalidaTuristica salida : salidas){
+                            DtSalidasCollectionWS salidas = (DtSalidasCollectionWS) request.getAttribute("salidas");
+                            for(DtSalidaTuristicaWS salida : salidas.getSalidas()){
                         %>
                         <tr>
                           <td><%= salida.getNombre() %></td>
@@ -121,7 +124,7 @@
                             <option value="" disabled selected>- seleccione una salida -</option>
                             <% 
                                 String selectedSalida = request.getParameter("salida");
-                                for(DTSalidaTuristica salida : salidas){
+                                for(DtSalidaTuristicaWS salida : salidas.getSalidas()){
                                     String nombreSalida = salida.getNombre();
                             %>
                             <option value="<%= nombreSalida %>" <% if (nombreSalida.equals(selectedSalida)) { %>selected <% } %>>
@@ -152,9 +155,9 @@
                             <%
                                 if (formaPago != null) {
                                     if (formaPago.equals("paquete")) {
-                                        List <DTPaqueteActividadTuristica> paquetes = 
-                                                (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetes");
-                                        if (paquetes.size() > 0) {
+                                        DtPaquetesCollectionWS paquetes = 
+                                                (DtPaquetesCollectionWS) request.getAttribute("paquetes");
+                                        if (paquetes.getPaquetes().size() > 0) {
                             %>
                             <h4>
                                 Paquetes
@@ -169,7 +172,7 @@
                               </thead>
                               <tbody>
                                 <% 
-                                    for(DTPaqueteActividadTuristica paquete : paquetes){
+                                    for(DtPaqueteWS paquete : paquetes.getPaquetes()){
                                 %>
                                 <tr>
                                   <td><%= paquete.getNombre() %></td>
@@ -183,7 +186,7 @@
                                 <option value="" disabled selected>- seleccione un paquete -</option>
                                 <% 
                                     String selectedPaquete = request.getParameter("paquete");
-                                    for(DTPaqueteActividadTuristica paquete : paquetes){
+                                    for(DtPaqueteWS paquete : paquetes.getPaquetes()){
                                         String nombrePaquete = paquete.getNombre();
                                 %>
                                 <option value="<%= nombrePaquete %>" <% if (nombrePaquete.equals(selectedPaquete)) { %>selected <% } %>>

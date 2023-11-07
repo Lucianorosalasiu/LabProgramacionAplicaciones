@@ -2,9 +2,11 @@
 package webservice;
 
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.ws.Action;
 
 
@@ -16,6 +18,9 @@ import jakarta.xml.ws.Action;
  */
 @WebService(name = "WSPaqueteController", targetNamespace = "http://webService/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
+@XmlSeeAlso({
+    ObjectFactory.class
+})
 public interface WSPaqueteController {
 
 
@@ -28,5 +33,24 @@ public interface WSPaqueteController {
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSPaqueteController/pingRequest", output = "http://webService/WSPaqueteController/pingResponse")
     public String ping();
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesCompradosRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesCompradosResponse")
+    public DtPaquetesCollectionWS obtenerPaquetesComprados(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        int arg2);
 
 }

@@ -64,6 +64,19 @@ public interface WSActividadController {
      * 
      * @param arg0
      * @return
+     *     returns float
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerCostoActividadRequest", output = "http://webService/WSActividadController/obtenerCostoActividadResponse")
+    public float obtenerCostoActividad(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns webservice.DtActividadesCollectionWS
      */
     @WebMethod

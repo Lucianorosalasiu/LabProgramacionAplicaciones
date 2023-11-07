@@ -4,24 +4,32 @@
  */
 package controllers.salidas;
 
-import Enums.TipoInscripcion;
-import dataTypes.DTActividadTuristica;
-import dataTypes.DTInscripcion;
-import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTSalidaTuristica;
-import exceptions.MyException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import static java.util.Objects.isNull;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import webservice.DatatypeConfigurationException_Exception;
+import webservice.DtActividadesCollectionWS;
+import webservice.DtInscripcionWS;
+import webservice.DtPaquetesCollectionWS;
+import webservice.DtSalidasCollectionWS;
+import webservice.MyException_Exception;
+import webservice.ParseException_Exception;
+import webservice.TipoInscripcion;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
+import webservice.WSPaqueteController;
+import webservice.WSPaqueteControllerService;
+import webservice.WSSalidaController;
+import webservice.WSSalidaControllerService;
 
 /**
  *
@@ -39,7 +47,7 @@ public class Inscripcion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, DatatypeConfigurationException_Exception {
         Long idUser = (Long) request.getSession().getAttribute("id");
         String userType = (String) request.getSession().getAttribute("sessionType");
         String nickname = (String) request.getSession().getAttribute("sessionNickname");
@@ -49,8 +57,14 @@ public class Inscripcion extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        WSSalidaControllerService salidaController = new WSSalidaControllerService();
+        WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
+        
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
+        
+        WSPaqueteControllerService paqueteController = new WSPaqueteControllerService();
+        WSPaqueteController paquetePort = paqueteController.getWSPaqueteControllerPort();
         
         String departamento = request.getParameter("departamento"); 
         String actividad = request.getParameter("actividad");
@@ -60,20 +74,20 @@ public class Inscripcion extends HttpServlet {
         String error = null;
        
         
-        List<DTActividadTuristica> actividades = new ArrayList();
-        List<DTSalidaTuristica> salidas = new ArrayList();
-        List<DTPaqueteActividadTuristica> paquetes = new ArrayList();
+        DtActividadesCollectionWS actividades = new DtActividadesCollectionWS();
+        DtSalidasCollectionWS salidas = new DtSalidasCollectionWS();
+        DtPaquetesCollectionWS paquetes = new DtPaquetesCollectionWS();
 
         if (departamento != null) {
-            actividades = controlador.obtenerActividadesTuristicas(departamento);
+            actividades = actividadPort.obtenerActividadesTuristicasPorDepartamento(departamento);
 
             if (actividad != null) {
-                salidas = controlador.obtenerSalidasTuristicas(actividad);
+                salidas = salidaPort.obtenerSalidasTuristicas(actividad);
 
                 if (formaPago != null && salida != null && !cantidadTuristas.isBlank()) {
                     Integer cantTuristas = Integer.valueOf(cantidadTuristas);
                     if (formaPago.equals("paquete")) {
-                        paquetes = controlador.obtenerPaquetesComprados(
+                        paquetes = paquetePort.obtenerPaquetesComprados(
                                         idUser, 
                                         salida, 
                                         cantTuristas);
@@ -87,16 +101,17 @@ public class Inscripcion extends HttpServlet {
                 error = "Complete todos los campos";
             } else {
                 try {
-                    DTInscripcion dtInscripcion = new DTInscripcion(
-                                            new Date(),
-                                            Integer.parseInt(cantidadTuristas)
-                                        );
-
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    
+                    DtInscripcionWS dtInscripcion = new DtInscripcionWS();
+                    dtInscripcion.setFecha(dateFormat.format(new Date()));
+                    dtInscripcion.setCantidadTuristas(Integer.parseInt(cantidadTuristas));
+                    
                     String nombrePaquete = request.getParameter("paquete");
 
                     if (formaPago.equals("paquete")) { 
-                        float costoActividad = controlador.obtenerCostoActividad(actividad);
-                        float descuento = paquetes.stream()
+                        float costoActividad = actividadPort.obtenerCostoActividad(actividad);
+                        float descuento = paquetes.getPaquetes().stream()
                                 .filter(p -> p.getNombre().equals(nombrePaquete))
                                 .findFirst()
                                 .get()
@@ -111,7 +126,7 @@ public class Inscripcion extends HttpServlet {
                         dtInscripcion.setTipo(TipoInscripcion.GENERAL);  
                     }
 
-                    controlador.altaInscripcion(dtInscripcion, 
+                    salidaPort.altaInscripcion(dtInscripcion, 
                             actividad, 
                             salida, 
                             nickname
@@ -122,8 +137,10 @@ public class Inscripcion extends HttpServlet {
                             .forward(request, response);
                     return;
                     
-                } catch (MyException ex) {
+                } catch (MyException_Exception ex) {
                     error = ex.getMessage();
+                } catch (ParseException_Exception ex) {
+                    Logger.getLogger(Inscripcion.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
@@ -132,7 +149,7 @@ public class Inscripcion extends HttpServlet {
         
         
         request.setAttribute("errorMessage", error);
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+        request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
         request.setAttribute("actividades", actividades);
         request.setAttribute("salidas", salidas);
         request.setAttribute("paquetes", paquetes);
@@ -167,7 +184,11 @@ public class Inscripcion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DatatypeConfigurationException_Exception ex) {
+            Logger.getLogger(Inscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -181,7 +202,11 @@ public class Inscripcion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DatatypeConfigurationException_Exception ex) {
+            Logger.getLogger(Inscripcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

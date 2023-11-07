@@ -30,43 +30,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtActividadesCollectionWS }
+     * Create an instance of {@link DtPaquetesCollectionWS }
      * 
      */
-    public DtActividadesCollectionWS createDtActividadesCollectionWS() {
-        return new DtActividadesCollectionWS();
+    public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
+        return new DtPaquetesCollectionWS();
     }
 
     /**
-     * Create an instance of {@link DtActividadTuristicaWS }
+     * Create an instance of {@link DtPaqueteWS }
      * 
      */
-    public DtActividadTuristicaWS createDtActividadTuristicaWS() {
-        return new DtActividadTuristicaWS();
+    public DtPaqueteWS createDtPaqueteWS() {
+        return new DtPaqueteWS();
     }
 
     /**
-     * Create an instance of {@link LocalDate }
+     * Create an instance of {@link DtActividadTuristica }
      * 
      */
-    public LocalDate createLocalDate() {
-        return new LocalDate();
+    public DtActividadTuristica createDtActividadTuristica() {
+        return new DtActividadTuristica();
     }
 
     /**
-     * Create an instance of {@link DtDepartamentoWS }
+     * Create an instance of {@link DtDepartamento }
      * 
      */
-    public DtDepartamentoWS createDtDepartamentoWS() {
-        return new DtDepartamentoWS();
-    }
-
-    /**
-     * Create an instance of {@link DtDepartamentosCollectionWS }
-     * 
-     */
-    public DtDepartamentosCollectionWS createDtDepartamentosCollectionWS() {
-        return new DtDepartamentosCollectionWS();
+    public DtDepartamento createDtDepartamento() {
+        return new DtDepartamento();
     }
 
 }

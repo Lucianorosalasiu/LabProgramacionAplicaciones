@@ -97,11 +97,13 @@ public interface WSSalidaController {
      * @param arg2
      * @param arg1
      * @param arg0
+     * @throws ParseException_Exception
      * @throws MyException_Exception
      */
     @WebMethod
     @Action(input = "http://webService/WSSalidaController/altaInscripcionRequest", output = "http://webService/WSSalidaController/altaInscripcionResponse", fault = {
-        @FaultAction(className = MyException_Exception.class, value = "http://webService/WSSalidaController/altaInscripcion/Fault/MyException")
+        @FaultAction(className = MyException_Exception.class, value = "http://webService/WSSalidaController/altaInscripcion/Fault/MyException"),
+        @FaultAction(className = ParseException_Exception.class, value = "http://webService/WSSalidaController/altaInscripcion/Fault/ParseException")
     })
     public void altaInscripcion(
         @WebParam(name = "arg0", partName = "arg0")
@@ -112,7 +114,7 @@ public interface WSSalidaController {
         String arg2,
         @WebParam(name = "arg3", partName = "arg3")
         String arg3)
-        throws MyException_Exception
+        throws MyException_Exception, ParseException_Exception
     ;
 
 }
