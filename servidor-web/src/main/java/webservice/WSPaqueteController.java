@@ -23,7 +23,7 @@ import jakarta.xml.ws.Action;
 })
 public interface WSPaqueteController {
 
-
+    byte[] obtenerFotoPaqueteActividadTuristica(String paquete);
     /**
      * 
      * @return
@@ -33,6 +33,29 @@ public interface WSPaqueteController {
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSPaqueteController/pingRequest", output = "http://webService/WSPaqueteController/pingResponse")
     public String ping();
+
+    /**
+     * 
+     * @return
+     *     returns webservice.DtStringCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaqueteNombresRequest", output = "http://webService/WSPaqueteController/obtenerPaqueteNombresResponse")
+    public DtStringCollectionWS obtenerPaqueteNombres();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtPaqueteActividadTuristica
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaqueteCostoRequest", output = "http://webService/WSPaqueteController/obtenerPaqueteCostoResponse")
+    public DtPaqueteActividadTuristica obtenerPaqueteCosto(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
 
     /**
      * 

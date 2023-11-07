@@ -17,6 +17,7 @@ import webService.dataTypesWS.DTPaqueteWS;
 import webService.dataTypesWS.DTPaquetesCollectionWS;
 import webService.dataTypesWS.DTSalidaTuristicaWS;
 import webService.dataTypesWS.DTSalidasCollectionWS;
+import webService.dataTypesWS.DTStringCollectionWS;
 
 /**
  *
@@ -73,6 +74,30 @@ public class WSPaqueteController {
         return collection;
     
     }
+    public byte[] obtenerFotoPaqueteActividadTuristica(String paquete){
+        return controlador.obtenerFotoPaqueteActividadTuristica(paquete);
+    }
     
+    @WebMethod
+    public DTStringCollectionWS obtenerPaqueteNombres() {
+        ArrayList<String> listDTPaqueteWS = new ArrayList<>();
+        List<String> paquetes = controlador.obtenerPaqueteNombres();
+        
+        /* Se obtiene la lista de DTPaqueteActividadTuristica y se parsea a DTPaqueteWS*/
+        for (String paquete : paquetes) {
+            listDTPaqueteWS.add(paquete);
+            System.out.println(paquete);
+        }
+            
+        DTStringCollectionWS collection = new DTStringCollectionWS();
+        collection.setLista(listDTPaqueteWS);
+        
+        return collection;
+    
+    }
+    @WebMethod
+    public DTPaqueteActividadTuristica obtenerPaqueteCosto(String paquete){
+        return controlador.obtenerPaqueteCosto(paquete);
+    }
 }
 

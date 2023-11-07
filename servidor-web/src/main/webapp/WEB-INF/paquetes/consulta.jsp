@@ -12,7 +12,12 @@
 <%@page import="logica.fabrica.Fabrica"%> 
 <%@page import="logica.interfaces.IControlador"%>
 <%@page import="java.util.HashSet"%> 
-<%@page import="java.util.LinkedHashSet"%> 
+<%@page import="java.util.LinkedHashSet"%>
+<%@page import="webservice.DtActividadTuristica"%>
+<%@page import="webservice.DtActividadTuristicaWS"%>
+<%@page import="webservice.DtActividadesCollectionWS"%>
+<%@page import="webservice.DtPaqueteActividadTuristica"%>
+
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -45,7 +50,7 @@
                 %>
                 <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
                     <%
-                        DTPaqueteActividadTuristica paquete = (DTPaqueteActividadTuristica) request.getAttribute("paqueteEnteros");
+                        DtPaqueteActividadTuristica paquete = (DtPaqueteActividadTuristica) request.getAttribute("paqueteEnteros");
                         
                     %>
                     <div class="container w-100">
@@ -58,7 +63,7 @@
                                         Fabrica fabrica = new Fabrica();
                                         IControlador controlador = fabrica.getInterface();
                                         String imageDataUri = "";
-                                                byte [] foto = controlador.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
+                                                byte [] foto = ( byte[]) request.getAttribute("foto1");
                                                     if(foto != null){
                                                         String imagenBase64 = Base64.getEncoder().encodeToString(foto);
                                                         String contentType = "image/jpeg";
@@ -114,7 +119,7 @@
                         <option value="" disabled selected>- seleccione una actividad -</option>
                         <% 
                             String selectedActividad = request.getParameter("actividad");
-                            for(DTActividadTuristica actividad : (List<DTActividadTuristica>) request.getAttribute("actividades")){
+                            for(DtActividadTuristicaWS actividad : (List<DtActividadTuristicaWS>) request.getAttribute("actividades")){
                                 String nombreActividad = actividad.getNombre();
                         %>
                         <option value="<%= nombreActividad %>" <% if (nombreActividad.equals(selectedActividad)) { %>selected <% } %>>
@@ -125,11 +130,10 @@
                 </div>
                  <%                      
                     if (selectedActividad != null) {
-                    DTActividadTuristica actividad = (DTActividadTuristica) request.getAttribute("actividad");
-                    DTActividadTuristica actividadFoto = controlador.obtenerFotoActividadTuristicaID(selectedActividad);
+                    DtActividadTuristica actividad = (DtActividadTuristica) request.getAttribute("actividad");
                     String image = "";
                         
-                            byte [] foto2 = controlador.obtenerFotoActividadTuristica(actividadFoto.getId());
+                            byte [] foto2 = ( byte[]) request.getAttribute("foto2");
                                 if(foto2 != null){
                                     String imagenBase64 = Base64.getEncoder().encodeToString(foto2);
                                     String contentType = "image/jpeg";
