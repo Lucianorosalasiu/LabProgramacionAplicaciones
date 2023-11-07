@@ -36,6 +36,19 @@ public interface WSActividadController {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerFotoActividadTuristicaRequest", output = "http://webService/WSActividadController/obtenerFotoActividadTuristicaResponse")
+    public byte[] obtenerFotoActividadTuristica(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0);
+
+    /**
+     * 
      * @param arg1
      * @param arg0
      * @return
@@ -52,6 +65,32 @@ public interface WSActividadController {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadTuristica
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadTuristicaRequest", output = "http://webService/WSActividadController/obtenerActividadTuristicaResponse")
+    public DtActividadTuristica obtenerActividadTuristica(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadTuristica
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadTuristicaNullRequest", output = "http://webService/WSActividadController/obtenerActividadTuristicaNullResponse")
+    public DtActividadTuristica obtenerActividadTuristicaNull(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0);
+
+    /**
+     * 
      * @return
      *     returns webservice.DtDepartamentosCollectionWS
      */
@@ -59,6 +98,32 @@ public interface WSActividadController {
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSActividadController/obtenerDepartamentosRequest", output = "http://webService/WSActividadController/obtenerDepartamentosResponse")
     public DtDepartamentosCollectionWS obtenerDepartamentos();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadesRelacionadasRequest", output = "http://webService/WSActividadController/obtenerActividadesRelacionadasResponse")
+    public DtActividadesCollectionWS obtenerActividadesRelacionadas(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadTuristica
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerFotoActividadTuristicaIDRequest", output = "http://webService/WSActividadController/obtenerFotoActividadTuristicaIDResponse")
+    public DtActividadTuristica obtenerFotoActividadTuristicaID(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
 
     /**
      * 
