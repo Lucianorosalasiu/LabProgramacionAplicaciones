@@ -23,7 +23,7 @@ public class WSUsuarioController {
 
     @WebMethod(exclude = true)
     public void publish() {
-        endpoint = Endpoint.publish("http://localhost:8889/ws/Usuario", this);
+        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Usuario", this);
     }
 
     @WebMethod(exclude = true)
