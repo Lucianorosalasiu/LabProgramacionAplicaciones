@@ -60,6 +60,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import static java.util.Objects.isNull;
@@ -4975,10 +4977,18 @@ public class Main extends javax.swing.JFrame {
 
     public void jCU3PoblarComboBoxPaises() {
         try {
-            // Leer el archivo CSV
-            String csvFilePath = "src/main/resources/paises.csv";
-            FileReader fileReader = new FileReader(csvFilePath);
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(fileReader);
+            // Utiliza ClassLoader para cargar el archivo CSV desde el classpath
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("paises.csv");
+
+            // Verifica si el archivo se cargó correctamente
+            if (inputStream == null) {
+                System.err.println("No se pudo cargar el archivo paises.csv desde el classpath.");
+                return;
+            }
+
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            CSVParser csvParser = CSVFormat.DEFAULT.parse(reader);
 
             // Almacenar los datos del CSV en una lista
             List<String> datos = new ArrayList<>();
@@ -5599,15 +5609,23 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jCU6ButtonSeleccionarFotoActionPerformed
-
+    
     public void jCU1PoblarComboBoxPaises() {
         try {
-            // Leer el archivo CSV
-            String csvFilePath = "src/main/resources/paises.csv";
-            FileReader fileReader = new FileReader(csvFilePath);
-            CSVParser csvParser = CSVFormat.DEFAULT.parse(fileReader);
+            // Utiliza ClassLoader para cargar el archivo CSV desde el classpath
+            ClassLoader classLoader = getClass().getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("paises.csv");
 
-            // Almacenar los datos del CSV en una lista
+            // Verifica si el archivo se cargó correctamente
+            if (inputStream == null) {
+                System.err.println("No se pudo cargar el archivo paises.csv desde el classpath.");
+                return;
+            }
+
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            CSVParser csvParser = CSVFormat.DEFAULT.parse(reader);
+
+            // Almacena los datos del CSV en una lista
             List<String> datos = new ArrayList<>();
             for (CSVRecord record : csvParser) {
                 // Supongamos que la primera columna del CSV contiene los datos que quieres cargar en el JComboBox
@@ -5615,15 +5633,16 @@ public class Main extends javax.swing.JFrame {
                 datos.add(dato);
             }
 
-            // Agregar los datos al JComboBox
+            // Agrega los datos al JComboBox
             for (String dato : datos) {
                 jCU1ComboBoxPaises.addItem(dato);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    
 
     public void jCU3ActualizarTabla() {
         List<DTUsuario> usuario = controlador.obtenerUsuarios();

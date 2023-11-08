@@ -37,7 +37,7 @@ public class WSActividadController {
 
     @WebMethod(exclude = true)
     public void publish() {
-        endpoint = Endpoint.publish("http://localhost:8889/ws/Actividad", this);
+        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Actividad", this);
     }
 
     @WebMethod(exclude = true)
@@ -49,7 +49,15 @@ public class WSActividadController {
     public String ping() {
         return "pong";
     }
-
+    
+    @WebMethod
+    public DTActividadTuristica obtenerActividadTuristicaNull(Long id){
+        return controlador.obtenerActividadTuristicaNull(id);
+    }
+    @WebMethod
+    public DTActividadTuristica obtenerActividadTuristica(String actividad){
+        return controlador.obtenerActividadTuristica(actividad);
+    }
     @WebMethod
     public DTDepartamentosCollectionWS obtenerDepartamentos() {
         ArrayList<DTDepartamentoWS> listDTDepartamentoWS = new ArrayList<>();
@@ -129,5 +137,45 @@ public class WSActividadController {
         collection.setActividades(listDTActividadWS);
         
         return collection;
+    }
+   @WebMethod
+   public DTActividadTuristica obtenerFotoActividadTuristicaID(String selectedActividad){
+        return controlador.obtenerFotoActividadTuristicaID(selectedActividad);
+   }
+   @WebMethod
+   public byte[] obtenerFotoActividadTuristica(Long id){
+       return controlador.obtenerFotoActividadTuristica(id);
+   }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesRelacionadas(String nombrePaquete) {
+        ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
+
+        /* Se obtiene la lista de DTActividad y se parsea a DTActividadWS*/
+        List<DTActividadTuristica> listDTActividad = controlador.obtenerActividadesRelacionadas(nombrePaquete);
+
+        for (DTActividadTuristica at : listDTActividad) {
+            listDTActividadWS.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getDuracion(),
+                            at.getCosto(),
+                            at.getCiudad(),
+                            DateConverter.convertToLocalDate(at.getFechaAlta())
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(listDTActividadWS);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public float obtenerCostoActividad(String nombreActividad) {
+        return controlador.obtenerCostoActividad(nombreActividad);
     }
 }

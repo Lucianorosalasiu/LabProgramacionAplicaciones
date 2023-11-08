@@ -36,7 +36,7 @@ public class WSSalidaController {
 
     @WebMethod(exclude = true)
     public void publish() {
-        endpoint = Endpoint.publish("http://localhost:8889/ws/Salida", this);
+        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Salida", this);
     }
 
     @WebMethod(exclude = true)
@@ -106,11 +106,11 @@ public class WSSalidaController {
 
     @WebMethod
     public void altaInscripcion(DTInscripcionWS dTInscripcionWS, String nombreActividad, String nombreSalida,
-            String nicknameTurista) throws MyException {
+            String nicknameTurista) throws MyException, ParseException {
 
         /*Se construye el DTInscripcion a partir del DTInscripcionWS*/
         DTInscripcion dtInscripcion = new DTInscripcion(
-                DateConverter.convertToDate(dTInscripcionWS.getFecha()),
+                DateConverter.stringToDate(dTInscripcionWS.getFecha()),
                 dTInscripcionWS.getCantidadTuristas()
         );
 

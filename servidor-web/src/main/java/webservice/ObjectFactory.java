@@ -30,43 +30,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtActividadesCollectionWS }
+     * Create an instance of {@link DtStringCollectionWS }
      * 
      */
-    public DtActividadesCollectionWS createDtActividadesCollectionWS() {
-        return new DtActividadesCollectionWS();
+    public DtStringCollectionWS createDtStringCollectionWS() {
+        return new DtStringCollectionWS();
     }
 
     /**
-     * Create an instance of {@link DtActividadTuristicaWS }
+     * Create an instance of {@link DtPaqueteActividadTuristica }
      * 
      */
-    public DtActividadTuristicaWS createDtActividadTuristicaWS() {
-        return new DtActividadTuristicaWS();
+    public DtPaqueteActividadTuristica createDtPaqueteActividadTuristica() {
+        return new DtPaqueteActividadTuristica();
     }
 
     /**
-     * Create an instance of {@link LocalDate }
+     * Create an instance of {@link DtActividadTuristica }
      * 
      */
-    public LocalDate createLocalDate() {
-        return new LocalDate();
+    public DtActividadTuristica createDtActividadTuristica() {
+        return new DtActividadTuristica();
     }
 
     /**
-     * Create an instance of {@link DtDepartamentoWS }
+     * Create an instance of {@link DtDepartamento }
      * 
      */
-    public DtDepartamentoWS createDtDepartamentoWS() {
-        return new DtDepartamentoWS();
+    public DtDepartamento createDtDepartamento() {
+        return new DtDepartamento();
     }
 
     /**
-     * Create an instance of {@link DtDepartamentosCollectionWS }
+     * Create an instance of {@link DtPaquetesCollectionWS }
      * 
      */
-    public DtDepartamentosCollectionWS createDtDepartamentosCollectionWS() {
-        return new DtDepartamentosCollectionWS();
+    public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
+        return new DtPaquetesCollectionWS();
+    }
+
+    /**
+     * Create an instance of {@link DtPaqueteWS }
+     * 
+     */
+    public DtPaqueteWS createDtPaqueteWS() {
+        return new DtPaqueteWS();
     }
 
 }

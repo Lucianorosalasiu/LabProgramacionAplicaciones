@@ -8,9 +8,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dtUsuarioWS complex type.
+ * <p>Clase Java para dtUsuarioWS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="dtUsuarioWS"&gt;
@@ -62,7 +62,7 @@ public abstract class DtUsuarioWS {
     protected byte[] photo;
 
     /**
-     * Gets the value of the id property.
+     * Obtiene el valor de la propiedad id.
      * 
      * @return
      *     possible object is
@@ -74,7 +74,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the id property.
+     * Define el valor de la propiedad id.
      * 
      * @param value
      *     allowed object is
@@ -86,7 +86,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the nickname property.
+     * Obtiene el valor de la propiedad nickname.
      * 
      * @return
      *     possible object is
@@ -98,7 +98,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the nickname property.
+     * Define el valor de la propiedad nickname.
      * 
      * @param value
      *     allowed object is
@@ -110,7 +110,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the name property.
+     * Obtiene el valor de la propiedad name.
      * 
      * @return
      *     possible object is
@@ -122,7 +122,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the name property.
+     * Define el valor de la propiedad name.
      * 
      * @param value
      *     allowed object is
@@ -134,7 +134,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the lastName property.
+     * Obtiene el valor de la propiedad lastName.
      * 
      * @return
      *     possible object is
@@ -146,7 +146,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the lastName property.
+     * Define el valor de la propiedad lastName.
      * 
      * @param value
      *     allowed object is
@@ -158,7 +158,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the email property.
+     * Obtiene el valor de la propiedad email.
      * 
      * @return
      *     possible object is
@@ -170,7 +170,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the email property.
+     * Define el valor de la propiedad email.
      * 
      * @param value
      *     allowed object is
@@ -182,7 +182,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the birthDate property.
+     * Obtiene el valor de la propiedad birthDate.
      * 
      * @return
      *     possible object is
@@ -194,7 +194,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the birthDate property.
+     * Define el valor de la propiedad birthDate.
      * 
      * @param value
      *     allowed object is
@@ -206,7 +206,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the password property.
+     * Obtiene el valor de la propiedad password.
      * 
      * @return
      *     possible object is
@@ -218,7 +218,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the password property.
+     * Define el valor de la propiedad password.
      * 
      * @param value
      *     allowed object is
@@ -230,7 +230,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the imagePath property.
+     * Obtiene el valor de la propiedad imagePath.
      * 
      * @return
      *     possible object is
@@ -242,7 +242,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the imagePath property.
+     * Define el valor de la propiedad imagePath.
      * 
      * @param value
      *     allowed object is
@@ -254,7 +254,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Gets the value of the photo property.
+     * Obtiene el valor de la propiedad photo.
      * 
      * @return
      *     possible object is
@@ -265,7 +265,7 @@ public abstract class DtUsuarioWS {
     }
 
     /**
-     * Sets the value of the photo property.
+     * Define el valor de la propiedad photo.
      * 
      * @param value
      *     allowed object is

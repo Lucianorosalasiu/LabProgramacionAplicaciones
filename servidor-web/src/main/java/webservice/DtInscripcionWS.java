@@ -8,9 +8,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dtInscripcionWS complex type.
+ * <p>Clase Java para dtInscripcionWS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="dtInscripcionWS"&gt;
@@ -19,7 +19,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="turista" type="{http://webService/}dtTuristaWS" minOccurs="0"/&gt;
  *         &lt;element name="salidaTuristica" type="{http://webService/}dtSalidaTuristicaWS" minOccurs="0"/&gt;
- *         &lt;element name="fecha" type="{http://webService/}localDate" minOccurs="0"/&gt;
+ *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="cantidadTuristas" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="costoTotal" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
  *         &lt;element name="tipo" type="{http://webService/}tipoInscripcion" minOccurs="0"/&gt;
@@ -44,14 +44,14 @@ public class DtInscripcionWS {
 
     protected DtTuristaWS turista;
     protected DtSalidaTuristicaWS salidaTuristica;
-    protected LocalDate fecha;
+    protected String fecha;
     protected int cantidadTuristas;
     protected float costoTotal;
     @XmlSchemaType(name = "string")
     protected TipoInscripcion tipo;
 
     /**
-     * Gets the value of the turista property.
+     * Obtiene el valor de la propiedad turista.
      * 
      * @return
      *     possible object is
@@ -63,7 +63,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Sets the value of the turista property.
+     * Define el valor de la propiedad turista.
      * 
      * @param value
      *     allowed object is
@@ -75,7 +75,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Gets the value of the salidaTuristica property.
+     * Obtiene el valor de la propiedad salidaTuristica.
      * 
      * @return
      *     possible object is
@@ -87,7 +87,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Sets the value of the salidaTuristica property.
+     * Define el valor de la propiedad salidaTuristica.
      * 
      * @param value
      *     allowed object is
@@ -99,31 +99,31 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Gets the value of the fecha property.
+     * Obtiene el valor de la propiedad fecha.
      * 
      * @return
      *     possible object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
     /**
-     * Sets the value of the fecha property.
+     * Define el valor de la propiedad fecha.
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDate }
+     *     {@link String }
      *     
      */
-    public void setFecha(LocalDate value) {
+    public void setFecha(String value) {
         this.fecha = value;
     }
 
     /**
-     * Gets the value of the cantidadTuristas property.
+     * Obtiene el valor de la propiedad cantidadTuristas.
      * 
      */
     public int getCantidadTuristas() {
@@ -131,7 +131,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Sets the value of the cantidadTuristas property.
+     * Define el valor de la propiedad cantidadTuristas.
      * 
      */
     public void setCantidadTuristas(int value) {
@@ -139,7 +139,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Gets the value of the costoTotal property.
+     * Obtiene el valor de la propiedad costoTotal.
      * 
      */
     public float getCostoTotal() {
@@ -147,7 +147,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Sets the value of the costoTotal property.
+     * Define el valor de la propiedad costoTotal.
      * 
      */
     public void setCostoTotal(float value) {
@@ -155,7 +155,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Gets the value of the tipo property.
+     * Obtiene el valor de la propiedad tipo.
      * 
      * @return
      *     possible object is
@@ -167,7 +167,7 @@ public class DtInscripcionWS {
     }
 
     /**
-     * Sets the value of the tipo property.
+     * Define el valor de la propiedad tipo.
      * 
      * @param value
      *     allowed object is

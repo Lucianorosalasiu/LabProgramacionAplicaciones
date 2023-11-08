@@ -19,6 +19,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import webservice.DtActividadTuristica;
+import webservice.DtActividadTuristicaWS;
+import webservice.DtActividadesCollectionWS;
+import webservice.DtPaqueteActividadTuristica;
 
 /**
  *
@@ -37,6 +41,13 @@ public class ConsultaPaquete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /* WebService Actividades: */
+        webservice.WSActividadControllerService a = new webservice.WSActividadControllerService();
+        webservice.WSActividadController portA = a.getWSActividadControllerPort();
+
+        /* WebService Paquetes: */
+        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
+        webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
         
         if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403); 
@@ -45,39 +56,45 @@ public class ConsultaPaquete extends HttpServlet {
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
-        
+        byte [] foto1 = null;
+        byte [] foto2 = null;
         String paquete = request.getParameter("paquetes");
         String actividad = request.getParameter("actividad");
-         List<DTActividadTuristica> actividades = new ArrayList();
-        DTActividadTuristica actividadCompleta = null;
-        
-        DTPaqueteActividadTuristica pa = null;
+        DtActividadesCollectionWS actividades = new DtActividadesCollectionWS();
+        DtActividadTuristica actividadCompleta = null;
+        DtActividadTuristica actividadfoto = null;
+        DtPaqueteActividadTuristica pa = null;
         String imagen = null;
         String categorias = "";
         LinkedHashSet<String> hash = new LinkedHashSet<String>();
+        List<DtActividadTuristicaWS> lista = new ArrayList<>();
         if (paquete != null) {
-            pa = controlador.obtenerPaqueteCosto(paquete);
-            actividades = controlador.obtenerActividadesRelacionadas(paquete);
-            for (DTActividadTuristica a : actividades){
-                DTActividadTuristica actividadCategoria = controlador.obtenerActividadTuristicaNull(a.getId());
+            pa = portP.obtenerPaqueteCosto(paquete);
+            actividades = portA.obtenerActividadesRelacionadas(paquete);
+             lista = actividades.getActividades();
+            for (DtActividadTuristicaWS Actividad : lista){
+                DtActividadTuristica actividadCategoria = portA.obtenerActividadTuristicaNull(Actividad.getId());
                 categorias += actividadCategoria.getCategoriasString();
             }
             String[] categoriasSeparadas = categorias.split("\\|");
             for(String c :categoriasSeparadas){
                 hash.add(c);
             }
+            foto1 = portP.obtenerFotoPaqueteActividadTuristica(paquete);
             if(actividad != null){
-                actividadCompleta = controlador.obtenerActividadTuristica(actividad);
-                
-                
+                actividadCompleta = portA.obtenerActividadTuristica(actividad);
+                actividadfoto = portA.obtenerFotoActividadTuristicaID(actividad);
+                foto2 = portA.obtenerFotoActividadTuristica(actividadfoto.getId());
             }
         }
-        
-        request.setAttribute("actividades", actividades);
+        List<String> paquetes = portP.obtenerPaqueteNombres().getLista();
+        request.setAttribute("actividades", lista);
+        request.setAttribute("foto1", foto1);
+        request.setAttribute("foto2", foto2);
         request.setAttribute("actividad", actividadCompleta);
         request.setAttribute("categorias", hash);
         request.setAttribute("paqueteEnteros", pa);
-        request.setAttribute("paquetes", controlador.obtenerPaqueteNombres());
+        request.setAttribute("paquetes", paquetes);
         request.setAttribute("imagenSalida", imagen);
         
         
