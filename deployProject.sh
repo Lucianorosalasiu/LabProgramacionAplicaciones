@@ -24,10 +24,17 @@ CENTRAL_SERVER_DIR=$BASE_DIR/servidor-central
 WORKSTATION_DIR=$BASE_DIR/estacion-de-trabajo
 WEB_SERVER_DIR=$BASE_DIR/servidor-web
 
+# Puerto donde corren los WebServices
+WEB_SERVICES_PORT=8889
+
+# Nombre de los paquetes compilados
+CENTRAL_SERVER_JAR_NAME='servidor-central-1.0-SNAPSHOT-jar-with-dependencies.jar'
+WORKSTATION_JAR_NAME='estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar'
+WEB_SERVER_WAR_NAME='servidor-web-1.0-SNAPSHOT.war'
+
 # Rutas de tomcat
 CATALINA_PATH=/opt/tomcat/bin
-TOMCAT_WEBAPPS=/opt/tomcat/webapps
-
+TOMCAT_WEBAPPS_DIR=/opt/tomcat/webapps
 
 # ==== Config para recibir argumentos ==== #
 OPTIONS=123
@@ -42,8 +49,8 @@ RUN_WEBSERVER=false
 
 while true; do
   case "$1" in
-    -1 | --onlyWorkstation ) RUN_WORKSTATION=true; shift ;;
-    -2 | --onlyCentralServer ) RUN_CENTRALSERVER=true; shift ;;
+    -1 | --onlyCentralServer ) RUN_CENTRALSERVER=true; shift ;;
+    -2 | --onlyWorkstation ) RUN_WORKSTATION=true; shift ;;
     -3 | --onlyWebServer ) RUN_WEBSERVER=true; shift ;;
      -- ) shift; break ;;
     * ) break ;;
@@ -85,22 +92,22 @@ deployCentralServer() {
     cd $CENTRAL_SERVER_DIR/target/
 
     echo -e "${VERDE_HACKER}\nEstableciendo permisos a .jar compilado previamente...${RESET}"
-    chmod +x $CENTRAL_SERVER_DIR/target/servidor-central-1.0-SNAPSHOT-jar-with-dependencies.jar
+    chmod +x $CENTRAL_SERVER_DIR/target/$CENTRAL_SERVER_JAR_NAME
 
-    # Se comprueba si el puerto 8889 ya está en uso
-    if lsof -i:8889 &>/dev/null; then
-        pid=$(lsof -i:8889 | awk 'NR==2 {print $2}')
-        echo -e "${ROJO}\n¡Error! El puerto 8889 ya está en uso con el PID: ${RESET} ${CIAN}$pid${RESET}\n"
+    # Se comprueba si el puerto utilizado por los WebServices ya está en uso
+    if lsof -i:$WEB_SERVICES_PORT &>/dev/null; then
+        pid=$(lsof -ti :$WEB_SERVICES_PORT)
+        echo -e "${ROJO}\n¡Error! El puerto $WEB_SERVICES_PORT ya está en uso con el PID: ${RESET} ${CIAN}$pid${RESET}\n"
         exit 1
     else
         echo -e "${VERDE_HACKER}\nEjecutando WebServicePublisher del servidor-central en segundo plano...\n${RESET}"
-        java -jar $CENTRAL_SERVER_DIR/target/servidor-central-1.0-SNAPSHOT-jar-with-dependencies.jar & > $LOGS_DIR/central_server_info.log 2> $LOGS_DIR/central_server_error.log
+        java -jar $CENTRAL_SERVER_DIR/target/$CENTRAL_SERVER_JAR_NAME & > $LOGS_DIR/central_server_info.log 2> $LOGS_DIR/central_server_error.log
 
         # Brinda una pausa para esperar que el proceso se ejecute correctamente
         sleep 5
 
         # Obtiene el PID del proceso corriendo en background
-        pid=$(lsof -i:8889 | awk 'NR==2 {print $2}')
+        pid=$(lsof -ti :$WEB_SERVICES_PORT)
         echo -e "${VERDE_HACKER}\nEl PID del proceso es:${RESET} ${AMARILLO}$pid (Puedes terminarlo con el comando: kill $pid)\n${RESET}"
     fi
 }
@@ -130,68 +137,79 @@ deployWorkstation() {
     cd target/
 
     echo -e "${VERDE_HACKER}\nEstableciendo permisos a .jar compilado previamente...${RESET}"
-    chmod +x $WORKSTATION_DIR/target/estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar
+    chmod +x $WORKSTATION_DIR/target/$WORKSTATION_JAR_NAME
 
     echo -e "${VERDE_HACKER}\nEjecutando aplicación de escritorio de estacion-de-trabajo en segundo plano...\n${RESET}"
-    java -jar $WORKSTATION_DIR/target/estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar &  > $LOGS_DIR/workstation_info.log 2> $LOGS_DIR/workstation_error.log
+    java -jar $WORKSTATION_DIR/target/$WORKSTATION_JAR_NAME &  > $LOGS_DIR/workstation_info.log 2> $LOGS_DIR/workstation_error.log
 
     # Se brinda una pausa para esperar que el proceso se ejecute correctamente
     sleep 5
-
+    
     # Se obtiene el PID del proceso corriendo en background
+    pid=$(pgrep -f "$WORKSTATION_JAR_NAME")
 
-    nombre_proceso="estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar"
-
-    # Utiliza pgrep para buscar el PID del proceso
-    pid2=$(pgrep -f "$nombre_proceso")
-
-    echo -e "${VERDE_HACKER}\nEl PID del proceso es:${RESET} ${AMARILLO}$pid2 (Puedes terminarlo con el comando: kill $pid2 o desde la interfaz gráfica)\n${RESET}" 
+    echo -e "${VERDE_HACKER}\nEl PID del proceso es:${RESET} ${AMARILLO}$pid (Puedes terminarlo con el comando: kill $pid o desde la interfaz gráfica)\n${RESET}" 
 }
 
 deployWebServer() {
     echo -e "${CIAN}=========== Compilación de servidor-web y despliegue en Tomcat ===========${RESET}"
 
-    echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR...${RESET}"
-    cd $WEB_SERVER_DIR
-
-    echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
-    mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
-
-    echo -e "${VERDE_HACKER}\nLogs generados en $LOGS_DIR/${RESET}"
-    # Se parsean los logs generados para evitar símbolos con errores de caracterización
-    cat $LOGS_DIR/mvn_info_unparsed.log | sed -r "s/\x1B\[[0-9;]*[mK]//g" > $LOGS_DIR/mvn_info_web_server.log
-    cat $LOGS_DIR/mvn_error_unparsed.log | sed -r "s/\x1B\[[0-9;]*[mK]//g" > $LOGS_DIR/mvn_error_web_server.log
-
-    # Se borran los logs sin parsear
-    rm -rf $LOGS_DIR/mvn_info_unparsed.log
-    rm -rf $LOGS_DIR/mvn_error_unparsed.log
-
-    echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR/target/...${RESET}"
-    cd $WEB_SERVER_DIR/target/
-
-    echo -e "${VERDE_HACKER}\nDesplegando .war en $TOMCAT_WEBAPPS...\n${RESET}"
-    cp $WEB_SERVER_DIR/target/servidor-web-1.0-SNAPSHOT.war $TOMCAT_WEBAPPS
-
-    echo -e "${VERDE_HACKER}\nIniciando WebServer Tomcat...${RESET}"
-    cd $CATALINA_PATH
-    ./startup.sh
-
-    echo -e "${VERDE_HACKER}\nPara terminar la ejecución de tomcat es posible usar el siguiente comando:"
-    echo -e "${RESET} ${CIAN}$CATALINA_PATH/shutdown.sh${RESET}"
+    # Se obtiene el PID del proceso en el puerto 8889
+    pid=$(lsof -ti :$WEB_SERVICES_PORT)
+    
+    if [ -n "$pid" ]; then
+        # Obtener el nombre del proceso a partir del PID
+        nombre_proceso_pid=$(ps -p $pid -o cmd=)
+        # Verificar si el nombre del proceso coincide
+        if [[ "$nombre_proceso_pid" == *"$NOMBRE_PROCESO"* ]]; then
+            # Si los WebServices están activos y corriendo en el puerto 8889 se compila y despliega el servidor-web
+            echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR...${RESET}"
+            cd $WEB_SERVER_DIR
+            
+            echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
+            mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
+        
+            echo -e "${VERDE_HACKER}\nLogs generados en $LOGS_DIR/${RESET}"
+            # Se parsean los logs generados para evitar símbolos con errores de caracterización
+            cat $LOGS_DIR/mvn_info_unparsed.log | sed -r "s/\x1B\[[0-9;]*[mK]//g" > $LOGS_DIR/mvn_info_web_server.log
+            cat $LOGS_DIR/mvn_error_unparsed.log | sed -r "s/\x1B\[[0-9;]*[mK]//g" > $LOGS_DIR/mvn_error_web_server.log
+        
+            # Se borran los logs sin parsear
+            rm -rf $LOGS_DIR/mvn_info_unparsed.log
+            rm -rf $LOGS_DIR/mvn_error_unparsed.log
+        
+            echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR/target/...${RESET}"
+            cd $WEB_SERVER_DIR/target/
+        
+            echo -e "${VERDE_HACKER}\nDesplegando .war en $TOMCAT_WEBAPPS_DIR...\n${RESET}"
+            cp $WEB_SERVER_DIR/target/$WEB_SERVER_WAR_NAME $TOMCAT_WEBAPPS_DIR
+        
+            echo -e "${VERDE_HACKER}\nIniciando WebServer Tomcat...${RESET}"
+            cd $CATALINA_PATH
+            ./startup.sh
+        
+            echo -e "${VERDE_HACKER}\nPara terminar la ejecución de tomcat es posible usar el siguiente comando:${RESET} "
+            echo -e "${CIAN}$CATALINA_PATH/shutdown.sh${RESET}"
+        else
+            echo -e "${ROJO}¡Error! No es posible compilar el servidor web. Parece ser que el servicio que corre en el puerto $PUERTO no son los WebServices.${RESET}"
+        fi
+    else
+        echo -e "${ROJO}¡Error! Debes ejecutar los WebServices del servidor-central antes de compilar el servidor-web.${RESET}"
+    fi
 }
 
-# Argumento = -1 / --onlyWorkstation
-if [ "$RUN_WORKSTATION" = true ]; then
-    clear
-    createLogFolder
-    deployWorkstation
-fi
-
-# Argumento = -2 / --onlyCentralServer
+# Argumento = -1 / --onlyCentralServer
 if [ "$RUN_CENTRALSERVER" = true ]; then
     clear
     createLogFolder
     deployCentralServer
+fi
+
+# Argumento = -2 / --onlyWorkstation
+if [ "$RUN_WORKSTATION" = true ]; then
+    clear
+    createLogFolder
+    deployWorkstation
 fi
 
 # Argumento = -3 / --onlyWebServer
