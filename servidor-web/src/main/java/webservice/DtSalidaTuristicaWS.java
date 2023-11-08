@@ -7,9 +7,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dtSalidaTuristicaWS complex type.
+ * <p>Clase Java para dtSalidaTuristicaWS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="dtSalidaTuristicaWS"&gt;
@@ -52,7 +52,7 @@ public class DtSalidaTuristicaWS {
     protected byte[] imagen;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -64,7 +64,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +76,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the cantidadMaxTuristas property.
+     * Obtiene el valor de la propiedad cantidadMaxTuristas.
      * 
      */
     public int getCantidadMaxTuristas() {
@@ -84,7 +84,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the cantidadMaxTuristas property.
+     * Define el valor de la propiedad cantidadMaxTuristas.
      * 
      */
     public void setCantidadMaxTuristas(int value) {
@@ -92,7 +92,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the fechaSalida property.
+     * Obtiene el valor de la propiedad fechaSalida.
      * 
      * @return
      *     possible object is
@@ -104,7 +104,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the fechaSalida property.
+     * Define el valor de la propiedad fechaSalida.
      * 
      * @param value
      *     allowed object is
@@ -116,7 +116,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the lugar property.
+     * Obtiene el valor de la propiedad lugar.
      * 
      * @return
      *     possible object is
@@ -128,7 +128,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the lugar property.
+     * Define el valor de la propiedad lugar.
      * 
      * @param value
      *     allowed object is
@@ -140,7 +140,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the fechaAlta property.
+     * Obtiene el valor de la propiedad fechaAlta.
      * 
      * @return
      *     possible object is
@@ -152,7 +152,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the fechaAlta property.
+     * Define el valor de la propiedad fechaAlta.
      * 
      * @param value
      *     allowed object is
@@ -164,7 +164,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the dtActividadTuristica property.
+     * Obtiene el valor de la propiedad dtActividadTuristica.
      * 
      * @return
      *     possible object is
@@ -176,7 +176,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the dtActividadTuristica property.
+     * Define el valor de la propiedad dtActividadTuristica.
      * 
      * @param value
      *     allowed object is
@@ -188,7 +188,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Gets the value of the imagen property.
+     * Obtiene el valor de la propiedad imagen.
      * 
      * @return
      *     possible object is
@@ -199,7 +199,7 @@ public class DtSalidaTuristicaWS {
     }
 
     /**
-     * Sets the value of the imagen property.
+     * Define el valor de la propiedad imagen.
      * 
      * @param value
      *     allowed object is

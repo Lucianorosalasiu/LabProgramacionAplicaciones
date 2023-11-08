@@ -12,9 +12,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for dtPaqueteActividadTuristica complex type.
+ * <p>Clase Java para dtPaqueteActividadTuristica complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="dtPaqueteActividadTuristica"&gt;
@@ -91,7 +91,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the costo property.
+     * Obtiene el valor de la propiedad costo.
      * 
      */
     public float getCosto() {
@@ -99,7 +99,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the costo property.
+     * Define el valor de la propiedad costo.
      * 
      */
     public void setCosto(float value) {
@@ -107,7 +107,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the descripcion property.
+     * Obtiene el valor de la propiedad descripcion.
      * 
      * @return
      *     possible object is
@@ -119,7 +119,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the descripcion property.
+     * Define el valor de la propiedad descripcion.
      * 
      * @param value
      *     allowed object is
@@ -131,7 +131,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the descuento property.
+     * Obtiene el valor de la propiedad descuento.
      * 
      */
     public float getDescuento() {
@@ -139,7 +139,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the descuento property.
+     * Define el valor de la propiedad descuento.
      * 
      */
     public void setDescuento(float value) {
@@ -147,7 +147,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the fechaAlta property.
+     * Obtiene el valor de la propiedad fechaAlta.
      * 
      * @return
      *     possible object is
@@ -159,7 +159,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the fechaAlta property.
+     * Define el valor de la propiedad fechaAlta.
      * 
      * @param value
      *     allowed object is
@@ -171,7 +171,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the imagen property.
+     * Obtiene el valor de la propiedad imagen.
      * 
      * @return
      *     possible object is
@@ -182,7 +182,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the imagen property.
+     * Define el valor de la propiedad imagen.
      * 
      * @param value
      *     allowed object is
@@ -193,7 +193,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -205,7 +205,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -217,7 +217,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Gets the value of the validez property.
+     * Obtiene el valor de la propiedad validez.
      * 
      */
     public int getValidez() {
@@ -225,7 +225,7 @@ public class DtPaqueteActividadTuristica {
     }
 
     /**
-     * Sets the value of the validez property.
+     * Define el valor de la propiedad validez.
      * 
      */
     public void setValidez(int value) {

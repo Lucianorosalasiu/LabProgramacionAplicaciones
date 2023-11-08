@@ -12,7 +12,7 @@ public class WebServicePublisher {
     public static void main(String[] args) {
         System.out.println(greenColorCode + "Desplegando Web Services...\n" + resetColorCode);
         
-        // Luego se debería utilizar el puerto estraído del fichero .properties
+        // Luego se debería utilizar el puerto extraído del fichero .properties
         String port = "8889";
         
         WSSalidaController servicio1 = new WSSalidaController();

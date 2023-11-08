@@ -39,8 +39,8 @@ public interface WSSalidaController {
      * 
      * @param arg1
      * @param arg0
-     * @throws ParseException_Exception
      * @throws MyException_Exception
+     * @throws ParseException_Exception
      */
     @WebMethod
     @Action(input = "http://webService/WSSalidaController/altaSalidaTuristicaRequest", output = "http://webService/WSSalidaController/altaSalidaTuristicaResponse", fault = {
@@ -97,8 +97,8 @@ public interface WSSalidaController {
      * @param arg2
      * @param arg1
      * @param arg0
-     * @throws ParseException_Exception
      * @throws MyException_Exception
+     * @throws ParseException_Exception
      */
     @WebMethod
     @Action(input = "http://webService/WSSalidaController/altaInscripcionRequest", output = "http://webService/WSSalidaController/altaInscripcionResponse", fault = {
