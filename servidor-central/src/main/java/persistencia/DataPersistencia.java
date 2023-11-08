@@ -1171,7 +1171,7 @@ public class DataPersistencia implements IDataPersistencia {
             LocalDate currentDate = LocalDate.now();
             
             for(ESalidaTuristica s : resultados){
-                LocalDate salidaDate = s.getFechaAlta().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate salidaDate = s.getFechaSalida().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();                
                 if(!currentDate.isAfter(salidaDate)){
                     dtActividadesTuristicas.add(    
                             new DTSalidaTuristica(

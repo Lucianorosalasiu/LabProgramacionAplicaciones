@@ -237,7 +237,7 @@
                     <%                                
                     ArrayList<DTActividadTuristica> actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
                     if(actividadesFinalizables.size() > 0){%>
-                        <h3 class="text-center">Actividades turísticas finalizables:</h3>
+                    <h3 class="text-center">Actividades turísticas finalizables<span class="text-secondary">(Confirmadas y sin salidas por hacer)</span>:</h3>
                         <div class="table-responsive-lg">
                             <table class="table align-middle">
                                 <thead class="table-dark">
