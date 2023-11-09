@@ -23,6 +23,7 @@ import guiExceptions.EmptyFieldsException;
 
 import com.toedter.calendar.JDateChooser;
 import dataTypes.DTCategoria;
+import dataTypes.DTTop;
 import guiExceptions.NonEqualPasswordException;
 import java.awt.Graphics2D;
 
@@ -3691,26 +3692,26 @@ public class Main extends javax.swing.JFrame {
 
         jTableCasoDeUsoTop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre Actividad/Salida", "Tipo", "Cantidad visitas"
+                "#", "Nombre Actividad/Salida", "Tipo", "Cantidad visitas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -3724,8 +3725,6 @@ public class Main extends javax.swing.JFrame {
         jTableCasoDeUsoTop.setToolTipText("");
         jTableCasoDeUsoTop.setFocusable(false);
         jTableCasoDeUsoTop.setShowGrid(false);
-        jTableCasoDeUsoTop.setShowHorizontalLines(false);
-        jTableCasoDeUsoTop.setShowVerticalLines(false);
         jScrollPane16.setViewportView(jTableCasoDeUsoTop);
 
         javax.swing.GroupLayout jInternalFrameTopLayout = new javax.swing.GroupLayout(jInternalFrameTop.getContentPane());
@@ -5701,7 +5700,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             DefaultTableModel modelPaquetes = (DefaultTableModel) jTableCasoDeUsoTop.getModel();
-            List<Object> resultados = controlador.obtenerTop();
+            List<DTTop> resultados = controlador.obtenerTop();
             int index = 1;
             
             /*borro la tabla si tenia algo*/
@@ -5710,22 +5709,13 @@ public class Main extends javax.swing.JFrame {
             }
             
             /*cargo la tabla con los resultados*/
-            for (Object o : resultados){
-                if(o instanceof DTActividadTuristica){
-                    DTActividadTuristica a = (DTActividadTuristica) o;
-                    Object rowData[] = new Object[3];
-                    rowData[0] = a.getNombre();
-                    rowData[1] = "Actividad";
-                    rowData[2] = a.getCantidadVistas();
-                    modelPaquetes.addRow(rowData);
-                }else if(o instanceof DTSalidaTuristica){
-                    DTSalidaTuristica s = (DTSalidaTuristica) o;
-                    Object rowData[] = new Object[3];
-                    rowData[0] = s.getNombre();
-                    rowData[1] = "Salida";
-                    rowData[2] = s.getCantidadVistas();
-                    modelPaquetes.addRow(rowData);
-                }
+            for (DTTop dt : resultados){
+                Object rowData[] = new Object[4];
+                rowData[0] = dt.getPos();
+                rowData[1] = dt.getNombre();
+                rowData[2] = dt.getTipoTop();
+                rowData[3] = dt.getCantidadVistas();
+                modelPaquetes.addRow(rowData);
             index += 1;
             }
             
@@ -5736,7 +5726,7 @@ public class Main extends javax.swing.JFrame {
             
             SortOrder sortOrder = SortOrder.ASCENDING;            
             
-            int columnIndex = 2;
+            int columnIndex = 3;
             
             List<SortKey> sortKeys = new ArrayList<>();
             sortKeys.add(new SortKey(columnIndex, SortOrder.ASCENDING));

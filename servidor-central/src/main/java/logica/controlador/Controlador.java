@@ -12,6 +12,7 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import logica.interfaces.IControlador;
@@ -498,7 +499,7 @@ public class Controlador implements IControlador{
         }
     }
 
-    public List<Object> obtenerTop(){
+    public List<DTTop> obtenerTop(){
         return dataPersistencia.obtenerTop();
     }
     
