@@ -106,4 +106,6 @@ public interface IDataPersistencia {
     /* CU Alta Salida Turistica */
     ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     List<DTPaqueteActividadTuristica> obtenerPaquetesCompradosDisponibles(Long idTurista, String nombreSalida, int cantTuristas);
+    
+    DTInscripcion obtenerInscripcion(String nickname, String nombreSalida);
 }

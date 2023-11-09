@@ -1693,4 +1693,51 @@ public class DataPersistencia implements IDataPersistencia {
         
     } 
     
+    @Override
+    public DTInscripcion obtenerInscripcion(String nickname, String nombreSalida) {
+        EntityManager em = emf.createEntityManager(); 
+        
+        try{
+            ESalidaTuristica eSalidaTuristica = obtenerSalidaPorNombre(nombreSalida);
+
+            String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                    .setParameter("nickname", nickname)
+                                    .getSingleResult();
+
+            String auxQuery = "SELECT i FROM EInscripcion i WHERE i.eTurista = :turista AND i.eSalidaTuristica = :salida";
+            EInscripcion eInscripcion = em.createQuery(auxQuery, EInscripcion.class)
+                                    .setParameter("turista", eTurista)
+                                    .setParameter("salida", eSalidaTuristica)
+                                    .getSingleResult();
+
+            
+            DTInscripcion dtInscripcion = new DTInscripcion();
+            DTSalidaTuristica dtSalida = new DTSalidaTuristica();
+            DTActividadTuristica dtActividad = new DTActividadTuristica();
+            DTTurista dtTurista = new DTTurista();
+            
+            dtActividad.setNombre(eInscripcion.getESalidaTuristica().getEActividadTuristica().getNombre());
+            
+            dtSalida.setNombre(eInscripcion.getESalidaTuristica().getNombre());
+            dtSalida.setDtActividadTuristica(dtActividad);
+            
+            dtTurista.setNickname(eInscripcion.getETurista().getNickname());
+            dtTurista.setName(eInscripcion.getETurista().getName());
+            
+            dtInscripcion.setSalidaTuristica(dtSalida);
+            dtInscripcion.setTurista(dtTurista);
+            dtInscripcion.setCantidadTuristas(eInscripcion.getCantidadTuristas());
+            dtInscripcion.setCostoTotal(eInscripcion.getCostoTotal());
+            dtInscripcion.setFecha(eInscripcion.getFecha()); 
+            
+            return dtInscripcion;
+            
+        }catch(Exception e){
+            return new DTInscripcion();
+        }finally{
+            em.close();
+        }
+    }
+    
 }

@@ -102,4 +102,6 @@ public interface  IControlador {
     List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas);
     float obtenerCostoActividad(String nombreActividad);
     
+    byte[] obtenerPdfInscripcion(String nickname, String nombreSalida);
+    
 }
