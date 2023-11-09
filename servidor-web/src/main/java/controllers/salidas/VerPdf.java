@@ -19,7 +19,6 @@ import webservice.WSSalidaControllerService;
  *
  * @author diego
  */
-@WebServlet(name = "verPDF")
 public class VerPdf extends HttpServlet {
 
 

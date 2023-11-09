@@ -162,7 +162,7 @@
                                 <td><%= salida.getLugar() %></td>
                                 <td>
                                     <button class="btn btn-primary" 
-                                            onclick="openPdfInscripcion(<%=turista.getNickname()%>, <%=salida.getNombre()%>);">
+                                            onclick="openPdfInscripcion('<%=turista.getNickname()%>', '<%=salida.getNombre()%>');">
                                         Ver PDF
                                     </button>
                                 </td>

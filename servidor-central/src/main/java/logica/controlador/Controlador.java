@@ -19,6 +19,7 @@ import exceptions.MyException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -31,9 +32,11 @@ import org.apache.commons.codec.binary.Base64;
 import persistencia.FDataPersistencia;
 import persistencia.IDataPersistencia;
 
-import org.apache.poi.xwpf.converter.pdf.PdfConverter;
-import org.apache.poi.xwpf.converter.pdf.PdfOptions;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 
 /**
  *
@@ -453,19 +456,19 @@ public class Controlador implements IControlador{
             replaceInPdf(document, "$nombre", inscripcion.getTurista().getName());
             replaceInPdf(document, "$actividad", inscripcion.getSalidaTuristica().getDtActividadTuristica().getNombre());
             replaceInPdf(document, "$salida", inscripcion.getSalidaTuristica().getNombre());
-            replaceInPdf(document, "$cantTuristas", String.valueOf(inscripcion.getCantidadTuristas()));
+            replaceInPdf(document, "cantTuristas", String.valueOf(inscripcion.getCantidadTuristas()));
             replaceInPdf(document, "$costo", String.valueOf(inscripcion.getCostoTotal()));
             
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
             
             LocalDateTime locaDateInscripcion = inscripcion.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             String fechaInscripcion = locaDateInscripcion.format(dateFormat);
-            replaceInPdf(document, "$fechaInscripcion", fechaInscripcion);
+            replaceInPdf(document, "fechaInscripcion", fechaInscripcion);
             
             String actualDate = LocalDateTime.now().format(dateFormat);
-            replaceInPdf(document, "$fechaEmitido", actualDate);
+            replaceInPdf(document, "fechaEmitido", actualDate);
 
-            document.createNumbering();
+            
             // Convert XWPFDocument to Pdf
             PdfOptions options = PdfOptions.create();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
