@@ -13,6 +13,7 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTInscripcion;
 import dataTypes.DTProveedor;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import java.util.List;
@@ -96,7 +97,7 @@ public interface  IControlador {
     void validarActividad(Long id, EstadoActividad estado);
     
     /*Obtener top*/
-    List<Object> obtenerTop();
+    List<DTTop> obtenerTop();
     
     
     /*Servidor Web*/

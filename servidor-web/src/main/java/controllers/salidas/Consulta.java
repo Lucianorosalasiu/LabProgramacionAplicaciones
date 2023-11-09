@@ -40,6 +40,15 @@ public class Consulta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DatatypeConfigurationException_Exception {
+        
+        /*si esta en mobile, solo puede ver la consulta en caso de que sea turista, el flujo
+        de mobile solo permite que si un usuario este logeado es porque es turista*/
+        String userType = (String) request.getSession().getAttribute("sessionType");
+        if (request.getHeader("User-Agent").toLowerCase().contains("mobile") && isNull(userType)) {
+            response.sendError(403); 
+            return;
+        }
+        
         WSSalidaControllerService salidaController = new WSSalidaControllerService();
         WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
         

@@ -9,6 +9,7 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1796,37 +1798,54 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public List<Object> obtenerTop(){
+    public List<DTTop> obtenerTop(){
         EntityManager em = emf.createEntityManager();
-        List<Object> resultado = new LinkedList<>();
-        List<EActividadTuristica> resultadosActividad = new LinkedList<>();
-        List<ESalidaTuristica> resultadosSalida = new LinkedList<>();
+        List<DTTop> resultadoTopSort = new LinkedList<>();
         
             try {
-                String consultaActividad = "select a from EActividadTuristica a";
-                String consultaSalidas = "select s from ESalidaTuristica s";
-            
-                resultadosActividad = em.createQuery(consultaActividad,EActividadTuristica.class).getResultList();
-                resultadosSalida = em.createQuery(consultaSalidas,ESalidaTuristica.class).getResultList();
+                /*new version*/
+                String consultaActividadSort = "SELECT id,nombre,cantidadvistas FROM turismouy.actividadTuristica order by cantidadvistas desc;";
+                String consultaSalidaSort = "SELECT id,nombre,cantidadvistas FROM turismouy.salidaTuristica order by cantidadvistas desc;";
                 
-                for(EActividadTuristica a : resultadosActividad){
-                    if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
-                        DTActividadTuristica dta = 
-                                new DTActividadTuristica(a.getId(),a.getNombre(),a.getCantidadVistas());
-                        resultado.add(dta);
-                    }
+                //List<> resultadoSort = new LinkedList<>();
+                List<EActividadTuristica>actividadTuristicaSort = new LinkedList<>();
+                List<ESalidaTuristica>salidaTuristicaSort = new LinkedList<>();
+                
+                int index = 1;
+
+                //guardo las actividades como dttop                
+                actividadTuristicaSort = em.createNativeQuery(consultaActividadSort,EActividadTuristica.class).getResultList();
+                for( EActividadTuristica a : actividadTuristicaSort){
+                    DTTop dtop = new DTTop(0, a.getId(), a.getNombre(), "ACTIVIDAD", a.getCantidadVistas());
+                    resultadoTopSort.add(dtop);
                 }
                 
-                for(ESalidaTuristica s : resultadosSalida){
-                    DTSalidaTuristica dts =
-                            new DTSalidaTuristica(s.getId(),s.getNombre(),s.getCantidadVistas());
-                    resultado.add(dts);
+                //guardo las salidas como dttop
+                salidaTuristicaSort = em.createNativeQuery(consultaSalidaSort,ESalidaTuristica.class).getResultList();
+                for( ESalidaTuristica s : salidaTuristicaSort){
+                    DTTop dtop = new DTTop(0, s.getId(), s.getNombre(), "SALIDA", s.getCantidadVistas());
+                    resultadoTopSort.add(dtop);
                 }
                 
-                return resultado;
+                //ordeno la lista
+                Collections.sort(resultadoTopSort, Comparator.comparingInt(DTTop::getCantidadVistas).reversed());
+                //actualizo el indice
+                for (DTTop d : resultadoTopSort){
+                  d.setPos(index);
+                  Logger.getLogger("DEBUG").log(Level.SEVERE,"index: " + Integer.toString(index) + 
+                          "cantidad vistas: " + Integer.toString(d.getCantidadVistas()));
+                  index += 1;
+                }
+                //devuelvo las 10 mejores
+                while(index > 10){
+                    resultadoTopSort.remove(index);
+                    index -= 1;
+                }
+                
+                return resultadoTopSort;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                return resultado;
+                return resultadoTopSort;
             } finally {
                 em.close();
             }

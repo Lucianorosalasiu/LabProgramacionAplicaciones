@@ -13,6 +13,7 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import java.util.List;
 import exceptions.MyException;
@@ -102,7 +103,7 @@ public interface IDataPersistencia {
     void validarActividad(Long id, EstadoActividad estado);
     
     /* Obtener top */
-    List<Object> obtenerTop();
+    List<DTTop> obtenerTop();
     
     /* Servidor Web */
     
