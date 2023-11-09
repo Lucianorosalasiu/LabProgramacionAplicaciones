@@ -37,7 +37,14 @@
                         </a>
                     </li>          
                 </ul>
+                        
+                <form class="d-flex flex-row gap-2 m-2" action="/busqueda" method="post">
+                    <input type="text" placeholder="Buscar actividades,paquetes" class="form-control">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
             </div>
+                        
+            
 
 
             <% if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){ %>
