@@ -59,6 +59,45 @@ public interface WSPaqueteController {
 
     /**
      * 
+<<<<<<< Updated upstream
+=======
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesResponse")
+    public DtPaquetesCollectionWS obtenerPaquetes();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerFotoPaqueteActividadTuristicaRequest", output = "http://webService/WSPaqueteController/obtenerFotoPaqueteActividadTuristicaResponse")
+    public byte[] obtenerFotoPaqueteActividadTuristica(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/compraExisteRequest", output = "http://webService/WSPaqueteController/compraExisteResponse")
+    public boolean compraExiste(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraPaquete arg0);
+
+    /**
+     * 
+>>>>>>> Stashed changes
      * @param arg2
      * @param arg1
      * @param arg0

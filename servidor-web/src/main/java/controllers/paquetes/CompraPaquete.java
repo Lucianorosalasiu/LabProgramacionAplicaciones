@@ -18,6 +18,10 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import webservice.DtActividadesCollectionWS;
+import webservice.DtPaqueteActividadTuristica;
+import webservice.DtPaqueteWS;
+import webservice.DtPaquetesCollectionWS;
 /**
  *
  * @author lucho
@@ -37,6 +41,19 @@ public class CompraPaquete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        /* WebService Usuarios: */
+        webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();
+
+        /* WebService Actividades: */
+        webservice.WSActividadControllerService a = new webservice.WSActividadControllerService();
+        webservice.WSActividadController portA = a.getWSActividadControllerPort();      
+
+        /* WebService Paquetes: */
+        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
+        webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
+        
+        byte [] foto1 = null;
         String userType = (String) request.getSession().getAttribute("sessionType");
         if (isNull(userType) || !userType.equals("TURISTA") || request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
             response.sendError(403); 
@@ -45,9 +62,11 @@ public class CompraPaquete extends HttpServlet {
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
+        DtPaquetesCollectionWS paquetesEnteros = new DtPaquetesCollectionWS();
         
-        List<DTPaqueteActividadTuristica> paquetesEnteros = controlador.obtenerPaquetes();
-        request.setAttribute("paquetesEnteros", paquetesEnteros);
+        paquetesEnteros = portP.obtenerPaquetes();
+        List<DtPaqueteWS> paquetes1 = paquetesEnteros.getPaquetes();
+        request.setAttribute("paquetesEnteros", paquetes1);
         
         int cantPersonas = 0;
         
@@ -61,10 +80,12 @@ public class CompraPaquete extends HttpServlet {
             int cantidadPersonas = Integer.parseInt(request.getParameter("personas"));
             
             DTTurista turista = controlador.obtenerTurista(idTurista);
-            DTPaqueteActividadTuristica paquete = controlador.obtenerPaqueteCosto(request.getParameter("paquetes"));
-            c.add(Calendar.DATE, paquete.getValidez());
+            DtPaqueteActividadTuristica pa = portP.obtenerPaqueteCosto(request.getParameter("paquetes"));
+            c.add(Calendar.DATE, pa.getValidez());
             vencimiento = c.getTime();
             
+            DTPaqueteActividadTuristica paquete = new DTPaqueteActividadTuristica(pa.getNombre(),pa.getDescripcion(),pa.getValidez(),pa.getDescuento(),pa.getFechaAlta().toGregorianCalendar().getTime());
+            foto1 = portP.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
             DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
             if(controlador.compraExiste(compra)){
                 controlador.agregarCompraPaquete(compra);
@@ -76,7 +97,7 @@ public class CompraPaquete extends HttpServlet {
                 request.setAttribute("errorMessage", "Ya has comprado este paquete");
             }
             
-              
+           request.setAttribute("foto1", foto1);   
         }
         if(request.getParameter("cancelar") != null){
             request.getRequestDispatcher("/WEB-INF/home/home.jsp").

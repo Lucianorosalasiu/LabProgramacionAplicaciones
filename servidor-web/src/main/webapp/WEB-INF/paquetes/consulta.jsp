@@ -51,7 +51,6 @@
                 <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
                     <%
                         DtPaqueteActividadTuristica paquete = (DtPaqueteActividadTuristica) request.getAttribute("paqueteEnteros");
-                        
                     %>
                     <div class="container w-100">
                         <div class="row">

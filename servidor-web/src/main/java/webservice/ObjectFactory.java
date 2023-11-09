@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtStringCollectionWS }
+     * Create an instance of {@link DtPaquetesCollectionWS }
      * 
      */
-    public DtStringCollectionWS createDtStringCollectionWS() {
-        return new DtStringCollectionWS();
+    public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
+        return new DtPaquetesCollectionWS();
     }
 
     /**
-     * Create an instance of {@link DtPaqueteActividadTuristica }
+     * Create an instance of {@link DtPaqueteWS }
      * 
      */
-    public DtPaqueteActividadTuristica createDtPaqueteActividadTuristica() {
-        return new DtPaqueteActividadTuristica();
+    public DtPaqueteWS createDtPaqueteWS() {
+        return new DtPaqueteWS();
     }
 
     /**
@@ -62,19 +62,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtPaquetesCollectionWS }
+     * Create an instance of {@link DtStringCollectionWS }
      * 
      */
-    public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
-        return new DtPaquetesCollectionWS();
+    public DtStringCollectionWS createDtStringCollectionWS() {
+        return new DtStringCollectionWS();
     }
 
     /**
-     * Create an instance of {@link DtPaqueteWS }
+     * Create an instance of {@link DtPaqueteActividadTuristica }
      * 
      */
-    public DtPaqueteWS createDtPaqueteWS() {
-        return new DtPaqueteWS();
+    public DtPaqueteActividadTuristica createDtPaqueteActividadTuristica() {
+        return new DtPaqueteActividadTuristica();
+    }
+
+    /**
+     * Create an instance of {@link DtCompraPaquete }
+     * 
+     */
+    public DtCompraPaquete createDtCompraPaquete() {
+        return new DtCompraPaquete();
     }
 
 }

@@ -71,7 +71,7 @@ public class ConsultaPaquete extends HttpServlet {
         if (paquete != null) {
             pa = portP.obtenerPaqueteCosto(paquete);
             actividades = portA.obtenerActividadesRelacionadas(paquete);
-             lista = actividades.getActividades();
+            lista = actividades.getActividades();
             for (DtActividadTuristicaWS Actividad : lista){
                 DtActividadTuristica actividadCategoria = portA.obtenerActividadTuristicaNull(Actividad.getId());
                 categorias += actividadCategoria.getCategoriasString();

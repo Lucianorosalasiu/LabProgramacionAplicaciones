@@ -1,5 +1,6 @@
 package webService;
 
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import logica.fabrica.Fabrica;
@@ -74,10 +75,42 @@ public class WSPaqueteController {
         return collection;
     
     }
+    @WebMethod
+    public DTPaquetesCollectionWS obtenerPaquetes(){
+        ArrayList<DTPaqueteWS> listDTPaqueteWS = new ArrayList<>();
+        List<DTPaqueteActividadTuristica> paquetes = controlador.obtenerPaquetes();
+        
+        /* Se obtiene la lista de DTPaqueteActividadTuristica y se parsea a DTPaqueteWS*/
+        for (DTPaqueteActividadTuristica paquete : paquetes) {
+            listDTPaqueteWS.add(
+                    new DTPaqueteWS(
+                            paquete.getNombre(),
+                            paquete.getDescripcion(),
+                            paquete.getValidez(),
+                            paquete.getDescuento(),
+                            DateConverter.dateToString(paquete.getFechaAlta()),
+                            paquete.getCosto(),
+                            paquete.getActividades(),
+                            paquete.getImagen()
+                    )
+            );
+        }
+            
+        DTPaquetesCollectionWS collection = new DTPaquetesCollectionWS();
+        collection.setPaquetes(listDTPaqueteWS);
+        
+        return collection;
+        
+    }
+    @WebMethod
     public byte[] obtenerFotoPaqueteActividadTuristica(String paquete){
         return controlador.obtenerFotoPaqueteActividadTuristica(paquete);
     }
-    
+    @WebMethod
+    public boolean compraExiste(DTCompraPaquete compra){
+        return controlador.compraExiste(compra);
+    }
+   
     @WebMethod
     public DTStringCollectionWS obtenerPaqueteNombres() {
         ArrayList<String> listDTPaqueteWS = new ArrayList<>();

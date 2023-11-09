@@ -1,5 +1,6 @@
 package webService;
 
+import dataTypes.DTTurista;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -8,6 +9,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import webService.dataTypesWS.DTTuristaWS;
 
 /**
  *
@@ -25,7 +27,11 @@ public class WSUsuarioController {
     public void publish() {
         endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Usuario", this);
     }
-
+    @WebMethod(exclude = true)
+    public DTTurista obtenerTurista(Long idTurista){
+        return controlador.obtenerTurista(idTurista);
+    }
+    
     @WebMethod(exclude = true)
     public Endpoint getEndpoint() {
         return endpoint;
