@@ -2,9 +2,17 @@
 
 << 'Objetivo-del-script'
     Este script se encarga de compilar y ejecutar tanto el componente servidor-central
-    así como el de la estacio-de-trabajo. Además, compila el componente
+    así como el de la estacion-de-trabajo. Además, compila el componente
     servidor-web y deja una copia del .war en la carpeta webapps de tomcat.
 Objetivo-del-script
+
+TITULO="
+     _____           _                     _   ___   __
+    |_   _|   _ _ __(_)___ _ __ ___   ___ | | | \ \ / /
+      | || | | | '__| / __| '_ \` _ \ / _ \| | | |\ V /
+      | || |_| | |  | \__ \ | | | | | (_) | |_| | | |  
+      |_| \__,_|_|  |_|___/_| |_| |_|\___/ \___/  |_|  
+"
 
 # Colores
 ROJO='\e[31m'
@@ -12,6 +20,9 @@ VERDE_HACKER='\e[1;32m'
 AMARILLO='\e[33m'
 CIAN='\e[36m'
 RESET='\e[0m'
+BOLD='\033[1m' # Negrita
+COLOR_FLICKER='\033[5m' # Letras parpadeantes
+
 
 # Ruta base del proyecto
 BASE_DIR=$(pwd)
@@ -36,9 +47,13 @@ WEB_SERVER_WAR_NAME='servidor-web-1.0-SNAPSHOT.war'
 CATALINA_PATH=/opt/tomcat/bin
 TOMCAT_WEBAPPS_DIR=/opt/tomcat/webapps
 
+# IP del host donde se encuentra el web server TOMCAT
+#IP_REMOTE_HOST=localhost
+IP_REMOTE_HOST="192.168.1.3"
+
 # ==== Config para recibir argumentos ==== #
-OPTIONS=123
-LONGOPTS=onlyWorkstation,onlyCentralServer,onlyWebServer
+OPTIONS=h123
+LONGOPTS=onlyWorkstation,onlyCentralServer,onlyWebServer,help
 
 PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 eval set -- "$PARSED"
@@ -46,9 +61,11 @@ eval set -- "$PARSED"
 RUN_WORKSTATION=false
 RUN_CENTRALSERVER=false
 RUN_WEBSERVER=false
+VIEW_USER_GUIDE=false
 
 while true; do
   case "$1" in
+    -h | --help ) VIEW_USER_GUIDE=true; shift;;
     -1 | --onlyCentralServer ) RUN_CENTRALSERVER=true; shift ;;
     -2 | --onlyWorkstation ) RUN_WORKSTATION=true; shift ;;
     -3 | --onlyWebServer ) RUN_WEBSERVER=true; shift ;;
@@ -67,11 +84,33 @@ createLogFolder(){
   fi
 }
 
+viewUserGuide(){
+    echo -e "${VERDE_HACKER}Guía de script para despliegue automatizado de proyecto:\n"
+    echo -e "${BOLD}${COLOR_FLICKER}${TITULO}${RESET}"
+
+    echo -e "${VERDE_HACKER}Uso: ${RESET}${CIAN}./deployProject.sh [OPCIÓN]${RESET}\n"
+    echo -e "${VERDE_HACKER}Ejemplo: ${RESET}${CIAN}./deployProject.sh --onlyCentralServer${RESET}\n"
+    
+    echo -e "${VERDE_HACKER}Opciones:${RESET}"
+    echo -e "${VERDE_HACKER}  -h, --help                      ${RESET}${VERDE_HACKER}Muestra el menú de ayuda${RESET}"
+    echo -e "${VERDE_HACKER}  -1, --onlyCentralServer         ${RESET}${VERDE_HACKER}Compila y despliega los WebServices${RESET}"
+    echo -e "${VERDE_HACKER}  -2, --onlyWorkstation           ${RESET}${VERDE_HACKER}Compila y ejecuta la aplicación de escritorio${RESET}"
+    echo -e "${VERDE_HACKER}  -3, --onlyWebServer             ${RESET}${VERDE_HACKER}Compila y despliega la aplicación web dentro del Tomcat${RESET}"       
+}
+
 deployCentralServer() {
     echo -e "${CIAN}=========== Compilación de servidor-central y despliegue de webservices ===========${RESET}"
 
     echo -e "${VERDE_HACKER}\nEntrando a directorio $CENTRAL_SERVER_DIR...${RESET}"
     cd $CENTRAL_SERVER_DIR
+
+    echo -e "${VERDE_HACKER}\nEstableciendo permisos a script de carga de datos...${RESET}"
+    chmod +x cargarDatos.sh
+
+    echo -e "${VERDE_HACKER}\nCargando datos de prueba...${RESET}"
+    echo -e "${AMARILLO}"
+    ./cargarDatos.sh
+    echo -e "${RESET}"
 
     echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
     mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
@@ -84,9 +123,6 @@ deployCentralServer() {
     # Se borran los logs sin parsear
     rm -rf $LOGS_DIR/mvn_info_unparsed.log
     rm -rf $LOGS_DIR/mvn_error_unparsed.log
-
-    echo -e "${VERDE_HACKER}\nEstableciendo permisos a script de carga de datos...${RESET}"
-    chmod +x cargarDatos.sh
 
     echo -e "${VERDE_HACKER}\nEntrando a directorio $CENTRAL_SERVER_DIR/target/...${RESET}"
     cd $CENTRAL_SERVER_DIR/target/
@@ -118,6 +154,14 @@ deployWorkstation() {
     echo -e "${VERDE_HACKER}\nEntrando a directorio $WORKSTATION_DIR...${RESET}"
     cd $WORKSTATION_DIR
 
+    echo -e "${VERDE_HACKER}\nEstableciendo permisos a script de carga de datos...${RESET}"
+    chmod +x cargarDatos.sh
+
+    echo -e "${VERDE_HACKER}\nCargando datos de prueba...${RESET}"
+    echo -e "${AMARILLO}"
+    ./cargarDatos.sh
+    echo -e "${RESET}"
+
     echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
     mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
 
@@ -129,9 +173,6 @@ deployWorkstation() {
     # Se borran los logs sin parsear
     rm -rf $LOGS_DIR/mvn_info_unparsed.log
     rm -rf $LOGS_DIR/mvn_error_unparsed.log
-
-    echo -e "${VERDE_HACKER}\nEstableciendo permisos a script de carga de datos...${RESET}"
-    chmod +x cargarDatos.sh
 
     echo -e "${VERDE_HACKER}\nEntrando a directorio $WORKSTATION_DIR/target/...${RESET}"
     cd target/
@@ -161,7 +202,7 @@ deployWebServer() {
         # Obtener el nombre del proceso a partir del PID
         nombre_proceso_pid=$(ps -p $pid -o cmd=)
         # Verificar si el nombre del proceso coincide
-        if [[ "$nombre_proceso_pid" == *"$NOMBRE_PROCESO"* ]]; then
+        if [[ "$nombre_proceso_pid" == *"$CENTRAL_SERVER_JAR_NAME"* ]]; then
             # Si los WebServices están activos y corriendo en el puerto 8889 se compila y despliega el servidor-web
             echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR...${RESET}"
             cd $WEB_SERVER_DIR
@@ -181,22 +222,33 @@ deployWebServer() {
             echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR/target/...${RESET}"
             cd $WEB_SERVER_DIR/target/
         
-            echo -e "${VERDE_HACKER}\nDesplegando .war en $TOMCAT_WEBAPPS_DIR...\n${RESET}"
-            cp $WEB_SERVER_DIR/target/$WEB_SERVER_WAR_NAME $TOMCAT_WEBAPPS_DIR
-        
-            echo -e "${VERDE_HACKER}\nIniciando WebServer Tomcat...${RESET}"
-            cd $CATALINA_PATH
-            ./startup.sh
-        
-            echo -e "${VERDE_HACKER}\nPara terminar la ejecución de tomcat es posible usar el siguiente comando:${RESET} "
-            echo -e "${CIAN}$CATALINA_PATH/shutdown.sh${RESET}"
+            if [ "$IP_REMOTE_HOST" == "localhost" ]; then
+                echo -e "${VERDE_HACKER}\nDesplegando .war en $TOMCAT_WEBAPPS_DIR...\n${RESET}"
+                cp $WEB_SERVER_DIR/target/$WEB_SERVER_WAR_NAME $TOMCAT_WEBAPPS_DIR
+
+                echo -e "${VERDE_HACKER}\nIniciando WebServer Tomcat...${RESET}"    
+                cd $CATALINA_PATH
+                ./startup.sh
+
+                echo -e "${VERDE_HACKER}\nPara terminar la ejecución de tomcat es posible usar el siguiente comando:${RESET} ${CIAN}$CATALINA_PATH/shutdown.sh${RESET}"
+            else
+                # FALTA TERMINAR ESTO
+                echo -e "\nEn caso de que IP_REMOTE_HOST sea diferente de localhost se debe desplegar el .war en el host remoto\n"
+            fi
+           
         else
-            echo -e "${ROJO}¡Error! No es posible compilar el servidor web. Parece ser que el servicio que corre en el puerto $PUERTO no son los WebServices.${RESET}"
+            echo -e "${ROJO}\n¡Error! No es posible compilar el servidor web. Parece ser que el servicio que corre en el puerto $PUERTO no son los WebServices.${RESET}\n"
         fi
     else
-        echo -e "${ROJO}¡Error! Debes ejecutar los WebServices del servidor-central antes de compilar el servidor-web.${RESET}"
+        echo -e "${ROJO}\n¡Error! Debes ejecutar los WebServices del servidor-central antes de compilar el servidor-web.${RESET}\n"
     fi
 }
+
+# Argumento = -h / --help
+if [ "$VIEW_USER_GUIDE" = true ]; then
+    clear
+    viewUserGuide
+fi
 
 # Argumento = -1 / --onlyCentralServer
 if [ "$RUN_CENTRALSERVER" = true ]; then
@@ -220,7 +272,7 @@ if [ "$RUN_WEBSERVER" = true ]; then
 fi
 
 # Si no se indicó nada, ejecutar todos
-if [ "$RUN_WORKSTATION" = false ] && [ "$RUN_CENTRALSERVER" = false ] && [ "$RUN_WEBSERVER" = false ]; then
+if [ "$VIEW_USER_GUIDE" = false ] && [ "$RUN_WORKSTATION" = false ] && [ "$RUN_CENTRALSERVER" = false ] && [ "$RUN_WEBSERVER" = false ]; then
     clear
     createLogFolder
     deployCentralServer

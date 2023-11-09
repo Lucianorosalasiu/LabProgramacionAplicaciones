@@ -21,6 +21,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="cantidadVistas" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="categorias" type="{http://www.w3.org/2001/XMLSchema}long" maxOccurs="unbounded" minOccurs="0"/&gt;
  *         &lt;element name="categoriasString" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="ciudad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
@@ -31,6 +32,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *         &lt;element name="fechaAlta" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/&gt;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="url" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -41,6 +43,7 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dtActividadTuristica", propOrder = {
+    "cantidadVistas",
     "categorias",
     "categoriasString",
     "ciudad",
@@ -50,10 +53,12 @@ import jakarta.xml.bind.annotation.XmlType;
     "duracion",
     "fechaAlta",
     "id",
-    "nombre"
+    "nombre",
+    "url"
 })
 public class DtActividadTuristica {
 
+    protected int cantidadVistas;
     @XmlElement(nillable = true)
     protected List<Long> categorias;
     protected String categoriasString;
@@ -66,6 +71,23 @@ public class DtActividadTuristica {
     protected XMLGregorianCalendar fechaAlta;
     protected Long id;
     protected String nombre;
+    protected String url;
+
+    /**
+     * Obtiene el valor de la propiedad cantidadVistas.
+     * 
+     */
+    public int getCantidadVistas() {
+        return cantidadVistas;
+    }
+
+    /**
+     * Define el valor de la propiedad cantidadVistas.
+     * 
+     */
+    public void setCantidadVistas(int value) {
+        this.cantidadVistas = value;
+    }
 
     /**
      * Gets the value of the categorias property.
@@ -302,6 +324,30 @@ public class DtActividadTuristica {
      */
     public void setNombre(String value) {
         this.nombre = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad url.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Define el valor de la propiedad url.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrl(String value) {
+        this.url = value;
     }
 
 }
