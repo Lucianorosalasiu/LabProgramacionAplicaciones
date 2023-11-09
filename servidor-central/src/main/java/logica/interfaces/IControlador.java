@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * @author lucho
  */
 public interface  IControlador {
-    /* CU USUARIOS */
+    /*CU USUARIOS*/
     void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
     void altaTurista(DTTurista nuevoTurista) throws MyException;
     List<DTUsuario> obtenerUsuarios();
@@ -95,10 +95,13 @@ public interface  IControlador {
     List<DTActividadTuristica> obtenerActividadesSinConfirmar();
     void validarActividad(Long id, EstadoActividad estado);
     
+    /*Obtener top*/
+    List<Object> obtenerTop();
     
-    /* Servidor Web */
     
-    /* CU Alta Salida Turistica*/
+    /*Servidor Web*/
+    
+    /*CU Alta Salida Turistica*/
     ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas);
     float obtenerCostoActividad(String nombreActividad);

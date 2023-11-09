@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import persistencia.entidades.EActividadTuristica_;
+//import persistencia.entidades.EActividadTuristica_;
 
 /**
  *
@@ -16,7 +16,7 @@ import persistencia.entidades.EActividadTuristica_;
  */
 @Getter
 @Setter
-public class DTActividadTuristica {
+public class DTActividadTuristica{
     private Long id;
     private String nombre;
     private String descripcion;
@@ -98,6 +98,12 @@ public class DTActividadTuristica {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+    }
+    
+    public DTActividadTuristica(Long id, String nombre, int cantidadVistas){
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidadVistas = cantidadVistas;
     }
     
     public String getCostoToString(){

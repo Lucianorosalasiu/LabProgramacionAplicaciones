@@ -425,4 +425,9 @@ public class Controlador implements IControlador{
         return dataPersistencia.obtenerCostoActividad(nombreActividad);
     }
     
+    @Override
+    public List<Object> obtenerTop(){
+        return dataPersistencia.obtenerTop();
+    }
+    
 }

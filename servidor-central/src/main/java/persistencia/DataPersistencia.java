@@ -21,6 +21,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1111,7 +1112,8 @@ public class DataPersistencia implements IDataPersistencia {
                         dtSalidaTuristica.getLugar(),
                         dtSalidaTuristica.getFechaAlta(),
                         dtSalidaTuristica.getImagen(),
-                        eActividadTuristica
+                        eActividadTuristica,
+                        0
                 );
 
                 em.persist(nuevaSalida);
@@ -1304,7 +1306,25 @@ public class DataPersistencia implements IDataPersistencia {
         EntityManager em = emf.createEntityManager();
         
         try{
+            em.getTransaction().begin();
+            
             ESalidaTuristica eSalidaTuristica = obtenerSalidaPorNombre(nombreSalida);
+            
+            int vistasActuales = eSalidaTuristica.getCantidadVistas();
+            
+            
+            Logger.getLogger("Log BD").log(Level.SEVERE, "esalida.getcantvistas: "
+            + eSalidaTuristica.getCantidadVistas() + "vistas actuales: " + vistasActuales);
+            
+            vistasActuales += 1;
+            eSalidaTuristica.setCantidadVistas(vistasActuales);
+            
+            Logger.getLogger("Log BD").log(Level.SEVERE, "esalida.getcantvistas: "
+            + eSalidaTuristica.getCantidadVistas() + "vistas actuales: " + vistasActuales);
+            em.merge(eSalidaTuristica);
+            //em.persist(eSalidaTuristica);
+            //em.refresh(eSalidaTuristica);
+            em.getTransaction().commit();
             
             return new DTSalidaTuristica(
                             eSalidaTuristica.getNombre(),
@@ -1773,6 +1793,43 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
         
-    } 
+    }
+    
+    @Override
+    public List<Object> obtenerTop(){
+        EntityManager em = emf.createEntityManager();
+        List<Object> resultado = new LinkedList<>();
+        List<EActividadTuristica> resultadosActividad = new LinkedList<>();
+        List<ESalidaTuristica> resultadosSalida = new LinkedList<>();
+        
+            try {
+                String consultaActividad = "select a from EActividadTuristica a";
+                String consultaSalidas = "select s from ESalidaTuristica s";
+            
+                resultadosActividad = em.createQuery(consultaActividad,EActividadTuristica.class).getResultList();
+                resultadosSalida = em.createQuery(consultaSalidas,ESalidaTuristica.class).getResultList();
+                
+                for(EActividadTuristica a : resultadosActividad){
+                    if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
+                        DTActividadTuristica dta = 
+                                new DTActividadTuristica(a.getId(),a.getNombre(),a.getCantidadVistas());
+                        resultado.add(dta);
+                    }
+                }
+                
+                for(ESalidaTuristica s : resultadosSalida){
+                    DTSalidaTuristica dts =
+                            new DTSalidaTuristica(s.getId(),s.getNombre(),s.getCantidadVistas());
+                    resultado.add(dts);
+                }
+                
+                return resultado;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return resultado;
+            } finally {
+                em.close();
+            }
+    }
     
 }
