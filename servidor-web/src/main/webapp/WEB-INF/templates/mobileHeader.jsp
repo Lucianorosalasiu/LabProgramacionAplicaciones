@@ -51,7 +51,7 @@
                                 >
                             <img src="<%=(String) session.getAttribute("sessionPhoto")%>" width="50" height="50" class="rounded-circle">
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center">
+                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center p-2">
                             <li><strong class="dropdown-item"><%=session.getAttribute("sessionNickname")%></strong></li>
                             <li><small class="dropdown-item"><%=session.getAttribute("sessionEmail")%></small></li>
                                 <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
@@ -59,7 +59,7 @@
                                 <%}else{%>
                             <li><small class="dropdown-item badge text-bg-warning">Proveedor</small></li>
                                 <%}%>
-                            <li><a class="dropdown-item text-bg-danger" href="/logout">Cerrar sesión</a></li>
+                            <li class="mt-2"><a class="dropdown-item text-danger border rounded border-danger" href="/logout">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </ul>
@@ -88,9 +88,6 @@
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton2">
                 <li><a class="dropdown-item" href="/consultaactividad">Consulta actividades</a></li>
             </ul>
-        </div>
-        <%}%>
-        <div class="dropdown flex-grow-1">
             <button class="w-100 btn btn-outline-primary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                 Salidas turísticas
             </button>
@@ -98,5 +95,6 @@
                 <li><a class="dropdown-item" href="/consultasalida">Consulta de salida</a></li>
             </ul>
         </div>
+        <%}%>
     </div>
 </header>

@@ -18,6 +18,7 @@ import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
+import exceptions.MyException;
 
 /**
  *
@@ -65,6 +66,9 @@ public class Login extends HttpServlet {
                         sessionType = "TURISTA";
                     }else if(usuario instanceof DTProveedor){
                         sessionType = "PROVEEDOR";
+                        if(request.getHeader("User-Agent").toLowerCase().contains("mobile")){
+                            throw new MyException("Los proveedores no pueden iniciar sesion desde la version mobile.");
+                        }
                     }
                     request.getSession().setAttribute("id", usuario.getId());
                     request.getSession().setAttribute("sessionNickname", usuario.getNickname());
@@ -78,7 +82,6 @@ public class Login extends HttpServlet {
                 request.setAttribute("errorMessage", errorMessage);
             }
         }
-        
         /*cuando se termine con la logica o hayan campos vacios, se redirige*/
         request.getRequestDispatcher("/WEB-INF/login/login.jsp")
                     .forward(request, response);   

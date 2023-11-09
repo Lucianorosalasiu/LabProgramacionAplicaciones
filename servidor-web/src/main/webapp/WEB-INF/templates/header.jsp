@@ -51,7 +51,7 @@
                                 >
                             <img src="<%=(String) session.getAttribute("sessionPhoto")%>" width="50" height="50" class="rounded-circle">
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center">
+                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center p-2">
                             <li><strong class="dropdown-item"><%=session.getAttribute("sessionNickname")%></strong></li>
                             <li><small class="dropdown-item"><%=session.getAttribute("sessionEmail")%></small></li>
                                 <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>
