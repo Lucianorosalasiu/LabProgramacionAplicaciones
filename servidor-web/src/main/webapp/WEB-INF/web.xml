@@ -41,6 +41,10 @@
         <servlet-class>controllers.actividades.AltaActividad</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>FinalizarActividad</servlet-name>
+        <servlet-class>controllers.actividades.Finalizar</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AltaUsuario</servlet-name>
         <servlet-class>controllers.usuarios.AltaUsuario</servlet-class>
     </servlet>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>AltaActividad</servlet-name>
         <url-pattern>/altaactividad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalizarActividad</servlet-name>
+        <url-pattern>/finalizaractividad</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AltaUsuario</servlet-name>

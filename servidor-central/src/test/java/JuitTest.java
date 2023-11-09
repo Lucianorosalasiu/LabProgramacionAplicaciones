@@ -481,7 +481,7 @@ public class JuitTest {
         ECompraPaquete testCompra = new ECompraPaquete(null, null, 0, null, null, 0);
         EDepartamento testDepartamento = new EDepartamento(null, null, null);
         EPaqueteActividadTuristica testPaquete = new EPaqueteActividadTuristica(null, null, 0, 0, null);
-        ESalidaTuristica testSalida = new ESalidaTuristica(null, 0, null, null, null, null, testActividad);
+        ESalidaTuristica testSalida = new ESalidaTuristica(null, 0, null, null, null, null, testActividad,0);
         ETurista testTurista = new ETurista();
         TipoInscripcion tipo = TipoInscripcion.GENERAL;
         TipoInscripcion tipo2 = TipoInscripcion.PAQUETE;

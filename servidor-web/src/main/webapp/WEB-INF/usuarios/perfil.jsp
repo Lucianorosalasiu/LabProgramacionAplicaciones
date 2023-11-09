@@ -13,9 +13,11 @@
 <%@page import="dataTypes.DTProveedor"%>
 <%@page import="dataTypes.DTSalidaTuristica"%>
 <%@page import="dataTypes.DTActividadTuristica"%>
+<%@page import="Enums.EstadoActividad"%>
 
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%> 
+<%@page import="java.util.ArrayList"%> 
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -238,7 +240,41 @@
                             </tbody>
                         </table>
                     </div>
-                    <% } %> 
+                    
+                    <%                                
+                    ArrayList<DTActividadTuristica> actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
+                    if(actividadesFinalizables.size() > 0){%>
+                    <h3 class="text-center">Actividades turísticas finalizables<span class="text-secondary">(Confirmadas y sin salidas por hacer)</span>:</h3>
+                        <div class="table-responsive-lg">
+                            <table class="table align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Ciudad</th>
+                                        <th>Costo</th>
+                                        <th>Finalizar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <%for (DTActividadTuristica a : actividadesFinalizables) {%>
+                                    <tr>
+                                        <td><%= a.getNombre() %></td>
+                                        <td><%= a.getDescripcion() %></td>
+                                        <td><%= a.getCiudad() %></td>
+                                        <td><%= a.getCosto() %></td>
+                                        <td>
+                                            <form action="/finalizaractividad?idActividad=<%=a.getId()%>" method="post">  
+                                                <button type="submit" class="btn btn-outline-danger">Finalizar</button>
+                                            </form>  
+                                        </td>
+                                    </tr>		
+                                <% }%>
+                                </tbody>
+                            </table>
+                        </div>
+                    <%} %>
+                <% } %> 
                 </div>  
             </div>
         </div>

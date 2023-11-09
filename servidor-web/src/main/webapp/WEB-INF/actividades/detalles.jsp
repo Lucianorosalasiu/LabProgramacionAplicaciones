@@ -30,11 +30,13 @@
         List<DTPaqueteActividadTuristica> paquetes = (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetes");
         String foto = (String) request.getAttribute("foto");
         String categorias = (String) request.getAttribute("categorias");
-        String urlVideo = (String) request.getAttribute("urlVideo");
+        String urlVideo = actividad.getUrl();
+        int vistas = actividad.getCantidadVistas() + 1;
     %>
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column flex-grow-1 justify-content-start p-2">
             <h5>Viendo en detalle la actividad <span class="fw-bold text-primary"><%=actividad.getNombre()%></span></h5>
+            <span class="text-secondary">Vistas: <%=vistas%></span>
             <div class="d-flex gap-2">
                 <% String[] categoriasSeparadas = categorias.split("\\|");
                 for (String categoriaIndividual : categoriasSeparadas) {%>

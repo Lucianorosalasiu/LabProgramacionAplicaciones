@@ -11,5 +11,6 @@ package Enums;
 public enum EstadoActividad {
     AGREGADA,
     CONFIRMADA,
-    RECHAZADA
+    RECHAZADA,
+    FINALIZADA
 }

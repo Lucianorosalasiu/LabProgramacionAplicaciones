@@ -117,13 +117,6 @@ public class ConsultaActividad extends HttpServlet {
                 imageDataUri = "data:" + contentType + ";base64," + imagenBase64;
             }
             
-            String urlVideo = "";
-            try{
-                urlVideo = controlador.obtenerUrlVideo(idActividad);
-            }catch(Exception e){
-                
-            }
-            
             String categorias = "";
             try {
                categorias += actividad.getCategoriasString(); 
@@ -146,12 +139,10 @@ public class ConsultaActividad extends HttpServlet {
                 response.sendError(404);
                 return;
             }
-            
             request.setAttribute("paquetes", paquetes);
             request.setAttribute("salidas",salidas);
             request.setAttribute("categorias", categorias);
             request.setAttribute("foto", imageDataUri);
-            request.setAttribute("urlVideo", urlVideo);
             request.setAttribute("actividad",actividad);
             request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
                         .forward(request, response);

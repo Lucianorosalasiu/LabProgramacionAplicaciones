@@ -35,6 +35,7 @@ public class ESalidaTuristica extends EBase {
     @ManyToOne
     private EActividadTuristica eActividadTuristica;
     
+    private int cantidadVistas = 0;
     
     public ESalidaTuristica(){}
 }
