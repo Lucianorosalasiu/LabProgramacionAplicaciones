@@ -143,6 +143,7 @@
                                 <th>Nombre</th>
                                 <th>Fecha Salida</th>
                                 <th>Lugar de Salida</th>
+                                <th>Inscripción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,6 +158,12 @@
                                     %>
                                 </td>
                                 <td><%= salida.getLugar() %></td>
+                                <td>
+                                    <button class="btn btn-primary" 
+                                            onclick="openPdfInscripcion(<%=turista.getNickname()%>, <%=salida.getNombre()%>);">
+                                        Ver PDF
+                                    </button>
+                                </td>
                             </tr>		
                             <% } %>
                         </tbody>
@@ -236,6 +243,14 @@
             </div>
         </div>
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
+        <script>
+            function openPdfInscripcion(nickname, nombreSalida) {
+                var url = '/pdfInscripcion?nickname=' + nickname + '&salida=' + nombreSalida;
+                var newWindow = window.open(url, '_blank');
+
+                newWindow.focus();
+            }
+        </script>
     </body>
 </html>
 

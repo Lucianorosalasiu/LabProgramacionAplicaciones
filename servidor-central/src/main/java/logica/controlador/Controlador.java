@@ -437,7 +437,9 @@ public class Controlador implements IControlador{
     public byte[] obtenerPdfInscripcion(String nickname, String nombreSalida) {
         DTInscripcion inscripcion = dataPersistencia.obtenerInscripcion(nickname, nombreSalida);
         
-        InputStream templateInputStream = getClass().getClassLoader().getResourceAsStream("templates/turismoUyInscripcion.docx");
+        InputStream templateInputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream("templates/turismoUyInscripcion.docx");
 
         XWPFDocument document;
         try {
@@ -458,11 +460,12 @@ public class Controlador implements IControlador{
             String actualDate = LocalDateTime.now().format(dateFormat);
             replaceInPdf(document, "$fechaEmitido", actualDate);
 
-
+            document.createNumbering();
             // Convert XWPFDocument to Pdf
             PdfOptions options = PdfOptions.create();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            PdfConverter.getInstance().convert(document, outputStream, options);
+            PdfConverter pdfConverter = new PdfConverter();
+            pdfConverter.convert(document, outputStream, options);
             
             return outputStream.toByteArray();
         } catch (IOException ex) {
@@ -481,21 +484,6 @@ public class Controlador implements IControlador{
                     if (text != null && text.contains(prevText)) {
                         text = text.replace(prevText, newText);
                         r.setText(text, 0);
-                    }
-                }
-            }
-        }
-        for (XWPFTable tbl : document.getTables()) {
-            for (XWPFTableRow row : tbl.getRows()) {
-                for (XWPFTableCell cell : row.getTableCells()) {
-                    for (XWPFParagraph p : cell.getParagraphs()) {
-                        for (XWPFRun r : p.getRuns()) {
-                            String text = r.getText(0);
-                            if (text != null && text.contains(prevText)) {
-                                text = text.replace(prevText, newText);
-                                r.setText(text,0);
-                            }
-                        }
                     }
                 }
             }

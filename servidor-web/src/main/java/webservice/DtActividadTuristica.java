@@ -12,9 +12,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para dtActividadTuristica complex type.
+ * <p>Java class for dtActividadTuristica complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="dtActividadTuristica"&gt;
@@ -97,7 +97,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad categoriasString.
+     * Gets the value of the categoriasString property.
      * 
      * @return
      *     possible object is
@@ -109,7 +109,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad categoriasString.
+     * Sets the value of the categoriasString property.
      * 
      * @param value
      *     allowed object is
@@ -121,7 +121,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad ciudad.
+     * Gets the value of the ciudad property.
      * 
      * @return
      *     possible object is
@@ -133,7 +133,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad ciudad.
+     * Sets the value of the ciudad property.
      * 
      * @param value
      *     allowed object is
@@ -145,7 +145,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad costo.
+     * Gets the value of the costo property.
      * 
      */
     public float getCosto() {
@@ -153,7 +153,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad costo.
+     * Sets the value of the costo property.
      * 
      */
     public void setCosto(float value) {
@@ -161,7 +161,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad departamento.
+     * Gets the value of the departamento property.
      * 
      * @return
      *     possible object is
@@ -173,7 +173,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad departamento.
+     * Sets the value of the departamento property.
      * 
      * @param value
      *     allowed object is
@@ -185,7 +185,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -197,7 +197,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -209,7 +209,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad duracion.
+     * Gets the value of the duracion property.
      * 
      * @return
      *     possible object is
@@ -221,7 +221,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad duracion.
+     * Sets the value of the duracion property.
      * 
      * @param value
      *     allowed object is
@@ -233,7 +233,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad fechaAlta.
+     * Gets the value of the fechaAlta property.
      * 
      * @return
      *     possible object is
@@ -245,7 +245,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad fechaAlta.
+     * Sets the value of the fechaAlta property.
      * 
      * @param value
      *     allowed object is
@@ -257,7 +257,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -269,7 +269,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
@@ -281,7 +281,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -293,7 +293,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
