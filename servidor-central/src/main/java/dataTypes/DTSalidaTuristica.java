@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DTSalidaTuristica {
+    private Long id;
     private String nombre;
     private int cantidadMaxTuristas;
     private Date fechaSalida;
@@ -25,6 +26,7 @@ public class DTSalidaTuristica {
     private Date fechaAlta;
     private DTActividadTuristica dtActividadTuristica;
     private byte[] imagen;
+    private int cantidadVistas;
     
     public DTSalidaTuristica(){};
     
@@ -43,5 +45,21 @@ public class DTSalidaTuristica {
         this.lugar = lugar;
         this.fechaAlta = fechaAlta;
         this.imagen = imagen;
+    }
+    
+    public DTSalidaTuristica(Long id, String nombre, int cantidadMaxTuristas, Date fechaSalida, String lugar, Date fechaAlta, int cantidadVistas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidadMaxTuristas = cantidadMaxTuristas;
+        this.fechaSalida = fechaSalida;
+        this.lugar = lugar;
+        this.fechaAlta = fechaAlta;
+        this.cantidadVistas = cantidadVistas;
+    }
+    
+    public DTSalidaTuristica(Long id, String nombre, int cantidadVistas){
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidadVistas = cantidadVistas;
     }
 }

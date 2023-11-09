@@ -59,8 +59,11 @@ public class EActividadTuristica extends EBase {
             joinColumns = @JoinColumn (name = "ACTIVIDAD_ID"),
             inverseJoinColumns = @JoinColumn (name = "CATEGORIA_ID"))
     private List<ECategoria> categorias;
-    private EActividadTuristica(){}
     private String url;
+    private int cantidadVistas = 0;
+    
+    private EActividadTuristica(){}
+    
     
     public EActividadTuristica(String nombre, String descripcion, String duracion,
             float costo, String ciudad, Date fechaAlta, EDepartamento eDepartamento){
