@@ -6,6 +6,7 @@ package logica.interfaces;
 
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -98,6 +99,9 @@ public interface  IControlador {
     
     /*Obtener top*/
     List<DTTop> obtenerTop();
+    
+    /*Busqueda*/
+    ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro);
     
     
     /*Servidor Web*/

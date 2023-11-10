@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import com.sun.jdi.IntegerType;
+import dataTypes.DTBusqueda;
 import java.io.IOException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -33,13 +41,28 @@ public class Busqueda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            
-        } catch(Exception e){
+        ArrayList<DTBusqueda> resultadoBusqueda = new ArrayList<>();
+        String peticionBusqueda = (String) request.getParameter("peticionBusqueda");
+        int tipoDeFiltro = 0;
         
+        if(request.getParameter("tipoDeFiltro") != null){
+            tipoDeFiltro = Integer.parseInt(request.getParameter("tipoDeFiltro"));
+            request.setAttribute("test",tipoDeFiltro);
         }
         
+        try {
+        
+            Fabrica fabrica = new Fabrica();
+            IControlador controlador = fabrica.getInterface();
+            resultadoBusqueda = controlador.obtenerBusqueda(peticionBusqueda,tipoDeFiltro);
+            
+        } catch(Exception e){
+            
+        }
+        
+        request.setAttribute("filtro", Integer.toString(tipoDeFiltro));
+        request.setAttribute("peticionBusqueda",peticionBusqueda);
+        request.setAttribute("resultadosBusqueda", resultadoBusqueda);
         request.getRequestDispatcher("/WEB-INF/busqueda/busqueda.jsp")
                     .forward(request, response); 
     }

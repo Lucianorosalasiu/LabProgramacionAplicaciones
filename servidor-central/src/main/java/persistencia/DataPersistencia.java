@@ -2,6 +2,7 @@ package persistencia;
 
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -1894,6 +1895,47 @@ public class DataPersistencia implements IDataPersistencia {
         }catch(Exception e){
             return new DTInscripcion();
         }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro){
+       EntityManager em = emf.createEntityManager(); 
+       ArrayList<DTBusqueda> resultadosBusqueda = new ArrayList<>();
+        try {
+            String actividadQuery = "select a from EActividadTuristica a where a.nombre like :nombre";
+            String paqueteQuery = "select p from EPaqueteActividadTuristica p where p.nombre like :nombre";
+            
+            List<EActividadTuristica> resultadoActividad = new ArrayList<>();
+            List<EPaqueteActividadTuristica> resultadoPaquete = new ArrayList<>();
+            
+            resultadoActividad = em.createQuery(actividadQuery,EActividadTuristica.class).
+                    setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+            resultadoPaquete = em.createQuery(paqueteQuery,EPaqueteActividadTuristica.class).
+                    setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+            
+            for ( EActividadTuristica a : resultadoActividad){
+                DTBusqueda dtb = new DTBusqueda(a.getId(), 
+                        a.getNombre(), a.getFechaAlta().toString(), a.getCategorias().toString(),
+                        "Actividad", a.getDescripcion());
+                
+                resultadosBusqueda.add(dtb);
+            }
+            
+            for ( EPaqueteActividadTuristica p : resultadoPaquete){
+                DTBusqueda dtb = new DTBusqueda(p.getId(), 
+                        p.getNombre(), p.getFechaAlta().toString(),"categoriasplaceholder",
+                        "Paquete", p.getDescripcion());
+                
+                resultadosBusqueda.add(dtb);
+            }
+            Logger.getLogger("log").log(Level.SEVERE, "size: " + resultadoActividad.size());
+            return resultadosBusqueda;
+            
+        } catch (Exception e) {
+            return resultadosBusqueda;
+        } finally {
             em.close();
         }
     }
