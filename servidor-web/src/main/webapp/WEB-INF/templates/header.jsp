@@ -39,8 +39,8 @@
                 </ul>
                         
                 <form class="d-flex flex-row gap-2 m-2" action="/busqueda" method="post">
-                    <input type="text" placeholder="Buscar actividades,paquetes" class="form-control">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <input type="text" placeholder="Buscar actividades,paquetes" class="form-control" name="peticionBusqueda">
+                    <button type="submit" class="text-light btn btn-outline-primary">Buscar</button>
                 </form>
             </div>
                         

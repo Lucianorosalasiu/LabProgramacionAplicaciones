@@ -5,6 +5,7 @@
 package logica.controlador;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -499,8 +500,30 @@ public class Controlador implements IControlador{
         }
     }
 
+    @Override
     public List<DTTop> obtenerTop(){
         return dataPersistencia.obtenerTop();
+    }
+    
+    
+    @Override
+    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda){
+        return dataPersistencia.obtenerBusqueda(peticionBusqueda);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda){
+        return dataPersistencia.ordenarBusquedaFecha(peticionBusqueda);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String nombreDepartamento){
+        return dataPersistencia.ordenarBusquedaDepartamento(peticionBusqueda,nombreDepartamento);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaCategoria(String peticionBusqueda,String categoria){
+        return dataPersistencia.ordenarBusquedaCategoria(peticionBusqueda,categoria);
     }
     
 }

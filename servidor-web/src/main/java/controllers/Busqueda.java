@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import com.sun.jdi.IntegerType;
+import dataTypes.DTBusqueda;
 import java.io.IOException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logica.fabrica.Fabrica;
+import logica.interfaces.IControlador;
 
 /**
  *
@@ -33,13 +43,59 @@ public class Busqueda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            
-        } catch(Exception e){
+        ArrayList<DTBusqueda> resultadoBusqueda = new ArrayList<>();
+        String peticionBusqueda = (String) request.getParameter("peticionBusqueda");
+        int tipoDeFiltro = 0;
         
+        if(request.getParameter("tipoDeFiltro") != null){
+            tipoDeFiltro = Integer.parseInt(request.getParameter("tipoDeFiltro"));
+            request.setAttribute("test",tipoDeFiltro);
         }
         
+        try {
+            
+            Fabrica fabrica = new Fabrica();
+            IControlador controlador = fabrica.getInterface();
+            resultadoBusqueda = controlador.obtenerBusqueda(peticionBusqueda);
+            request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+            request.setAttribute("categorias", controlador.obtenerCategorias());
+            
+            if(request.getParameter("departamento") != null){
+                String departamento = request.getParameter("departamento");
+                resultadoBusqueda = controlador.ordenarBusquedaDepartamento(peticionBusqueda,departamento);
+                request.setAttribute("departamento",departamento);
+            }
+            
+            if(request.getParameter("categoria") != null){
+                String categoria = request.getParameter("categoria");
+                resultadoBusqueda = controlador.ordenarBusquedaCategoria(peticionBusqueda,categoria);
+                request.setAttribute("categoria",categoria);
+            }
+            
+            if(tipoDeFiltro == 1){
+                Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getNombre));
+            }
+            
+            if(tipoDeFiltro == 2){
+                //resultadoBusqueda = controlador.ordenarBusquedaFecha(peticionBusqueda);
+                //por cada Date parseado a string que haya en los registros de la busqueda, lo convierto
+                //a fecha para poder compararlo bien y una vez ordenado lo devuelvo a String
+                
+                /*remuevo el objeto fecha de todos los dts y lo paso a texto plano*/
+                Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
+                for(DTBusqueda dtb : resultadoBusqueda){
+                    dtb.setFechaAltaComoString(dtb.getFechaAlta().toString());
+                    dtb.setFechaAlta(null);
+                }
+            }
+            
+        } catch(Exception e){
+            
+        }
+        
+        //request.setAttribute("filtro", Integer.toString(tipoDeFiltro));
+        request.setAttribute("peticionBusqueda",peticionBusqueda);
+        request.setAttribute("resultadosBusqueda", resultadoBusqueda);
         request.getRequestDispatcher("/WEB-INF/busqueda/busqueda.jsp")
                     .forward(request, response); 
     }
