@@ -507,8 +507,13 @@ public class Controlador implements IControlador{
     
     
     @Override
-    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro){
-        return dataPersistencia.obtenerBusqueda(peticionBusqueda, tipoDeFiltro);
+    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda){
+        return dataPersistencia.obtenerBusqueda(peticionBusqueda);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda){
+        return dataPersistencia.ordenarBusquedaFecha(peticionBusqueda);
     }
     
 }

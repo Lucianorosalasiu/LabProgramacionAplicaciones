@@ -101,7 +101,8 @@ public interface  IControlador {
     List<DTTop> obtenerTop();
     
     /*Busqueda*/
-    ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro);
+    ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda);
     
     
     /*Servidor Web*/

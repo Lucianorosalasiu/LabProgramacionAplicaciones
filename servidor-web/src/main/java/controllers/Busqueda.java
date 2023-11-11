@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,10 +53,20 @@ public class Busqueda extends HttpServlet {
         }
         
         try {
-        
+            
             Fabrica fabrica = new Fabrica();
             IControlador controlador = fabrica.getInterface();
-            resultadoBusqueda = controlador.obtenerBusqueda(peticionBusqueda,tipoDeFiltro);
+            resultadoBusqueda = controlador.obtenerBusqueda(peticionBusqueda);
+            request.setAttribute("departamentos", controlador.obtenerDepartamentos());
+            request.setAttribute("categorias", controlador.obtenerCategorias());
+            
+            if(tipoDeFiltro == 1){
+                Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getNombre));
+            }
+            
+            if(tipoDeFiltro == 2){
+                resultadoBusqueda = controlador.ordenarBusquedaFecha(peticionBusqueda);
+            }
             
         } catch(Exception e){
             

@@ -29,11 +29,49 @@
     
     <%
         ArrayList<DTBusqueda> resultadosBusqueda = (ArrayList<DTBusqueda>) request.getAttribute("resultadosBusqueda");
+        String strPeticionBusqueda = (String) request.getAttribute("peticionBusqueda");
     %>
 
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-row align-items-center justify-content-between p-2">
-            <h4>Resultados de la busqueda</h4>
+            <h4>Resultados de la busqueda: <span class="text-secondary"><%=strPeticionBusqueda%></span></h4>
+            <form method="post" action="/busqueda?peticionBusqueda=<%=strPeticionBusqueda%>">
+                <div class="form-group">
+                    <select class="form-select btn btn-primary" name="tipoDeFiltro" onchange="this.form.submit();">
+                        <option disable selected >Selecciona un orden</option>
+                        <option value="1"> Ordenar alfabeticamente </option>
+                        <option value="2"> Ordenar por fecha de alta </option>
+                    </select>
+                </div>
+            </form>
+            <div class="form-group">
+                <label>Filtro por Departamento</label>
+                <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
+                    <option value="" disabled selected>- seleccione un departamento -</option>
+                    <% 
+                        for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
+                            String nombreDepartamento = departamento.getNombre();
+                    %>
+                    <option value="<%= departamento.getNombre() %>">
+                        <%= nombreDepartamento %>
+                    </option>		
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Filtro por Categoria</label>
+                <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
+                    <option value="" disabled selected>- seleccione una categoria -</option>
+                    <% 
+                        for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
+                            String nombreCategoria = c.getNombre();
+                    %>
+                    <option value="<%=nombreCategoria%>">
+                        <%= nombreCategoria %>
+                    </option>		
+                    <% } %>
+                </select>
+            </div> 
         </div>
 
         <div class="p-2 overflow-scroll flex-grow-1">    
@@ -58,7 +96,16 @@
                             <td><%= dtb.getDescripcion() %></td>
                             <td><%= dtb.getFechaAltaComoString() %></td>
                             <td><span class="badge text-bg-primary">Categoria</span></td>
-                            <td><span class="badge text-bg-primary">Departamento</span></td>
+                            <%if(dtb.getTipoResultado().equals("Actividad")){%>
+                                <td><span class="badge text-bg-primary"><%= dtb.getDepartamento() %></span></td>
+                            <%} else {%>
+                                <td>
+                                    <% String[] departamentosSeparados = dtb.getDepartamento().split(",");
+                                    for (String departamentoIndividual : departamentosSeparados) {%>
+                                        <span class="badge text-bg-primary"><%=departamentoIndividual%></span>
+                                    <%}%>
+                                </td>
+                            <%}%>
                             <td><%= dtb.getTipoResultado() %></td>
                         </tr>		
                         <% } %>

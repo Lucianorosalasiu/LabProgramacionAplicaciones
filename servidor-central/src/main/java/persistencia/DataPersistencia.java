@@ -1900,59 +1900,166 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro){
+    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda){
        EntityManager em = emf.createEntityManager(); 
        ArrayList<DTBusqueda> resultadosBusqueda = new ArrayList<>();
        
         try {
-            String actividadQuery = "select a from EActividadTuristica a where a.nombre like :nombre";
-            String paqueteQuery = "select p from EPaqueteActividadTuristica p where p.nombre like :nombre";
-            
+ 
+            /*caso filtrado por nombre y ordenado alfabeticamente*/
+            String actividadQuery = "select a from EActividadTuristica a where a.nombre like :nombre or a.descripcion like :nombre";
+            String paqueteQuery = "select p from EPaqueteActividadTuristica p where p.nombre like :nombre or p.descripcion like :nombre";
+
             List<EActividadTuristica> resultadoActividad = new ArrayList<>();
             List<EPaqueteActividadTuristica> resultadoPaquete = new ArrayList<>();
-            
+
             resultadoActividad = em.createQuery(actividadQuery,EActividadTuristica.class).
-                    setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+            setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+
             resultadoPaquete = em.createQuery(paqueteQuery,EPaqueteActividadTuristica.class).
-                    setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
-            
+            setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+
             for ( EActividadTuristica a : resultadoActividad){
                 DTBusqueda dtb = new DTBusqueda(a.getId(), 
-                        a.getNombre(), a.getFechaAlta(),"", a.getCategorias().toString(),
-                        "Actividad", a.getDescripcion());
-                
+                    a.getNombre(), null,a.getFechaAlta().toString(),
+                        a.getCategorias().toString(),
+                    "Actividad", a.getDescripcion(),
+                        a.getEDepartamento().getNombre());
+
                 resultadosBusqueda.add(dtb);
-            }
-            
-            for ( EPaqueteActividadTuristica p : resultadoPaquete){
-                DTBusqueda dtb = new DTBusqueda(p.getId(), 
-                        p.getNombre(), p.getFechaAlta(),"","categoriasplaceholder",
-                        "Paquete", p.getDescripcion());
-                
-                resultadosBusqueda.add(dtb);
-            }
-            
-            switch (tipoDeFiltro) {
-                case 0:
-                        
-                    break;
-                case 1:
-                        Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getNombre));
-                    break;
-                case 4:
-                        Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
-                        for(DTBusqueda dtb : resultadosBusqueda){
-                            dtb.setFechaAltaComoString(dtb.getFechaAlta().toString());
-                            dtb.setFechaAlta(null);
-                        }
-                    break;
-                default:
-                    throw new AssertionError();
             }
 
-            Logger.getLogger("log").log(Level.SEVERE, "size: " + resultadoActividad.size());
+            for ( EPaqueteActividadTuristica p : resultadoPaquete){
+                DTBusqueda dtb = new DTBusqueda(p.getId(), 
+                    p.getNombre(), null,p.getFechaAlta().toString(),
+                        "categoriasplaceholder",
+                    "Paquete", p.getDescripcion(),"");
+
+                String departamentos = "";
+
+                for(EActividadTuristica a : p.getActividades()){
+                    if(!departamentos.contains(a.getEDepartamento().getNombre())){
+                        departamentos += a.getEDepartamento().getNombre() + ",";
+                    }
+                }
+
+                dtb.setDepartamento(departamentos);
+
+                resultadosBusqueda.add(dtb);
+            }
+
             return resultadosBusqueda;
+
+//                /*caso filtrado por nombre y ordenado alfabeticamente*/
+//                String actividadQuery = "select a from EActividadTuristica a";
+//                String paqueteQuery = "select p from EPaqueteActividadTuristica p";
+//
+//                List<EActividadTuristica> resultadoActividad = new ArrayList<>();
+//                List<EPaqueteActividadTuristica> resultadoPaquete = new ArrayList<>();
+//
+//                resultadoActividad = em.createQuery(actividadQuery,EActividadTuristica.class).getResultList();
+//
+//                resultadoPaquete = em.createQuery(paqueteQuery,EPaqueteActividadTuristica.class).getResultList();
+//
+//                for ( EActividadTuristica a : resultadoActividad){
+//                    DTBusqueda dtb = new DTBusqueda(a.getId(), 
+//                        a.getNombre(), a.getFechaAlta(),"",
+//                            a.getCategorias().toString(),
+//                        "Actividad", a.getDescripcion(),
+//                            a.getEDepartamento().getNombre());
+//
+//                    if(dtb.getDepartamento().contains(peticionBusqueda)){
+//                        resultadosBusqueda.add(dtb);
+//                    }
+//                }
+//
+//                for ( EPaqueteActividadTuristica p : resultadoPaquete){
+//                    DTBusqueda dtb = new DTBusqueda(p.getId(), 
+//                        p.getNombre(), p.getFechaAlta(),"",
+//                            "categoriasplaceholder",
+//                        "Paquete", p.getDescripcion(),"");
+//
+//                    String departamentos = "";
+//
+//                    for(EActividadTuristica a : p.getActividades()){
+//                        if(!departamentos.contains(a.getEDepartamento().getNombre())){
+//                            departamentos += a.getEDepartamento().getNombre() + ",";
+//                        }
+//                    }
+//
+//                    dtb.setDepartamento(departamentos);
+//
+//                    if(dtb.getDepartamento().contains(peticionBusqueda)){
+//                        resultadosBusqueda.add(dtb);
+//                    }
+//                }
+//
+//                return resultadosBusqueda;
+        } catch (Exception e) {
+            return resultadosBusqueda;
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override 
+    public ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda){
+        EntityManager em = emf.createEntityManager(); 
+        ArrayList<DTBusqueda> resultadosBusqueda = new ArrayList<>();
+        
+        try {
+            String actividadQuery = "select a from EActividadTuristica a where a.nombre like :nombre or a.descripcion like :nombre";
+            String paqueteQuery = "select p from EPaqueteActividadTuristica p where p.nombre like :nombre or p.descripcion like :nombre";
+
+            List<EActividadTuristica> resultadoActividad = new ArrayList<>();
+            List<EPaqueteActividadTuristica> resultadoPaquete = new ArrayList<>();
+
+            resultadoActividad = em.createQuery(actividadQuery,EActividadTuristica.class).
+            setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+
+            resultadoPaquete = em.createQuery(paqueteQuery,EPaqueteActividadTuristica.class).
+            setParameter("nombre","%" + peticionBusqueda + "%").getResultList();
+
+            for ( EActividadTuristica a : resultadoActividad){
+                DTBusqueda dtb = new DTBusqueda(a.getId(), 
+                    a.getNombre(), a.getFechaAlta(),"",
+                        a.getCategorias().toString(),
+                    "Actividad", a.getDescripcion(),
+                        a.getEDepartamento().getNombre());
+
+                resultadosBusqueda.add(dtb);
+            }
+
+            /*para los paquetes que pueden contener varios departamentos
+            recorro los departamentos de cada actividad que contenga
+            un paquete y lo agrego a la lista si es nuevo*/
+            for ( EPaqueteActividadTuristica p : resultadoPaquete){
+                DTBusqueda dtb = new DTBusqueda(p.getId(), 
+                    p.getNombre(), p.getFechaAlta(),"",
+                        "categoriasplaceholder",
+                    "Paquete", p.getDescripcion(),"");
+
+                String departamentos = "";
+
+                for(EActividadTuristica a : p.getActividades()){
+                    if(!departamentos.contains(a.getEDepartamento().getNombre())){
+                        departamentos += a.getEDepartamento().getNombre() + ",";
+                    }
+                }
+
+                dtb.setDepartamento(departamentos);
+
+                resultadosBusqueda.add(dtb);
+            }
+
+            /*remuevo el objeto fecha de todos los dts y lo paso a texto plano*/
+            Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
+            for(DTBusqueda dtb : resultadosBusqueda){
+                dtb.setFechaAltaComoString(dtb.getFechaAlta().toString());
+                dtb.setFechaAlta(null);
+            }
             
+            return resultadosBusqueda;
         } catch (Exception e) {
             return resultadosBusqueda;
         } finally {

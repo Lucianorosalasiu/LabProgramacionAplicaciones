@@ -26,6 +26,7 @@ public class DTBusqueda {
     private String categorias;
     private String tipoResultado;
     private String descripcion;
+    private String departamento;
 
     public DTBusqueda(){}
     
