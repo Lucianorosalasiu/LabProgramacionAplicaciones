@@ -56,9 +56,9 @@
                         <tr>
                             <td><%= dtb.getNombre() %></td>
                             <td><%= dtb.getDescripcion() %></td>
-                            <td><%= dtb.getFechaAlta() %></td>
-                            <td>categorias placeholder</td>
-                            <td>departamento placeholder</td>
+                            <td><%= dtb.getFechaAltaComoString() %></td>
+                            <td><span class="badge text-bg-primary">Categoria</span></td>
+                            <td><span class="badge text-bg-primary">Departamento</span></td>
                             <td><%= dtb.getTipoResultado() %></td>
                         </tr>		
                         <% } %>

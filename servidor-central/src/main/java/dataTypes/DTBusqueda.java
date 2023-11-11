@@ -4,6 +4,9 @@
  */
 package dataTypes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +21,8 @@ import lombok.Setter;
 public class DTBusqueda {
     private Long id;
     private String nombre;
-    private String fechaAlta;
+    private Date fechaAlta;
+    private String fechaAltaComoString;
     private String categorias;
     private String tipoResultado;
     private String descripcion;

@@ -18,11 +18,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import exceptions.MyException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -1833,8 +1835,6 @@ public class DataPersistencia implements IDataPersistencia {
                 //actualizo el indice
                 for (DTTop d : resultadoTopSort){
                   d.setPos(index);
-                  Logger.getLogger("DEBUG").log(Level.SEVERE,"index: " + Integer.toString(index) + 
-                          "cantidad vistas: " + Integer.toString(d.getCantidadVistas()));
                   index += 1;
                 }
                 //devuelvo las 10 mejores
@@ -1903,6 +1903,7 @@ public class DataPersistencia implements IDataPersistencia {
     public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda, int tipoDeFiltro){
        EntityManager em = emf.createEntityManager(); 
        ArrayList<DTBusqueda> resultadosBusqueda = new ArrayList<>();
+       
         try {
             String actividadQuery = "select a from EActividadTuristica a where a.nombre like :nombre";
             String paqueteQuery = "select p from EPaqueteActividadTuristica p where p.nombre like :nombre";
@@ -1917,7 +1918,7 @@ public class DataPersistencia implements IDataPersistencia {
             
             for ( EActividadTuristica a : resultadoActividad){
                 DTBusqueda dtb = new DTBusqueda(a.getId(), 
-                        a.getNombre(), a.getFechaAlta().toString(), a.getCategorias().toString(),
+                        a.getNombre(), a.getFechaAlta(),"", a.getCategorias().toString(),
                         "Actividad", a.getDescripcion());
                 
                 resultadosBusqueda.add(dtb);
@@ -1925,11 +1926,30 @@ public class DataPersistencia implements IDataPersistencia {
             
             for ( EPaqueteActividadTuristica p : resultadoPaquete){
                 DTBusqueda dtb = new DTBusqueda(p.getId(), 
-                        p.getNombre(), p.getFechaAlta().toString(),"categoriasplaceholder",
+                        p.getNombre(), p.getFechaAlta(),"","categoriasplaceholder",
                         "Paquete", p.getDescripcion());
                 
                 resultadosBusqueda.add(dtb);
             }
+            
+            switch (tipoDeFiltro) {
+                case 0:
+                        
+                    break;
+                case 1:
+                        Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getNombre));
+                    break;
+                case 4:
+                        Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
+                        for(DTBusqueda dtb : resultadosBusqueda){
+                            dtb.setFechaAltaComoString(dtb.getFechaAlta().toString());
+                            dtb.setFechaAlta(null);
+                        }
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
             Logger.getLogger("log").log(Level.SEVERE, "size: " + resultadoActividad.size());
             return resultadosBusqueda;
             
