@@ -7,9 +7,9 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para ParseException complex type.
+ * <p>Java class for ParseException complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="ParseException"&gt;
@@ -37,7 +37,7 @@ public class ParseException {
     protected String message;
 
     /**
-     * Obtiene el valor de la propiedad errorOffset.
+     * Gets the value of the errorOffset property.
      * 
      */
     public int getErrorOffset() {
@@ -45,7 +45,7 @@ public class ParseException {
     }
 
     /**
-     * Define el valor de la propiedad errorOffset.
+     * Sets the value of the errorOffset property.
      * 
      */
     public void setErrorOffset(int value) {
@@ -53,7 +53,7 @@ public class ParseException {
     }
 
     /**
-     * Obtiene el valor de la propiedad message.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
@@ -65,7 +65,7 @@ public class ParseException {
     }
 
     /**
-     * Define el valor de la propiedad message.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is

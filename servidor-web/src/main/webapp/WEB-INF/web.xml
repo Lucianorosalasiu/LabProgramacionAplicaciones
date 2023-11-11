@@ -29,6 +29,10 @@
         <servlet-class>controllers.salidas.Inscripcion</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>PdfInscripcion</servlet-name>
+        <servlet-class>controllers.salidas.VerPdf</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ConsultaActividad</servlet-name>
         <servlet-class>controllers.actividades.ConsultaActividad</servlet-class>
     </servlet>
@@ -39,6 +43,10 @@
     <servlet>
         <servlet-name>FinalizarActividad</servlet-name>
         <servlet-class>controllers.actividades.Finalizar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Busqueda</servlet-name>
+        <servlet-class>controllers.Busqueda</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AltaUsuario</servlet-name>
@@ -85,6 +93,10 @@
         <url-pattern>/inscripcion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>PdfInscripcion</servlet-name>
+        <url-pattern>/pdfInscripcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ConsultaActividad</servlet-name>
         <url-pattern>/consultaactividad</url-pattern>
     </servlet-mapping>
@@ -95,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>FinalizarActividad</servlet-name>
         <url-pattern>/finalizaractividad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Busqueda</servlet-name>
+        <url-pattern>/busqueda</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AltaUsuario</servlet-name>

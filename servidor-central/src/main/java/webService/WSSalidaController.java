@@ -19,6 +19,7 @@ import jakarta.xml.ws.Endpoint;
 import java.text.ParseException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import utils.DateConverter;
+import webService.dataTypesWS.DTPDFWrapper;
 import webService.dataTypesWS.DTSalidasCollectionWS;
 
 /**
@@ -49,6 +50,15 @@ public class WSSalidaController {
     	return "pong";
     }
 
+    @WebMethod
+    public DTPDFWrapper obtenerPdf(String nickname, String nombreSalida){
+        DTPDFWrapper pdf = new DTPDFWrapper();
+        pdf.setData(controlador.obtenerPdfInscripcion(nickname, nombreSalida));
+        
+        return pdf;
+    }
+
+    
     @WebMethod
     public void altaSalidaTuristica(DTSalidaTuristicaWS dTSalidaTuristicaWS, String nombreActividad) throws MyException, ParseException {
 

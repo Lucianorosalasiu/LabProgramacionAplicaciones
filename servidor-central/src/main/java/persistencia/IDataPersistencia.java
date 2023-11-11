@@ -6,6 +6,7 @@ package persistencia;
 
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -13,6 +14,7 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import java.util.List;
 import exceptions.MyException;
@@ -102,11 +104,19 @@ public interface IDataPersistencia {
     void validarActividad(Long id, EstadoActividad estado);
     
     /* Obtener top */
-    List<Object> obtenerTop();
+    List<DTTop> obtenerTop();
+    
+    /*Busqueda*/
+    ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String nombreDepartamento);
+    ArrayList<DTBusqueda> ordenarBusquedaCategoria(String peticionBusqueda,String categoria);
     
     /* Servidor Web */
     
     /* CU Alta Salida Turistica */
     ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     List<DTPaqueteActividadTuristica> obtenerPaquetesCompradosDisponibles(Long idTurista, String nombreSalida, int cantTuristas);
+    
+    DTInscripcion obtenerInscripcion(String nickname, String nombreSalida);
 }

@@ -37,7 +37,14 @@
                         </a>
                     </li>          
                 </ul>
+                        
+                <form class="d-flex flex-row gap-2 m-2" action="/busqueda" method="post">
+                    <input type="text" placeholder="Buscar actividades,paquetes" class="form-control" name="peticionBusqueda">
+                    <button type="submit" class="text-light btn btn-outline-primary">Buscar</button>
+                </form>
             </div>
+                        
+            
 
 
             <% if(session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")){ %>
@@ -51,7 +58,7 @@
                                 >
                             <img src="<%=(String) session.getAttribute("sessionPhoto")%>" width="50" height="50" class="rounded-circle">
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center">
+                        <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-center p-2">
                             <li><strong class="dropdown-item"><%=session.getAttribute("sessionNickname")%></strong></li>
                             <li><small class="dropdown-item"><%=session.getAttribute("sessionEmail")%></small></li>
                                 <%if("TURISTA".equals((String) session.getAttribute("sessionType"))){%>

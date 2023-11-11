@@ -6,6 +6,7 @@ package logica.interfaces;
 
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -13,6 +14,7 @@ import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import dataTypes.DTInscripcion;
 import dataTypes.DTProveedor;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import java.util.List;
@@ -96,8 +98,13 @@ public interface  IControlador {
     void validarActividad(Long id, EstadoActividad estado);
     
     /*Obtener top*/
-    List<Object> obtenerTop();
+    List<DTTop> obtenerTop();
     
+    /*Busqueda*/
+    ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String departamentoNombre);
+    ArrayList<DTBusqueda> ordenarBusquedaCategoria(String peticionBusqueda,String categoria);
     
     /*Servidor Web*/
     
@@ -105,5 +112,7 @@ public interface  IControlador {
     ArrayList<DTActividadTuristica> obtenerActividadesTuristicas(String nombreDepartamento, Long idProveedor);
     List<DTPaqueteActividadTuristica> obtenerPaquetesComprados(Long idTurista, String nombreSalida, int cantTuristas);
     float obtenerCostoActividad(String nombreActividad);
+    
+    byte[] obtenerPdfInscripcion(String nickname, String nombreSalida);
     
 }

@@ -39,6 +39,22 @@ public interface WSSalidaController {
      * 
      * @param arg1
      * @param arg0
+     * @return
+     *     returns webservice.DtpdfWrapper
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSSalidaController/obtenerPdfRequest", output = "http://webService/WSSalidaController/obtenerPdfResponse")
+    public DtpdfWrapper obtenerPdf(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
      * @throws MyException_Exception
      * @throws ParseException_Exception
      */

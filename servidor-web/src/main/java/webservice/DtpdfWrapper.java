@@ -7,16 +7,16 @@ import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for DatatypeConfigurationException complex type.
+ * <p>Java class for dtpdfWrapper complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="DatatypeConfigurationException"&gt;
+ * &lt;complexType name="dtpdfWrapper"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="data" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -26,35 +26,33 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DatatypeConfigurationException", propOrder = {
-    "message"
+@XmlType(name = "dtpdfWrapper", propOrder = {
+    "data"
 })
-public class DatatypeConfigurationException {
+public class DtpdfWrapper {
 
-    protected String message;
+    protected byte[] data;
 
     /**
-     * Gets the value of the message property.
+     * Gets the value of the data property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
-     *     
+     *     byte[]
      */
-    public String getMessage() {
-        return message;
+    public byte[] getData() {
+        return data;
     }
 
     /**
-     * Sets the value of the message property.
+     * Sets the value of the data property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
-     *     
+     *     byte[]
      */
-    public void setMessage(String value) {
-        this.message = value;
+    public void setData(byte[] value) {
+        this.data = value;
     }
 
 }

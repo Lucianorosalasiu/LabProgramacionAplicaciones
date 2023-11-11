@@ -5,6 +5,7 @@
 package logica.controlador;
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTDepartamento;
@@ -12,15 +13,32 @@ import dataTypes.DTInscripcion;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTProveedor;
 import dataTypes.DTSalidaTuristica;
+import dataTypes.DTTop;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
 import logica.interfaces.IControlador;
 import exceptions.MyException;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.codec.binary.Base64;
 import persistencia.FDataPersistencia;
 import persistencia.IDataPersistencia;
+
+import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
+import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 
 /**
  *
@@ -426,8 +444,86 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public List<Object> obtenerTop(){
+    public byte[] obtenerPdfInscripcion(String nickname, String nombreSalida) {
+        DTInscripcion inscripcion = dataPersistencia.obtenerInscripcion(nickname, nombreSalida);
+        
+        InputStream templateInputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream("templates/turismoUyInscripcion.docx");
+
+        XWPFDocument document;
+        try {
+            document = new XWPFDocument(templateInputStream);
+
+            replaceInPdf(document, "$nombre", inscripcion.getTurista().getName());
+            replaceInPdf(document, "$actividad", inscripcion.getSalidaTuristica().getDtActividadTuristica().getNombre());
+            replaceInPdf(document, "$salida", inscripcion.getSalidaTuristica().getNombre());
+            replaceInPdf(document, "cantTuristas", String.valueOf(inscripcion.getCantidadTuristas()));
+            replaceInPdf(document, "$costo", String.valueOf(inscripcion.getCostoTotal()));
+            
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+            
+            LocalDateTime locaDateInscripcion = inscripcion.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            String fechaInscripcion = locaDateInscripcion.format(dateFormat);
+            replaceInPdf(document, "fechaInscripcion", fechaInscripcion);
+            
+            String actualDate = LocalDateTime.now().format(dateFormat);
+            replaceInPdf(document, "fechaEmitido", actualDate);
+
+            
+            // Convert XWPFDocument to Pdf
+            PdfOptions options = PdfOptions.create();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PdfConverter pdfConverter = new PdfConverter();
+            pdfConverter.convert(document, outputStream, options);
+            
+            return outputStream.toByteArray();
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    private void replaceInPdf(XWPFDocument document, String prevText, String newText) {
+        for (XWPFParagraph p : document.getParagraphs()) {
+            List<XWPFRun> runs = p.getRuns();
+            if (runs != null) {
+                for (XWPFRun r : runs) {
+                    String text = r.getText(0);
+                    if (text != null && text.contains(prevText)) {
+                        text = text.replace(prevText, newText);
+                        r.setText(text, 0);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<DTTop> obtenerTop(){
         return dataPersistencia.obtenerTop();
+    }
+    
+    
+    @Override
+    public ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda){
+        return dataPersistencia.obtenerBusqueda(peticionBusqueda);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda){
+        return dataPersistencia.ordenarBusquedaFecha(peticionBusqueda);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String nombreDepartamento){
+        return dataPersistencia.ordenarBusquedaDepartamento(peticionBusqueda,nombreDepartamento);
+    }
+    
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaCategoria(String peticionBusqueda,String categoria){
+        return dataPersistencia.ordenarBusquedaCategoria(peticionBusqueda,categoria);
     }
     
 }
