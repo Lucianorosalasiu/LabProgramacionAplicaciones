@@ -109,6 +109,7 @@ public interface IDataPersistencia {
     /*Busqueda*/
     ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda);
     ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda);
+    ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String nombreDepartamento);
     
     /* Servidor Web */
     

@@ -60,6 +60,12 @@ public class Busqueda extends HttpServlet {
             request.setAttribute("departamentos", controlador.obtenerDepartamentos());
             request.setAttribute("categorias", controlador.obtenerCategorias());
             
+            if(request.getParameter("departamento") != null){
+                String departamento = request.getParameter("departamento");
+                resultadoBusqueda = controlador.ordenarBusquedaDepartamento(peticionBusqueda,departamento);
+                request.setAttribute("existeDepto",departamento);
+            }
+            
             if(tipoDeFiltro == 1){
                 Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getNombre));
             }

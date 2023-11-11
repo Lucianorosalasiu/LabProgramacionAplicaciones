@@ -516,4 +516,9 @@ public class Controlador implements IControlador{
         return dataPersistencia.ordenarBusquedaFecha(peticionBusqueda);
     }
     
+    @Override
+    public ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String nombreDepartamento){
+        return dataPersistencia.ordenarBusquedaDepartamento(peticionBusqueda,nombreDepartamento);
+    }
+    
 }
