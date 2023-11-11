@@ -104,7 +104,7 @@ public interface  IControlador {
     ArrayList<DTBusqueda> obtenerBusqueda(String peticionBusqueda);
     ArrayList<DTBusqueda> ordenarBusquedaFecha(String peticionBusqueda);
     ArrayList<DTBusqueda> ordenarBusquedaDepartamento(String peticionBusqueda, String departamentoNombre);
-    
+    ArrayList<DTBusqueda> ordenarBusquedaCategoria(String peticionBusqueda,String categoria);
     
     /*Servidor Web*/
     

@@ -30,4 +30,8 @@ public class DTBusqueda {
 
     public DTBusqueda(){}
     
+    public void setCategorias(String categorias){
+        this.categorias = categorias;
+    }
+    
 }
