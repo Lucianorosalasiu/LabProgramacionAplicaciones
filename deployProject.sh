@@ -35,9 +35,6 @@ CENTRAL_SERVER_DIR=$BASE_DIR/servidor-central
 WORKSTATION_DIR=$BASE_DIR/estacion-de-trabajo
 WEB_SERVER_DIR=$BASE_DIR/servidor-web
 
-# Puerto donde corren los WebServices
-WEB_SERVICES_PORT=8889
-
 # Nombre de los paquetes compilados
 CENTRAL_SERVER_JAR_NAME='servidor-central-1.0-SNAPSHOT-jar-with-dependencies.jar'
 WORKSTATION_JAR_NAME='estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar'
@@ -47,13 +44,20 @@ WEB_SERVER_WAR_NAME='servidor-web-1.0-SNAPSHOT.war'
 CATALINA_PATH=/opt/tomcat/bin
 TOMCAT_WEBAPPS_DIR=/opt/tomcat/webapps
 
-# IP del host donde se encuentra el web server TOMCAT
-#IP_REMOTE_HOST=localhost
-IP_REMOTE_HOST="192.168.1.3"
+# Configuración de credenciales del host remoto donde va a correr la web con tomcat
+CONFIG_FILE='host.config'
+IP_REMOTE_HOST=$(grep "IP_REMOTE_HOST" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+REMOTE_USER=$(grep "REMOTE_USER" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+DESTINATION_PATH=$(grep "DESTINATION_PATH" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+
+
+# Puerto donde corren los WebServices
+WEB_SERVICES_HOST=$(grep "WEB_SERVICES_HOST" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+WEB_SERVICES_PORT=8889
 
 # ==== Config para recibir argumentos ==== #
 OPTIONS=h123
-LONGOPTS=onlyWorkstation,onlyCentralServer,onlyWebServer,help
+LONGOPTS=help,onlyWorkstation,onlyCentralServer,onlyWebServer
 
 PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 eval set -- "$PARSED"
@@ -208,7 +212,7 @@ deployWebServer() {
             cd $WEB_SERVER_DIR
             
             echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
-            mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
+            mvn clean install -Dip-host=${WEB_SERVICES_HOST} > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
         
             echo -e "${VERDE_HACKER}\nLogs generados en $LOGS_DIR/${RESET}"
             # Se parsean los logs generados para evitar símbolos con errores de caracterización
@@ -221,19 +225,30 @@ deployWebServer() {
         
             echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR/target/...${RESET}"
             cd $WEB_SERVER_DIR/target/
-        
+
+            # En caso de que el host sea local, se mueve el .war al directorio de tomcat de la misma máquina en la
+            # que corre el script. En caso contrario se envía al host remoto.
             if [ "$IP_REMOTE_HOST" == "localhost" ]; then
                 echo -e "${VERDE_HACKER}\nDesplegando .war en $TOMCAT_WEBAPPS_DIR...\n${RESET}"
                 cp $WEB_SERVER_DIR/target/$WEB_SERVER_WAR_NAME $TOMCAT_WEBAPPS_DIR
 
                 echo -e "${VERDE_HACKER}\nIniciando WebServer Tomcat...${RESET}"    
                 cd $CATALINA_PATH
+                echo -e "${AMARILLO}"
                 ./startup.sh
+                echo -e "${RESET}"
 
                 echo -e "${VERDE_HACKER}\nPara terminar la ejecución de tomcat es posible usar el siguiente comando:${RESET} ${CIAN}$CATALINA_PATH/shutdown.sh${RESET}"
             else
-                # FALTA TERMINAR ESTO
-                echo -e "\nEn caso de que IP_REMOTE_HOST sea diferente de localhost se debe desplegar el .war en el host remoto\n"
+                echo -e "${VERDE_HACKER}\nEnviando .war a directorio $DESTINATION_PATH del host remoto...\n${RESET}"
+
+                # Se construye el comando scp
+                # Es importante que el puerto 22 esté habilitado en el host remoto: sudo ufw allow 22.
+                # También es importante que se haya generado la clave privada en el host origen
+                comando_scp="scp -q -P 22 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $WEB_SERVER_DIR/target/$WEB_SERVER_WAR_NAME $REMOTE_USER@$IP_REMOTE_HOST:$DESTINATION_PATH"
+
+                # Ejecuta el comando scp
+                eval "$comando_scp"
             fi
            
         else

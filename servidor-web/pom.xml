@@ -10,6 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jaxws-maven-plugin.version>4.0.0</jaxws-maven-plugin.version>
+        <ip-host>localhost</ip-host>
     </properties>
     <build>
         <plugins>
@@ -44,10 +45,10 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>http://localhost:8889/ws/Salida?wsdl</wsdlUrl>
-                                <wsdlUrl>http://localhost:8889/ws/Actividad?wsdl</wsdlUrl>
-                                <wsdlUrl>http://localhost:8889/ws/Usuario?wsdl</wsdlUrl>
-                                <wsdlUrl>http://localhost:8889/ws/Paquete?wsdl</wsdlUrl>
+                                <wsdlUrl>http://${ip-host}:8889/ws/Salida?wsdl</wsdlUrl>
+                                <wsdlUrl>http://${ip-host}:8889/ws/Actividad?wsdl</wsdlUrl>
+                                <wsdlUrl>http://${ip-host}:8889/ws/Usuario?wsdl</wsdlUrl>
+                                <wsdlUrl>http://${ip-host}:8889/ws/Paquete?wsdl</wsdlUrl>
                             </wsdlUrls>
                         </configuration>
                     </execution>
