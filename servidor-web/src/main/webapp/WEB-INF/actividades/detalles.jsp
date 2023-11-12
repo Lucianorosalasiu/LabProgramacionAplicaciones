@@ -36,7 +36,17 @@
     %>
     <body class="h-100 d-flex flex-column">
         <div class="d-flex flex-column flex-grow-1 justify-content-start p-2">
-            <h5>Viendo en detalle la actividad <span class="fw-bold text-primary"><%=actividad.getNombre()%></span></h5>
+            <h5>
+                Viendo en detalle la actividad <span class="fw-bold text-primary"><%=actividad.getNombre()%></span>
+                <%
+                    boolean enFavoritos = (boolean) request.getAttribute("enFavoritos");
+                    if (enFavoritos) {
+                %>
+                        <img width="24" height="24" src="/assets/favicon/star-full-32.png" alt="fav"/>
+                <%
+                    }
+                %>
+            </h5>
             <span class="text-secondary">Vistas: <%=vistas%></span>
             <span class="text-secondary">Favoritos: <%=cantidadFavoritos%></span>
             <div class="d-flex gap-2">

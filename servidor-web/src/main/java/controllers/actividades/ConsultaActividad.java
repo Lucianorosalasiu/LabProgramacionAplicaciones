@@ -113,12 +113,18 @@ public class ConsultaActividad extends HttpServlet {
             
             DTActividadTuristica actividad;
             int cantidadFavoritos = 0;
+            boolean enFavoritos = false;
             try {
                 //metodo que busca actividad por su id y si no la encuentra devuelve null a diferencia
                 //de metodos previamente existentes
                 actividad = controlador.obtenerActividadTuristicaNull(idActividad);
                 if(actividad == null){
                     throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
+                }
+                if (!isNull(userType) && userType.equals("TURISTA")) {
+                    if (actividadPort.obtenerActividadesFavoritas(nickname).getLista().contains(actividad.getNombre())) {
+                        enFavoritos = true;
+                    }
                 }
                 cantidadFavoritos = actividadPort.obtenerCantidadFavoritos(actividad.getNombre());
             } catch (MyException ex) {
@@ -164,6 +170,7 @@ public class ConsultaActividad extends HttpServlet {
             request.setAttribute("foto", imageDataUri);
             request.setAttribute("actividad",actividad);
             request.setAttribute("cantidadFavoritos", cantidadFavoritos);
+            request.setAttribute("enFavoritos", enFavoritos);
             request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
                         .forward(request, response);
         }
