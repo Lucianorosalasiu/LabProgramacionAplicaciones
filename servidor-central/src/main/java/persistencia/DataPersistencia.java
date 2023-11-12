@@ -2280,7 +2280,34 @@ public class DataPersistencia implements IDataPersistencia {
     }
     
     @Override
-    public void updateFavoritas(Long idActividad, String nickname) {
+    public void agregarAFavoritos(Long idActividad, String nickname) {
+        EntityManager em = emf.createEntityManager(); 
+        
+        try{
+            String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                    .setParameter("nickname", nickname)
+                                    .getSingleResult();
+            
+            List<String> favoritas = obtenerActividadesFavoritas(nickname);
+            EActividadTuristica eActividad = em.find(EActividadTuristica.class, idActividad);
+            
+            if (!favoritas.contains(eActividad.getNombre())) {
+                eTurista.getEActividadesFavoritas().add(eActividad);
+                
+                em.getTransaction().begin();
+                em.merge(eTurista);
+                em.getTransaction().commit();
+            }
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void eliminarDeFavoritos(Long idActividad, String nickname) {
         EntityManager em = emf.createEntityManager(); 
         
         try{
@@ -2294,14 +2321,11 @@ public class DataPersistencia implements IDataPersistencia {
             
             if (favoritas.contains(eActividad.getNombre())) {
                 eTurista.getEActividadesFavoritas().remove(eActividad);
-            } else {
-                eTurista.getEActividadesFavoritas().add(eActividad);
+                
+                em.getTransaction().begin();
+                em.merge(eTurista);
+                em.getTransaction().commit();
             }
-            
-            em.getTransaction().begin();
-            em.merge(eTurista);
-            em.getTransaction().commit();
-            
         }catch(Exception e){
             em.getTransaction().rollback();
         }finally{

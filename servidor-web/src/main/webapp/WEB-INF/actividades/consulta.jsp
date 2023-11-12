@@ -47,10 +47,11 @@
                     <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
+                            String selectedDepartamento = request.getParameter("departamento");
                             for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
                                 String nombreDepartamento = departamento.getNombre();
                         %>
-                        <option value="<%= departamento.getNombre() %>">
+                        <option value="<%= departamento.getNombre() %>" <% if (nombreDepartamento.equals(selectedDepartamento)) { %>selected <% } %>>
                             <%= nombreDepartamento %>
                         </option>		
                         <% } %>
@@ -98,21 +99,21 @@
                             <% 
                             String userType = (String) request.getSession().getAttribute("sessionType");
                             if ( userType != null && userType.equals("TURISTA")) {
+                                if (favoritasUsuario.contains(actividad.getNombre())) {
                             %>
-                            <a class="btn bg-transparent border-0" href="?idActividad=<%=actividad.getId()%>&fav=update" >
-                                <%
-                                    if (favoritasUsuario.contains(actividad.getNombre())) {
-                                %>
-                                        <img width="32" height="32" src="/assets/favicon/star-full-32.png" alt="fav"/>
-                                <%
-                                    } else {
-                                %>
-                                        <img width="32" height="32" src="/assets/favicon/star-empty-32.png" alt="fav"/>
-                                <%
-                                    }
-                                %>
-                            </a>
+                                <a class="btn bg-transparent border-0" 
+                                   href="?eliminarDeFavoritos=<%=actividad.getId()%>&departamento=<%=selectedDepartamento%>" >
+                                    <img width="32" height="32" src="/assets/favicon/star-full-32.png" alt="fav"/>
+                                </a>
                             <%
+                                } else {
+                            %>
+                                <a class="btn bg-transparent border-0" 
+                                   href="?agregarAFavoritos=<%=actividad.getId()%>&departamento=<%=selectedDepartamento%>" >        
+                                    <img width="32" height="32" src="/assets/favicon/star-empty-32.png" alt="fav"/>
+                                </a>
+                            <%
+                                }
                             }
                             %>
                         </div>

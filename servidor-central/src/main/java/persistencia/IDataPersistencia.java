@@ -122,5 +122,6 @@ public interface IDataPersistencia {
     
     int obtenerCantidadFavoritos(String nombreActividad);
     List<String> obtenerActividadesFavoritas(String nickname);
-    void updateFavoritas(Long idActividad, String nickname);
+    void agregarAFavoritos(Long idActividad, String nickname);
+    void eliminarDeFavoritos(Long idActividad, String nickname);
 }

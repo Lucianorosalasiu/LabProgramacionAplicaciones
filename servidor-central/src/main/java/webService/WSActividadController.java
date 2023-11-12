@@ -196,8 +196,12 @@ public class WSActividadController {
     }
     
     @WebMethod
-    public void updateFavoritas(Long idActividad, String nickname){
-        controlador.updateFavoritas(idActividad, nickname);
+    public void agregarAFavoritos(Long idActividad, String nickname){
+        controlador.agregarAFavoritos(idActividad, nickname);
     }
-    
+        
+    @WebMethod
+    public void eliminarDeFavoritos(Long idActividad, String nickname){
+        controlador.eliminarDeFavoritos(idActividad, nickname);
+    }
 }

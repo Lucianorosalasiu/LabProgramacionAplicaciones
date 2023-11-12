@@ -537,8 +537,13 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void updateFavoritas(Long idActividad, String nickname){
-        dataPersistencia.updateFavoritas(idActividad, nickname);
+    public void agregarAFavoritos(Long idActividad, String nickname){
+        dataPersistencia.agregarAFavoritos(idActividad, nickname);
+    }
+        
+    @Override
+    public void eliminarDeFavoritos(Long idActividad, String nickname){
+        dataPersistencia.eliminarDeFavoritos(idActividad, nickname);
     }
     
 }

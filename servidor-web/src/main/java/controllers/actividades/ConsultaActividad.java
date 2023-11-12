@@ -68,6 +68,16 @@ public class ConsultaActividad extends HttpServlet {
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
         
+        String eliminarFavParameter = (String) request.getParameter("eliminarDeFavoritos");
+        if (!isNull(eliminarFavParameter)) {
+            actividadPort.eliminarDeFavoritos(Long.parseLong(eliminarFavParameter), nickname);
+        }
+        
+        String agregarFavParameter = (String) request.getParameter("agregarAFavoritos");
+        if (!isNull(agregarFavParameter)) {
+            actividadPort.agregarAFavoritos(Long.parseLong(agregarFavParameter), nickname);
+        }
+        
         //en caso de que no se haya seleccionado ninguna actividad, se listan todas
         if(request.getParameter("idActividad") == null){
             if(validateParameters(request)){
@@ -104,12 +114,6 @@ public class ConsultaActividad extends HttpServlet {
                         .forward(request, response);
         }else{
             Long idActividad = Long.parseLong(request.getParameter("idActividad"));
-            
-            String favParameter = (String) request.getParameter("fav");
-            if (!isNull(favParameter) && favParameter.equals("update")) {
-                actividadPort.updateFavoritas(idActividad, nickname);
-            }
-            
             
             DTActividadTuristica actividad;
             int cantidadFavoritos = 0;

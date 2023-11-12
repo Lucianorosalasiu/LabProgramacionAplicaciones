@@ -170,8 +170,21 @@ public interface WSActividadController {
      * @param arg0
      */
     @WebMethod
-    @Action(input = "http://webService/WSActividadController/updateFavoritasRequest", output = "http://webService/WSActividadController/updateFavoritasResponse")
-    public void updateFavoritas(
+    @Action(input = "http://webService/WSActividadController/agregarAFavoritosRequest", output = "http://webService/WSActividadController/agregarAFavoritosResponse")
+    public void agregarAFavoritos(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSActividadController/eliminarDeFavoritosRequest", output = "http://webService/WSActividadController/eliminarDeFavoritosResponse")
+    public void eliminarDeFavoritos(
         @WebParam(name = "arg0", partName = "arg0")
         long arg0,
         @WebParam(name = "arg1", partName = "arg1")
