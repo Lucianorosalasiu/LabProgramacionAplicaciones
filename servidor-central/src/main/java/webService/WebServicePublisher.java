@@ -12,9 +12,11 @@ public class WebServicePublisher {
     public static void main(String[] args) {
         System.out.println(greenColorCode + "Desplegando Web Services...\n" + resetColorCode);
         
-        // Luego se debería utilizar el puerto extraído del fichero .properties
+        // Luego se debería obtener el host y puerto desde el fichero .properties
+        String host = "localhost";
         String port = "8889";
-        
+        String url = "http://" + host + ":" + port;
+
         WSSalidaController servicio1 = new WSSalidaController();
         WSActividadController servicio2 = new WSActividadController();
         WSUsuarioController servicio3 = new WSUsuarioController();
@@ -26,10 +28,10 @@ public class WebServicePublisher {
         servicio4.publish();
         System.out.println(cyanColorCode + "\n¡Todos los WebServices han sido desplegados exitosamente!" + resetColorCode);
         System.out.println(cyanColorCode + 
-                "Servicios escuchando en puerto: " + 
-                resetColorCode + 
+                "Servicios escuchando en: " + 
+                resetColorCode +
                 greenColorCode + 
-                port + 
+                url + 
                 resetColorCode
         );
     }

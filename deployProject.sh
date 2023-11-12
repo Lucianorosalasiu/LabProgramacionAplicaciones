@@ -56,20 +56,22 @@ WEB_SERVICES_HOST=$(grep "WEB_SERVICES_HOST" "$CONFIG_FILE" | awk -F '=' '{print
 WEB_SERVICES_PORT=8889
 
 # ==== Config para recibir argumentos ==== #
-OPTIONS=h123
-LONGOPTS=help,onlyWorkstation,onlyCentralServer,onlyWebServer
+OPTIONS=hv123
+LONGOPTS=help,vars,onlyWorkstation,onlyCentralServer,onlyWebServer
 
 PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 eval set -- "$PARSED"
 
+VIEW_USER_GUIDE=false
+VIEW_VARS=false
 RUN_WORKSTATION=false
 RUN_CENTRALSERVER=false
 RUN_WEBSERVER=false
-VIEW_USER_GUIDE=false
 
 while true; do
   case "$1" in
     -h | --help ) VIEW_USER_GUIDE=true; shift;;
+	-v | --vars ) VIEW_VARS=true; shift;;
     -1 | --onlyCentralServer ) RUN_CENTRALSERVER=true; shift ;;
     -2 | --onlyWorkstation ) RUN_WORKSTATION=true; shift ;;
     -3 | --onlyWebServer ) RUN_WEBSERVER=true; shift ;;
@@ -89,17 +91,46 @@ createLogFolder(){
 }
 
 viewUserGuide(){
-    echo -e "${VERDE_HACKER}Guía de script para despliegue automatizado de proyecto:\n"
+    echo -e "${VERDE_HACKER}Guía de script para despliegue automatizado de proyecto:"
     echo -e "${BOLD}${COLOR_FLICKER}${TITULO}${RESET}"
 
     echo -e "${VERDE_HACKER}Uso: ${RESET}${CIAN}./deployProject.sh [OPCIÓN]${RESET}\n"
     echo -e "${VERDE_HACKER}Ejemplo: ${RESET}${CIAN}./deployProject.sh --onlyCentralServer${RESET}\n"
     
     echo -e "${VERDE_HACKER}Opciones:${RESET}"
-    echo -e "${VERDE_HACKER}  -h, --help                      ${RESET}${VERDE_HACKER}Muestra el menú de ayuda${RESET}"
-    echo -e "${VERDE_HACKER}  -1, --onlyCentralServer         ${RESET}${VERDE_HACKER}Compila y despliega los WebServices${RESET}"
-    echo -e "${VERDE_HACKER}  -2, --onlyWorkstation           ${RESET}${VERDE_HACKER}Compila y ejecuta la aplicación de escritorio${RESET}"
-    echo -e "${VERDE_HACKER}  -3, --onlyWebServer             ${RESET}${VERDE_HACKER}Compila y despliega la aplicación web dentro del Tomcat${RESET}"       
+    echo -e "${VERDE_HACKER}  -h, --help                      ${RESET}${CIAN}Muestra este menú${RESET}"
+    echo -e "${VERDE_HACKER}  -v, --vars                      ${RESET}${CIAN}Muestra variables de entorno utilizadas en script${RESET}"
+    echo -e "${VERDE_HACKER}  -1, --onlyCentralServer         ${RESET}${CIAN}Compila y despliega los WebServices${RESET}"
+    echo -e "${VERDE_HACKER}  -2, --onlyWorkstation           ${RESET}${CIAN}Compila y ejecuta la aplicación de escritorio${RESET}"
+    echo -e "${VERDE_HACKER}  -3, --onlyWebServer             ${RESET}${CIAN}Compila y despliega la aplicación web dentro del Tomcat${RESET}"       
+}
+
+viewVars(){
+    echo -e "${CIAN}======== Variables de entorno ========${RESET}\n"
+
+    echo -e "${CIAN}Directorios: ${RESET}"
+    echo -e "${VERDE_HACKER}  BASE_DIR: ${RESET}${CIAN}${BASE_DIR}${RESET}"
+    echo -e "${VERDE_HACKER}  LOGS_DIR: ${RESET}${CIAN}${LOGS_DIR}${RESET}"
+    echo -e "${VERDE_HACKER}  CENTRAL_SERVER_DIR: ${RESET}${CIAN}${CENTRAL_SERVER_DIR}${RESET}"
+    echo -e "${VERDE_HACKER}  WORKSTATION_DIR: ${RESET}${CIAN}${WORKSTATION_DIR}${RESET}"
+    echo -e "${VERDE_HACKER}  WEB_SERVER_DIR: ${RESET}${CIAN}${WEB_SERVER_DIR}${RESET}"
+    echo -e "${VERDE_HACKER}  CATALINA_PATH: ${RESET}${CIAN}${CATALINA_PATH}${RESET}"
+    echo -e "${VERDE_HACKER}  TOMCAT_WEBAPPS_DIR: ${RESET}${CIAN}${TOMCAT_WEBAPPS_DIR}${RESET}"
+
+    echo -e "${CIAN}\nPaquetes: ${RESET}"
+    echo -e "${VERDE_HACKER}  CENTRAL_SERVER_JAR_NAME: ${RESET}${CIAN}${CENTRAL_SERVER_JAR_NAME}${RESET}"
+    echo -e "${VERDE_HACKER}  WORKSTATION_JAR_NAME: ${RESET}${CIAN}${WORKSTATION_JAR_NAME}${RESET}"
+    echo -e "${VERDE_HACKER}  WEB_SERVER_WAR_NAME: ${RESET}${CIAN}${WEB_SERVER_WAR_NAME}${RESET}"
+
+    echo -e "${CIAN}\nWebServices: ${RESET}"
+    echo -e "${VERDE_HACKER}  WEB_SERVICES_HOST: ${RESET}${CIAN}${WEB_SERVICES_HOST}${RESET}"
+    echo -e "${VERDE_HACKER}  WEB_SERVICES_PORT: ${RESET}${CIAN}${WEB_SERVICES_PORT}${RESET}"
+
+    echo -e "${CIAN}\nHost remoto: ${RESET}" 
+    echo -e "${VERDE_HACKER}  CONFIG_FILE: ${RESET}${CIAN}${CONFIG_FILE}${RESET}"
+    echo -e "${VERDE_HACKER}  IP_REMOTE_HOST: ${RESET}${CIAN}${IP_REMOTE_HOST}${RESET}"
+    echo -e "${VERDE_HACKER}  REMOTE_USER: ${RESET}${CIAN}${REMOTE_USER}${RESET}"
+    echo -e "${VERDE_HACKER}  DESTINATION_PATH: ${RESET}${CIAN}${DESTINATION_PATH}${RESET}\n"
 }
 
 deployCentralServer() {
@@ -160,11 +191,6 @@ deployWorkstation() {
 
     echo -e "${VERDE_HACKER}\nEstableciendo permisos a script de carga de datos...${RESET}"
     chmod +x cargarDatos.sh
-
-    echo -e "${VERDE_HACKER}\nCargando datos de prueba...${RESET}"
-    echo -e "${AMARILLO}"
-    ./cargarDatos.sh
-    echo -e "${RESET}"
 
     echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
     mvn clean install > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
@@ -249,8 +275,7 @@ deployWebServer() {
 
                 # Ejecuta el comando scp
                 eval "$comando_scp"
-            fi
-           
+            fi          
         else
             echo -e "${ROJO}\n¡Error! No es posible compilar el servidor web. Parece ser que el servicio que corre en el puerto $PUERTO no son los WebServices.${RESET}\n"
         fi
@@ -259,10 +284,18 @@ deployWebServer() {
     fi
 }
 
+# ================================ Ejecución del script ================================ #
+
 # Argumento = -h / --help
 if [ "$VIEW_USER_GUIDE" = true ]; then
     clear
     viewUserGuide
+fi
+
+# Argumento = -v / --vars
+if [ "$VIEW_VARS" = true ]; then
+    clear
+    viewVars
 fi
 
 # Argumento = -1 / --onlyCentralServer
@@ -287,7 +320,7 @@ if [ "$RUN_WEBSERVER" = true ]; then
 fi
 
 # Si no se indicó nada, ejecutar todos
-if [ "$VIEW_USER_GUIDE" = false ] && [ "$RUN_WORKSTATION" = false ] && [ "$RUN_CENTRALSERVER" = false ] && [ "$RUN_WEBSERVER" = false ]; then
+if [ "$VIEW_USER_GUIDE" = false ] && [ "$VIEW_VARS" = false ] && [ "$RUN_WORKSTATION" = false ] && [ "$RUN_CENTRALSERVER" = false ] && [ "$RUN_WEBSERVER" = false ]; then
     clear
     createLogFolder
     deployCentralServer
