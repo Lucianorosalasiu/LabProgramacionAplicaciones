@@ -22,6 +22,10 @@ public class ETurista extends EUsuario {
     @OneToMany(mappedBy = "eTurista")
     private List<EInscripcion> EInscripciones;
     
+    
+    @OneToMany
+    private List<EActividadTuristica> eActividadesFavoritas;
+    
     public ETurista() {
         super();
     }

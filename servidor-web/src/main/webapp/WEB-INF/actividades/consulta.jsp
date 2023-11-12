@@ -12,6 +12,7 @@
 <%@page import="java.util.Base64"%> 
 <%@page import="logica.fabrica.Fabrica"%> 
 <%@page import="logica.interfaces.IControlador"%> 
+<%@page import="webservice.DtStringCollectionWS"%>
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -22,6 +23,7 @@
     
     <%
     String userAgent = request.getHeader("User-Agent");
+    List<String> favoritasUsuario = (List<String>)request.getAttribute("favoritasUsuario");
     if(userAgent != null && userAgent.toLowerCase().contains("mobile")){%>
             <jsp:include page="/WEB-INF/templates/mobileHeader.jsp"/>
     <%}else{%>
@@ -90,9 +92,29 @@
                     <div class="card" style="width: 18rem;">
                     <img src="<%= imageDataUri %>" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h5 class="card-title"><%=actividad.getNombre()%></h5>
-                          <p class="card-text"><%=actividad.getDescripcion()%></p>
-                          <a href="?idActividad=<%=actividad.getId()%>" class="btn btn-primary">Ver detalles</a>
+                            <h5 class="card-title"><%=actividad.getNombre()%></h5>
+                            <p class="card-text"><%=actividad.getDescripcion()%></p>
+                            <a href="?idActividad=<%=actividad.getId()%>" class="btn btn-primary">Ver detalles</a>
+                            <% 
+                            String userType = (String) request.getSession().getAttribute("sessionType");
+                            if ( userType != null && userType.equals("TURISTA")) {
+                            %>
+                            <a class="btn bg-transparent border-0" href="?idActividad=<%=actividad.getId()%>&fav=update" >
+                                <%
+                                    if (favoritasUsuario.contains(actividad.getNombre())) {
+                                %>
+                                        <img width="32" height="32" src="/assets/favicon/star-full-32.png" alt="fav"/>
+                                <%
+                                    } else {
+                                %>
+                                        <img width="32" height="32" src="/assets/favicon/star-empty-32.png" alt="fav"/>
+                                <%
+                                    }
+                                %>
+                            </a>
+                            <%
+                            }
+                            %>
                         </div>
                     </div>
                 <% } %>

@@ -26,6 +26,8 @@ import static java.util.Objects.isNull;
 import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
 
 /**
  *
@@ -45,6 +47,7 @@ public class ConsultaActividad extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userType = (String) request.getSession().getAttribute("sessionType");
+        String nickname = (String) request.getSession().getAttribute("sessionNickname");
         //si estas en mobile y no estas registrado
         //o
         //si estas en mobile, estas registrado pero no como turista
@@ -55,6 +58,8 @@ public class ConsultaActividad extends HttpServlet {
             return;
         }
         
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
@@ -90,11 +95,24 @@ public class ConsultaActividad extends HttpServlet {
                     request.setAttribute("errorMessage", errorMessage);
                 }
             }
-        request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
-                    .forward(request, response);
+            List<String> favoritasUsuario = null;
+            if (!isNull(userType) && userType.equals("TURISTA")) {
+                favoritasUsuario = actividadPort.obtenerActividadesFavoritas(nickname).getLista();
+            }
+            request.setAttribute("favoritasUsuario", favoritasUsuario);
+            request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
+                        .forward(request, response);
         }else{
             Long idActividad = Long.parseLong(request.getParameter("idActividad"));
+            
+            String favParameter = (String) request.getParameter("fav");
+            if (!isNull(favParameter) && favParameter.equals("update")) {
+                actividadPort.updateFavoritas(idActividad, nickname);
+            }
+            
+            
             DTActividadTuristica actividad;
+            int cantidadFavoritos = 0;
             try {
                 //metodo que busca actividad por su id y si no la encuentra devuelve null a diferencia
                 //de metodos previamente existentes
@@ -102,6 +120,7 @@ public class ConsultaActividad extends HttpServlet {
                 if(actividad == null){
                     throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
                 }
+                cantidadFavoritos = actividadPort.obtenerCantidadFavoritos(actividad.getNombre());
             } catch (MyException ex) {
                 response.sendError(404);
                 return;
@@ -144,6 +163,7 @@ public class ConsultaActividad extends HttpServlet {
             request.setAttribute("categorias", categorias);
             request.setAttribute("foto", imageDataUri);
             request.setAttribute("actividad",actividad);
+            request.setAttribute("cantidadFavoritos", cantidadFavoritos);
             request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
                         .forward(request, response);
         }

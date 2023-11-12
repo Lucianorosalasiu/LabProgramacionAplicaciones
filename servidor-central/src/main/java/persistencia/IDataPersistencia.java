@@ -119,4 +119,8 @@ public interface IDataPersistencia {
     List<DTPaqueteActividadTuristica> obtenerPaquetesCompradosDisponibles(Long idTurista, String nombreSalida, int cantTuristas);
     
     DTInscripcion obtenerInscripcion(String nickname, String nombreSalida);
+    
+    int obtenerCantidadFavoritos(String nombreActividad);
+    List<String> obtenerActividadesFavoritas(String nickname);
+    void updateFavoritas(Long idActividad, String nickname);
 }

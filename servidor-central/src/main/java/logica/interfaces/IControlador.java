@@ -115,4 +115,8 @@ public interface  IControlador {
     
     byte[] obtenerPdfInscripcion(String nickname, String nombreSalida);
     
+    int obtenerCantidadFavoritos(String nombreActividad);
+    List<String> obtenerActividadesFavoritas(String nickname);
+    void updateFavoritas(Long idActividad, String nickname);
+    
 }

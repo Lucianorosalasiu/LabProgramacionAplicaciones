@@ -21,6 +21,7 @@ import webService.dataTypesWS.DTActividadTuristicaWS;
 import webService.dataTypesWS.DTActividadesCollectionWS;
 import webService.dataTypesWS.DTDepartamentoWS;
 import webService.dataTypesWS.DTDepartamentosCollectionWS;
+import webService.dataTypesWS.DTStringCollectionWS;
 
 /**
  *
@@ -178,4 +179,25 @@ public class WSActividadController {
     public float obtenerCostoActividad(String nombreActividad) {
         return controlador.obtenerCostoActividad(nombreActividad);
     }
+    
+    
+    @WebMethod
+    public int obtenerCantidadFavoritos(String nombreActividad) {
+        return controlador.obtenerCantidadFavoritos(nombreActividad);
+    }
+    
+    @WebMethod
+    public DTStringCollectionWS obtenerActividadesFavoritas(String nickname){
+        DTStringCollectionWS dtStringCollection = new DTStringCollectionWS();
+
+        dtStringCollection.setLista(controlador.obtenerActividadesFavoritas(nickname));
+        
+        return dtStringCollection;
+    }
+    
+    @WebMethod
+    public void updateFavoritas(Long idActividad, String nickname){
+        controlador.updateFavoritas(idActividad, nickname);
+    }
+    
 }
