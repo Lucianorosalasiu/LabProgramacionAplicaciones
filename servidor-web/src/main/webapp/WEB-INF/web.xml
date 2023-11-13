@@ -61,6 +61,14 @@
         <servlet-class>controllers.usuarios.ModificacionUsuario</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Follow</servlet-name>
+        <servlet-class>controllers.usuarios.Follow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Unfollow</servlet-name>
+        <servlet-class>controllers.usuarios.Unfollow</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ConsultaPaquete</servlet-name>
         <servlet-class>controllers.paquetes.ConsultaPaquete</servlet-class>
     </servlet>
@@ -125,6 +133,14 @@
         <url-pattern>/modificacionusuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Follow</servlet-name>
+        <url-pattern>/follow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Unfollow</servlet-name>
+        <url-pattern>/unfollow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ConsultaPaquete</servlet-name>
         <url-pattern>/consultapaquete</url-pattern>
     </servlet-mapping>
@@ -145,5 +161,8 @@
         <error-code>404</error-code>
         <location>/WEB-INF/errorPages/404.jsp</location>
     </error-page>
-    
+<!--    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/errorPages/500.jsp</location>
+    </error-page>-->
 </web-app>

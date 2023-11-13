@@ -16,8 +16,8 @@ public class WebServicePublisher {
         ConfigManager configManager = ConfigManager.getInstance();
 
         // Se accede a las propiedades de configuración necesarias
-        String host = configManager.getConfigValue("WEB_SERVICES_HOST");
-        String port = configManager.getConfigValue("WEB_SERVICES_PORT");
+        String wsHost = configManager.getConfigValue("WEB_SERVICES_HOST");
+        String wsPort = configManager.getConfigValue("WEB_SERVICES_PORT");
 
         System.out.println(greenColorCode + "Desplegando Web Services...\n" + resetColorCode);
         WSSalidaController servicio1 = new WSSalidaController();
@@ -25,10 +25,10 @@ public class WebServicePublisher {
         WSUsuarioController servicio3 = new WSUsuarioController();
         WSPaqueteController servicio4 = new WSPaqueteController();
 
-        servicio1.publish(host, port);
-        servicio2.publish(host, port);
-        servicio3.publish(host, port);
-        servicio4.publish(host, port);
+        servicio1.publish(wsHost, wsPort);
+        servicio2.publish(wsHost, wsPort);
+        servicio3.publish(wsHost, wsPort);
+        servicio4.publish(wsHost, wsPort);
         
         System.out.println(cyanColorCode + "\n¡Todos los WebServices han sido desplegados exitosamente!" + resetColorCode);
         System.out.println(cyanColorCode + "\nServicios escuchando en: " + resetColorCode + greenColorCode);

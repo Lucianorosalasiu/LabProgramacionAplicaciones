@@ -54,7 +54,6 @@ public class ConfigManager {
                         CONFIG_DIR_PATH + 
                         RESET_COLOR_CODE
                 );
-                copyDefaultConfigFile();
             } else {
                 if (!configFile.exists()) {
                     System.out.println(
@@ -63,9 +62,10 @@ public class ConfigManager {
                             CONFIG_FILE_PATH + 
                             RESET_COLOR_CODE
                     );
-                    copyDefaultConfigFile();
+
                 }
             }
+            copyDefaultConfigFile();
 
             configProperties = new Properties();
             try (InputStream inputStream = Files.newInputStream(configFile.toPath())) {

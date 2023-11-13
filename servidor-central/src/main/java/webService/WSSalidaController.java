@@ -38,10 +38,10 @@ public class WSSalidaController {
     private String port = null;
     
     @WebMethod(exclude = true)
-    public void publish(String ipHost, String port) {
-        this.host = ipHost;
-        this.port = port;
-        endpoint = Endpoint.publish("http://"+ ipHost + ":" + port + "/ws/Salida", this);
+    public void publish(String wsHost, String wsPort) {
+        this.host = wsHost;
+        this.port = wsPort;
+        endpoint = Endpoint.publish("http://"+ this.host + ":" + this.port + "/ws/Salida", this);
     }
     
     @WebMethod(exclude = true)
@@ -52,7 +52,7 @@ public class WSSalidaController {
     @WebMethod(exclude = true)
     public String getAddress() {
         if (endpoint != null) {
-            return "http://"+this.host+":"+port+"/ws/Salida?wsdl";
+            return "http://"+this.host+":"+this.port+"/ws/Salida?wsdl";
         } else {
             return "Endpoint no publicado aún";
         }

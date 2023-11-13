@@ -39,10 +39,10 @@ public class WSActividadController {
     private String port = null;
     
     @WebMethod(exclude = true)
-    public void publish(String ipHost, String port) {
-        this.host = ipHost;
-        this.port = port;
-        endpoint = Endpoint.publish("http://"+ ipHost + ":" + port + "/ws/Actividad", this);
+    public void publish(String wsHost, String wsPort) {
+        this.host = wsHost;
+        this.port = wsPort;
+        endpoint = Endpoint.publish("http://"+ this.host + ":" + this.port + "/ws/Actividad", this);
     }
 
     @WebMethod(exclude = true)
@@ -53,7 +53,7 @@ public class WSActividadController {
     @WebMethod(exclude = true)
     public String getAddress() {
         if (endpoint != null) {
-            return "http://"+this.host+":"+port+"/ws/Actividad?wsdl";
+            return "http://"+this.host+":"+this.port+"/ws/Actividad?wsdl";
         } else {
             return "Endpoint no publicado aún";
         }

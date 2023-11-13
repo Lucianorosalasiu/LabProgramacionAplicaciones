@@ -31,33 +31,6 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /* WebService Usuarios: */
-        webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
-        webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();
-
-        /* WebService Actividades: */
-        webservice.WSActividadControllerService a = new webservice.WSActividadControllerService();
-        webservice.WSActividadController portA = a.getWSActividadControllerPort();
-
-        /* WebService Salidas: */
-        webservice.WSSalidaControllerService s = new webservice.WSSalidaControllerService();
-        webservice.WSSalidaController portS = s.getWSSalidaControllerPort();
-
-        /* WebService Paquetes: */
-        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
-        webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
-        
-        
-        String responsePingUsuarioWS = portU.ping();
-        String responsePingActividadWS = portA.ping();
-        String responsePingSalidaWS = portS.ping();
-        String responsePingPaqueteWS = portP.ping();
-        
-        request.setAttribute("pingUsuario", responsePingUsuarioWS);
-        request.setAttribute("pingActividad", responsePingActividadWS);
-        request.setAttribute("pingSalida", responsePingSalidaWS);
-        request.setAttribute("pingPaquete", responsePingPaqueteWS);
         
         request.getRequestDispatcher("/WEB-INF/home/home.jsp")
                 .forward(request, response);

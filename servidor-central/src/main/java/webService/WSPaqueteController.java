@@ -35,10 +35,10 @@ public class WSPaqueteController {
     private String port = null;
     
     @WebMethod(exclude = true)
-    public void publish(String ipHost, String port) {
-        this.host = ipHost;
-        this.port = port;
-        endpoint = Endpoint.publish("http://"+ ipHost + ":" + port + "/ws/Paquete", this);
+    public void publish(String wsHost, String wsPort) {
+        this.host = wsHost;
+        this.port = wsPort;
+        endpoint = Endpoint.publish("http://"+ this.host + ":" + this.port + "/ws/Paquete", this);
     }
 
     @WebMethod(exclude = true)
@@ -49,7 +49,7 @@ public class WSPaqueteController {
     @WebMethod(exclude = true)
     public String getAddress() {
         if (endpoint != null) {
-            return "http://"+this.host+":"+port+"/ws/Paquete?wsdl";
+            return "http://"+this.host+":"+this.port+"/ws/Paquete?wsdl";
         } else {
             return "Endpoint no publicado aún";
         }

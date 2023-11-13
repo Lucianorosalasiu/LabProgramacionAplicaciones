@@ -1,7 +1,3 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
 /* 
     Created on : 5 oct. 2023, 11:56:24
     Author     : alexis
@@ -31,34 +27,13 @@ hr {
     display: none;
 }
 
+.medium-card {
+    max-width: 200px;
+}
+
 .medium-image {
-    width: 150px;
-    height: 150px;
-}
-
-/** Listar **/
-
-#listar .usuario {
-    border-bottom: 1px solid #CCCCCC;
-    margin-top: 10px;
-    padding-bottom: 15px;
-}
-
-#listar .usuario:last-child {
-    border-bottom: none;
-}
-
-#listar .usuario img {
-    width: 60px;
-    height: 60px;
-}
-
-#listar .usuario .email {
-    display: block;
-    font-size: 0.8em;
-}
-#listar .usuario .derecha {
-    display: inline-block;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 /* Perfil */
