@@ -1,18 +1,13 @@
-///*
-// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-// * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
-// */
-//
 //import java.util.ArrayList;
 //import java.util.Date;
 //import java.util.List;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.AfterAll;
 //import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
-//
+
 //import Enums.EstadoActividad;
 //import Enums.TipoInscripcion;
 //import dataTypes.DTActividadTuristica;
@@ -26,9 +21,9 @@
 //import dataTypes.DTTurista;
 //import dataTypes.DTUsuario;
 //import exceptions.MyException;
-//import java.io.IOException;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import persistencia.entidades.EActividadTuristica;
 //import persistencia.entidades.ECategoria;
 //import persistencia.entidades.ECompraPaquete;
@@ -39,28 +34,28 @@
 //import persistencia.entidades.ETurista;
 //import logica.fabrica.Fabrica;
 //import logica.interfaces.IControlador;
-//
-///**
-// *
-// * @author lucho
-// */
-//public class JuitTest {
-//
-//    public JuitTest() {
-//    }
-//
-//    @BeforeAll
-//    public static void setUpClass() {
-//        Runtime rt = Runtime.getRuntime();
-//        try {
-//            rt.exec("./cargarDatos.sh");
-//            System.out.println("Los datos de prueba fueron cargados!");
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//            Logger.getLogger(JuitTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
+
+/**
+ *
+ * @author lucho
+ */
+public class JuitTest {
+
+    public JuitTest() {
+    }
+
+    @BeforeAll
+    public static void setUpClass() {
+        Runtime rt = Runtime.getRuntime();
+        try {
+            rt.exec("./cargarDatos.sh");
+            System.out.println("Los datos de prueba fueron cargados!");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(JuitTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 //    @BeforeEach
 //    public void setUp() {
 //
@@ -625,4 +620,4 @@
 //            Logger.getLogger(JuitTest.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-//}
+}

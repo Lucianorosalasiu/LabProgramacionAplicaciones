@@ -1,5 +1,7 @@
 package webService;
 
+import config.ConfigManager;
+
 /**
  *
  * @author alexis
@@ -10,29 +12,30 @@ public class WebServicePublisher {
     public static String resetColorCode = "\u001B[0m";
 
     public static void main(String[] args) {
-        System.out.println(greenColorCode + "Desplegando Web Services...\n" + resetColorCode);
-        
-        // Luego se debería obtener el host y puerto desde el fichero .properties
-        String host = "localhost";
-        String port = "8889";
-        String url = "http://" + host + ":" + port;
+        // Se obtiene la instancia de ConfigManager
+        ConfigManager configManager = ConfigManager.getInstance();
 
+        // Se accede a las propiedades de configuración necesarias
+        String host = configManager.getConfigValue("WEB_SERVICES_HOST");
+        String port = configManager.getConfigValue("WEB_SERVICES_PORT");
+
+        System.out.println(greenColorCode + "Desplegando Web Services...\n" + resetColorCode);
         WSSalidaController servicio1 = new WSSalidaController();
         WSActividadController servicio2 = new WSActividadController();
         WSUsuarioController servicio3 = new WSUsuarioController();
         WSPaqueteController servicio4 = new WSPaqueteController();
 
-        servicio1.publish();
-        servicio2.publish();
-        servicio3.publish();
-        servicio4.publish();
+        servicio1.publish(host, port);
+        servicio2.publish(host, port);
+        servicio3.publish(host, port);
+        servicio4.publish(host, port);
+        
         System.out.println(cyanColorCode + "\n¡Todos los WebServices han sido desplegados exitosamente!" + resetColorCode);
-        System.out.println(cyanColorCode + 
-                "Servicios escuchando en: " + 
-                resetColorCode +
-                greenColorCode + 
-                url + 
-                resetColorCode
-        );
+        System.out.println(cyanColorCode + "\nServicios escuchando en: " + resetColorCode + greenColorCode);
+        System.out.println("  - " + servicio1.getAddress());
+        System.out.println("  - " + servicio2.getAddress());
+        System.out.println("  - " + servicio3.getAddress());
+        System.out.println("  - " + servicio4.getAddress());
+        System.out.println(resetColorCode);
     }
 }

@@ -23,7 +23,6 @@ RESET='\e[0m'
 BOLD='\033[1m' # Negrita
 COLOR_FLICKER='\033[5m' # Letras parpadeantes
 
-
 # Ruta base del proyecto
 BASE_DIR=$(pwd)
 
@@ -40,20 +39,22 @@ CENTRAL_SERVER_JAR_NAME='servidor-central-1.0-SNAPSHOT-jar-with-dependencies.jar
 WORKSTATION_JAR_NAME='estacion-de-trabajo-1.0-SNAPSHOT-jar-with-dependencies.jar'
 WEB_SERVER_WAR_NAME='servidor-web-1.0-SNAPSHOT.war'
 
-# Rutas de tomcat
-CATALINA_PATH=/opt/tomcat/bin
-TOMCAT_WEBAPPS_DIR=/opt/tomcat/webapps
+# Archivo de configuración, del cual se cargan propiedades tanto en este script
+# de desploy, como también en el propio proyecto.
+CONFIG_FILE=$CENTRAL_SERVER_DIR/src/main/resources/config.properties
 
-# Configuración de credenciales del host remoto donde va a correr la web con tomcat
-CONFIG_FILE='host.config'
+# Rutas de tomcat
+CATALINA_PATH=$(grep "CATALINA_PATH" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+TOMCAT_WEBAPPS_DIR=$(grep "TOMCAT_WEBAPPS_DIR" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
+
+# Datos de acceso al host remoto
 IP_REMOTE_HOST=$(grep "IP_REMOTE_HOST" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
 REMOTE_USER=$(grep "REMOTE_USER" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
 DESTINATION_PATH=$(grep "DESTINATION_PATH" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
 
-
 # Puerto donde corren los WebServices
 WEB_SERVICES_HOST=$(grep "WEB_SERVICES_HOST" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
-WEB_SERVICES_PORT=8889
+WEB_SERVICES_PORT=$(grep "WEB_SERVICES_PORT" "$CONFIG_FILE" | awk -F '=' '{print $2}' | tr -d '[:space:]')
 
 # ==== Config para recibir argumentos ==== #
 OPTIONS=hv123
@@ -114,26 +115,31 @@ viewVars(){
     echo -e "${VERDE_HACKER}  CENTRAL_SERVER_DIR: ${RESET}${CIAN}${CENTRAL_SERVER_DIR}${RESET}"
     echo -e "${VERDE_HACKER}  WORKSTATION_DIR: ${RESET}${CIAN}${WORKSTATION_DIR}${RESET}"
     echo -e "${VERDE_HACKER}  WEB_SERVER_DIR: ${RESET}${CIAN}${WEB_SERVER_DIR}${RESET}"
-    echo -e "${VERDE_HACKER}  CATALINA_PATH: ${RESET}${CIAN}${CATALINA_PATH}${RESET}"
-    echo -e "${VERDE_HACKER}  TOMCAT_WEBAPPS_DIR: ${RESET}${CIAN}${TOMCAT_WEBAPPS_DIR}${RESET}"
 
     echo -e "${CIAN}\nPaquetes: ${RESET}"
     echo -e "${VERDE_HACKER}  CENTRAL_SERVER_JAR_NAME: ${RESET}${CIAN}${CENTRAL_SERVER_JAR_NAME}${RESET}"
     echo -e "${VERDE_HACKER}  WORKSTATION_JAR_NAME: ${RESET}${CIAN}${WORKSTATION_JAR_NAME}${RESET}"
     echo -e "${VERDE_HACKER}  WEB_SERVER_WAR_NAME: ${RESET}${CIAN}${WEB_SERVER_WAR_NAME}${RESET}"
+    
+    echo -e "${CIAN}\nFichero de propiedades: ${RESET}"
+    echo -e "${VERDE_HACKER}  CONFIG_FILE: ${RESET}${CIAN}${CONFIG_FILE}${RESET}"
+
+    echo -e "${CIAN}\nRutas Tomcat: ${RESET}"
+    echo -e "${VERDE_HACKER}  CATALINA_PATH: ${RESET}${CIAN}${CATALINA_PATH}${RESET}"
+    echo -e "${VERDE_HACKER}  TOMCAT_WEBAPPS_DIR: ${RESET}${CIAN}${TOMCAT_WEBAPPS_DIR}${RESET}"
 
     echo -e "${CIAN}\nWebServices: ${RESET}"
     echo -e "${VERDE_HACKER}  WEB_SERVICES_HOST: ${RESET}${CIAN}${WEB_SERVICES_HOST}${RESET}"
     echo -e "${VERDE_HACKER}  WEB_SERVICES_PORT: ${RESET}${CIAN}${WEB_SERVICES_PORT}${RESET}"
 
     echo -e "${CIAN}\nHost remoto: ${RESET}" 
-    echo -e "${VERDE_HACKER}  CONFIG_FILE: ${RESET}${CIAN}${CONFIG_FILE}${RESET}"
     echo -e "${VERDE_HACKER}  IP_REMOTE_HOST: ${RESET}${CIAN}${IP_REMOTE_HOST}${RESET}"
     echo -e "${VERDE_HACKER}  REMOTE_USER: ${RESET}${CIAN}${REMOTE_USER}${RESET}"
     echo -e "${VERDE_HACKER}  DESTINATION_PATH: ${RESET}${CIAN}${DESTINATION_PATH}${RESET}\n"
 }
 
 deployCentralServer() {
+    chmod +x killWebServices.sh
     echo -e "${CIAN}=========== Compilación de servidor-central y despliegue de webservices ===========${RESET}"
 
     echo -e "${VERDE_HACKER}\nEntrando a directorio $CENTRAL_SERVER_DIR...${RESET}"
@@ -179,7 +185,7 @@ deployCentralServer() {
 
         # Obtiene el PID del proceso corriendo en background
         pid=$(lsof -ti :$WEB_SERVICES_PORT)
-        echo -e "${VERDE_HACKER}\nEl PID del proceso es:${RESET} ${AMARILLO}$pid (Puedes terminarlo con el comando: kill $pid)\n${RESET}"
+        echo -e "${VERDE_HACKER}\nEl PID del proceso es:${RESET} ${AMARILLO}$pid (Puedes terminarlo con el comando: ./killWebServices.sh)\n${RESET}"
     fi
 }
 
@@ -237,8 +243,8 @@ deployWebServer() {
             echo -e "${VERDE_HACKER}\nEntrando a directorio $WEB_SERVER_DIR...${RESET}"
             cd $WEB_SERVER_DIR
             
-            echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}"
-            mvn clean install -Dip-host=${WEB_SERVICES_HOST} > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
+            echo -e "${VERDE_HACKER}\nLimpiando, compilando e instalando paquete en repositorio local...${RESET}" 
+            mvn clean install -Dip-host=${WEB_SERVICES_HOST} -Dport=${WEB_SERVICES_PORT} > $LOGS_DIR/mvn_info_unparsed.log 2> $LOGS_DIR/mvn_error_unparsed.log
         
             echo -e "${VERDE_HACKER}\nLogs generados en $LOGS_DIR/${RESET}"
             # Se parsean los logs generados para evitar símbolos con errores de caracterización

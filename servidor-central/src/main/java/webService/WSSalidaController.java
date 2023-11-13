@@ -34,15 +34,28 @@ public class WSSalidaController {
     private Fabrica fabrica = new Fabrica();
     private IControlador controlador = fabrica.getInterface();
     private Endpoint endpoint = null;
-
+    private String host = null;
+    private String port = null;
+    
     @WebMethod(exclude = true)
-    public void publish() {
-        endpoint = Endpoint.publish("http://0.0.0.0:8889/ws/Salida", this);
+    public void publish(String ipHost, String port) {
+        this.host = ipHost;
+        this.port = port;
+        endpoint = Endpoint.publish("http://"+ ipHost + ":" + port + "/ws/Salida", this);
     }
-
+    
     @WebMethod(exclude = true)
     public Endpoint getEndpoint() {
         return endpoint;
+    }
+    
+    @WebMethod(exclude = true)
+    public String getAddress() {
+        if (endpoint != null) {
+            return "http://"+this.host+":"+port+"/ws/Salida?wsdl";
+        } else {
+            return "Endpoint no publicado aún";
+        }
     }
     
     @WebMethod
