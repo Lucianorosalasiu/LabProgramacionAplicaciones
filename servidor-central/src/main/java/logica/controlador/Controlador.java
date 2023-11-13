@@ -526,4 +526,24 @@ public class Controlador implements IControlador{
         return dataPersistencia.ordenarBusquedaCategoria(peticionBusqueda,categoria);
     }
     
+    @Override
+    public int obtenerCantidadFavoritos(String nombreActividad){
+        return dataPersistencia.obtenerCantidadFavoritos(nombreActividad);
+    }
+    
+    @Override
+    public List<String> obtenerActividadesFavoritas(String nickname){
+        return dataPersistencia.obtenerActividadesFavoritas(nickname);
+    }
+    
+    @Override
+    public void agregarAFavoritos(Long idActividad, String nickname){
+        dataPersistencia.agregarAFavoritos(idActividad, nickname);
+    }
+        
+    @Override
+    public void eliminarDeFavoritos(Long idActividad, String nickname){
+        dataPersistencia.eliminarDeFavoritos(idActividad, nickname);
+    }
+    
 }

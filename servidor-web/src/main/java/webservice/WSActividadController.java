@@ -142,6 +142,58 @@ public interface WSActividadController {
      * 
      * @param arg0
      * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerCantidadFavoritosRequest", output = "http://webService/WSActividadController/obtenerCantidadFavoritosResponse")
+    public int obtenerCantidadFavoritos(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtStringCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadesFavoritasRequest", output = "http://webService/WSActividadController/obtenerActividadesFavoritasResponse")
+    public DtStringCollectionWS obtenerActividadesFavoritas(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSActividadController/agregarAFavoritosRequest", output = "http://webService/WSActividadController/agregarAFavoritosResponse")
+    public void agregarAFavoritos(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSActividadController/eliminarDeFavoritosRequest", output = "http://webService/WSActividadController/eliminarDeFavoritosResponse")
+    public void eliminarDeFavoritos(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns webservice.DtActividadesCollectionWS
      */
     @WebMethod

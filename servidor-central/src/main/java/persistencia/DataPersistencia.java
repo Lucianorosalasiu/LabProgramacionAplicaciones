@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import static java.util.Objects.isNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
@@ -2228,6 +2229,106 @@ public class DataPersistencia implements IDataPersistencia {
         } catch (Exception e) {
             return resultadosBusqueda;
         } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public int obtenerCantidadFavoritos(String nombreActividad){
+        EntityManager em = emf.createEntityManager(); 
+        
+        try{
+            String queryActividad = "SELECT a FROM EActividadTuristica a WHERE a.nombre = :nombreActividad";
+            EActividadTuristica eActividad = em.createQuery(queryActividad, EActividadTuristica.class)
+                                    .setParameter("nombreActividad", nombreActividad)
+                                    .getSingleResult();
+
+            Query queryCount = em.createNativeQuery(
+                    "SELECT COUNT(*) FROM turista_actividadTuristica WHERE eActividadesFavoritas_ID = ?actividadId");
+            queryCount.setParameter("actividadId", eActividad.getId());
+            
+            return ((Number) queryCount.getSingleResult()).intValue();
+        }catch(Exception e){
+            return 0;
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<String> obtenerActividadesFavoritas(String nickname) {
+        EntityManager em = emf.createEntityManager(); 
+        List<String> actividadesFavoritas = new ArrayList<>();
+        
+        try{
+            String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                    .setParameter("nickname", nickname)
+                                    .getSingleResult();
+            
+            for (EActividadTuristica eActividad : eTurista.getEActividadesFavoritas()) {
+                actividadesFavoritas.add(eActividad.getNombre());
+            }
+            
+            return actividadesFavoritas;
+            
+        }catch(Exception e){
+            return new ArrayList<>();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void agregarAFavoritos(Long idActividad, String nickname) {
+        EntityManager em = emf.createEntityManager(); 
+        
+        try{
+            String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                    .setParameter("nickname", nickname)
+                                    .getSingleResult();
+            
+            List<String> favoritas = obtenerActividadesFavoritas(nickname);
+            EActividadTuristica eActividad = em.find(EActividadTuristica.class, idActividad);
+            
+            if (!favoritas.contains(eActividad.getNombre())) {
+                eTurista.getEActividadesFavoritas().add(eActividad);
+                
+                em.getTransaction().begin();
+                em.merge(eTurista);
+                em.getTransaction().commit();
+            }
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+    }
+    
+    @Override
+    public void eliminarDeFavoritos(Long idActividad, String nickname) {
+        EntityManager em = emf.createEntityManager(); 
+        
+        try{
+            String queryTurista = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            ETurista eTurista = em.createQuery(queryTurista, ETurista.class)
+                                    .setParameter("nickname", nickname)
+                                    .getSingleResult();
+            
+            List<String> favoritas = obtenerActividadesFavoritas(nickname);
+            EActividadTuristica eActividad = em.find(EActividadTuristica.class, idActividad);
+            
+            if (favoritas.contains(eActividad.getNombre())) {
+                eTurista.getEActividadesFavoritas().remove(eActividad);
+                
+                em.getTransaction().begin();
+                em.merge(eTurista);
+                em.getTransaction().commit();
+            }
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
             em.close();
         }
     }

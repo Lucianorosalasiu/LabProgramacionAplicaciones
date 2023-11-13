@@ -26,6 +26,8 @@ import static java.util.Objects.isNull;
 import javax.imageio.ImageIO;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
 
 /**
  *
@@ -45,6 +47,7 @@ public class ConsultaActividad extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userType = (String) request.getSession().getAttribute("sessionType");
+        String nickname = (String) request.getSession().getAttribute("sessionNickname");
         //si estas en mobile y no estas registrado
         //o
         //si estas en mobile, estas registrado pero no como turista
@@ -55,6 +58,8 @@ public class ConsultaActividad extends HttpServlet {
             return;
         }
         
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
         
         Fabrica fabrica = new Fabrica();
         IControlador controlador = fabrica.getInterface();
@@ -62,6 +67,16 @@ public class ConsultaActividad extends HttpServlet {
         
         request.setAttribute("departamentos", controlador.obtenerDepartamentos());
         request.setAttribute("categorias", controlador.obtenerCategorias());
+        
+        String eliminarFavParameter = (String) request.getParameter("eliminarDeFavoritos");
+        if (!isNull(eliminarFavParameter)) {
+            actividadPort.eliminarDeFavoritos(Long.parseLong(eliminarFavParameter), nickname);
+        }
+        
+        String agregarFavParameter = (String) request.getParameter("agregarAFavoritos");
+        if (!isNull(agregarFavParameter)) {
+            actividadPort.agregarAFavoritos(Long.parseLong(agregarFavParameter), nickname);
+        }
         
         //en caso de que no se haya seleccionado ninguna actividad, se listan todas
         if(request.getParameter("idActividad") == null){
@@ -90,11 +105,19 @@ public class ConsultaActividad extends HttpServlet {
                     request.setAttribute("errorMessage", errorMessage);
                 }
             }
-        request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
-                    .forward(request, response);
+            List<String> favoritasUsuario = null;
+            if (!isNull(userType) && userType.equals("TURISTA")) {
+                favoritasUsuario = actividadPort.obtenerActividadesFavoritas(nickname).getLista();
+            }
+            request.setAttribute("favoritasUsuario", favoritasUsuario);
+            request.getRequestDispatcher("/WEB-INF/actividades/consulta.jsp")
+                        .forward(request, response);
         }else{
             Long idActividad = Long.parseLong(request.getParameter("idActividad"));
+            
             DTActividadTuristica actividad;
+            int cantidadFavoritos = 0;
+            boolean enFavoritos = false;
             try {
                 //metodo que busca actividad por su id y si no la encuentra devuelve null a diferencia
                 //de metodos previamente existentes
@@ -102,6 +125,12 @@ public class ConsultaActividad extends HttpServlet {
                 if(actividad == null){
                     throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
                 }
+                if (!isNull(userType) && userType.equals("TURISTA")) {
+                    if (actividadPort.obtenerActividadesFavoritas(nickname).getLista().contains(actividad.getNombre())) {
+                        enFavoritos = true;
+                    }
+                }
+                cantidadFavoritos = actividadPort.obtenerCantidadFavoritos(actividad.getNombre());
             } catch (MyException ex) {
                 response.sendError(404);
                 return;
@@ -144,6 +173,8 @@ public class ConsultaActividad extends HttpServlet {
             request.setAttribute("categorias", categorias);
             request.setAttribute("foto", imageDataUri);
             request.setAttribute("actividad",actividad);
+            request.setAttribute("cantidadFavoritos", cantidadFavoritos);
+            request.setAttribute("enFavoritos", enFavoritos);
             request.getRequestDispatcher("/WEB-INF/actividades/detalles.jsp")
                         .forward(request, response);
         }
