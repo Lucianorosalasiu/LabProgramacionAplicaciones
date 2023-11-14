@@ -47,6 +47,16 @@ public interface WSPaqueteController {
     /**
      * 
      * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSPaqueteController/agregarCompraPaqueteRequest", output = "http://webService/WSPaqueteController/agregarCompraPaqueteResponse")
+    public void agregarCompraPaquete(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraWS arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns webservice.DtPaqueteActividadTuristica
      */
@@ -56,6 +66,16 @@ public interface WSPaqueteController {
     public DtPaqueteActividadTuristica obtenerPaqueteCosto(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
+
+    /**
+     * 
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesResponse")
+    public DtPaquetesCollectionWS obtenerPaquetes();
 
     /**
      * 
@@ -69,6 +89,19 @@ public interface WSPaqueteController {
     public byte[] obtenerFotoPaqueteActividadTuristica(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/compraExisteRequest", output = "http://webService/WSPaqueteController/compraExisteResponse")
+    public boolean compraExiste(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraWS arg0);
 
     /**
      * 
