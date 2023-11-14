@@ -59,8 +59,7 @@
                                 <fieldset disabled>
                                     <div class="row">
                                         <% 
-                                        Fabrica fabrica = new Fabrica();
-                                        IControlador controlador = fabrica.getInterface();
+                                        
                                         String imageDataUri = "";
                                                 byte [] foto = ( byte[]) request.getAttribute("foto1");
                                                     if(foto != null){

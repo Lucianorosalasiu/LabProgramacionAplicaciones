@@ -5,6 +5,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlSchemaType;
+<<<<<<< Updated upstream
+=======
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+>>>>>>> Stashed changes
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -47,6 +51,12 @@ import jakarta.xml.bind.annotation.XmlType;
     "password",
     "photo"
 })
+<<<<<<< Updated upstream
+=======
+@XmlSeeAlso({
+    DtTurista.class
+})
+>>>>>>> Stashed changes
 public abstract class DtUsuario {
 
     @XmlSchemaType(name = "dateTime")

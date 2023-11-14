@@ -66,6 +66,26 @@ public class DtActividadTuristica {
     protected XMLGregorianCalendar fechaAlta;
     protected Long id;
     protected String nombre;
+<<<<<<< Updated upstream
+=======
+    protected String url;
+
+    /**
+     * Gets the value of the cantidadVistas property.
+     * 
+     */
+    public int getCantidadVistas() {
+        return cantidadVistas;
+    }
+
+    /**
+     * Sets the value of the cantidadVistas property.
+     * 
+     */
+    public void setCantidadVistas(int value) {
+        this.cantidadVistas = value;
+    }
+>>>>>>> Stashed changes
 
     /**
      * Gets the value of the categorias property.
@@ -304,4 +324,31 @@ public class DtActividadTuristica {
         this.nombre = value;
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Gets the value of the url property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets the value of the url property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrl(String value) {
+        this.url = value;
+    }
+
+>>>>>>> Stashed changes
 }

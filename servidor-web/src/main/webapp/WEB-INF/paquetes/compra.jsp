@@ -11,11 +11,22 @@
 <%@page import="java.util.Base64"%> 
 <%@page import="logica.fabrica.Fabrica"%> 
 <%@page import="logica.interfaces.IControlador"%> 
+<<<<<<< Updated upstream
 <%@page import="webservice.DtActividadTuristica"%>
 <%@page import="webservice.DtActividadTuristicaWS"%>
 <%@page import="webservice.DtActividadesCollectionWS"%>
 <%@page import="webservice.DtPaqueteActividadTuristica"%>
 <%@page import="webservice.DtPaqueteWS"%>
+=======
+<%@page import="webService.dataTypesWS.DTPaquetesCollectionWS"%> 
+<%@page import="webservice.DtCompraPaquete"%> 
+<%@page import="webservice.DtPaqueteActividadTuristica"%> 
+<%@page import="webservice.DtPaquetesCollectionWS"%> 
+<%@page import="webservice.DtTurista"%> 
+<%@page import="webservice.DtPaqueteWS"%> 
+
+
+>>>>>>> Stashed changes
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -62,10 +73,13 @@
                             <div  class="col-sm-9" >
                                 <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center">
                                     <% 
-                                        Fabrica fabrica = new Fabrica();
-                                        IControlador controlador = fabrica.getInterface();
+                                        
                                         String imageDataUri = "";
+<<<<<<< Updated upstream
                                                 byte [] foto = (byte[]) request.getAttribute("foto1");
+=======
+                                                byte [] foto = ( byte[]) request.getAttribute("foto1");
+>>>>>>> Stashed changes
                                                     if(foto != null){
                                                         String imagenBase64 = Base64.getEncoder().encodeToString(foto);
                                                         String contentType = "image/jpeg";
@@ -78,7 +92,7 @@
                                 <fieldset disabled>
                                     <div class="row">
                                         <div class="col m-3">
-                                        <img src="<%= imageDataUri %>" width="400" height="200" class="card-img-top" alt="...">
+                                            <img src="<%= imageDataUri %>" width="400" height="200" class="card-img-top" alt="...">
                                         </div>
                                         <div class="col m-3">
                                             <label>Nombre</label>

@@ -30,11 +30,27 @@ public class ObjectFactory {
     }
 
     /**
+<<<<<<< Updated upstream
      * Create an instance of {@link DtPaquetesCollectionWS }
      * 
      */
     public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
         return new DtPaquetesCollectionWS();
+=======
+     * Create an instance of {@link DtCompraWS }
+     * 
+     */
+    public DtCompraWS createDtCompraWS() {
+        return new DtCompraWS();
+    }
+
+    /**
+     * Create an instance of {@link DtTurista }
+     * 
+     */
+    public DtTurista createDtTurista() {
+        return new DtTurista();
+>>>>>>> Stashed changes
     }
 
     /**
@@ -83,6 +99,14 @@ public class ObjectFactory {
      */
     public DtCompraPaquete createDtCompraPaquete() {
         return new DtCompraPaquete();
+    }
+
+    /**
+     * Create an instance of {@link DtStringCollectionWS }
+     * 
+     */
+    public DtStringCollectionWS createDtStringCollectionWS() {
+        return new DtStringCollectionWS();
     }
 
 }

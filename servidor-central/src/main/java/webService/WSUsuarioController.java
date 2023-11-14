@@ -32,6 +32,11 @@ public class WSUsuarioController {
         return controlador.obtenerTurista(idTurista);
     }
     
+    @WebMethod
+    public DTTurista obtenerTurista(long idTurista){
+        return controlador.obtenerTurista(idTurista);
+    }
+    
     @WebMethod(exclude = true)
     public Endpoint getEndpoint() {
         return endpoint;

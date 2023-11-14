@@ -47,6 +47,16 @@ public interface WSPaqueteController {
     /**
      * 
      * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSPaqueteController/agregarCompraPaqueteRequest", output = "http://webService/WSPaqueteController/agregarCompraPaqueteResponse")
+    public void agregarCompraPaquete(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraWS arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns webservice.DtPaqueteActividadTuristica
      */
@@ -60,7 +70,10 @@ public interface WSPaqueteController {
     /**
      * 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
      * @return
      *     returns webservice.DtPaquetesCollectionWS
      */
@@ -93,7 +106,14 @@ public interface WSPaqueteController {
     @Action(input = "http://webService/WSPaqueteController/compraExisteRequest", output = "http://webService/WSPaqueteController/compraExisteResponse")
     public boolean compraExiste(
         @WebParam(name = "arg0", partName = "arg0")
+<<<<<<< Updated upstream
         DtCompraPaquete arg0);
+
+    /**
+     * 
+>>>>>>> Stashed changes
+=======
+        DtCompraWS arg0);
 
     /**
      * 

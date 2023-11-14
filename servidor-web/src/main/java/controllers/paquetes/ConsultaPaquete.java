@@ -54,8 +54,7 @@ public class ConsultaPaquete extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        
         byte [] foto1 = null;
         byte [] foto2 = null;
         String paquete = request.getParameter("paquetes");
