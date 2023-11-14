@@ -1,5 +1,6 @@
 package webService;
 
+import dataTypes.DTCompraPaquete;
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTSalidaTuristica;
 import logica.fabrica.Fabrica;
@@ -18,7 +19,7 @@ import webService.dataTypesWS.DTPaquetesCollectionWS;
 import webService.dataTypesWS.DTSalidaTuristicaWS;
 import webService.dataTypesWS.DTSalidasCollectionWS;
 import webService.dataTypesWS.DTStringCollectionWS;
-
+import webService.dataTypesWS.DTCompraWS;
 /**
  *
  * @author diego
@@ -111,6 +112,50 @@ public class WSPaqueteController {
     @WebMethod
     public DTPaqueteActividadTuristica obtenerPaqueteCosto(String paquete){
         return controlador.obtenerPaqueteCosto(paquete);
+    }
+    
+    
+    
+     @WebMethod
+    public DTPaquetesCollectionWS obtenerPaquetes(){
+        ArrayList<DTPaqueteWS> listDTPaqueteWS = new ArrayList<>();
+        List<DTPaqueteActividadTuristica> paquetes = controlador.obtenerPaquetes();
+
+        /* Se obtiene la lista de DTPaqueteActividadTuristica y se parsea a DTPaqueteWS*/
+        for (DTPaqueteActividadTuristica paquete : paquetes) {
+            listDTPaqueteWS.add(
+                    new DTPaqueteWS(
+                            paquete.getNombre(),
+                            paquete.getDescripcion(),
+                            paquete.getValidez(),
+                            paquete.getDescuento(),
+                            DateConverter.dateToString(paquete.getFechaAlta()),
+                            paquete.getCosto(),
+                            paquete.getActividades(),
+                            paquete.getImagen()
+                    )
+            );
+        }
+
+        DTPaquetesCollectionWS collection = new DTPaquetesCollectionWS();
+        collection.setPaquetes(listDTPaqueteWS);
+
+        return collection;
+
+    }
+    @WebMethod
+    public boolean compraExiste(DTCompraWS compra){
+        DTCompraPaquete Compra = new DTCompraPaquete(compra.getCOMPRADOR(), compra.getPAQUETE(), compra.getCANTTURISTAS(),
+                compra.getVENCIMIENTO(), compra.getFECHACOMPRA(), compra.getCOSTO());
+        return controlador.compraExiste(Compra);
+
+    }
+    @WebMethod
+    public void agregarCompraPaquete(DTCompraWS compra){
+        DTCompraPaquete Compra = new DTCompraPaquete(compra.getCOMPRADOR(), compra.getPAQUETE(), compra.getCANTTURISTAS(),
+                compra.getVENCIMIENTO(), compra.getFECHACOMPRA(), compra.getCOSTO());
+
+        controlador.agregarCompraPaquete(Compra);
     }
 }
 
