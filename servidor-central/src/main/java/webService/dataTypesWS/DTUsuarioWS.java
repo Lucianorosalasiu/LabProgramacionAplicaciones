@@ -75,7 +75,16 @@ public abstract class DTUsuarioWS {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-    }    
+    } 
+    
+    public DTUsuarioWS(Long id, String email, String nickname,  String password, String imagePath, byte[] photo) {
+        this.id = id;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.imagePath = imagePath;
+        this.photo = photo;
+    } 
         
     public DTUsuarioWS(Long id, String nickname, String email) {
         this.id = id;

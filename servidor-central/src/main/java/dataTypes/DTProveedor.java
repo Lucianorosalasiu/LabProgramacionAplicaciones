@@ -77,4 +77,17 @@ public class DTProveedor extends DTUsuario {
         super(id, nickname, email);
         this.description = description;
     }
+    
+    public DTProveedor(
+            Long id,
+            String email,
+            String nickname,
+            String password,
+            String imagePath,
+            byte[] photo
+    ) {
+        super(id, nickname, email, password, imagePath, photo);
+        this.description = "";
+        this.websiteURL = "";
+    }
 }

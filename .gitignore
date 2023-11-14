@@ -25,7 +25,6 @@
 *.tar.gz
 *.rar
 
-
 hs_err_pid
 /.metadata/
 /Servers/

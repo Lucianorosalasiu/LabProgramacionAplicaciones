@@ -75,4 +75,17 @@ public class DTProveedorWS extends DTUsuarioWS {
         super(id, nickname, email);
         this.description = description;
     }
+    
+    public DTProveedorWS(
+            Long id,
+            String email,
+            String nickname,
+            String password,
+            String imagePath,
+            byte[] photo
+    ) {
+        super(id, nickname, email, password, imagePath, photo);
+        this.description = "";
+        this.websiteURL = "";
+    }
 }

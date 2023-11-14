@@ -49,7 +49,8 @@ import jakarta.xml.bind.annotation.XmlType;
     "photo"
 })
 @XmlSeeAlso({
-    DtTurista.class
+    DtTurista.class,
+    DtProveedor.class
 })
 public abstract class DtUsuario {
 

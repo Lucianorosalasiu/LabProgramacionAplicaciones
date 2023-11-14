@@ -30,6 +30,7 @@
             <h1 class="text-danger">Ping WS Actividad: <%= request.getAttribute("pingActividad") %></h1>
             <h1 class="text-info">Ping WS Salida: <%= request.getAttribute("pingSalida") %></h1>
             <h1 class="text-dark-emphasis">Ping WS Paquete: <%= request.getAttribute("pingPaquete") %></h1>
+            <h1 class="text-warning">Ping WS Login: <%= request.getAttribute("pingLogin") %></h1>
             <hr/>
             <!-- Prueba de conectividad con los WebServices -->
             
