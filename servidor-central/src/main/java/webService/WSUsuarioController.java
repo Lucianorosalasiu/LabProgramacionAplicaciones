@@ -1,5 +1,6 @@
 package webService;
 
+import dataTypes.DTTurista;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -48,4 +49,8 @@ public class WSUsuarioController {
     public String ping() {
     	return "pong";
     }    
+    @WebMethod
+    public DTTurista obtenerTurista(long idTurista){
+        return controlador.obtenerTurista(idTurista);
+    }
 }

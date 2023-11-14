@@ -39,6 +39,19 @@ public class ObjectFactory {
      */
     public DtUsuarioWrapper createDtUsuarioWrapper() {
         return new DtUsuarioWrapper();
+     * Create an instance of {@link DtCompraWS }
+     * 
+     */
+    public DtCompraWS createDtCompraWS() {
+        return new DtCompraWS();
+    }
+
+    /**
+     * Create an instance of {@link DtTurista }
+     * 
+     */
+    public DtTurista createDtTurista() {
+        return new DtTurista();
     }
 
     /**
@@ -68,6 +81,14 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webService/", name = "dtUsuarioWrapper")
     public JAXBElement<DtUsuarioWrapper> createDtUsuarioWrapper(DtUsuarioWrapper value) {
         return new JAXBElement<DtUsuarioWrapper>(_DtUsuarioWrapper_QNAME, DtUsuarioWrapper.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link DtStringCollectionWS }
+     * 
+     */
+    public DtStringCollectionWS createDtStringCollectionWS() {
+        return new DtStringCollectionWS();
     }
 
 }
