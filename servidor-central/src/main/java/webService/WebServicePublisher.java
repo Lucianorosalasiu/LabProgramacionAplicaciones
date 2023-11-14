@@ -24,11 +24,13 @@ public class WebServicePublisher {
         WSActividadController servicio2 = new WSActividadController();
         WSUsuarioController servicio3 = new WSUsuarioController();
         WSPaqueteController servicio4 = new WSPaqueteController();
+        WSLoginController servicio5 = new WSLoginController();
 
         servicio1.publish(host, port);
         servicio2.publish(host, port);
         servicio3.publish(host, port);
         servicio4.publish(host, port);
+        servicio5.publish(host, port);
         
         System.out.println(cyanColorCode + "\n¡Todos los WebServices han sido desplegados exitosamente!" + resetColorCode);
         System.out.println(cyanColorCode + "\nServicios escuchando en: " + resetColorCode + greenColorCode);
@@ -36,6 +38,7 @@ public class WebServicePublisher {
         System.out.println("  - " + servicio2.getAddress());
         System.out.println("  - " + servicio3.getAddress());
         System.out.println("  - " + servicio4.getAddress());
+        System.out.println("  - " + servicio5.getAddress());
         System.out.println(resetColorCode);
     }
 }

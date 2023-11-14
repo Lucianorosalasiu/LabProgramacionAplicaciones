@@ -89,6 +89,15 @@ public abstract class DTUsuario {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
+    } 
+    
+    public DTUsuario(Long id, String email, String nickname,  String password, String imagePath, byte[] photo) {
+        this.id = id;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.imagePath = imagePath;
+        this.photo = photo;
     }  
     
     public String hashPassword(String password){

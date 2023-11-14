@@ -14,11 +14,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dataTypes.DTProveedor;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import logica.fabrica.Fabrica;//!Se va una vez se implemente el ws
+import logica.interfaces.IControlador;//!Se va una vez se implemente el ws
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
+import dataTypes.DTUsuarioWrapper;
 import exceptions.MyException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import webService.dataTypesWS.DTUsuarioWS;
+import webservice.DtUsuario;
+import webservice.DtUsuarioWS;
+import webservice.DtUsuarioWrapper;
 
 /**
  *
@@ -49,34 +56,52 @@ public class Login extends HttpServlet {
         String sessionType = "VISITANTE";
         String errorMessage = null;
         
+        webservice.WSLoginControllerService l = new webservice.WSLoginControllerService();
+        webservice.WSLoginController portL = l.getWSLoginControllerPort();
+
         /*realiza la logica del login solo si los campos contienen datos*/
         if(validateParameters(request)){
             try {
-                Fabrica fabrica = new Fabrica();
-                IControlador controlador = fabrica.getInterface();
-                
-                DTUsuario usuario = controlador.obtenerUsuarioAlternativo(nickname);
-                //si no existe un usuario con esas credenciales
-                if(usuario == null || !usuario.verifyPassword(loginPassword,usuario.getPassword())){                    
-                    errorMessage = "Nombre de usuario o contraseña incorrectas.";
-                    request.setAttribute("errorMessage", errorMessage);
-                }else if(usuario.verifyPassword(loginPassword, usuario.getPassword())){  
-                    //en caso de que si exista un usuario con esas credenciales
-                    if(usuario instanceof DTTurista){
+               DtUsuarioWrapper usuario = portL.obtenerUsuarioAlternativo(nickname);
+               
+               if(usuario.isTurista()){
+                   DTTurista dtt = new DTTurista(usuario.getId(),usuario.getEmail(),usuario.getNickname(),usuario.getPassword(),usuario.getDtt().getImagePath(),usuario.getPhoto());
+                   //si no existe un usuario con esas credenciales
+                    if(!dtt.verifyPassword(loginPassword,dtt.getPassword())){                    
+                        errorMessage += "Nombre de usuario o contraseña incorrectas.";
+                        request.setAttribute("errorMessage", errorMessage);
+                    }else if(dtt.verifyPassword(loginPassword, dtt.getPassword())){  
+                        //en caso de que si exista un usuario con esas credenciales
                         sessionType = "TURISTA";
-                    }else if(usuario instanceof DTProveedor){
-                        sessionType = "PROVEEDOR";
-                        if(request.getHeader("User-Agent").toLowerCase().contains("mobile")){
-                            throw new MyException("Los proveedores no pueden iniciar sesion desde la version mobile.");
-                        }
+                        request.getSession().setAttribute("id", dtt.getId());
+                        request.getSession().setAttribute("sessionNickname", dtt.getNickname());
+                        request.getSession().setAttribute("sessionEmail", dtt.getEmail());
+                        request.getSession().setAttribute("sessionType", sessionType);
+                        request.getSession().setAttribute("isLogged",true);
+                        request.getSession().setAttribute("sessionPhoto",dtt.getProfileImageUrl());
                     }
-                    request.getSession().setAttribute("id", usuario.getId());
-                    request.getSession().setAttribute("sessionNickname", usuario.getNickname());
-                    request.getSession().setAttribute("sessionEmail", usuario.getEmail());
-                    request.getSession().setAttribute("sessionPhoto", usuario.getProfileImageUrl());
-                    request.getSession().setAttribute("sessionType", sessionType);
-                    request.getSession().setAttribute("isLogged",true);
-                }
+               }else{
+                   DTProveedor dtp = new DTProveedor(usuario.getId(),usuario.getEmail(),usuario.getNickname(),usuario.getPassword(),usuario.getDtp().getImagePath(),usuario.getPhoto());
+                   if (!dtp.verifyPassword(loginPassword, dtp.getPassword())) {
+                       errorMessage = "Nombre de usuario o contraseña incorrectas.";
+                       request.setAttribute("errorMessage", errorMessage);
+                   } else if (dtp.verifyPassword(loginPassword, dtp.getPassword())) {
+                       //en caso de que si exista un usuario con esas credenciales
+                       if (!usuario.isTurista()) {
+                           sessionType = "PROVEEDOR";
+                           if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
+                               throw new MyException("Los proveedores no pueden iniciar sesion desde la version mobile.");
+                           }
+                       }
+                       request.getSession().setAttribute("id", dtp.getId());
+                       request.getSession().setAttribute("sessionNickname", dtp.getNickname());
+                       request.getSession().setAttribute("sessionEmail", dtp.getEmail());
+                       request.getSession().setAttribute("bytePhoto", dtp.getPhoto());
+                       request.getSession().setAttribute("sessionType", sessionType);
+                       request.getSession().setAttribute("isLogged", true);
+                       request.getSession().setAttribute("sessionPhoto",dtp.getProfileImageUrl());
+                   }
+            }
             } catch (Exception e) {
                 errorMessage = e.getMessage();
                 request.setAttribute("errorMessage", errorMessage);

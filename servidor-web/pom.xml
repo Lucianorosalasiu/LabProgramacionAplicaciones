@@ -50,6 +50,7 @@
                                 <wsdlUrl>http://${ip-host}:${port}/ws/Actividad?wsdl</wsdlUrl>
                                 <wsdlUrl>http://${ip-host}:${port}/ws/Usuario?wsdl</wsdlUrl>
                                 <wsdlUrl>http://${ip-host}:${port}/ws/Paquete?wsdl</wsdlUrl>
+                                <wsdlUrl>http://${ip-host}:${port}/ws/Login?wsdl</wsdlUrl>
                             </wsdlUrls>
                         </configuration>
                     </execution>

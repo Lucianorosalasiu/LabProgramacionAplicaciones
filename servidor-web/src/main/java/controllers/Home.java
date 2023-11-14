@@ -48,16 +48,23 @@ public class Home extends HttpServlet {
         webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
         webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
         
+        /* WebService Sesion: */
+        webservice.WSLoginControllerService l = new webservice.WSLoginControllerService();
+        webservice.WSLoginController portL = l.getWSLoginControllerPort();
+        
+        
         
         String responsePingUsuarioWS = portU.ping();
         String responsePingActividadWS = portA.ping();
         String responsePingSalidaWS = portS.ping();
         String responsePingPaqueteWS = portP.ping();
+        String responsePingLoginWS = portL.ping();
         
         request.setAttribute("pingUsuario", responsePingUsuarioWS);
         request.setAttribute("pingActividad", responsePingActividadWS);
         request.setAttribute("pingSalida", responsePingSalidaWS);
         request.setAttribute("pingPaquete", responsePingPaqueteWS);
+        request.setAttribute("pingLogin", responsePingLoginWS);
         
         request.getRequestDispatcher("/WEB-INF/home/home.jsp")
                 .forward(request, response);

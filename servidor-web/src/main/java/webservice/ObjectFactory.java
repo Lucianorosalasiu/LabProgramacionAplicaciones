@@ -1,6 +1,9 @@
 
 package webservice;
 
+import javax.xml.namespace.QName;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlElementDecl;
 import jakarta.xml.bind.annotation.XmlRegistry;
 
 
@@ -21,6 +24,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _DtUsuarioWrapper_QNAME = new QName("http://webService/", "dtUsuarioWrapper");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservice
@@ -30,51 +34,40 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtStringCollectionWS }
+     * Create an instance of {@link DtUsuarioWrapper }
      * 
      */
-    public DtStringCollectionWS createDtStringCollectionWS() {
-        return new DtStringCollectionWS();
+    public DtUsuarioWrapper createDtUsuarioWrapper() {
+        return new DtUsuarioWrapper();
     }
 
     /**
-     * Create an instance of {@link DtPaqueteActividadTuristica }
+     * Create an instance of {@link DtTurista }
      * 
      */
-    public DtPaqueteActividadTuristica createDtPaqueteActividadTuristica() {
-        return new DtPaqueteActividadTuristica();
+    public DtTurista createDtTurista() {
+        return new DtTurista();
     }
 
     /**
-     * Create an instance of {@link DtActividadTuristica }
+     * Create an instance of {@link DtProveedor }
      * 
      */
-    public DtActividadTuristica createDtActividadTuristica() {
-        return new DtActividadTuristica();
+    public DtProveedor createDtProveedor() {
+        return new DtProveedor();
     }
 
     /**
-     * Create an instance of {@link DtDepartamento }
+     * Create an instance of {@link JAXBElement }{@code <}{@link DtUsuarioWrapper }{@code >}
      * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link DtUsuarioWrapper }{@code >}
      */
-    public DtDepartamento createDtDepartamento() {
-        return new DtDepartamento();
-    }
-
-    /**
-     * Create an instance of {@link DtPaquetesCollectionWS }
-     * 
-     */
-    public DtPaquetesCollectionWS createDtPaquetesCollectionWS() {
-        return new DtPaquetesCollectionWS();
-    }
-
-    /**
-     * Create an instance of {@link DtPaqueteWS }
-     * 
-     */
-    public DtPaqueteWS createDtPaqueteWS() {
-        return new DtPaqueteWS();
+    @XmlElementDecl(namespace = "http://webService/", name = "dtUsuarioWrapper")
+    public JAXBElement<DtUsuarioWrapper> createDtUsuarioWrapper(DtUsuarioWrapper value) {
+        return new JAXBElement<DtUsuarioWrapper>(_DtUsuarioWrapper_QNAME, DtUsuarioWrapper.class, null, value);
     }
 
 }

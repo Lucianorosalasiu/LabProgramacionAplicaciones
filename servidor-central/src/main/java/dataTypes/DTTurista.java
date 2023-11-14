@@ -70,4 +70,15 @@ public class DTTurista extends DTUsuario{
         super(id, nickname, email);
         this.nacionality = nacionality;
     }
+    
+    public DTTurista(
+            Long id,
+            String email,
+            String nickname,
+            String password,
+            String imagePath,
+            byte[] photo
+    ) {
+        super(id, nickname, email, password, imagePath, photo);
+    }
 }

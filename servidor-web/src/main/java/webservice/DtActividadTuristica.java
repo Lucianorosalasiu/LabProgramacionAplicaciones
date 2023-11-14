@@ -1,3 +1,4 @@
+
 package webservice;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class DtActividadTuristica {
     protected String url;
 
     /**
-     * Obtiene el valor de la propiedad cantidadVistas.
+     * Gets the value of the cantidadVistas property.
      * 
      */
     public int getCantidadVistas() {
@@ -81,7 +82,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad cantidadVistas.
+     * Sets the value of the cantidadVistas property.
      * 
      */
     public void setCantidadVistas(int value) {
@@ -326,7 +327,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Obtiene el valor de la propiedad url.
+     * Gets the value of the url property.
      * 
      * @return
      *     possible object is
@@ -338,7 +339,7 @@ public class DtActividadTuristica {
     }
 
     /**
-     * Define el valor de la propiedad url.
+     * Sets the value of the url property.
      * 
      * @param value
      *     allowed object is
