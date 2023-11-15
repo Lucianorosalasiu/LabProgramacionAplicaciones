@@ -5,6 +5,7 @@
 package webService;
 
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -97,6 +98,18 @@ public class WSActividadController {
     }
     
     @WebMethod
+    public String obtenerCategorias(){
+        String PlainStringCategorias = "";
+        
+        List<DTCategoria> categorias = controlador.obtenerCategorias();
+        for(DTCategoria c : categorias){
+            PlainStringCategorias += c.getNombre() + ",";
+        }
+        
+        return PlainStringCategorias;
+    }
+    
+    @WebMethod
     public DTActividadesCollectionWS obtenerActividadesTuristicasPorDepartamento(String nombreDepartamento){
         ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
 
@@ -108,6 +121,34 @@ public class WSActividadController {
         for (DTActividadTuristica at : listDTActividad) {
             listDTActividadWS.add(
                     new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getDuracion(),
+                            at.getCosto(),
+                            at.getCiudad(),
+                            DateConverter.convertToLocalDate(at.getFechaAlta())
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(listDTActividadWS);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesPorCategoria(String nombreCategoria){
+        ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
+        
+        List<DTActividadTuristica> listDTActividad = controlador.obtenerActividadesTuristicasPorCategoria(
+                nombreCategoria);
+        
+        for (DTActividadTuristica at : listDTActividad) {
+            listDTActividadWS.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
                             at.getNombre(),
                             at.getDescripcion(),
                             at.getDuracion(),

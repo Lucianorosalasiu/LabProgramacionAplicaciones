@@ -719,8 +719,14 @@ public class DataPersistencia implements IDataPersistencia {
             
             for(EActividadTuristica a : resultados){
                 if(a.getEstadoActividad() == EstadoActividad.CONFIRMADA){
-                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(a.getNombre(),a.getDescripcion(),
-                    a.getDuracion(),a.getCosto(),a.getCiudad(),a.getFechaAlta());
+                    DTActividadTuristica dtActividadTuristica = new DTActividadTuristica(
+                            a.getId(),
+                            a.getNombre(),
+                            a.getDescripcion(),
+                            a.getDuracion(),
+                            a.getCosto(),
+                            a.getCiudad(),
+                            a.getFechaAlta());
 
                     dtActividadesTuristicas.add(dtActividadTuristica);
                 }

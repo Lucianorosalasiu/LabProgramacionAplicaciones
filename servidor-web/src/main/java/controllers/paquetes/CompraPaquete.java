@@ -18,6 +18,16 @@ import java.util.List;
 import static java.util.Objects.isNull;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import java.util.GregorianCalendar;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.datatype.DatatypeFactory;
+import webService.dataTypesWS.DTPaquetesCollectionWS;
+//import webservice.DtCompraPaquete;
+import webservice.DtCompraWS;
+import webservice.DtPaqueteActividadTuristica;
+import webservice.DtPaqueteWS;
+import webservice.DtPaquetesCollectionWS;
+import webservice.DtTurista;
 /**
  *
  * @author lucho
@@ -43,11 +53,31 @@ public class CompraPaquete extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        /* WebService Usuarios: */
+        webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();
+
+        /* WebService Actividades: */
+        webservice.WSActividadControllerService a = new webservice.WSActividadControllerService();
+        webservice.WSActividadController portA = a.getWSActividadControllerPort();
+
+        /* WebService Salidas: */
+        webservice.WSSalidaControllerService s = new webservice.WSSalidaControllerService();
+        webservice.WSSalidaController portS = s.getWSSalidaControllerPort();
+
+        /* WebService Paquetes: */
+        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
+        webservice.WSPaqueteController portP = p.getWSPaqueteControllerPort();
         
-        List<DTPaqueteActividadTuristica> paquetesEnteros = controlador.obtenerPaquetes();
-        request.setAttribute("paquetesEnteros", paquetesEnteros);
+        byte [] foto1 = null;
+
+        DtPaquetesCollectionWS paquetesEnteros = portP.obtenerPaquetes();
+        List<DtPaqueteWS> PaquetesEnteros = paquetesEnteros.getPaquetes();
+        request.setAttribute("paquetesEnteros", PaquetesEnteros);
+        if(request.getParameter("paquetes") != null){
+            foto1 = portP.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
+             request.setAttribute("foto1", foto1);
+        }
         
         int cantPersonas = 0;
         
@@ -60,14 +90,43 @@ public class CompraPaquete extends HttpServlet {
             long idTurista = (long)request.getSession().getAttribute("id");
             int cantidadPersonas = Integer.parseInt(request.getParameter("personas"));
             
-            DTTurista turista = controlador.obtenerTurista(idTurista);
-            DTPaqueteActividadTuristica paquete = controlador.obtenerPaqueteCosto(request.getParameter("paquetes"));
+            DtTurista turista = portU.obtenerTurista(idTurista);
+            DTTurista dtturista = new DTTurista(turista.getId(),turista.getNickname(),turista.getEmail(),turista.getNacionality());
+
+            DtPaqueteActividadTuristica paquete = portP.obtenerPaqueteCosto(request.getParameter("paquetes"));
+
+
+            DTPaqueteActividadTuristica dtpaquete = new DTPaqueteActividadTuristica(paquete.getNombre(), paquete.getDescripcion(), paquete.getValidez(), paquete.getDescuento(), paquete.getFechaAlta().toGregorianCalendar().getTime());
+
             c.add(Calendar.DATE, paquete.getValidez());
             vencimiento = c.getTime();
-            
-            DTCompraPaquete compra = new DTCompraPaquete(turista,paquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
-            if(controlador.compraExiste(compra)){
-                controlador.agregarCompraPaquete(compra);
+
+            GregorianCalendar xmlDateAlta = new GregorianCalendar();
+            xmlDateAlta.setTime(alta);
+            XMLGregorianCalendar xmlAlta = null;
+
+            GregorianCalendar xmlDateVencimiento = new GregorianCalendar();
+            xmlDateVencimiento.setTime(vencimiento);
+            XMLGregorianCalendar xmlVencimiento = null;
+            try{
+
+                xmlAlta = DatatypeFactory.newInstance().newXMLGregorianCalendar(xmlDateAlta);
+
+                xmlVencimiento = DatatypeFactory.newInstance().newXMLGregorianCalendar(xmlDateVencimiento);
+
+            }catch(Exception e){}
+
+            DTCompraPaquete compra = new DTCompraPaquete(dtturista,dtpaquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
+            DtCompraWS dtcompra = new DtCompraWS();
+            dtcompra.setCOMPRADOR(turista);
+            dtcompra.setCANTTURISTAS(cantidadPersonas);
+            dtcompra.setPAQUETE(paquete);
+            dtcompra.setVENCIMIENTO(xmlVencimiento);
+            dtcompra.setFECHACOMPRA(xmlAlta);
+            dtcompra.setCOSTO(paquete.getCosto()*cantidadPersonas);
+
+            if(portP.compraExiste(dtcompra)){
+                portP.agregarCompraPaquete(dtcompra);
                 request.setAttribute("successMessage", "Compra realizada!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);

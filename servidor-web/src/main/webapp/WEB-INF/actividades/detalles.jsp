@@ -8,6 +8,13 @@
 <%@page import="dataTypes.DTActividadTuristica"%>
 <%@page import="dataTypes.DTSalidaTuristica"%>
 <%@page import="dataTypes.DTPaqueteActividadTuristica"%>
+<%@page import="webservice.DtActividadTuristica"%> 
+<%@page import="webservice.DtSalidasCollectionWS"%> 
+<%@page import="webservice.DtSalidaTuristicaWS"%> 
+<%@page import="webservice.DtPaquetesCollectionWS"%> 
+<%@page import="webservice.DtPaqueteWS"%> 
+
+
 <%@page import="java.util.List"%> 
 <!DOCTYPE html>
 <html class="h-100">
@@ -25,9 +32,9 @@
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
     <%}%>
     <%
-        DTActividadTuristica actividad = (DTActividadTuristica) request.getAttribute("actividad");
-        List<DTSalidaTuristica> salidas = (List<DTSalidaTuristica>) request.getAttribute("salidas");
-        List<DTPaqueteActividadTuristica> paquetes = (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetes");
+        DtActividadTuristica actividad = (DtActividadTuristica) request.getAttribute("actividad");
+        DtSalidasCollectionWS salidas = (DtSalidasCollectionWS) request.getAttribute("salidas");
+        DtPaquetesCollectionWS paquetes = (DtPaquetesCollectionWS) request.getAttribute("paquetes");
         String foto = (String) request.getAttribute("foto");
         String categorias = (String) request.getAttribute("categorias");
         String urlVideo = actividad.getUrl();
@@ -125,7 +132,7 @@
                             </thead>
                             <tbody>
                                 <% 
-                                    for(DTSalidaTuristica salida : salidas){
+                                    for(DtSalidaTuristicaWS salida : salidas.getSalidas()){
                                 %>
                                 <tr>
                                     <td><%= salida.getNombre() %></td>
@@ -152,7 +159,7 @@
                             </thead>
                             <tbody>
                                 <% 
-                                    for(DTPaqueteActividadTuristica paquete : paquetes){
+                                    for(DtPaqueteWS paquete : paquetes.getPaquetes()){
                                 %>
                                 <tr>
                                     <td><%= paquete.getNombre() %></td>

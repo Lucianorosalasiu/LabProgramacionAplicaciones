@@ -16,12 +16,12 @@ import jakarta.xml.ws.Action;
  * Generated source version: 3.0
  * 
  */
-@WebService(name = "WSUsuarioController", targetNamespace = "http://webService/")
+@WebService(name = "WSLoginController", targetNamespace = "http://webService/")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface WSUsuarioController {
+public interface WSLoginController {
 
 
     /**
@@ -31,20 +31,20 @@ public interface WSUsuarioController {
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webService/WSUsuarioController/pingRequest", output = "http://webService/WSUsuarioController/pingResponse")
+    @Action(input = "http://webService/WSLoginController/pingRequest", output = "http://webService/WSLoginController/pingResponse")
     public String ping();
 
     /**
      * 
      * @param arg0
      * @return
-     *     returns webservice.DtTurista
+     *     returns webservice.DtUsuarioWrapper
      */
     @WebMethod
     @WebResult(partName = "return")
-    @Action(input = "http://webService/WSUsuarioController/obtenerTuristaRequest", output = "http://webService/WSUsuarioController/obtenerTuristaResponse")
-    public DtTurista obtenerTurista(
+    @Action(input = "http://webService/WSLoginController/obtenerUsuarioAlternativoRequest", output = "http://webService/WSLoginController/obtenerUsuarioAlternativoResponse")
+    public DtUsuarioWrapper obtenerUsuarioAlternativo(
         @WebParam(name = "arg0", partName = "arg0")
-        long arg0);
+        String arg0);
 
 }

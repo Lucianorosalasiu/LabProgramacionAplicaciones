@@ -10,7 +10,13 @@
 <%@page import="java.util.List"%> 
 <%@page import="java.util.Base64"%> 
 <%@page import="logica.fabrica.Fabrica"%> 
-<%@page import="logica.interfaces.IControlador"%> 
+<%@page import="logica.interfaces.IControlador"%>
+<%@page import="webService.dataTypesWS.DTPaquetesCollectionWS"%> 
+
+<%@page import="webservice.DtPaqueteActividadTuristica"%> 
+<%@page import="webservice.DtPaquetesCollectionWS"%> 
+<%@page import="webservice.DtTurista"%> 
+<%@page import="webservice.DtPaqueteWS"%> 
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -27,7 +33,7 @@
                         <option value="" disabled selected>- seleccionar paquete -</option>
                         <% 
                             String selectedPaquete = request.getParameter("paquetes");
-                            for(DTPaqueteActividadTuristica paquete : (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetesEnteros")){
+                            for(DtPaqueteWS paquete : (List<DtPaqueteWS>) request.getAttribute("paquetesEnteros")){
                                 String nombrePaquete = paquete.getNombre();
                             
                         %>
@@ -42,8 +48,8 @@
                 %>
                 <div class="d-flex flex-column align-items-center p-4 flex-grow-1">
                     <%
-                        DTPaqueteActividadTuristica paqueteSeleccionado = null;
-                        for(DTPaqueteActividadTuristica paquete : (List<DTPaqueteActividadTuristica>) request.getAttribute("paquetesEnteros")){
+                        DtPaqueteWS paqueteSeleccionado = null;
+                        for(DtPaqueteWS paquete : (List<DtPaqueteWS>) request.getAttribute("paquetesEnteros")){
                             if(paquete.getNombre().equals(selectedPaquete)){
                                 paqueteSeleccionado = paquete;
                             }
@@ -56,10 +62,9 @@
                             <div  class="col-sm-9" >
                                 <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center">
                                     <% 
-                                        Fabrica fabrica = new Fabrica();
-                                        IControlador controlador = fabrica.getInterface();
+                                   
                                         String imageDataUri = "";
-                                                byte [] foto = controlador.obtenerFotoPaqueteActividadTuristica(request.getParameter("paquetes"));
+                                                byte [] foto = ( byte[]) request.getAttribute("foto1");
                                                     if(foto != null){
                                                         String imagenBase64 = Base64.getEncoder().encodeToString(foto);
                                                         String contentType = "image/jpeg";

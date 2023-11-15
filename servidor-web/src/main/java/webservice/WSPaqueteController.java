@@ -36,6 +36,19 @@ public interface WSPaqueteController {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesRelacionadosRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesRelacionadosResponse")
+    public DtPaquetesCollectionWS obtenerPaquetesRelacionados(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0);
+
+    /**
+     * 
      * @return
      *     returns webservice.DtStringCollectionWS
      */
@@ -43,6 +56,16 @@ public interface WSPaqueteController {
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSPaqueteController/obtenerPaqueteNombresRequest", output = "http://webService/WSPaqueteController/obtenerPaqueteNombresResponse")
     public DtStringCollectionWS obtenerPaqueteNombres();
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @Action(input = "http://webService/WSPaqueteController/agregarCompraPaqueteRequest", output = "http://webService/WSPaqueteController/agregarCompraPaqueteResponse")
+    public void agregarCompraPaquete(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraWS arg0);
 
     /**
      * 
@@ -59,6 +82,16 @@ public interface WSPaqueteController {
 
     /**
      * 
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesResponse")
+    public DtPaquetesCollectionWS obtenerPaquetes();
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns byte[]
@@ -69,6 +102,19 @@ public interface WSPaqueteController {
     public byte[] obtenerFotoPaqueteActividadTuristica(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/compraExisteRequest", output = "http://webService/WSPaqueteController/compraExisteResponse")
+    public boolean compraExiste(
+        @WebParam(name = "arg0", partName = "arg0")
+        DtCompraWS arg0);
 
     /**
      * 
