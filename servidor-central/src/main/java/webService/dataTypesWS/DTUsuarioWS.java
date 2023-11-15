@@ -33,7 +33,6 @@ public abstract class DTUsuarioWS {
     protected String imagePath;
     protected byte[] photo;
 
-
     public DTUsuarioWS(
             String nickname, 
             String name, 

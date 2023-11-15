@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package webService;
 
 import dataTypes.DTProveedor;
 import dataTypes.DTTurista;
 import dataTypes.DTUsuario;
-import dataTypes.DTUsuarioWrapper;
+import webService.dataTypesWS.DTProveedorWS;
+import webService.dataTypesWS.DTTuristaWS;
+import webService.dataTypesWS.DTUsuarioWrapper;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
@@ -63,28 +61,68 @@ public class WSLoginController {
         DTUsuarioWrapper dtuw = new DTUsuarioWrapper();
 
         if (u instanceof DTProveedor) {
-            dtuw.setPhoto(u.getPhoto());
-            dtuw.setImagePath(u.getImagePath());
+            DTProveedor proveedor = (DTProveedor) u;
             
-            dtuw.setDtp((DTProveedor) u);
-            
-            dtuw.getDtp().setImagePath(u.getImagePath());
-            
+            DTProveedorWS proveedorWS = new DTProveedorWS(
+                    proveedor.getId(),
+                    proveedor.getEmail(),
+                    proveedor.getNickname(),
+                    proveedor.getPassword(),
+                    proveedor.getImagePath(),
+                    proveedor.getPhoto()
+            );
+                    
+            dtuw.setPhoto(proveedorWS.getPhoto());
+            dtuw.setImagePath(proveedorWS.getImagePath());
+            dtuw.setDtp(proveedorWS);
+            dtuw.getDtp().setImagePath(proveedorWS.getImagePath());
             dtuw.setTurista(false);
+            
             /* no me pregunten porque pero si no le pongo un DTTurista vacio revienta,
              mi suposicion es que al serializarlo si no encuentra nada da error */
-            DTTurista turistaVacio = new DTTurista();
+            DTTuristaWS turistaVacio = new DTTuristaWS();
             dtuw.setDtt(turistaVacio);
         } else if (u instanceof DTTurista) {
-            /* en cambio si cuando es un turista no le pongo el DTProveedor no pasa nada */
-            dtuw.setPhoto(u.getPhoto());
-            dtuw.setImagePath(u.getImagePath());
+            DTTurista turista = (DTTurista) u;
             
-            dtuw.setDtt((DTTurista) u);
-            dtuw.getDtt().setImagePath(u.getImagePath());
+            DTTuristaWS turistaWS = new DTTuristaWS(
+                    turista.getId(),
+                    turista.getEmail(), 
+                    turista.getNickname(),
+                    turista.getPassword(),
+                    turista.getImagePath(),
+                    turista.getPhoto()
+            );
+            
+            /* en cambio si cuando es un turista no le pongo el DTProveedor no pasa nada */
+            dtuw.setPhoto(turistaWS.getPhoto());
+            dtuw.setImagePath(turistaWS.getImagePath());
+            
+            dtuw.setDtt(turistaWS);
+            dtuw.getDtt().setImagePath(turistaWS.getImagePath());
             dtuw.setTurista(true);
         }
 
         return dtuw;
+    }
+    
+    @WebMethod
+    public boolean verifyPassword(String loginPassword, DTUsuarioWrapper usuario) {
+        if (usuario.isTurista()) {
+            return usuario.getDtt().verifyPassword(
+                    loginPassword, 
+                    usuario.getDtt().getPassword()
+            );
+        }
+   
+        return usuario.getDtp().verifyPassword(
+                loginPassword, 
+                usuario.getDtp().getPassword()
+        );
+    }
+    
+    @WebMethod
+    public String getProfileImageUrl(DTUsuarioWrapper usuario) {   
+        return usuario.getProfileImageUrl();
     }
 }

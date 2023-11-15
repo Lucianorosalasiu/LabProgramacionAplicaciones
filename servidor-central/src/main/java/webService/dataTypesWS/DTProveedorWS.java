@@ -85,7 +85,5 @@ public class DTProveedorWS extends DTUsuarioWS {
             byte[] photo
     ) {
         super(id, nickname, email, password, imagePath, photo);
-        this.description = "";
-        this.websiteURL = "";
-    }
+    }  
 }

@@ -7,14 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import dataTypes.DTProveedor;
-import dataTypes.DTTurista;
-
-//import webservice.DtProveedorWS;
-//import webservice.DtTuristaWS;
-
+import webservice.DtProveedorWS;
+import webservice.DtTuristaWS;
 import webservice.DtUsuarioWrapper;
-
 
 /**
  *
@@ -25,7 +20,7 @@ public class Login extends HttpServlet {
     public Login() {
         super();
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,53 +39,70 @@ public class Login extends HttpServlet {
         String loginPassword = request.getParameter("password");
         String sessionType = "VISITANTE";
         String errorMessage = null;
-        
+
         webservice.WSLoginControllerService l = new webservice.WSLoginControllerService();
         webservice.WSLoginController portL = l.getWSLoginControllerPort();
 
         /*realiza la logica del login solo si los campos contienen datos*/
-        if(validateParameters(request)){
+        if (validateParameters(request)) {
             try {
-               DtUsuarioWrapper usuario = portL.obtenerUsuarioAlternativo(nickname);
-               
-               if(usuario.isTurista()){
-                   DTTurista dtt = new DTTurista(usuario.getId(),usuario.getEmail(),usuario.getNickname(),usuario.getPassword(),usuario.getDtt().getImagePath(),usuario.getPhoto());
-                   //si no existe un usuario con esas credenciales
-                    if(!dtt.verifyPassword(loginPassword,dtt.getPassword())){                    
+                DtUsuarioWrapper usuario = portL.obtenerUsuarioAlternativo(nickname);
+
+                if (usuario.isTurista()) {
+                    DtTuristaWS dtt = new DtTuristaWS();
+
+                    dtt.setId(usuario.getId());
+                    dtt.setEmail(usuario.getEmail());
+                    dtt.setNickname(usuario.getNickname());
+                    dtt.setPassword(usuario.getPassword());
+                    dtt.setImagePath(usuario.getDtt().getImagePath());
+                    dtt.setPhoto(usuario.getPhoto());
+
+                    //si no existe un usuario con esas credenciales
+                    if (!portL.verifyPassword(loginPassword, usuario)) {
                         errorMessage += "Nombre de usuario o contraseña incorrectas.";
                         request.setAttribute("errorMessage", errorMessage);
-                    }else if(dtt.verifyPassword(loginPassword, dtt.getPassword())){  
+                    } else if (portL.verifyPassword(loginPassword, usuario)) {
                         //en caso de que si exista un usuario con esas credenciales
                         sessionType = "TURISTA";
                         request.getSession().setAttribute("id", dtt.getId());
                         request.getSession().setAttribute("sessionNickname", dtt.getNickname());
                         request.getSession().setAttribute("sessionEmail", dtt.getEmail());
+                        request.getSession().setAttribute("bytePhoto", dtt.getPhoto());
                         request.getSession().setAttribute("sessionType", sessionType);
-                        request.getSession().setAttribute("isLogged",true);
-                        request.getSession().setAttribute("sessionPhoto",dtt.getProfileImageUrl());
+                        request.getSession().setAttribute("isLogged", true);
+                        request.getSession().setAttribute("sessionPhoto", portL.getProfileImageUrl(usuario));
                     }
-               }else{
-                   DTProveedor dtp = new DTProveedor(usuario.getId(),usuario.getEmail(),usuario.getNickname(),usuario.getPassword(),usuario.getDtp().getImagePath(),usuario.getPhoto());
-                   if (!dtp.verifyPassword(loginPassword, dtp.getPassword())) {
-                       errorMessage = "Nombre de usuario o contraseña incorrectas.";
-                       request.setAttribute("errorMessage", errorMessage);
-                   } else if (dtp.verifyPassword(loginPassword, dtp.getPassword())) {
-                       //en caso de que si exista un usuario con esas credenciales
-                       if (!usuario.isTurista()) {
-                           sessionType = "PROVEEDOR";
-                           if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
-                               throw new Exception("Los proveedores no pueden iniciar sesion desde la version mobile.");
-                           }
-                       }
-                       request.getSession().setAttribute("id", dtp.getId());
-                       request.getSession().setAttribute("sessionNickname", dtp.getNickname());
-                       request.getSession().setAttribute("sessionEmail", dtp.getEmail());
-                       request.getSession().setAttribute("bytePhoto", dtp.getPhoto());
-                       request.getSession().setAttribute("sessionType", sessionType);
-                       request.getSession().setAttribute("isLogged", true);
-                       request.getSession().setAttribute("sessionPhoto",dtp.getProfileImageUrl());
-                   }
-            }
+                } else {
+                    DtProveedorWS dtp = new DtProveedorWS();
+
+                    dtp.setId(usuario.getId());
+                    dtp.setEmail(usuario.getEmail());
+                    dtp.setNickname(usuario.getNickname());
+                    dtp.setPassword(usuario.getPassword());
+                    dtp.setImagePath(usuario.getDtt().getImagePath());
+                    dtp.setPhoto(usuario.getPhoto());
+
+                    if (!portL.verifyPassword(loginPassword, usuario)) {
+                        errorMessage = "Nombre de usuario o contraseña incorrectas.";
+                        request.setAttribute("errorMessage", errorMessage);
+                    } else if (portL.verifyPassword(loginPassword, usuario)) {
+                        //en caso de que si exista un usuario con esas credenciales
+                        if (!usuario.isTurista()) {
+                            sessionType = "PROVEEDOR";
+                            if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
+                                throw new Exception("Los proveedores no pueden iniciar sesion desde la version mobile.");
+                            }
+                        }
+                        request.getSession().setAttribute("id", dtp.getId());
+                        request.getSession().setAttribute("sessionNickname", dtp.getNickname());
+                        request.getSession().setAttribute("sessionEmail", dtp.getEmail());
+                        request.getSession().setAttribute("bytePhoto", dtp.getPhoto());
+                        request.getSession().setAttribute("sessionType", sessionType);
+                        request.getSession().setAttribute("isLogged", true);
+                        request.getSession().setAttribute("sessionPhoto", portL.getProfileImageUrl(usuario));
+                    }
+                }
             } catch (Exception e) {
                 errorMessage = e.getMessage();
                 request.setAttribute("errorMessage", errorMessage);
@@ -98,14 +110,14 @@ public class Login extends HttpServlet {
         }
         /*cuando se termine con la logica o hayan campos vacios, se redirige*/
         request.getRequestDispatcher("/WEB-INF/login/login.jsp")
-                    .forward(request, response);   
+                .forward(request, response);
     }
-    
-    private boolean validateParameters(HttpServletRequest request){
-        return(request.getParameter("nickname") != null) &&
-            (request.getParameter("password") != null);
+
+    private boolean validateParameters(HttpServletRequest request) {
+        return (request.getParameter("nickname") != null)
+                && (request.getParameter("password") != null);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -120,7 +132,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -146,7 +158,3 @@ public class Login extends HttpServlet {
     }// </editor-fold>
 
 }
-
-    
-
-    

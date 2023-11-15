@@ -63,6 +63,17 @@ public class DTTuristaWS extends DTUsuarioWS {
         super(id, nickname, name, lastName, email, birthDate, password, imagePath, photo);
         this.nacionality = nacionality;
     }
+    
+    public DTTuristaWS(
+            Long id,
+            String email,
+            String nickname,
+            String password,
+            String imagePath,
+            byte[] photo
+    ) {
+        super(id, nickname, email, password, imagePath, photo);
+    } 
 
     public DTTuristaWS(Long id, String nickname, String email, String nacionality) {
         super(id, nickname, email);

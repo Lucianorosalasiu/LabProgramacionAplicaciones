@@ -1,4 +1,4 @@
-package dataTypes;
+package webService.dataTypesWS;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -10,18 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.mindrot.jbcrypt.BCrypt;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
  *
  * @author ignfer
- * 
- * @importante Este DT "deberia" estar en la carpeta de webService.dataTypesWS 
- * pero si lo muevo de donde esta ahora no puede acceder a metodos de DTTurista ni de 
- * DTProveedor por lo que lo deje aca, saludos :D
  */
 @AllArgsConstructor
 @Getter
@@ -29,8 +20,8 @@ import org.mindrot.jbcrypt.BCrypt;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuarioWrapper {
-    private DTTurista dtt;
-    private DTProveedor dtp;
+    private DTTuristaWS dtt;
+    private DTProveedorWS dtp;
     private byte [] photo;
     private boolean turista = false;
     private String imagePath;
@@ -76,7 +67,7 @@ public class DTUsuarioWrapper {
             return dtp.getEmail();
         }
     }
-    
+
     public String getProfileImageUrl() {
         if (this.photo != null && !this.photo.equals("")) {
             // Si hay una imagen de perfil en formato blob, se convierte a Base64
