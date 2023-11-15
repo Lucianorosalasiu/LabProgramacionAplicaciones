@@ -143,6 +143,33 @@ public class WSPaqueteController {
         return collection;
 
     }
+    
+    @WebMethod
+    public DTPaquetesCollectionWS obtenerPaquetesRelacionados(Long idActividad){
+        ArrayList<DTPaqueteWS> listDTPaqueteWS = new ArrayList<>();
+        List<DTPaqueteActividadTuristica> paquetes = controlador.obtenerPaquetesRelacionadosCompletos(idActividad);
+        
+        for (DTPaqueteActividadTuristica paquete : paquetes) {
+            listDTPaqueteWS.add(
+                    new DTPaqueteWS(
+                            paquete.getNombre(),
+                            paquete.getDescripcion(),
+                            paquete.getValidez(),
+                            paquete.getDescuento(),
+                            DateConverter.dateToString(paquete.getFechaAlta()),
+                            paquete.getCosto(),
+                            paquete.getActividades(),
+                            paquete.getImagen()
+                    )
+            );
+        }
+
+        DTPaquetesCollectionWS collection = new DTPaquetesCollectionWS();
+        collection.setPaquetes(listDTPaqueteWS);
+
+        return collection;
+    }
+    
     @WebMethod
     public boolean compraExiste(DTCompraWS compra){
         DTCompraPaquete Compra = new DTCompraPaquete(compra.getCOMPRADOR(), compra.getPAQUETE(), compra.getCANTTURISTAS(),
