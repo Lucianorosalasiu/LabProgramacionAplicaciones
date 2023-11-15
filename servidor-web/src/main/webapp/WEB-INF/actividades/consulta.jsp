@@ -13,6 +13,11 @@
 <%@page import="logica.fabrica.Fabrica"%> 
 <%@page import="logica.interfaces.IControlador"%> 
 <%@page import="webservice.DtStringCollectionWS"%>
+<%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
+<%@page import="webservice.WSActividadController"%>
+<%@page import="webservice.WSActividadControllerService"%> 
+<%@page import="webservice.DtDepartamentosCollectionWS"%>
+<%@page import="webservice.DtDepartamentoWS"%>
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -48,7 +53,9 @@
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
                             String selectedDepartamento = request.getParameter("departamento");
-                            for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
+                            DtDepartamentosCollectionWS departamentos = (DtDepartamentosCollectionWS) request.getAttribute("departamentos");
+                            
+                            for (DtDepartamentoWS departamento : departamentos.getDepartamentos()) {
                                 String nombreDepartamento = departamento.getNombre();
                         %>
                         <option value="<%= departamento.getNombre() %>" <% if (nombreDepartamento.equals(selectedDepartamento)) { %>selected <% } %>>
@@ -62,12 +69,14 @@
                     <label>Categoria</label>
                     <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
                         <option value="" disabled selected>- seleccione una categoria -</option>
-                        <% 
-                            for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
-                                String nombreCategoria = c.getNombre();
+                        <%   
+                            String categorias = (String) request.getAttribute("categorias");
+                            String[] categoriasSeparadas = categorias.split(",");
+
+                            for (String categoriaIndividual : categoriasSeparadas) {
                         %>
-                        <option value="<%=nombreCategoria%>">
-                            <%= nombreCategoria %>
+                        <option value="<%=categoriaIndividual%>">
+                            <%= categoriaIndividual %>
                         </option>		
                         <% } %>
                     </select>
@@ -79,11 +88,13 @@
             <%if(request.getAttribute("actividades") != null){%>
             <div class="d-flex flex-row flex-wrap gap-2 p-2 justify-content-center">
                 <% 
-                    Fabrica fabrica = new Fabrica();
-                    IControlador controlador = fabrica.getInterface();
+                    WSActividadControllerService actividadController = new WSActividadControllerService();
+                    WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
                     String imageDataUri = "";
-                        for(DTActividadTuristica actividad : (List<DTActividadTuristica>) request.getAttribute("actividades")){
-                            byte [] foto = controlador.obtenerFotoActividadTuristica(actividad.getId());
+                    
+                    DtActividadesCollectionWS actividades = (DtActividadesCollectionWS) request.getAttribute("actividades");
+                        for(DtActividadTuristicaWS actividad : actividades.getActividades()){
+                            byte [] foto = actividadPort.obtenerFotoActividadTuristica(actividad.getId());
                                 if(foto != null){
                                     String imagenBase64 = Base64.getEncoder().encodeToString(foto);
                                     String contentType = "image/jpeg";

@@ -24,10 +24,18 @@ import java.util.LinkedList;
 import java.util.List;
 import static java.util.Objects.isNull;
 import javax.imageio.ImageIO;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import webService.dataTypesWS.DTActividadesCollectionWS;
+import webService.dataTypesWS.DTPaquetesCollectionWS;
+import webService.dataTypesWS.DTSalidasCollectionWS;
+import webservice.DtActividadTuristica;
+import webservice.DtActividadTuristicaWS;
+import webservice.DtActividadesCollectionWS;
+import webservice.DtPaquetesCollectionWS;
+import webservice.DtSalidasCollectionWS;
 import webservice.WSActividadController;
 import webservice.WSActividadControllerService;
+import webservice.WSSalidaController;
+import webservice.WSSalidaControllerService;
 
 /**
  *
@@ -56,17 +64,22 @@ public class ConsultaActividad extends HttpServlet {
                 !isNull(userType) && !userType.equals("TURISTA")) {
             response.sendError(403); 
             return;
-        }
+        }        
         
         WSActividadControllerService actividadController = new WSActividadControllerService();
         WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        WSSalidaControllerService salidaController = new WSSalidaControllerService();
+        WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
+        
+        webservice.WSPaqueteControllerService p = new webservice.WSPaqueteControllerService();
+        webservice.WSPaqueteController paquetePort = p.getWSPaqueteControllerPort();
+        
         String errorMessage = null;
         
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
-        request.setAttribute("categorias", controlador.obtenerCategorias());
+        request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
+        
+        request.setAttribute("categorias", actividadPort.obtenerCategorias());
         
         String eliminarFavParameter = (String) request.getParameter("eliminarDeFavoritos");
         if (!isNull(eliminarFavParameter)) {
@@ -82,26 +95,28 @@ public class ConsultaActividad extends HttpServlet {
         if(request.getParameter("idActividad") == null){
             if(validateParameters(request)){
                 try {
-                    if(request.getParameter("departamento") != null){
-                        String departamento = request.getParameter("departamento");
-                        List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasConId(departamento);
-                            if(actividades.size() < 1){
-                                request.setAttribute("actividades",null);
-                            }else{
-                                request.setAttribute("actividades", actividades); 
-                            }
-                    }else if(request.getParameter("categoria") != null){
+                    if(request.getParameter("categoria") != null){
                         String categoria = request.getParameter("categoria");
-                        List<DTActividadTuristica> actividades = controlador.obtenerActividadesTuristicasPorCategoria(categoria);
-                            if(actividades.size() < 1){
+                        DtActividadesCollectionWS actividades = actividadPort.obtenerActividadesPorCategoria(categoria);
+                            
+                        if(actividades.getActividades().size() < 1){
                                 request.setAttribute("actividades",null);
                             }else{
                                 request.setAttribute("actividades", actividades); 
                             }
                     }
+                    if(request.getParameter("departamento") != null && request.getParameter("categoria") == null){
+                        String departamento = request.getParameter("departamento");
+                        DtActividadesCollectionWS actividades = actividadPort.obtenerActividadesTuristicasPorDepartamento(departamento);
 
+                            if(actividades.getActividades().size() < 1){
+                                request.setAttribute("actividades",null);
+                            }else{
+                                request.setAttribute("actividades", actividades); 
+                            }
+                    }
                 } catch (Exception e) {
-                    errorMessage = e.getMessage();  
+                   errorMessage = e.getMessage();  
                     request.setAttribute("errorMessage", errorMessage);
                 }
             }
@@ -115,13 +130,13 @@ public class ConsultaActividad extends HttpServlet {
         }else{
             Long idActividad = Long.parseLong(request.getParameter("idActividad"));
             
-            DTActividadTuristica actividad;
+            DtActividadTuristica actividad;
             int cantidadFavoritos = 0;
             boolean enFavoritos = false;
             try {
                 //metodo que busca actividad por su id y si no la encuentra devuelve null a diferencia
                 //de metodos previamente existentes
-                actividad = controlador.obtenerActividadTuristicaNull(idActividad);
+                actividad = actividadPort.obtenerActividadTuristicaNull(idActividad);
                 if(actividad == null){
                     throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
                 }
@@ -135,11 +150,10 @@ public class ConsultaActividad extends HttpServlet {
                 response.sendError(404);
                 return;
             }
-            
 
             String imageDataUri = "";
 
-            byte [] foto = controlador.obtenerFotoActividadTuristica(actividad.getId());
+            byte [] foto = actividadPort.obtenerFotoActividadTuristica(actividad.getId());
             if(foto != null){
                 String imagenBase64 = Base64.getEncoder().encodeToString(foto);
                 String contentType = "image/jpeg";
@@ -153,17 +167,17 @@ public class ConsultaActividad extends HttpServlet {
                 
             }
             
-            List<DTSalidaTuristica> salidas = new LinkedList<>();
+            DtSalidasCollectionWS salidas = new DtSalidasCollectionWS();
             try{
-                salidas = controlador.obtenerSalidasTuristicas(actividad.getNombre());
+                salidas = salidaPort.obtenerSalidasTuristicas(actividad.getNombre());
             }catch(Exception ex){
                 response.sendError(404);
                 return;
             }
             
-            List<DTPaqueteActividadTuristica> paquetes = new LinkedList<>(); 
+            DtPaquetesCollectionWS paquetes;
             try{
-                paquetes = controlador.obtenerPaquetesRelacionadosCompletos(actividad.getId());
+                paquetes = paquetePort.obtenerPaquetesRelacionados(actividad.getId());
             }catch(Exception ex){
                 response.sendError(404);
                 return;

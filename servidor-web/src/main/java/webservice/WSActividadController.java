@@ -127,6 +127,16 @@ public interface WSActividadController {
 
     /**
      * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerCategoriasRequest", output = "http://webService/WSActividadController/obtenerCategoriasResponse")
+    public String obtenerCategorias();
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns float
@@ -200,6 +210,19 @@ public interface WSActividadController {
     @WebResult(partName = "return")
     @Action(input = "http://webService/WSActividadController/obtenerActividadesTuristicasPorDepartamentoRequest", output = "http://webService/WSActividadController/obtenerActividadesTuristicasPorDepartamentoResponse")
     public DtActividadesCollectionWS obtenerActividadesTuristicasPorDepartamento(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtActividadesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSActividadController/obtenerActividadesPorCategoriaRequest", output = "http://webService/WSActividadController/obtenerActividadesPorCategoriaResponse")
+    public DtActividadesCollectionWS obtenerActividadesPorCategoria(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0);
 

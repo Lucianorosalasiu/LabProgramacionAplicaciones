@@ -36,6 +36,19 @@ public interface WSPaqueteController {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns webservice.DtPaquetesCollectionWS
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://webService/WSPaqueteController/obtenerPaquetesRelacionadosRequest", output = "http://webService/WSPaqueteController/obtenerPaquetesRelacionadosResponse")
+    public DtPaquetesCollectionWS obtenerPaquetesRelacionados(
+        @WebParam(name = "arg0", partName = "arg0")
+        long arg0);
+
+    /**
+     * 
      * @return
      *     returns webservice.DtStringCollectionWS
      */
