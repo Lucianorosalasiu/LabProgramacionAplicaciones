@@ -30,6 +30,7 @@ public class WebServicePublisher {
         servicio2.publish(wsHost, wsPort);
         servicio3.publish(wsHost, wsPort);
         servicio4.publish(wsHost, wsPort);
+        servicio5.publish(wsHost, wsPort);
         
         System.out.println(cyanColorCode + "\n¡Todos los WebServices han sido desplegados exitosamente!" + resetColorCode);
         System.out.println(cyanColorCode + "\nServicios escuchando en: " + resetColorCode + greenColorCode);

@@ -55,13 +55,6 @@
                         </configuration>
                     </execution>
                 </executions>
-<!--                <dependencies>
-                    <dependency>
-                        <groupId>com.sun.xml.ws</groupId>
-                        <artifactId>jaxws-tools</artifactId>
-                        <version>4.0.0</version>
-                    </dependency>
-                </dependencies>-->
             </plugin>
         </plugins>
     </build>

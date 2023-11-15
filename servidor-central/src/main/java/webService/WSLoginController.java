@@ -34,10 +34,10 @@ public class WSLoginController {
     private String port = null;
 
     @WebMethod(exclude = true)
-    public void publish(String ipHost, String port) {
-        this.host = ipHost;
-        this.port = port;
-        endpoint = Endpoint.publish("http://" + ipHost + ":" + port + "/ws/Login", this);
+    public void publish(String wsHost, String wsPort) {
+        this.host = wsHost;
+        this.port = wsPort;
+        endpoint = Endpoint.publish("http://" + this.host + ":" + this.port + "/ws/Login", this);
     }
 
     @WebMethod(exclude = true)
@@ -48,7 +48,7 @@ public class WSLoginController {
     @WebMethod(exclude = true)
     public String getAddress() {
         if (endpoint != null) {
-            return "http://" + this.host + ":" + port + "/ws/Login?wsdl";
+            return "http://" + this.host + ":" + this.port + "/ws/Login?wsdl";
         } else {
             return "Endpoint no publicado aún";
         }
