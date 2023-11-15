@@ -28,12 +28,16 @@ hr {
 }
 
 .medium-card {
-    max-width: 200px;
+    max-width: 260px;
 }
 
 .medium-image {
-    max-width: 200px;
-    max-height: 200px;
+    width: 260px;
+    height: 220px;
+}
+
+.small-text {
+    font-size: 12px;
 }
 
 /* Perfil */

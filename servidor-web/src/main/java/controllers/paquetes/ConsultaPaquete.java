@@ -4,17 +4,12 @@
  */
 package controllers.paquetes;
 
-import dataTypes.DTActividadTuristica;
-import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTSalidaTuristica;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import logica.fabrica.Fabrica;

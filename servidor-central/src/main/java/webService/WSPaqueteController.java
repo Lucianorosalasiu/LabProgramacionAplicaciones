@@ -2,7 +2,6 @@ package webService;
 
 import dataTypes.DTCompraPaquete;
 import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTSalidaTuristica;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -16,8 +15,6 @@ import java.util.List;
 import utils.DateConverter;
 import webService.dataTypesWS.DTPaqueteWS;
 import webService.dataTypesWS.DTPaquetesCollectionWS;
-import webService.dataTypesWS.DTSalidaTuristicaWS;
-import webService.dataTypesWS.DTSalidasCollectionWS;
 import webService.dataTypesWS.DTStringCollectionWS;
 import webService.dataTypesWS.DTCompraWS;
 /**

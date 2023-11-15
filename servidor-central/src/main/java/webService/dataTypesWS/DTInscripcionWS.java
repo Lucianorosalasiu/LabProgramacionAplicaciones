@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 
-import java.time.LocalDate;
 
 /**
  *

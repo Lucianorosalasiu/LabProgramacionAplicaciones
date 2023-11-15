@@ -4,21 +4,15 @@
  */
 package controllers;
 
-import com.sun.jdi.IntegerType;
 import dataTypes.DTBusqueda;
-import java.io.IOException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 

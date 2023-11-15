@@ -1,10 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controllers;
-
-
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -14,18 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dataTypes.DTProveedor;
-import logica.fabrica.Fabrica;//!Se va una vez se implemente el ws
-import logica.interfaces.IControlador;//!Se va una vez se implemente el ws
 import dataTypes.DTTurista;
-import dataTypes.DTUsuario;
-import dataTypes.DTUsuarioWrapper;
-import exceptions.MyException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import webService.dataTypesWS.DTUsuarioWS;
-import webservice.DtUsuario;
-import webservice.DtUsuarioWS;
+
+//import webservice.DtProveedorWS;
+//import webservice.DtTuristaWS;
+
 import webservice.DtUsuarioWrapper;
+
 
 /**
  *
@@ -90,7 +79,7 @@ public class Login extends HttpServlet {
                        if (!usuario.isTurista()) {
                            sessionType = "PROVEEDOR";
                            if (request.getHeader("User-Agent").toLowerCase().contains("mobile")) {
-                               throw new MyException("Los proveedores no pueden iniciar sesion desde la version mobile.");
+                               throw new Exception("Los proveedores no pueden iniciar sesion desde la version mobile.");
                            }
                        }
                        request.getSession().setAttribute("id", dtp.getId());

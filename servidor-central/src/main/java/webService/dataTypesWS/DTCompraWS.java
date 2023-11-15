@@ -6,10 +6,8 @@ package webService.dataTypesWS;
 
 import dataTypes.DTPaqueteActividadTuristica;
 import dataTypes.DTTurista;
-import dataTypes.DTUsuario;
 import java.util.Date;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**

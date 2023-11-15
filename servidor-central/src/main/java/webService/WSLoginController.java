@@ -12,8 +12,6 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import lombok.NoArgsConstructor;

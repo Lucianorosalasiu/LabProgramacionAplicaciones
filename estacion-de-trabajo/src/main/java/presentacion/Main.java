@@ -46,7 +46,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatter;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,14 +67,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import static java.util.Objects.isNull;
 import javax.imageio.ImageIO;
-import javax.swing.DefaultRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.RowSorter;
 import javax.swing.RowSorter.SortKey;
 import javax.swing.SortOrder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.apache.commons.csv.CSVFormat;

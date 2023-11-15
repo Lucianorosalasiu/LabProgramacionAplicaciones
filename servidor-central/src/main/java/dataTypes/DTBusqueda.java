@@ -4,8 +4,6 @@
  */
 package dataTypes;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

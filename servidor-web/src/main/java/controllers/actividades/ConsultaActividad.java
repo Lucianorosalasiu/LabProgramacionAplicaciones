@@ -4,31 +4,16 @@
  */
 package controllers.actividades;
 
-import dataTypes.DTActividadTuristica;
-import dataTypes.DTCategoria;
-import dataTypes.DTDepartamento;
-import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTSalidaTuristica;
 import exceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.util.Base64;
-import java.util.LinkedList;
 import java.util.List;
 import static java.util.Objects.isNull;
-import javax.imageio.ImageIO;
-import webService.dataTypesWS.DTActividadesCollectionWS;
-import webService.dataTypesWS.DTPaquetesCollectionWS;
-import webService.dataTypesWS.DTSalidasCollectionWS;
 import webservice.DtActividadTuristica;
-import webservice.DtActividadTuristicaWS;
 import webservice.DtActividadesCollectionWS;
 import webservice.DtPaquetesCollectionWS;
 import webservice.DtSalidasCollectionWS;
