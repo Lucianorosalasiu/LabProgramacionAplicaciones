@@ -1,7 +1,7 @@
 <%-- 
     Document   : perfil
     Created on : 15 oct. 2023, 21:36:42
-    Author     : progav
+    Author     : alexis
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,18 +37,18 @@
             <%
                 if(!usr.getNickname().equals(userLogged)){
             %>
-                <h3 id="titulo-perfil">Perfil del usuario:
-                    <% if (usr instanceof DTTurista) {
-                    %>
-                    <span class="text-info">  <%= usr.getNickname() %> </span>
-                    <%
-                    } else if(usr instanceof DTProveedor){     
-                    %>
-                    <span class="text-warning"> <%= usr.getNickname() %> </span>
-                    <%
-                    }
-                    %>   
-                </h3>
+            <h3 id="titulo-perfil">Perfil del usuario:
+                <% if (usr instanceof DTTurista) {
+                %>
+                <span class="text-info">  <%= usr.getNickname() %> </span>
+                <%
+                } else if(usr instanceof DTProveedor){     
+                %>
+                <span class="text-warning"> <%= usr.getNickname() %> </span>
+                <%
+                }
+                %>   
+            </h3>
             <%
                 } else {
             %>
@@ -161,8 +161,10 @@
                                 </td>
                                 <td><%= salida.getLugar() %></td>
                                 <td>
-                                    <button class="btn btn-primary" 
-                                            onclick="openPdfInscripcion('<%=turista.getNickname()%>', '<%=salida.getNombre()%>');">
+                                    <button 
+                                        class="btn btn-primary" 
+                                        onclick="openPdfInscripcion('<%=turista.getNickname()%>', '<%=salida.getNombre()%>');"
+                                        >
                                         Ver PDF
                                     </button>
                                 </td>
@@ -176,14 +178,15 @@
                     DTProveedor proveedor = (DTProveedor) usr;
                     List<DTActividadTuristica> actividadList;
                     List<DTSalidaTuristica> salidaList;
-
+                    ArrayList<DTActividadTuristica> actividadesFinalizables = new ArrayList();
                     if(proveedor.getId() == sessionID) {
-                        actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
-                        salidaList = controlador.obtenerSalidasDeProveedorCompleto(proveedor.getId());
+                        actividadList = controlador.obtenerActividadesDeProveedorCompleto(sessionID);
+                        salidaList = controlador.obtenerSalidasDeProveedorCompleto(sessionID);
+                        actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
                     } else {
                         actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
                         salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
-                }
+                    }
                 %>
                 <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
                     <h3 class="text-center">Actividades Turísticas:</h3>
@@ -241,10 +244,11 @@
                         </table>
                     </div>
                     
-                    <%                                
-                    ArrayList<DTActividadTuristica> actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
-                    if(actividadesFinalizables.size() > 0){%>
-                    <h3 class="text-center">Actividades turísticas finalizables<span class="text-secondary">(Confirmadas y sin salidas por hacer)</span>:</h3>
+                    <% if(proveedor.getId() == sessionID) { %>
+                        <h3 class="text-center">
+                            Actividades turísticas finalizables
+                            <span class="text-secondary">(Confirmadas y sin salidas por hacer)</span>:
+                        </h3>
                         <div class="table-responsive-lg">
                             <table class="table align-middle">
                                 <thead class="table-dark">
@@ -257,7 +261,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%for (DTActividadTuristica a : actividadesFinalizables) {%>
+                                    <% 
+                                    for (DTActividadTuristica a : actividadesFinalizables){
+                                    %>
                                     <tr>
                                         <td><%= a.getNombre() %></td>
                                         <td><%= a.getDescripcion() %></td>
@@ -269,11 +275,11 @@
                                             </form>  
                                         </td>
                                     </tr>		
-                                <% }%>
+                                    <% } %>
                                 </tbody>
                             </table>
                         </div>
-                    <%} %>
+                    <% } %> 
                 <% } %> 
                 </div>  
             </div>
