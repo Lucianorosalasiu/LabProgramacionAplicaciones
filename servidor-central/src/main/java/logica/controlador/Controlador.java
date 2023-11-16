@@ -149,6 +149,16 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public void seguirUsuario(long idSeguidor, long idSeguido) throws MyException {
+        dataPersistencia.seguirUsuario(idSeguidor, idSeguido);
+    }
+    
+    @Override
+    public void dejarDeSeguirUsuario(long idSeguidor, long idSeguido)  throws MyException {
+        dataPersistencia.dejarDeSeguirUsuario(idSeguidor, idSeguido);
+    }
+    
+    @Override
     public List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista){
         return dataPersistencia.obtenerSalidasDeTurista(idTurista); 
     }

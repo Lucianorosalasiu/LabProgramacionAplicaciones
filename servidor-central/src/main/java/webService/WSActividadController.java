@@ -17,7 +17,6 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import utils.DateConverter;

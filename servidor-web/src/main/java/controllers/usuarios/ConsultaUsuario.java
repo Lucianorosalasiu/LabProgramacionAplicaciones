@@ -14,7 +14,7 @@ import logica.interfaces.IControlador;
 
 /**
  *
- * @author progav
+ * @author alexis
  */
 public class ConsultaUsuario extends HttpServlet {
 

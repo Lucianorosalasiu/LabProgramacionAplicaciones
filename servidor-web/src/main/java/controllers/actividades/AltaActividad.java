@@ -11,10 +11,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import dataTypes.DTActividadTuristica;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
@@ -24,7 +20,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import static java.util.Objects.isNull;
 import org.apache.commons.io.IOUtils;
-import webService.dataTypesWS.DTActividadTuristicaWS;
 import webservice.DtActividadTuristicaWS;
 import webservice.WSActividadController;
 import webservice.WSActividadControllerService;
