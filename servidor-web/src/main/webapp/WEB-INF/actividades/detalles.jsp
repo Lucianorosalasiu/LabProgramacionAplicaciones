@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
-<%@page import="dataTypes.DTSalidaTuristica"%>
-<%@page import="dataTypes.DTPaqueteActividadTuristica"%>
 <%@page import="webservice.DtActividadTuristica"%> 
 <%@page import="webservice.DtSalidasCollectionWS"%> 
 <%@page import="webservice.DtSalidaTuristicaWS"%> 

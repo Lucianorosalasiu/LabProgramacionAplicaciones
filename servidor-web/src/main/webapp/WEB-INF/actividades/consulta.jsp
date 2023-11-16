@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
-<%@page import="dataTypes.DTDepartamento"%>
-<%@page import="dataTypes.DTCategoria"%>
 <%@page import="java.util.List"%> 
 <%@page import="java.util.Base64"%> 
 <%@page import="logica.fabrica.Fabrica"%> 

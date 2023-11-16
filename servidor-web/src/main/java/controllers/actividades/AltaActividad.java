@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import dataTypes.DTActividadTuristica;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -21,9 +23,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import static java.util.Objects.isNull;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
 import org.apache.commons.io.IOUtils;
+import webService.dataTypesWS.DTActividadTuristicaWS;
+import webservice.DtActividadTuristicaWS;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
 
 /**
  *
@@ -50,9 +54,9 @@ public class AltaActividad extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
-        
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
+
         String errorMessage = null;
         
         if(validateParameters(request)){
@@ -68,18 +72,13 @@ public class AltaActividad extends HttpServlet {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
                 Date fecha = dateFormat.parse(request.getParameter("fecha"));
                 
-                List<Long> idCategoriasLong = new LinkedList<>();
-                
+                String categoriasIds = "";
                 //obtengo todas las categorias seleccionadas
                 if(request.getParameterValues("categoria") != null){
                     List<String> idCategoriasString = new LinkedList<>(Arrays.asList(request.getParameterValues("categoria")));
                     //parseo cada una de ellas de string a float
                     for(String c : idCategoriasString){
-                        try {
-                            idCategoriasLong.add(Long.parseLong(c));
-                        } catch (Exception e) {
-
-                        }
+                       categoriasIds += c + ",";
                     }
                 }
 
@@ -88,16 +87,13 @@ public class AltaActividad extends HttpServlet {
 
                 //obtengo idDepartamento
                 Long idDepartamento = Long.parseLong(request.getParameter("departamento"));
-
-
-                DTActividadTuristica nuevaActividadTuristica = new DTActividadTuristica(nombre, descripcion, duracion, costo, ciudad, fecha);
-                 
-                //debug de alta actividad
-                //errorMessage = "depto: " + departamento + "| nombre: " + nombre +
-                //        "| descr: " + descripcion + "| duracion: " + duracion +
-                //        "| costo: " + costo + "| ciudad: " + ciudad +
-                //        "| idProveedor: " + idProveedor + "| idDepartamento: " + idDepartamento +
-                //        "| fecha: " + fecha;
+                
+                DtActividadTuristicaWS nuevaActividadTuristica = new DtActividadTuristicaWS();
+                nuevaActividadTuristica.setNombre(nombre);
+                nuevaActividadTuristica.setDescripcion(descripcion);
+                nuevaActividadTuristica.setDuracion(duracion);
+                nuevaActividadTuristica.setCosto(costo);
+                nuevaActividadTuristica.setCiudad(ciudad);
                 
                 Part imagePart = request.getPart("imagen");
                 byte[] newImage = null;
@@ -107,8 +103,11 @@ public class AltaActividad extends HttpServlet {
                     IOUtils.closeQuietly(imageFile);
                 }
                 
-                controlador.existeActividadTuristica(nombre);
-                controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage, url);
+                String strFecha = dateFormat.format(fecha);
+                
+                actividadPort.existeActividadTuristica(nombre);
+                //controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage, url);
+                actividadPort.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, categoriasIds, newImage, url, strFecha);
                 request.setAttribute("successMessage", "Actividad turistica dada de alta!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                         .forward(request, response);
@@ -119,8 +118,9 @@ public class AltaActividad extends HttpServlet {
             }
         }
         
-        request.setAttribute("departamentos", controlador.obtenerDepartamentos());
-        request.setAttribute("categorias", controlador.obtenerCategorias());
+        request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
+        request.setAttribute("categoriasNombres", actividadPort.obtenerCategorias());
+        request.setAttribute("categoriasIds", actividadPort.obtenerIdsCategorias());
 
         request.getRequestDispatcher("/WEB-INF/actividades/alta.jsp")
                     .forward(request, response);

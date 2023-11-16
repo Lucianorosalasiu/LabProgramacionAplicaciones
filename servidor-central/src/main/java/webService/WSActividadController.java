@@ -7,6 +7,7 @@ package webService;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
+import exceptions.MyException;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import utils.DateConverter;
 import webService.dataTypesWS.DTActividadTuristicaWS;
@@ -23,6 +26,9 @@ import webService.dataTypesWS.DTActividadesCollectionWS;
 import webService.dataTypesWS.DTDepartamentoWS;
 import webService.dataTypesWS.DTDepartamentosCollectionWS;
 import webService.dataTypesWS.DTStringCollectionWS;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -63,6 +69,46 @@ public class WSActividadController {
     @WebMethod
     public String ping() {
         return "pong";
+    }
+    
+    @WebMethod
+    public void altaActividadTuristica (
+        DTActividadTuristicaWS nuevaActividadTuristica,
+        Long idDepartamento,
+        Long idProveedor, 
+        String categoriasIds,
+        byte[] newImage,
+        String url,
+        String strFecha) throws ParseException {
+            String[] categoriasIdsSplit = categoriasIds.split(",");
+            List<Long> categoriasIdsLong = new LinkedList<>();
+
+            for (String categoriaIdsIndividual : categoriasIdsSplit) {
+                try {
+                    categoriasIdsLong.add(Long.parseLong(categoriaIdsIndividual));
+                } catch (Exception e) {
+                    
+                }
+            }
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            Date fecha = new Date();
+            try {
+                fecha = dateFormat.parse(strFecha);
+            } catch (Exception e) {
+                throw new ParseException("Algo salio mal construyendo la fecha", 0);
+            } 
+            
+            
+            DTActividadTuristica nuevoDTActividadTuristica = new DTActividadTuristica(
+                    nuevaActividadTuristica.getNombre(),
+                    nuevaActividadTuristica.getDescripcion(),
+                    nuevaActividadTuristica.getDuracion(),
+                    nuevaActividadTuristica.getCosto(),
+                    nuevaActividadTuristica.getCiudad(),
+                    fecha);         
+            
+            controlador.altaActividadTuristica(nuevoDTActividadTuristica, idDepartamento, idProveedor, categoriasIdsLong, newImage, url);
     }
     
     @WebMethod
@@ -110,6 +156,18 @@ public class WSActividadController {
     }
     
     @WebMethod
+    public String obtenerIdsCategorias(){
+        String PlainStringIdsCategorias = "";
+        
+        List<DTCategoria> categorias = controlador.obtenerCategorias();
+        for(DTCategoria c : categorias){
+            PlainStringIdsCategorias += String.valueOf(c.getId()) + ",";
+        }
+        
+        return PlainStringIdsCategorias;
+    }
+    
+    @WebMethod
     public DTActividadesCollectionWS obtenerActividadesTuristicasPorDepartamento(String nombreDepartamento){
         ArrayList<DTActividadTuristicaWS> listDTActividadWS = new ArrayList<>();
 
@@ -136,6 +194,11 @@ public class WSActividadController {
         collection.setActividades(listDTActividadWS);
         
         return collection;
+    }
+    
+    @WebMethod
+    public void existeActividadTuristica(String nombreActividad)throws MyException{
+        controlador.existeActividadTuristica(nombreActividad);
     }
     
     @WebMethod
