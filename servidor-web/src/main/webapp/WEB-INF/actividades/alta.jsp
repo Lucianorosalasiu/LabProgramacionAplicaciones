@@ -5,10 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
-<%@page import="dataTypes.DTDepartamento"%>
-<%@page import="dataTypes.DTCategoria"%>
 <%@page import="java.util.List"%> 
+<%@page import="webservice.DtDepartamentosCollectionWS"%>
+<%@page import="webservice.DtDepartamentoWS"%>
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -36,7 +35,9 @@
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
                             String selectedDepartamento = request.getParameter("departamento");
-                            for(DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")){
+                            DtDepartamentosCollectionWS departamentos = (DtDepartamentosCollectionWS) request.getAttribute("departamentos");
+                            
+                            for (DtDepartamentoWS departamento : departamentos.getDepartamentos()) {
                                 String nombreDepartamento = departamento.getNombre();
                         %>
                         <option value="<%=departamento.getId()%>" <% if (nombreDepartamento.equals(selectedDepartamento)) { %>selected <% } %>>
@@ -90,11 +91,21 @@
                 <div class="form-group">
                     <label>Categorias<span class="text-info"> (Ctrl + Click izquierdo selección multiple).</span></label>
                     <select name="categoria" class="form-select" multiple>
-                        <%for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){%> 
+                        <%
+                            String categoriasNombres = (String) request.getAttribute("categoriasNombres");
+                            String categoriasIds = (String) request.getAttribute("categoriasIds");
+                            
+                            String[] categoriasNombresSplit = categoriasNombres.split(",");
+                            String[] categoriasIdsSplit = categoriasIds.split(",");
+                            
+                            int index = 0;
+
+                            for (String categoriaNombreIndividual : categoriasNombresSplit) {
+                        %> 
                     
-                    <option value="<%=c.getId()%>"><%=c.getNombre()%></option>
+                    <option value="<%=categoriasIdsSplit[index]%>"><%=categoriaNombreIndividual%></option>
                     
-                    <%}%>
+                    <%index+=1;}%>
                     </select>
                 </div>
                     
