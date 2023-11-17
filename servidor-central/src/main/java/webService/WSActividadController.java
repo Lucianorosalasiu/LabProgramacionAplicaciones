@@ -4,6 +4,7 @@
  */
 package webService;
 
+import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
@@ -320,5 +321,34 @@ public class WSActividadController {
     @WebMethod
     public void eliminarDeFavoritos(Long idActividad, String nickname){
         controlador.eliminarDeFavoritos(idActividad, nickname);
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesFinalizables(Long idProveedor){
+        ArrayList<DTActividadTuristicaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTActividadTuristica> resultadosSinParsear = controlador.obtenerActividadesFinalizables(idProveedor);
+        
+        for (DTActividadTuristica at : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getCiudad(),
+                            at.getCosto()
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public void finalizarActividad(Long idActividad){
+        controlador.validarActividad(idActividad, EstadoActividad.FINALIZADA);
     }
 }
