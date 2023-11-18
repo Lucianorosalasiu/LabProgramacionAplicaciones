@@ -321,7 +321,7 @@ public class DataPersistencia implements IDataPersistencia {
             }
 
             // Seguir al usuario
-            seguidor.agregarSeguido(seguido);
+            seguido.agregarSeguidor(seguidor);
 
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -353,7 +353,7 @@ public class DataPersistencia implements IDataPersistencia {
             }
 
             // Dejar de seguir al usuario
-            seguidor.removerSeguido(seguido);
+            seguido.removerSeguidor(seguidor);
 
             em.getTransaction().commit();
         } catch (Exception e) {

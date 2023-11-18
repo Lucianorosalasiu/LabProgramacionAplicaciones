@@ -17,7 +17,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@MappedSuperclass
 public abstract class EBase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

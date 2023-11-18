@@ -32,3 +32,4 @@ hs_err_pid
 /estacion-de-trabajo/target/
 /servidor-web/target/
 /servidor-web/src/main/java/webservice/
+/servidor-central/nbproject/

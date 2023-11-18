@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-//@MappedSuperclass
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class EUsuario extends EBase {
 
     @Column(unique = true)
@@ -42,23 +42,19 @@ public abstract class EUsuario extends EBase {
 
     @ManyToMany
     @JoinTable(
-            name = "SEGUIMIENTO_USUARIO",
+            name = "SEGUIDORES",
             joinColumns = @JoinColumn(name = "seguidor_id"),
             inverseJoinColumns = @JoinColumn(name = "seguido_id")
     )
-    protected List<EUsuario> seguidores = new ArrayList<>();
+    protected List<EUsuario> seguidores;
 
-    @ManyToMany(mappedBy = "seguidores")
-    protected List<EUsuario> seguidos = new ArrayList<>();
-
-    private void inicializarListas() {
+    private void inicializarLista() {
         this.seguidores = new ArrayList<>();
-        this.seguidos = new ArrayList<>();
     }
 
     public EUsuario() {
         super();
-        this.inicializarListas();
+        this.inicializarLista();
     }
 
     public EUsuario(String nickname, String name, String lastName, String email, Date birthDate) {
@@ -68,7 +64,7 @@ public abstract class EUsuario extends EBase {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.inicializarListas();
+        this.inicializarLista();
     }
 
     public EUsuario(
@@ -90,26 +86,14 @@ public abstract class EUsuario extends EBase {
         this.password = password;
         this.imagePath = imagePath;
         this.photo = photo;
-        this.inicializarListas();
+        this.inicializarLista();
     }
 
     public void agregarSeguidor(EUsuario seguidor) {
         seguidores.add(seguidor);
-        seguidor.getSeguidos().add(this);
     }
 
     public void removerSeguidor(EUsuario seguidor) {
         seguidores.remove(seguidor);
-        seguidor.getSeguidos().remove(this);
-    }
-
-    public void agregarSeguido(EUsuario seguido) {
-        seguidos.add(seguido);
-        seguido.getSeguidores().add(this);
-    }
-
-    public void removerSeguido(EUsuario seguido) {
-        seguidos.remove(seguido);
-        seguido.getSeguidores().remove(this);
     }
 }
