@@ -10,8 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
 
 /**
  *
@@ -32,12 +32,11 @@ public class Finalizar extends HttpServlet {
             throws ServletException, IOException {
         
         Long idActividad = Long.parseLong(request.getParameter("idActividad"));
+        WSActividadControllerService actividadController = new WSActividadControllerService();
+        WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
         
         try{
-            Fabrica fabrica = new Fabrica();
-            IControlador controlador = fabrica.getInterface();
-
-            controlador.validarActividad(idActividad, EstadoActividad.FINALIZADA);
+            actividadPort.finalizarActividad(idActividad);
             request.setAttribute("successMessage", "Actividad turistica finalizada!");
             request.getRequestDispatcher("/WEB-INF/templates/success.jsp")
                     .forward(request, response);

@@ -14,6 +14,11 @@
 <%@page import="dataTypes.DTSalidaTuristica"%>
 <%@page import="dataTypes.DTActividadTuristica"%>
 <%@page import="Enums.EstadoActividad"%>
+<%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
+<%@page import="webservice.WSActividadController"%>
+<%@page import="webservice.WSActividadControllerService"%> 
+
+
 
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%> 
@@ -32,6 +37,8 @@
             DTUsuario usr = (DTUsuario) request.getAttribute("usuario");
             String userLogged = (String) request.getSession().getAttribute("sessionNickname");
             String profileImageUrl = usr.getProfileImageUrl();
+            WSActividadControllerService actividadController = new WSActividadControllerService();
+            WSActividadController actividadPort = actividadController.getWSActividadControllerPort(); 
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
             <%
@@ -178,11 +185,13 @@
                     DTProveedor proveedor = (DTProveedor) usr;
                     List<DTActividadTuristica> actividadList;
                     List<DTSalidaTuristica> salidaList;
-                    ArrayList<DTActividadTuristica> actividadesFinalizables = new ArrayList();
+                    DtActividadesCollectionWS actividadesFinalizables = new DtActividadesCollectionWS();
+
                     if(proveedor.getId() == sessionID) {
                         actividadList = controlador.obtenerActividadesDeProveedorCompleto(sessionID);
                         salidaList = controlador.obtenerSalidasDeProveedorCompleto(sessionID);
-                        actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
+                        actividadesFinalizables = actividadPort.obtenerActividadesFinalizables(sessionID);
+
                     } else {
                         actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
                         salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
@@ -262,7 +271,7 @@
                                 </thead>
                                 <tbody>
                                     <% 
-                                    for (DTActividadTuristica a : actividadesFinalizables){
+                                    for (DtActividadTuristicaWS a : actividadesFinalizables.getActividades()){
                                     %>
                                     <tr>
                                         <td><%= a.getNombre() %></td>

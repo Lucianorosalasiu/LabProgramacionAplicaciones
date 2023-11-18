@@ -52,8 +52,8 @@ public class Login extends HttpServlet {
                     DtTuristaWS dtt = new DtTuristaWS();
 
                     dtt.setId(usuario.getId());
-                    dtt.setEmail(usuario.getEmail());
-                    dtt.setNickname(usuario.getNickname());
+                    dtt.setEmail(usuario.getNickname());
+                    dtt.setNickname(usuario.getEmail());
                     dtt.setPassword(usuario.getPassword());
                     dtt.setImagePath(usuario.getDtt().getImagePath());
                     dtt.setPhoto(usuario.getPhoto());
@@ -77,8 +77,8 @@ public class Login extends HttpServlet {
                     DtProveedorWS dtp = new DtProveedorWS();
 
                     dtp.setId(usuario.getId());
-                    dtp.setEmail(usuario.getEmail());
-                    dtp.setNickname(usuario.getNickname());
+                    dtp.setEmail(usuario.getNickname());
+                    dtp.setNickname(usuario.getEmail());
                     dtp.setPassword(usuario.getPassword());
                     dtp.setImagePath(usuario.getDtt().getImagePath());
                     dtp.setPhoto(usuario.getPhoto());

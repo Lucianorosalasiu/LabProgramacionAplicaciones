@@ -103,4 +103,13 @@ public class DTActividadTuristicaWS {
         return costoString.toString();
     }
     
+    public DTActividadTuristicaWS(Long id, String nombre, String descripcion,
+            String ciudad, Float costo){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.ciudad = ciudad;
+        this.costo = costo;
+    }
+    
 }

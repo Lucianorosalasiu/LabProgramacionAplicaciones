@@ -65,7 +65,7 @@ public class ConsultaUsuario extends HttpServlet {
                 response.sendError(404);
                 return;
             }
-            
+
             // setea el usuario
             request.setAttribute("usuario", usr);
 
