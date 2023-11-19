@@ -15,6 +15,8 @@
 <%@page import="webservice.WSActividadControllerService"%> 
 <%@page import="webservice.DtDepartamentosCollectionWS"%>
 <%@page import="webservice.DtDepartamentoWS"%>
+<%@page import="webservice.DtBusquedaCollectionWS"%>
+<%@page import="webservice.DtBusquedaWS"%>
 
 <!DOCTYPE html>
 <html class="h-100">

@@ -49,8 +49,24 @@ public class Consulta extends HttpServlet {
             return;
         }
         
+        
         WSSalidaControllerService salidaController = new WSSalidaControllerService();
         WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
+        
+        String nombreSalida = request.getParameter("nombre");
+        if (!isNull(nombreSalida)) {
+            DtSalidaTuristicaWS salida = salidaPort.obtenerSalidaTuristica(nombreSalida);
+            request.setAttribute("salida", salida);
+            if (!isNull(salida.getImagen())) {
+                request.setAttribute("imagenSalida", Base64.getEncoder().encodeToString(salida.getImagen()));
+            } else {
+                request.setAttribute("imagenSalida", "");
+            }
+            
+            request.getRequestDispatcher("/WEB-INF/salidas/consultaIndividual.jsp").
+                forward(request, response);
+            return;
+        }
         
         WSActividadControllerService actividadController = new WSActividadControllerService();
         WSActividadController actividadPort = actividadController.getWSActividadControllerPort();

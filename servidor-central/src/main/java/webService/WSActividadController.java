@@ -6,6 +6,7 @@ package webService;
 
 import Enums.EstadoActividad;
 import dataTypes.DTActividadTuristica;
+import dataTypes.DTBusqueda;
 import dataTypes.DTCategoria;
 import dataTypes.DTDepartamento;
 import exceptions.MyException;
@@ -28,7 +29,11 @@ import webService.dataTypesWS.DTDepartamentosCollectionWS;
 import webService.dataTypesWS.DTStringCollectionWS;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import webService.dataTypesWS.DTBusquedaCollectionWS;
+import webService.dataTypesWS.DTBusquedaWS;
 
 /**
  *
@@ -349,5 +354,112 @@ public class WSActividadController {
     @WebMethod
     public void finalizarActividad(Long idActividad){
         controlador.validarActividad(idActividad, EstadoActividad.FINALIZADA);
+    }
+    
+    @WebMethod
+    public DTBusquedaCollectionWS obtenerBusqueda(String peticionBusqueda) {
+        ArrayList<DTBusquedaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTBusqueda> resultadosSinParsear = controlador.obtenerBusqueda(peticionBusqueda);
+
+        for (DTBusqueda dtb : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTBusquedaWS(
+                        dtb.getId(),
+                        dtb.getNombre(),
+                        dtb.getFechaAlta(),
+                        dtb.getFechaAltaComoString(),
+                        dtb.getCategorias(),
+                        dtb.getTipoResultado(),
+                        dtb.getDescripcion(),
+                        dtb.getDepartamento()
+                    )
+            );
+        }
+        
+        DTBusquedaCollectionWS collection = new DTBusquedaCollectionWS();
+        collection.setResultadosBusqueda(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTBusquedaCollectionWS ordenarBusquedaDepartamento(String peticionBusqueda,String nombreDepartamento){
+        ArrayList<DTBusquedaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTBusqueda> resultadosSinParsear = controlador.ordenarBusquedaDepartamento(peticionBusqueda, nombreDepartamento);
+        
+         for (DTBusqueda dtb : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTBusquedaWS(
+                        dtb.getId(),
+                        dtb.getNombre(),
+                        dtb.getFechaAlta(),
+                        dtb.getFechaAltaComoString(),
+                        dtb.getCategorias(),
+                        dtb.getTipoResultado(),
+                        dtb.getDescripcion(),
+                        dtb.getDepartamento()
+                    )
+            );
+        }
+        
+        DTBusquedaCollectionWS collection = new DTBusquedaCollectionWS();
+        collection.setResultadosBusqueda(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTBusquedaCollectionWS ordenarBusquedaCategoria(String peticionBusqueda,String nombreCategoria) {
+    ArrayList<DTBusquedaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTBusqueda> resultadosSinParsear = controlador.ordenarBusquedaCategoria(peticionBusqueda, nombreCategoria);
+        
+         for (DTBusqueda dtb : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTBusquedaWS(
+                        dtb.getId(),
+                        dtb.getNombre(),
+                        dtb.getFechaAlta(),
+                        dtb.getFechaAltaComoString(),
+                        dtb.getCategorias(),
+                        dtb.getTipoResultado(),
+                        dtb.getDescripcion(),
+                        dtb.getDepartamento()
+                    )
+            );
+        }
+        
+        DTBusquedaCollectionWS collection = new DTBusquedaCollectionWS();
+        collection.setResultadosBusqueda(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTBusquedaCollectionWS ordenarBusquedaFecha(String peticionBusqueda) {
+    ArrayList<DTBusquedaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTBusqueda> resultadosSinParsear = controlador.obtenerBusqueda(peticionBusqueda);
+        Collections.sort(resultadosSinParsear, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
+        
+        for (DTBusqueda dtb : resultadosSinParsear) {
+            resultadosParseados.add(new DTBusquedaWS(
+                dtb.getId(),
+                dtb.getNombre(),
+                dtb.getFechaAlta(),
+                dtb.getFechaAltaComoString(),
+                dtb.getCategorias(),
+                dtb.getTipoResultado(),
+                dtb.getDescripcion(),
+                dtb.getDepartamento()
+            ));
+        }
+        
+        DTBusquedaCollectionWS collection = new DTBusquedaCollectionWS();
+        collection.setResultadosBusqueda(resultadosParseados);
+        
+        return collection;
     }
 }

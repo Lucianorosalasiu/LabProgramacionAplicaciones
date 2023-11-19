@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
 import webservice.DtActividadTuristica;
 import webservice.DtActividadTuristicaWS;
 import webservice.DtActividadesCollectionWS;
@@ -49,8 +47,6 @@ public class ConsultaPaquete extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
         byte [] foto1 = null;
         byte [] foto2 = null;
         String paquete = request.getParameter("paquetes");
