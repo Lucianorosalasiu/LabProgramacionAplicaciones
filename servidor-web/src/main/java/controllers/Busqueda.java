@@ -4,17 +4,17 @@
  */
 package controllers;
 
-import dataTypes.DTBusqueda;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import webservice.DtBusquedaCollectionWS;
+import webservice.DtBusquedaWS;
+import webservice.WSActividadController;
+import webservice.WSActividadControllerService;
 
 /**
  *
@@ -37,7 +37,7 @@ public class Busqueda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<DTBusqueda> resultadoBusqueda = new ArrayList<>();
+        DtBusquedaCollectionWS resultadoBusqueda = new DtBusquedaCollectionWS();
         String peticionBusqueda = (String) request.getParameter("peticionBusqueda");
         int tipoDeFiltro = 0;
         
@@ -48,43 +48,56 @@ public class Busqueda extends HttpServlet {
         
         try {
             
-            Fabrica fabrica = new Fabrica();
-            IControlador controlador = fabrica.getInterface();
-            resultadoBusqueda = controlador.obtenerBusqueda(peticionBusqueda);
-            request.setAttribute("departamentos", controlador.obtenerDepartamentos());
-            request.setAttribute("categorias", controlador.obtenerCategorias());
+            WSActividadControllerService actividadController = new WSActividadControllerService();
+            WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
+            
+            request.setAttribute("departamentos", actividadPort.obtenerDepartamentos());
+            request.setAttribute("categorias", actividadPort.obtenerCategorias());
+            
+            resultadoBusqueda = actividadPort.obtenerBusqueda(peticionBusqueda);
             
             if(request.getParameter("departamento") != null){
                 String departamento = request.getParameter("departamento");
-                resultadoBusqueda = controlador.ordenarBusquedaDepartamento(peticionBusqueda,departamento);
+                resultadoBusqueda = actividadPort.ordenarBusquedaDepartamento(peticionBusqueda,departamento);
+
                 request.setAttribute("departamento",departamento);
             }
             
             if(request.getParameter("categoria") != null){
                 String categoria = request.getParameter("categoria");
-                resultadoBusqueda = controlador.ordenarBusquedaCategoria(peticionBusqueda,categoria);
+                resultadoBusqueda = actividadPort.ordenarBusquedaCategoria(peticionBusqueda,categoria);
                 request.setAttribute("categoria",categoria);
             }
             
             if(tipoDeFiltro == 1){
-                Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getNombre));
+                Collections.sort(resultadoBusqueda.getResultadosBusqueda(), Comparator.comparing(DtBusquedaWS::getNombre));
             }
             
             if(tipoDeFiltro == 2){
-                //resultadoBusqueda = controlador.ordenarBusquedaFecha(peticionBusqueda);
-                //por cada Date parseado a string que haya en los registros de la busqueda, lo convierto
-                //a fecha para poder compararlo bien y una vez ordenado lo devuelvo a String
-                
-                /*remuevo el objeto fecha de todos los dts y lo paso a texto plano*/
-                Collections.sort(resultadoBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
-                for(DTBusqueda dtb : resultadoBusqueda){
-                    dtb.setFechaAltaComoString(dtb.getFechaAlta().toString());
-                    dtb.setFechaAlta(null);
+                DtBusquedaCollectionWS resultadosSinFiltrar = actividadPort.ordenarBusquedaFecha(peticionBusqueda);
+                DtBusquedaCollectionWS listaAuxiliar = new DtBusquedaCollectionWS();
+                for(DtBusquedaWS dtb : resultadosSinFiltrar.getResultadosBusqueda()){
+                    if(request.getParameter("departamento") != null &&
+                            dtb.getDepartamento().contains(request.getParameter("departamento"))){
+                        listaAuxiliar.getResultadosBusqueda().add(dtb);
+                    }
+                    if(request.getParameter("categoria") != null &&
+                            dtb.getCategorias().contains(request.getParameter("categoria"))){
+                        listaAuxiliar.getResultadosBusqueda().add(dtb);
+                    }
+                    if(request.getParameter("departamento") == null &&
+                        request.getParameter("categoria") == null){
+                    listaAuxiliar.getResultadosBusqueda().add(dtb);
+                    }
                 }
+                
+                resultadoBusqueda = listaAuxiliar;
             }
             
         } catch(Exception e){
-            
+            e.printStackTrace();
+            response.sendError(500);
+            return;
         }
         
         //request.setAttribute("filtro", Integer.toString(tipoDeFiltro));
