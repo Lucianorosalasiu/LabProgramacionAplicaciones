@@ -9,8 +9,6 @@
 <%@page import="java.util.List"%> 
 <%@page import="java.util.List"%> 
 <%@page import="java.util.Base64"%> 
-<%@page import="logica.fabrica.Fabrica"%> 
-<%@page import="logica.interfaces.IControlador"%>
 <%@page import="java.util.HashSet"%> 
 <%@page import="java.util.LinkedHashSet"%>
 <%@page import="webservice.DtActividadTuristica"%>
@@ -59,9 +57,7 @@
                             <div  class="col-sm-9" >
                                 <fieldset disabled>
                                     <div class="row">
-                                        <% 
-                                        Fabrica fabrica = new Fabrica();
-                                        IControlador controlador = fabrica.getInterface();
+                                        <%
                                         String imageDataUri = "";
                                                 byte [] foto = ( byte[]) request.getAttribute("foto1");
                                                     if(foto != null){
