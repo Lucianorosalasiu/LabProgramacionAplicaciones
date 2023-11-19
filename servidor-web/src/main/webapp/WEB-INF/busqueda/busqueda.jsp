@@ -5,12 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
-<%@page import="dataTypes.DTDepartamento"%>
-<%@page import="dataTypes.DTCategoria"%>
-<%@page import="dataTypes.DTBusqueda"%>
 <%@page import="java.util.List"%> 
 <%@page import="java.util.ArrayList"%> 
+<%@page import="webservice.DtDepartamentosCollectionWS"%>
+<%@page import="webservice.DtDepartamentoWS"%>
+<%@page import="webservice.DtBusquedaCollectionWS"%>
+<%@page import="webservice.DtBusquedaWS"%>
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -28,7 +28,7 @@
     <%}%>
     
     <%
-        ArrayList<DTBusqueda> resultadosBusqueda = (ArrayList<DTBusqueda>) request.getAttribute("resultadosBusqueda");
+        DtBusquedaCollectionWS resultadosBusqueda = (DtBusquedaCollectionWS) request.getAttribute("resultadosBusqueda");
         String strPeticionBusqueda = (String) request.getAttribute("peticionBusqueda");
         
         String attributeDepartamento = (String) request.getAttribute("departamento");
@@ -53,10 +53,13 @@
                     <select class="text-light form-select bg-primary" name="departamento" onchange="this.form.submit();">
                         <option value="" disabled selected>- seleccione un departamento -</option>
                         <% 
-                            for (DTDepartamento departamento : (List<DTDepartamento>) request.getAttribute("departamentos")) {
+                            String selectedDepartamento = request.getParameter("departamento");
+                            DtDepartamentosCollectionWS departamentos = (DtDepartamentosCollectionWS) request.getAttribute("departamentos");
+                            
+                            for (DtDepartamentoWS departamento : departamentos.getDepartamentos()) {
                                 String nombreDepartamento = departamento.getNombre();
                         %>
-                        <option value="<%= departamento.getNombre() %>">
+                        <option value="<%= nombreDepartamento %>">
                             <%= nombreDepartamento %>
                         </option>		
                         <% } %>
@@ -69,11 +72,13 @@
                     <select class="text-light form-select bg-primary" name="categoria" onchange="this.form.submit();">
                         <option value="" disabled selected>- seleccione una categoria -</option>
                         <% 
-                            for(DTCategoria c : (List<DTCategoria>) request.getAttribute("categorias")){
-                                String nombreCategoria = c.getNombre();
+                            String categorias = (String) request.getAttribute("categorias");
+                            String[] categoriasSeparadas = categorias.split(",");
+
+                            for (String categoriaIndividual : categoriasSeparadas) {
                         %>
-                        <option value="<%=nombreCategoria%>">
-                            <%= nombreCategoria %>
+                        <option value="<%=categoriaIndividual%>">
+                            <%= categoriaIndividual %>
                         </option>		
                         <% } %>
                     </select>
@@ -96,16 +101,16 @@
                     </thead>
                     <tbody>
                         <% 
-                            for(DTBusqueda dtb : resultadosBusqueda){
+                            for(DtBusquedaWS dtb : resultadosBusqueda.getResultadosBusqueda()){
                         %>
                         <tr>
                             <td><%= dtb.getNombre() %></td>
                             <td><%= dtb.getDescripcion() %></td>
                             <td><%= dtb.getFechaAltaComoString() %></td>
                             <td>
-                                <% String[] categoriasSeparadas = dtb.getCategorias().split(",");
-                                for (String categoriaIndividual : categoriasSeparadas) {%>
-                                    <span class="badge text-bg-primary"><%=categoriaIndividual%></span>
+                                <% String[] categoriasBusquedaSeparadas = dtb.getCategorias().split(",");
+                                for (String categoriaBusquedaIndividual : categoriasBusquedaSeparadas) {%>
+                                    <span class="badge text-bg-primary"><%=categoriaBusquedaIndividual%></span>
                                 <%}%>
                             </td>
 

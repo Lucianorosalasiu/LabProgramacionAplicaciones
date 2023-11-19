@@ -2055,6 +2055,7 @@ public class DataPersistencia implements IDataPersistencia {
 
                 resultadosBusqueda.add(dtb);
             }
+            Collections.sort(resultadosBusqueda, Comparator.comparing(DTBusqueda::getFechaAlta).reversed());
             return resultadosBusqueda;
         } catch (Exception e) {
             return resultadosBusqueda;
