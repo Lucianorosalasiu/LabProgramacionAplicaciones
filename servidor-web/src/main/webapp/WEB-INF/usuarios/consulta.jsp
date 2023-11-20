@@ -5,10 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTUsuario"%>
-<%@page import="dataTypes.DTTurista"%>
-<%@page import="dataTypes.DTProveedor"%>
-<%@page import="java.util.List"%> 
+<%@page import="webservice.DtUsuarioWrapper"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html class="h-100">
     <head>
@@ -26,29 +27,48 @@
             <div class="card-deck d-flex flex-row flex-wrap gap-3 p-2 justify-content-center">
                 <!-- Iterar sobre la lista de usuarios -->
                 <%
-                List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
+                ArrayList<DtUsuarioWrapper> usuarios = (ArrayList<DtUsuarioWrapper>) request.getAttribute("usuarios");
                 String userLogged = (String) request.getSession().getAttribute("sessionNickname");
-
-                for (DTUsuario u : usuarios) {
-                    String profileImageUrl = u.getProfileImageUrl();
+                
+                for (DtUsuarioWrapper u : usuarios) {
+                    String image = null;
+                    if (u.getPhoto() != null && !u.getPhoto().equals("")) {
+                        // Si hay una imagen de perfil en formato blob, se convierte a Base64
+                        String encodedImage = Base64.getEncoder().encodeToString(u.getPhoto());
+                        image = "data:image/jpeg;base64," + encodedImage;
+                    } else if (u.getImagePath() != null && !u.getImagePath().isBlank()) {
+                        // Si hay una ruta de imagen
+                        image = "https://" + u.getImagePath();
+                    } else {
+                        // Si no se encuentra una imagen, usa la imagen por defecto
+                        image = "assets/img/defecto.jpg";
+                    }
                 %> 
                 <!-- Tarjeta Bootstrap para cada usuario -->
                 <div class="card mb-4 medium-card">
-                    <img src="<%= profileImageUrl %>" class="card-img-top  img-thumbnail medium-image">
+                    <img src="<%= image %>" class="card-img-top  img-thumbnail medium-image">
                     <div class="card-header">  
                         <h5 class="card-link card-title">
-                            <a href="?usuario=<%= u.getNickname() %>">
-                                <%= u.getName() %>
-                            </a>
+                            <% if (u.isTurista()) { %>
+                                <a href="?usuario=<%= u.getDtt().getNickname() %>">
+                                    <%= u.getDtt().getName() %>
+                                </a>
+                            <% } else { %>
+                                <a href="?usuario=<%= u.getDtp().getNickname() %>">
+                                    <%= u.getDtp().getName() %>
+                                </a>
+                            <% } %> 
+
                         </h5>
                     </div>        
                     <div class="card-body">
-                        <% if (u instanceof DTTurista) { %>
+                        <% if (u.isTurista()) { %>
                         <p class="text-info"> Turista </p>
-                        <% } else if(u instanceof DTProveedor){ %>
+                        <small class="text-body-secondary"><%= u.getDtt().getEmail() %></small>
+                        <% } else { %>
                         <p class="text-warning"> Proveedor </p>
+                        <small class="text-body-secondary"><%= u.getDtp().getEmail() %></small>
                         <% } %> 
-                        <small class="text-body-secondary"><%= u.getEmail() %></small>
                     </div>
                     <% if(request.getSession().getAttribute("isLogged") != null) {%>
                     <div class="card-footer">

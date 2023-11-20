@@ -1,14 +1,17 @@
 package controllers.usuarios;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import webExceptions.UsuarioNoEncontrado;
+import webservice.DtUsuarioCollectionWS;
+import webservice.DtUsuarioWrapper;
 
 import dataTypes.DTUsuario;
-import webExceptions.UsuarioNoEncontrado;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
 
@@ -35,25 +38,25 @@ public class ConsultaUsuario extends HttpServlet {
             return;
         }
         
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
-        
         /* Se utiliza el webservice para obtener las operaciones*/   
-//        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
-//        webservice.WSUsuarioController port = service.getWSUsuarioControllerPort(); 
-        
+        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort(); 
         
         String emailUsuario = request.getParameter("usuario");
 
         if (emailUsuario == null) {
             // Si no se elige un usuario en específico, lista todos los usuarios.
-            List<DTUsuario> usrs = controlador.obtenerUsuarios();
-
-            request.setAttribute("usuarios", usrs);
-
+            DtUsuarioCollectionWS usrs = portU.obtenerUsuarios();
+            List<DtUsuarioWrapper> usersW = new ArrayList();
+            usersW = usrs.getUsuariosW();
+            request.setAttribute("usuarios", usersW);
+            
             request.getRequestDispatcher("/WEB-INF/usuarios/consulta.jsp")
                     .forward(request, response);
         } else {
+                    
+            Fabrica fabrica = new Fabrica();
+            IControlador controlador = fabrica.getInterface();
             // Caso contrario, ve el perfil de un solo usuario
             DTUsuario usr;
             try {
