@@ -370,11 +370,7 @@ public class DataPersistencia implements IDataPersistencia {
                 throw new MyException("¡ERROR! No se encontró el usuario a seguir.");
             }
 
-//            ESeguidores relacion = new ESeguidores(seguidor, seguido);
-//            em.persist(relacion);
-//
-//            em.getTransaction().commit();
-            // Crear instancia de ESeguidores con los IDs
+            // Se crea la instancia de ESeguidores con los IDs
             ESeguidores relacion = new ESeguidores();
             relacion.setSeguidorId(idSeguidor);
             relacion.setSeguidoId(idSeguido);
@@ -415,7 +411,7 @@ public class DataPersistencia implements IDataPersistencia {
                 em.remove(relacion);
 
                 // Remover IDs de las listas en lugar de instancias
-                seguido.removerSeguidor(idSeguidor);
+                // seguido.removerSeguidor(idSeguidor);
             }
 
             em.getTransaction().commit();

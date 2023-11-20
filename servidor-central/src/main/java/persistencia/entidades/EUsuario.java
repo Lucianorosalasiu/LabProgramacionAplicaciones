@@ -36,11 +36,11 @@ public abstract class EUsuario extends EBase {
     protected String imagePath;
     protected byte[] photo;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    protected List<ESeguidores> seguidores;
+    // @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    // protected List<ESeguidores> seguidores;
 
     private void inicializarListas() {
-        this.seguidores = new ArrayList<>();
+        // this.seguidores = new ArrayList<>();
     }
 
     public EUsuario() {
@@ -80,15 +80,15 @@ public abstract class EUsuario extends EBase {
         this.inicializarListas();
     }
 
-    public void agregarSeguidor(long seguidorId) {
-        ESeguidores relacion = new ESeguidores();
-        relacion.setSeguidorId(seguidorId);
-        relacion.setSeguidoId(this.getId());
-
-        this.seguidores.add(relacion);
-    }
-
-    public void removerSeguidor(long seguidorId) {
-        this.seguidores.removeIf(relacion -> relacion.getSeguidorId() == seguidorId);
-    }
+    // public void agregarSeguidor(long seguidorId) {
+    //      ESeguidores relacion = new ESeguidores();
+    //      relacion.setSeguidorId(seguidorId);
+    //      relacion.setSeguidoId(this.getId());
+    //
+    //      this.seguidores.add(relacion);
+    // }
+    //
+    // public void removerSeguidor(long seguidorId) {
+    //      this.seguidores.removeIf(relacion -> relacion.getSeguidorId() == seguidorId);
+    // }
 }
