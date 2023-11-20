@@ -20,6 +20,7 @@ import webService.dataTypesWS.DTProveedorWS;
 import webService.dataTypesWS.DTTuristaWS;
 import webService.dataTypesWS.DTUsuarioCollectionWS;
 import webService.dataTypesWS.DTUsuarioWrapper;
+import webService.dataTypesWS.DTLongCollectionWS;
 
 /**
  *
@@ -152,6 +153,15 @@ public class WSUsuarioController {
     @WebMethod
     public void dejarDeSeguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.dejarDeSeguirUsuario(idSeguidor, idSeguido);
+    }
+    
+    @WebMethod
+    public DTLongCollectionWS obtenerSeguidos(Long idSeguidor) {
+        DTLongCollectionWS dtLongCollection = new DTLongCollectionWS();
+
+        dtLongCollection.setLista(controlador.obtenerSeguidos(idSeguidor));
+        
+        return dtLongCollection;
     }
 
     @WebMethod

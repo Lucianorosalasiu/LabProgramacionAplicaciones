@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import webExceptions.UsuarioNoEncontrado;
 import webservice.DtUsuarioCollectionWS;
 import webservice.DtUsuarioWrapper;
+import static java.util.Objects.isNull;
 
 import dataTypes.DTUsuario;
 import logica.fabrica.Fabrica;
@@ -43,14 +44,22 @@ public class ConsultaUsuario extends HttpServlet {
         webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort(); 
         
         String emailUsuario = request.getParameter("usuario");
-
+            
         if (emailUsuario == null) {
             // Si no se elige un usuario en específico, lista todos los usuarios.
             DtUsuarioCollectionWS usrs = portU.obtenerUsuarios();
             List<DtUsuarioWrapper> usersW = new ArrayList();
             usersW = usrs.getUsuariosW();
-            request.setAttribute("usuarios", usersW);
+        
+            List<Long> seguidos = new ArrayList();
             
+            Long idUser = (Long) request.getSession().getAttribute("id");
+            if(!isNull(idUser)) {
+                seguidos = portU.obtenerSeguidos(idUser).getLista();
+            }
+            
+            request.setAttribute("usuarios", usersW);
+            request.setAttribute("seguidos", seguidos);
             request.getRequestDispatcher("/WEB-INF/usuarios/consulta.jsp")
                     .forward(request, response);
         } else {
