@@ -5,14 +5,10 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.Getter;
@@ -25,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class EUsuario extends EBase {
 
     @Column(unique = true)
@@ -40,21 +36,16 @@ public abstract class EUsuario extends EBase {
     protected String imagePath;
     protected byte[] photo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "SEGUIDORES",
-            joinColumns = @JoinColumn(name = "seguidor_id"),
-            inverseJoinColumns = @JoinColumn(name = "seguido_id")
-    )
-    protected List<EUsuario> seguidores;
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    protected List<ESeguidores> seguidores;
 
-    private void inicializarLista() {
+    private void inicializarListas() {
         this.seguidores = new ArrayList<>();
     }
 
     public EUsuario() {
         super();
-        this.inicializarLista();
+        this.inicializarListas();
     }
 
     public EUsuario(String nickname, String name, String lastName, String email, Date birthDate) {
@@ -64,7 +55,7 @@ public abstract class EUsuario extends EBase {
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;
-        this.inicializarLista();
+        this.inicializarListas();
     }
 
     public EUsuario(
@@ -86,14 +77,18 @@ public abstract class EUsuario extends EBase {
         this.password = password;
         this.imagePath = imagePath;
         this.photo = photo;
-        this.inicializarLista();
+        this.inicializarListas();
     }
 
-    public void agregarSeguidor(EUsuario seguidor) {
-        seguidores.add(seguidor);
+    public void agregarSeguidor(long seguidorId) {
+        ESeguidores relacion = new ESeguidores();
+        relacion.setSeguidorId(seguidorId);
+        relacion.setSeguidoId(this.getId());
+
+        this.seguidores.add(relacion);
     }
 
-    public void removerSeguidor(EUsuario seguidor) {
-        seguidores.remove(seguidor);
+    public void removerSeguidor(long seguidorId) {
+        this.seguidores.removeIf(relacion -> relacion.getSeguidorId() == seguidorId);
     }
 }

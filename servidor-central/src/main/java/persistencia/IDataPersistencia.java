@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package persistencia;
 
 import Enums.EstadoActividad;
@@ -29,17 +25,17 @@ import persistencia.entidades.ETurista;
 public interface IDataPersistencia {
     /* CU USUARIOS */
     void existeUsuario(String email, String nickname) throws MyException;
-    void altaProveedor(DTProveedor proveedor) throws MyException;
-    void altaTurista(DTTurista turista) throws MyException;
-    
-    List<DTTurista> obtenerTuristas();
     ETurista buscarTuristaPorNickname(String nickname) throws MyException;
     EProveedor buscarProveedorPorNickname(String nickname) throws MyException;
+    DTTurista obtenerTurista(long idTurista);
+    List<DTTurista> obtenerTuristas();
+    List<DTProveedor> obtenerProveedores();
+    void altaProveedor(DTProveedor proveedor) throws MyException;
+    void altaTurista(DTTurista turista) throws MyException;
     void actualizarProveedor(DTProveedor proveedor) throws MyException;
     void actualizarTurista(DTTurista turista) throws MyException;
-    
     void dejarDeSeguirUsuario(long idSeguidor, long idSeguido) throws MyException;
-    public void seguirUsuario(long idSeguidor, long idSeguido) throws MyException;
+    void seguirUsuario(long idSeguidor, long idSeguido) throws MyException;
     
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
@@ -52,11 +48,9 @@ public interface IDataPersistencia {
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias, byte[] foto);
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica, Long idDepartamento, Long idProveedor,List<Long> categorias, byte[] foto, String url);
-    List<DTProveedor> obtenerProveedores();
     byte[] obtenerFotoActividadTuristica(Long id);
     String obtenerUrlVideo(Long id);
     
-
     /*CU5*/
     List<DTActividadTuristica> obtenerActividadesTuristicas(Long idDepartamento);
     List<DTActividadTuristica> obtenerActividadesTuristicasConId(Long idDepartamento);
@@ -95,7 +89,6 @@ public interface IDataPersistencia {
     void agregarCompraPaquete(DTCompraPaquete compra);
     DTPaqueteActividadTuristica obtenerPaqueteCosto(String nombre);
     List<DTPaqueteActividadTuristica>obtenerPaquetes();
-    DTTurista obtenerTurista(long idTurista);
     byte[] obtenerFotoPaqueteActividadTuristica(String selectedPaquete);
     DTActividadTuristica obtenerFotoActividadTuristicaID(String actividad);         
     void altaCategoria(String nombre) throws MyException;

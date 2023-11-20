@@ -37,20 +37,17 @@ import persistencia.entidades.EInscripcion;
 import persistencia.entidades.EPaqueteActividadTuristica;
 import persistencia.entidades.EProveedor;
 import persistencia.entidades.ESalidaTuristica;
+import persistencia.entidades.ESeguidores;
 import persistencia.entidades.ETurista;
 import persistencia.entidades.EUsuario;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 /**
  *
  * @author all
  */
 public class DataPersistencia implements IDataPersistencia {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("puConexionBD");
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("puConexionBD");
     private static DataPersistencia instancia = null;
 
     private DataPersistencia() {
@@ -100,6 +97,125 @@ public class DataPersistencia implements IDataPersistencia {
 
         if (!resultadoProveedor.isEmpty() || !resultadoTurista.isEmpty()) {
             throw new MyException("Ya existe un usuario con el email o nickname ingresado.");
+        }
+    }
+
+    @Override
+    public ETurista buscarTuristaPorNickname(String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
+            TypedQuery<ETurista> touristResult = em.createQuery(query, ETurista.class);
+            touristResult.setParameter("nickname", nickname);
+            return touristResult.getSingleResult();
+        } catch (NoResultException e) {
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
+            throw new MyException("No se encontró el turista con el nickname brindado");
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public EProveedor buscarProveedorPorNickname(String nickname) throws MyException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            String query = "SELECT p FROM EProveedor p WHERE p.nickname = :nickname";
+            TypedQuery<EProveedor> providerResult = em.createQuery(query, EProveedor.class);
+            providerResult.setParameter("nickname", nickname);
+            return providerResult.getSingleResult();
+        } catch (NoResultException e) {
+            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
+            throw new MyException("No se encontró el proveedor con el nickname brindado");
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public DTTurista obtenerTurista(long idTurista) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+
+            ETurista eTurista = em.find(ETurista.class, idTurista);
+            DTTurista dtTurista = new DTTurista(eTurista.getId(), eTurista.getNickname(), eTurista.getEmail(), eTurista.getNacionality());
+            return dtTurista;
+
+        } catch (Exception e) {
+            DTTurista dtTurista = new DTTurista();
+            return dtTurista;
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<DTTurista> obtenerTuristas() {
+        EntityManager em = emf.createEntityManager();
+        List<DTTurista> touristList = new LinkedList<>();
+        List<ETurista> qryResults = new LinkedList<>();
+
+        try {
+            String query = "select t from ETurista t";
+            qryResults = em.createQuery(query, ETurista.class).getResultList();
+
+            for (ETurista t : qryResults) {
+                DTTurista turista = new DTTurista(
+                        t.getId(),
+                        t.getNickname(),
+                        t.getName(),
+                        t.getLastName(),
+                        t.getEmail(),
+                        t.getBirthDate(),
+                        t.getPassword(),
+                        t.getImagePath(),
+                        t.getPhoto(),
+                        t.getNacionality()
+                );
+                touristList.add(turista);
+            }
+
+            return touristList;
+        } catch (Exception e) {
+            return touristList;
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<DTProveedor> obtenerProveedores() {
+        EntityManager em = emf.createEntityManager();
+        List<DTProveedor> resultados = new LinkedList<>();
+        List<EProveedor> qryResult = new LinkedList<>();
+
+        try {
+            String query = "select e from EProveedor e";
+            qryResult = em.createQuery(query, EProveedor.class).getResultList();
+
+            for (EProveedor p : qryResult) {
+                DTProveedor dtProveedor = new DTProveedor(
+                        p.getId(),
+                        p.getNickname(),
+                        p.getName(),
+                        p.getLastName(),
+                        p.getEmail(),
+                        p.getBirthDate(),
+                        p.getPassword(),
+                        p.getImagePath(),
+                        p.getPhoto(),
+                        p.getDescription(),
+                        p.getWebsiteURL()
+                );
+                resultados.add(dtProveedor);
+            }
+
+            return resultados;
+        } catch (Exception e) {
+            return resultados;
+        } finally {
+            em.close();
         }
     }
 
@@ -155,72 +271,6 @@ public class DataPersistencia implements IDataPersistencia {
             em.getTransaction().rollback();
             Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("¡ERROR! Algo salio mal al insertar el nuevo turista");
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public List<DTTurista> obtenerTuristas() {
-        EntityManager em = emf.createEntityManager();
-        List<DTTurista> touristList = new LinkedList<>();
-        List<ETurista> qryResults = new LinkedList<>();
-
-        try {
-            String query = "select t from ETurista t";
-            qryResults = em.createQuery(query, ETurista.class).getResultList();
-
-            for (ETurista t : qryResults) {
-                DTTurista turista = new DTTurista(
-                        t.getId(),
-                        t.getNickname(),
-                        t.getName(),
-                        t.getLastName(),
-                        t.getEmail(),
-                        t.getBirthDate(),
-                        t.getPassword(),
-                        t.getImagePath(),
-                        t.getPhoto(),
-                        t.getNacionality()
-                );
-                touristList.add(turista);
-            }
-
-            return touristList;
-        } catch (Exception e) {
-            return touristList;
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public ETurista buscarTuristaPorNickname(String nickname) throws MyException {
-        EntityManager em = emf.createEntityManager();
-        try {
-            String query = "SELECT t FROM ETurista t WHERE t.nickname = :nickname";
-            TypedQuery<ETurista> touristResult = em.createQuery(query, ETurista.class);
-            touristResult.setParameter("nickname", nickname);
-            return touristResult.getSingleResult();
-        } catch (NoResultException e) {
-            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
-            throw new MyException("No se encontró el turista con el nickname brindado");
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public EProveedor buscarProveedorPorNickname(String nickname) throws MyException {
-        EntityManager em = emf.createEntityManager();
-        try {
-            String query = "SELECT p FROM EProveedor p WHERE p.nickname = :nickname";
-            TypedQuery<EProveedor> providerResult = em.createQuery(query, EProveedor.class);
-            providerResult.setParameter("nickname", nickname);
-            return providerResult.getSingleResult();
-        } catch (NoResultException e) {
-            Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
-            throw new MyException("No se encontró el proveedor con el nickname brindado");
         } finally {
             em.close();
         }
@@ -315,13 +365,21 @@ public class DataPersistencia implements IDataPersistencia {
             if (seguidor == null) {
                 throw new MyException("¡ERROR! No se encontró el usuario seguidor.");
             }
-            
+
             if (seguido == null) {
                 throw new MyException("¡ERROR! No se encontró el usuario a seguir.");
             }
 
-            // Seguir al usuario
-            seguido.agregarSeguidor(seguidor);
+//            ESeguidores relacion = new ESeguidores(seguidor, seguido);
+//            em.persist(relacion);
+//
+//            em.getTransaction().commit();
+            // Crear instancia de ESeguidores con los IDs
+            ESeguidores relacion = new ESeguidores();
+            relacion.setSeguidorId(idSeguidor);
+            relacion.setSeguidoId(idSeguido);
+
+            em.persist(relacion);
 
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -339,21 +397,26 @@ public class DataPersistencia implements IDataPersistencia {
         try {
             em.getTransaction().begin();
 
-            // Obtener los usuarios involucrados en el seguimiento
+            // Verificar si ambos usuarios existen
             EUsuario seguidor = em.find(EUsuario.class, idSeguidor);
             EUsuario seguido = em.find(EUsuario.class, idSeguido);
 
-            // Verificar si ambos usuarios existen
             if (seguidor == null) {
                 throw new MyException("¡ERROR! No se encontró el usuario seguidor.");
             }
-            
+
             if (seguido == null) {
                 throw new MyException("¡ERROR! No se encontró el usuario a dejar de seguir.");
             }
 
-            // Dejar de seguir al usuario
-            seguido.removerSeguidor(seguidor);
+            // Buscar y eliminar la relación de seguimiento
+            ESeguidores relacion = buscarRelacionDeSeguimiento(idSeguidor, idSeguido, em);
+            if (relacion != null) {
+                em.remove(relacion);
+
+                // Remover IDs de las listas en lugar de instancias
+                seguido.removerSeguidor(idSeguidor);
+            }
 
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -362,6 +425,19 @@ public class DataPersistencia implements IDataPersistencia {
             throw new MyException("¡ERROR! Algo salió mal al dejar de seguir al usuario.");
         } finally {
             em.close();
+        }
+    }
+
+    private ESeguidores buscarRelacionDeSeguimiento(long idSeguidor, long idSeguido, EntityManager em) {
+        try {
+            return em.createQuery(
+                    "SELECT r FROM ESeguidores r WHERE r.seguidorId = :seguidorId AND r.seguidoId = :seguidoId",
+                    ESeguidores.class)
+                    .setParameter("seguidorId", idSeguidor)
+                    .setParameter("seguidoId", idSeguido)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No se encontró la relación de seguimiento
         }
     }
 
@@ -723,41 +799,6 @@ public class DataPersistencia implements IDataPersistencia {
             return url;
         } catch (Exception e) {
             return url;
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public List<DTProveedor> obtenerProveedores() {
-        EntityManager em = emf.createEntityManager();
-        List<DTProveedor> resultados = new LinkedList<>();
-        List<EProveedor> qryResult = new LinkedList<>();
-
-        try {
-            String query = "select e from EProveedor e";
-            qryResult = em.createQuery(query, EProveedor.class).getResultList();
-
-            for (EProveedor p : qryResult) {
-                DTProveedor dtProveedor = new DTProveedor(
-                        p.getId(),
-                        p.getNickname(),
-                        p.getName(),
-                        p.getLastName(),
-                        p.getEmail(),
-                        p.getBirthDate(),
-                        p.getPassword(),
-                        p.getImagePath(),
-                        p.getPhoto(),
-                        p.getDescription(),
-                        p.getWebsiteURL()
-                );
-                resultados.add(dtProveedor);
-            }
-
-            return resultados;
-        } catch (Exception e) {
-            return resultados;
         } finally {
             em.close();
         }
@@ -1757,24 +1798,6 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
 
-    }
-
-    @Override
-    public DTTurista obtenerTurista(long idTurista) {
-        EntityManager em = emf.createEntityManager();
-
-        try {
-
-            ETurista eTurista = em.find(ETurista.class, idTurista);
-            DTTurista dtTurista = new DTTurista(eTurista.getId(), eTurista.getNickname(), eTurista.getEmail(), eTurista.getNacionality());
-            return dtTurista;
-
-        } catch (Exception e) {
-            DTTurista dtTurista = new DTTurista();
-            return dtTurista;
-        } finally {
-            em.close();
-        }
     }
 
     @Override

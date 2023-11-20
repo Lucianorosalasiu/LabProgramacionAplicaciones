@@ -13,6 +13,7 @@
     <class>persistencia.entidades.ETurista</class>
     <class>persistencia.entidades.ECategoria</class>
     <class>persistencia.entidades.ECompraPaquete</class>
+    <class>persistencia.entidades.ESeguidores</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/turismouy?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="tecnologo"/>
