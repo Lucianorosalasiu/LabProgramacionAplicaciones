@@ -27,6 +27,7 @@
                 <!-- Iterar sobre la lista de usuarios -->
                 <%
                 List<DTUsuario> usuarios = (List<DTUsuario>) request.getAttribute("usuarios");
+                List<Long> seguidos = (List<Long>) request.getAttribute("seguidos");
                 String userLogged = (String) request.getSession().getAttribute("sessionNickname");
 
                 for (DTUsuario u : usuarios) {
@@ -52,8 +53,15 @@
                     </div>
                     <% if(request.getSession().getAttribute("isLogged") != null) {%>
                     <div class="card-footer">
-                        <button type="button" class="btn btn-primary">Seguir</button>
-                        <button type="button" class="btn btn-danger float-right">Dejar de seguir</button>
+                        <%if (!seguidos.contains(u.getId())) { %>
+                        <form action="/follow?usuario=<%=u.getId()%>" method="post">
+                            <button type="submit" class="btn btn-primary float-right">Seguir</button>
+                        </form>
+                        <%} else { %>
+                        <form action="/unfollow?usuario=<%=u.getId()%>" method="post">
+                            <button type="submit" class="btn btn-danger float-right">Dejar de seguir</button>
+                        </form>
+                        <%} %>
                     </div>
                     <% } %>
                 </div>
@@ -62,6 +70,5 @@
         </div>
 
         <jsp:include page="/WEB-INF/templates/footer.jsp"/>
-
     </body>
 </html>

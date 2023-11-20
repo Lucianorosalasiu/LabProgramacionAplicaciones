@@ -154,8 +154,13 @@ public class Controlador implements IControlador{
     }
     
     @Override
-    public void dejarDeSeguirUsuario(long idSeguidor, long idSeguido)  throws MyException {
+    public void dejarDeSeguirUsuario(long idSeguidor, long idSeguido) throws MyException {
         dataPersistencia.dejarDeSeguirUsuario(idSeguidor, idSeguido);
+    }
+    
+    @Override
+    public ArrayList<Long> obtenerSeguidos(long idSeguidor) {
+        return dataPersistencia.obtenerSeguidos(idSeguidor);
     }
     
     @Override

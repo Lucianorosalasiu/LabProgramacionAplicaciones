@@ -372,8 +372,8 @@ public class DataPersistencia implements IDataPersistencia {
 
             // Se crea la instancia de ESeguidores con los IDs
             ESeguidores relacion = new ESeguidores();
-            relacion.setSeguidorId(idSeguidor);
-            relacion.setSeguidoId(idSeguido);
+            relacion.setSeguidorId(seguidor.getId());
+            relacion.setSeguidoId(seguido.getId());
 
             em.persist(relacion);
 
@@ -419,6 +419,30 @@ public class DataPersistencia implements IDataPersistencia {
             em.getTransaction().rollback();
             Logger.getLogger(DataPersistencia.class.getName()).log(Level.SEVERE, null, e);
             throw new MyException("¡ERROR! Algo salió mal al dejar de seguir al usuario.");
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public ArrayList<Long> obtenerSeguidos(long idSeguidor){
+        EntityManager em = emf.createEntityManager();
+        ArrayList<Long> seguidores = new ArrayList<>();
+
+        try {
+            String querySeguidores = "SELECT r FROM ESeguidores r WHERE r.seguidorId = :seguidorId";
+            List<ESeguidores> eSeguidoresList = em.createQuery(querySeguidores, ESeguidores.class)
+                    .setParameter("seguidorId", idSeguidor)
+                    .getResultList();
+
+            for (ESeguidores r : eSeguidoresList) {
+                seguidores.add(r.getSeguidoId());
+            }
+
+            return seguidores;
+
+        } catch (Exception e) {
+            return new ArrayList<>();
         } finally {
             em.close();
         }

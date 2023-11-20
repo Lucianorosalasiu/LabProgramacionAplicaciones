@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dataTypes.DTUsuario;
+import java.util.ArrayList;
+import static java.util.Objects.isNull;
 import webExceptions.UsuarioNoEncontrado;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
@@ -39,18 +41,24 @@ public class ConsultaUsuario extends HttpServlet {
         IControlador controlador = fabrica.getInterface();
         
         /* Se utiliza el webservice para obtener las operaciones*/   
-//        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
-//        webservice.WSUsuarioController port = service.getWSUsuarioControllerPort(); 
-        
+        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort(); 
         
         String emailUsuario = request.getParameter("usuario");
-
+            
         if (emailUsuario == null) {
             // Si no se elige un usuario en específico, lista todos los usuarios.
             List<DTUsuario> usrs = controlador.obtenerUsuarios();
-
+            List<Long> seguidos = new ArrayList();
+            
+            Long idUser = (Long) request.getSession().getAttribute("id");
+            if(!isNull(idUser)) {
+                seguidos = portU.obtenerSeguidos(idUser).getLista();
+                System.out.println(seguidos.toString());
+            }
+            
             request.setAttribute("usuarios", usrs);
-
+            request.setAttribute("seguidos", seguidos);
             request.getRequestDispatcher("/WEB-INF/usuarios/consulta.jsp")
                     .forward(request, response);
         } else {

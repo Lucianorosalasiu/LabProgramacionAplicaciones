@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import static java.util.Objects.isNull;
+import webservice.MyException_Exception;
 
 /**
  *
@@ -65,9 +66,10 @@ public class Follow extends HttpServlet {
             return;
         }
         
+        /* El usuario logueado no se puede seguir a sí mismo. */
+        /*
         String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
         String sessionNickname = (String) request.getSession().getAttribute("sessionNickname");
-        /* El usuario logueado no se puede seguir a sí mismo. */
         if (
             queryUser.equals(sessionEmail)
             || queryUser.equals(sessionNickname)
@@ -75,13 +77,27 @@ public class Follow extends HttpServlet {
             response.sendError(403);
             return;
         }
+        */
+        Long userId = (Long) request.getSession().getAttribute("id");        
+        if (userId.longValue() == Long.valueOf(queryUser).longValue()) {
+            response.sendError(403);
+            return; 
+        }
         
         // Hacer post
 
-        // /* WebService Usuarios: */
-        // webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
-        // webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();             
-        // String responsePingUsuarioWS = portU.ping();
+        /* WebService Usuarios: */
+        webservice.WSUsuarioControllerService u = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = u.getWSUsuarioControllerPort();   
+        try {
+            portU.seguirUsuario(
+                userId, 
+                Long.parseLong(queryUser)
+            );    
+        } catch (MyException_Exception ex) {
+            response.sendError(500);
+            return;
+        }
                 
         this.doGet(request, response);
     }

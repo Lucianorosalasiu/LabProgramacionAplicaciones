@@ -36,6 +36,7 @@ public interface IDataPersistencia {
     void actualizarTurista(DTTurista turista) throws MyException;
     void dejarDeSeguirUsuario(long idSeguidor, long idSeguido) throws MyException;
     void seguirUsuario(long idSeguidor, long idSeguido) throws MyException;
+    ArrayList<Long> obtenerSeguidos(long idSeguidor);
     
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
