@@ -67,17 +67,6 @@ public class Follow extends HttpServlet {
         }
         
         /* El usuario logueado no se puede seguir a sí mismo. */
-        /*
-        String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
-        String sessionNickname = (String) request.getSession().getAttribute("sessionNickname");
-        if (
-            queryUser.equals(sessionEmail)
-            || queryUser.equals(sessionNickname)
-        ){
-            response.sendError(403);
-            return;
-        }
-        */
         Long userId = (Long) request.getSession().getAttribute("id");        
         if (userId.longValue() == Long.valueOf(queryUser).longValue()) {
             response.sendError(403);

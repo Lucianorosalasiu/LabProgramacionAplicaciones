@@ -9,6 +9,7 @@
 <%@page import="dataTypes.DTTurista"%>
 <%@page import="dataTypes.DTProveedor"%>
 <%@page import="java.text.SimpleDateFormat"%>
+
 <!DOCTYPE html>
 <html class="h-100">
     <head>

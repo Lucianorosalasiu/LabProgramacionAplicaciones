@@ -427,16 +427,40 @@ public class DataPersistencia implements IDataPersistencia {
     @Override
     public ArrayList<Long> obtenerSeguidos(long idSeguidor){
         EntityManager em = emf.createEntityManager();
-        ArrayList<Long> seguidores = new ArrayList<>();
+        ArrayList<Long> seguidos = new ArrayList<>();
 
         try {
-            String querySeguidores = "SELECT r FROM ESeguidores r WHERE r.seguidorId = :seguidorId";
-            List<ESeguidores> eSeguidoresList = em.createQuery(querySeguidores, ESeguidores.class)
+            String querySeguidos = "SELECT r FROM ESeguidores r WHERE r.seguidorId = :seguidorId";
+            List<ESeguidores> eSeguidosList = em.createQuery(querySeguidos, ESeguidores.class)
                     .setParameter("seguidorId", idSeguidor)
                     .getResultList();
 
+            for (ESeguidores r : eSeguidosList) {
+                seguidos.add(r.getSeguidoId());
+            }
+
+            return seguidos;
+
+        } catch (Exception e) {
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public ArrayList<Long> obtenerSeguidores(long idSeguido){
+        EntityManager em = emf.createEntityManager();
+        ArrayList<Long> seguidores = new ArrayList<>();
+
+        try {
+            String querySeguidores = "SELECT r FROM ESeguidores r WHERE r.seguidoId = :seguidoId";
+            List<ESeguidores> eSeguidoresList = em.createQuery(querySeguidores, ESeguidores.class)
+                    .setParameter("seguidoId", idSeguido)
+                    .getResultList();
+
             for (ESeguidores r : eSeguidoresList) {
-                seguidores.add(r.getSeguidoId());
+                seguidores.add(r.getSeguidorId());
             }
 
             return seguidores;
@@ -447,7 +471,7 @@ public class DataPersistencia implements IDataPersistencia {
             em.close();
         }
     }
-
+    
     private ESeguidores buscarRelacionDeSeguimiento(long idSeguidor, long idSeguido, EntityManager em) {
         try {
             return em.createQuery(

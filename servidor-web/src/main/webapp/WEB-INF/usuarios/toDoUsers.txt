@@ -4,7 +4,5 @@ información de las inscripciones a las salidas (costo, cantidad turistas, etc)
 y compras de paquetes (costo, cantidad turistas, vencimiento, etc).
 
 USUARIOS EN GENERAL:
-Si el usuario selecciona una salida turística, o un paquete se muestra la
-información detallada, tal como se indica en los casos de uso Consulta de 
-Actividad Turística, Consulta de Salida Turística y Consulta de 
-Paquete de Actividades Turísticas, respectivamente.
+Si el usuario selecciona un paquete se muestra la  información detallada, tal 
+como se indica en el caso de uso Consulta de Paquete de Actividades Turísticas.

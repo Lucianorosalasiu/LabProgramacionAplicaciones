@@ -27,15 +27,18 @@ import java.util.ArrayList;
  */
 public interface  IControlador {
     /*CU USUARIOS*/
-    void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
-    void altaTurista(DTTurista nuevoTurista) throws MyException;
-    List<DTUsuario> obtenerUsuarios();
     DTUsuario obtenerUsuario(String nickname);
     DTUsuario obtenerUsuarioAlternativo(String nickname);
+    List<DTUsuario> obtenerUsuarios();
+    List<DTTurista> obtenerTuristas();
+    List<DTProveedor> obtenerProveedores();
+    void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
+    void altaTurista(DTTurista nuevoTurista) throws MyException;
     void actualizarUsuario(DTUsuario usuario) throws MyException;    
     void seguirUsuario(long idSeguidor, long idSeguido) throws MyException ;
     void dejarDeSeguirUsuario(long idSeguidor, long idSeguido) throws MyException ;
     ArrayList<Long> obtenerSeguidos(long idSeguidor);
+    ArrayList<Long> obtenerSeguidores(long idSeguido);
     
     List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista);
     List<DTSalidaTuristica> obtenerSalidasDeProveedor(long idProveedor);
@@ -48,7 +51,6 @@ public interface  IControlador {
     void existeActividadTuristica(String nombre)throws MyException;
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto);
     void altaActividadTuristica(DTActividadTuristica dtActividadTuristica,Long idDepartamento, Long idProveedor, List<Long> categorias, byte[] foto, String url);
-    List<DTProveedor> obtenerProveedores();
     byte[] obtenerFotoActividadTuristica(Long id);
     String obtenerUrlVideo(Long id);
     
@@ -70,7 +72,7 @@ public interface  IControlador {
     
     /*CU8*/
     void altaInscripcion(DTInscripcion dtInscripcion, String nombreActividad, String nombreSalida, String nicknameTurista) throws MyException;
-    List<DTTurista> obtenerTuristas();
+
             
     /*CU12*/
     void existeDepartamento(String nombre)throws MyException;

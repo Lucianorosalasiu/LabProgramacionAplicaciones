@@ -164,6 +164,12 @@ public class Controlador implements IControlador{
     }
     
     @Override
+    public ArrayList<Long> obtenerSeguidores(long idSeguido) {
+        return dataPersistencia.obtenerSeguidores(idSeguido);
+    }
+    
+    
+    @Override
     public List<DTSalidaTuristica> obtenerSalidasDeTurista(long idTurista){
         return dataPersistencia.obtenerSalidasDeTurista(idTurista); 
     }

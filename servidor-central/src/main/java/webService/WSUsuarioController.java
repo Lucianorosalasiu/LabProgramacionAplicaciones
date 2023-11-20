@@ -12,7 +12,6 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static utils.DateConverter.convertToLocalDate;
@@ -132,19 +131,40 @@ public class WSUsuarioController {
         return collection;
     }
 
-    // DTUsuario usr = controlador.obtenerUsuarioAlternativo(emailUsuario);
-    // controlador.altaProveedor(nuevoProveedor);
-    // controlador.altaTurista(nuevoTurista);
-    // controlador.actualizarUsuario(nuevoProveedor);   
-    // controlador.actualizarUsuario(nuevoTurista);
-    // En WSSalida:
-    // List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
-    // List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedorCompleto(proveedor.getId());
-    // List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
-    // En WSActividad:
-    // List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
-    // List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
-    // ArrayList<DTActividadTuristica> actividadesFinalizables = controlador.obtenerActividadesFinalizables(sessionID);
+    /* ALTA USUARIO 
+     * Servlet = AltaUsuario.java
+     * JSP = alta.jsp
+        
+        controlador.altaProveedor(nuevoProveedor);
+        controlador.altaTurista(nuevoTurista);
+    */
+    
+    /* MODIFICACIÓN USUARIO 
+     * Servlet = ModificacionUsuario.java
+     * JSP = modificacion.jsp
+        
+        controlador.actualizarUsuario(nuevoProveedor);   
+        controlador.actualizarUsuario(nuevoTurista);
+    */
+
+    
+    /* OBTENER USUARIO INDIVIDUAL
+     * Servlet = ConsultaUsuario.java
+     * JSP = perfil.jsp
+
+    En WSUsuario:
+    DTUsuario usr = controlador.obtenerUsuarioAlternativo(emailUsuario);
+    
+    En WSSalida:
+        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
+        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedorCompleto(proveedor.getId());
+        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
+    
+    En WSActividad:
+        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
+        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
+    */
+    
     @WebMethod
     public void seguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.seguirUsuario(idSeguidor, idSeguido);
@@ -160,6 +180,15 @@ public class WSUsuarioController {
         DTLongCollectionWS dtLongCollection = new DTLongCollectionWS();
 
         dtLongCollection.setLista(controlador.obtenerSeguidos(idSeguidor));
+        
+        return dtLongCollection;
+    }
+    
+    @WebMethod
+    public DTLongCollectionWS obtenerSeguidores(Long idSeguido) {
+        DTLongCollectionWS dtLongCollection = new DTLongCollectionWS();
+
+        dtLongCollection.setLista(controlador.obtenerSeguidores(idSeguido));
         
         return dtLongCollection;
     }

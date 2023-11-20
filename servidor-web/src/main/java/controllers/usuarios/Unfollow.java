@@ -6,8 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import static java.util.Objects.isNull;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import webservice.MyException_Exception;
 
 /**
@@ -69,16 +67,6 @@ public class Unfollow extends HttpServlet {
         }
         
         /* El usuario logueado no se puede dejar de seguir a sí mismo. */
-        /*
-        String sessionEmail = (String) request.getSession().getAttribute("sessionEmail");
-        String sessionNickname = (String) request.getSession().getAttribute("sessionNickname");
-        if (
-            queryUser.equals(sessionEmail)
-            || queryUser.equals(sessionNickname)
-        ){
-
-        }
-        */
         Long userId = (Long) request.getSession().getAttribute("id");        
         if (userId.longValue() == Long.valueOf(queryUser).longValue()) {
             response.sendError(403);
