@@ -4,9 +4,7 @@
  */
 package controllers.paquetes;
 
-import dataTypes.DTCompraPaquete;
-import dataTypes.DTPaqueteActividadTuristica;
-import dataTypes.DTTurista;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -88,13 +86,11 @@ public class CompraPaquete extends HttpServlet {
             int cantidadPersonas = Integer.parseInt(request.getParameter("personas"));
             
             DtTurista turista = portU.obtenerTurista(idTurista);
-            DTTurista dtturista = new DTTurista(turista.getId(),turista.getNickname(),turista.getEmail(),turista.getNacionality());
-
+            
             DtPaqueteActividadTuristica paquete = portP.obtenerPaqueteCosto(request.getParameter("paquetes"));
 
 
-            DTPaqueteActividadTuristica dtpaquete = new DTPaqueteActividadTuristica(paquete.getNombre(), paquete.getDescripcion(), paquete.getValidez(), paquete.getDescuento(), paquete.getFechaAlta().toGregorianCalendar().getTime());
-
+            
             c.add(Calendar.DATE, paquete.getValidez());
             vencimiento = c.getTime();
 
@@ -113,7 +109,7 @@ public class CompraPaquete extends HttpServlet {
 
             }catch(Exception e){}
 
-            DTCompraPaquete compra = new DTCompraPaquete(dtturista,dtpaquete,cantidadPersonas,vencimiento,alta,paquete.getCosto()*cantidadPersonas);
+           
             DtCompraWS dtcompra = new DtCompraWS();
             dtcompra.setCOMPRADOR(turista);
             dtcompra.setCANTTURISTAS(cantidadPersonas);
