@@ -6,15 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="exceptions.MyException"%>
-<%@page import="logica.fabrica.Fabrica"%>
-<%@page import="logica.interfaces.IControlador"%>  
-<%@page import="dataTypes.DTSalidaTuristica"%>
-<%@page import="dataTypes.DTActividadTuristica"%>
+<%--<%@page import="exceptions.MyException"%>--%>
 
 <%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
 <%@page import="webservice.WSActividadController"%>
 <%@page import="webservice.WSActividadControllerService"%> 
+
+<%@page import="webservice.DtSalidaTuristicaWS, webservice.DtSalidasCollectionWS"%>
+<%@page import="webservice.WSSalidaController"%>
+<%@page import="webservice.WSSalidaControllerService"%> 
+
 <%@page import="webservice.DtUsuarioWrapper"%>
 
 <%@page import="java.util.Base64"%>
@@ -134,15 +135,17 @@
             <hr/>
 
             <%
-                Fabrica fabrica = new Fabrica();
-                IControlador controlador = fabrica.getInterface();
                 Long sessionID = (Long) request.getSession().getAttribute("id");
                 
                 WSActividadControllerService actividadController = new WSActividadControllerService();
-                WSActividadController actividadPort = actividadController.getWSActividadControllerPort(); 
+                WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
+                
+                WSSalidaControllerService salidaController = new WSSalidaControllerService();
+                WSSalidaController salidaPort = salidaController.getWSSalidaControllerPort();
 
-            if (usr.isTurista()) { 
-                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(usr.getDtt().getId());
+            if (usr.isTurista()) {
+                DtSalidasCollectionWS salidaList = new DtSalidasCollectionWS();
+                salidaList = salidaPort.obtenerSalidasDeTurista(usr.getDtt().getId());
             %>
             <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
                 <h3 class="text-center">Salidas Turísticas:</h3>
@@ -158,7 +161,7 @@
                         </thead>
                         <tbody>
                             <% 
-                            for (DTSalidaTuristica salida : salidaList) {     
+                            for (DtSalidaTuristicaWS salida : salidaList.getSalidas()) {     
                             %>
                             <tr>
                                 <td>
@@ -166,12 +169,7 @@
                                         <%= salida.getNombre() %>
                                     </a>
                                 </td>
-                                <td>
-                                    <%=
-                                    // Formato deseado para la fecha
-                                    new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
-                                    %>
-                                </td>
+                                <td><%= salida.getFechaSalida()%></td>
                                 <td><%= salida.getLugar() %></td>
                                 <td>
                                     <button 
@@ -188,18 +186,18 @@
                 </div>
                 <%
                 } else {
-                    List<DTActividadTuristica> actividadList;
-                    List<DTSalidaTuristica> salidaList;
+                    DtActividadesCollectionWS actividadList = new DtActividadesCollectionWS();
                     DtActividadesCollectionWS actividadesFinalizables = new DtActividadesCollectionWS();
+                    DtSalidasCollectionWS salidaList = new DtSalidasCollectionWS();
 
                     if(usr.getDtp().getId() == sessionID) {
-                        actividadList = controlador.obtenerActividadesDeProveedorCompleto(sessionID);
-                        salidaList = controlador.obtenerSalidasDeProveedorCompleto(sessionID);
+                        actividadList = actividadPort.obtenerActividadesDeProveedorCompleto(sessionID);
                         actividadesFinalizables = actividadPort.obtenerActividadesFinalizables(sessionID);
+                        salidaList = salidaPort.obtenerSalidasDeProveedorCompleto(sessionID);
 
                     } else {
-                        actividadList = controlador.obtenerActividadesDeProveedor(usr.getDtp().getId());
-                        salidaList = controlador.obtenerSalidasDeProveedor(usr.getDtp().getId());
+                        actividadList = actividadPort.obtenerActividadesDeProveedor(usr.getDtp().getId());
+                        salidaList = salidaPort.obtenerSalidasDeProveedor(usr.getDtp().getId());
                     }
                 %>
                 <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
@@ -214,8 +212,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% 
-                                for (DTActividadTuristica actividad : actividadList) {
+                                <%
+                                for (DtActividadTuristicaWS actividad : actividadList.getActividades()) {
                                 %>
                                 <tr>
                                     <td>
@@ -241,8 +239,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% 
-                                for (DTSalidaTuristica salida : salidaList) {     
+                                <%
+                                for (DtSalidaTuristicaWS salida : salidaList.getSalidas()) {     
                                 %>
                                 <tr>
                                     <td>
@@ -251,11 +249,7 @@
                                         </a>
                                     </td>
                                     <td><%= salida.getLugar() %></td>
-                                    <td><%=
-                                        // Formato deseado para la fecha
-                                        new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
-                                        %>
-                                    </td>
+                                    <td><%= salida.getFechaSalida()%></td>
                                 </tr>		
                                 <% } %>
                             </tbody>

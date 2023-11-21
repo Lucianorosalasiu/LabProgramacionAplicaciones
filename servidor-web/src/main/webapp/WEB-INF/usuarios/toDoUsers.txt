@@ -1,8 +1,0 @@
-TURISTAS:
-En caso de que un Turista consulte su propio perfil, adicionalmente verá la 
-información de las inscripciones a las salidas (costo, cantidad turistas, etc) 
-y compras de paquetes (costo, cantidad turistas, vencimiento, etc).
-
-USUARIOS EN GENERAL:
-Si el usuario selecciona un paquete se muestra la  información detallada, tal 
-como se indica en el caso de uso Consulta de Paquete de Actividades Turísticas.

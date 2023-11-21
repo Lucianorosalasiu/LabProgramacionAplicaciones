@@ -17,6 +17,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
 import java.text.ParseException;
+import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import utils.DateConverter;
 import webService.dataTypesWS.DTPDFWrapper;
@@ -145,5 +146,80 @@ public class WSSalidaController {
         }
 
         controlador.altaInscripcion(dtInscripcion, nombreActividad, nombreSalida, nicknameTurista);
+    }
+    
+    @WebMethod
+    public DTSalidasCollectionWS obtenerSalidasDeTurista(Long idTurista) {
+        ArrayList<DTSalidaTuristicaWS> resultadosParseados = new ArrayList<>();
+
+        /* Se obtiene la lista de DTsalidas y se parsea a DTsalidasWS*/
+        List<DTSalidaTuristica> resultadosSinParsear = controlador.obtenerSalidasDeTurista(idTurista);
+
+        for (DTSalidaTuristica st : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTSalidaTuristicaWS(
+                            st.getNombre(),
+                            st.getCantidadMaxTuristas(),
+                            DateConverter.dateToString(st.getFechaSalida()),
+                            st.getLugar(),
+                            DateConverter.dateToString(st.getFechaAlta())
+                    )
+            );
+        }
+            
+        DTSalidasCollectionWS collection = new DTSalidasCollectionWS();
+        collection.setSalidas(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTSalidasCollectionWS obtenerSalidasDeProveedorCompleto(Long idProveedor) {
+        ArrayList<DTSalidaTuristicaWS> resultadosParseados = new ArrayList<>();
+
+        /* Se obtiene la lista de DTsalidas y se parsea a DTsalidasWS*/
+        List<DTSalidaTuristica> resultadosSinParsear = controlador.obtenerSalidasDeProveedorCompleto(idProveedor);
+
+        for (DTSalidaTuristica st : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTSalidaTuristicaWS(
+                            st.getNombre(),
+                            st.getCantidadMaxTuristas(),
+                            DateConverter.dateToString(st.getFechaSalida()),
+                            st.getLugar(),
+                            DateConverter.dateToString(st.getFechaAlta())
+                    )
+            );
+        }
+            
+        DTSalidasCollectionWS collection = new DTSalidasCollectionWS();
+        collection.setSalidas(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTSalidasCollectionWS obtenerSalidasDeProveedor(Long idProveedor) {
+        ArrayList<DTSalidaTuristicaWS> resultadosParseados = new ArrayList<>();
+
+        /* Se obtiene la lista de DTsalidas y se parsea a DTsalidasWS*/
+        List<DTSalidaTuristica> resultadosSinParsear = controlador.obtenerSalidasDeProveedor(idProveedor);
+        
+        for (DTSalidaTuristica st : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTSalidaTuristicaWS(
+                            st.getNombre(),
+                            st.getCantidadMaxTuristas(),
+                            DateConverter.dateToString(st.getFechaSalida()),
+                            st.getLugar(),
+                            DateConverter.dateToString(st.getFechaAlta())
+                    )
+            );
+        }
+            
+        DTSalidasCollectionWS collection = new DTSalidasCollectionWS();
+        collection.setSalidas(resultadosParseados);
+        
+        return collection;
     }
 }

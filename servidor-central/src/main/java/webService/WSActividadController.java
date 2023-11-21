@@ -326,31 +326,7 @@ public class WSActividadController {
     public void eliminarDeFavoritos(Long idActividad, String nickname){
         controlador.eliminarDeFavoritos(idActividad, nickname);
     }
-    
-    @WebMethod
-    public DTActividadesCollectionWS obtenerActividadesFinalizables(Long idProveedor){
-        ArrayList<DTActividadTuristicaWS> resultadosParseados = new ArrayList<>();
         
-        List<DTActividadTuristica> resultadosSinParsear = controlador.obtenerActividadesFinalizables(idProveedor);
-        
-        for (DTActividadTuristica at : resultadosSinParsear) {
-            resultadosParseados.add(
-                    new DTActividadTuristicaWS(
-                            at.getId(),
-                            at.getNombre(),
-                            at.getDescripcion(),
-                            at.getCiudad(),
-                            at.getCosto()
-                    )
-            );
-        }
-        
-        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
-        collection.setActividades(resultadosParseados);
-        
-        return collection;
-    }
-    
     @WebMethod
     public void finalizarActividad(Long idActividad){
         controlador.validarActividad(idActividad, EstadoActividad.FINALIZADA);
@@ -462,4 +438,76 @@ public class WSActividadController {
         
         return collection;
     }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesFinalizables(Long idProveedor){
+        ArrayList<DTActividadTuristicaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTActividadTuristica> resultadosSinParsear = controlador.obtenerActividadesFinalizables(idProveedor);
+        
+        for (DTActividadTuristica at : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getCiudad(),
+                            at.getCosto()
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesDeProveedor(Long idProveedor){
+        ArrayList<DTActividadTuristicaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTActividadTuristica> resultadosSinParsear = controlador.obtenerActividadesDeProveedor(idProveedor);
+        
+        for (DTActividadTuristica at : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getCiudad(),
+                            at.getCosto()
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(resultadosParseados);
+        
+        return collection;
+    }
+    
+    @WebMethod
+    public DTActividadesCollectionWS obtenerActividadesDeProveedorCompleto(Long idProveedor){
+        ArrayList<DTActividadTuristicaWS> resultadosParseados = new ArrayList<>();
+        
+        List<DTActividadTuristica> resultadosSinParsear = controlador.obtenerActividadesDeProveedorCompleto(idProveedor);
+        
+        for (DTActividadTuristica at : resultadosSinParsear) {
+            resultadosParseados.add(
+                    new DTActividadTuristicaWS(
+                            at.getId(),
+                            at.getNombre(),
+                            at.getDescripcion(),
+                            at.getCiudad(),
+                            at.getCosto()
+                    )
+            );
+        }
+        
+        DTActividadesCollectionWS collection = new DTActividadesCollectionWS();
+        collection.setActividades(resultadosParseados);
+        
+        return collection;
+    }      
 }

@@ -4,7 +4,7 @@
  */
 package controllers.actividades;
 
-import exceptions.MyException;
+import webExceptions.MyException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -123,7 +123,7 @@ public class ConsultaActividad extends HttpServlet {
                 //de metodos previamente existentes
                 actividad = actividadPort.obtenerActividadTuristicaNull(idActividad);
                 if(actividad == null){
-                    throw new exceptions.MyException("¡ERROR! No se ha encontrado la actividad.");
+                    throw new MyException("¡ERROR! No se ha encontrado la actividad.");
                 }
                 if (!isNull(userType) && userType.equals("TURISTA")) {
                     if (actividadPort.obtenerActividadesFavoritas(nickname).getLista().contains(actividad.getNombre())) {
