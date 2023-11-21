@@ -28,7 +28,7 @@ public abstract class DTUsuarioWS {
     protected String name;
     protected String lastName;
     protected String email;
-    protected LocalDate birthDate;
+    protected String birthDate;
     protected String password;
     protected String imagePath;
     protected byte[] photo;
@@ -38,7 +38,7 @@ public abstract class DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate, 
+            String birthDate, 
             String password, 
             String imagePath,
             byte [] photo
@@ -58,7 +58,7 @@ public abstract class DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate
+            String birthDate
     ) {
         this.nickname = nickname;
         this.name = name;
@@ -67,7 +67,7 @@ public abstract class DTUsuarioWS {
         this.birthDate = birthDate;
     }
     
-    public DTUsuarioWS(Long id, String nickname, String name, String lastName, String email, LocalDate birthDate) {
+    public DTUsuarioWS(Long id, String nickname, String name, String lastName, String email, String birthDate) {
         this.id = id;
         this.nickname = nickname;
         this.name = name;

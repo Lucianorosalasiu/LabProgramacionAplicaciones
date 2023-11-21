@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 
-import java.time.LocalDate;
 
 /**
  *
@@ -27,7 +26,7 @@ public class DTProveedorWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate, 
+            String birthDate, 
             String description,
             String websiteURL
     ) {
@@ -41,7 +40,7 @@ public class DTProveedorWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate,
+            String birthDate,
             String password, 
             String imagePath,
             byte [] photo,
@@ -59,7 +58,7 @@ public class DTProveedorWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate, 
+            String birthDate, 
             String password, 
             String imagePath,
             byte [] photo,

@@ -5,14 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTDepartamento, dataTypes.DTActividadTuristica, dataTypes.DTSalidaTuristica,dataTypes.DTPaqueteActividadTuristica"%>
-
 <%@page import="java.util.List"%> 
 <%@page import="java.util.Base64"%> 
-<%@page import="logica.fabrica.Fabrica"%> 
-<%@page import="logica.interfaces.IControlador"%>
 <%@page import="webService.dataTypesWS.DTPaquetesCollectionWS"%> 
-
 <%@page import="webservice.DtPaqueteActividadTuristica"%> 
 <%@page import="webservice.DtPaquetesCollectionWS"%> 
 <%@page import="webservice.DtTurista"%> 

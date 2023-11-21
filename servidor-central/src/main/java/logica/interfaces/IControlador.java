@@ -35,7 +35,7 @@ public interface  IControlador {
     void altaProveedor(DTProveedor nuevoProveedor) throws MyException;
     void altaTurista(DTTurista nuevoTurista) throws MyException;
     void actualizarUsuario(DTUsuario usuario) throws MyException;    
-    void seguirUsuario(long idSeguidor, long idSeguido) throws MyException ;
+    void seguirUsuario(long idSeguidor, long idSeguido) throws MyException;
     void dejarDeSeguirUsuario(long idSeguidor, long idSeguido) throws MyException ;
     ArrayList<Long> obtenerSeguidos(long idSeguidor);
     ArrayList<Long> obtenerSeguidores(long idSeguido);

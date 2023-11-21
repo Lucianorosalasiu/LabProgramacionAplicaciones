@@ -101,7 +101,6 @@ public class AltaActividad extends HttpServlet {
                 String strFecha = dateFormat.format(fecha);
                 
                 actividadPort.existeActividadTuristica(nombre);
-                //controlador.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, idCategoriasLong, newImage, url);
                 actividadPort.altaActividadTuristica(nuevaActividadTuristica, idDepartamento, idProveedor, categoriasIds, newImage, url, strFecha);
                 request.setAttribute("successMessage", "Actividad turistica dada de alta!");
                 request.getRequestDispatcher("/WEB-INF/templates/success.jsp")

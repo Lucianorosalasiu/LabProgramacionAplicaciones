@@ -6,20 +6,22 @@ import dataTypes.DTUsuario;
 import exceptions.MyException;
 import logica.fabrica.Fabrica;
 import logica.interfaces.IControlador;
+import webService.dataTypesWS.DTProveedorWS;
+import webService.dataTypesWS.DTTuristaWS;
+import webService.dataTypesWS.DTUsuarioCollectionWS;
+import webService.dataTypesWS.DTUsuarioWrapper;
+import webService.dataTypesWS.DTLongCollectionWS;
 
 import lombok.NoArgsConstructor;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.xml.ws.Endpoint;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import static utils.DateConverter.convertToLocalDate;
-import webService.dataTypesWS.DTProveedorWS;
-import webService.dataTypesWS.DTTuristaWS;
-import webService.dataTypesWS.DTUsuarioCollectionWS;
-import webService.dataTypesWS.DTUsuarioWrapper;
-import webService.dataTypesWS.DTLongCollectionWS;
+import static utils.DateConverter.userDateToString;
+import static utils.DateConverter.userStringToDate;
 
 /**
  *
@@ -79,13 +81,13 @@ public class WSUsuarioController {
                         proveedor.getName(),
                         proveedor.getLastName(),
                         proveedor.getEmail(),
-                        convertToLocalDate( proveedor.getBirthDate()),
+                        userDateToString(proveedor.getBirthDate()),
                         proveedor.getPassword(),
                         proveedor.getImagePath(),
                         proveedor.getPhoto(),
                         proveedor.getDescription(),
                         proveedor.getWebsiteURL()
-                );             
+                );
 
                 dtuw.setPhoto(proveedorWS.getPhoto());
                 dtuw.setImagePath(proveedorWS.getImagePath());
@@ -106,7 +108,7 @@ public class WSUsuarioController {
                         turista.getName(),
                         turista.getLastName(),
                         turista.getEmail(),
-                        convertToLocalDate( turista.getBirthDate()),
+                        userDateToString(turista.getBirthDate()),
                         turista.getPassword(),
                         turista.getImagePath(),
                         turista.getPhoto(),
@@ -123,31 +125,56 @@ public class WSUsuarioController {
             }
 
             listUsuarioWrapper.add(dtuw);
-       }
+        }
 
         DTUsuarioCollectionWS collection = new DTUsuarioCollectionWS();
         collection.setUsuariosW(listUsuarioWrapper);
-        
+
         return collection;
     }
 
-    /* ALTA USUARIO 
-     * Servlet = AltaUsuario.java
-     * JSP = alta.jsp
-        
+    @WebMethod
+    public void altaProveedor(DTProveedorWS proveedor) throws MyException, ParseException {
+        DTProveedor nuevoProveedor = new DTProveedor(
+                proveedor.getNickname(),
+                proveedor.getName(),
+                proveedor.getLastName(),
+                proveedor.getEmail(),
+                userStringToDate(proveedor.getBirthDate()),
+                proveedor.getPassword(),
+                proveedor.getImagePath(),
+                proveedor.getPhoto(),
+                proveedor.getDescription(),
+                proveedor.getWebsiteURL()
+        );
         controlador.altaProveedor(nuevoProveedor);
-        controlador.altaTurista(nuevoTurista);
-    */
-    
-    /* MODIFICACIÓN USUARIO 
-     * Servlet = ModificacionUsuario.java
-     * JSP = modificacion.jsp
-        
-        controlador.actualizarUsuario(nuevoProveedor);   
-        controlador.actualizarUsuario(nuevoTurista);
-    */
+    }
 
-    
+    @WebMethod
+    public void altaTurista(DTTuristaWS turista) throws MyException, ParseException {
+        DTTurista nuevoTurista = new DTTurista(
+                turista.getNickname(),
+                turista.getName(),
+                turista.getLastName(),
+                turista.getEmail(),
+                userStringToDate(turista.getBirthDate()),
+                turista.getPassword(),
+                turista.getImagePath(),
+                turista.getPhoto(),
+                turista.getNacionality()
+        );
+        controlador.altaTurista(nuevoTurista);
+    }
+
+    @WebMethod
+    public void modificarUsuario(DTUsuarioWrapper usuario) throws MyException {
+        if(usuario.isTurista()){
+            // controlador.actualizarUsuario(turistaAActualizar);
+        }else{
+            // controlador.actualizarUsuario(proveedorAActualizar);   
+        }
+    }
+
     /* OBTENER USUARIO INDIVIDUAL
      * Servlet = ConsultaUsuario.java
      * JSP = perfil.jsp
@@ -163,8 +190,7 @@ public class WSUsuarioController {
     En WSActividad:
         List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
         List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
-    */
-    
+     */
     @WebMethod
     public void seguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.seguirUsuario(idSeguidor, idSeguido);
@@ -174,22 +200,22 @@ public class WSUsuarioController {
     public void dejarDeSeguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.dejarDeSeguirUsuario(idSeguidor, idSeguido);
     }
-    
+
     @WebMethod
     public DTLongCollectionWS obtenerSeguidos(Long idSeguidor) {
         DTLongCollectionWS dtLongCollection = new DTLongCollectionWS();
 
         dtLongCollection.setLista(controlador.obtenerSeguidos(idSeguidor));
-        
+
         return dtLongCollection;
     }
-    
+
     @WebMethod
     public DTLongCollectionWS obtenerSeguidores(Long idSeguido) {
         DTLongCollectionWS dtLongCollection = new DTLongCollectionWS();
 
         dtLongCollection.setLista(controlador.obtenerSeguidores(idSeguido));
-        
+
         return dtLongCollection;
     }
 

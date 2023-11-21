@@ -12,17 +12,17 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static java.util.Objects.isNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static java.util.Objects.isNull;
 
-import dataTypes.DTProveedor;
-import dataTypes.DTTurista;
 import webExceptions.EmptyFieldsException;
-import exceptions.MyException;
 import webExceptions.NonEqualPasswordException;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import webservice.DtProveedorWS;
+import webservice.DtTuristaWS;
+import webservice.MyException_Exception;
+import webservice.ParseException_Exception;
 
 
 /**
@@ -69,22 +69,28 @@ public class AltaUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        
+        /* Se utiliza el webservice para obtener las operaciones*/   
+        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort(); 
 
         String nickname = "";
         String name = "";
         String lastName = "";
         String email = "";
-        String birthdate = "";
-                
+        String birthdate = "";    
+        
         String error = null;
         try {
             if (this.validateParameters(request)) {
+                /* Se almacena la fecha en formato string por si llega a haber
+                un error */ 
                 birthdate = request.getParameter("birthdate");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date birthDateParsed = dateFormat.parse(birthdate);
+                
+                SimpleDateFormat datePickerFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthDateParsed = datePickerFormat.parse(request.getParameter("birthdate"));
+
+                
                 nickname = request.getParameter("nickname");
                 name = request.getParameter("name");
                 lastName = request.getParameter("lastName");
@@ -111,37 +117,36 @@ public class AltaUsuario extends HttpServlet {
                         String websiteURL = request.getParameter("website").isBlank()
                                 ? ""
                                 : request.getParameter("website");
-
-                        DTProveedor nuevoProveedor = new DTProveedor(
-                                nickname,
-                                name,
-                                lastName,
-                                email,
-                                birthDateParsed,
-                                password,
-                                "",
-                                photo,
-                                description,
-                                websiteURL
-                        );
-                        controlador.altaProveedor(nuevoProveedor);
+                        
+                        DtProveedorWS nuevoProveedor = new DtProveedorWS();
+                        nuevoProveedor.setNickname(nickname);
+                        nuevoProveedor.setName(name);
+                        nuevoProveedor.setLastName(lastName);
+                        nuevoProveedor.setEmail(email);
+                        nuevoProveedor.setBirthDate(datePickerFormat.format(birthDateParsed));
+                        nuevoProveedor.setPassword(password);
+                        nuevoProveedor.setImagePath("");
+                        nuevoProveedor.setPhoto(photo);
+                        nuevoProveedor.setDescription(description);
+                        nuevoProveedor.setWebsiteURL(websiteURL);
+                                
+                        portU.altaProveedor(nuevoProveedor);
                         break;
 
                     case "turista":
                         String nacionality = request.getParameter("nacionality");
-                        DTTurista nuevoTurista = new DTTurista(
-                                nickname,
-                                name,
-                                lastName,
-                                email,
-                                birthDateParsed,
-                                password,
-                                "",
-                                photo,
-                                nacionality
-                        );
-
-                        controlador.altaTurista(nuevoTurista);
+                        DtTuristaWS nuevoTurista = new DtTuristaWS();
+                        nuevoTurista.setNickname(nickname);
+                        nuevoTurista.setName(name);
+                        nuevoTurista.setLastName(lastName);
+                        nuevoTurista.setEmail(email);
+                        nuevoTurista.setBirthDate(datePickerFormat.format(birthDateParsed));
+                        nuevoTurista.setPassword(password);
+                        nuevoTurista.setImagePath("");
+                        nuevoTurista.setPhoto(photo);
+                        nuevoTurista.setNacionality(nacionality);
+                                
+                        portU.altaTurista(nuevoTurista);
                         break;
                 }
                 request.setAttribute("successMessage", "Usuario dado de Alta!");
@@ -149,12 +154,10 @@ public class AltaUsuario extends HttpServlet {
                     .forward(request, response);
             }
             return;
-        } catch (NonEqualPasswordException | EmptyFieldsException | MyException ex) {
+        } catch (MyException_Exception | NonEqualPasswordException | ParseException_Exception | EmptyFieldsException ex) {
             error = ex.getMessage();
         } catch (ParseException ex) {
             Logger.getLogger(AltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendError(500);
-            return;
         }
         
         /* En caso de error, se cargan los atributos básicos previamente 

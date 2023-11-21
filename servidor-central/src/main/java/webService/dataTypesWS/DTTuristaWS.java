@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author alexis
@@ -26,7 +24,7 @@ public class DTTuristaWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate, 
+            String birthDate, 
             String nacionality
     ) {
         super(nickname, name, lastName, email, birthDate);
@@ -38,7 +36,7 @@ public class DTTuristaWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate,
+            String birthDate,
             String password, 
             String imagePath,
             byte [] photo,
@@ -54,7 +52,7 @@ public class DTTuristaWS extends DTUsuarioWS {
             String name, 
             String lastName, 
             String email, 
-            LocalDate birthDate, 
+            String birthDate, 
             String password,
             String imagePath,
             byte [] photo,

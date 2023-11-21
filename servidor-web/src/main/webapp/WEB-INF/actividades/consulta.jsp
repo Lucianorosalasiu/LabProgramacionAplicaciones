@@ -6,9 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%> 
-<%@page import="java.util.Base64"%> 
-<%@page import="logica.fabrica.Fabrica"%> 
-<%@page import="logica.interfaces.IControlador"%> 
+<%@page import="java.util.Base64"%>
 <%@page import="webservice.DtStringCollectionWS"%>
 <%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
 <%@page import="webservice.WSActividadController"%>

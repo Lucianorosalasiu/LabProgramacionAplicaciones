@@ -42,4 +42,16 @@ public class DateConverter {
         
         return formatter.parse(date);
     }
+    
+    public static String userDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        
+        return dateFormat.format(date);
+    }
+    
+    public static Date userStringToDate(String date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        
+        return formatter.parse(date);
+    }
 }
