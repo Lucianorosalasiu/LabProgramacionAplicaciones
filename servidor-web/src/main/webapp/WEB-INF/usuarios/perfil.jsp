@@ -8,19 +8,19 @@
 
 <%@page import="exceptions.MyException"%>
 <%@page import="logica.fabrica.Fabrica"%>
-<%@page import="logica.interfaces.IControlador"%>   
-<%@page import="dataTypes.DTUsuario"%>
-<%@page import="dataTypes.DTTurista"%>
-<%@page import="dataTypes.DTProveedor"%>
+<%@page import="logica.interfaces.IControlador"%>  
 <%@page import="dataTypes.DTSalidaTuristica"%>
 <%@page import="dataTypes.DTActividadTuristica"%>
 
 <%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
 <%@page import="webservice.WSActividadController"%>
 <%@page import="webservice.WSActividadControllerService"%> 
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="webservice.DtUsuarioWrapper"%>
+
+<%@page import="java.util.Base64"%>
 <%@page import="java.util.List"%> 
 <%@page import="java.util.ArrayList"%> 
+<%@page import="java.text.SimpleDateFormat"%>
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -32,27 +32,32 @@
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <%
-            DTUsuario usr = (DTUsuario) request.getAttribute("usuario");
             String userLogged = (String) request.getSession().getAttribute("sessionNickname");
-            String profileImageUrl = usr.getProfileImageUrl();
-            WSActividadControllerService actividadController = new WSActividadControllerService();
-            WSActividadController actividadPort = actividadController.getWSActividadControllerPort(); 
+
+            DtUsuarioWrapper usr = (DtUsuarioWrapper) request.getAttribute("usuario");
+            String image = null;
+            if (usr.getPhoto() != null && !usr.getPhoto().equals("")) {
+                // Si hay una imagen de perfil en formato blob, se convierte a Base64
+                String encodedImage = Base64.getEncoder().encodeToString(usr.getPhoto());
+                image = "data:image/jpeg;base64," + encodedImage;
+            } else if (usr.getImagePath() != null && !usr.getImagePath().isBlank()) {
+                // Si hay una ruta de imagen
+                image = "https://" + usr.getImagePath();
+            } else {
+                // Si no se encuentra una imagen, usa la imagen por defecto
+                image = "assets/img/defecto.jpg";
+            }
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
             <%
                 if(!usr.getNickname().equals(userLogged)){
             %>
             <h3 id="titulo-perfil">Perfil del usuario:
-                <% if (usr instanceof DTTurista) {
-                %>
-                <span class="text-info">  <%= usr.getNickname() %> </span>
-                <%
-                } else if(usr instanceof DTProveedor){     
-                %>
-                <span class="text-warning"> <%= usr.getNickname() %> </span>
-                <%
-                }
-                %>   
+                <% if (usr.isTurista()) { %>
+                <span class="text-info">  <%= usr.getDtt().getNickname() %> </span>
+                <% } else { %>
+                <span class="text-warning"> <%= usr.getDtp().getNickname() %> </span>
+                <% } %>  
             </h3>
             <%
                 } else {
@@ -70,39 +75,40 @@
             %>        
             <hr />
             <div id="perfil_izquierda">
-                <img src="<%= profileImageUrl %>">
+                <img src="<%= image %>">
             </div>
             <div id="perfil_derecha">
                 <div>
                     <h2>Información básica</h2>
                     <label class="rotulo">Nombre completo:</label>
-                    <label class="valor"><%= usr.getName()%> <%= usr.getLastName()%></label>
+                    <% if (usr.isTurista()) { %>
+                    <label class="valor"><%= usr.getDtt().getName()%> <%= usr.getDtt().getLastName()%></label>
+                    <% } else { %>
+                    <label class="valor"><%= usr.getDtp().getName()%> <%= usr.getDtp().getLastName()%></label>
+                    <% } %>
                     <br/>
                     <label class="rotulo">Fecha de nacimiento:</label>
                     <label class="valor">
-                        <%=
-                            // Formato deseado para la fecha
-                            new SimpleDateFormat("dd-MM-yyyy").format(usr.getBirthDate())
+                        <% if (usr.isTurista()) { 
+                        SimpleDateFormat formatedDate = new SimpleDateFormat("yyyy-MM-dd");
                         %>
+                        <%=new SimpleDateFormat("dd-MM-yyyy").format(formatedDate.parse(usr.getDtt().getBirthDate()))%>
+                        <% } else {
+                        SimpleDateFormat formatedDate = new SimpleDateFormat("yyyy-MM-dd");
+                        %>
+                        <%=new SimpleDateFormat("dd-MM-yyyy").format(formatedDate.parse(usr.getDtp().getBirthDate()))%>
+                        <% } %> 
                     </label>
                     <br/>
-                    <%
-                    if (usr instanceof DTTurista) {
-                        DTTurista turista = (DTTurista) usr;
-                    %>        
+                    <% if (usr.isTurista()) { %>  
                     <label class="rotulo">País de Orígen</label>
-                    <label class="valor"><%= turista.getNacionality() %></label>
+                    <label class="valor"><%= usr.getDtt().getNacionality() %></label>
                     <br/>
-                    <%
-                    } else if (usr instanceof DTProveedor) {
-                        DTProveedor proveedor = (DTProveedor) usr;
-                    %>
+                    <% } else { %>
                     <br/>
                     <label class="rotulo">Descripción:</label>
-                    <label class="valor"><%= proveedor.getDescription() %></label>  
-                    <%
-                    }
-                    %> 
+                    <label class="valor"><%= usr.getDtp().getDescription() %></label>  
+                    <% } %> 
                 </div>
                 <br/>
                 <div>
@@ -114,19 +120,14 @@
                         </a>
                     </label>
                     <br/>
-                    <%
-                    if (usr instanceof DTProveedor) {
-                        DTProveedor proveedor = (DTProveedor) usr;
-                    %>    
+                    <% if (!usr.isTurista()) { %>
                     <label class="rotulo">Sitio web:</label>
                     <label class="valor">
-                        <a href="<%= proveedor.getWebsiteURL() %>">
-                            <%= proveedor.getWebsiteURL() %>
+                        <a href="<%= usr.getDtp().getWebsiteURL() %>">
+                            <%= usr.getDtp().getWebsiteURL() %>
                         </a>
                     </label>
-                    <%
-                    }
-                    %> 
+                    <% } %> 
                 </div>
             </div>
             <br/>
@@ -136,10 +137,12 @@
                 Fabrica fabrica = new Fabrica();
                 IControlador controlador = fabrica.getInterface();
                 Long sessionID = (Long) request.getSession().getAttribute("id");
+                
+                WSActividadControllerService actividadController = new WSActividadControllerService();
+                WSActividadController actividadPort = actividadController.getWSActividadControllerPort(); 
 
-            if (usr instanceof DTTurista) {
-                DTTurista turista = (DTTurista) usr;
-                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
+            if (usr.isTurista()) { 
+                List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(usr.getDtt().getId());
             %>
             <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
                 <h3 class="text-center">Salidas Turísticas:</h3>
@@ -163,7 +166,8 @@
                                         <%= salida.getNombre() %>
                                     </a>
                                 </td>
-                                <td><%=
+                                <td>
+                                    <%=
                                     // Formato deseado para la fecha
                                     new SimpleDateFormat("dd-MM-yyyy").format(salida.getFechaSalida())
                                     %>
@@ -172,7 +176,7 @@
                                 <td>
                                     <button 
                                         class="btn btn-primary" 
-                                        onclick="openPdfInscripcion('<%=turista.getNickname()%>', '<%=salida.getNombre()%>');"
+                                        onclick="openPdfInscripcion('<%=usr.getDtt().getNickname()%>', '<%=salida.getNombre()%>');"
                                         >
                                         Ver PDF
                                     </button>
@@ -183,20 +187,19 @@
                     </table>
                 </div>
                 <%
-                } else if (usr instanceof DTProveedor) {
-                    DTProveedor proveedor = (DTProveedor) usr;
+                } else {
                     List<DTActividadTuristica> actividadList;
                     List<DTSalidaTuristica> salidaList;
                     DtActividadesCollectionWS actividadesFinalizables = new DtActividadesCollectionWS();
 
-                    if(proveedor.getId() == sessionID) {
+                    if(usr.getDtp().getId() == sessionID) {
                         actividadList = controlador.obtenerActividadesDeProveedorCompleto(sessionID);
                         salidaList = controlador.obtenerSalidasDeProveedorCompleto(sessionID);
                         actividadesFinalizables = actividadPort.obtenerActividadesFinalizables(sessionID);
 
                     } else {
-                        actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
-                        salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
+                        actividadList = controlador.obtenerActividadesDeProveedor(usr.getDtp().getId());
+                        salidaList = controlador.obtenerSalidasDeProveedor(usr.getDtp().getId());
                     }
                 %>
                 <div class="container py-5 min-vh-70 flex-grow-1 justify-content-lg-start">
@@ -259,7 +262,7 @@
                         </table>
                     </div>
 
-                    <% if(proveedor.getId() == sessionID) { %>
+                    <% if(usr.getDtp().getId() == sessionID) { %>
                     <h3 class="text-center">
                         Actividades turísticas finalizables
                         <span class="text-secondary">(Confirmadas y sin salidas por hacer)</span>:

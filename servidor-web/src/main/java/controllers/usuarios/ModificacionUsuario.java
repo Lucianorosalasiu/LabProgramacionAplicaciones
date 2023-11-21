@@ -20,8 +20,6 @@ import webservice.DtTuristaWS;
 import webservice.MyException_Exception;
 import webservice.ParseException_Exception;
 
-
-
 /**
  *
  * @author alexis

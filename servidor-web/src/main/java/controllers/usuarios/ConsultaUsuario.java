@@ -3,18 +3,15 @@ package controllers.usuarios;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
+import static java.util.Objects.isNull;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import webExceptions.UsuarioNoEncontrado;
 import webservice.DtUsuarioCollectionWS;
 import webservice.DtUsuarioWrapper;
-import static java.util.Objects.isNull;
-
-import dataTypes.DTUsuario;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
 
 /**
  *
@@ -63,16 +60,14 @@ public class ConsultaUsuario extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/usuarios/consulta.jsp")
                     .forward(request, response);
         } else {
-                    
-            Fabrica fabrica = new Fabrica();
-            IControlador controlador = fabrica.getInterface();
             // Caso contrario, ve el perfil de un solo usuario
-            DTUsuario usr;
+            DtUsuarioWrapper usr;
             try {
-                usr = controlador.obtenerUsuarioAlternativo(emailUsuario);
+                usr = portU.obtenerUsuarioAlternativo(emailUsuario);
                 if(usr == null){
                     throw new UsuarioNoEncontrado("¡ERROR! No se ha encontrado el usuario.");
                 }
+
             } catch (UsuarioNoEncontrado ex) {
                 response.sendError(404);
                 return;

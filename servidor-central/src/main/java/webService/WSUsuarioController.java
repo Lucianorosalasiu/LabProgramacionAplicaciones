@@ -263,21 +263,7 @@ public class WSUsuarioController {
         );
         controlador.actualizarUsuario(turistaAActualizar);   
     }
-    
-    /* OBTENER USUARIO INDIVIDUAL
-     * Servlet = ConsultaUsuario.java
-     * JSP = perfil.jsp
-    
-    En WSSalida:
-        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
-        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedorCompleto(proveedor.getId());
-        List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeProveedor(proveedor.getId());
-    
-    En WSActividad:
-        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
-        List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
-     */
-    
+        
     @WebMethod
     public void seguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.seguirUsuario(idSeguidor, idSeguido);
