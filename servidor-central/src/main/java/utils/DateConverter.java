@@ -43,14 +43,20 @@ public class DateConverter {
         return formatter.parse(date);
     }
     
-    public static String userDateToString(Date date) {
+    public static String userDateToStringFront(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         
         return dateFormat.format(date);
     }
     
+    public static String userDateToStringForm(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        return dateFormat.format(date);
+    }
+    
     public static Date userStringToDate(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         return formatter.parse(date);
     }

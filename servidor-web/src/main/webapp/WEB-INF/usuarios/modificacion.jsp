@@ -5,10 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="dataTypes.DTUsuario"%>
-<%@page import="dataTypes.DTTurista"%>
-<%@page import="dataTypes.DTProveedor"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="webservice.DtUsuarioWrapper"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 <html class="h-100">
@@ -21,8 +22,19 @@
     <body class="h-100 d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <%
-            DTUsuario usr = (DTUsuario) request.getAttribute("usuario");
-            String profileImageUrl = usr.getProfileImageUrl();
+            DtUsuarioWrapper u = (DtUsuarioWrapper) request.getAttribute("usuario");
+            String image = null;
+            if (u.getPhoto() != null && !u.getPhoto().equals("")) {
+                // Si hay una imagen de perfil en formato blob, se convierte a Base64
+                String encodedImage = Base64.getEncoder().encodeToString(u.getPhoto());
+                image = "data:image/jpeg;base64," + encodedImage;
+            } else if (u.getImagePath() != null && !u.getImagePath().isBlank()) {
+                // Si hay una ruta de imagen
+                image = "https://" + u.getImagePath();
+            } else {
+                // Si no se encuentra una imagen, usa la imagen por defecto
+                image = "assets/img/defecto.jpg";
+            }
         %>
         <main>
             <!--<div class="d-flex justify-content-center align-items-center p-4 flex-grow-1">-->
@@ -50,7 +62,11 @@
                             id="input-nickname"
                             class="form-control"
                             name="nickname"
-                            value="<%= usr.getNickname() %>"
+                            <% if (u.isTurista()) { %>
+                            value="<%= u.getDtt().getNickname() %>"
+                            <% } else { %>
+                            value="<%= u.getDtp().getNickname() %>"
+                            <% } %> 
                             required
                             disabled
                             />
@@ -66,7 +82,11 @@
                                 class="form-control"
                                 name="email"
                                 aria-describedby="inputGroupFusion"
-                                value="<%= usr.getEmail() %>"
+                                <% if (u.isTurista()) { %>
+                                value="<%= u.getDtt().getEmail() %>"
+                                <% } else { %>
+                                value="<%= u.getDtp().getEmail() %>"
+                                <% } %> 
                                 required
                                 disabled
                                 />
@@ -83,7 +103,11 @@
                             class="form-control"
                             name="name"
                             placeholder="John"
-                            value="<%= usr.getName() %>"
+                            <% if (u.isTurista()) { %>
+                            value="<%= u.getDtt().getName() %>"
+                            <% } else { %>
+                            value="<%= u.getDtp().getName() %>"
+                            <% } %>
                             required
                             />
                     </div>
@@ -96,7 +120,11 @@
                             class="form-control"
                             name="lastName"
                             placeholder="Doe"
-                            value="<%= usr.getLastName() %>"
+                            <% if (u.isTurista()) { %>
+                            value="<%= u.getDtt().getLastName() %>"
+                            <% } else { %>
+                            value="<%= u.getDtp().getLastName() %>"
+                            <% } %>                            
                             required
                             />
                     </div>
@@ -108,16 +136,16 @@
                             id="input-birthdate"
                             class="form-control"
                             name="birthdate"
-                            value="<%=
-                            // Formato deseado para la fecha
-                            new SimpleDateFormat("yyyy-MM-dd").format(usr.getBirthDate())
-                            %>"
+                            <% if (u.isTurista()) { %>
+                            value="<%=u.getDtt().getBirthDate()%>"
+                            <% } else { %>
+                            value="<%=u.getDtp().getBirthDate()%>"
+                            <% } %>                             
                             required
                             />
                     </div>
                     <%
-                    if (usr instanceof DTTurista) {
-                        DTTurista turista = (DTTurista) usr;
+                    if (u.isTurista()) {
                     %>        
                     <!-- ----- Ingreso de la nacionalidad del turista ----- -->
                     <div class="col-md-4" id="nacionality-div">
@@ -132,15 +160,14 @@
                             required
                             >
                             <option value=''>Selecciona el país</option>
-                            <option value="<%=turista.getNacionality()%>" selected>
-                                <%=turista.getNacionality()%>
+                            <option value="<%=u.getDtt().getNacionality()%>" selected>
+                                <%=u.getDtt().getNacionality()%>   
                             </option>
                         </select>
                     </div>  
                     <br/>
                     <%
-                    } else if (usr instanceof DTProveedor) {
-                        DTProveedor proveedor = (DTProveedor) usr;
+                    } else {
                     %>
                     <!-- ----- Ingreso del sitio web del proveedor ----- -->
                     <div class="col-md-6" id="website-div">
@@ -153,7 +180,7 @@
                             id="input-website"
                             class="form-control"
                             name="website"
-                            value="<%= proveedor.getWebsiteURL() %>"
+                            value="<%= u.getDtp().getWebsiteURL() %>"
                             placeholder="https://example.com"
                             />
                     </div>
@@ -168,7 +195,7 @@
                             cols='30'
                             rows='4'
                             placeholder='Una breve descripción de tu persona'
-                        ><%= proveedor.getDescription() %>
+                            ><%= u.getDtp().getDescription() %>
                         </textarea>
                     </div>
                     <%
@@ -220,7 +247,7 @@
                         <br />
                         <img
                             id="image-preview"
-                            src="<%= profileImageUrl %>"
+                            src="<%= image %>"
                             width="150"
                             height="150"
                             class="rounded-circle"

@@ -20,7 +20,8 @@ import jakarta.xml.ws.Endpoint;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import static utils.DateConverter.userDateToString;
+import static utils.DateConverter.userDateToStringFront;
+import static utils.DateConverter.userDateToStringForm;
 import static utils.DateConverter.userStringToDate;
 
 /**
@@ -65,6 +66,70 @@ public class WSUsuarioController {
     }
 
     @WebMethod
+    public DTUsuarioWrapper obtenerUsuarioAlternativo(String nickname) {
+        DTUsuario u = controlador.obtenerUsuarioAlternativo(nickname);
+        DTUsuarioWrapper dtuw = new DTUsuarioWrapper();
+
+        if (u instanceof DTProveedor) {
+            DTProveedor proveedor = (DTProveedor) u;
+
+            DTProveedorWS proveedorWS = new DTProveedorWS(
+                    proveedor.getId(),
+                    proveedor.getNickname(),
+                    proveedor.getName(),
+                    proveedor.getLastName(),
+                    proveedor.getEmail(),
+                    userDateToStringForm(proveedor.getBirthDate()),
+                    proveedor.getPassword(),
+                    proveedor.getImagePath(),
+                    proveedor.getPhoto(),
+                    proveedor.getDescription(),
+                    proveedor.getWebsiteURL()
+            );
+
+            dtuw.setPhoto(proveedorWS.getPhoto());
+            dtuw.setImagePath(proveedorWS.getImagePath());
+            dtuw.setDtp(proveedorWS);
+            dtuw.getDtp().setImagePath(proveedorWS.getImagePath());
+            dtuw.setTurista(false);
+
+            /* Nacho dice que no le pregunten porque pero si no le pone un 
+            DTTurista vacio revienta, su suposicion es que al serializarlo, 
+            si no encuentra nada da error 
+            
+            PD: Entonces no le pregunto
+            */
+            DTTuristaWS turistaVacio = new DTTuristaWS();
+            dtuw.setDtt(turistaVacio);
+        } else if (u instanceof DTTurista) {
+            DTTurista turista = (DTTurista) u;
+
+            DTTuristaWS turistaWS = new DTTuristaWS(
+                    turista.getId(),
+                    turista.getNickname(),
+                    turista.getName(),
+                    turista.getLastName(),
+                    turista.getEmail(),
+                    userDateToStringForm(turista.getBirthDate()),
+                    turista.getPassword(),
+                    turista.getImagePath(),
+                    turista.getPhoto(),
+                    turista.getNacionality()
+            );
+
+            /* en cambio si cuando es un turista no le pongo el DTProveedor no pasa nada */
+            dtuw.setPhoto(turistaWS.getPhoto());
+            dtuw.setImagePath(turistaWS.getImagePath());
+
+            dtuw.setDtt(turistaWS);
+            dtuw.getDtt().setImagePath(turistaWS.getImagePath());
+            dtuw.setTurista(true);
+        }
+
+        return dtuw;
+    }
+
+    @WebMethod
     public DTUsuarioCollectionWS obtenerUsuarios() {
         ArrayList<DTUsuarioWrapper> listUsuarioWrapper = new ArrayList<>();
         List<DTUsuario> users = controlador.obtenerUsuarios();
@@ -81,7 +146,7 @@ public class WSUsuarioController {
                         proveedor.getName(),
                         proveedor.getLastName(),
                         proveedor.getEmail(),
-                        userDateToString(proveedor.getBirthDate()),
+                        userDateToStringFront(proveedor.getBirthDate()),
                         proveedor.getPassword(),
                         proveedor.getImagePath(),
                         proveedor.getPhoto(),
@@ -108,7 +173,7 @@ public class WSUsuarioController {
                         turista.getName(),
                         turista.getLastName(),
                         turista.getEmail(),
-                        userDateToString(turista.getBirthDate()),
+                        userDateToStringFront(turista.getBirthDate()),
                         turista.getPassword(),
                         turista.getImagePath(),
                         turista.getPhoto(),
@@ -167,20 +232,41 @@ public class WSUsuarioController {
     }
 
     @WebMethod
-    public void modificarUsuario(DTUsuarioWrapper usuario) throws MyException {
-        if(usuario.isTurista()){
-            // controlador.actualizarUsuario(turistaAActualizar);
-        }else{
-            // controlador.actualizarUsuario(proveedorAActualizar);   
-        }
+    public void modificarProveedor(DTProveedorWS proveedor) throws MyException, ParseException { 
+        DTProveedor proveedorAActualizar = new DTProveedor(
+                proveedor.getNickname(),
+                proveedor.getName(),
+                proveedor.getLastName(),
+                proveedor.getEmail(),
+                userStringToDate(proveedor.getBirthDate()),
+                proveedor.getPassword(),
+                proveedor.getImagePath(),
+                proveedor.getPhoto(),
+                proveedor.getDescription(),
+                proveedor.getWebsiteURL()
+        );
+        controlador.actualizarUsuario(proveedorAActualizar);   
     }
-
+    
+    @WebMethod
+    public void modificarTurista(DTTuristaWS turista) throws MyException, ParseException { 
+        DTTurista turistaAActualizar = new DTTurista(
+                turista.getNickname(),
+                turista.getName(),
+                turista.getLastName(),
+                turista.getEmail(),
+                userStringToDate(turista.getBirthDate()),
+                turista.getPassword(),
+                turista.getImagePath(),
+                turista.getPhoto(),
+                turista.getNacionality()
+        );
+        controlador.actualizarUsuario(turistaAActualizar);   
+    }
+    
     /* OBTENER USUARIO INDIVIDUAL
      * Servlet = ConsultaUsuario.java
      * JSP = perfil.jsp
-
-    En WSUsuario:
-    DTUsuario usr = controlador.obtenerUsuarioAlternativo(emailUsuario);
     
     En WSSalida:
         List<DTSalidaTuristica> salidaList = controlador.obtenerSalidasDeTurista(turista.getId());
@@ -191,6 +277,7 @@ public class WSUsuarioController {
         List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedorCompleto(proveedor.getId());
         List<DTActividadTuristica> actividadList = controlador.obtenerActividadesDeProveedor(proveedor.getId());
      */
+    
     @WebMethod
     public void seguirUsuario(Long idSeguidor, Long idSeguido) throws MyException {
         controlador.seguirUsuario(idSeguidor, idSeguido);

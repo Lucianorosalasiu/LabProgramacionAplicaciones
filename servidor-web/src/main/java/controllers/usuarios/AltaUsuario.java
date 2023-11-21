@@ -85,12 +85,7 @@ public class AltaUsuario extends HttpServlet {
             if (this.validateParameters(request)) {
                 /* Se almacena la fecha en formato string por si llega a haber
                 un error */ 
-                birthdate = request.getParameter("birthdate");
-                
-                SimpleDateFormat datePickerFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date birthDateParsed = datePickerFormat.parse(request.getParameter("birthdate"));
-
-                
+                birthdate = request.getParameter("birthdate");                
                 nickname = request.getParameter("nickname");
                 name = request.getParameter("name");
                 lastName = request.getParameter("lastName");
@@ -123,7 +118,7 @@ public class AltaUsuario extends HttpServlet {
                         nuevoProveedor.setName(name);
                         nuevoProveedor.setLastName(lastName);
                         nuevoProveedor.setEmail(email);
-                        nuevoProveedor.setBirthDate(datePickerFormat.format(birthDateParsed));
+                        nuevoProveedor.setBirthDate(birthdate);
                         nuevoProveedor.setPassword(password);
                         nuevoProveedor.setImagePath("");
                         nuevoProveedor.setPhoto(photo);
@@ -140,7 +135,7 @@ public class AltaUsuario extends HttpServlet {
                         nuevoTurista.setName(name);
                         nuevoTurista.setLastName(lastName);
                         nuevoTurista.setEmail(email);
-                        nuevoTurista.setBirthDate(datePickerFormat.format(birthDateParsed));
+                        nuevoTurista.setBirthDate(birthdate);
                         nuevoTurista.setPassword(password);
                         nuevoTurista.setImagePath("");
                         nuevoTurista.setPhoto(photo);
@@ -156,8 +151,6 @@ public class AltaUsuario extends HttpServlet {
             return;
         } catch (MyException_Exception | NonEqualPasswordException | ParseException_Exception | EmptyFieldsException ex) {
             error = ex.getMessage();
-        } catch (ParseException ex) {
-            Logger.getLogger(AltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         /* En caso de error, se cargan los atributos básicos previamente 

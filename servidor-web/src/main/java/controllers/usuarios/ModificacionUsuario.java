@@ -1,30 +1,26 @@
 package controllers.usuarios;
 
-import dataTypes.DTProveedor;
-import dataTypes.DTTurista;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import static java.util.Objects.isNull;
-
-import dataTypes.DTUsuario;
-import webExceptions.EmptyFieldsException;
-import exceptions.MyException;
-import webExceptions.NonEqualPasswordException;
 import jakarta.servlet.http.Part;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import logica.fabrica.Fabrica;
-import logica.interfaces.IControlador;
+import static java.util.Objects.isNull;
 import org.apache.commons.io.IOUtils;
+
+import webExceptions.EmptyFieldsException;
+import webExceptions.NonEqualPasswordException;
+import webservice.DtUsuarioWrapper;
+import webservice.DtProveedorWS;
+import webservice.DtTuristaWS;
+import webservice.MyException_Exception;
+import webservice.ParseException_Exception;
+
+
 
 /**
  *
@@ -74,10 +70,11 @@ public class ModificacionUsuario extends HttpServlet {
         }
         
         /* Si el usuario logueado coincide con el perfil a editar */
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
-
-        DTUsuario usr = controlador.obtenerUsuarioAlternativo(queryUser);
+        /* Se utiliza el webservice para obtener las operaciones*/   
+        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort();
+        
+        DtUsuarioWrapper usr = portU.obtenerUsuarioAlternativo(queryUser);
 
         // Se setea el usuario
         request.setAttribute("usuario", usr);
@@ -98,8 +95,9 @@ public class ModificacionUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Fabrica fabrica = new Fabrica();
-        IControlador controlador = fabrica.getInterface();
+        /* Se utiliza el webservice para obtener las operaciones*/   
+        webservice.WSUsuarioControllerService service = new webservice.WSUsuarioControllerService();
+        webservice.WSUsuarioController portU = service.getWSUsuarioControllerPort();
 
         String error = null;
         try {
@@ -107,9 +105,7 @@ public class ModificacionUsuario extends HttpServlet {
                 String nickname = (String) request.getSession().getAttribute("sessionNickname");
                 String email = (String) request.getSession().getAttribute("sessionEmail");
                 
-                String birthdate = request.getParameter("birthdate");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date birthDateParsed = dateFormat.parse(birthdate);
+                String birthdate = request.getParameter("birthdate");               
                 String name = request.getParameter("name");
                 String lastName = request.getParameter("lastName");
                 String password = request.getParameter("password");
@@ -133,37 +129,36 @@ public class ModificacionUsuario extends HttpServlet {
                         String websiteURL = request.getParameter("website").isBlank()
                                 ? ""
                                 : request.getParameter("website");
-
-                        DTProveedor nuevoProveedor = new DTProveedor(
-                                nickname,
-                                name,
-                                lastName,
-                                email,
-                                birthDateParsed,
-                                password,
-                                "",
-                                photo,
-                                description,
-                                websiteURL
-                        );
-                        controlador.actualizarUsuario(nuevoProveedor);
+                        
+                        DtProveedorWS nuevoProveedor = new DtProveedorWS();
+                        nuevoProveedor.setNickname(nickname);
+                        nuevoProveedor.setName(name);
+                        nuevoProveedor.setLastName(lastName);
+                        nuevoProveedor.setEmail(email);
+                        nuevoProveedor.setBirthDate(birthdate);
+                        nuevoProveedor.setPassword(password);
+                        nuevoProveedor.setImagePath("");
+                        nuevoProveedor.setPhoto(photo);
+                        nuevoProveedor.setDescription(description);
+                        nuevoProveedor.setWebsiteURL(websiteURL);
+                                
+                        portU.modificarProveedor(nuevoProveedor);
                         break;
 
                     case "TURISTA":
                         String nacionality = request.getParameter("nacionality");
-                        DTTurista nuevoTurista = new DTTurista(
-                                nickname,
-                                name,
-                                lastName,
-                                email,
-                                birthDateParsed,
-                                password,
-                                "",
-                                photo,
-                                nacionality
-                        );
-
-                        controlador.actualizarUsuario(nuevoTurista);
+                        DtTuristaWS nuevoTurista = new DtTuristaWS();
+                        nuevoTurista.setNickname(nickname);
+                        nuevoTurista.setName(name);
+                        nuevoTurista.setLastName(lastName);
+                        nuevoTurista.setEmail(email);
+                        nuevoTurista.setBirthDate(birthdate);
+                        nuevoTurista.setPassword(password);
+                        nuevoTurista.setImagePath("");
+                        nuevoTurista.setPhoto(photo);
+                        nuevoTurista.setNacionality(nacionality);
+                                
+                        portU.modificarTurista(nuevoTurista);
                         break;
                 }
                 request.setAttribute("successMessage", "El usuario fue modificado!");
@@ -171,12 +166,8 @@ public class ModificacionUsuario extends HttpServlet {
                     .forward(request, response);
             }
             return;
-        } catch (NonEqualPasswordException | EmptyFieldsException | MyException ex) {
+        } catch (NonEqualPasswordException | EmptyFieldsException | MyException_Exception | ParseException_Exception ex) {
             error = ex.getMessage();
-        } catch (ParseException ex) {
-            Logger.getLogger(AltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendError(500);
-            return;
         }
         
         /* En caso de error, se carga el mensaje de error como parámetro 
