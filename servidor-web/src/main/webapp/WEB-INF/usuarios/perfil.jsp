@@ -6,8 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%--<%@page import="exceptions.MyException"%>--%>
-
 <%@page import="webservice.DtActividadTuristicaWS, webservice.DtActividadesCollectionWS"%>
 <%@page import="webservice.WSActividadController"%>
 <%@page import="webservice.WSActividadControllerService"%> 
@@ -34,8 +32,12 @@
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <%
             String userLogged = (String) request.getSession().getAttribute("sessionNickname");
-
+            Long sessionID = (Long) request.getSession().getAttribute("id");
+            
             DtUsuarioWrapper usr = (DtUsuarioWrapper) request.getAttribute("usuario");
+            List<Long> seguidos = (List<Long>) request.getAttribute("seguidos");
+            List<Long> seguidores = (List<Long>) request.getAttribute("seguidores");
+            
             String image = null;
             if (usr.getPhoto() != null && !usr.getPhoto().equals("")) {
                 // Si hay una imagen de perfil en formato blob, se convierte a Base64
@@ -50,30 +52,24 @@
             }
         %>
         <div id="perfil" class ="container py-5 min-vh-70 flex-grow-1">
-            <%
-                if(!usr.getNickname().equals(userLogged)){
-            %>
-            <h3 id="titulo-perfil">Perfil del usuario:
-                <% if (usr.isTurista()) { %>
-                <span class="text-info">  <%= usr.getDtt().getNickname() %> </span>
-                <% } else { %>
-                <span class="text-warning"> <%= usr.getDtp().getNickname() %> </span>
-                <% } %>  
-            </h3>
-            <%
-                } else {
-            %>
-            <h3 id="titulo-perfil">Mi Perfil</h3>
-            <a href="/modificacionusuario?usuario=<%= usr.getEmail() %>" 
-               id="editar-perfil" 
-               type="button" 
-               class="btn btn-primary float-right"
-               >
-                Editar Perfil
-            </a>            
-            <%
-                }
-            %>        
+            <% if(!usr.getNickname().equals(userLogged)){ %>
+                <h3 id="titulo-perfil">Perfil del usuario:
+                    <% if (usr.isTurista()) { %>
+                    <span class="text-info">  <%= usr.getDtt().getNickname() %> </span>
+                    <% } else { %>
+                    <span class="text-warning"> <%= usr.getDtp().getNickname() %> </span>
+                    <% } %>  
+                </h3>               
+            <% } else { %>
+                <h3 id="titulo-perfil">Mi Perfil</h3>
+                <a href="/modificacionusuario?usuario=<%= usr.getEmail() %>" 
+                   id="editar-perfil" 
+                   type="button" 
+                   class="btn btn-primary float-right"
+                   >
+                    Editar Perfil
+                </a>  
+            <% } %>        
             <hr />
             <div id="perfil_izquierda">
                 <img src="<%= image %>">
@@ -100,6 +96,12 @@
                         <%=new SimpleDateFormat("dd-MM-yyyy").format(formatedDate.parse(usr.getDtp().getBirthDate()))%>
                         <% } %> 
                     </label>
+                    <br/>
+                    <label class="rotulo">Seguidores: </label>
+                    <label class="valor"><%= seguidores.size() %></label>
+                    <br/>
+                    <label class="rotulo">Seguidos: </label>
+                    <label class="valor"><%= seguidos.size() %></label>
                     <br/>
                     <% if (usr.isTurista()) { %>  
                     <label class="rotulo">País de Orígen</label>
@@ -135,8 +137,6 @@
             <hr/>
 
             <%
-                Long sessionID = (Long) request.getSession().getAttribute("id");
-                
                 WSActividadControllerService actividadController = new WSActividadControllerService();
                 WSActividadController actividadPort = actividadController.getWSActividadControllerPort();
                 

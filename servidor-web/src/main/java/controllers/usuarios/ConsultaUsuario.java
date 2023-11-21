@@ -72,10 +72,17 @@ public class ConsultaUsuario extends HttpServlet {
                 response.sendError(404);
                 return;
             }
+            
+            List<Long> seguidos = new ArrayList();
+            List<Long> seguidores = new ArrayList();
 
-            // setea el usuario
+            seguidos = portU.obtenerSeguidos(usr.getId()).getLista();
+            seguidores = portU.obtenerSeguidores(usr.getId()).getLista();
+
             request.setAttribute("usuario", usr);
-
+            request.setAttribute("seguidos", seguidos);
+            request.setAttribute("seguidores", seguidores);
+            
             request.getRequestDispatcher("/WEB-INF/usuarios/perfil.jsp").
                     forward(request, response);
         }
